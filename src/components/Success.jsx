@@ -1,0 +1,60 @@
+import { useEffect } from 'react'
+import { CheckCircle, Download, Mail } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
+
+export default function Success() {
+  const [searchParams] = useSearchParams()
+  const sessionId = searchParams.get('session_id')
+
+  useEffect(() => {
+    // TODO: Verify payment and unlock Pro access
+    console.log('Payment successful:', sessionId)
+  }, [sessionId])
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
+      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="h-8 w-8 text-green-600" />
+        </div>
+        
+        <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">
+          Welcome to Pro!
+        </h1>
+        <p className="text-gray-600 mb-8">
+          Your payment was successful. You now have lifetime access to all 150+ prompts and the Shot-to-Prompt tool.
+        </p>
+
+        <div className="space-y-4">
+          <a 
+            href="/prompts"
+            className="flex items-center justify-center gap-2 w-full bg-brand-600 text-white py-3 rounded-lg font-medium hover:bg-brand-700 transition-colors"
+          >
+            <Download className="h-5 w-5" />
+            Browse All Prompts
+          </a>
+          
+          <a 
+            href="/shot-to-prompt"
+            className="flex items-center justify-center gap-2 w-full border border-gray-300 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+          >
+            Try Shot to Prompt
+          </a>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <p className="text-sm text-gray-500 mb-4">
+            Check your email for your receipt and access details.
+          </p>
+          <a 
+            href="mailto:support@cineworkflo.com"
+            className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 text-sm"
+          >
+            <Mail className="h-4 w-4" />
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
