@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
-import Hero from './components/Hero'
+import HeroGallery from './components/HeroGallery'
 import Features from './components/Features'
 import PromptVault from './components/PromptVault'
 import ShotToPrompt from './components/ShotToPrompt'
@@ -18,7 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
-                <Hero />
+                <HeroGallery />
                 <Features />
                 <PromptVault preview={true} />
                 <ShotToPrompt preview={true} />
