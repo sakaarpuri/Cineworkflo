@@ -21,7 +21,6 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link to="/prompts" className="hover:text-white transition-colors">Prompt Vault</Link></li>
               <li><Link to="/shot-to-prompt" className="hover:text-white transition-colors">Shot to Prompt</Link></li>
-              <li><Link to="/work-log" className="hover:text-white transition-colors">Work Log</Link></li>
               <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
             </ul>
           </div>
