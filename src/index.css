@@ -10,6 +10,43 @@
   body {
     @apply antialiased;
   }
+
+  /* Theme Variables */
+  :root {
+    /* Day Mode (default) */
+    --bg-primary: #F5F3EE;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FAFAF8;
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --border-color: #E5E7EB;
+    --shadow-soft: 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-card: 8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8);
+    --shadow-inset: inset 4px 4px 8px rgba(0,0,0,0.06), inset -4px -4px 8px rgba(255,255,255,0.8);
+    --accent-blue: #2563EB;
+    --accent-purple: #7C3AED;
+    --accent-green: #059669;
+    --accent-pink: #BE185D;
+  }
+
+  [data-theme="dark"] {
+    /* Night Mode */
+    --bg-primary: #0F1115;
+    --bg-secondary: #1A1D24;
+    --bg-card: #15171C;
+    --text-primary: #F9FAFB;
+    --text-secondary: #A1A5AD;
+    --text-muted: #6B7280;
+    --border-color: #2D3139;
+    --shadow-soft: 0 4px 20px rgba(0,0,0,0.4);
+    --shadow-card: 8px 8px 16px rgba(0,0,0,0.5), -8px -8px 16px rgba(255,255,255,0.03);
+    --shadow-inset: inset 4px 4px 8px rgba(0,0,0,0.5), inset -4px -4px 8px rgba(255,255,255,0.03);
+    --accent-blue: #3B82F6;
+    --accent-purple: #8B5CF6;
+    --accent-green: #10B981;
+    --accent-pink: #EC4899;
+  }
 }
 
 @layer utilities {
@@ -18,5 +55,43 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Neumorphic utilities */
+  .neu-card {
+    background: var(--bg-card);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+  }
+
+  .neu-inset {
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-inset);
+    border-radius: 12px;
+  }
+
+  .neu-button {
+    background: var(--bg-card);
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1), -4px -4px 8px rgba(255,255,255,0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .neu-button:hover {
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.12), -6px -6px 12px rgba(255,255,255,0.8);
+  }
+
+  .neu-button:active {
+    box-shadow: var(--shadow-inset);
+  }
+
+  [data-theme="dark"] .neu-button {
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.5), -4px -4px 8px rgba(255,255,255,0.03);
+  }
+
+  [data-theme="dark"] .neu-button:hover {
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.6), -6px -6px 12px rgba(255,255,255,0.05);
   }
 }

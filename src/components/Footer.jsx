@@ -3,49 +3,134 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12">
+    <footer 
+      className="py-12 transition-colors"
+      style={{ 
+        background: 'var(--bg-secondary)',
+        borderTop: '1px solid var(--border-color)'
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <Film className="h-6 w-6 text-brand-400" />
-              <span className="font-display font-bold text-xl text-white">CineWorkflo</span>
+              <Film className="h-6 w-6" style={{ color: 'var(--accent-blue)' }} />
+              <span 
+                className="font-display font-bold text-xl"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                CineWorkflo
+              </span>
             </div>
-            <p className="text-gray-400 max-w-sm">
+            <p style={{ color: 'var(--text-secondary)' }} className="max-w-sm">
               Professional AI video prompts for filmmakers. 
               Create stunning content with Runway, Pika, and more.
             </p>
           </div>
           <div>
-            <h4 className="font-display font-bold text-white mb-4">Product</h4>
+            <h4 
+              className="font-display font-bold mb-4"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Product
+            </h4>
             <ul className="space-y-2">
-              <li><Link to="/prompts" className="hover:text-white transition-colors">Prompt Vault</Link></li>
-              <li><Link to="/shot-to-prompt" className="hover:text-white transition-colors">Shot to Prompt</Link></li>
-              <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
+              <li>
+                <Link 
+                  to="/prompts" 
+                  className="transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Prompt Vault
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/shot-to-prompt" 
+                  className="transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Shot to Prompt
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/camera-moves" 
+                  className="transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Camera Moves
+                </Link>
+              </li>
+              <li>
+                <a 
+                  href="#pricing" 
+                  className="transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Pricing
+                </a>
+              </li>
             </ul>
           </div>
           <div>
-            <h4 className="font-display font-bold text-white mb-4">Connect</h4>
+            <h4 
+              className="font-display font-bold mb-4"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Connect
+            </h4>
             <div className="flex gap-4">
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+              <a 
+                href="https://twitter.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="transition-colors hover:opacity-80"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="mailto:support@cineworkflo.com" className="hover:text-white transition-colors">
+              <a 
+                href="mailto:support@cineworkflo.com" 
+                className="transition-colors hover:opacity-80"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <Mail className="h-5 w-5" />
               </a>
-              <a href="https://github.com/sakaarpuri/Cineworkflo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+              <a 
+                href="https://github.com/sakaarpuri/Cineworkflo" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="transition-colors hover:opacity-80"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <Github className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">
+        <div 
+          className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t"
+          style={{ borderColor: 'var(--border-color)' }}
+        >
+          <p style={{ color: 'var(--text-muted)' }} className="text-sm">
             © 2026 CineWorkflo. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a 
+              href="#" 
+              className="transition-colors hover:opacity-80"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Privacy
+            </a>
+            <a 
+              href="#" 
+              className="transition-colors hover:opacity-80"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Terms
+            </a>
           </div>
         </div>
       </div>
