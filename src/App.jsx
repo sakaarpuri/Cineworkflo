@@ -19,9 +19,9 @@ function App() {
             <Route path="/" element={
               <>
                 <HeroGallery />
+                <ShotToPrompt preview={true} />
                 <Features />
                 <PromptVault preview={true} />
-                <ShotToPrompt preview={true} />
                 <Pricing />
               </>
             } />

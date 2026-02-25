@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Upload, Sparkles, Image as ImageIcon, Loader2, Lock } from 'lucide-react'
+import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2 } from 'lucide-react'
 
 export default function ShotToPrompt({ preview = false }) {
   const [uploadedImage, setUploadedImage] = useState(null)
@@ -35,7 +35,7 @@ export default function ShotToPrompt({ preview = false }) {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 bg-brand-500/20 text-brand-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Sparkles className="h-4 w-4" />
+                <Wand2 className="h-4 w-4" />
                 AI-Powered
               </div>
               <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
@@ -65,22 +65,44 @@ export default function ShotToPrompt({ preview = false }) {
                   Get optimized prompt for your AI video tool
                 </li>
               </ul>
-            </div>
-            <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Lock className="h-8 w-8 text-gray-500" />
-                </div>
-                <h3 className="font-display font-bold text-xl mb-2">Pro Feature</h3>
-                <p className="text-gray-400 mb-6">
-                  Upload unlimited shots and get AI-generated prompts
+              
+              <div className="mt-8 p-4 bg-brand-500/10 border border-brand-500/20 rounded-lg">
+                <p className="text-brand-300 text-sm font-medium mb-2">Pro Feature</p>
+                <p className="text-gray-400 text-sm mb-4">
+                  Unlock Shot-to-Prompt with the full prompt vault
                 </p>
                 <a 
                   href="#pricing"
                   className="inline-block bg-brand-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-brand-700 transition-colors"
                 >
-                  Upgrade to Pro
+                  Get Pro Access — $49
                 </a>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <span className="ml-4 text-sm text-gray-400">Upload any shot</span>
+                </div>
+                
+                <div className="border-2 border-dashed border-gray-600 rounded-xl p-12 text-center bg-gray-700/30">
+                  <ImageIcon className="h-12 w-12 text-gray-500 mx-auto mb-4" />
+                  <p className="text-gray-400 text-sm">Drop image here or click to upload</p>
+                </div>
+                
+                <div className="mt-4 p-4 bg-gray-700/50 rounded-lg">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sparkles className="h-4 w-4 text-brand-400" />
+                    <span className="text-sm font-medium text-white">Generated Prompt</span>
+                  </div>
+                  <p className="text-xs text-gray-400 font-mono">
+                    "Cinematic drone shot, golden hour lighting, sweeping landscape..."
+                  </p>
+                </div>
               </div>
             </div>
           </div>
