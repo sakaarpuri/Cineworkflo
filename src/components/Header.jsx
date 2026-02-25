@@ -88,10 +88,12 @@ export default function Header() {
 
             <a 
               href="#pricing"
-              className="px-5 py-2 rounded-lg font-medium transition-all hover:opacity-90"
+              className="px-5 py-2 rounded-lg font-semibold transition-all hover:-translate-y-0.5"
               style={{ 
-                background: 'var(--accent-blue)',
-                color: '#fff'
+                background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                color: '#fff',
+                boxShadow: '4px 4px 8px rgba(37,99,235,0.25), -4px -4px 8px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.2)',
+                border: '1px solid rgba(255,255,255,0.1)'
               }}
             >
               Get Pro

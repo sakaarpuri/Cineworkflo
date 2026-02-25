@@ -387,10 +387,12 @@ export default function HeroGallery() {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-xl font-medium transition-all whitespace-nowrap"
+                  className="px-6 py-3 rounded-xl font-semibold transition-all whitespace-nowrap"
                   style={{
-                    background: 'var(--accent-blue)',
-                    color: '#fff'
+                    background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                    color: '#fff',
+                    boxShadow: '6px 6px 12px rgba(37,99,235,0.3), -6px -6px 12px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.2)',
+                    border: '1px solid rgba(255,255,255,0.1)'
                   }}
                 >
                   Get Access

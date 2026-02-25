@@ -292,7 +292,7 @@ export default function CameraMovesPreview() {
         </div>
 
         <div className="text-center">
-          <Link to="/camera-moves" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all hover:-translate-y-0.5" style={{ background: 'var(--accent-purple)', color: '#fff', boxShadow: '0 4px 14px rgba(124,58,237,0.35)' }}>
+          <Link to="/camera-moves" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all hover:-translate-y-0.5" style={{ background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)', color: '#fff', boxShadow: '6px 6px 12px rgba(124,58,237,0.3), -6px -6px 12px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.1)' }}>
             See All 16 Camera Moves
             <ArrowRight className="h-5 w-5" />
           </Link>

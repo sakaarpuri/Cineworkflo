@@ -149,9 +149,11 @@ Format: Just return the enhanced prompt text, nothing else.`
               disabled={!canSubmit}
               className="px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               style={{
-                background: canSubmit ? 'var(--accent-blue)' : 'var(--border-color)',
+                background: canSubmit ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--border-color)',
                 color: canSubmit ? '#fff' : 'var(--text-muted)',
-                cursor: canSubmit ? 'pointer' : 'not-allowed'
+                cursor: canSubmit ? 'pointer' : 'not-allowed',
+                boxShadow: canSubmit ? '5px 5px 10px rgba(37,99,235,0.25), -5px -5px 10px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.25)' : 'none',
+                border: canSubmit ? '1px solid rgba(255,255,255,0.1)' : 'none'
               }}
             >
               {loading ? (

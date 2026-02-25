@@ -232,10 +232,12 @@ export default function PromptVault({ preview = false }) {
           <div className="text-center mt-10">
             <Link
               to="/prompts"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all"
               style={{
-                background: 'var(--accent-blue)',
-                color: '#fff'
+                background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                color: '#fff',
+                boxShadow: '6px 6px 12px rgba(37,99,235,0.25), -6px -6px 12px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.2)',
+                border: '1px solid rgba(255,255,255,0.1)'
               }}
             >
               View All Prompts
