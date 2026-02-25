@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Copy, Check, Lock } from 'lucide-react'
+import { Search, Copy, Check, Lock, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const samplePrompts = [
@@ -53,6 +53,14 @@ const samplePrompts = [
   }
 ]
 
+const CATEGORY_COLORS = {
+  'Product Demo': '#3B82F6',
+  'B-Roll': '#F59E0B',
+  'Interview': '#10B981',
+  'Motion Graphics': '#06B6D4',
+  'Transition': '#8B5CF6'
+}
+
 export default function PromptVault({ preview = false }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
@@ -76,92 +84,160 @@ export default function PromptVault({ preview = false }) {
   }
 
   return (
-    <section className="py-20 bg-gray-50" id="prompts">
+    <section 
+      className="py-16 transition-colors"
+      id="prompts"
+      style={{ background: 'var(--bg-secondary)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="font-display text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10">
+          <h2 
+            className="text-3xl lg:text-4xl font-bold mb-4"
+            style={{ color: 'var(--text-primary)' }}
+          >
             Prompt Vault
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p 
+            className="text-xl max-w-2xl mx-auto"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             {preview 
-              ? 'Preview 6 of 150+ professional prompts. Get full access with Pro.' 
+              ? 'Preview of professional prompts. Get full access with Pro.' 
               : 'Browse our complete collection of tested prompts for AI video creation.'}
           </p>
         </div>
 
+        {/* Search & Filter */}
         <div className="mb-8 flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <div 
+            className="relative flex-1"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5" />
             <input
               type="text"
               placeholder="Search prompts..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full pl-10 pr-4 py-3 rounded-xl outline-none transition-all"
+              style={{
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)'
+              }}
             />
           </div>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500"
-          >
-            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-          </select>
+          <div className="flex gap-2 flex-wrap">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                style={{
+                  background: selectedCategory === cat ? 'var(--accent-blue)' : 'var(--bg-card)',
+                  color: selectedCategory === cat ? '#fff' : 'var(--text-secondary)',
+                  border: `1px solid ${selectedCategory === cat ? 'var(--accent-blue)' : 'var(--border-color)'}`
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Prompts Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayedPrompts.map((prompt) => (
-            <div key={prompt.id} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <span className="text-xs font-medium text-brand-600 bg-brand-50 px-2 py-1 rounded">
+            <div 
+              key={prompt.id}
+              className="p-5 rounded-2xl transition-all hover:-translate-y-1"
+              style={{
+                background: 'var(--bg-card)',
+                boxShadow: 'var(--shadow-card)',
+                border: '1px solid var(--border-color)'
+              }}
+            >
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <span 
+                    className="text-xs font-bold uppercase tracking-wide"
+                    style={{ color: CATEGORY_COLORS[prompt.category] || 'var(--accent-blue)' }}
+                  >
                     {prompt.category}
                   </span>
-                  <span className="text-xs text-gray-500">
-                    {prompt.tool}
-                  </span>
-                </div>
-                <h3 className="font-display font-bold text-gray-900 mb-3">
-                  {prompt.title}
-                </h3>
-                <p className="text-sm text-gray-600 font-mono bg-gray-50 p-3 rounded mb-4 line-clamp-4">
-                  {prompt.prompt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    {prompt.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-xs text-gray-500">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => copyPrompt(prompt.prompt, prompt.id)}
-                    className="flex items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-700"
+                  <h3 
+                    className="font-bold mt-1"
+                    style={{ color: 'var(--text-primary)' }}
                   >
-                    {copiedId === prompt.id ? (
-                      <><Check className="h-4 w-4" /> Copied</>
-                    ) : (
-                      <><Copy className="h-4 w-4" /> Copy</>
-                    )}
-                  </button>
+                    {prompt.title}
+                  </h3>
                 </div>
+                <span 
+                  className="text-xs px-2 py-1 rounded"
+                  style={{ 
+                    background: 'var(--bg-primary)',
+                    color: 'var(--text-muted)'
+                  }}
+                >
+                  {prompt.tool}
+                </span>
+              </div>
+
+              <p 
+                className="text-sm mb-4 font-mono line-clamp-3"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {prompt.prompt}
+              </p>
+
+              <div className="flex items-center justify-between">
+                <div className="flex gap-1.5">
+                  {prompt.tags.slice(0, 2).map(tag => (
+                    <span 
+                      key={tag}
+                      className="text-xs px-2 py-1 rounded"
+                      style={{ 
+                        background: 'var(--bg-primary)',
+                        color: 'var(--text-muted)'
+                      }}
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+                <button
+                  onClick={() => copyPrompt(prompt.prompt, prompt.id)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
+                  style={{
+                    background: copiedId === prompt.id ? 'var(--accent-green)' : 'var(--bg-primary)',
+                    color: copiedId === prompt.id ? '#fff' : 'var(--text-secondary)',
+                    border: '1px solid var(--border-color)'
+                  }}
+                >
+                  {copiedId === prompt.id ? (
+                    <><Check className="h-3.5 w-3.5" /> Copied</>
+                  ) : (
+                    <><Copy className="h-3.5 w-3.5" /> Copy</>
+                  )}
+                </button>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Preview CTA */}
         {preview && (
-          <div className="text-center mt-12">
-            <div className="inline-flex items-center gap-2 text-gray-500 mb-4">
-              <Lock className="h-4 w-4" />
-              <span>147 more prompts available in Pro</span>
-            </div>
+          <div className="text-center mt-10">
             <Link
               to="/prompts"
-              className="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-brand-700 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all"
+              style={{
+                background: 'var(--accent-blue)',
+                color: '#fff'
+              }}
             >
               View All Prompts
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         )}

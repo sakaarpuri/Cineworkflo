@@ -4,58 +4,89 @@ const features = [
   {
     icon: Database,
     title: '150+ Tested Prompts',
-    description: 'Every prompt tested and refined for commercial use. No more trial and error.'
+    description: 'Every prompt tested and refined for commercial use. No more trial and error.',
+    color: '#2563EB'
   },
   {
     icon: Camera,
     title: 'Shot to Prompt',
-    description: 'Upload any reference image or video frame. Get the exact prompt to recreate it.'
+    description: 'Upload any reference image or video frame. Get the exact prompt to recreate it.',
+    color: '#7C3AED'
   },
   {
     icon: Workflow,
     title: 'Workflow Templates',
-    description: 'Turn scripts into shot lists with automatic prompt generation.'
+    description: 'Turn scripts into shot lists with automatic prompt generation.',
+    color: '#059669'
   },
   {
     icon: Wand2,
     title: 'AI Tool Specific',
-    description: 'Prompts optimized for Runway Gen-2, Pika 1.0, and Stable Video Diffusion.'
+    description: 'Prompts optimized for Runway Gen-2, Pika 1.0, and Stable Video Diffusion.',
+    color: '#DC2626'
   },
   {
     icon: Share2,
     title: 'One-Click Copy',
-    description: 'Copy prompts instantly. Paste into your AI video tool and generate.'
+    description: 'Copy prompts instantly. Paste into your AI video tool and generate.',
+    color: '#EA580C'
   },
   {
     icon: Search,
     title: 'Smart Search',
-    description: 'Find prompts by shot type, mood, lighting, camera movement, or subject.'
+    description: 'Find prompts by shot type, mood, lighting, camera movement, or subject.',
+    color: '#0891B2'
   }
 ]
 
 export default function Features() {
   return (
-    <section className="py-20 bg-white">
+    <section 
+      className="py-16 transition-colors"
+      style={{ background: 'var(--bg-primary)' }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-12">
+          <h2 
+            className="text-3xl lg:text-4xl font-bold mb-4"
+            style={{ color: 'var(--text-primary)' }}
+          >
             Everything You Need for AI Video
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p 
+            className="text-xl max-w-2xl mx-auto"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             Stop spending hours tweaking prompts. Get professional results in minutes.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature) => (
-            <div key={feature.title} className="p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
-              <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
-                <feature.icon className="h-6 w-6 text-brand-600" />
+            <div 
+              key={feature.title} 
+              className="p-6 rounded-2xl transition-all hover:-translate-y-1"
+              style={{
+                background: 'var(--bg-card)',
+                boxShadow: 'var(--shadow-card)',
+                border: '1px solid var(--border-color)'
+              }}
+            >
+              <div 
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                style={{
+                  background: `${feature.color}15`
+                }}
+              >
+                <feature.icon className="h-6 w-6" style={{ color: feature.color }} />
               </div>
-              <h3 className="font-display text-lg font-bold text-gray-900 mb-2">
+              <h3 
+                className="text-lg font-bold mb-2"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 {feature.title}
               </h3>
-              <p className="text-gray-600">
+              <p style={{ color: 'var(--text-secondary)' }}>
                 {feature.description}
               </p>
             </div>

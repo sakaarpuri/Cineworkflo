@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Sparkles, Copy, Check, Wand2 } from 'lucide-react';
 
-const MOODS = ["Epic / Cinematic", "Emotional / Quiet", "Energetic / Hype", "Eerie / Dark", "Calm / Peaceful", "Surreal / Dreamy"];
-const USES = ["Social Media / Reels", "Brand Ad", "Short Film", "Background / Loop", "Music Video", "Presentation"];
-const TOOLS = ["Runway", "Kling", "Sora", "Pika", "Luma", "Google Veo", "Higgsfield"];
+const MOODS = ["Epic", "Emotional", "Energetic", "Eerie", "Calm", "Surreal"];
+const USES = ["Social Media", "Brand Ad", "Short Film", "Background", "Music Video"];
+const TOOLS = ["Runway", "Kling", "Sora", "Pika", "Luma", "Veo", "Higgsfield"];
 
 const TOOL_INFO = {
   "Runway": "Best for cinematic control and style consistency.",
@@ -11,7 +11,7 @@ const TOOL_INFO = {
   "Sora": "Excels at surreal scenes and complex physics.",
   "Pika": "Fast for social content and VHS aesthetics.",
   "Luma": "Strong on realistic lighting and fluid dynamics.",
-  "Google Veo": "Best all-rounder with native audio generation.",
+  "Veo": "Best all-rounder with native audio generation.",
   "Higgsfield": "Full director's toolkit with camera control.",
 };
 
@@ -60,7 +60,6 @@ Format: Just return the enhanced prompt text, nothing else.`
       const promptText = data.content?.[0]?.text || data.completion || '';
       setResult(promptText.trim());
     } catch (err) {
-      console.error('Enhancement failed:', err);
       // Fallback demo response
       setResult(`Cinematic ${mood || 'wide'} shot of ${idea}, ${tool || 'professional'} style, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
     }
@@ -77,12 +76,11 @@ Format: Just return the enhanced prompt text, nothing else.`
   const Chip = ({ label, selected, onClick, color }) => (
     <button
       onClick={onClick}
-      className="px-4 py-2 rounded-full text-sm font-medium transition-all"
+      className="px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap"
       style={{
         background: selected ? `${color}15` : 'var(--bg-primary)',
         border: `1.5px solid ${selected ? color : 'var(--border-color)'}`,
-        color: selected ? color : 'var(--text-secondary)',
-        boxShadow: selected ? 'none' : '2px 2px 4px rgba(0,0,0,0.05), -2px -2px 4px rgba(255,255,255,0.5)'
+        color: selected ? color : 'var(--text-secondary)'
       }}
     >
       {label}
@@ -91,231 +89,180 @@ Format: Just return the enhanced prompt text, nothing else.`
 
   return (
     <section 
-      className="py-20 transition-colors"
+      className="py-12 transition-colors"
       style={{ background: 'var(--bg-primary)' }}
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Compact Header */}
+        <div className="text-center mb-6">
           <div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider mb-6"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wider mb-3"
             style={{ 
               background: 'var(--accent-blue)15',
               border: '1px solid var(--accent-blue)30',
               color: 'var(--accent-blue)'
             }}
           >
-            <Sparkles className="h-3.5 w-3.5" />
+            <Sparkles className="h-3 w-3" />
             AI PROMPT ENHANCER
           </div>
           <h2 
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--text-primary)' }}
           >
-            Describe your idea.
-            <br />
-            <span style={{ color: 'var(--accent-blue)' }}>
-              We'll write the perfect prompt.
-            </span>
+            Describe your idea. <span style={{ color: 'var(--accent-blue)' }}>We'll write the prompt.</span>
           </h2>
-          <p style={{ color: 'var(--text-secondary)' }}>
-            Just tell us what you're imagining — we'll turn it into a detailed, tool-ready prompt.
-          </p>
         </div>
 
-        {/* Main Card */}
+        {/* Wide Compact Card */}
         <div 
-          className="p-8 rounded-2xl"
+          className="p-5 rounded-2xl"
           style={{
             background: 'var(--bg-secondary)',
             boxShadow: 'var(--shadow-card)',
             border: '1px solid var(--border-color)'
           }}
         >
-          {/* Idea Input */}
-          <div className="mb-8">
-            <label 
-              className="block text-sm font-semibold mb-3"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              Describe your video idea
-            </label>
-            <textarea
-              value={idea}
-              onChange={(e) => setIdea(e.target.value)}
-              placeholder="e.g. a car driving through a neon-lit city at night, a serene mountain landscape at sunrise..."
-              rows={3}
-              className="w-full p-4 rounded-xl resize-none transition-all outline-none"
-              style={{
-                background: 'var(--bg-primary)',
-                border: '2px solid var(--border-color)',
-                color: 'var(--text-primary)'
-              }}
-            />
-          </div>
-
-          {/* Optional Fields */}
-          <div 
-            className="flex items-center gap-4 mb-6"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            <div className="flex-1 h-px" style={{ background: 'var(--border-color)' }} />
-            <span className="text-xs font-semibold tracking-wider uppercase">
-              Refine Your Result — Optional
-            </span>
-            <div className="flex-1 h-px" style={{ background: 'var(--border-color)' }} />
-          </div>
-
-          {/* Mood */}
-          <div className="mb-6">
-            <label 
-              className="block text-sm font-medium mb-3"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              What's the mood?
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {MOODS.map(m => (
-                <Chip
-                  key={m}
-                  label={m}
-                  selected={mood === m}
-                  onClick={() => setMood(mood === m ? '' : m)}
-                  color="var(--accent-blue)"
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Use Case */}
-          <div className="mb-6">
-            <label 
-              className="block text-sm font-medium mb-3"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              Where will you use it?
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {USES.map(u => (
-                <Chip
-                  key={u}
-                  label={u}
-                  selected={useCase === u}
-                  onClick={() => setUseCase(useCase === u ? '' : u)}
-                  color="var(--accent-purple)"
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Tool */}
-          <div className="mb-8">
-            <label 
-              className="block text-sm font-medium mb-3"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              Which AI tool?
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {TOOLS.map(t => (
-                <Chip
-                  key={t}
-                  label={t}
-                  selected={tool === t}
-                  onClick={() => setTool(tool === t ? '' : t)}
-                  color="var(--accent-green)"
-                />
-              ))}
-            </div>
-            {tool && TOOL_INFO[tool] && (
-              <div 
-                className="mt-3 p-3 rounded-lg text-sm"
+          {/* Main Input Row */}
+          <div className="flex flex-col lg:flex-row gap-4 mb-4">
+            {/* Idea Input - Takes more space */}
+            <div className="flex-1">
+              <input
+                value={idea}
+                onChange={(e) => setIdea(e.target.value)}
+                placeholder="e.g. a car driving through a neon-lit city at night..."
+                className="w-full px-4 py-3 rounded-xl outline-none transition-all"
                 style={{
-                  background: 'var(--accent-green)10',
-                  border: '1px solid var(--accent-green)30',
-                  color: 'var(--accent-green)'
+                  background: 'var(--bg-primary)',
+                  border: '2px solid var(--border-color)',
+                  color: 'var(--text-primary)'
+                }}
+              />
+            </div>
+
+            {/* Enhance Button */}
+            <button
+              onClick={handleEnhance}
+              disabled={!canSubmit}
+              className="px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+              style={{
+                background: canSubmit ? 'var(--accent-blue)' : 'var(--border-color)',
+                color: canSubmit ? '#fff' : 'var(--text-muted)',
+                cursor: canSubmit ? 'pointer' : 'not-allowed'
+              }}
+            >
+              {loading ? (
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <><Wand2 className="h-4 w-4" /> Enhance</>
+              )}
+            </button>
+          </div>
+
+          {/* Options Row - Compact */}
+          <div className="flex flex-wrap items-center gap-4 text-sm">
+            <span style={{ color: 'var(--text-muted)' }}>Refine:</span>
+            
+            {/* Mood */}
+            <div className="flex items-center gap-1.5">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs">Mood</span>
+              <div className="flex gap-1">
+                {MOODS.slice(0, 4).map(m => (
+                  <Chip
+                    key={m}
+                    label={m}
+                    selected={mood === m}
+                    onClick={() => setMood(mood === m ? '' : m)}
+                    color="var(--accent-blue)"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Use Case */}
+            <div className="flex items-center gap-1.5">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs">Use</span>
+              <div className="flex gap-1">
+                {USES.slice(0, 3).map(u => (
+                  <Chip
+                    key={u}
+                    label={u}
+                    selected={useCase === u}
+                    onClick={() => setUseCase(useCase === u ? '' : u)}
+                    color="var(--accent-purple)"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Tool */}
+            <div className="flex items-center gap-1.5">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs">Tool</span>
+              <select
+                value={tool}
+                onChange={(e) => setTool(e.target.value)}
+                className="px-2 py-1 rounded-lg text-xs outline-none cursor-pointer"
+                style={{
+                  background: 'var(--bg-primary)',
+                  border: '1px solid var(--border-color)',
+                  color: tool ? 'var(--accent-green)' : 'var(--text-muted)'
                 }}
               >
-                💡 {TOOL_INFO[tool]}
-              </div>
-            )}
+                <option value="">Select...</option>
+                {TOOLS.map(t => <option key={t} value={t}>{t}</option>)}
+              </select>
+            </div>
           </div>
 
-          {/* Submit Button */}
-          <button
-            onClick={handleEnhance}
-            disabled={!canSubmit}
-            className="w-full py-4 rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2"
-            style={{
-              background: canSubmit ? 'var(--accent-blue)' : 'var(--border-color)',
-              color: canSubmit ? '#fff' : 'var(--text-muted)',
-              cursor: canSubmit ? 'pointer' : 'not-allowed',
-              boxShadow: canSubmit ? '0 4px 14px rgba(37,99,235,0.35)' : 'none'
-            }}
-          >
-            {loading ? (
-              <>
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Enhancing...
-              </>
-            ) : (
-              <>
-                <Wand2 className="h-5 w-5" />
-                ✨ Enhance My Prompt
-              </>
-            )}
-          </button>
-
-          {idea.trim().length <= 3 && (
-            <p 
-              className="text-center text-sm mt-4"
-              style={{ color: 'var(--text-muted)' }}
+          {tool && TOOL_INFO[tool] && (
+            <div 
+              className="mt-3 p-2 rounded-lg text-xs inline-block"
+              style={{
+                background: 'var(--accent-green)10',
+                border: '1px solid var(--accent-green)30',
+                color: 'var(--accent-green)'
+              }}
             >
-              Describe your idea above — the rest is optional
-            </p>
+              💡 {TOOL_INFO[tool]}
+            </div>
           )}
         </div>
 
-        {/* Result */}
+        {/* Result - Compact */}
         {result && (
           <div 
-            className="mt-8 p-8 rounded-2xl animate-fade-in"
+            className="mt-4 p-4 rounded-2xl flex items-start gap-4"
             style={{
               background: 'var(--bg-secondary)',
               boxShadow: 'var(--shadow-card)',
               border: '1px solid var(--accent-green)40'
             }}
           >
-            <div className="flex items-center justify-between mb-4">
-              <div 
-                className="flex items-center gap-2 text-sm font-bold"
-                style={{ color: 'var(--accent-green)' }}
-              >
-                <Check className="h-4 w-4" />
-                ENHANCED PROMPT READY
-              </div>
-              <button
-                onClick={handleCopy}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
-                style={{
-                  background: copied ? 'var(--accent-green)' : 'var(--bg-primary)',
-                  color: copied ? '#fff' : 'var(--text-secondary)',
-                  border: '1px solid var(--border-color)'
-                }}
-              >
-                {copied ? (
-                  <><Check className="h-4 w-4" /> Copied</>
-                ) : (
-                  <><Copy className="h-4 w-4" /> Copy</>
-                )}
-              </button>
+            <div 
+              className="text-xs font-bold flex items-center gap-1 flex-shrink-0"
+              style={{ color: 'var(--accent-green)' }}
+            >
+              <Check className="h-3 w-3" />
+              RESULT
             </div>
             <p 
-              className="text-lg leading-relaxed italic"
+              className="flex-1 text-sm leading-relaxed italic"
               style={{ color: 'var(--text-primary)', fontFamily: 'Georgia, serif' }}
             >
               "{result}"
             </p>
+            <button
+              onClick={handleCopy}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex-shrink-0"
+              style={{
+                background: copied ? 'var(--accent-green)' : 'var(--bg-primary)',
+                color: copied ? '#fff' : 'var(--text-secondary)',
+                border: '1px solid var(--border-color)'
+              }}
+            >
+              {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+              {copied ? 'Copied' : 'Copy'}
+            </button>
           </div>
         )}
       </div>
