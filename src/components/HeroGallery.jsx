@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, Copy, Check, Play, Image as ImageIcon } from 'lucide-react'
+import { Sparkles, Copy, Check, Image as ImageIcon } from 'lucide-react'
 
 const sampleShots = [
   {
@@ -126,12 +126,6 @@ export default function HeroGallery() {
               {/* Visual Placeholder */}
               <div className={`h-48 bg-gradient-to-br ${shot.color} relative flex items-center justify-center`}>
                 <ImageIcon className="h-16 w-16 text-white/30" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <button className="bg-white/90 text-gray-900 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
-                    <Play className="h-4 w-4" />
-                    Preview
-                  </button>
-                </div>
                 <span className="absolute top-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
                   {shot.tool}
                 </span>
