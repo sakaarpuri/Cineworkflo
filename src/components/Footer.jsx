@@ -1,4 +1,5 @@
-import { Film, Twitter, Mail } from 'lucide-react'
+import { Film, Twitter, Mail, Github } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
@@ -18,19 +19,23 @@ export default function Footer() {
           <div>
             <h4 className="font-display font-bold text-white mb-4">Product</h4>
             <ul className="space-y-2">
-              <li><a href="#prompts" className="hover:text-white transition-colors">Prompt Vault</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Shot to Prompt</a></li>
+              <li><Link to="/prompts" className="hover:text-white transition-colors">Prompt Vault</Link></li>
+              <li><Link to="/shot-to-prompt" className="hover:text-white transition-colors">Shot to Prompt</Link></li>
+              <li><Link to="/work-log" className="hover:text-white transition-colors">Work Log</Link></li>
               <li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li>
             </ul>
           </div>
           <div>
             <h4 className="font-display font-bold text-white mb-4">Connect</h4>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="mailto:support@cineworkflo.com" className="hover:text-white transition-colors">
                 <Mail className="h-5 w-5" />
+              </a>
+              <a href="https://github.com/sakaarpuri/Cineworkflo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <Github className="h-5 w-5" />
               </a>
             </div>
           </div>
