@@ -134,11 +134,15 @@ export default function PromptVault({ preview = false }) {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
                 style={{
-                  background: selectedCategory === cat ? 'var(--accent-blue)' : 'var(--bg-card)',
+                  background: selectedCategory === cat ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--bg-card)',
                   color: selectedCategory === cat ? '#fff' : 'var(--text-secondary)',
-                  border: `1px solid ${selectedCategory === cat ? 'var(--accent-blue)' : 'var(--border-color)'}`
+                  border: `1px solid ${selectedCategory === cat ? 'rgba(255,255,255,0.2)' : 'var(--border-color)'}`,
+                  boxShadow: selectedCategory === cat 
+                    ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.1)' 
+                    : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                  transform: selectedCategory === cat ? 'translateY(1px)' : 'translateY(0)'
                 }}
               >
                 {cat}

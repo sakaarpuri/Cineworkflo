@@ -127,12 +127,15 @@ export default function HeroGallery() {
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className="px-4 py-2 rounded-full text-sm font-medium transition-all"
+              className="px-4 py-2 rounded-full text-sm font-semibold transition-all"
               style={{
-                background: activeFilter === cat ? 'var(--accent-blue)' : 'var(--bg-card)',
+                background: activeFilter === cat ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--bg-card)',
                 color: activeFilter === cat ? '#fff' : 'var(--text-secondary)',
-                border: `1px solid ${activeFilter === cat ? 'var(--accent-blue)' : 'var(--border-color)'}`,
-                boxShadow: activeFilter === cat ? 'none' : 'var(--shadow-soft)'
+                border: `1px solid ${activeFilter === cat ? 'rgba(255,255,255,0.2)' : 'var(--border-color)'}`,
+                boxShadow: activeFilter === cat 
+                  ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.1)' 
+                  : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                transform: activeFilter === cat ? 'translateY(1px)' : 'translateY(0)'
               }}
             >
               {cat}

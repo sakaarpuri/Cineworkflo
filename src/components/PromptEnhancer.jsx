@@ -76,11 +76,15 @@ Format: Just return the enhanced prompt text, nothing else.`
   const Chip = ({ label, selected, onClick, color }) => (
     <button
       onClick={onClick}
-      className="px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap"
+      className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap"
       style={{
-        background: selected ? `${color}15` : 'var(--bg-primary)',
+        background: selected ? `linear-gradient(145deg, ${color}20, ${color}05)` : 'var(--bg-primary)',
         border: `1.5px solid ${selected ? color : 'var(--border-color)'}`,
-        color: selected ? color : 'var(--text-secondary)'
+        color: selected ? color : 'var(--text-secondary)',
+        boxShadow: selected 
+          ? `inset 2px 2px 4px ${color}30, inset -2px -2px 4px rgba(255,255,255,0.5)` 
+          : '3px 3px 6px rgba(0,0,0,0.06), -3px -3px 6px rgba(255,255,255,0.7), inset 0 1px 0 rgba(255,255,255,0.5)',
+        transform: selected ? 'translateY(0.5px)' : 'translateY(0)'
       }}
     >
       {label}

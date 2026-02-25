@@ -235,21 +235,24 @@ export default function CameraMoves() {
               <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold transition-all"
                 style={{
-                  background: isActive ? style.bg : 'var(--bg-card)',
+                  background: isActive ? `linear-gradient(145deg, ${style.bg}, ${style.color}15)` : 'var(--bg-card)',
                   border: `1.5px solid ${isActive ? style.color : 'var(--border-color)'}`,
                   color: isActive ? style.color : 'var(--text-secondary)',
-                  boxShadow: isActive ? 'none' : 'var(--shadow-soft)'
+                  boxShadow: isActive 
+                    ? `inset 3px 3px 6px ${style.color}30, inset -3px -3px 6px rgba(255,255,255,0.5)` 
+                    : '5px 5px 10px rgba(0,0,0,0.08), -5px -5px 10px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                  transform: isActive ? 'translateY(1px)' : 'translateY(0)'
                 }}
               >
                 <Icon className="h-4 w-4" />
                 {category}
                 <span 
-                  className="text-xs px-2 py-0.5 rounded-full"
+                  className="text-xs px-2 py-0.5 rounded-full font-bold"
                   style={{ 
-                    background: isActive ? 'rgba(255,255,255,0.5)' : style.bg,
-                    color: style.color
+                    background: isActive ? style.color : style.bg,
+                    color: isActive ? '#fff' : style.color
                   }}
                 >
                   {category === 'All' ? ALL_MOVES.length : ALL_MOVES.filter(m => m.category === category).length}
