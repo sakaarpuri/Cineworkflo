@@ -1,0 +1,812 @@
+[
+  {
+    "id": 1,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "A slow-motion close-up of a person laughing on a sun-drenched rooftop, golden hour light wrapping around their face, shallow depth of field, warm cinematic color grade, handheld camera feel, Instagram Reels format 9:16",
+    "tool_notes": "On Pika add 'smooth motion'. On Kling specify '6 seconds'."
+  },
+  {
+    "id": 2,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "A barista pouring latte art in extreme slow motion, steam rising dramatically, dark moody café background with bokeh string lights, cinematic 24fps feel, vertical 9:16 format, rich brown and amber tones",
+    "tool_notes": "Use 'slow motion' keyword explicitly on Pika for best results."
+  },
+  {
+    "id": 3,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Sora"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "A skateboarder performing a trick at sunset in an empty urban plaza, low angle tracking shot, lens flare cutting through the frame, gritty cinematic grade, fast cut energy, 9:16 vertical",
+    "tool_notes": "Sora handles motion blur naturally here. Add 'sharp details' on Runway."
+  },
+  {
+    "id": 4,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Pika"],
+    "audience": ["Creator"],
+    "prompt": "A woman walking through a crowded neon night market, slow push-in shot, bokeh lights blurring behind her, cinematic anamorphic lens flares, moody and atmospheric, 9:16 vertical format",
+    "tool_notes": "On Pika use 'anamorphic' as a style keyword for better lens effects."
+  },
+  {
+    "id": 5,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An extreme close-up of rain droplets hitting a puddle in slow motion, city reflections shimmering in the water, cold blue cinematic tone, minimalist composition, satisfying loop-friendly ending, 9:16",
+    "tool_notes": "Set loop mode on Kling. On Luma add 'seamless loop' to prompt."
+  },
+  {
+    "id": 6,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": ["Pika", "Runway"],
+    "audience": ["Creator"],
+    "prompt": "A group of friends at a backyard summer party in the late 80s, handheld VHS camcorder aesthetic, washed-out colors, scan lines and film grain overlay, timestamp in corner, warm nostalgic feel, 9:16 vertical",
+    "tool_notes": "Add 'VHS grain overlay' on Runway for stronger retro effect."
+  },
+  {
+    "id": 7,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": ["Pika", "Kling"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "A city street at night shot on a VHS camcorder, neon signs bleeding color, slight tracking distortion, lo-fi grainy texture, 90s aesthetic, fast walking POV shot, vertical 9:16",
+    "tool_notes": "On Kling use 'lo-fi camera' style tag. Pika handles VHS distortion natively."
+  },
+  {
+    "id": 8,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": ["Runway", "Pika"],
+    "audience": ["Creator"],
+    "prompt": "A teenage bedroom in the 90s, posters on the wall, CRT TV glowing, person playing old video game, VHS camcorder POV, warm orange lamp light, grainy nostalgic texture, 9:16 vertical format",
+    "tool_notes": "Specify 'VHS tape quality' and 'scan lines' on Runway for authentic look."
+  },
+  {
+    "id": 9,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": ["Pika", "Luma"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "An aerobics class in a 1980s gym, bright spandex outfits, neon headbands, VHS recording aesthetic, energetic music-video style cuts, washed pastel color palette, 9:16 format",
+    "tool_notes": "Use 'fast cuts' and 'VHS style' on Pika. Luma preserves color well for pastel tones."
+  },
+  {
+    "id": 10,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "A road trip shot entirely on a VHS camcorder, car window POV, endless highway stretching into desert heat haze, old cassette radio visible on dashboard, grainy warm tones, nostalgic summer energy, 9:16",
+    "tool_notes": "Add 'haze distortion' on Runway. Kling handles continuous motion shots smoothly."
+  },
+  {
+    "id": 11,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An anime-style girl running through a cherry blossom forest, petals swirling in slow motion around her, soft pastel color palette, Studio Ghibli-inspired aesthetic, gentle camera pan, 9:16 vertical",
+    "tool_notes": "Kling handles anime style consistently. On Luma add 'Studio Ghibli' as style reference."
+  },
+  {
+    "id": 12,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "Anime-style rooftop scene at sunset, two characters sitting on the edge of a building, city skyline glowing orange behind them, wind blowing through hair, emotional and cinematic, 9:16 vertical format",
+    "tool_notes": "Specify 'flat anime shading' on Runway to avoid 3D look."
+  },
+  {
+    "id": 13,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A lone anime warrior standing in a thunderstorm, lightning illuminating dramatic clouds behind them, cape flowing violently in the wind, dark and epic anime art style, slow zoom in, 9:16 vertical",
+    "tool_notes": "Luma handles lightning effects well. Add 'dramatic lighting' on Kling."
+  },
+  {
+    "id": 14,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": ["Kling", "Pika"],
+    "audience": ["Creator"],
+    "prompt": "Anime city street at night, neon signs reflecting on wet pavement, protagonist walking in slow motion with headphones, lo-fi aesthetic, cool blue and purple tones, smooth pan shot, 9:16",
+    "tool_notes": "Use 'lo-fi anime' as a style tag on both Kling and Pika."
+  },
+  {
+    "id": 15,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "Anime-style ocean scene, massive waves crashing on a rocky shore, seagulls flying overhead, golden hour light, painterly watercolor-meets-anime aesthetic, wide establishing shot slowly pushing in, 9:16",
+    "tool_notes": "On Runway combine 'anime' and 'watercolor' style tags for painterly effect."
+  },
+  {
+    "id": 16,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Marketer"],
+    "prompt": "A single white sneaker floating in a pure white void, soft directional shadow beneath it, slow 360-degree rotation, ultra-sharp texture detail on stitching and sole, clean Apple-ad aesthetic, 16:9",
+    "tool_notes": "On Pika add 'smooth rotation'. Luma handles reflective surfaces cleanly."
+  },
+  {
+    "id": 17,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Marketer"],
+    "prompt": "A luxury skincare serum bottle on a white marble surface, single overhead light casting a precise shadow, slow camera orbit around the product, hyper-realistic glass and liquid detail, minimal and premium feel, 16:9",
+    "tool_notes": "Kling handles glass refraction well. Add 'photorealistic product' on Runway."
+  },
+  {
+    "id": 18,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Marketer", "Creator"],
+    "prompt": "A matte black coffee mug on a light grey surface, steam rising slowly, morning soft window light from the left, minimalist Nordic aesthetic, slow push-in camera, ultra clean composition, 16:9",
+    "tool_notes": "Luma handles steam simulation naturally. Specify 'Nordic minimal' on Runway."
+  },
+  {
+    "id": 19,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": ["Runway", "Pika"],
+    "audience": ["Marketer"],
+    "prompt": "A sleek wireless earbud case opening slowly to reveal the earbuds inside, white background, subtle lens flare, macro close-up detail shot, tech product ad aesthetic, smooth and satisfying motion, 16:9",
+    "tool_notes": "Pika handles mechanical opening animations well. Add 'macro detail' on Runway."
+  },
+  {
+    "id": 20,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Marketer"],
+    "prompt": "A perfume bottle standing on a reflective black surface surrounded by floating water droplets frozen in mid-air, dark and luxurious background, single rim light, ultra cinematic product shot, 16:9",
+    "tool_notes": "Kling handles particle effects around products cleanly. Use 'luxury product' tag on Luma."
+  },
+  {
+    "id": 21,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Marketer"],
+    "prompt": "A sports car driving on a winding coastal road at golden hour, low angle tracking shot keeping pace with the vehicle, dust kicking up behind tires, warm dramatic lighting, cinematic color grade, 16:9",
+    "tool_notes": "Luma excels at vehicle motion. Add 'tracking shot' explicitly on Runway."
+  },
+  {
+    "id": 22,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Marketer"],
+    "prompt": "A glass of whiskey being poured in slow motion, ice cubes cracking, golden liquid splashing in beautiful detail, dark wooden bar surface, warm amber lighting, cinematic macro photography style, 16:9",
+    "tool_notes": "Kling handles liquid dynamics well. On Runway use 'slow motion pour' for clarity."
+  },
+  {
+    "id": 23,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Sora"],
+    "audience": ["Marketer", "Creator"],
+    "prompt": "A chef plating an exquisite dish in a high-end restaurant kitchen, steam rising, dramatic overhead spotlight, slow cinematic push-in to the plate, rich deep color grade, Michelin-star aesthetic, 16:9",
+    "tool_notes": "Sora handles environmental details like steam and kitchen atmosphere well."
+  },
+  {
+    "id": 24,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Marketer"],
+    "prompt": "A luxury watch being placed on a wrist in slow motion, extreme macro close-up on the dial mechanics, cinematic shallow depth of field, warm gold rim lighting, premium brand commercial aesthetic, 16:9",
+    "tool_notes": "Kling handles macro mechanical detail cleanly. Specify 'extreme close-up' on Runway."
+  },
+  {
+    "id": 25,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Marketer"],
+    "prompt": "Condensation dripping down the side of an ice cold soda can in extreme close-up, macro water droplet detail, dramatic studio lighting, slow camera orbit, dark background contrast, satisfying and appetizing, 16:9",
+    "tool_notes": "Luma renders condensation realistically. Use 'condensation droplets macro' on Runway."
+  },
+  {
+    "id": 26,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": ["Sora", "Runway"],
+    "audience": ["Marketer", "Creator"],
+    "prompt": "A perfume bottle floating in the middle of a galaxy, stars and nebula swirling slowly around it, the bottle glowing softly from within, surreal dreamlike scale contrast, cinematic and otherworldly, 16:9",
+    "tool_notes": "Sora excels at surreal scale and space environments. Add 'photorealistic space' on Runway."
+  },
+  {
+    "id": 27,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Marketer"],
+    "prompt": "A luxury handbag sitting in the middle of a calm ocean at sunset, water perfectly still like glass, sky reflecting in the water, hyper-surreal impossible composition, high fashion editorial aesthetic, 16:9",
+    "tool_notes": "On Luma specify 'mirror water reflection'. Runway handles surreal compositions cleanly."
+  },
+  {
+    "id": 28,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": ["Sora", "Kling"],
+    "audience": ["Marketer", "Developer"],
+    "prompt": "A sneaker growing like a plant from the earth in a lush forest, roots visible, surrounded by blooming flowers, surreal nature-meets-product concept, rich green and earthy tones, slow grow animation, 16:9",
+    "tool_notes": "Sora handles organic growth animations well. Kling maintains product detail."
+  },
+  {
+    "id": 29,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Marketer"],
+    "prompt": "A coffee cup that contains an entire miniature rainy city inside it, steam rising turning into tiny clouds, surreal macro world concept, warm intimate lighting, slow zoom into the cup, 16:9",
+    "tool_notes": "Sora handles miniature world concepts best. On Runway use 'tiny world inside' as style cue."
+  },
+  {
+    "id": 30,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": ["Sora", "Luma"],
+    "audience": ["Marketer", "Creator"],
+    "prompt": "A wristwatch melting like Salvador Dali's clocks but in a hyper-realistic 3D space, draped over a floating rock above clouds, dreamlike golden light, slow camera push-in, surreal luxury brand concept, 16:9",
+    "tool_notes": "Sora handles surreal physics well. On Luma add 'Dali-inspired surrealism'."
+  },
+  {
+    "id": 31,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An old man sitting alone at a diner counter at 3am, rain hitting the window behind him, soft neon light from outside casting colored shadows, handheld camera slowly orbiting him, melancholic and silent, 16:9",
+    "tool_notes": "Luma handles atmospheric lighting well. Add 'handheld camera drift' on Runway."
+  },
+  {
+    "id": 32,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": ["Sora", "Runway"],
+    "audience": ["Creator"],
+    "prompt": "A woman standing at the edge of a cliff overlooking a stormy ocean, coat whipping in the wind, wide establishing shot slowly zooming out to reveal the vast scale, dramatic grey sky, emotional and powerful, 16:9",
+    "tool_notes": "Sora excels at wide environmental shots. Use 'slow zoom out reveal' on Runway."
+  },
+  {
+    "id": 33,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "Two strangers making brief eye contact on a subway train, everything slows to a near stop, the world blurs around them, only they are in sharp focus, intimate and emotionally charged close-up, 16:9",
+    "tool_notes": "Kling handles focus shift effects cleanly. Luma maintains face detail in close-ups."
+  },
+  {
+    "id": 34,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A soldier returning home, walking through a quiet suburban street at dawn, long shadow behind him, neighbors beginning to stir, birds starting to sing, slow tracking shot from the side, bittersweet and hopeful, 16:9",
+    "tool_notes": "Sora handles environmental storytelling and character movement naturally."
+  },
+  {
+    "id": 35,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Creator"],
+    "prompt": "A child blowing out birthday candles in slow motion, family faces in soft bokeh background, warm candlelight glow, joyful and intimate, close-up on the child's face as light extinguishes, cinematic and nostalgic, 16:9",
+    "tool_notes": "Luma handles candlelight dynamics well. Specify 'slow motion blow' on Runway."
+  },
+  {
+    "id": 36,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": ["Pika", "Runway"],
+    "audience": ["Creator"],
+    "prompt": "A home video of a family road trip in the early 90s, kids faces pressed against car window, interstate highway passing by, VHS grain and warm color bleed, dated timestamp in the corner, pure nostalgia, 16:9",
+    "tool_notes": "Pika handles VHS grain consistently. Add 'home video aesthetic' on Runway."
+  },
+  {
+    "id": 37,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "A graduation ceremony in the late 80s, proud parents filming with a camcorder, wide-shoulder jackets and big hair, VHS recording artifacts, warm washed-out colors, handheld shaky footage feel, 16:9",
+    "tool_notes": "Add 'VHS handheld shake' on Kling for authentic camcorder movement."
+  },
+  {
+    "id": 38,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": ["Pika", "Luma"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "A couple dancing at a 1990s school prom, disco ball casting spinning light dots, VHS camcorder aesthetic, warm nostalgic orange tones, slight tracking line distortion, slow push-in on their faces, 16:9",
+    "tool_notes": "Luma handles lighting reflections from disco balls well. Use 'prom night 90s VHS' on Pika."
+  },
+  {
+    "id": 39,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": ["Runway", "Pika"],
+    "audience": ["Creator"],
+    "prompt": "A little girl's first bike ride without training wheels, dad running alongside her, backyard in summer, VHS camcorder POV, slightly overexposed sunny footage, pure emotional warmth, 16:9",
+    "tool_notes": "On Runway specify 'overexposed summer light VHS'. Pika maintains movement well."
+  },
+  {
+    "id": 40,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": ["Kling", "Pika"],
+    "audience": ["Creator"],
+    "prompt": "A late night diner scene in the 90s, two friends sharing pie and laughing, VHS color bleed on neon diner signs, grainy low-light footage, close-up handheld camcorder style, warm and intimate, 16:9",
+    "tool_notes": "Kling handles low-light VHS scenes well. Add 'neon color bleed' on Pika."
+  },
+  {
+    "id": 41,
+    "category": "Cinematic & Storytelling",
+    "style": "Anime",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An anime flashback sequence, a young child standing in a sunlit field waving goodbye, petals drifting across the frame, soft watercolor-meets-anime aesthetic, emotional piano score implied, slow fade to white, 16:9",
+    "tool_notes": "Kling handles anime transitions. Add 'soft watercolor animation' on Luma."
+  },
+  {
+    "id": 42,
+    "category": "Cinematic & Storytelling",
+    "style": "Anime",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "An anime hero standing in the ruins of a destroyed city, wind blowing through their hair, camera slowly circling them, determination in their eyes, epic and emotional, dramatic sky with god rays, 16:9",
+    "tool_notes": "Specify 'epic anime lighting' on Runway. Kling maintains character consistency."
+  },
+  {
+    "id": 43,
+    "category": "Cinematic & Storytelling",
+    "style": "Anime",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "Two anime characters sharing an umbrella in the rain, quiet street at dusk, warm street lamp glow, puddles reflecting the light, slow and intimate scene, soft color palette, emotional and bittersweet, 16:9",
+    "tool_notes": "Luma handles rain and reflections well. Use 'warm anime palette' on Kling."
+  },
+  {
+    "id": 44,
+    "category": "Cinematic & Storytelling",
+    "style": "Anime",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An anime montage of seasons changing in a small Japanese town, cherry blossoms in spring to snow in winter, same street corner shown in each season, beautiful time-lapse style anime sequence, 16:9",
+    "tool_notes": "Kling handles scene transitions well. On Runway use 'seasonal montage anime'."
+  },
+  {
+    "id": 45,
+    "category": "Cinematic & Storytelling",
+    "style": "Anime",
+    "best_on": ["Luma", "Sora"],
+    "audience": ["Creator"],
+    "prompt": "An anime train journey through the countryside at sunset, protagonist looking out the window pensively, fields and mountains passing by in beautiful motion, warm orange and pink tones, Studio Ghibli spirit, 16:9",
+    "tool_notes": "Sora handles landscape motion through windows naturally. Luma captures Ghibli color palette well."
+  },
+  {
+    "id": 46,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": ["Runway", "Pika"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A single black line slowly drawing itself across a pure white canvas, transforming into a geometric pattern, clean and hypnotic, minimal sound design implied, smooth and precise animation, perfect loop, 16:9",
+    "tool_notes": "Runway handles minimalist animation cleanly. Specify 'perfect loop' on Pika."
+  },
+  {
+    "id": 47,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Developer"],
+    "prompt": "Hundreds of white dots on a black background slowly forming and dissolving into constellation patterns, smooth particle motion, zen and meditative pacing, subtle glow on each dot, seamless loop, 16:9",
+    "tool_notes": "Luma handles particle fields naturally. Add 'seamless loop particle art' on Runway."
+  },
+  {
+    "id": 48,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": ["Pika", "Runway"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A minimalist color block animation, rectangles of muted pastel colors slowly sliding and rearranging in Mondrian-inspired compositions, clean transitions, no text, pure motion design aesthetic, 16:9",
+    "tool_notes": "Pika handles geometric transitions well. Specify 'Mondrian motion design' on Runway."
+  },
+  {
+    "id": 49,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Developer"],
+    "prompt": "A single water droplet falling in extreme slow motion into a perfectly still pool, creating a crown splash frozen in time, pure white background, hyper-detailed macro, clean and satisfying, loopable, 16:9",
+    "tool_notes": "Luma excels at fluid dynamics. Use 'macro fluid simulation' on Runway."
+  },
+  {
+    "id": 50,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A series of perfect geometric shapes — circle, square, triangle — morphing smoothly into each other on a neutral grey background, satisfying kinetic typography energy, precise and elegant motion, 16:9",
+    "tool_notes": "Kling handles shape morphing cleanly. Add 'smooth morph transition' on Runway."
+  },
+  {
+    "id": 51,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": ["Sora", "Runway"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "An infinite staircase folding in on itself like an M.C. Escher painting brought to life, photorealistic stone texture, small figures walking in impossible directions, slow and hypnotic camera rotation, 16:9",
+    "tool_notes": "Sora handles impossible geometry best. On Runway use 'Escher architectural loop'."
+  },
+  {
+    "id": 52,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Developer"],
+    "prompt": "A clock melting and reforming in a desert landscape, time itself appearing to bend and ripple like water, hyper-surreal photorealistic render, warm dusty light, slow and dreamlike motion, 16:9",
+    "tool_notes": "Sora handles surreal physics intuitively. On Runway specify 'Salvador Dali surrealism'."
+  },
+  {
+    "id": 53,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": ["Sora", "Luma"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A door standing alone in the middle of the ocean, slowly opening to reveal a completely different world inside — a lush rainforest — camera slowly pushes through, impossible portal concept, cinematic and dreamlike, 16:9",
+    "tool_notes": "Sora handles portal and world-transition concepts exceptionally well."
+  },
+  {
+    "id": 54,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Developer"],
+    "prompt": "A human silhouette dissolving into a flock of birds that fly toward the horizon, seamless morphing transition, dramatic sky, poetic and symbolic visual, slow and emotionally resonant, wide 16:9",
+    "tool_notes": "Kling handles morphing transitions cleanly. Add 'silhouette to birds morph' on Runway."
+  },
+  {
+    "id": 55,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": ["Sora", "Runway"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "Giant fish swimming slowly through the clouds above a city, casting enormous shadows on the streets below, pedestrians going about their day as if this is normal, beautiful surreal juxtaposition, soft natural light, 16:9",
+    "tool_notes": "Sora excels at surreal scale and environmental blending."
+  },
+  {
+    "id": 56,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "Neon light tubes bending and morphing into abstract flowing shapes against a pure black background, electric pink and cyan colors, smooth fluid motion, hypnotic and loopable, synthwave energy, 16:9",
+    "tool_notes": "Kling handles neon glow effects cleanly. Specify 'loopable neon fluid art' on Runway."
+  },
+  {
+    "id": 57,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Pika", "Runway"],
+    "audience": ["Developer"],
+    "prompt": "Abstract data stream visualization, thousands of glowing green particles racing through black space forming and dissolving into neural network patterns, techy and hypnotic, fast and kinetic energy, loopable, 16:9",
+    "tool_notes": "Runway handles data visualization aesthetics cleanly. Add 'matrix neural network art' on Pika."
+  },
+  {
+    "id": 58,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A beating neon heart outlined in electric light on a black background, each pulse sending ripples of color outward, synthwave aesthetic, smooth rhythmic animation, perfect loop, 16:9",
+    "tool_notes": "Kling maintains consistent neon effects. Luma handles glow and bloom well."
+  },
+  {
+    "id": 59,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Developer"],
+    "prompt": "Fractal patterns growing and evolving in deep space, electric blue and violet colors, infinite zoom feeling, psychedelic and mathematical beauty, smooth continuous camera push-in, loopable, 16:9",
+    "tool_notes": "Sora handles infinite zoom concepts. On Runway use 'fractal zoom cyberpunk colors'."
+  },
+  {
+    "id": 60,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Pika", "Kling"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "Abstract neon cityscape seen from above at night, grid of light lines forming and dissolving like a circuit board, tron-inspired aesthetic, cool blue and white tones, slow aerial drift, loopable, 16:9",
+    "tool_notes": "Pika handles grid light art well. Use 'Tron grid city top-down' on Kling."
+  },
+  {
+    "id": 61,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": ["Sora", "Luma"],
+    "audience": ["Creator", "Developer", "Marketer"],
+    "prompt": "A sweeping aerial drone shot over an ancient Roman city at its peak, thousands of citizens in the streets, temples gleaming white marble, the Colosseum towering in the distance, golden morning light, epic and majestic, 16:9",
+    "tool_notes": "Sora excels at large-scale historical world building. Luma maintains architectural detail."
+  },
+  {
+    "id": 62,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Sora"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A misty mountain valley at dawn, low clouds rolling between forested peaks, a single narrow river catching the first light, birds rising from the treeline, slow aerial glide forward, breathtaking natural beauty, 16:9",
+    "tool_notes": "Luma handles fog and atmospheric depth beautifully. Add 'volumetric morning mist' on Sora."
+  },
+  {
+    "id": 63,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A vast salt flat at dusk, the sky perfectly mirrored in a thin layer of water, purple and orange gradients, lone figure walking in the distance for scale, infinite horizon, drone shot slowly descending, 16:9",
+    "tool_notes": "Sora handles mirror-flat landscapes well. Specify 'Bolivian salt flat reflection' on Runway."
+  },
+  {
+    "id": 64,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "An underwater coral reef teeming with life, schools of tropical fish darting through coral formations, shafts of light filtering down from the surface, slow camera drift through the scene, vivid and lush, 16:9",
+    "tool_notes": "Luma handles underwater light caustics naturally. Add 'underwater volumetric light' on Runway."
+  },
+  {
+    "id": 65,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": ["Sora", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A futuristic megacity at night, viewed from a descending spacecraft, thousands of lit towers stretching to the horizon, flying vehicles in organized lanes, atmospheric haze and light pollution glow, epic scale reveal, 16:9",
+    "tool_notes": "Sora handles large-scale sci-fi cityscapes best. Use 'cyberpunk megacity descent' on Luma."
+  },
+  {
+    "id": 66,
+    "category": "World & Environment Building",
+    "style": "Anime",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An anime-style fantasy village nestled in a valley, thatched roof cottages with smoke curling from chimneys, a market street with colorful stalls, soft morning light, Studio Ghibli-inspired warmth and detail, slow pan across, 16:9",
+    "tool_notes": "Luma captures Ghibli environmental warmth. Kling maintains consistent anime style."
+  },
+  {
+    "id": 67,
+    "category": "World & Environment Building",
+    "style": "Anime",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "A massive anime sky castle floating above the clouds, waterfalls cascading off its edges, greenery growing on its stone walls, golden hour light, wide establishing shot from below looking up, epic and wondrous, 16:9",
+    "tool_notes": "Kling handles anime architectural detail. On Runway use 'Laputa floating castle style'."
+  },
+  {
+    "id": 68,
+    "category": "World & Environment Building",
+    "style": "Anime",
+    "best_on": ["Luma", "Sora"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A post-apocalyptic anime city being reclaimed by nature, vines growing over crumbled skyscrapers, deer walking through overgrown streets, soft melancholic light, wide aerial shot slowly pushing in, beautiful and haunting, 16:9",
+    "tool_notes": "Sora handles nature reclaiming environments naturally. Luma maintains anime color aesthetic."
+  },
+  {
+    "id": 69,
+    "category": "World & Environment Building",
+    "style": "Anime",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Creator"],
+    "prompt": "An anime ocean town at sunset, boats in the harbor, locals walking along a seaside promenade, warm orange and pink sky reflecting on the water, wide establishing shot with gentle camera drift, peaceful and beautiful, 16:9",
+    "tool_notes": "Kling maintains consistent anime atmosphere. Use 'anime coastal town Ghibli style' on Runway."
+  },
+  {
+    "id": 70,
+    "category": "World & Environment Building",
+    "style": "Anime",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An anime underground crystal cave, massive glowing crystals in blue and purple hues lighting the space, a small boat on a still underground lake, magical and mysterious, slow camera glide across the water surface, 16:9",
+    "tool_notes": "Luma handles crystal glow and reflection naturally. Kling maintains consistent anime rendering."
+  },
+  {
+    "id": 71,
+    "category": "World & Environment Building",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Developer", "Creator", "Marketer"],
+    "prompt": "A rain-soaked cyberpunk alley at night, neon signs in Chinese characters reflecting in puddles, steam rising from grates, a lone figure with an umbrella walking away from camera, atmospheric and moody, slow push in, 16:9",
+    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner 2049 mood' on Runway."
+  },
+  {
+    "id": 72,
+    "category": "World & Environment Building",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Sora", "Luma"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A massive cyberpunk marketplace inside an underground dome, hundreds of stalls with glowing holographic signs, diverse crowds, flying drones carrying packages, chaotic and vibrant energy, sweeping aerial shot, 16:9",
+    "tool_notes": "Sora handles populated large-scale environments best. Use 'underground cyber bazaar' on Luma."
+  },
+  {
+    "id": 73,
+    "category": "World & Environment Building",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Developer"],
+    "prompt": "A futuristic highway at night, self-driving vehicles with glowing trails, massive LED billboards lining the road, rain and mist adding atmospheric depth, drone tracking shot low above the traffic, cinematic and fast, 16:9",
+    "tool_notes": "Sora handles traffic motion naturally. On Runway specify 'neon highway tracking shot'."
+  },
+  {
+    "id": 74,
+    "category": "World & Environment Building",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A cyberpunk rooftop garden high above the city, plants and trees growing wild amid abandoned tech equipment, city lights sprawling to the horizon below, peaceful contrast to the chaos below, slow wide shot, 16:9",
+    "tool_notes": "Luma handles nature vs tech contrast well. Add 'solarpunk meets cyberpunk' on Kling."
+  },
+  {
+    "id": 75,
+    "category": "World & Environment Building",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Developer", "Marketer"],
+    "prompt": "A cyberpunk nightclub interior, laser lights cutting through haze, a crowd of silhouetted figures dancing, massive LED screens on every wall, immersive and sensory, slow aerial pan across the dancefloor, 16:9",
+    "tool_notes": "Kling handles crowd and light interaction. Runway produces strong nightclub atmosphere."
+  },
+  {
+    "id": 76,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "A photorealistic AI news anchor behind a sleek modern desk, speaking directly to camera, neutral professional studio backdrop with subtle screen graphics, confident and authoritative presentation style, cinematic talking head format, 16:9",
+    "tool_notes": "Luma maintains face consistency. Add 'professional news broadcast' on Runway."
+  },
+  {
+    "id": 77,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Marketer"],
+    "prompt": "A photorealistic AI brand spokesperson standing in a modern minimalist office, warm natural light, professional business casual attire, speaking naturally with subtle hand gestures, approachable and trustworthy, 16:9",
+    "tool_notes": "Kling handles natural body movement. Specify 'natural gesture spokesperson' on Runway."
+  },
+  {
+    "id": 78,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "A weathered explorer character walking through a dusty canyon at golden hour, pack on their back, wide-brimmed hat casting a shadow across their face, cinematic tracking shot, adventurous and bold, 16:9",
+    "tool_notes": "Kling handles character locomotion well. Luma maintains cinematic lighting quality."
+  },
+  {
+    "id": 79,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": ["Runway", "Sora"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A photorealistic warrior woman in ancient armor standing at the entrance of a cave, torch light flickering on her face, determination and calm in her eyes, slow dramatic zoom in on her face, cinematic and powerful, 16:9",
+    "tool_notes": "Sora handles environmental character integration naturally. Runway maintains face detail."
+  },
+  {
+    "id": 80,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Marketer", "Creator"],
+    "prompt": "A photorealistic AI fitness coach demonstrating a stretch in a bright modern gym, speaking directly to camera with energy and positivity, natural movement, clean and motivational aesthetic, talking head format, 16:9",
+    "tool_notes": "Luma handles expressive face detail. Add 'motivational fitness coach' on Runway."
+  },
+  {
+    "id": 81,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": ["Kling", "Luma"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "An anime samurai character standing still in a bamboo forest, wind moving the leaves gently, sunlight filtering through the canopy, calm and focused expression, slow dramatic zoom, highly detailed character design, 16:9",
+    "tool_notes": "Kling maintains anime character consistency. Use 'anime samurai dramatic zoom' on Luma."
+  },
+  {
+    "id": 82,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Creator"],
+    "prompt": "An anime mage character casting a spell, hands glowing with arcane energy, magical particles swirling around them, dramatic backlit sky, intense expression, slow motion particle burst at moment of casting, 16:9",
+    "tool_notes": "Kling handles particle effects around characters cleanly. Runway produces strong magic lighting."
+  },
+  {
+    "id": 83,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": ["Luma", "Kling"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A cheerful anime shopkeeper behind a cozy potion shop counter, colorful bottles on shelves behind them, warm lantern light, welcoming expression and animated personality, gentle idle animation, loopable, 16:9",
+    "tool_notes": "Luma handles warm interior lighting for anime characters. Kling maintains character idle loops."
+  },
+  {
+    "id": 84,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Creator"],
+    "prompt": "An anime detective in a long coat standing in a rain-soaked street at night, looking up pensively, neon signs reflecting in puddles around them, noir and atmospheric mood, slow camera push-in on face, 16:9",
+    "tool_notes": "Kling handles rain and neon reflection for anime characters well. Add 'anime noir detective' on Runway."
+  },
+  {
+    "id": 85,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Creator", "Developer"],
+    "prompt": "A regal anime queen on a throne in a grand hall, sunlight streaming through tall windows behind her, attendants blurred in background, confident and powerful presence, slow dramatic zoom in, rich color palette, 16:9",
+    "tool_notes": "Luma maintains face and costume detail. Runway handles grand interior lighting."
+  },
+  {
+    "id": 86,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Kling"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A cyberpunk hacker character hunched over multiple glowing screens in a dark room, neon blue light casting dramatic shadows on their face, holographic data floating around them, intense focus, slow push-in, 16:9",
+    "tool_notes": "Kling handles character with environmental lighting. Add 'cyberpunk hacker holographic UI' on Runway."
+  },
+  {
+    "id": 87,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Luma", "Runway"],
+    "audience": ["Developer", "Marketer"],
+    "prompt": "A sleek AI assistant avatar rendered as a glowing holographic figure, blue and white light forming a human silhouette, particles flowing around the body, appearing on a dark background, futuristic and premium, 16:9",
+    "tool_notes": "Luma handles holographic light figures cleanly. Use 'holographic AI avatar particle field' on Runway."
+  },
+  {
+    "id": 88,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Kling", "Sora"],
+    "audience": ["Developer", "Creator"],
+    "prompt": "A cyberpunk street runner sprinting through a neon-lit alley, rain splashing under their feet, augmented reality HUD elements visible in their visor, motion blur on background, dynamic tracking shot from the side, 16:9",
+    "tool_notes": "Sora handles character-in-motion tracking naturally. Kling maintains cyberpunk visual consistency."
+  },
+  {
+    "id": 89,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Runway", "Luma"],
+    "audience": ["Creator", "Marketer"],
+    "prompt": "A cyberpunk DJ performing on a massive stage, neon lights and lasers exploding behind them, crowd silhouettes in front, bold and energetic visual identity, slow crane shot pulling back to reveal the scale, 16:9",
+    "tool_notes": "Runway handles stage and crowd atmosphere. Add 'cyberpunk concert reveal shot' on Luma."
+  },
+  {
+    "id": 90,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": ["Kling", "Runway"],
+    "audience": ["Developer"],
+    "prompt": "A cyborg character standing in heavy rain, one eye glowing red as it scans the environment, neon reflections on their chrome plating, steam rising from their body, slow dramatic reveal shot from feet to face, 16:9",
+    "tool_notes": "Kling handles metallic surface reflections on characters. Use 'cyborg reveal slow pan' on Runway."
+  }
+]
