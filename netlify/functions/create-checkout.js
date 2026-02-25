@@ -31,7 +31,7 @@ exports.handler = async (event) => {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'CineWorkflow Pro',
+              name: 'CineWorkflo Pro',
               description: 'Lifetime access to 150+ AI video prompts and Shot-to-Prompt tool'
             },
             unit_amount: 4900 // $49.00 in cents

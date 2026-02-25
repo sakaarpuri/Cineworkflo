@@ -86,7 +86,7 @@ const prompts = [
 ]
 
 async function setupDatabase() {
-  console.log('Setting up CineWorkflow database...\n')
+  console.log('Setting up CineWorkflo database...\n')
 
   try {
     // Try to insert prompts - table might already exist or will auto-create

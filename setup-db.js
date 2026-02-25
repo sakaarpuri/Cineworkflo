@@ -510,7 +510,7 @@ const prompts = [
 ]
 
 async function setupDatabase() {
-  console.log('Setting up CineWorkflow database...\n')
+  console.log('Setting up CineWorkflo database...\n')
 
   try {
     // Clear existing data

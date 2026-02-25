@@ -1,4 +1,4 @@
-# CineWorkflow Marketing Strategy
+# CineWorkflo Marketing Strategy
 
 ## 1. Content Marketing (Daily)
 
@@ -77,7 +77,7 @@
 - Both parties benefit
 
 ### Viral Loops
-- "Created with CineWorkflow" badge on outputs
+- "Created with CineWorkflo" badge on outputs
 - Easy share to social
 
 ## 6. Email Marketing
@@ -132,7 +132,7 @@
 
 ## Immediate Actions (This Week)
 
-1. [ ] Set up Twitter account (@CineWorkflow)
+1. [ ] Set up Twitter account (@CineWorkflo)
 2. [ ] Create Linktree/bio link
 3. [ ] Write 7 Twitter posts
 4. [ ] Join 5 relevant subreddits

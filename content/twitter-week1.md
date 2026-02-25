@@ -1,7 +1,7 @@
-# CineWorkflow Twitter Content - Week 1
+# CineWorkflo Twitter Content - Week 1
 
 ## Tweet 1 (Launch Day)
-🎬 Launched CineWorkflow - a curated library of 150+ AI video prompts for filmmakers.
+🎬 Launched CineWorkflo - a curated library of 150+ AI video prompts for filmmakers.
 
 No more guessing with Runway, Pika, or Stable Video.
 
@@ -32,7 +32,7 @@ Stop guessing. Start creating.
 
 Real feedback from real users.
 
-CineWorkflow: Professional AI video prompts without the trial and error.
+CineWorkflo: Professional AI video prompts without the trial and error.
 
 ---
 
@@ -62,7 +62,7 @@ What should I add next?
 ## Tweet 6 (Comparison)
 AI video tool: $28/month
 Prompt engineering course: $199
-CineWorkflow prompt library: $49 one-time
+CineWorkflo prompt library: $49 one-time
 
 The math is simple.
 
@@ -71,7 +71,7 @@ Stop paying monthly for guesswork.
 ---
 
 ## Tweet 7 (Weekend Reflection)
-Week 1 of CineWorkflow:
+Week 1 of CineWorkflo:
 
 • X email signups
 • X paid customers
@@ -126,7 +126,7 @@ Change ONE variable at a time:
 
 7/ Or... skip the learning curve entirely.
 
-I built CineWorkflow with 150+ tested prompts for filmmakers.
+I built CineWorkflo with 150+ tested prompts for filmmakers.
 
 Each one optimized for commercial use.
 

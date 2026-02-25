@@ -1,4 +1,4 @@
-# CineWorkflow - AI Prompts for Filmmakers
+# CineWorkflo - AI Prompts for Filmmakers
 
 A curated library of professional AI video prompts for Runway, Pika, and other AI video tools.
 

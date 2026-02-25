@@ -1,4 +1,4 @@
-# CineWorkflow Launch Checklist
+# CineWorkflo Launch Checklist
 
 ## Pre-Launch (Now - Today)
 
@@ -17,7 +17,7 @@
 ### Marketing Assets
 - [x] Create Twitter content (Week 1)
 - [x] Create marketing strategy doc
-- [ ] Set up Twitter account (@CineWorkflow)
+- [ ] Set up Twitter account (@CineWorkflo)
 - [ ] Create logo/simple branding
 - [ ] Design social media templates
 - [ ] Write Product Hunt listing copy

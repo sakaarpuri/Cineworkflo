@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <Film className="h-6 w-6 text-brand-400" />
-              <span className="font-display font-bold text-xl text-white">CineWorkflow</span>
+              <span className="font-display font-bold text-xl text-white">CineWorkflo</span>
             </div>
             <p className="text-gray-400 max-w-sm">
               Professional AI video prompts for filmmakers. 
@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-gray-500">
-            © 2026 CineWorkflow. All rights reserved.
+            © 2026 CineWorkflo. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <a href="#" className="hover:text-white transition-colors">Privacy</a>

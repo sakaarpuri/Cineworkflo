@@ -11,7 +11,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center gap-2">
             <Film className="h-8 w-8 text-brand-600" />
-            <span className="font-display font-bold text-xl text-gray-900">CineWorkflow</span>
+            <span className="font-display font-bold text-xl text-gray-900">CineWorkflo</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
