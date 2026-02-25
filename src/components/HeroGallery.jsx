@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, Copy, Check, Image as ImageIcon } from 'lucide-react'
+import { Sparkles, Copy, Check, Image as ImageIcon, X, Eye } from 'lucide-react'
 
 const sampleShots = [
   {
@@ -63,6 +63,7 @@ export default function HeroGallery() {
   const [submitted, setSubmitted] = useState(false)
   const [copiedId, setCopiedId] = useState(null)
   const [activeFilter, setActiveFilter] = useState('All')
+  const [selectedShot, setSelectedShot] = useState(null)
 
   const categories = ['All', 'Commercial', 'Travel', 'Corporate', 'Graphics', 'Documentary', 'Branding']
 
@@ -74,6 +75,14 @@ export default function HeroGallery() {
     navigator.clipboard.writeText(prompt)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
+  }
+
+  const openModal = (shot) => {
+    setSelectedShot(shot)
+  }
+
+  const closeModal = () => {
+    setSelectedShot(null)
   }
 
   const handleSubmit = (e) => {
@@ -121,7 +130,8 @@ export default function HeroGallery() {
           {filteredShots.map((shot) => (
             <div 
               key={shot.id}
-              className="group bg-gray-800/50 backdrop-blur rounded-xl overflow-hidden border border-gray-700 hover:border-brand-500/50 transition-all hover:transform hover:scale-[1.02]"
+              onClick={() => openModal(shot)}
+              className="group bg-gray-800/50 backdrop-blur rounded-xl overflow-hidden border border-gray-700 hover:border-brand-500/50 transition-all hover:transform hover:scale-[1.02] cursor-pointer"
             >
               {/* Visual Placeholder */}
               <div className={`h-48 bg-gradient-to-br ${shot.color} relative flex items-center justify-center`}>
@@ -137,6 +147,16 @@ export default function HeroGallery() {
                   <span className="text-xs font-medium text-brand-400 uppercase tracking-wide">
                     {shot.category}
                   </span>
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      openModal(shot)
+                    }}
+                    className="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors"
+                  >
+                    <Eye className="h-3 w-3" />
+                    View
+                  </button>
                 </div>
                 <h3 className="font-display text-lg font-bold text-white mb-3">
                   {shot.title}
@@ -158,7 +178,10 @@ export default function HeroGallery() {
 
                 {/* Copy Button */}
                 <button
-                  onClick={() => copyPrompt(shot.prompt, shot.id)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    copyPrompt(shot.prompt, shot.id)
+                  }}
                   className="w-full py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium flex items-center justify-center gap-2 transition-colors"
                 >
                   {copiedId === shot.id ? (
@@ -171,6 +194,75 @@ export default function HeroGallery() {
             </div>
           ))}
         </div>
+
+        {/* Modal */}
+        {selectedShot && (
+          <div 
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={closeModal}
+          >
+            <div 
+              className="bg-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className={`h-32 bg-gradient-to-br ${selectedShot.color} relative flex items-center justify-center`}>
+                <ImageIcon className="h-12 w-12 text-white/30" />
+                <button
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+                <span className="absolute top-4 left-4 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                  {selectedShot.tool}
+                </span>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xs font-medium text-brand-400 uppercase tracking-wide">
+                    {selectedShot.category}
+                  </span>
+                </div>
+                <h2 className="font-display text-2xl font-bold text-white mb-4">
+                  {selectedShot.title}
+                </h2>
+
+                {/* Full Prompt */}
+                <div className="bg-gray-900 rounded-lg p-4 mb-4">
+                  <p className="text-gray-300 font-mono text-sm leading-relaxed">
+                    {selectedShot.prompt}
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedShot.tags.map(tag => (
+                    <span key={tag} className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => copyPrompt(selectedShot.prompt, selectedShot.id)}
+                    className="flex-1 py-3 bg-brand-600 hover:bg-brand-700 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                  >
+                    {copiedId === selectedShot.id ? (
+                      <><Check className="h-4 w-4" /> Copied!</>
+                    ) : (
+                      <><Copy className="h-4 w-4" /> Copy Prompt</>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Social Proof */}
         <div className="flex flex-wrap justify-center gap-8 mb-12 text-center">
