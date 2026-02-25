@@ -107,7 +107,16 @@ export default function HeroGallery() {
             className="text-4xl lg:text-6xl font-bold leading-tight mb-4"
             style={{ color: 'var(--text-primary)', fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
           >
-            AI Video Prompts That <span style={{ color: 'var(--accent-blue)' }}>Actually Work</span>
+            Get videos right in one{' '}
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              <span style={{ 
+                textDecoration: 'line-through', 
+                textDecorationColor: 'var(--accent-blue)',
+                textDecorationThickness: '4px',
+                opacity: 0.5
+              }}>take</span>
+            </span>{' '}
+            <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
           </h1>
           <p 
             className="text-xl max-w-2xl mx-auto mb-2"
