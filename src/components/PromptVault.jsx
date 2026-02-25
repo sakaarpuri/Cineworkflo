@@ -85,10 +85,12 @@ export default function PromptVault({ preview = false }) {
 
   return (
     <section 
-      className="py-16 transition-colors"
+      className="py-16 transition-colors relative overflow-hidden"
       id="prompts"
-      style={{ background: 'var(--bg-secondary)' }}
+      style={{ background: 'linear-gradient(180deg, #F5F3FF 0%, var(--bg-secondary) 30%, var(--bg-secondary) 70%, #FDF2F8 100%)' }}
     >
+      {/* Decorative gradient */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-32 bg-gradient-to-b from-purple-100 to-transparent opacity-30" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 

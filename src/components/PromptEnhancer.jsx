@@ -89,9 +89,12 @@ Format: Just return the enhanced prompt text, nothing else.`
 
   return (
     <section 
-      className="py-12 transition-colors"
-      style={{ background: 'var(--bg-primary)' }}
+      className="py-12 transition-colors relative overflow-hidden"
+      style={{ background: 'linear-gradient(90deg, #ECFDF5 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, #E0E7FF 100%)' }}
     >
+      {/* Subtle gradient orbs */}
+      <div className="absolute top-1/2 left-10 w-64 h-64 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 transform -translate-y-1/2" />
+      <div className="absolute top-1/2 right-10 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 transform -translate-y-1/2" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Compact Header */}
         <div className="text-center mb-6">

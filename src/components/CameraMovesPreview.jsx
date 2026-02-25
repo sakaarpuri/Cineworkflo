@@ -273,7 +273,10 @@ const FEATURED_MOVES = [
 
 export default function CameraMovesPreview() {
   return (
-    <section className="py-14 transition-colors" style={{ background: 'var(--bg-secondary)' }}>
+    <section className="py-14 transition-colors relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #FEF3C7 0%, var(--bg-secondary) 50%, #DBEAFE 100%)' }}>
+      {/* Decorative elements */}
+      <div className="absolute -top-10 -left-10 w-64 h-64 bg-amber-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
+      <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider mb-3" style={{ background: 'var(--accent-purple)15', border: '1px solid var(--accent-purple)30', color: 'var(--accent-purple)' }}>

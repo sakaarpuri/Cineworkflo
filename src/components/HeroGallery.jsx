@@ -91,9 +91,15 @@ export default function HeroGallery() {
 
   return (
     <section 
-      className="py-16 lg:py-24 transition-colors"
-      style={{ background: 'var(--bg-secondary)' }}
+      className="py-16 lg:py-24 transition-colors relative overflow-hidden"
+      style={{ 
+        background: 'linear-gradient(135deg, var(--bg-secondary) 0%, #EEF2FF 50%, var(--bg-secondary) 100%)'
+      }}
     >
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Headline */}
         <div className="text-center mb-12">

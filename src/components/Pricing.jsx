@@ -36,10 +36,13 @@ const plans = [
 export default function Pricing() {
   return (
     <section 
-      className="py-16 transition-colors"
+      className="py-16 transition-colors relative overflow-hidden"
       id="pricing"
-      style={{ background: 'var(--bg-primary)' }}
+      style={{ background: 'linear-gradient(135deg, #FFFBEB 0%, var(--bg-primary) 50%, #ECFDF5 100%)' }}
     >
+      {/* Decorative elements */}
+      <div className="absolute -top-20 -right-20 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
+      <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 

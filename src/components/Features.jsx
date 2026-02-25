@@ -42,9 +42,11 @@ const features = [
 export default function Features() {
   return (
     <section 
-      className="py-16 transition-colors"
-      style={{ background: 'var(--bg-primary)' }}
+      className="py-16 transition-colors relative"
+      style={{ background: 'linear-gradient(180deg, #F0FDF4 0%, var(--bg-primary) 50%, #FDF4FF 100%)' }}
     >
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '24px 24px' }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 
