@@ -193,9 +193,9 @@ export default function PromptEnhancer() {
             <span style={{ color: 'var(--text-muted)' }}>Refine:</span>
             
             {/* Mood */}
-            <div className="flex items-center gap-1.5">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs">Mood</span>
-              <div className="flex gap-1.5">
+            <div className="flex flex-col items-start gap-1.5 min-w-0 pr-4">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs flex-shrink-0">Mood</span>
+              <div className="flex flex-wrap gap-1.5 overflow-x-auto custom-scroll pr-2">
                 {MOODS.map(m => (
                   <Chip
                     key={m}
@@ -209,9 +209,9 @@ export default function PromptEnhancer() {
             </div>
 
             {/* Use Case */}
-            <div className="flex items-center gap-1.5">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs">Use</span>
-              <div className="flex gap-1.5">
+            <div className="flex flex-col items-start gap-1.5 min-w-0">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs flex-shrink-0">Use</span>
+              <div className="flex flex-wrap gap-1.5 overflow-x-auto custom-scroll pr-2">
                 {USES.map(u => (
                   <Chip
                     key={u}
