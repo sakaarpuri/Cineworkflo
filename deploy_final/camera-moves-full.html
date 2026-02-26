@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Classic Camera Moves</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    scroll-behavior: smooth;
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EEE9;
+    padding: 60px 24px 80px;
+  }
+
+  .page-header { text-align: center; margin-bottom: 52px; }
+  .page-eyebrow {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    color: #2563EB; background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    padding: 4px 14px; border-radius: 99px; margin-bottom: 14px;
+  }
+  .page-title { font-size: 36px; font-weight: 700; color: #111827; letter-spacing: -0.03em; margin-bottom: 10px; line-height: 1.15; }
+  .page-subtitle { font-size: 15px; color: #6B7280; line-height: 1.6; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 28px; max-width: 1200px; margin: 0 auto;
+  }
+
+  .card {
+    background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1.5px solid #E2DDD6;
+    border-radius: 22px; overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  }
+
+  .badge-row { padding: 16px 22px 0; }
+  .badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    color: #2563EB; background: #EFF6FF; border: 1px solid #BFDBFE;
+    padding: 3px 10px; border-radius: 99px; display: inline-block;
+  }
+  .title-row { padding: 8px 22px 2px; display: flex; align-items: baseline; justify-content: space-between; }
+  .move-name { font-size: 24px; font-weight: 700; color: #111827; letter-spacing: -0.03em; }
+  .move-tag  { font-size: 11px; color: #9CA3AF; font-family: 'DM Mono', monospace; }
+
+  .stage {
+    margin: 12px 22px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    border-radius: 16px; height: 220px;
+    position: relative; overflow: hidden;
+    border: 1.5px solid #1a2535; cursor: pointer; user-select: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .stage.idle { border-color: #2563EB55; box-shadow: 0 0 0 3px #2563EB14; }
+
+  .floor-line {
+    position: absolute; bottom: 48px; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, #ffffff08 20%, #ffffff12 50%, #ffffff08 80%, transparent);
+  }
+  .floor-fade {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 48px;
+    background: linear-gradient(to bottom, transparent, rgba(15,23,42,0.9));
+  }
+  .view-label {
+    position: absolute; top: 11px; right: 14px;
+    font-size: 9px; font-family: 'DM Mono', monospace;
+    color: #4B6A8A; letter-spacing: 0.1em; z-index: 2;
+  }
+  .hover-hint {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 6; pointer-events: none;
+    transition: opacity 0.35s ease;
+    background: rgba(15,23,42,0.45); backdrop-filter: blur(2px); border-radius: 15px;
+  }
+  .hover-hint.hidden { opacity: 0; }
+  .hint-pill {
+    display: flex; align-items: center; gap: 9px;
+    background: #2563EB; color: #fff;
+    font-size: 11px; font-weight: 700;
+    font-family: 'DM Mono', monospace; letter-spacing: 0.09em;
+    padding: 9px 20px; border-radius: 99px;
+    box-shadow: 0 0 0 5px #2563EB25, 0 4px 18px #2563EB60;
+  }
+  .hint-pill .play-tri {
+    width: 0; height: 0; border-style: solid;
+    border-width: 5px 0 5px 9px;
+    border-color: transparent transparent transparent #fff;
+  }
+  .dir-label {
+    position: absolute; bottom: 26px; left: 14px;
+    font-size: 9px; font-family: 'DM Mono', monospace;
+    color: #3B82F6; letter-spacing: 0.07em; z-index: 3; opacity: 0;
+  }
+
+  /* stickman */
+  .stickman-wrap { position: absolute; z-index: 2; filter: drop-shadow(0 0 6px #E0850015); }
+  .sil-shadow {
+    position: absolute;
+    background: radial-gradient(ellipse, #E0850014 0%, transparent 70%);
+    border-radius: 50%; z-index: 1;
+  }
+  .fig-main { fill: #E08500; }
+  .fig-dark  { fill: #C06A00; }
+
+  .desc { padding: 8px 22px 10px; font-size: 13px; color: #4B5563; line-height: 1.65; }
+  .feel-row {
+    margin: 2px 22px 12px; background: #FAFAF8; border: 1px solid #F0EDE6;
+    border-radius: 10px; padding: 10px 14px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .feel-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .feel-text { font-size: 12px; color: #6B7280; line-height: 1.55; }
+  .feel-text strong { color: #374151; font-weight: 600; }
+  .prompt-row { margin: 0 22px 20px; }
+  .prompt-label { font-size: 10px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.08em; margin-bottom: 7px; }
+  .prompt-chip {
+    background: #FFFBEB; border: 1px solid #FDE68A;
+    border-radius: 10px; padding: 10px 14px;
+    font-family: 'DM Mono', monospace; font-size: 11px; color: #78350F; line-height: 1.75;
+  }
+  .var { color: #D97706; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-eyebrow">CAMERA MOVES</div>
+  <h1 class="page-title">Classic Camera Movements</h1>
+  <p class="page-subtitle">The foundational moves used in every film, TV show, and video.<br/>Hover each card to see how it works.</p>
+</div>
+
+<div class="grid">
+
+<!-- ══════════════════════════════════════
+     1. DOLLY — side view, camera moves,
+        dotted path line along the floor
+════════════════════════════════════════ -->
+<div class="card">
+  <div class="badge-row"><span class="badge">CLASSIC MOVE</span></div>
+  <div class="title-row"><span class="move-name">Dolly</span><span class="move-tag">push in / pull back</span></div>
+  <div class="stage" id="s-dolly">
+    <span class="view-label">SIDE VIEW</span>
+    <div class="floor-line"></div><div class="floor-fade"></div>
+    <div class="hover-hint" id="h-dolly"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+    <!-- dotted track line -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none" viewBox="0 0 356 220">
+      <line x1="18" y1="168" x2="290" y2="168" stroke="#3B82F6" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="5 5"/>
+      <!-- arrow head at right end -->
+      <polyline points="282,163 290,168 282,173" fill="none" stroke="#3B82F6" stroke-opacity="0.35" stroke-width="1.5"/>
+    </svg>
+    <!-- stickman -->
+    <div class="sil-shadow" style="bottom:45px;right:28px;width:76px;height:9px;"></div>
+    <div class="stickman-wrap" style="bottom:48px;right:38px;">
+      <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+        <circle cx="28" cy="12" r="11" class="fig-main"/>
+        <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+        <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+        <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+        <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+        <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+        <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+        <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+      </svg>
+    </div>
+    <!-- camera -->
+    <div id="dolly-cam" style="position:absolute;bottom:52px;left:12px;z-index:3;">
+      <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style="filter:drop-shadow(0 0 7px #2563EB88)">
+        <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#3B82F6" stroke-width="0.75"/>
+        <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#3B82F6" stroke-width="0.5"/>
+        <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#3B82F6" stroke-width="1.2"/>
+        <circle cx="16" cy="17" r="4.5" fill="#1E3A8A"/>
+        <circle cx="16" cy="17" r="2" fill="#60A5FA"/>
+        <circle cx="13" cy="14" r="1.2" fill="#BAE6FD" opacity="0.6"/>
+        <rect x="11" y="2" width="12" height="5" rx="1.5" fill="#1D4ED8" stroke="#3B82F6" stroke-width="0.5"/>
+        <circle id="dolly-rec" cx="27" cy="10" r="2" fill="#EF4444"/>
+      </svg>
+    </div>
+    <div class="dir-label" id="dolly-lbl"></div>
+  </div>
+  <p class="desc">The camera physically moves <strong>forward or backward</strong> on a track. Unlike zoom, perspective genuinely shifts — foreground and background move at different rates.</p>
+  <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Walking into the scene. Builds intimacy, tension, or a slow reveal.</span></div>
+  <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+  <div class="prompt-chip"><span class="var">slow dolly in</span> toward subject, <span class="var">camera pushes forward on a track</span>, <span class="var">cinematic push into close-up</span></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     2. PAN — side view like dolly,
+        camera rotates on axis (head turns)
+        dotted arc shows sweep direction
+════════════════════════════════════════ -->
+<div class="card">
+  <div class="badge-row"><span class="badge">CLASSIC MOVE</span></div>
+  <div class="title-row"><span class="move-name">Pan</span><span class="move-tag">rotate left / right</span></div>
+  <div class="stage" id="s-pan">
+    <span class="view-label">TOP-DOWN VIEW</span>
+    <div class="hover-hint" id="h-pan"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+    <!-- subtle grid -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none" viewBox="0 0 356 220" preserveAspectRatio="none">
+      <line x1="118" y1="0" x2="118" y2="220" stroke="white" stroke-width="1"/>
+      <line x1="238" y1="0" x2="238" y2="220" stroke="white" stroke-width="1"/>
+      <line x1="0" y1="73" x2="356" y2="73" stroke="white" stroke-width="1"/>
+      <line x1="0" y1="147" x2="356" y2="147" stroke="white" stroke-width="1"/>
+    </svg>
+    <!-- Stickman top-down: shoulder bar crosses through lower part of head -->
+    <div class="stickman-wrap" style="top:50%;right:44px;transform:translateY(-50%);">
+      <svg width="80" height="52" viewBox="0 0 80 52" fill="none">
+        <!-- Shoulders — wide bar sitting at lower third of head -->
+        <rect x="0" y="26" width="80" height="20" rx="10" fill="#C06A00"/>
+        <!-- Head on top, overlaps the shoulder bar -->
+        <circle cx="40" cy="22" r="20" fill="#E08500"/>
+        <!-- Crown -->
+        <circle cx="40" cy="13" r="8" fill="#C06A00" opacity="0.35"/>
+      </svg>
+    </div>
+    <!-- All camera + FOV drawn in SVG, camera sits left-centre, pivots in place -->
+    <svg id="pan-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:3;overflow:visible;pointer-events:none" viewBox="0 0 356 220">
+      <!-- FOV fill -->
+      <path id="pan-fov" d="" fill="#2563EB" fill-opacity="0.07"/>
+      <!-- FOV edges dashed -->
+      <line id="pan-edge1" x1="80" y1="110" x2="80" y2="110" stroke="#2563EB" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="5 4"/>
+      <line id="pan-edge2" x1="80" y1="110" x2="80" y2="110" stroke="#2563EB" stroke-opacity="0.4" stroke-width="1" stroke-dasharray="5 4"/>
+      <!-- Sweep arc (dotted) showing pan range -->
+      <path id="pan-sweep" d="" fill="none" stroke="#3B82F6" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <!-- Camera body (top-down view) -->
+      <g id="pan-cam-g">
+        <rect x="-14" y="-9" width="28" height="18" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="0.75"/>
+        <rect x="14" y="-5" width="9" height="10" rx="2" fill="#1D4ED8"/>
+        <!-- lens -->
+        <circle cx="0" cy="0" r="6" fill="#0C1445" stroke="#3B82F6" stroke-width="1"/>
+        <circle cx="0" cy="0" r="3" fill="#1E3A8A"/>
+        <circle cx="0" cy="0" r="1.2" fill="#60A5FA"/>
+        <circle id="pan-rec" cx="11" cy="-7" r="1.8" fill="#EF4444"/>
+      </g>
+    </svg>
+    <div class="dir-label" id="pan-lbl"></div>
+  </div>
+  <p class="desc">The camera <strong>rotates left or right on a fixed axis</strong> — it stays in place, only the direction it points changes. Used to follow action or reveal a wide scene.</p>
+  <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Turning your head to follow someone walking past. Great for reveals and establishing wide shots.</span></div>
+  <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+  <div class="prompt-chip"><span class="var">slow pan left to right</span>, <span class="var">camera rotates on fixed axis</span>, <span class="var">wide establishing pan across the scene</span></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     3. TILT — side view, camera on a
+        tripod, beam sweeps up/down the
+        stickman's body clearly
+════════════════════════════════════════ -->
+<div class="card">
+  <div class="badge-row"><span class="badge">CLASSIC MOVE</span></div>
+  <div class="title-row"><span class="move-name">Tilt</span><span class="move-tag">pivot up / down</span></div>
+  <div class="stage" id="s-tilt">
+    <span class="view-label">SIDE VIEW</span>
+    <div class="floor-line"></div><div class="floor-fade"></div>
+    <div class="hover-hint" id="h-tilt"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+    <!-- Stickman standing right-centre, taller so tilt is obvious -->
+    <div class="sil-shadow" style="bottom:45px;right:55px;width:76px;height:9px;"></div>
+    <div class="stickman-wrap" style="bottom:48px;right:65px;">
+      <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+        <circle cx="28" cy="12" r="11" class="fig-main"/>
+        <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+        <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+        <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+        <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+        <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+        <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+        <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+      </svg>
+    </div>
+    <!-- Camera on tripod, left side. SVG handles the pivot beam -->
+    <svg id="tilt-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:3;overflow:visible;pointer-events:none" viewBox="0 0 356 220">
+      <!-- Tripod legs -->
+      <line x1="52" y1="172" x2="36" y2="200" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="52" y1="172" x2="52" y2="202" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="52" y1="172" x2="68" y2="200" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Tripod pole -->
+      <line x1="52" y1="148" x2="52" y2="172" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+      <!-- Pivot point -->
+      <circle cx="52" cy="148" r="4" fill="#334155" stroke="#4B5563" stroke-width="1"/>
+      <!-- FOV fill arc -->
+      <path id="tilt-fov" d="" fill="#2563EB" fill-opacity="0.07"/>
+      <!-- Beam line (main sight line) -->
+      <line id="tilt-beam" x1="52" y1="148" x2="52" y2="148" stroke="#3B82F6" stroke-opacity="0.6" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <!-- Upper FOV edge -->
+      <line id="tilt-edge1" x1="52" y1="148" x2="52" y2="148" stroke="#2563EB" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4 5"/>
+      <!-- Lower FOV edge -->
+      <line id="tilt-edge2" x1="52" y1="148" x2="52" y2="148" stroke="#2563EB" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="4 5"/>
+      <!-- Sweep arc -->
+      <path id="tilt-sweep" d="" fill="none" stroke="#3B82F6" stroke-opacity="0.3" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <!-- Camera body at pivot, rotates with beam -->
+      <g id="tilt-cam-g" transform="translate(52,148)">
+        <rect x="4" y="-8" width="26" height="16" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="0.75"/>
+        <rect x="30" y="-4" width="9" height="8" rx="2" fill="#1D4ED8"/>
+        <circle cx="14" cy="0" r="5.5" fill="#0C1445" stroke="#3B82F6" stroke-width="1"/>
+        <circle cx="14" cy="0" r="3" fill="#1E3A8A"/>
+        <circle cx="14" cy="0" r="1.2" fill="#60A5FA"/>
+        <circle id="tilt-rec" cx="28" cy="-6" r="1.8" fill="#EF4444"/>
+      </g>
+    </svg>
+    <!-- Highlight dot showing where beam hits the stickman -->
+    <div id="tilt-hit" style="position:absolute;width:8px;height:8px;border-radius:50%;background:#3B82F6;opacity:0.7;z-index:4;transform:translate(-50%,-50%);pointer-events:none;transition:none;"></div>
+    <div class="dir-label" id="tilt-lbl"></div>
+  </div>
+  <p class="desc">The camera <strong>pivots up or down on a fixed tripod</strong> — staying in place while the lens tilts vertically. Classic for scanning a tall subject from feet to face.</p>
+  <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Looking up at a skyscraper, or slowly revealing a character from shoes to eyes.</span></div>
+  <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+  <div class="prompt-chip"><span class="var">slow tilt up</span> from feet to face, <span class="var">camera pivots upward on fixed tripod</span>, <span class="var">low-to-high vertical reveal</span></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     4. ZOOM — camera centred left,
+        subject grows bigger as zoom in,
+        FOV lines narrow
+════════════════════════════════════════ -->
+<div class="card">
+  <div class="badge-row"><span class="badge">CLASSIC MOVE</span></div>
+  <div class="title-row"><span class="move-name">Zoom</span><span class="move-tag">lens in / lens out</span></div>
+  <div class="stage" id="s-zoom">
+    <span class="view-label">SIDE VIEW</span>
+    <div class="floor-line"></div><div class="floor-fade"></div>
+    <div class="hover-hint" id="h-zoom"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+    <!-- Camera centred vertically, left third of stage. Does NOT move. -->
+    <div style="position:absolute;bottom:52px;left:48px;z-index:3;">
+      <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style="filter:drop-shadow(0 0 7px #2563EB88)">
+        <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#3B82F6" stroke-width="0.75"/>
+        <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#3B82F6" stroke-width="0.5"/>
+        <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#3B82F6" stroke-width="1.2"/>
+        <circle cx="16" cy="17" r="4.5" fill="#1E3A8A"/>
+        <circle cx="16" cy="17" r="2" fill="#60A5FA"/>
+        <circle cx="13" cy="14" r="1.2" fill="#BAE6FD" opacity="0.6"/>
+        <rect x="11" y="2" width="12" height="5" rx="1.5" fill="#1D4ED8" stroke="#3B82F6" stroke-width="0.5"/>
+        <circle id="zoom-rec" cx="27" cy="10" r="2" fill="#EF4444"/>
+      </svg>
+    </div>
+    <!-- NOT MOVING label -->
+    <div style="position:absolute;bottom:38px;left:48px;font-size:8px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:0.06em;z-index:3;">FIXED</div>
+    <!-- Stickman: scales via JS to show zoom effect -->
+    <div id="zoom-subject" style="position:absolute;bottom:48px;right:28px;z-index:2;transform-origin:bottom center;">
+      <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+        <circle cx="28" cy="12" r="11" class="fig-main"/>
+        <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+        <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+        <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+        <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+        <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+        <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+        <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+      </svg>
+    </div>
+    <!-- Shadow under subject, also scales -->
+    <div id="zoom-shadow" style="position:absolute;bottom:45px;right:18px;width:76px;height:9px;background:radial-gradient(ellipse,#E0850014 0%,transparent 70%);border-radius:50%;z-index:1;transform-origin:center center;"></div>
+    <!-- FOV lines + zoom label -->
+    <svg id="zoom-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none" viewBox="0 0 356 220">
+      <line id="zoom-top" x1="80" y1="106" x2="280" y2="20" stroke="#2563EB" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 4"/>
+      <line id="zoom-bot" x1="80" y1="114" x2="280" y2="200" stroke="#2563EB" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 4"/>
+      <!-- "SUBJECT GROWS" label arrow -->
+      <text id="zoom-note" x="180" y="30" fill="#3B82F6" fill-opacity="0" font-size="8" font-family="monospace" letter-spacing="0.05em">▶ SUBJECT APPEARS CLOSER</text>
+    </svg>
+    <div class="dir-label" id="zoom-lbl"></div>
+  </div>
+  <p class="desc">The camera <strong>stays completely still</strong> — only the lens changes focal length, making the subject appear closer or further. Creates a flatter, more compressed look than a dolly.</p>
+  <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Looking through binoculars. The subject gets bigger but the depth of the world flattens.</span></div>
+  <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+  <div class="prompt-chip"><span class="var">slow zoom in</span> on subject, <span class="var">camera stays fixed, lens compresses</span>, <span class="var">telephoto zoom push</span></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     5. TRACKING SHOT — top-down, full
+        stickman moves with camera beside
+════════════════════════════════════════ -->
+<div class="card">
+  <div class="badge-row"><span class="badge">CLASSIC MOVE</span></div>
+  <div class="title-row"><span class="move-name">Tracking Shot</span><span class="move-tag">follow sideways</span></div>
+  <div class="stage" id="s-track">
+    <span class="view-label">TOP-DOWN VIEW</span>
+    <div class="hover-hint" id="h-track"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+    <!-- Ground grid -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none" viewBox="0 0 356 220" preserveAspectRatio="none">
+      <line x1="0" y1="73" x2="356" y2="73" stroke="white" stroke-width="1"/>
+      <line x1="0" y1="147" x2="356" y2="147" stroke="white" stroke-width="1"/>
+      <line x1="89" y1="0" x2="89" y2="220" stroke="white" stroke-width="1"/>
+      <line x1="178" y1="0" x2="178" y2="220" stroke="white" stroke-width="1"/>
+      <line x1="267" y1="0" x2="267" y2="220" stroke="white" stroke-width="1"/>
+    </svg>
+    <!-- Travel path lines (dashed) -->
+    <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none" viewBox="0 0 356 220">
+      <line x1="14" y1="82" x2="322" y2="82" stroke="#E08500" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <line x1="14" y1="148" x2="322" y2="148" stroke="#2563EB" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <!-- arrowheads -->
+      <polyline points="313,77 322,82 313,87" fill="none" stroke="#E08500" stroke-opacity="0.3" stroke-width="1.5"/>
+      <polyline points="313,143 322,148 313,153" fill="none" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1.5"/>
+    </svg>
+    <!-- Stickman top-down: shoulder bar crosses through lower part of head -->
+    <div id="track-subject" style="position:absolute;top:50px;left:6px;z-index:3;">
+      <svg width="80" height="52" viewBox="0 0 80 52" fill="none">
+        <!-- Shoulders — wide bar at lower third of head -->
+        <rect x="0" y="26" width="80" height="20" rx="10" fill="#C06A00"/>
+        <!-- Head overlapping the shoulder bar -->
+        <circle cx="40" cy="22" r="20" fill="#E08500"/>
+        <!-- Crown -->
+        <circle cx="40" cy="13" r="8" fill="#C06A00" opacity="0.35"/>
+      </svg>
+    </div>
+    <!-- Camera top-down -->
+    <div id="track-cam" style="position:absolute;top:124px;left:14px;z-index:3;">
+      <svg width="38" height="28" viewBox="0 0 38 28" fill="none" style="filter:drop-shadow(0 0 6px #2563EB88)">
+        <rect x="0" y="4" width="28" height="20" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="0.75"/>
+        <rect x="28" y="8" width="9" height="10" rx="2" fill="#1D4ED8"/>
+        <circle cx="14" cy="14" r="6" fill="#0C1445" stroke="#3B82F6" stroke-width="1"/>
+        <circle cx="14" cy="14" r="3.5" fill="#1E3A8A"/>
+        <circle cx="14" cy="14" r="1.4" fill="#60A5FA"/>
+        <circle id="track-rec" cx="25" cy="6" r="1.8" fill="#EF4444"/>
+      </svg>
+    </div>
+    <!-- FOV lines from camera toward subject (top-down), dynamic -->
+    <svg id="track-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none" viewBox="0 0 356 220">
+      <line id="track-fov1" x1="32" y1="138" x2="40" y2="82" stroke="#2563EB" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="4 4"/>
+      <line id="track-fov2" x1="44" y1="138" x2="52" y2="82" stroke="#2563EB" stroke-opacity="0.2" stroke-width="1" stroke-dasharray="4 4"/>
+    </svg>
+    <div class="dir-label" id="track-lbl"></div>
+  </div>
+  <p class="desc">Camera and subject <strong>move together sideways</strong> at the same speed, keeping the subject perfectly framed throughout. The camera never gets closer or further away.</p>
+  <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Running alongside someone. Keeps energy and the subject always centred in frame.</span></div>
+  <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+  <div class="prompt-chip"><span class="var">tracking shot following subject</span>, <span class="var">camera moves parallel sideways</span>, <span class="var">side-on tracking as character walks</span></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     6. CRANE / JIB
+════════════════════════════════════════ -->
+<div class="card">
+  <div class="badge-row"><span class="badge">CLASSIC MOVE</span></div>
+  <div class="title-row"><span class="move-name">Crane / Jib</span><span class="move-tag">rise up / sweep down</span></div>
+  <div class="stage" id="s-crane">
+    <span class="view-label">SIDE VIEW</span>
+    <div class="floor-line"></div><div class="floor-fade"></div>
+    <div class="hover-hint" id="h-crane"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+    <div class="sil-shadow" style="bottom:45px;right:55px;width:76px;height:9px;"></div>
+    <div class="stickman-wrap" style="bottom:48px;right:65px;">
+      <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+        <circle cx="28" cy="12" r="11" class="fig-main"/>
+        <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+        <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+        <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+        <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+        <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+        <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+        <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+      </svg>
+    </div>
+    <svg id="crane-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:3;overflow:visible;pointer-events:none" viewBox="0 0 356 220">
+      <!-- Crane base -->
+      <polygon points="32,210 58,210 45,178" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+      <rect x="40" y="176" width="10" height="8" rx="2" fill="#334155"/>
+      <!-- Arm -->
+      <line id="crane-arm" x1="45" y1="178" x2="45" y2="120" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+      <!-- Path arc (dotted) showing vertical sweep -->
+      <path id="crane-path" d="" fill="none" stroke="#3B82F6" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <!-- Camera group -->
+      <g id="crane-cam-g">
+        <rect x="-13" y="-8" width="26" height="16" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="0.75"/>
+        <rect x="13" y="-4" width="9" height="8" rx="2" fill="#1D4ED8"/>
+        <circle cx="0" cy="0" r="5.5" fill="#0C1445" stroke="#3B82F6" stroke-width="1"/>
+        <circle cx="0" cy="0" r="3" fill="#1E3A8A"/>
+        <circle cx="0" cy="0" r="1.2" fill="#60A5FA"/>
+        <circle id="crane-rec" cx="11" cy="-6" r="1.8" fill="#EF4444"/>
+        <!-- beam toward subject -->
+        <line id="crane-beam" x1="13" y1="0" x2="100" y2="0" stroke="#2563EB" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="4 4"/>
+      </g>
+    </svg>
+    <div class="dir-label" id="crane-lbl"></div>
+  </div>
+  <p class="desc">The camera is mounted on a long arm and <strong>sweeps vertically</strong> — rising high above or swooping down to ground level, keeping the subject in frame throughout.</p>
+  <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> A bird taking flight over the scene. Creates grandeur, scale, and epic transitions.</span></div>
+  <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+  <div class="prompt-chip"><span class="var">crane shot rising up</span> from ground level, <span class="var">camera sweeps upward on jib arm</span>, <span class="var">epic rising reveal pulling back and up</span></div></div>
+</div>
+
+</div><!-- /grid -->
+
+<script>
+function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+function makeCard(stageId, hintId, animFn, resetFn) {
+  const stage = document.getElementById(stageId);
+  const hint  = document.getElementById(hintId);
+  let running = false, runCount = 0, startTime = null, animId = null;
+  const RUNS = 2, DUR = 3400;
+
+  function showIdle() { stage.classList.add('idle'); hint.classList.remove('hidden'); }
+  function hideIdle() { stage.classList.remove('idle'); hint.classList.add('hidden'); }
+
+  function tick(ts) {
+    if (!startTime) startTime = ts;
+    const p = Math.min((ts - startTime) / DUR, 1);
+    animFn(p, ts);
+    if (p < 1) {
+      animId = requestAnimationFrame(tick);
+    } else {
+      runCount++;
+      startTime = null;
+      if (runCount < RUNS) { animId = requestAnimationFrame(tick); }
+      else { if (resetFn) resetFn(); running = false; setTimeout(showIdle, 600); }
+    }
+  }
+
+  function start() {
+    if (running) return;
+    running = true; runCount = 0; startTime = null;
+    hideIdle();
+    animId = requestAnimationFrame(tick);
+  }
+
+  if (resetFn) resetFn();
+  showIdle();
+  stage.addEventListener('mouseenter', () => { if (!running) start(); });
+}
+
+// ─────────────────────────────────────────────────────────
+// 1. DOLLY
+// ─────────────────────────────────────────────────────────
+{
+  const cam = document.getElementById('dolly-cam');
+  const lbl = document.getElementById('dolly-lbl');
+  const rec = document.getElementById('dolly-rec');
+  const SX = 12, EX = 136;
+
+  makeCard('s-dolly','h-dolly', (p, ts) => {
+    let x;
+    if      (p < 0.44) x = SX + easeInOut(p/0.44)*(EX-SX);
+    else if (p < 0.56) x = EX;
+    else               x = EX - easeInOut((p-0.56)/0.44)*(EX-SX);
+    cam.style.left = x + 'px';
+    lbl.textContent = p<0.44 ? '▶▶ MOVING CLOSER' : p<0.56 ? '— HOLDING —' : '◀◀ PULLING BACK';
+    lbl.style.opacity = p<0.44 ? String(Math.min(p/0.1,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.1,0.85));
+    rec.style.opacity = (p<0.44||p>0.56) ? String(0.35+0.65*Math.abs(Math.sin(ts/360))) : '1';
+  }, () => { cam.style.left = SX+'px'; lbl.style.opacity='0'; });
+}
+
+// ─────────────────────────────────────────────────────────
+// 2. PAN — top-down, camera pivots left, FOV sweeps right
+//    Camera drawn inside SVG, rotates in place
+// ─────────────────────────────────────────────────────────
+{
+  const camG   = document.getElementById('pan-cam-g');
+  const fov    = document.getElementById('pan-fov');
+  const edge1  = document.getElementById('pan-edge1');
+  const edge2  = document.getElementById('pan-edge2');
+  const sweep  = document.getElementById('pan-sweep');
+  const lbl    = document.getElementById('pan-lbl');
+  const rec    = document.getElementById('pan-rec');
+
+  // Camera sits left-centre in viewBox 356x220
+  const CX = 80, CY = 110;
+  const FOV_HALF = 22; // degrees each side of centre line
+  const LEN = 200;
+  // Pan: centre angle goes from -35deg (pointing up-right) to +35deg (pointing down-right)
+  const A_START = -35, A_END = 35;
+  // Sweep arc radius
+  const SWEEP_R = 150;
+
+  function setPan(centreDeg) {
+    // Camera body rotates
+    camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${centreDeg})`);
+    rec.setAttribute('transform', `rotate(${centreDeg})`); // inside camG, stays relative
+
+    const toRad = d => d * Math.PI / 180;
+    const a1 = toRad(centreDeg - FOV_HALF);
+    const a2 = toRad(centreDeg + FOV_HALF);
+    const ac = toRad(centreDeg);
+
+    // Centre beam
+    const bx = CX + LEN * Math.cos(ac), by = CY + LEN * Math.sin(ac);
+    edge1.setAttribute('x1', CX); edge1.setAttribute('y1', CY);
+    edge1.setAttribute('x2', bx); edge1.setAttribute('y2', by);
+
+    // FOV edges
+    const e1x = CX + LEN*0.9*Math.cos(a1), e1y = CY + LEN*0.9*Math.sin(a1);
+    const e2x = CX + LEN*0.9*Math.cos(a2), e2y = CY + LEN*0.9*Math.sin(a2);
+    edge2.setAttribute('x1', CX); edge2.setAttribute('y1', CY);
+    edge2.setAttribute('x2', e2x); edge2.setAttribute('y2', e2y);
+    fov.setAttribute('d', `M${CX},${CY} L${e1x},${e1y} A${LEN*0.9},${LEN*0.9} 0 0,1 ${e2x},${e2y} Z`);
+
+    // Sweep arc shows where we came from
+    const saStart = toRad(A_START), saEnd = toRad(centreDeg);
+    const lf = (centreDeg - A_START) > 180 ? 1 : 0;
+    const sx1 = CX + SWEEP_R*Math.cos(saStart), sy1 = CY + SWEEP_R*Math.sin(saStart);
+    const sx2 = CX + SWEEP_R*Math.cos(saEnd),   sy2 = CY + SWEEP_R*Math.sin(saEnd);
+    if (Math.abs(centreDeg - A_START) > 1) {
+      sweep.setAttribute('d', `M${sx1},${sy1} A${SWEEP_R},${SWEEP_R} 0 ${lf},1 ${sx2},${sy2}`);
+    } else {
+      sweep.setAttribute('d', '');
+    }
+  }
+
+  makeCard('s-pan','h-pan', (p, ts) => {
+    let angle;
+    if      (p < 0.44) angle = A_START + easeInOut(p/0.44)*(A_END-A_START);
+    else if (p < 0.56) angle = A_END;
+    else               angle = A_END - easeInOut((p-0.56)/0.44)*(A_END-A_START);
+    setPan(angle);
+    lbl.textContent = p<0.44 ? '▶▶ PANNING RIGHT' : p<0.56 ? '— HOLDING —' : '◀◀ PANNING LEFT';
+    lbl.style.opacity = p<0.44 ? String(Math.min(p/0.1,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.1,0.85));
+    rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/360)));
+  }, () => { setPan(A_START); lbl.style.opacity='0'; });
+}
+
+// ─────────────────────────────────────────────────────────
+// 3. TILT — side view, camera on tripod left,
+//    beam sweeps from feet up to head of stickman
+// ─────────────────────────────────────────────────────────
+{
+  const camG  = document.getElementById('tilt-cam-g');
+  const beam  = document.getElementById('tilt-beam');
+  const edge1 = document.getElementById('tilt-edge1');
+  const edge2 = document.getElementById('tilt-edge2');
+  const fov   = document.getElementById('tilt-fov');
+  const sweep = document.getElementById('tilt-sweep');
+  const hit   = document.getElementById('tilt-hit');
+  const lbl   = document.getElementById('tilt-lbl');
+  const rec   = document.getElementById('tilt-rec');
+
+  // Camera pivot on tripod at (52, 148) in SVG viewBox 356x220
+  const CX = 52, CY = 148;
+  const LEN = 180, FOV_H = 12;
+  // Stickman feet at roughly (right:65px → x=356-65-28=263, y=172 in viewbox)
+  // Stickman head top at same x, y≈30
+  // So tilt angles: feet = atan2(172-148, 263-52)≈atan2(24,211)≈6.5deg
+  //                 head = atan2(30-148, 263-52)=atan2(-118,211)≈-29deg
+  const A_START = 10, A_END = -32; // degrees from horizontal right
+
+  function setTilt(deg) {
+    const toRad = d => d * Math.PI / 180;
+    const r = toRad(deg);
+    // Rotate camera body
+    camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${deg})`);
+    // Main beam
+    const bx = CX + LEN*Math.cos(r), by = CY + LEN*Math.sin(r);
+    beam.setAttribute('x1', CX); beam.setAttribute('y1', CY);
+    beam.setAttribute('x2', bx); beam.setAttribute('y2', by);
+    // FOV edges
+    const r1 = toRad(deg - FOV_H), r2 = toRad(deg + FOV_H);
+    const e1x = CX+LEN*0.85*Math.cos(r1), e1y = CY+LEN*0.85*Math.sin(r1);
+    const e2x = CX+LEN*0.85*Math.cos(r2), e2y = CY+LEN*0.85*Math.sin(r2);
+    edge1.setAttribute('x1',CX); edge1.setAttribute('y1',CY);
+    edge1.setAttribute('x2',e1x); edge1.setAttribute('y2',e1y);
+    edge2.setAttribute('x1',CX); edge2.setAttribute('y1',CY);
+    edge2.setAttribute('x2',e2x); edge2.setAttribute('y2',e2y);
+    fov.setAttribute('d', `M${CX},${CY} L${e1x},${e1y} A${LEN*0.85},${LEN*0.85} 0 0,1 ${e2x},${e2y} Z`);
+    // Sweep arc
+    const rS = toRad(A_START), rC = toRad(deg);
+    const lf = (deg - A_START) < -180 ? 1 : 0;
+    const sx1 = CX+120*Math.cos(rS), sy1 = CY+120*Math.sin(rS);
+    const sx2 = CX+120*Math.cos(rC), sy2 = CY+120*Math.sin(rC);
+    if (Math.abs(deg - A_START) > 1) {
+      sweep.setAttribute('d', `M${sx1},${sy1} A120,120 0 ${lf},0 ${sx2},${sy2}`);
+    } else { sweep.setAttribute('d',''); }
+    // Hit dot on stickman — interpolate along stickman height
+    // stickman right:65 → in stage pixel: stageW(~312)-65=247 from left, +half figure width
+    const hitX = 258; // approx centre of stickman in stage px
+    // lerp from feet (y≈172) to head (y≈30) based on progress
+    const tp = (A_START - deg) / (A_START - A_END);
+    const hitY = 172 - tp * 142; // feet to head
+    hit.style.left = hitX + 'px';
+    hit.style.top  = hitY + 'px';
+    hit.style.opacity = tp > 0.02 && tp < 0.98 ? '0.8' : '0';
+  }
+
+  makeCard('s-tilt','h-tilt', (p, ts) => {
+    let angle;
+    if      (p < 0.44) angle = A_START + easeInOut(p/0.44)*(A_END-A_START);
+    else if (p < 0.56) angle = A_END;
+    else               angle = A_END - easeInOut((p-0.56)/0.44)*(A_END-A_START);
+    setTilt(angle);
+    lbl.textContent = p<0.44 ? '▲ TILTING UP' : p<0.56 ? '— HOLDING —' : '▼ TILTING DOWN';
+    lbl.style.opacity = p<0.44 ? String(Math.min(p/0.1,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.1,0.85));
+    rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/360)));
+  }, () => { setTilt(A_START); lbl.style.opacity='0'; hit.style.opacity='0'; });
+}
+
+// ─────────────────────────────────────────────────────────
+// 4. ZOOM — camera fixed, subject grows bigger
+// ─────────────────────────────────────────────────────────
+{
+  const subj   = document.getElementById('zoom-subject');
+  const shadow = document.getElementById('zoom-shadow');
+  const topL   = document.getElementById('zoom-top');
+  const botL   = document.getElementById('zoom-bot');
+  const note   = document.getElementById('zoom-note');
+  const lbl    = document.getElementById('zoom-lbl');
+  const rec    = document.getElementById('zoom-rec');
+
+  // Camera at left:48, lens at ~x=94 in stage, subject right:28 → subj centre ≈ x=262
+  const CAM_X = 94, SUB_X = 262, CY = 110;
+
+  function setZoom(t) {
+    // Scale subject: 1.0 → 1.8 (zoom in makes subject appear bigger)
+    const scale = 1 + t * 0.85;
+    subj.style.transform = `scale(${scale})`;
+    shadow.style.transform = `scale(${scale})`;
+
+    // FOV lines narrow as zoom increases
+    const fovHalf = 90 - t * 74; // 90 → 16 pixels at subject end
+    topL.setAttribute('x1', CAM_X); topL.setAttribute('y1', CY);
+    topL.setAttribute('x2', SUB_X); topL.setAttribute('y2', CY - fovHalf);
+    botL.setAttribute('x1', CAM_X); botL.setAttribute('y1', CY);
+    botL.setAttribute('x2', SUB_X); botL.setAttribute('y2', CY + fovHalf);
+
+    note.setAttribute('fill-opacity', t > 0.3 ? String(Math.min((t-0.3)/0.2, 0.7)) : '0');
+  }
+
+  makeCard('s-zoom','h-zoom', (p, ts) => {
+    let t;
+    if      (p < 0.44) t = easeInOut(p/0.44);
+    else if (p < 0.56) t = 1;
+    else               t = 1 - easeInOut((p-0.56)/0.44);
+    setZoom(t);
+    lbl.textContent = p<0.44 ? '▶▶ ZOOMING IN' : p<0.56 ? '— HOLDING —' : '◀◀ ZOOMING OUT';
+    lbl.style.opacity = p<0.44 ? String(Math.min(p/0.1,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.1,0.85));
+    rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/360)));
+  }, () => { setZoom(0); lbl.style.opacity='0'; });
+}
+
+// ─────────────────────────────────────────────────────────
+// 5. TRACKING — full stickman + camera move together
+// ─────────────────────────────────────────────────────────
+{
+  const sub  = document.getElementById('track-subject');
+  const cam  = document.getElementById('track-cam');
+  const fov1 = document.getElementById('track-fov1');
+  const fov2 = document.getElementById('track-fov2');
+  const lbl  = document.getElementById('track-lbl');
+  const rec  = document.getElementById('track-rec');
+  const SX = 6, EX = 256;
+
+  function setTrack(x) {
+    sub.style.left = x + 'px';
+    cam.style.left = x + 'px';
+    // FOV from camera up toward subject — both move together
+    const camCX = x + 19, camCY = 138;
+    const subCX = x + 40, subCY = 78;
+    fov1.setAttribute('x1', camCX);    fov1.setAttribute('y1', camCY);
+    fov1.setAttribute('x2', subCX);    fov1.setAttribute('y2', subCY);
+    fov2.setAttribute('x1', camCX+16); fov2.setAttribute('y1', camCY);
+    fov2.setAttribute('x2', subCX+18); fov2.setAttribute('y2', subCY);
+  }
+
+  makeCard('s-track','h-track', (p, ts) => {
+    let x;
+    if      (p < 0.44) x = SX + easeInOut(p/0.44)*(EX-SX);
+    else if (p < 0.56) x = EX;
+    else               x = EX - easeInOut((p-0.56)/0.44)*(EX-SX);
+    setTrack(x);
+    lbl.textContent = p<0.44 ? '▶▶ TRACKING RIGHT' : p<0.56 ? '— HOLDING —' : '◀◀ TRACKING LEFT';
+    lbl.style.opacity = p<0.44 ? String(Math.min(p/0.1,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.1,0.85));
+    rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/360)));
+  }, () => { setTrack(SX); lbl.style.opacity='0'; });
+}
+
+// ─────────────────────────────────────────────────────────
+// 6. CRANE / JIB
+// ─────────────────────────────────────────────────────────
+{
+  const arm   = document.getElementById('crane-arm');
+  const camG  = document.getElementById('crane-cam-g');
+  const path  = document.getElementById('crane-path');
+  const lbl   = document.getElementById('crane-lbl');
+  const rec   = document.getElementById('crane-rec');
+  const PX = 45, PY = 178, ARM_LEN = 100;
+  const A_START = 20, A_END = -62;
+
+  function setCrane(deg) {
+    const r = deg * Math.PI / 180;
+    const ex = PX + ARM_LEN * Math.cos(r);
+    const ey = PY + ARM_LEN * Math.sin(r);
+    arm.setAttribute('x1', PX); arm.setAttribute('y1', PY);
+    arm.setAttribute('x2', ex); arm.setAttribute('y2', ey);
+    camG.setAttribute('transform', `translate(${ex},${ey}) rotate(${deg})`);
+    // Dotted arc path showing travel range
+    const rS = A_START * Math.PI/180, rE = deg * Math.PI/180;
+    const px1 = PX + ARM_LEN*Math.cos(rS), py1 = PY + ARM_LEN*Math.sin(rS);
+    const px2 = PX + ARM_LEN*Math.cos(rE), py2 = PY + ARM_LEN*Math.sin(rE);
+    const lf = (A_START - deg) > 180 ? 1 : 0;
+    if (Math.abs(deg - A_START) > 2) {
+      path.setAttribute('d', `M${px1},${py1} A${ARM_LEN},${ARM_LEN} 0 ${lf},0 ${px2},${py2}`);
+    } else { path.setAttribute('d',''); }
+  }
+
+  makeCard('s-crane','h-crane', (p, ts) => {
+    let angle;
+    if      (p < 0.44) angle = A_START + easeInOut(p/0.44)*(A_END-A_START);
+    else if (p < 0.56) angle = A_END;
+    else               angle = A_END - easeInOut((p-0.56)/0.44)*(A_END-A_START);
+    setCrane(angle);
+    lbl.textContent = p<0.44 ? '▲ RISING UP' : p<0.56 ? '— HOLDING —' : '▼ SWOOPING DOWN';
+    lbl.style.opacity = p<0.44 ? String(Math.min(p/0.1,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.1,0.85));
+    rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/360)));
+  }, () => { setCrane(A_START); lbl.style.opacity='0'; });
+}
+</script>
+</body>
+</html>
+<div class="section-title">DYNAMIC / CINEMATIC MOVES</div>
+      position: relative;
+      overflow: hidden;
+      border: 1.5px solid #1a2535;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stage.idle { border-color: #BE185D55; box-shadow: 0 0 0 3px #BE185D14; }
+
+    .floor-line {
+      position: absolute; bottom: 48px; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, #ffffff08 20%, #ffffff12 50%, #ffffff08 80%, transparent);
+    }
+    .floor-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 48px;
+      background: linear-gradient(to bottom, transparent, rgba(15,23,42,0.9));
+    }
+    .view-label {
+      position: absolute; top: 11px; right: 14px;
+      font-size: 9px; font-family: 'DM Mono', monospace;
+      color: #4B6A8A; letter-spacing: 0.1em; z-index: 2;
+    }
+    .hover-hint {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 6; pointer-events: none;
+      transition: opacity 0.35s ease;
+      background: rgba(15,23,42,0.45); backdrop-filter: blur(2px); border-radius: 15px;
+    }
+    .hover-hint.hidden { opacity: 0; }
+    .hint-pill {
+      display: flex; align-items: center; gap: 9px;
+      background: #BE185D; color: #fff;
+      font-size: 11px; font-weight: 700;
+      font-family: 'DM Mono', monospace; letter-spacing: 0.09em;
+      padding: 9px 20px; border-radius: 99px;
+      box-shadow: 0 0 0 5px #BE185D22, 0 4px 18px #BE185D55;
+    }
+    .hint-pill .play-tri {
+      width: 0; height: 0; border-style: solid;
+      border-width: 5px 0 5px 9px;
+      border-color: transparent transparent transparent #fff;
+    }
+    .dir-label {
+      position: absolute; bottom: 26px; left: 14px;
+      font-size: 9px; font-family: 'DM Mono', monospace;
+      color: #FB7185; letter-spacing: 0.07em; z-index: 3; opacity: 0;
+    }
+
+    /* stickman */
+    .stickman-wrap { position: absolute; z-index: 2; filter: drop-shadow(0 0 6px #E0850015); }
+    .sil-shadow {
+      position: absolute;
+      background: radial-gradient(ellipse, #E0850014 0%, transparent 70%);
+      border-radius: 50%; z-index: 1;
+    }
+    .fig-main { fill: #E08500; }
+    .fig-dark { fill: #C06A00; }
+
+    .desc { padding: 8px 22px 10px; font-size: 13px; color: #4B5563; line-height: 1.65; }
+    .feel-row {
+      margin: 2px 22px 12px; background: #FAFAF8; border: 1px solid #F0EDE6;
+      border-radius: 10px; padding: 10px 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .feel-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .feel-text { font-size: 12px; color: #6B7280; line-height: 1.55; }
+    .feel-text strong { color: #374151; font-weight: 600; }
+    .prompt-row { margin: 0 22px 20px; }
+    .prompt-label { font-size: 10px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.08em; margin-bottom: 7px; }
+    .prompt-chip {
+      background: #FFFBEB; border: 1px solid #FDE68A;
+      border-radius: 10px; padding: 10px 14px;
+      font-family: 'DM Mono', monospace; font-size: 11px; color: #78350F; line-height: 1.75;
+    }
+    .var { color: #D97706; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <div class="grid">
+	    <div class="card">
+	      <div class="badge-row"><span class="badge">DYNAMIC / CINEMATIC</span></div>
+	      <div class="title-row"><span class="move-name">Handheld</span><span class="move-tag">smooth / natural</span></div>
+
+      <div class="stage" id="s-handheld">
+        <span class="view-label">SIDE VIEW</span>
+        <div class="floor-line"></div><div class="floor-fade"></div>
+        <div class="hover-hint" id="h-handheld"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+        <!-- Stickman (stable reference) -->
+        <div class="sil-shadow" style="bottom:45px;right:28px;width:76px;height:9px;"></div>
+        <div class="stickman-wrap" style="bottom:48px;right:38px;">
+          <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+            <circle cx="28" cy="12" r="11" class="fig-main"/>
+            <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+            <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+            <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+            <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+            <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+            <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+            <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+          </svg>
+        </div>
+
+        <!-- Camera + FOV (smooth, human-like drift) -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:3;overflow:visible;pointer-events:none" viewBox="0 0 356 220">
+          <path id="handheld-fov" d="" fill="#BE185D" fill-opacity="0.06"/>
+          <line id="handheld-edge1" x1="0" y1="0" x2="0" y2="0" stroke="#FB7185" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 4"/>
+          <line id="handheld-edge2" x1="0" y1="0" x2="0" y2="0" stroke="#FB7185" stroke-opacity="0.14" stroke-width="1" stroke-dasharray="5 4"/>
+          <line id="handheld-beam"  x1="0" y1="0" x2="0" y2="0" stroke="#FDA4AF" stroke-opacity="0.18" stroke-width="1.1" stroke-dasharray="4 6"/>
+
+          <g id="handheld-cam-g">
+            <rect x="-14" y="-9" width="28" height="18" rx="3" fill="#1E40AF" stroke="#93C5FD" stroke-width="0.75"/>
+            <rect x="14" y="-5" width="9" height="10" rx="2" fill="#1D4ED8"/>
+            <circle cx="0" cy="0" r="6" fill="#0C1445" stroke="#93C5FD" stroke-width="1"/>
+            <circle cx="0" cy="0" r="3" fill="#1E3A8A"/>
+            <circle cx="0" cy="0" r="1.2" fill="#60A5FA"/>
+            <circle id="handheld-rec" cx="11" cy="-7" r="1.8" fill="#EF4444"/>
+          </g>
+        </svg>
+
+        <div id="handheld-hit" style="position:absolute;width:8px;height:8px;border-radius:50%;background:#FB7185;opacity:0;z-index:4;transform:translate(-50%,-50%);pointer-events:none;"></div>
+        <div class="dir-label" id="handheld-lbl"></div>
+      </div>
+
+      <p class="desc">A handheld camera has <strong>subtle, organic drift</strong> from breathing, footsteps, and micro-corrections. It feels intimate and human without looking chaotic.</p>
+      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Present and personal. Adds realism, tension, and immediacy.</span></div>
+      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+        <div class="prompt-chip"><span class="var">handheld camera</span>, <span class="var">smooth natural micro-drift</span>, <span class="var">human-operated</span>, <span class="var">subtle breathing sway</span></div>
+	      </div>
+	    </div>
+
+	    <!-- 2. STEADICAM -->
+	    <div class="card">
+	      <div class="badge-row"><span class="badge">DYNAMIC / CINEMATIC</span></div>
+	      <div class="title-row"><span class="move-name">Steadicam</span><span class="move-tag">follow behind</span></div>
+
+	      <div class="stage" id="s-steadicam">
+	        <span class="view-label">REAR FOLLOW</span>
+	        <div class="hover-hint" id="h-steadicam"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+	        <div class="floor-fade"></div>
+
+	        <!-- Rear-follow diagram (all in SVG for consistent perspective) -->
+	        <svg id="steadicam-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none" viewBox="0 0 356 220">
+	          <!-- Perspective guides -->
+	          <line x1="36" y1="214" x2="178" y2="48" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+	          <line x1="320" y1="214" x2="178" y2="48" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+	          <line x1="120" y1="214" x2="178" y2="48" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+	          <line x1="236" y1="214" x2="178" y2="48" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+	          <!-- Cross lines (spacing increases toward camera) -->
+	          <line x1="80" y1="84"  x2="276" y2="84"  stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+	          <line x1="70" y1="104" x2="286" y2="104" stroke="#ffffff" stroke-opacity="0.04"  stroke-width="1"/>
+	          <line x1="58" y1="128" x2="298" y2="128" stroke="#ffffff" stroke-opacity="0.045" stroke-width="1"/>
+	          <line x1="44" y1="156" x2="312" y2="156" stroke="#ffffff" stroke-opacity="0.05"  stroke-width="1"/>
+	          <line x1="30" y1="188" x2="326" y2="188" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1"/>
+
+	          <!-- Centre travel line -->
+	          <line x1="178" y1="214" x2="178" y2="56" stroke="#BE185D" stroke-opacity="0.18" stroke-width="1.5" stroke-dasharray="7 7"/>
+
+	          <!-- FOV -->
+	          <path id="steadicam-fov" d="" fill="#BE185D" fill-opacity="0.055"/>
+	          <line id="steadicam-edge1" x1="0" y1="0" x2="0" y2="0" stroke="#FB7185" stroke-opacity="0.28" stroke-width="1" stroke-dasharray="5 4"/>
+	          <line id="steadicam-edge2" x1="0" y1="0" x2="0" y2="0" stroke="#FB7185" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="5 4"/>
+
+	          <!-- Camera (behind) -->
+	          <g id="steadicam-cam-g" transform="translate(178,208)" style="filter: drop-shadow(0 0 10px rgba(251,113,133,0.55)) drop-shadow(0 0 3px rgba(190,24,93,0.55));">
+	            <!-- Opaque backing plate so the icon reads clearly on the dark stage -->
+	            <rect x="-18" y="-13" width="36" height="26" rx="9" fill="#FDF2F8" stroke="#FB7185" stroke-width="1"/>
+	            <rect x="-14" y="-9" width="28" height="18" rx="3" fill="#2563EB" stroke="#1D4ED8" stroke-width="0.9"/>
+	            <rect x="14" y="-5" width="9" height="10" rx="2" fill="#1D4ED8"/>
+	            <circle cx="0" cy="0" r="6" fill="#0C1445" stroke="#93C5FD" stroke-width="1.15"/>
+	            <circle cx="0" cy="0" r="3" fill="#1E3A8A"/>
+	            <circle cx="0" cy="0" r="1.2" fill="#60A5FA"/>
+	            <circle id="steadicam-rec" cx="11" cy="-7" r="1.8" fill="#EF4444"/>
+	          </g>
+
+	          <!-- Subject (walking away) -->
+	          <g id="steadicam-sub-g" transform="translate(178,126) scale(1.02)">
+	            <!-- Head -->
+	            <circle cx="0" cy="-30" r="10.5" fill="#E08500"/>
+	            <circle cx="0" cy="-35.5" r="4.5" fill="#C06A00" opacity="0.35"/>
+	            <!-- Shoulders / torso (back view) -->
+	            <rect x="-18" y="-18" width="36" height="24" rx="12" fill="#C06A00"/>
+	            <path d="M-16 2 C-10 16, 10 16, 16 2 L12 26 L-12 26 Z" fill="#E08500"/>
+	            <!-- Legs -->
+	            <path d="M-10 24 L-4 58 L-14 58 L-18 28 Z" fill="#C06A00" opacity="0.9"/>
+	            <path d="M10 24 L16 58 L6 58 L2 28 Z" fill="#C06A00" opacity="0.9"/>
+	            <!-- Feet -->
+	            <rect x="-18" y="56" width="18" height="6" rx="3" fill="#C06A00"/>
+	            <rect x="0" y="56" width="18" height="6" rx="3" fill="#C06A00"/>
+	          </g>
+	        </svg>
+
+	        <div class="dir-label" id="steadicam-lbl"></div>
+	      </div>
+
+	      <p class="desc">A stabilised rig creates a <strong>gliding follow</strong> that feels human but controlled. The camera moves with the subject without the jitter of handheld.</p>
+	      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Floating alongside the action. Smooth, immersive, and cinematic.</span></div>
+	      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+	        <div class="prompt-chip"><span class="var">steadicam follow</span>, <span class="var">smooth glide</span>, <span class="var">stable tracking</span>, <span class="var">no shake</span></div>
+	      </div>
+	    </div>
+
+	    <!-- 3. WHIP PAN -->
+	    <div class="card">
+	      <div class="badge-row"><span class="badge">DYNAMIC / CINEMATIC</span></div>
+	      <div class="title-row"><span class="move-name">Whip Pan</span><span class="move-tag">snap rotation</span></div>
+
+	      <div class="stage" id="s-whip">
+	        <span class="view-label">TOP-DOWN VIEW</span>
+	        <div class="hover-hint" id="h-whip"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+	        <!-- Subtle grid -->
+	        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none" viewBox="0 0 356 220" preserveAspectRatio="none">
+	          <line x1="118" y1="0" x2="118" y2="220" stroke="white" stroke-width="1"/>
+	          <line x1="238" y1="0" x2="238" y2="220" stroke="white" stroke-width="1"/>
+	          <line x1="0" y1="73" x2="356" y2="73" stroke="white" stroke-width="1"/>
+	          <line x1="0" y1="147" x2="356" y2="147" stroke="white" stroke-width="1"/>
+	        </svg>
+
+	        <!-- Subject reference -->
+	        <div class="stickman-wrap" style="top:50%;right:44px;transform:translateY(-50%);">
+	          <svg width="80" height="52" viewBox="0 0 80 52" fill="none">
+	            <rect x="0" y="26" width="80" height="20" rx="10" fill="#C06A00"/>
+	            <circle cx="40" cy="22" r="20" fill="#E08500"/>
+	            <circle cx="40" cy="13" r="8" fill="#C06A00" opacity="0.35"/>
+	          </svg>
+	        </div>
+
+	        <!-- Camera + FOV -->
+	        <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:3;overflow:visible;pointer-events:none" viewBox="0 0 356 220">
+	          <path id="whip-fov" d="" fill="#BE185D" fill-opacity="0.05"/>
+	          <line id="whip-edge1" x1="80" y1="110" x2="80" y2="110" stroke="#FB7185" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="5 4"/>
+	          <line id="whip-edge2" x1="80" y1="110" x2="80" y2="110" stroke="#FB7185" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 4"/>
+	          <path id="whip-sweep" d="" fill="none" stroke="#FB7185" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+	          <!-- Motion smear lines (only during snap) -->
+	          <g id="whip-smear" opacity="0">
+	            <line x1="64" y1="86" x2="186" y2="66" stroke="#F472B6" stroke-opacity="0.25" stroke-width="3" stroke-linecap="round"/>
+	            <line x1="64" y1="110" x2="190" y2="110" stroke="#F472B6" stroke-opacity="0.18" stroke-width="3" stroke-linecap="round"/>
+	            <line x1="64" y1="134" x2="186" y2="154" stroke="#F472B6" stroke-opacity="0.25" stroke-width="3" stroke-linecap="round"/>
+	          </g>
+
+	          <g id="whip-cam-g">
+	            <rect x="-14" y="-9" width="28" height="18" rx="3" fill="#1E40AF" stroke="#F9A8D4" stroke-width="0.75"/>
+	            <rect x="14" y="-5" width="9" height="10" rx="2" fill="#1D4ED8"/>
+	            <circle cx="0" cy="0" r="6" fill="#0C1445" stroke="#F9A8D4" stroke-width="1"/>
+	            <circle cx="0" cy="0" r="3" fill="#1E3A8A"/>
+	            <circle cx="0" cy="0" r="1.2" fill="#60A5FA"/>
+	            <circle id="whip-rec" cx="11" cy="-7" r="1.8" fill="#EF4444"/>
+	          </g>
+	        </svg>
+
+	        <div class="dir-label" id="whip-lbl"></div>
+	      </div>
+
+	      <p class="desc">A <strong>fast snap pan</strong> that creates motion blur. Often used as an energetic transition between moments or locations.</p>
+	      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Whipping your head to catch something. Punchy, urgent, and stylised.</span></div>
+	      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+	        <div class="prompt-chip"><span class="var">whip pan</span>, <span class="var">fast snap rotation</span>, <span class="var">motion blur transition</span>, <span class="var">energetic cut</span></div>
+	      </div>
+	    </div>
+
+	    <!-- 4. DUTCH ANGLE -->
+	    <div class="card">
+	      <div class="badge-row"><span class="badge">DYNAMIC / CINEMATIC</span></div>
+	      <div class="title-row"><span class="move-name">Dutch Angle</span><span class="move-tag">tilt axis (roll)</span></div>
+
+	      <div class="stage" id="s-dutch">
+	        <span class="view-label">SIDE VIEW</span>
+	        <div class="hover-hint" id="h-dutch"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+	        <!-- "World" that rotates to simulate camera roll -->
+	        <div id="dutch-world" style="position:absolute;inset:0;transform-origin:50% 55%;z-index:2;">
+	          <!-- Horizon / set line -->
+	          <div style="position:absolute;left:-40px;right:-40px;top:118px;height:1px;background:linear-gradient(90deg,transparent,#ffffff10 18%,#ffffff22 50%,#ffffff10 82%,transparent);"></div>
+
+	          <!-- Subject -->
+	          <div class="sil-shadow" style="bottom:45px;right:28px;width:76px;height:9px;"></div>
+	          <div class="stickman-wrap" style="bottom:48px;right:38px;">
+	            <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+	              <circle cx="28" cy="12" r="11" class="fig-main"/>
+	              <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+	              <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+	              <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+	              <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+	              <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+	              <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+	              <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+	            </svg>
+	          </div>
+
+	          <!-- Camera (fixed position, but rolled with world) -->
+	          <div style="position:absolute;bottom:52px;left:22px;z-index:3;">
+	            <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style="filter:drop-shadow(0 0 7px #BE185D88)">
+	              <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#F9A8D4" stroke-width="0.75"/>
+	              <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#F9A8D4" stroke-width="0.5"/>
+	              <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#F9A8D4" stroke-width="1.2"/>
+	              <circle cx="16" cy="17" r="4.5" fill="#1E3A8A"/>
+	              <circle cx="16" cy="17" r="2" fill="#60A5FA"/>
+	              <circle cx="13" cy="14" r="1.2" fill="#BAE6FD" opacity="0.6"/>
+	              <rect x="11" y="2" width="12" height="5" rx="1.5" fill="#1D4ED8" stroke="#F9A8D4" stroke-width="0.5"/>
+	              <circle id="dutch-rec" cx="27" cy="10" r="2" fill="#EF4444"/>
+	            </svg>
+	          </div>
+	        </div>
+
+	        <div class="dir-label" id="dutch-lbl"></div>
+	      </div>
+
+	      <p class="desc">The camera is <strong>tilted on its roll axis</strong>, making the horizon diagonal. A classic way to suggest unease, imbalance, or psychological tension.</p>
+	      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Something is off. Anxiety, instability, or a world out of balance.</span></div>
+	      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+	        <div class="prompt-chip"><span class="var">dutch angle</span>, <span class="var">tilted horizon</span>, <span class="var">camera roll</span>, <span class="var">uneasy tension</span></div>
+	      </div>
+	    </div>
+	  </div>
+
+  <script>
+    function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+    function makeCard(stageId, hintId, animFn, resetFn) {
+      const stage = document.getElementById(stageId);
+      const hint  = document.getElementById(hintId);
+      let running = false, runCount = 0, startTime = null;
+      const RUNS = 2, DUR = 3400;
+
+      function showIdle() { stage.classList.add('idle'); hint.classList.remove('hidden'); }
+      function hideIdle() { stage.classList.remove('idle'); hint.classList.add('hidden'); }
+
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        const p = Math.min((ts - startTime) / DUR, 1);
+        animFn(p, ts);
+        if (p < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          runCount++;
+          startTime = null;
+          if (runCount < RUNS) requestAnimationFrame(tick);
+          else { if (resetFn) resetFn(); running = false; setTimeout(showIdle, 600); }
+        }
+      }
+
+      function start() {
+        if (running) return;
+        running = true; runCount = 0; startTime = null;
+        hideIdle();
+        requestAnimationFrame(tick);
+      }
+
+      if (resetFn) resetFn();
+      showIdle();
+      stage.addEventListener('mouseenter', () => { if (!running) start(); });
+    }
+
+    // HANDHELD — smooth + natural (small amplitudes, low frequency)
+    {
+      const camG  = document.getElementById('handheld-cam-g');
+      const beam  = document.getElementById('handheld-beam');
+      const edge1 = document.getElementById('handheld-edge1');
+      const edge2 = document.getElementById('handheld-edge2');
+      const fov   = document.getElementById('handheld-fov');
+      const hit   = document.getElementById('handheld-hit');
+      const lbl   = document.getElementById('handheld-lbl');
+      const rec   = document.getElementById('handheld-rec');
+
+      const CX0 = 90, CY0 = 116;
+      const SUB_X = 270, SUB_Y = 116;
+      const LEN = 210, FOV_HALF = 18;
+
+      function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+
+      function setHandheld(t, ts) {
+        const intensity = clamp(t, 0, 1);
+
+        // Smooth drift (periods ~2–8s), larger amplitude (easy to see) but not faster
+        const dx = (Math.sin(ts*0.00105) + 0.6*Math.sin(ts*0.00162 + 1.1) + 0.35*Math.sin(ts*0.00225 + 2.4)) * (4.2 * intensity);
+        const dy = (Math.sin(ts*0.00122 + 0.7) + 0.55*Math.sin(ts*0.00188 + 2.0)) * (2.8 * intensity);
+        const roll = (Math.sin(ts*0.00092 + 0.9) + 0.45*Math.sin(ts*0.00136 + 1.7)) * (1.96 * intensity);
+
+        const CX = CX0 + dx, CY = CY0 + dy;
+
+        // Tiny aim drift around the subject (micro-corrections) — slightly exaggerated for clarity
+        const aimDriftDeg = (Math.sin(ts*0.00100 + 0.2) + 0.5*Math.sin(ts*0.00155 + 2.2)) * (2.52 * intensity);
+        const baseAng = Math.atan2(SUB_Y - CY, SUB_X - CX);
+        const centre = baseAng + (aimDriftDeg * Math.PI / 180);
+
+        camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${roll})`);
+
+        const a1 = centre - (FOV_HALF * Math.PI/180);
+        const a2 = centre + (FOV_HALF * Math.PI/180);
+        const e1x = CX + LEN*0.92*Math.cos(a1), e1y = CY + LEN*0.92*Math.sin(a1);
+        const e2x = CX + LEN*0.92*Math.cos(a2), e2y = CY + LEN*0.92*Math.sin(a2);
+
+        edge1.setAttribute('x1', CX); edge1.setAttribute('y1', CY);
+        edge1.setAttribute('x2', e1x); edge1.setAttribute('y2', e1y);
+        edge2.setAttribute('x1', CX); edge2.setAttribute('y1', CY);
+        edge2.setAttribute('x2', e2x); edge2.setAttribute('y2', e2y);
+        fov.setAttribute('d', `M${CX},${CY} L${e1x},${e1y} A${LEN*0.92},${LEN*0.92} 0 0,1 ${e2x},${e2y} Z`);
+
+        const bx = CX + LEN*Math.cos(centre), by = CY + LEN*Math.sin(centre);
+        beam.setAttribute('x1', CX); beam.setAttribute('y1', CY);
+        beam.setAttribute('x2', bx); beam.setAttribute('y2', by);
+
+        // Visualize subtle "frame centre" wandering near the subject
+        const hx = SUB_X + (Math.sin(ts*0.00135 + 1.7) * (11.2 * intensity));
+        const hy = SUB_Y + (Math.sin(ts*0.00162 + 0.9) * (8.4 * intensity));
+        hit.style.left = hx + 'px';
+        hit.style.top  = hy + 'px';
+        hit.style.opacity = String(0.18 + 0.42*intensity);
+      }
+
+      makeCard('s-handheld','h-handheld', (p, ts) => {
+        // Gentle engage → hold → gentle release
+        let t;
+        if      (p < 0.32) t = easeInOut(p/0.32);
+        else if (p < 0.68) t = 1;
+        else               t = 1 - easeInOut((p-0.68)/0.32);
+
+        const breathe = 0.88 + 0.12*Math.sin(ts/900);
+        const intensity = t * breathe;
+        setHandheld(intensity, ts);
+
+        lbl.textContent = p < 0.32 ? '— SETTLING IN —' : p < 0.68 ? '≈ NATURAL HANDHELD ≈' : '— SETTLING OUT —';
+        lbl.style.opacity = p < 0.32 ? String(Math.min(p/0.12, 0.85)) : p < 0.68 ? '0.55' : String(Math.min((1-p)/0.12, 0.85));
+        rec.style.opacity = String(0.5 + 0.5*Math.abs(Math.sin(ts/520)));
+      }, () => { setHandheld(0, 0); lbl.style.opacity = '0'; hit.style.opacity = '0'; });
+    }
+
+    // STEADICAM — smooth follow without shake
+    {
+      const camG  = document.getElementById('steadicam-cam-g');
+      const subG  = document.getElementById('steadicam-sub-g');
+      const fov   = document.getElementById('steadicam-fov');
+      const edge1 = document.getElementById('steadicam-edge1');
+      const edge2 = document.getElementById('steadicam-edge2');
+      const lbl  = document.getElementById('steadicam-lbl');
+      const rec  = document.getElementById('steadicam-rec');
+
+      const X = 178;
+      const SUB_Y0 = 126, SUB_Y1 = 88;  // subject walks away (up)
+      const CAM_Y0 = 208, CAM_Y1 = 182; // camera follows behind (kept behind the feet)
+
+      function setSteadicam(subX, subY, camX, camY, subScale, swayDeg) {
+        camG.setAttribute('transform', `translate(${camX},${camY})`);
+        subG.setAttribute('transform', `translate(${subX},${subY}) scale(${subScale}) rotate(${swayDeg})`);
+
+        // FOV points toward subject (rear follow)
+        const camY2 = camY;
+        const tgtX = subX, tgtY = subY - 12 * subScale; // aim near upper torso/head
+        const halfW = 44 * subScale;                 // wider near camera, narrower far
+        const x1 = tgtX - halfW, y1 = tgtY;
+        const x2 = tgtX + halfW, y2 = tgtY;
+
+        edge1.setAttribute('x1', camX); edge1.setAttribute('y1', camY2);
+        edge1.setAttribute('x2', x1);   edge1.setAttribute('y2', y1);
+        edge2.setAttribute('x1', camX); edge2.setAttribute('y1', camY2);
+        edge2.setAttribute('x2', x2);   edge2.setAttribute('y2', y2);
+        fov.setAttribute('d', `M${camX},${camY2} L${x1},${y1} L${x2},${y2} Z`);
+      }
+
+      makeCard('s-steadicam','h-steadicam', (p, ts) => {
+        let s;
+        if      (p < 0.44) s = easeInOut(p/0.44);     // move forward
+        else if (p < 0.56) s = 1;                     // hold
+        else               s = 1 - easeInOut((p-0.56)/0.44); // move back
+
+        // Subject leads slightly, camera catches up (classic steadicam follow-behind)
+        const lead = Math.min(1, s * 1.06);
+        const catchUp = Math.max(0, Math.min(1, (s - 0.14) / 0.86));
+
+        const subY = SUB_Y0 + lead * (SUB_Y1 - SUB_Y0);
+        const camY = CAM_Y0 + easeInOut(catchUp) * (CAM_Y1 - CAM_Y0);
+
+        // Straight-path walk: smooth bob + tiny side sway. Camera follows those with a slight delay.
+        const moving = (p < 0.44 || p > 0.56);
+        const intensity = moving ? 1 : 0.35;
+        const WALK_MS = 560;
+        const LAG_MS = 130;
+
+        const bobSub = Math.sin((ts) / WALK_MS * Math.PI * 2) * (1.15 * intensity);
+        const bobCam = Math.sin((ts - LAG_MS) / WALK_MS * Math.PI * 2) * (0.85 * intensity);
+
+        const swayXSub = Math.sin((ts) / (WALK_MS * 1.35) * Math.PI * 2) * (2.6 * intensity);
+        const swayXCam = Math.sin((ts - LAG_MS) / (WALK_MS * 1.35) * Math.PI * 2) * (1.9 * intensity);
+
+        const swayDegSub = Math.sin((ts) / (WALK_MS * 1.55) * Math.PI * 2) * (1.35 * intensity);
+
+        // Mild scale change to communicate distance (walking away), but keep it stable
+        const subScale = 1.02 - 0.10 * lead;
+
+        const subX = X + swayXSub;
+        const camX = X + swayXCam;
+        setSteadicam(subX, subY + bobSub, camX, camY + bobCam * 0.7, subScale, swayDegSub);
+
+        lbl.textContent = p<0.44 ? '▶▶ GLIDING BEHIND' : p<0.56 ? '— LOCKED IN —' : '◀◀ GLIDING BACK';
+        lbl.style.opacity = p<0.44 ? String(Math.min(p/0.12,0.85)) : p<0.56 ? '0.5' : String(Math.min((1-p)/0.12,0.85));
+        rec.style.opacity = String(0.5 + 0.5*Math.abs(Math.sin(ts/520)));
+      }, () => { setSteadicam(X, SUB_Y0, X, CAM_Y0, 1.02, 0); lbl.style.opacity = '0'; });
+    }
+
+    // WHIP PAN — fast snap rotation transition
+    {
+      const camG  = document.getElementById('whip-cam-g');
+      const fov   = document.getElementById('whip-fov');
+      const edge1 = document.getElementById('whip-edge1');
+      const edge2 = document.getElementById('whip-edge2');
+      const sweep = document.getElementById('whip-sweep');
+      const smear = document.getElementById('whip-smear');
+      const lbl   = document.getElementById('whip-lbl');
+      const rec   = document.getElementById('whip-rec');
+
+      const CX = 80, CY = 110;
+      const LEN = 200, FOV_HALF = 22;
+      const A_START = -18, A_END = 62;
+      const SWEEP_R = 140;
+
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+      function setWhip(centreDeg) {
+        camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${centreDeg})`);
+
+        const toRad = d => d * Math.PI / 180;
+        const a1 = toRad(centreDeg - FOV_HALF);
+        const a2 = toRad(centreDeg + FOV_HALF);
+
+        const e1x = CX + LEN*0.9*Math.cos(a1), e1y = CY + LEN*0.9*Math.sin(a1);
+        const e2x = CX + LEN*0.9*Math.cos(a2), e2y = CY + LEN*0.9*Math.sin(a2);
+        edge1.setAttribute('x1', CX); edge1.setAttribute('y1', CY);
+        edge1.setAttribute('x2', e1x); edge1.setAttribute('y2', e1y);
+        edge2.setAttribute('x1', CX); edge2.setAttribute('y1', CY);
+        edge2.setAttribute('x2', e2x); edge2.setAttribute('y2', e2y);
+        fov.setAttribute('d', `M${CX},${CY} L${e1x},${e1y} A${LEN*0.9},${LEN*0.9} 0 0,1 ${e2x},${e2y} Z`);
+
+        const rS = toRad(A_START), rE = toRad(centreDeg);
+        const sx1 = CX + SWEEP_R*Math.cos(rS), sy1 = CY + SWEEP_R*Math.sin(rS);
+        const sx2 = CX + SWEEP_R*Math.cos(rE), sy2 = CY + SWEEP_R*Math.sin(rE);
+        if (Math.abs(centreDeg - A_START) > 1) sweep.setAttribute('d', `M${sx1},${sy1} A${SWEEP_R},${SWEEP_R} 0 0,1 ${sx2},${sy2}`);
+        else sweep.setAttribute('d', '');
+      }
+
+      makeCard('s-whip','h-whip', (p, ts) => {
+        let angle = A_START;
+        let sm = 0;
+
+        if (p < 0.14) {
+          const t = easeOutCubic(p/0.14); // snap right
+          angle = A_START + t*(A_END-A_START);
+          sm = 1;
+        } else if (p < 0.56) {
+          angle = A_END; // hold at end angle (as if it cuts here)
+          sm = 0;
+        } else if (p < 0.70) {
+          const t = easeOutCubic((p-0.56)/0.14); // snap back
+          angle = A_END - t*(A_END-A_START);
+          sm = 1;
+        } else {
+          angle = A_START; // settle
+          sm = 0;
+        }
+
+        setWhip(angle);
+
+        smear.setAttribute('opacity', String(0.85*sm));
+        lbl.textContent = p < 0.14 ? '≫≫ WHIP!' : p < 0.56 ? '— TRANSITION —' : p < 0.70 ? '≪≪ SNAP BACK' : '— SETTLED —';
+        lbl.style.opacity = p < 0.14 ? String(Math.min(p/0.06,0.85)) : p < 0.56 ? '0.55' : p < 0.70 ? '0.75' : '0.35';
+
+        // faster REC blink during whip
+        const blinkRate = sm ? 160 : 520;
+        rec.style.opacity = String(0.45 + 0.55*Math.abs(Math.sin(ts/blinkRate)));
+      }, () => { setWhip(A_START); lbl.style.opacity = '0'; smear.setAttribute('opacity','0'); });
+    }
+
+    // DUTCH ANGLE — roll (tilt) camera on axis
+    {
+      const world = document.getElementById('dutch-world');
+      const lbl   = document.getElementById('dutch-lbl');
+      const rec   = document.getElementById('dutch-rec');
+      const A_MAX = 16;
+
+      function setDutch(deg) {
+        world.style.transform = `rotate(${deg}deg)`;
+      }
+
+      makeCard('s-dutch','h-dutch', (p, ts) => {
+        let a;
+        if      (p < 0.44) a = easeInOut(p/0.44) * A_MAX;
+        else if (p < 0.56) a = A_MAX;
+        else               a = (1 - easeInOut((p-0.56)/0.44)) * A_MAX;
+
+<div class="section-title">MODERN / AI-NATIVE MOVES</div>
+    .move-tag  { font-size: 11px; color: #9CA3AF; font-family: 'DM Mono', monospace; }
+
+    .stage {
+      margin: 12px 22px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      border-radius: 16px; height: 220px;
+      position: relative; overflow: hidden;
+      border: 1.5px solid #1a2535; cursor: pointer; user-select: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stage.idle { border-color: #6D28D955; box-shadow: 0 0 0 3px #6D28D914; }
+
+    .floor-line {
+      position: absolute; bottom: 48px; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, #ffffff08 20%, #ffffff12 50%, #ffffff08 80%, transparent);
+    }
+    .floor-fade {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 48px;
+      background: linear-gradient(to bottom, transparent, rgba(15,23,42,0.9));
+    }
+    .view-label {
+      position: absolute; top: 11px; right: 14px;
+      font-size: 9px; font-family: 'DM Mono', monospace;
+      color: #4B6A8A; letter-spacing: 0.1em; z-index: 2;
+    }
+    .hover-hint {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 6; pointer-events: none;
+      transition: opacity 0.35s ease;
+      background: rgba(15,23,42,0.45); backdrop-filter: blur(2px); border-radius: 15px;
+    }
+    .hover-hint.hidden { opacity: 0; }
+    .hint-pill {
+      display: flex; align-items: center; gap: 9px;
+      background: #6D28D9; color: #fff;
+      font-size: 11px; font-weight: 800;
+      font-family: 'DM Mono', monospace; letter-spacing: 0.09em;
+      padding: 9px 20px; border-radius: 99px;
+      box-shadow: 0 0 0 5px #6D28D925, 0 4px 18px #6D28D955;
+    }
+    .hint-pill .play-tri {
+      width: 0; height: 0; border-style: solid;
+      border-width: 5px 0 5px 9px;
+      border-color: transparent transparent transparent #fff;
+    }
+    .dir-label {
+      position: absolute; bottom: 26px; left: 14px;
+      font-size: 9px; font-family: 'DM Mono', monospace;
+      color: #8B5CF6; letter-spacing: 0.07em; z-index: 3; opacity: 0;
+    }
+
+    /* stickman */
+    .stickman-wrap { position: absolute; z-index: 2; filter: drop-shadow(0 0 6px #E0850015); }
+    .sil-shadow {
+      position: absolute;
+      background: radial-gradient(ellipse, #E0850014 0%, transparent 70%);
+      border-radius: 50%; z-index: 1;
+    }
+    .fig-main { fill: #E08500; }
+    .fig-dark { fill: #C06A00; }
+
+    .desc { padding: 8px 22px 10px; font-size: 13px; color: #4B5563; line-height: 1.65; }
+    .feel-row {
+      margin: 2px 22px 12px; background: #FAFAF8; border: 1px solid #F0EDE6;
+      border-radius: 10px; padding: 10px 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .feel-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .feel-text { font-size: 12px; color: #6B7280; line-height: 1.55; }
+    .feel-text strong { color: #374151; font-weight: 700; }
+    .prompt-row { margin: 0 22px 20px; }
+    .prompt-label { font-size: 10px; font-weight: 800; color: #9CA3AF; letter-spacing: 0.08em; margin-bottom: 7px; }
+    .prompt-chip {
+      background: #F5F3FF; border: 1px solid #DDD6FE;
+      border-radius: 10px; padding: 10px 14px;
+      font-family: 'DM Mono', monospace; font-size: 11px; color: #4C1D95; line-height: 1.75;
+    }
+    .var { color: #6D28D9; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-eyebrow">MODERN / AI‑NATIVE</div>
+    <h1 class="page-title">Modern Camera Movements</h1>
+    <p class="page-subtitle">Moves that are new, hard, or sometimes impossible in real filmmaking — but easy in AI video.<br/>Hover each card to see the motion logic.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. ORBIT / 360 -->
+    <div class="card">
+      <div class="badge-row"><span class="badge">AI‑NATIVE MOVE</span></div>
+      <div class="title-row"><span class="move-name">Orbit / 360</span><span class="move-tag">circles subject</span></div>
+      <div class="stage" id="s-orbit">
+        <span class="view-label">TOP‑DOWN VIEW</span>
+        <div class="hover-hint" id="h-orbit"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+        <!-- Subtle grid -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none" viewBox="0 0 356 220" preserveAspectRatio="none">
+          <line x1="118" y1="0" x2="118" y2="220" stroke="white" stroke-width="1"/>
+          <line x1="238" y1="0" x2="238" y2="220" stroke="white" stroke-width="1"/>
+          <line x1="0" y1="73" x2="356" y2="73" stroke="white" stroke-width="1"/>
+          <line x1="0" y1="147" x2="356" y2="147" stroke="white" stroke-width="1"/>
+        </svg>
+        <svg id="orbit-svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none" viewBox="0 0 356 220">
+          <!-- Orbit path -->
+          <circle cx="178" cy="110" r="74" fill="none" stroke="#8B5CF6" stroke-opacity="0.18" stroke-width="1.5" stroke-dasharray="6 6"/>
+          <!-- Subject (center) -->
+          <g transform="translate(178,110)">
+            <circle cx="0" cy="0" r="18" fill="#E08500"/>
+            <rect x="-28" y="10" width="56" height="18" rx="9" fill="#C06A00"/>
+            <circle cx="0" cy="-6" r="7" fill="#C06A00" opacity="0.35"/>
+          </g>
+          <!-- FOV -->
+          <path id="orbit-fov" d="" fill="#6D28D9" fill-opacity="0.055"/>
+          <line id="orbit-edge1" x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="5 4"/>
+          <line id="orbit-edge2" x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 4"/>
+          <!-- Camera -->
+          <g id="orbit-cam-g">
+            <rect x="-14" y="-9" width="28" height="18" rx="3" fill="#1E40AF" stroke="#A78BFA" stroke-width="0.75"/>
+            <rect x="14" y="-5" width="9" height="10" rx="2" fill="#1D4ED8"/>
+            <circle cx="0" cy="0" r="6" fill="#0C1445" stroke="#A78BFA" stroke-width="1"/>
+            <circle cx="0" cy="0" r="3" fill="#1E3A8A"/>
+            <circle cx="0" cy="0" r="1.2" fill="#60A5FA"/>
+            <circle id="orbit-rec" cx="11" cy="-7" r="1.8" fill="#EF4444"/>
+          </g>
+        </svg>
+        <div class="dir-label" id="orbit-lbl"></div>
+      </div>
+      <p class="desc">The camera <strong>circles the subject</strong> while always keeping them centered. Great for hero moments, reveals, and “time-freeze” energy.</p>
+      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> The world rotates around the character. Bold, stylized, and high‑impact.</span></div>
+      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+        <div class="prompt-chip"><span class="var">360 orbit</span> around subject, <span class="var">camera circles</span>, <span class="var">keeps subject centered</span>, <span class="var">smooth cinematic rotation</span></div>
+      </div>
+    </div>
+
+    <!-- 2. DRONE / AERIAL -->
+    <div class="card">
+      <div class="badge-row"><span class="badge">AI‑NATIVE MOVE</span></div>
+      <div class="title-row"><span class="move-name">Drone / Aerial</span><span class="move-tag">rise up + away</span></div>
+      <div class="stage" id="s-drone">
+        <span class="view-label">AERIAL LIFT</span>
+        <div class="floor-line"></div><div class="floor-fade"></div>
+        <div class="hover-hint" id="h-drone"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+        <!-- Subject on ground -->
+        <div id="drone-shadow" class="sil-shadow" style="bottom:45px;right:30px;width:76px;height:9px;transform-origin:center center;"></div>
+        <div id="drone-subject" class="stickman-wrap" style="bottom:48px;right:40px;transform-origin:bottom center;">
+          <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+            <circle cx="28" cy="12" r="11" class="fig-main"/>
+            <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+            <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+            <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+            <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+            <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+            <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+            <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+          </svg>
+        </div>
+
+        <!-- Drone rig (moves up + back and shrinks) -->
+        <div id="drone-rig" style="position:absolute;left:68px;bottom:92px;z-index:4;transform-origin:center center;">
+          <svg width="72" height="44" viewBox="0 0 72 44" fill="none" style="filter:drop-shadow(0 0 9px rgba(109,40,217,0.55))">
+            <!-- arms -->
+            <line x1="12" y1="22" x2="60" y2="22" stroke="#A78BFA" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round"/>
+            <line x1="22" y1="10" x2="50" y2="34" stroke="#A78BFA" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round"/>
+            <line x1="50" y1="10" x2="22" y2="34" stroke="#A78BFA" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round"/>
+            <!-- body -->
+            <rect x="28" y="16" width="16" height="12" rx="4" fill="#1E40AF" stroke="#A78BFA" stroke-width="0.9"/>
+            <circle cx="36" cy="22" r="4.5" fill="#0C1445" stroke="#A78BFA" stroke-width="0.9"/>
+            <circle cx="36" cy="22" r="1.8" fill="#60A5FA"/>
+            <!-- rotors -->
+            <circle cx="12" cy="22" r="6" fill="#6D28D9" fill-opacity="0.22" stroke="#A78BFA" stroke-opacity="0.35"/>
+            <circle cx="60" cy="22" r="6" fill="#6D28D9" fill-opacity="0.22" stroke="#A78BFA" stroke-opacity="0.35"/>
+            <circle cx="22" cy="10" r="6" fill="#6D28D9" fill-opacity="0.22" stroke="#A78BFA" stroke-opacity="0.35"/>
+            <circle cx="50" cy="34" r="6" fill="#6D28D9" fill-opacity="0.22" stroke="#A78BFA" stroke-opacity="0.35"/>
+            <circle id="drone-rec" cx="44" cy="18" r="2" fill="#EF4444"/>
+          </svg>
+        </div>
+
+        <!-- Altitude path cue -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none" viewBox="0 0 356 220">
+          <path id="drone-path" d="" fill="none" stroke="#8B5CF6" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="6 6"/>
+        </svg>
+
+        <div class="dir-label" id="drone-lbl"></div>
+      </div>
+      <p class="desc">The camera <strong>rises and pulls away</strong>, revealing context and scale. In AI video, the “drone” can fly impossible paths without safety limits.</p>
+      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Expansion and grandeur. A reveal that opens the world.</span></div>
+      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+        <div class="prompt-chip"><span class="var">drone aerial</span>, <span class="var">rise up and pull back</span>, <span class="var">overhead reveal</span>, <span class="var">wide establishing scale</span></div>
+      </div>
+    </div>
+
+    <!-- 3. DOLLY ZOOM (VERTIGO) -->
+    <div class="card">
+      <div class="badge-row"><span class="badge">AI‑NATIVE MOVE</span></div>
+      <div class="title-row"><span class="move-name">Dolly Zoom (Vertigo)</span><span class="move-tag">dolly back + zoom in</span></div>
+      <div class="stage" id="s-vertigo">
+        <span class="view-label">SIDE VIEW</span>
+        <div class="floor-line"></div><div class="floor-fade"></div>
+        <div class="hover-hint" id="h-vertigo"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+        <!-- Background "world" that warps -->
+        <div id="vertigo-world" style="position:absolute;inset:0;z-index:1;transform-origin:50% 55%;">
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.07;pointer-events:none" viewBox="0 0 356 220" preserveAspectRatio="none">
+            <line x1="40" y1="0" x2="40" y2="220" stroke="white" stroke-width="2"/>
+            <line x1="94" y1="0" x2="94" y2="220" stroke="white" stroke-width="1.5"/>
+            <line x1="140" y1="0" x2="140" y2="220" stroke="white" stroke-width="1.2"/>
+            <line x1="178" y1="0" x2="178" y2="220" stroke="white" stroke-width="1.1"/>
+            <line x1="216" y1="0" x2="216" y2="220" stroke="white" stroke-width="1.2"/>
+            <line x1="262" y1="0" x2="262" y2="220" stroke="white" stroke-width="1.5"/>
+            <line x1="316" y1="0" x2="316" y2="220" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <!-- Subject stays same size -->
+        <div class="sil-shadow" style="bottom:45px;right:28px;width:76px;height:9px;"></div>
+        <div class="stickman-wrap" id="vertigo-subject" style="bottom:48px;right:38px;z-index:2;">
+          <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+            <circle cx="28" cy="12" r="11" class="fig-main"/>
+            <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+            <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+            <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+            <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+            <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+            <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+            <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+          </svg>
+        </div>
+
+        <!-- Camera moves back while FOV narrows -->
+        <div id="vertigo-cam" style="position:absolute;bottom:52px;left:54px;z-index:4;">
+          <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style="filter:drop-shadow(0 0 9px rgba(109,40,217,0.6))">
+            <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#A78BFA" stroke-width="0.85"/>
+            <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#A78BFA" stroke-width="0.6"/>
+            <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#A78BFA" stroke-width="1.2"/>
+            <circle cx="16" cy="17" r="4.5" fill="#1E3A8A"/>
+            <circle cx="16" cy="17" r="2" fill="#60A5FA"/>
+            <circle cx="13" cy="14" r="1.2" fill="#BAE6FD" opacity="0.6"/>
+            <rect x="11" y="2" width="12" height="5" rx="1.5" fill="#1D4ED8" stroke="#A78BFA" stroke-width="0.6"/>
+            <circle id="vertigo-rec" cx="27" cy="10" r="2" fill="#EF4444"/>
+          </svg>
+        </div>
+
+        <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none" viewBox="0 0 356 220">
+          <line id="vertigo-top" x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" stroke-opacity="0.26" stroke-width="1" stroke-dasharray="5 4"/>
+          <line id="vertigo-bot" x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" stroke-opacity="0.20" stroke-width="1" stroke-dasharray="5 4"/>
+          <text id="vertigo-note" x="120" y="34" fill="#A78BFA" fill-opacity="0" font-size="8" font-family="monospace" letter-spacing="0.05em">PERSPECTIVE WARPS</text>
+        </svg>
+
+        <div class="dir-label" id="vertigo-lbl"></div>
+      </div>
+      <p class="desc">A classic illusion: the camera <strong>dollies back</strong> while the lens <strong>zooms in</strong>. The subject stays similar size, but the background perspective feels like it stretches.</p>
+      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Reality bends. Dread, vertigo, shock, or “the room closes in.”</span></div>
+      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+        <div class="prompt-chip"><span class="var">dolly zoom</span>, <span class="var">vertigo effect</span>, <span class="var">dolly out while zooming in</span>, <span class="var">warped perspective</span></div>
+      </div>
+    </div>
+
+    <!-- 4. PUSH THROUGH -->
+    <div class="card">
+      <div class="badge-row"><span class="badge">AI‑NATIVE MOVE</span></div>
+      <div class="title-row"><span class="move-name">Push Through</span><span class="move-tag">through foreground</span></div>
+      <div class="stage" id="s-push">
+        <span class="view-label">SIDE VIEW</span>
+        <div class="floor-line"></div><div class="floor-fade"></div>
+        <div class="hover-hint" id="h-push"><div class="hint-pill"><div class="play-tri"></div>HOVER TO PLAY</div></div>
+
+        <!-- Foreground object (like a doorway / branch) -->
+        <div id="push-obj" style="position:absolute;left:148px;bottom:58px;width:62px;height:130px;border-radius:18px;background:linear-gradient(180deg, rgba(167,139,250,0.35), rgba(109,40,217,0.16));border:1px solid rgba(167,139,250,0.35);z-index:4;box-shadow:0 0 0 6px rgba(109,40,217,0.10);backdrop-filter: blur(1px);"></div>
+        <div id="push-cut" style="position:absolute;left:160px;bottom:70px;width:38px;height:106px;border-radius:14px;background:rgba(8,15,24,0.55);border:1px solid rgba(255,255,255,0.06);z-index:5;"></div>
+
+        <!-- Subject stands at the "window" so the camera can push through them -->
+        <div class="sil-shadow" style="bottom:45px;left:141px;width:76px;height:9px;"></div>
+        <div id="push-subject" class="stickman-wrap" style="bottom:48px;left:151px;z-index:2;">
+          <svg width="56" height="142" viewBox="0 0 56 142" fill="none">
+            <circle cx="28" cy="12" r="11" class="fig-main"/>
+            <rect x="23" y="22" width="10" height="8" rx="3" class="fig-main"/>
+            <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" class="fig-main"/>
+            <path d="M9 32L3 72L11 73L15 34Z" class="fig-dark"/><circle cx="6" cy="75" r="5" class="fig-dark"/>
+            <path d="M47 32L53 72L45 73L41 34Z" class="fig-dark"/><circle cx="50" cy="75" r="5" class="fig-dark"/>
+            <path d="M11 64L45 64L42 78L14 78Z" class="fig-dark"/>
+            <path d="M14 76L12 124L22 124L24 76Z" class="fig-main"/><path d="M11 122L23 122L24 132L9 132Z" class="fig-dark"/>
+            <path d="M32 76L34 124L44 124L42 76Z" class="fig-main"/><path d="M32 122L44 122L46 132L31 132Z" class="fig-dark"/>
+          </svg>
+        </div>
+
+        <!-- Camera pushes forward through the foreground -->
+        <div id="push-cam" style="position:absolute;bottom:52px;left:20px;z-index:6;">
+          <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style="filter:drop-shadow(0 0 10px rgba(139,92,246,0.65))">
+            <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#A78BFA" stroke-width="0.85"/>
+            <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#A78BFA" stroke-width="0.6"/>
+            <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#A78BFA" stroke-width="1.2"/>
+            <circle cx="16" cy="17" r="4.5" fill="#1E3A8A"/>
+            <circle cx="16" cy="17" r="2" fill="#60A5FA"/>
+            <circle cx="13" cy="14" r="1.2" fill="#BAE6FD" opacity="0.6"/>
+            <rect x="11" y="2" width="12" height="5" rx="1.5" fill="#1D4ED8" stroke="#A78BFA" stroke-width="0.6"/>
+            <circle id="push-rec" cx="27" cy="10" r="2" fill="#EF4444"/>
+          </svg>
+        </div>
+
+        <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none" viewBox="0 0 356 220">
+          <line id="push-top" x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="5 4"/>
+          <line id="push-bot" x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="5 4"/>
+          <text id="push-note" x="86" y="32" fill="#A78BFA" fill-opacity="0" font-size="8" font-family="monospace" letter-spacing="0.05em">THROUGH FOREGROUND</text>
+        </svg>
+
+        <div class="dir-label" id="push-lbl"></div>
+      </div>
+      <p class="desc">The camera <strong>pushes through a foreground element</strong> (doorway, crowd, leaves). In AI, you can pass through “solid” objects cleanly for dramatic reveals.</p>
+      <div class="feel-row"><span class="feel-icon">🎬</span><span class="feel-text"><strong>Feels like:</strong> Discovery and momentum. A reveal that breaks physical camera constraints.</span></div>
+      <div class="prompt-row"><div class="prompt-label">✏️ ADD TO YOUR PROMPT</div>
+        <div class="prompt-chip"><span class="var">push through</span> foreground object, <span class="var">camera passes through</span>, <span class="var">reveal subject</span>, <span class="var">seamless cinematic transition</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+    function makeCard(stageId, hintId, animFn, resetFn) {
+      const stage = document.getElementById(stageId);
+      const hint  = document.getElementById(hintId);
+      let running = false, runCount = 0, startTime = null;
+      const RUNS = 2, DUR = 3400;
+
+      function showIdle() { stage.classList.add('idle'); hint.classList.remove('hidden'); }
+      function hideIdle() { stage.classList.remove('idle'); hint.classList.add('hidden'); }
+
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        const p = Math.min((ts - startTime) / DUR, 1);
+        animFn(p, ts);
+        if (p < 1) requestAnimationFrame(tick);
+        else {
+          runCount++;
+          startTime = null;
+          if (runCount < RUNS) requestAnimationFrame(tick);
+          else { if (resetFn) resetFn(); running = false; setTimeout(showIdle, 600); }
+        }
+      }
+
+      function start() {
+        if (running) return;
+        running = true; runCount = 0; startTime = null;
+        hideIdle();
+        requestAnimationFrame(tick);
+      }
+
+      if (resetFn) resetFn();
+      showIdle();
+      stage.addEventListener('mouseenter', () => { if (!running) start(); });
+    }
+
+    // 1) ORBIT / 360
+    {
+      const camG  = document.getElementById('orbit-cam-g');
+      const fov   = document.getElementById('orbit-fov');
+      const e1    = document.getElementById('orbit-edge1');
+      const e2    = document.getElementById('orbit-edge2');
+      const lbl   = document.getElementById('orbit-lbl');
+      const rec   = document.getElementById('orbit-rec');
+      const CX = 178, CY = 110, R = 74, LEN = 150, FOV_HALF = 18 * Math.PI/180;
+
+      function setOrbit(theta) {
+        const camX = CX + R*Math.cos(theta);
+        const camY = CY + R*Math.sin(theta);
+        const aim = Math.atan2(CY - camY, CX - camX);
+        const a1 = aim - FOV_HALF, a2 = aim + FOV_HALF;
+        const x1 = camX + LEN*Math.cos(a1), y1 = camY + LEN*Math.sin(a1);
+        const x2 = camX + LEN*Math.cos(a2), y2 = camY + LEN*Math.sin(a2);
+
+        camG.setAttribute('transform', `translate(${camX},${camY}) rotate(${aim*180/Math.PI})`);
+        e1.setAttribute('x1', camX); e1.setAttribute('y1', camY); e1.setAttribute('x2', x1); e1.setAttribute('y2', y1);
+        e2.setAttribute('x1', camX); e2.setAttribute('y1', camY); e2.setAttribute('x2', x2); e2.setAttribute('y2', y2);
+        fov.setAttribute('d', `M${camX},${camY} L${x1},${y1} L${x2},${y2} Z`);
+      }
+
+      makeCard('s-orbit','h-orbit', (p, ts) => {
+        let t;
+        if      (p < 0.44) t = easeInOut(p/0.44);
+        else if (p < 0.56) t = 1;
+        else               t = 1 - easeInOut((p-0.56)/0.44);
+        const theta = (Math.PI*2) * t;
+        setOrbit(theta);
+        lbl.textContent = p<0.44 ? '↻ ORBITING' : p<0.56 ? '— HOLDING —' : '↺ RETURNING';
+        lbl.style.opacity = p<0.44 ? String(Math.min(p/0.12,0.85)) : p<0.56 ? '0.55' : String(Math.min((1-p)/0.12,0.85));
+        rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/360)));
+      }, () => { setOrbit(0); lbl.style.opacity='0'; });
+    }
+
+    // 2) DRONE / AERIAL
+    {
+      const rig  = document.getElementById('drone-rig');
+      const path = document.getElementById('drone-path');
+      const subj = document.getElementById('drone-subject');
+      const shad = document.getElementById('drone-shadow');
+      const lbl  = document.getElementById('drone-lbl');
+      const rec  = document.getElementById('drone-rec');
+
+      const SX = 68, EX = 28;
+      const SB = 92, EB = 162; // bottom increases as it rises (higher on stage)
+
+      function setDrone(t) {
+        const x = SX + (EX - SX) * t;
+        const b = SB + (EB - SB) * t;
+        const s = 1 - 0.46 * t;
+        rig.style.left = x + 'px';
+        rig.style.bottom = b + 'px';
+        rig.style.transform = `scale(${s})`;
+
+        // Subject appears smaller as the drone rises/pulls away (readable cue)
+        const subScale = 1 - 0.42 * t;
+        subj.style.transform = `scale(${subScale})`;
+        shad.style.transform = `scale(${subScale})`;
+        subj.style.opacity = String(0.98 - 0.10 * t);
+
+        // path cue
+        const x1 = SX+34, y1 = 220 - (SB+22);
+        const x2 = x+34,  y2 = 220 - (b+22);
+        path.setAttribute('d', `M${x1},${y1} Q${(x1+x2)/2 - 10},${(y1+y2)/2 - 30} ${x2},${y2}`);
+      }
+
+      makeCard('s-drone','h-drone', (p, ts) => {
+        let t;
+        if      (p < 0.44) t = easeInOut(p/0.44);
+        else if (p < 0.56) t = 1;
+        else               t = 1 - easeInOut((p-0.56)/0.44);
+        setDrone(t);
+        lbl.textContent = p<0.44 ? '▲ RISING + PULLING BACK' : p<0.56 ? '— WIDE REVEAL —' : '▼ DROPPING IN';
+        lbl.style.opacity = p<0.44 ? String(Math.min(p/0.12,0.85)) : p<0.56 ? '0.55' : String(Math.min((1-p)/0.12,0.85));
+        rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/220)));
+      }, () => { setDrone(0); path.setAttribute('d',''); lbl.style.opacity='0'; });
+    }
+
+    // 3) DOLLY ZOOM (VERTIGO)
+    {
+      const cam   = document.getElementById('vertigo-cam');
+      const topL  = document.getElementById('vertigo-top');
+      const botL  = document.getElementById('vertigo-bot');
+      const world = document.getElementById('vertigo-world');
+      const subj  = document.getElementById('vertigo-subject');
+      const note  = document.getElementById('vertigo-note');
+      const lbl   = document.getElementById('vertigo-lbl');
+      const rec   = document.getElementById('vertigo-rec');
+
+      const SX = 54, EX = 8;
+      const CAM_X = 78; // approximate lens x in stage coords when left=54
+      const SUB_X = 262, CY = 110;
+
+      function setVertigo(t) {
+        // dolly back (camera moves left)
+        const x = SX + (EX - SX) * t;
+        cam.style.left = x + 'px';
+
+        // zoom in (FOV narrows)
+        const fovHalf = 92 - t * 76;
+        const camX = (CAM_X - (SX - x));
+        topL.setAttribute('x1', camX); topL.setAttribute('y1', CY);
+        topL.setAttribute('x2', SUB_X); topL.setAttribute('y2', CY - fovHalf);
+        botL.setAttribute('x1', camX); botL.setAttribute('y1', CY);
+        botL.setAttribute('x2', SUB_X); botL.setAttribute('y2', CY + fovHalf);
+
+        // background warp cue
+        const sx = 1 + t * 0.45;
+        const tx = (0.5 - t) * 18;
+        world.style.transform = `translateX(${tx}px) scaleX(${sx})`;
+
+        // Subject "feels" further away, yet slightly grows (zoom compensation) to stay near natural size
+        const drift = 10 * t;
+        const scale = 1 + 0.10 * t;
+        subj.style.transform = `translateX(${drift}px) scale(${scale})`;
+
+        note.setAttribute('fill-opacity', t > 0.25 ? String(Math.min((t-0.25)/0.2, 0.75)) : '0');
+      }
+
+      makeCard('s-vertigo','h-vertigo', (p, ts) => {
+        let t;
+        if      (p < 0.44) t = easeInOut(p/0.44);
+        else if (p < 0.56) t = 1;
+        else               t = 1 - easeInOut((p-0.56)/0.44);
+        setVertigo(t);
+        lbl.textContent = p<0.44 ? 'DOLLY OUT + ZOOM IN' : p<0.56 ? '— VERTIGO HOLD —' : 'DOLLY IN + ZOOM OUT';
+        lbl.style.opacity = p<0.44 ? String(Math.min(p/0.12,0.85)) : p<0.56 ? '0.55' : String(Math.min((1-p)/0.12,0.85));
+        rec.style.opacity = String(0.35+0.65*Math.abs(Math.sin(ts/260)));
+      }, () => { setVertigo(0); lbl.style.opacity='0'; note.setAttribute('fill-opacity','0'); });
+    }
+
+    // 4) PUSH THROUGH
+    {
+      const cam  = document.getElementById('push-cam');
+      const obj  = document.getElementById('push-obj');
+      const cut  = document.getElementById('push-cut');
+      const sub  = document.getElementById('push-subject');
+      const topL = document.getElementById('push-top');
+      const botL = document.getElementById('push-bot');
+      const note = document.getElementById('push-note');
+      const lbl  = document.getElementById('push-lbl');
+      const rec  = document.getElementById('push-rec');
+
+      const SX = 20, EX = 246; // push past the subject/window
+      const CAM_X0 = 44, SUB_X = 179, CY = 110; // subject placed roughly halfway along the camera move
+      const OBJ_X = 148, OBJ_W = 62;
+      let noteOn = false;
+
+      function setPush(x) {
+        cam.style.left = x + 'px';
+        const camX = CAM_X0 + (x - SX);
+
+        // fade foreground as the camera "passes through" it
+        const camFront = x + 46;
+        const mid = OBJ_X + OBJ_W/2;
+        const dist = Math.abs(camFront - mid);
+        const near = 1 - Math.min(dist / 56, 1); // 0..1
+        const passed = camFront > (OBJ_X + OBJ_W);
+        const passedSubject = camFront > SUB_X;
+
+        // FOV lines: lock onto the subject while approaching, then aim forward after passing through
+        const fovHalf = 86;
+        const targetX = passedSubject ? Math.min(camX + 180, 340) : SUB_X;
+        const spread = passedSubject ? 0.62 : 1.0;
+        topL.setAttribute('x1', camX); topL.setAttribute('y1', CY);
+        topL.setAttribute('x2', targetX); topL.setAttribute('y2', CY - fovHalf * spread);
+        botL.setAttribute('x1', camX); botL.setAttribute('y1', CY);
+        botL.setAttribute('x2', targetX); botL.setAttribute('y2', CY + fovHalf * spread);
+
+        const o = passed ? 0.20 : (0.18 + 0.32 * (1 - near));
+        obj.style.opacity = String(o);
+        cut.style.opacity = String(passed ? 0.10 : 0.55);
+        obj.style.transform = passed ? 'scale(0.98)' : 'scale(1)';
+
+        // subject stays put; once the camera crosses the subject plane, emphasize "past" with a subtle dim
+        sub.style.opacity = passedSubject ? '0.78' : '1';
+
+        // Keep "THROUGH FOREGROUND" at a constant brightness once it appears (no flicker/no fade).
+        const NOTE_MAX = 0.8;
+        const holdDist = 140; // px past subject before it disappears
+        if (!noteOn && near > 0.35) noteOn = true;
+        if (passedSubject) noteOn = true;
+        const keepVisible = !passedSubject || (camFront - SUB_X) < holdDist;
+        note.setAttribute('fill-opacity', noteOn && keepVisible ? String(NOTE_MAX) : '0');
+      }
+
+      makeCard('s-push','h-push', (p, ts) => {
+        let x;
+        if      (p < 0.44) x = SX + easeInOut(p/0.44)*(EX-SX);
+        else if (p < 0.56) x = EX;
