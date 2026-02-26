@@ -296,14 +296,14 @@ export default function PromptEnhancer({ onAuthClick }) {
       className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap"
       style={{
         background: selected 
-          ? color
+          ? `linear-gradient(145deg, ${color}, ${color}DD)` 
           : 'var(--bg-primary)',
-        border: `2px solid ${selected ? color : 'var(--border-color)'}`,
+        border: `2px solid ${selected ? color + '50' : 'var(--border-color)'}`,
         color: selected ? '#fff' : 'var(--text-secondary)',
         boxShadow: selected 
-          ? `inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px ${color}40` 
-          : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)',
-        transform: selected ? 'translateY(1px)' : 'translateY(0)'
+          ? `inset 3px 3px 6px ${color}60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px ${color}40`
+          : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+        transform: selected ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
       }}
     >
       {label}
@@ -406,19 +406,22 @@ export default function PromptEnhancer({ onAuthClick }) {
               />
             </div>
 
-            {/* Enhance Button - Orange Neumorphic */}
+            {/* Enhance Button - Orange Neumorphic Main Button */}
             <button
               onClick={() => handleEnhance(false)}
               disabled={!canSubmit}
               className="px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               style={{
-                background: canSubmit ? '#FF6B35' : 'var(--border-color)',
+                background: canSubmit 
+                  ? 'linear-gradient(145deg, #FF6B35, #FF6B35DD)' 
+                  : 'var(--border-color)',
                 color: canSubmit ? '#fff' : 'var(--text-muted)',
                 cursor: canSubmit ? 'pointer' : 'not-allowed',
+                border: `2px solid ${canSubmit ? '#FF6B3550' : 'var(--border-color)'}`,
                 boxShadow: canSubmit 
-                  ? '6px 6px 12px rgba(255,107,53,0.3), -6px -6px 12px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.3)'
+                  ? 'inset 3px 3px 6px rgba(255,107,53,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(255,107,53,0.4)'
                   : 'none',
-                border: canSubmit ? '1px solid rgba(255,255,255,0.2)' : 'none'
+                transform: 'translateY(0) scale(1)'
               }}
             >
               {loading ? (
@@ -437,28 +440,34 @@ export default function PromptEnhancer({ onAuthClick }) {
               <div className="flex gap-2">
                 <button
                   onClick={() => setSkillLevel('beginner')}
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
                   style={{
-                    background: skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--bg-primary)',
+                    background: skillLevel === 'beginner' 
+                      ? 'linear-gradient(145deg, var(--accent-blue), var(--accent-blue)DD)' 
+                      : 'var(--bg-card)',
                     color: skillLevel === 'beginner' ? '#fff' : 'var(--text-secondary)',
-                    border: `2px solid ${skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--border-color)'}`,
+                    border: `2px solid ${skillLevel === 'beginner' ? 'var(--accent-blue)50' : 'var(--border-color)'}`,
                     boxShadow: skillLevel === 'beginner'
-                      ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-blue)40'
-                      : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
+                      ? 'inset 3px 3px 6px var(--accent-blue)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-blue)40'
+                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                    transform: skillLevel === 'beginner' ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                 >
                   Beginner
                 </button>
                 <button
                   onClick={() => setSkillLevel('pro')}
-                  className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
                   style={{
-                    background: skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--bg-primary)',
+                    background: skillLevel === 'pro' 
+                      ? 'linear-gradient(145deg, var(--accent-purple), var(--accent-purple)DD)' 
+                      : 'var(--bg-card)',
                     color: skillLevel === 'pro' ? '#fff' : 'var(--text-secondary)',
-                    border: `2px solid ${skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--border-color)'}`,
+                    border: `2px solid ${skillLevel === 'pro' ? 'var(--accent-purple)50' : 'var(--border-color)'}`,
                     boxShadow: skillLevel === 'pro'
-                      ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-purple)40'
-                      : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
+                      ? 'inset 3px 3px 6px var(--accent-purple)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-purple)40'
+                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                    transform: skillLevel === 'pro' ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                 >
                   Pro
@@ -526,14 +535,17 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
                 style={{
-                  background: copied ? 'var(--accent-green)' : 'var(--bg-primary)',
+                  background: copied 
+                    ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
+                    : 'var(--bg-card)',
                   color: copied ? '#fff' : 'var(--text-secondary)',
-                  border: `2px solid ${copied ? 'var(--accent-green)' : 'var(--border-color)'}`,
+                  border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                   boxShadow: copied 
-                    ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-green)40'
-                    : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
+                    ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+                    : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                  transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                 }}
               >
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -587,14 +599,17 @@ export default function PromptEnhancer({ onAuthClick }) {
                         }
                       }}
                       disabled={addedDetails.includes(detail.key)}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all"
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
                       style={{
-                        background: addedDetails.includes(detail.key) ? 'var(--accent-green)' : 'var(--bg-primary)',
-                        border: `2px solid ${addedDetails.includes(detail.key) ? 'var(--accent-green)' : 'var(--border-color)'}`,
+                        background: addedDetails.includes(detail.key) 
+                          ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
+                          : 'var(--bg-card)',
+                        border: `2px solid ${addedDetails.includes(detail.key) ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                         color: addedDetails.includes(detail.key) ? '#fff' : 'var(--text-secondary)',
                         boxShadow: addedDetails.includes(detail.key)
-                          ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-green)40'
-                          : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
+                          ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+                          : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                        transform: addedDetails.includes(detail.key) ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                       }}
                     >
                       {addedDetails.includes(detail.key) ? <Check className="h-3 w-3" /> : '+'}
@@ -613,7 +628,7 @@ export default function PromptEnhancer({ onAuthClick }) {
               <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
                 Generate alternative interpretations:
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {INTERPRETATIONS.map((interp) => {
                   const Icon = interp.icon;
                   return (
@@ -621,12 +636,13 @@ export default function PromptEnhancer({ onAuthClick }) {
                       key={interp.key}
                       onClick={() => generateInterpretation(interp.key)}
                       disabled={loading}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all"
+                      className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200"
                       style={{
-                        background: 'var(--bg-primary)',
-                        border: `2px solid ${interp.color}40`,
+                        background: 'var(--bg-card)',
+                        border: `2px solid ${interp.color}30`,
                         color: interp.color,
-                        boxShadow: '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)'
+                        boxShadow: '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                        transform: 'translateY(0) scale(1)'
                       }}
                     >
                       <Icon className="h-3.5 w-3.5" />
