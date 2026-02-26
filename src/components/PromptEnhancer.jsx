@@ -2,8 +2,22 @@ import { useState } from 'react';
 import { Sparkles, Copy, Check, Wand2 } from 'lucide-react';
 
 const MOODS = ["Epic", "Emotional", "Energetic", "Eerie", "Calm", "Surreal"];
+const MOOD_COLORS = {
+  "Epic": "#8B5CF6",
+  "Emotional": "#EC4899",
+  "Energetic": "#F59E0B",
+  "Eerie": "#10B981",
+  "Calm": "#06B6D4",
+  "Surreal": "#6366F1"
+};
 const USES = ["Social Media", "Brand Ad", "Short Film", "Background", "Music Video"];
-const TOOLS = ["Runway", "Kling", "Sora", "Pika", "Luma", "Veo", "Higgsfield"];
+const USE_COLORS = {
+  "Social Media": "#3B82F6",
+  "Brand Ad": "#F59E0B",
+  "Short Film": "#8B5CF6",
+  "Background": "#10B981",
+  "Music Video": "#EC4899"
+};
 
 const TOOL_INFO = {
   "Runway": "Best for cinematic control and style consistency.",
@@ -59,13 +73,15 @@ export default function PromptEnhancer() {
       onClick={onClick}
       className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap"
       style={{
-        background: selected ? `linear-gradient(145deg, ${color}20, ${color}05)` : 'var(--bg-primary)',
-        border: `1.5px solid ${selected ? color : 'var(--border-color)'}`,
-        color: selected ? color : 'var(--text-secondary)',
+        background: selected 
+          ? `linear-gradient(145deg, ${color}, ${color}DD)` 
+          : 'var(--bg-primary)',
+        border: `2px solid ${selected ? color + '60' : 'var(--border-color)'}`,
+        color: selected ? '#fff' : 'var(--text-secondary)',
         boxShadow: selected 
-          ? `inset 2px 2px 4px ${color}30, inset -2px -2px 4px rgba(255,255,255,0.5)` 
-          : '3px 3px 6px rgba(0,0,0,0.06), -3px -3px 6px rgba(255,255,255,0.7), inset 0 1px 0 rgba(255,255,255,0.5)',
-        transform: selected ? 'translateY(0.5px)' : 'translateY(0)'
+          ? `inset 2px 2px 4px ${color}80, inset -2px -2px 4px rgba(255,255,255,0.3), 0 3px 8px ${color}50` 
+          : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+        transform: selected ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
       }}
     >
       {label}
@@ -156,14 +172,14 @@ export default function PromptEnhancer() {
             {/* Mood */}
             <div className="flex items-center gap-1.5">
               <span style={{ color: 'var(--text-muted)' }} className="text-xs">Mood</span>
-              <div className="flex gap-1">
+              <div className="flex gap-1.5">
                 {MOODS.slice(0, 4).map(m => (
                   <Chip
                     key={m}
                     label={m}
                     selected={mood === m}
                     onClick={() => setMood(mood === m ? '' : m)}
-                    color="var(--accent-blue)"
+                    color={MOOD_COLORS[m]}
                   />
                 ))}
               </div>
@@ -172,14 +188,14 @@ export default function PromptEnhancer() {
             {/* Use Case */}
             <div className="flex items-center gap-1.5">
               <span style={{ color: 'var(--text-muted)' }} className="text-xs">Use</span>
-              <div className="flex gap-1">
+              <div className="flex gap-1.5">
                 {USES.slice(0, 3).map(u => (
                   <Chip
                     key={u}
                     label={u}
                     selected={useCase === u}
                     onClick={() => setUseCase(useCase === u ? '' : u)}
-                    color="var(--accent-purple)"
+                    color={USE_COLORS[u]}
                   />
                 ))}
               </div>

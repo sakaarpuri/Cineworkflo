@@ -133,25 +133,32 @@ export default function PromptVault({ preview = false }) {
               }}
             />
           </div>
-          <div className="flex gap-2 flex-wrap">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
-                style={{
-                  background: selectedCategory === cat ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--bg-card)',
-                  color: selectedCategory === cat ? '#fff' : 'var(--text-secondary)',
-                  border: `1px solid ${selectedCategory === cat ? 'rgba(255,255,255,0.2)' : 'var(--border-color)'}`,
-                  boxShadow: selectedCategory === cat 
-                    ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.1)' 
-                    : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
-                  transform: selectedCategory === cat ? 'translateY(1px)' : 'translateY(0)'
-                }}
-              >
-                {cat}
-              </button>
-            ))}
+          {/* Category Filters - Colorful Neumorphic Toggles */}
+          <div className="flex gap-3 flex-wrap">
+            {categories.map(cat => {
+              const catColor = cat === 'All' ? '#6366F1' : CATEGORY_COLORS[cat]
+              const isActive = selectedCategory === cat
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                  style={{
+                    background: isActive 
+                      ? `linear-gradient(145deg, ${catColor}, ${catColor}DD)` 
+                      : 'var(--bg-card)',
+                    color: isActive ? '#fff' : 'var(--text-secondary)',
+                    border: `2px solid ${isActive ? catColor + '50' : 'var(--border-color)'}`,
+                    boxShadow: isActive 
+                      ? `inset 3px 3px 6px ${catColor}60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px ${catColor}40`
+                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                    transform: isActive ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+                  }}
+                >
+                  {cat}
+                </button>
+              )
+            })}
           </div>
         </div>
 

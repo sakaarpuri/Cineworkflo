@@ -119,23 +119,32 @@ export default function HeroGallery() {
             Get consistent, commercial-quality results every time.
           </p>
 
-          {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveFilter(category)}
-                className="px-4 py-2 rounded-full text-sm font-medium transition-all"
-                style={{
-                  background: activeFilter === category ? 'var(--accent-blue)' : 'var(--bg-card)',
-                  color: activeFilter === category ? '#fff' : 'var(--text-secondary)',
-                  border: '1px solid var(--border-color)',
-                  boxShadow: activeFilter === category ? 'var(--shadow-soft)' : 'none'
-                }}
-              >
-                {category}
-              </button>
-            ))}
+          {/* Category Filters - Colorful Neumorphic Toggles */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {categories.map((category) => {
+              const categoryColor = category === 'All' ? '#6366F1' : CATEGORY_COLORS[category]
+              const isActive = activeFilter === category
+              return (
+                <button
+                  key={category}
+                  onClick={() => setActiveFilter(category)}
+                  className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                  style={{
+                    background: isActive 
+                      ? `linear-gradient(145deg, ${categoryColor}, ${categoryColor}DD)` 
+                      : 'var(--bg-card)',
+                    color: isActive ? '#fff' : 'var(--text-secondary)',
+                    border: `2px solid ${isActive ? categoryColor + '50' : 'var(--border-color)'}`,
+                    boxShadow: isActive 
+                      ? `inset 3px 3px 6px ${categoryColor}60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px ${categoryColor}40`
+                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                    transform: isActive ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+                  }}
+                >
+                  {category}
+                </button>
+              )
+            })}
           </div>
         </div>
 
