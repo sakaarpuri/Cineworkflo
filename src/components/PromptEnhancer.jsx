@@ -21,7 +21,8 @@ const MOOD_COLORS = {
   "Dreamlike": "#9575CD"
 };
 // Smart prompt generator - analyzes input and creates professional prompts
-const generateSmartPrompt = (idea, mood, useCase) => {
+const generateSmartPrompt = (idea, mood, useCase, skillLevel = 'beginner') => {
+  const isBeginner = skillLevel === 'beginner';
   const lowerIdea = idea.toLowerCase();
   
   // Detect subject categories
@@ -52,11 +53,32 @@ const generateSmartPrompt = (idea, mood, useCase) => {
   
   const moodSettings = mood && moodConfig[mood] ? moodConfig[mood] : moodConfig["Serene"];
   
-  // Subject-specific templates
+  // Subject-specific templates - different complexity for beginner vs pro
   let subjectPrompt = "";
   
-  if (hasVehicle) {
-    subjectPrompt = `${moodSettings.camera} a ${idea}, ${moodSettings.lighting} reflecting off chrome and glass. ${moodSettings.lens} lens capturing motion blur in the background, wheels spinning with subtle speed. ${moodSettings.style}, shallow depth isolating the vehicle from environment.`;
+  if (isBeginner) {
+    // Simple beginner prompts - no technical jargon
+    if (hasVehicle) {
+      subjectPrompt = `A ${idea} driving through ${moodSettings.lighting}. Smooth movement with energy and flow. ${moodSettings.style}.`;
+    } else if (hasNature && (lowerIdea.includes("ant") || lowerIdea.includes("insect") || lowerIdea.includes("bug"))) {
+      subjectPrompt = `A close-up of ${idea} in ${moodSettings.lighting}. Tiny details visible, soft blurry background. ${moodSettings.style}.`;
+    } else if (hasNature) {
+      subjectPrompt = `${idea} with ${moodSettings.lighting}. Natural and organic feel. ${moodSettings.style}.`;
+    } else if (hasPerson && (lowerIdea.includes("hand") || lowerIdea.includes("face") || lowerIdea.includes("eye"))) {
+      subjectPrompt = `Close-up of ${idea} with ${moodSettings.lighting}. Emotional and intimate. ${moodSettings.style}.`;
+    } else if (hasPerson) {
+      subjectPrompt = `${idea} moving naturally with ${moodSettings.lighting}. Authentic and real. ${moodSettings.style}.`;
+    } else if (hasUrban) {
+      subjectPrompt = `${idea} in ${moodSettings.lighting}. Atmospheric city vibes. ${moodSettings.style}.`;
+    } else if (hasObject) {
+      subjectPrompt = `A shot of ${idea} with ${moodSettings.lighting}. Clean and professional. ${moodSettings.style}.`;
+    } else {
+      subjectPrompt = `${idea} with ${moodSettings.lighting}. Smooth camera movement exploring the subject. ${moodSettings.style}.`;
+    }
+  } else {
+    // Pro prompts with full technical details
+    if (hasVehicle) {
+      subjectPrompt = `${moodSettings.camera} a ${idea}, ${moodSettings.lighting} reflecting off chrome and glass. ${moodSettings.lens} lens capturing motion blur in the background, wheels spinning with subtle speed. ${moodSettings.style}, shallow depth isolating the vehicle from environment.`;
   } else if (hasNature && (lowerIdea.includes("ant") || lowerIdea.includes("insect") || lowerIdea.includes("bug"))) {
     subjectPrompt = `Macro extreme close-up, ${moodSettings.lighting} illuminating tiny details. ${idea} with shallow depth of field, background dissolving into creamy bokeh. Microscopic textures visible, morning dew on surfaces. ${moodSettings.style}, 100mm macro lens, intimate perspective.`;
   } else if (hasNature) {
@@ -69,8 +91,9 @@ const generateSmartPrompt = (idea, mood, useCase) => {
     subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} casting long shadows. Architectural geometry framing the shot, atmospheric haze adding depth. ${moodSettings.lens} perspective. ${moodSettings.style}, urban texture and grit.`;
   } else if (hasObject) {
     subjectPrompt = `Studio product shot, ${moodSettings.lighting} creating dimension. ${idea} rotating slowly on invisible axis, material properties catching light. ${moodSettings.lens} lens with controlled depth. ${moodSettings.style}, commercial quality.`;
-  } else {
-    subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} revealing form. Smooth camera motion exploring the subject from multiple angles. ${moodSettings.lens} lens. ${moodSettings.style}, professional production quality.`;
+    } else {
+      subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} revealing form. Smooth camera motion exploring the subject from multiple angles. ${moodSettings.lens} lens. ${moodSettings.style}, professional production quality.`;
+    }
   }
   
   // Use case modifiers
@@ -222,7 +245,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       });
 
       const data = await response.json();
-      setResult(data.prompt || generateSmartPrompt(idea, mood, useCase));
+      setResult(data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel));
       setHasGeneratedOnce(true);
     } catch (err) {
       // Fallback with smart prompt generator
