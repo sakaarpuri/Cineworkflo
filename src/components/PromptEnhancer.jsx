@@ -296,14 +296,14 @@ export default function PromptEnhancer({ onAuthClick }) {
       className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all whitespace-nowrap"
       style={{
         background: selected 
-          ? `linear-gradient(145deg, ${color}, ${color}DD)` 
+          ? color
           : 'var(--bg-primary)',
-        border: `2px solid ${selected ? color + '60' : 'var(--border-color)'}`,
+        border: `2px solid ${selected ? color : 'var(--border-color)'}`,
         color: selected ? '#fff' : 'var(--text-secondary)',
         boxShadow: selected 
-          ? `inset 2px 2px 4px ${color}80, inset -2px -2px 4px rgba(255,255,255,0.3), 0 3px 8px ${color}50` 
-          : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
-        transform: selected ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+          ? `inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px ${color}40` 
+          : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)',
+        transform: selected ? 'translateY(1px)' : 'translateY(0)'
       }}
     >
       {label}
@@ -406,19 +406,19 @@ export default function PromptEnhancer({ onAuthClick }) {
               />
             </div>
 
-            {/* Enhance Button */}
+            {/* Enhance Button - Orange Neumorphic */}
             <button
               onClick={() => handleEnhance(false)}
               disabled={!canSubmit}
               className="px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               style={{
-                background: canSubmit ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--border-color)',
+                background: canSubmit ? '#FF6B35' : 'var(--border-color)',
                 color: canSubmit ? '#fff' : 'var(--text-muted)',
                 cursor: canSubmit ? 'pointer' : 'not-allowed',
                 boxShadow: canSubmit 
-                  ? '5px 5px 10px rgba(37,99,235,0.25), -5px -5px 10px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.25)'
+                  ? '6px 6px 12px rgba(255,107,53,0.3), -6px -6px 12px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.3)'
                   : 'none',
-                border: canSubmit ? '1px solid rgba(255,255,255,0.1)' : 'none'
+                border: canSubmit ? '1px solid rgba(255,255,255,0.2)' : 'none'
               }}
             >
               {loading ? (
@@ -441,7 +441,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                   style={{
                     background: skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--bg-primary)',
                     color: skillLevel === 'beginner' ? '#fff' : 'var(--text-secondary)',
-                    border: `1px solid ${skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--border-color)'}`
+                    border: `2px solid ${skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--border-color)'}`,
+                    boxShadow: skillLevel === 'beginner'
+                      ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-blue)40'
+                      : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
                   }}
                 >
                   Beginner
@@ -452,7 +455,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                   style={{
                     background: skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--bg-primary)',
                     color: skillLevel === 'pro' ? '#fff' : 'var(--text-secondary)',
-                    border: `1px solid ${skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--border-color)'}`
+                    border: `2px solid ${skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--border-color)'}`,
+                    boxShadow: skillLevel === 'pro'
+                      ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-purple)40'
+                      : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
                   }}
                 >
                   Pro
@@ -524,8 +530,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                 style={{
                   background: copied ? 'var(--accent-green)' : 'var(--bg-primary)',
                   color: copied ? '#fff' : 'var(--text-secondary)',
-                  border: '1px solid var(--border-color)',
-                  boxShadow: copied ? '0 2px 8px var(--accent-green)40' : 'none'
+                  border: `2px solid ${copied ? 'var(--accent-green)' : 'var(--border-color)'}`,
+                  boxShadow: copied 
+                    ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-green)40'
+                    : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
                 }}
               >
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -584,7 +592,9 @@ export default function PromptEnhancer({ onAuthClick }) {
                         background: addedDetails.includes(detail.key) ? 'var(--accent-green)' : 'var(--bg-primary)',
                         border: `2px solid ${addedDetails.includes(detail.key) ? 'var(--accent-green)' : 'var(--border-color)'}`,
                         color: addedDetails.includes(detail.key) ? '#fff' : 'var(--text-secondary)',
-                        opacity: addedDetails.includes(detail.key) ? 1 : 0.8
+                        boxShadow: addedDetails.includes(detail.key)
+                          ? 'inset 3px 3px 6px rgba(0,0,0,0.2), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 8px var(--accent-green)40'
+                          : '6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.9), inset 0 2px 0 rgba(255,255,255,0.6)'
                       }}
                     >
                       {addedDetails.includes(detail.key) ? <Check className="h-3 w-3" /> : '+'}
@@ -598,87 +608,34 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
             )}
             
-            {/* Pro Interpretations */}
-            {isPro && (
-              <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
-                <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
-                  Generate alternative interpretations:
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {INTERPRETATIONS.map((interp) => {
-                    const Icon = interp.icon;
-                    return (
-                      <button
-                        key={interp.key}
-                        onClick={() => generateInterpretation(interp.key)}
-                        disabled={loading}
-                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all"
-                        style={{
-                          background: 'var(--bg-primary)',
-                          border: `2px solid ${interp.color}40`,
-                          color: interp.color
-                        }}
-                      >
-                        <Icon className="h-3.5 w-3.5" />
-                        {interp.label}
-                      </button>
-                    );
-                  })}
-                </div>
+            {/* Pro Interpretations - Available to all users */}
+            <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+              <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
+                Generate alternative interpretations:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {INTERPRETATIONS.map((interp) => {
+                  const Icon = interp.icon;
+                  return (
+                    <button
+                      key={interp.key}
+                      onClick={() => generateInterpretation(interp.key)}
+                      disabled={loading}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all"
+                      style={{
+                        background: 'var(--bg-primary)',
+                        border: `2px solid ${interp.color}40`,
+                        color: interp.color,
+                        boxShadow: '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)'
+                      }}
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      {interp.label}
+                    </button>
+                  );
+                })}
               </div>
-            )}
-            
-            {/* Free Upgrade Prompt */}
-            {!isPro && (
-              <div className="mt-5 pt-4 border-t text-center" style={{ borderColor: 'var(--border-color)' }}>
-                <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
-                  {!user ? 'Sign in to save progress and unlock Pro features:' : 'Want more options? Upgrade to Pro for:'}
-                </p>
-                <div className="flex flex-wrap justify-center gap-2 mb-3">
-                  {INTERPRETATIONS.map((interp) => {
-                    const Icon = interp.icon;
-                    return (
-                      <span
-                        key={interp.key}
-                        className="flex items-center gap-1 px-2 py-1 rounded text-xs opacity-50"
-                        style={{
-                          background: 'var(--bg-primary)',
-                          color: interp.color
-                        }}
-                      >
-                        <Icon className="h-3 w-3" />
-                        {interp.label}
-                      </span>
-                    );
-                  })}
-                </div>
-                {!user ? (
-                  <button
-                    onClick={onAuthClick}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all"
-                    style={{
-                      background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
-                      color: '#fff'
-                    }}
-                  >
-                    <Lock className="h-3.5 w-3.5" />
-                    Sign In to Continue
-                  </button>
-                ) : (
-                  <a
-                    href="#pricing"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all"
-                    style={{
-                      background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
-                      color: '#fff'
-                    }}
-                  >
-                    <Zap className="h-3.5 w-3.5" />
-                    Unlock Pro Features
-                  </a>
-                )}
-              </div>
-            )}
+            </div>
           </div>
         )}
       </div>
