@@ -1,43 +1,51 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Sparkles, Copy, Check, Wand2 } from 'lucide-react';
 
-const MOODS = ["Epic", "Emotional", "Energetic", "Eerie", "Calm", "Surreal"];
+const MOODS = ["Epic", "Dramatic", "Thought-Provoking", "Whimsical", "Serene", "Mysterious", "Energetic", "Eerie", "Calm", "Surreal", "Hopeful", "Melancholic", "Tense", "Playful", "Dreamlike"];
 const MOOD_COLORS = {
   "Epic": "#8B5CF6",
-  "Emotional": "#EC4899",
-  "Energetic": "#F59E0B",
-  "Eerie": "#10B981",
-  "Calm": "#06B6D4",
-  "Surreal": "#6366F1"
+  "Dramatic": "#EC4899",
+  "Thought-Provoking": "#F59E0B",
+  "Whimsical": "#10B981",
+  "Serene": "#06B6D4",
+  "Mysterious": "#6366F1",
+  "Energetic": "#FF7043",
+  "Eerie": "#B0BEC5",
+  "Calm": "#4CAF50",
+  "Surreal": "#9C27B0",
+  "Hopeful": "#FFC107",
+  "Melancholic": "#607D8B",
+  "Tense": "#F44336",
+  "Playful": "#FFEB3B",
+  "Dreamlike": "#9575CD"
 };
-const USES = ["Social Media", "Brand Ad", "Short Film", "Background", "Music Video"];
+const USES = ["Storytelling", "Short-form Content", "Product Showcase", "Concept Art", "Music Visualizer", "Education", "Explainer Video", "Social Media", "Brand Ad", "Short Film", "Background", "Music Video", "Documentary", "Experimental", "Gaming Cinematic"];
 const USE_COLORS = {
-  "Social Media": "#3B82F6",
-  "Brand Ad": "#F59E0B",
-  "Short Film": "#8B5CF6",
-  "Background": "#10B981",
-  "Music Video": "#EC4899"
-};
-const TOOLS = ["Runway", "Kling", "Sora", "Pika", "Luma", "Veo", "Higgsfield"];
-
-const TOOL_INFO = {
-  "Runway": "Best for cinematic control and style consistency.",
-  "Kling": "Great for anime, characters, and audio-visual generation.",
-  "Sora": "Excels at surreal scenes and complex physics.",
-  "Pika": "Fast for social content and VHS aesthetics.",
-  "Luma": "Strong on realistic lighting and fluid dynamics.",
-  "Veo": "Best all-rounder with native audio generation.",
-  "Higgsfield": "Full director's toolkit with camera control.",
+  "Storytelling": "#3B82F6",
+  "Short-form Content": "#F59E0B",
+  "Product Showcase": "#8B5CF6",
+  "Concept Art": "#10B981",
+  "Music Visualizer": "#06B6D4",
+  "Education": "#6366F1",
+  "Explainer Video": "#FF7043",
+  "Social Media": "#4CAF50",
+  "Brand Ad": "#FFC107",
+  "Short Film": "#2196F3",
+  "Background": "#FF9800",
+  "Music Video": "#E91E63",
+  "Documentary": "#795548",
+  "Experimental": "#00BCD4",
+  "Gaming Cinematic": "#424242"
 };
 
 export default function PromptEnhancer() {
   const [idea, setIdea] = useState("");
   const [mood, setMood] = useState("");
   const [useCase, setUseCase] = useState("");
-  const [tool, setTool] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
 
   const canSubmit = idea.trim().length > 3 && !loading;
 
@@ -45,22 +53,34 @@ export default function PromptEnhancer() {
     if (!canSubmit) return;
     setLoading(true);
     setResult(null);
+    setCopied(false);
 
     try {
       const response = await fetch('/.netlify/functions/enhance-prompt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idea, mood, useCase, tool })
+        body: JSON.stringify({ idea, mood, useCase })
       });
 
       const data = await response.json();
-      setResult(data.prompt || `Cinematic ${mood || 'wide'} shot of ${idea}, ${tool || 'professional'} style, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
+      setResult(data.prompt || `Cinematic ${mood || 'wide'} shot of ${idea}, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
+      setHasGeneratedOnce(true);
     } catch (err) {
       // Fallback demo response
-      setResult(`Cinematic ${mood || 'wide'} shot of ${idea}, ${tool || 'professional'} style, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
+      setResult(`Cinematic ${mood || 'wide'} shot of ${idea}, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (hasGeneratedOnce && canSubmit) {
+      const timeoutId = setTimeout(() => {
+        handleEnhance();
+      }, 500); // Debounce for 500ms
+      return () => clearTimeout(timeoutId);
+    }
+  }, [mood, useCase, idea, hasGeneratedOnce, canSubmit]); // Depend on relevant states
+
 
   const handleCopy = () => {
     if (!result) return;
@@ -154,7 +174,9 @@ export default function PromptEnhancer() {
                 background: canSubmit ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--border-color)',
                 color: canSubmit ? '#fff' : 'var(--text-muted)',
                 cursor: canSubmit ? 'pointer' : 'not-allowed',
-                boxShadow: canSubmit ? '5px 5px 10px rgba(37,99,235,0.25), -5px -5px 10px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.25)' : 'none',
+                boxShadow: canSubmit 
+                  ? '5px 5px 10px rgba(37,99,235,0.25), -5px -5px 10px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.25)'
+                  : 'none',
                 border: canSubmit ? '1px solid rgba(255,255,255,0.1)' : 'none'
               }}
             >
@@ -174,7 +196,7 @@ export default function PromptEnhancer() {
             <div className="flex items-center gap-1.5">
               <span style={{ color: 'var(--text-muted)' }} className="text-xs">Mood</span>
               <div className="flex gap-1.5">
-                {MOODS.slice(0, 4).map(m => (
+                {MOODS.map(m => (
                   <Chip
                     key={m}
                     label={m}
@@ -190,7 +212,7 @@ export default function PromptEnhancer() {
             <div className="flex items-center gap-1.5">
               <span style={{ color: 'var(--text-muted)' }} className="text-xs">Use</span>
               <div className="flex gap-1.5">
-                {USES.slice(0, 3).map(u => (
+                {USES.map(u => (
                   <Chip
                     key={u}
                     label={u}
@@ -202,37 +224,12 @@ export default function PromptEnhancer() {
               </div>
             </div>
 
-            {/* Tool */}
-            <div className="flex items-center gap-1.5">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs">Tool</span>
-              <select
-                value={tool}
-                onChange={(e) => setTool(e.target.value)}
-                className="px-2 py-1 rounded-lg text-xs outline-none cursor-pointer"
-                style={{
-                  background: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  color: tool ? 'var(--accent-green)' : 'var(--text-muted)'
-                }}
-              >
-                <option value="">Select...</option>
-                {TOOLS.map(t => <option key={t} value={t}>{t}</option>)}
-              </select>
-            </div>
+            {/* Removed Tool Selection */}
+
           </div>
 
-          {tool && TOOL_INFO[tool] && (
-            <div 
-              className="mt-3 p-2 rounded-lg text-xs inline-block"
-              style={{
-                background: 'var(--accent-green)10',
-                border: '1px solid var(--accent-green)30',
-                color: 'var(--accent-green)'
-              }}
-            >
-              💡 {TOOL_INFO[tool]}
-            </div>
-          )}
+          {/* Removed Tool-specific info */}
+
         </div>
 
         {/* Result - Compact */}
