@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, Copy, Check, Lock, ArrowRight } from 'lucide-react'
+import { Search, Copy, Check, Lock, ArrowRight, Eye, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const samplePrompts = [
@@ -65,6 +65,7 @@ export default function PromptVault({ preview = false }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [copiedId, setCopiedId] = useState(null)
+  const [selectedPrompt, setSelectedPrompt] = useState(null)
 
   const categories = ['All', 'Product Demo', 'B-Roll', 'Interview', 'Motion Graphics', 'Transition']
 
@@ -83,11 +84,14 @@ export default function PromptVault({ preview = false }) {
     setTimeout(() => setCopiedId(null), 2000)
   }
 
+  const openModal = (prompt) => setSelectedPrompt(prompt)
+  const closeModal = () => setSelectedPrompt(null)
+
   return (
     <section 
       className="py-16 transition-colors relative overflow-hidden"
       id="prompts"
-      style={{ background: 'linear-gradient(180deg, #F5F3FF 0%, var(--bg-secondary) 30%, var(--bg-secondary) 70%, #FDF2F8 100%)' }}
+      style={{ background: 'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, var(--bg-secondary) 100%)' }}
     >
       {/* Decorative gradient */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-32 bg-gradient-to-b from-purple-100 to-transparent opacity-30" />
@@ -156,7 +160,8 @@ export default function PromptVault({ preview = false }) {
           {displayedPrompts.map((prompt) => (
             <div 
               key={prompt.id}
-              className="p-5 rounded-2xl transition-all hover:-translate-y-1"
+              onClick={() => openModal(prompt)}
+              className="p-5 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer group"
               style={{
                 background: 'var(--bg-card)',
                 boxShadow: 'var(--shadow-card)',
@@ -211,21 +216,32 @@ export default function PromptVault({ preview = false }) {
                     </span>
                   ))}
                 </div>
-                <button
-                  onClick={() => copyPrompt(prompt.prompt, prompt.id)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
-                  style={{
-                    background: copiedId === prompt.id ? 'var(--accent-green)' : 'var(--bg-primary)',
-                    color: copiedId === prompt.id ? '#fff' : 'var(--text-secondary)',
-                    border: '1px solid var(--border-color)'
-                  }}
-                >
-                  {copiedId === prompt.id ? (
-                    <><Check className="h-3.5 w-3.5" /> Copied</>
-                  ) : (
-                    <><Copy className="h-3.5 w-3.5" /> Copy</>
-                  )}
-                </button>
+                <div className="flex items-center gap-2">
+                  <span 
+                    className="flex items-center gap-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    <Eye className="h-3.5 w-3.5" /> View
+                  </span>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      copyPrompt(prompt.prompt, prompt.id)
+                    }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
+                    style={{
+                      background: copiedId === prompt.id ? 'var(--accent-green)' : 'var(--bg-primary)',
+                      color: copiedId === prompt.id ? '#fff' : 'var(--text-secondary)',
+                      border: '1px solid var(--border-color)'
+                    }}
+                  >
+                    {copiedId === prompt.id ? (
+                      <><Check className="h-3.5 w-3.5" /> Copied</>
+                    ) : (
+                      <><Copy className="h-3.5 w-3.5" /> Copy</>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -250,6 +266,74 @@ export default function PromptVault({ preview = false }) {
           </div>
         )}
       </div>
+
+      {/* Prompt Modal */}
+      {selectedPrompt && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)' }}
+          onClick={closeModal}
+        >
+          <div 
+            className="max-w-2xl w-full rounded-2xl p-6 relative"
+            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={closeModal}
+              className="absolute top-4 right-4 p-2 rounded-full transition-colors"
+              style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="mb-4">
+              <span 
+                className="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2"
+                style={{ background: CATEGORY_COLORS[selectedPrompt.category] + '20', color: CATEGORY_COLORS[selectedPrompt.category] }}
+              >
+                {selectedPrompt.category}
+              </span>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{selectedPrompt.title}</h2>
+              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Best for: {selectedPrompt.tool}</p>
+            </div>
+
+            <div 
+              className="p-4 rounded-xl mb-4 font-mono text-sm leading-relaxed"
+              style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
+            >
+              {selectedPrompt.prompt}
+            </div>
+
+            <div className="flex flex-wrap gap-2 mb-4">
+              {selectedPrompt.tags.map(tag => (
+                <span 
+                  key={tag}
+                  className="text-xs px-2 py-1 rounded"
+                  style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            <button
+              onClick={() => copyPrompt(selectedPrompt.prompt, selectedPrompt.id)}
+              className="w-full py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
+              style={{ 
+                background: copiedId === selectedPrompt.id ? '#10B981' : 'var(--accent-blue)',
+                color: '#fff'
+              }}
+            >
+              {copiedId === selectedPrompt.id ? (
+                <><Check className="h-5 w-5" /> Copied!</>
+              ) : (
+                <><Copy className="h-5 w-5" /> Copy Prompt</>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

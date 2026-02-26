@@ -117,6 +117,7 @@ export default function Header() {
             <nav className="flex flex-col gap-4">
               <Link 
                 to="/prompts" 
+                onClick={() => setIsOpen(false)}
                 className="font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >
@@ -124,6 +125,7 @@ export default function Header() {
               </Link>
               <Link 
                 to="/shot-to-prompt" 
+                onClick={() => setIsOpen(false)}
                 className="font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >
@@ -131,6 +133,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/camera-moves"
+                onClick={() => setIsOpen(false)}
                 className="font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >
@@ -138,6 +141,7 @@ export default function Header() {
               </Link>
               <a 
                 href="#pricing" 
+                onClick={() => setIsOpen(false)}
                 className="font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >

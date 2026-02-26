@@ -32,33 +32,14 @@ export default function PromptEnhancer() {
     setResult(null);
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('/.netlify/functions/enhance-prompt', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': import.meta.env.VITE_ANTHROPIC_API_KEY || '',
-          'anthropic-version': '2023-06-01'
-        },
-        body: JSON.stringify({
-          model: 'claude-3-haiku-20240307',
-          max_tokens: 500,
-          messages: [{
-            role: 'user',
-            content: `Transform this video idea into a professional AI video generation prompt. Be vivid and cinematic, under 60 words.
-
-Idea: "${idea}"
-Mood: ${mood || 'Not specified'}
-Use case: ${useCase || 'Not specified'}
-Tool: ${tool || 'General'}
-
-Format: Just return the enhanced prompt text, nothing else.`
-          }]
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idea, mood, useCase, tool })
       });
 
       const data = await response.json();
-      const promptText = data.content?.[0]?.text || data.completion || '';
-      setResult(promptText.trim());
+      setResult(data.prompt || `Cinematic ${mood || 'wide'} shot of ${idea}, ${tool || 'professional'} style, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
     } catch (err) {
       // Fallback demo response
       setResult(`Cinematic ${mood || 'wide'} shot of ${idea}, ${tool || 'professional'} style, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
@@ -94,7 +75,7 @@ Format: Just return the enhanced prompt text, nothing else.`
   return (
     <section 
       className="py-12 transition-colors relative overflow-hidden"
-      style={{ background: 'linear-gradient(90deg, #ECFDF5 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, #E0E7FF 100%)' }}
+      style={{ background: 'linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, var(--bg-secondary) 100%)' }}
     >
       {/* Subtle gradient orbs */}
       <div className="absolute top-1/2 left-10 w-64 h-64 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 transform -translate-y-1/2" />

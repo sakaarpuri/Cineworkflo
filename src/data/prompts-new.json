@@ -1,0 +1,2579 @@
+[
+  {
+    "id": 1,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "prompt": "A single [product color] [product type] floating in a pure white void, soft directional shadow beneath it, slow 360-degree rotation, ultra-sharp texture detail on [material detail], clean [brand aesthetic] aesthetic, 16:9",
+    "variables": {
+      "product color": {
+        "default": "white",
+        "examples": [
+          "black",
+          "gold",
+          "red"
+        ]
+      },
+      "product type": {
+        "default": "sneaker",
+        "examples": [
+          "perfume bottle",
+          "watch",
+          "handbag"
+        ]
+      },
+      "material detail": {
+        "default": "stitching and sole",
+        "examples": [
+          "glass and liquid",
+          "leather grain",
+          "metal brushed finish"
+        ]
+      },
+      "brand aesthetic": {
+        "default": "Apple-ad",
+        "examples": [
+          "Nike",
+          "Chanel",
+          "Tesla"
+        ]
+      }
+    },
+    "tool_notes": "On Pika add 'smooth rotation'. Luma handles reflective surfaces cleanly. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 2,
+    "category": "Brand & Product Ads",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Kling",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "prompt": "A [product type] on a [surface material] surface, single overhead light casting a precise shadow, slow camera orbit around the product, hyper-realistic [material detail], minimal and [mood] feel, 16:9",
+    "variables": {
+      "product type": {
+        "default": "luxury skincare serum bottle",
+        "examples": [
+          "cologne bottle",
+          "lipstick",
+          "face cream jar"
+        ]
+      },
+      "surface material": {
+        "default": "white marble",
+        "examples": [
+          "black granite",
+          "frosted glass",
+          "pale oak wood"
+        ]
+      },
+      "material detail": {
+        "default": "glass and liquid refraction",
+        "examples": [
+          "metallic sheen",
+          "matte texture",
+          "chrome finish"
+        ]
+      },
+      "mood": {
+        "default": "premium",
+        "examples": [
+          "clinical",
+          "organic",
+          "bold"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles glass refraction well. Add 'photorealistic product' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 3,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Luma",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "prompt": "A [vehicle type] driving on a [road type] at [time of day], low angle tracking shot keeping pace with the vehicle, [atmospheric detail] kicking up behind tires, warm dramatic lighting, cinematic color grade, 16:9",
+    "variables": {
+      "vehicle type": {
+        "default": "sports car",
+        "examples": [
+          "SUV",
+          "motorcycle",
+          "electric car"
+        ]
+      },
+      "road type": {
+        "default": "winding coastal road",
+        "examples": [
+          "desert highway",
+          "mountain pass",
+          "rain-slicked city street"
+        ]
+      },
+      "time of day": {
+        "default": "golden hour",
+        "examples": [
+          "dawn",
+          "dusk",
+          "overcast midday"
+        ]
+      },
+      "atmospheric detail": {
+        "default": "dust",
+        "examples": [
+          "water spray",
+          "snow",
+          "autumn leaves"
+        ]
+      }
+    },
+    "tool_notes": "Luma excels at vehicle motion. Add 'tracking shot' explicitly on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 4,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": [
+      "Kling",
+      "Runway",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "prompt": "A [drink type] being poured in slow motion, [ice detail], [liquid color] liquid splashing in beautiful detail, [surface type] surface, warm [light color] lighting, cinematic macro photography style, 16:9",
+    "variables": {
+      "drink type": {
+        "default": "glass of whiskey",
+        "examples": [
+          "cocktail",
+          "red wine",
+          "champagne"
+        ]
+      },
+      "ice detail": {
+        "default": "ice cubes cracking",
+        "examples": [
+          "no ice",
+          "crushed ice swirling",
+          "frost forming on glass"
+        ]
+      },
+      "liquid color": {
+        "default": "golden",
+        "examples": [
+          "deep ruby",
+          "pale gold",
+          "dark amber"
+        ]
+      },
+      "surface type": {
+        "default": "dark wooden bar",
+        "examples": [
+          "marble countertop",
+          "slate surface",
+          "glass table"
+        ]
+      },
+      "light color": {
+        "default": "amber",
+        "examples": [
+          "cool blue",
+          "warm rose",
+          "soft white"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles liquid dynamics well. On Runway use 'slow motion pour'. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 5,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "prompt": "A [product type] floating in the middle of [surreal environment], [atmospheric element] swirling slowly around it, the product glowing softly from within, surreal dreamlike scale contrast, cinematic and otherworldly, 16:9",
+    "variables": {
+      "product type": {
+        "default": "perfume bottle",
+        "examples": [
+          "watch",
+          "handbag",
+          "shoe"
+        ]
+      },
+      "surreal environment": {
+        "default": "a galaxy with stars and nebula",
+        "examples": [
+          "a calm ocean at sunset",
+          "an Arctic ice field",
+          "a blooming wildflower meadow"
+        ]
+      },
+      "atmospheric element": {
+        "default": "stars and cosmic dust",
+        "examples": [
+          "flower petals",
+          "ice crystals",
+          "golden light particles"
+        ]
+      }
+    },
+    "tool_notes": "Sora excels at surreal scale and space environments. Add 'photorealistic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 6,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Luma",
+      "Google Veo"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A slow-motion close-up of a [subject] on a [location] at [time of day], [light description] wrapping around their face, shallow depth of field, warm cinematic color grade, handheld camera feel, Instagram Reels format 9:16",
+    "variables": {
+      "subject": {
+        "default": "person laughing",
+        "examples": [
+          "athlete celebrating",
+          "chef tasting food",
+          "musician performing"
+        ]
+      },
+      "location": {
+        "default": "sun-drenched rooftop",
+        "examples": [
+          "beach",
+          "city balcony",
+          "forest clearing"
+        ]
+      },
+      "time of day": {
+        "default": "golden hour",
+        "examples": [
+          "dawn",
+          "blue hour",
+          "overcast afternoon"
+        ]
+      },
+      "light description": {
+        "default": "golden hour light",
+        "examples": [
+          "soft diffused light",
+          "dramatic rim light",
+          "warm street lamp glow"
+        ]
+      }
+    },
+    "tool_notes": "On Pika add 'smooth motion'. On Kling specify '6 seconds'. Google Veo 3.1 handles this well and auto-generates matching audio."
+  },
+  {
+    "id": 7,
+    "category": "Social & Short-Form Content",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Kling",
+      "Google Veo"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "A [subject] in extreme slow motion, [atmospheric detail] rising dramatically, [background description] with bokeh [light type], cinematic 24fps feel, vertical 9:16 format, rich [color palette] tones",
+    "variables": {
+      "subject": {
+        "default": "barista pouring latte art",
+        "examples": [
+          "athlete in mid-jump",
+          "dancer mid-spin",
+          "chef plating a dish"
+        ]
+      },
+      "atmospheric detail": {
+        "default": "steam",
+        "examples": [
+          "smoke",
+          "dust",
+          "mist"
+        ]
+      },
+      "background description": {
+        "default": "dark moody caf\u00e9",
+        "examples": [
+          "blurred stadium",
+          "foggy park",
+          "sunlit kitchen"
+        ]
+      },
+      "light type": {
+        "default": "string lights",
+        "examples": [
+          "city bokeh",
+          "candle bokeh",
+          "neon bokeh"
+        ]
+      },
+      "color palette": {
+        "default": "brown and amber",
+        "examples": [
+          "cool blue and grey",
+          "warm terracotta",
+          "deep green and gold"
+        ]
+      }
+    },
+    "tool_notes": "Use 'slow motion' keyword explicitly on Pika for best results. Google Veo 3.1 handles this well and auto-generates matching audio."
+  },
+  {
+    "id": 8,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "A [scene description] in the [decade], handheld VHS camcorder aesthetic, washed-out [color tone] colors, scan lines and film grain overlay, timestamp in corner, warm nostalgic feel, 9:16 vertical",
+    "variables": {
+      "scene description": {
+        "default": "group of friends at a backyard summer party",
+        "examples": [
+          "birthday party at a roller rink",
+          "family at an amusement park",
+          "kids trick-or-treating"
+        ]
+      },
+      "decade": {
+        "default": "late 80s",
+        "examples": [
+          "early 90s",
+          "mid 70s",
+          "late 90s"
+        ]
+      },
+      "color tone": {
+        "default": "warm orange",
+        "examples": [
+          "faded green",
+          "cool blue-grey",
+          "yellow-washed"
+        ]
+      }
+    },
+    "tool_notes": "Add 'VHS grain overlay' on Runway for stronger retro effect."
+  },
+  {
+    "id": 9,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "An anime-style [character description] running through a [environment], [atmospheric element] swirling in slow motion, soft [color palette] color palette, [art style] aesthetic, gentle camera pan, 9:16 vertical",
+    "variables": {
+      "character description": {
+        "default": "girl",
+        "examples": [
+          "young warrior",
+          "student with backpack",
+          "elderly man"
+        ]
+      },
+      "environment": {
+        "default": "cherry blossom forest",
+        "examples": [
+          "snowy mountain path",
+          "moonlit beach",
+          "rainy city street"
+        ]
+      },
+      "atmospheric element": {
+        "default": "cherry blossom petals",
+        "examples": [
+          "snowflakes",
+          "autumn leaves",
+          "fireflies"
+        ]
+      },
+      "color palette": {
+        "default": "pastel",
+        "examples": [
+          "deep cool",
+          "warm amber",
+          "monochrome blue"
+        ]
+      },
+      "art style": {
+        "default": "Studio Ghibli-inspired",
+        "examples": [
+          "Your Name style",
+          "Makoto Shinkai style",
+          "classic 90s anime"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles anime style consistently. On Luma add 'Studio Ghibli' as style reference."
+  },
+  {
+    "id": 10,
+    "category": "Social & Short-Form Content",
+    "style": "Anime",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "Anime-style [location] at [time of day], [character count] characters [activity], [background element] glowing [color] behind them, wind blowing through hair, emotional and cinematic, 9:16 vertical format",
+    "variables": {
+      "location": {
+        "default": "rooftop",
+        "examples": [
+          "park bench",
+          "school hallway",
+          "bridge over a river"
+        ]
+      },
+      "time of day": {
+        "default": "sunset",
+        "examples": [
+          "rainy afternoon",
+          "dawn",
+          "moonlit night"
+        ]
+      },
+      "character count": {
+        "default": "two",
+        "examples": [
+          "one",
+          "three",
+          "a group of"
+        ]
+      },
+      "activity": {
+        "default": "sitting on the edge of a building",
+        "examples": [
+          "sharing an umbrella",
+          "studying together",
+          "watching fireworks"
+        ]
+      },
+      "background element": {
+        "default": "city skyline",
+        "examples": [
+          "ocean horizon",
+          "mountain range",
+          "field of flowers"
+        ]
+      },
+      "color": {
+        "default": "orange",
+        "examples": [
+          "purple",
+          "pink and gold",
+          "deep blue"
+        ]
+      }
+    },
+    "tool_notes": "Specify 'flat anime shading' on Runway to avoid 3D look."
+  },
+  {
+    "id": 11,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Luma",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [character description] sitting alone at a [location] at [time], [atmospheric element] hitting the window behind them, soft [light source] casting colored shadows, handheld camera slowly orbiting, melancholic and silent, 16:9",
+    "variables": {
+      "character description": {
+        "default": "old man",
+        "examples": [
+          "young woman",
+          "tired soldier",
+          "child"
+        ]
+      },
+      "location": {
+        "default": "diner counter",
+        "examples": [
+          "park bench",
+          "bus stop",
+          "empty bar"
+        ]
+      },
+      "time": {
+        "default": "3am",
+        "examples": [
+          "dusk",
+          "early morning",
+          "late afternoon"
+        ]
+      },
+      "atmospheric element": {
+        "default": "rain",
+        "examples": [
+          "snow",
+          "falling leaves",
+          "fog"
+        ]
+      },
+      "light source": {
+        "default": "neon light from outside",
+        "examples": [
+          "street lamp",
+          "candle",
+          "TV glow"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles atmospheric lighting well. Add 'handheld camera drift' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 12,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "A [character description] standing at [dramatic location], [clothing detail] in the wind, wide establishing shot slowly zooming out to reveal the vast scale, [sky description], emotional and powerful, 16:9",
+    "variables": {
+      "character description": {
+        "default": "woman",
+        "examples": [
+          "lone soldier",
+          "elderly fisherman",
+          "young child"
+        ]
+      },
+      "dramatic location": {
+        "default": "the edge of a cliff overlooking a stormy ocean",
+        "examples": [
+          "the top of a mountain",
+          "an empty stadium",
+          "a vast wheat field"
+        ]
+      },
+      "clothing detail": {
+        "default": "coat whipping",
+        "examples": [
+          "hair streaming",
+          "scarf trailing",
+          "dress flowing"
+        ]
+      },
+      "sky description": {
+        "default": "dramatic grey storm sky",
+        "examples": [
+          "blood red sunset",
+          "endless star field",
+          "breaking dawn light"
+        ]
+      }
+    },
+    "tool_notes": "Sora excels at wide environmental shots. Use 'slow zoom out reveal' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 13,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Runway",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "A [nostalgic scene] in the [decade], [family members] visible, VHS camcorder aesthetic, warm [color description] tones, [VHS artifact], pure emotional warmth, 16:9",
+    "variables": {
+      "nostalgic scene": {
+        "default": "home video of a family road trip",
+        "examples": [
+          "child's first steps",
+          "backyard birthday party",
+          "holiday morning unwrapping gifts"
+        ]
+      },
+      "decade": {
+        "default": "early 90s",
+        "examples": [
+          "late 80s",
+          "mid 70s",
+          "late 90s"
+        ]
+      },
+      "family members": {
+        "default": "kids faces pressed against car window",
+        "examples": [
+          "parents hugging in the background",
+          "grandparents laughing",
+          "siblings playing"
+        ]
+      },
+      "color description": {
+        "default": "washed-out orange",
+        "examples": [
+          "faded pastel",
+          "overexposed sunny",
+          "cool blue-tinted"
+        ]
+      },
+      "VHS artifact": {
+        "default": "dated timestamp in corner",
+        "examples": [
+          "tracking distortion",
+          "slight color bleed on edges",
+          "tape grain overlay"
+        ]
+      }
+    },
+    "tool_notes": "Pika handles VHS grain consistently. Add 'home video aesthetic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 14,
+    "category": "Cinematic & Storytelling",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Luma",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "An anime [scene type], a [character description] [action], [atmospheric element] drifting across the frame, soft [art style] aesthetic, emotional [music mood] score implied, slow fade to [color], 16:9",
+    "variables": {
+      "scene type": {
+        "default": "flashback sequence",
+        "examples": [
+          "dream sequence",
+          "memory scene",
+          "opening title scene"
+        ]
+      },
+      "character description": {
+        "default": "young child standing in a sunlit field",
+        "examples": [
+          "elderly woman at a window",
+          "teenager on a rooftop",
+          "couple walking on a beach"
+        ]
+      },
+      "action": {
+        "default": "waving goodbye",
+        "examples": [
+          "looking at the sky",
+          "reaching out",
+          "turning away slowly"
+        ]
+      },
+      "atmospheric element": {
+        "default": "petals",
+        "examples": [
+          "snowflakes",
+          "autumn leaves",
+          "fireflies"
+        ]
+      },
+      "art style": {
+        "default": "watercolor-meets-anime",
+        "examples": [
+          "Studio Ghibli",
+          "Makoto Shinkai",
+          "classic shonen"
+        ]
+      },
+      "music mood": {
+        "default": "piano",
+        "examples": [
+          "orchestral",
+          "acoustic guitar",
+          "ambient"
+        ]
+      },
+      "color": {
+        "default": "white",
+        "examples": [
+          "soft gold",
+          "pale blue",
+          "warm orange"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles anime transitions. Add 'soft watercolor animation' on Luma. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 15,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Luma",
+      "Kling",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "A [character description] blowing out [celebration detail] in slow motion, [background description] in soft bokeh, [light source] glow, joyful and intimate, close-up on the [subject focus] as light extinguishes, cinematic and nostalgic, 16:9",
+    "variables": {
+      "character description": {
+        "default": "child",
+        "examples": [
+          "elderly person",
+          "young woman",
+          "group of friends"
+        ]
+      },
+      "celebration detail": {
+        "default": "birthday candles",
+        "examples": [
+          "sparklers",
+          "a single candle on a cupcake",
+          "a row of candles"
+        ]
+      },
+      "background description": {
+        "default": "family faces",
+        "examples": [
+          "decorated party room",
+          "intimate dinner table",
+          "friends gathered outdoors"
+        ]
+      },
+      "light source": {
+        "default": "candlelight",
+        "examples": [
+          "fairy lights",
+          "lantern",
+          "fireplace"
+        ]
+      },
+      "subject focus": {
+        "default": "child's face",
+        "examples": [
+          "person's eyes",
+          "hands cupped around the flame",
+          "cake in detail"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles candlelight dynamics well. Specify 'slow motion blow' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 16,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Developer",
+      "Marketer"
+    ],
+    "prompt": "A sweeping aerial drone shot over [historical or fantasy setting], [population detail] in the streets, [landmark description], [light quality], epic and majestic, 16:9",
+    "variables": {
+      "historical or fantasy setting": {
+        "default": "an ancient Roman city at its peak",
+        "examples": [
+          "a medieval European town",
+          "a feudal Japanese castle town",
+          "a Viking coastal settlement"
+        ]
+      },
+      "population detail": {
+        "default": "thousands of citizens",
+        "examples": [
+          "market traders",
+          "soldiers marching",
+          "festival crowds"
+        ]
+      },
+      "landmark description": {
+        "default": "the Colosseum towering in the distance",
+        "examples": [
+          "a great cathedral dominating the skyline",
+          "a palace at the hilltop",
+          "a massive harbor with ships"
+        ]
+      },
+      "light quality": {
+        "default": "golden morning light",
+        "examples": [
+          "dramatic stormy light",
+          "warm sunset glow",
+          "cold blue dawn"
+        ]
+      }
+    },
+    "tool_notes": "Sora excels at large-scale historical world building. Luma maintains architectural detail. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 17,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": [
+      "Luma",
+      "Sora",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [landscape type] at [time of day], [atmospheric effect] rolling between [natural features], a single [detail element] catching the first light, [wildlife detail], slow aerial glide forward, breathtaking natural beauty, 16:9",
+    "variables": {
+      "landscape type": {
+        "default": "misty mountain valley",
+        "examples": [
+          "vast savanna plain",
+          "tropical jungle canopy",
+          "frozen tundra"
+        ]
+      },
+      "time of day": {
+        "default": "dawn",
+        "examples": [
+          "dusk",
+          "golden hour",
+          "overcast midday"
+        ]
+      },
+      "atmospheric effect": {
+        "default": "low clouds",
+        "examples": [
+          "morning mist",
+          "rain curtains",
+          "heat haze"
+        ]
+      },
+      "natural features": {
+        "default": "forested peaks",
+        "examples": [
+          "canyon walls",
+          "rolling hills",
+          "volcanic ridges"
+        ]
+      },
+      "detail element": {
+        "default": "narrow river",
+        "examples": [
+          "frozen lake",
+          "waterfall",
+          "clearing in the forest"
+        ]
+      },
+      "wildlife detail": {
+        "default": "birds rising from the treeline",
+        "examples": [
+          "deer grazing below",
+          "eagles circling overhead",
+          "fish jumping in the river"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles fog and atmospheric depth beautifully. Add 'volumetric morning mist' on Sora. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 18,
+    "category": "World & Environment Building",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Runway",
+      "Kling",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Developer",
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A rain-soaked [location type] at night, neon signs in [language/style] reflecting in puddles, steam rising from grates, [character detail] walking away from camera, atmospheric and moody, slow push in, 16:9",
+    "variables": {
+      "location type": {
+        "default": "cyberpunk alley",
+        "examples": [
+          "neon market street",
+          "elevated walkway",
+          "underground passage"
+        ]
+      },
+      "language/style": {
+        "default": "Chinese characters",
+        "examples": [
+          "Japanese katakana",
+          "glitchy English",
+          "holographic symbols"
+        ]
+      },
+      "character detail": {
+        "default": "a lone figure with an umbrella",
+        "examples": [
+          "a hooded figure",
+          "a courier on a bike",
+          "two people arguing"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner 2049 mood' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 19,
+    "category": "World & Environment Building",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Luma",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "An anime-style [settlement type] nestled in a [natural setting], [architectural detail] with [atmospheric detail], a [activity description], soft [light quality], [art style] warmth and detail, slow pan across, 16:9",
+    "variables": {
+      "settlement type": {
+        "default": "fantasy village",
+        "examples": [
+          "fishing town",
+          "mountain monastery",
+          "floating sky settlement"
+        ]
+      },
+      "natural setting": {
+        "default": "valley surrounded by mountains",
+        "examples": [
+          "coastal cliffs",
+          "ancient forest",
+          "cloud layer"
+        ]
+      },
+      "architectural detail": {
+        "default": "thatched roof cottages",
+        "examples": [
+          "pagoda-style buildings",
+          "stone towers",
+          "wooden houses on stilts"
+        ]
+      },
+      "atmospheric detail": {
+        "default": "smoke curling from chimneys",
+        "examples": [
+          "lanterns lighting the paths",
+          "flags waving in the breeze",
+          "waterfalls cascading between buildings"
+        ]
+      },
+      "activity description": {
+        "default": "market street with colorful stalls",
+        "examples": [
+          "festival in the town square",
+          "children playing by the river",
+          "farmers returning from fields"
+        ]
+      },
+      "light quality": {
+        "default": "morning light",
+        "examples": [
+          "golden hour glow",
+          "misty afternoon light",
+          "twilight blue"
+        ]
+      },
+      "art style": {
+        "default": "Studio Ghibli-inspired",
+        "examples": [
+          "Makoto Shinkai style",
+          "classic JRPG",
+          "painterly watercolor anime"
+        ]
+      }
+    },
+    "tool_notes": "Luma captures Ghibli environmental warmth. Kling maintains consistent anime style. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 20,
+    "category": "World & Environment Building",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma",
+      "Google Veo",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [futuristic city type] at night, viewed from a [camera position], [infrastructure detail] stretching to the horizon, [transport detail], atmospheric haze and light pollution glow, epic scale reveal, 16:9",
+    "variables": {
+      "futuristic city type": {
+        "default": "futuristic megacity",
+        "examples": [
+          "underwater colony",
+          "orbital space station",
+          "cloud city above the atmosphere"
+        ]
+      },
+      "camera position": {
+        "default": "descending spacecraft",
+        "examples": [
+          "rooftop helipad",
+          "aerial drone",
+          "slow crane reveal"
+        ]
+      },
+      "infrastructure detail": {
+        "default": "thousands of lit towers",
+        "examples": [
+          "massive suspended bridges",
+          "interconnected dome structures",
+          "layered city tiers"
+        ]
+      },
+      "transport detail": {
+        "default": "flying vehicles in organized lanes",
+        "examples": [
+          "monorails weaving between buildings",
+          "cargo ships docking",
+          "pedestrian sky bridges"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles large-scale sci-fi cityscapes best. Use 'cyberpunk megacity descent' on Luma. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+  },
+  {
+    "id": 21,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Pika"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "prompt": "A single [line type] slowly drawing itself across a [background], transforming into a [pattern type], clean and hypnotic, smooth and precise animation, perfect loop, 16:9",
+    "variables": {
+      "line type": {
+        "default": "black line",
+        "examples": [
+          "gold line",
+          "white line",
+          "glowing neon line"
+        ]
+      },
+      "background": {
+        "default": "pure white canvas",
+        "examples": [
+          "dark grey surface",
+          "parchment texture",
+          "deep black void"
+        ]
+      },
+      "pattern type": {
+        "default": "geometric pattern",
+        "examples": [
+          "mandala",
+          "architectural blueprint",
+          "constellation map"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles minimalist animation cleanly. Specify 'perfect loop' on Pika."
+  },
+  {
+    "id": 22,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "prompt": "An infinite [architectural element] folding in on itself like an M.C. Escher painting brought to life, [surface texture], small figures walking in impossible directions, slow and hypnotic camera rotation, 16:9",
+    "variables": {
+      "architectural element": {
+        "default": "staircase",
+        "examples": [
+          "corridor",
+          "bridge",
+          "library"
+        ]
+      },
+      "surface texture": {
+        "default": "photorealistic stone",
+        "examples": [
+          "polished marble",
+          "ancient wood",
+          "floating glass"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible geometry best. On Runway use 'Escher architectural loop'."
+  },
+  {
+    "id": 23,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "prompt": "Neon light tubes bending and morphing into abstract flowing shapes against a pure black background, electric [color palette] colors, smooth fluid motion, hypnotic and loopable, [music genre] energy, 16:9",
+    "variables": {
+      "color palette": {
+        "default": "pink and cyan",
+        "examples": [
+          "gold and white",
+          "green and purple",
+          "red and orange"
+        ]
+      },
+      "music genre": {
+        "default": "synthwave",
+        "examples": [
+          "lo-fi",
+          "techno",
+          "ambient"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon glow effects cleanly. Specify 'loopable neon fluid art' on Runway."
+  },
+  {
+    "id": 24,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "prompt": "A [object] standing alone in [impossible environment], slowly opening to reveal a completely different world inside \u2014 a [contrasting world] \u2014 camera slowly pushes through, impossible portal concept, cinematic and dreamlike, 16:9",
+    "variables": {
+      "object": {
+        "default": "door",
+        "examples": [
+          "mirror",
+          "window frame",
+          "archway"
+        ]
+      },
+      "impossible environment": {
+        "default": "the middle of the ocean",
+        "examples": [
+          "a barren desert",
+          "outer space",
+          "a frozen lake"
+        ]
+      },
+      "contrasting world": {
+        "default": "lush rainforest",
+        "examples": [
+          "bustling ancient city",
+          "snowy alpine village",
+          "alien planet landscape"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles portal and world-transition concepts exceptionally well."
+  },
+  {
+    "id": 25,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Runway",
+      "Sora"
+    ],
+    "audience": [
+      "Developer"
+    ],
+    "prompt": "Fractal patterns growing and evolving in deep space, [color palette] colors, infinite zoom feeling, [aesthetic style] and mathematical beauty, smooth continuous camera push-in, loopable, 16:9",
+    "variables": {
+      "color palette": {
+        "default": "electric blue and violet",
+        "examples": [
+          "gold and red",
+          "green and white",
+          "pink and orange"
+        ]
+      },
+      "aesthetic style": {
+        "default": "psychedelic",
+        "examples": [
+          "clinical and precise",
+          "organic and warm",
+          "cold and mechanical"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles infinite zoom concepts. On Runway use 'fractal zoom cyberpunk colors'."
+  },
+  {
+    "id": 26,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Luma",
+      "Google Veo",
+      "HeyGen"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A photorealistic AI [role] behind a [set description], speaking directly to camera, [backdrop detail], [personality trait] and [tone] presentation style, cinematic talking head format, 16:9",
+    "variables": {
+      "role": {
+        "default": "news anchor",
+        "examples": [
+          "product reviewer",
+          "educator",
+          "brand spokesperson"
+        ]
+      },
+      "set description": {
+        "default": "sleek modern desk",
+        "examples": [
+          "minimalist white backdrop",
+          "warm bookshelf background",
+          "outdoor location"
+        ]
+      },
+      "backdrop detail": {
+        "default": "neutral professional studio backdrop with subtle screen graphics",
+        "examples": [
+          "soft bokeh city background",
+          "branded backdrop with logo",
+          "natural outdoor setting"
+        ]
+      },
+      "personality trait": {
+        "default": "confident",
+        "examples": [
+          "warm",
+          "energetic",
+          "calm"
+        ]
+      },
+      "tone": {
+        "default": "authoritative",
+        "examples": [
+          "friendly",
+          "inspiring",
+          "informative"
+        ]
+      }
+    },
+    "tool_notes": "Luma maintains face consistency. Add 'professional broadcast' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here \u2014 specify avatar expression and background scene for best results."
+  },
+  {
+    "id": 27,
+    "category": "AI Avatar & Character",
+    "style": "Cinematic",
+    "best_on": [
+      "Kling",
+      "Runway",
+      "Google Veo",
+      "HeyGen"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "prompt": "A photorealistic AI [character type] standing in a [environment], [light description], [outfit description], speaking naturally with subtle hand gestures, [personality] and [quality], 16:9",
+    "variables": {
+      "character type": {
+        "default": "brand spokesperson",
+        "examples": [
+          "fitness coach",
+          "chef",
+          "tech expert"
+        ]
+      },
+      "environment": {
+        "default": "modern minimalist office",
+        "examples": [
+          "professional kitchen",
+          "outdoor terrace",
+          "branded studio"
+        ]
+      },
+      "light description": {
+        "default": "warm natural light",
+        "examples": [
+          "cool studio lighting",
+          "golden hour outdoor light",
+          "dramatic side light"
+        ]
+      },
+      "outfit description": {
+        "default": "professional business casual attire",
+        "examples": [
+          "chef's uniform",
+          "athletic wear",
+          "branded clothing"
+        ]
+      },
+      "personality": {
+        "default": "approachable",
+        "examples": [
+          "authoritative",
+          "energetic",
+          "calm"
+        ]
+      },
+      "quality": {
+        "default": "trustworthy",
+        "examples": [
+          "inspiring",
+          "expert",
+          "relatable"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles natural body movement. Specify 'natural gesture' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here \u2014 specify avatar expression and background scene for best results."
+  },
+  {
+    "id": 28,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Luma",
+      "HeyGen"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "An anime [character archetype] standing still in a [environment], [natural element] moving gently, [light quality] filtering through, [expression description], slow dramatic zoom, highly detailed character design, 16:9",
+    "variables": {
+      "character archetype": {
+        "default": "samurai",
+        "examples": [
+          "witch",
+          "explorer",
+          "healer",
+          "scholar"
+        ]
+      },
+      "environment": {
+        "default": "bamboo forest",
+        "examples": [
+          "ancient library",
+          "mountain peak",
+          "mystical cave",
+          "enchanted garden"
+        ]
+      },
+      "natural element": {
+        "default": "leaves",
+        "examples": [
+          "snow",
+          "flower petals",
+          "floating embers",
+          "mist"
+        ]
+      },
+      "light quality": {
+        "default": "sunlight",
+        "examples": [
+          "moonlight",
+          "magical glow",
+          "lantern light",
+          "storm light"
+        ]
+      },
+      "expression description": {
+        "default": "calm and focused",
+        "examples": [
+          "determined and fierce",
+          "gentle and wise",
+          "mysterious and distant",
+          "warm and welcoming"
+        ]
+      }
+    },
+    "tool_notes": "Kling maintains anime character consistency. Use 'anime dramatic zoom' on Luma. HeyGen excels here \u2014 specify avatar expression and background scene for best results."
+  },
+  {
+    "id": 29,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Luma",
+      "Runway",
+      "HeyGen"
+    ],
+    "audience": [
+      "Developer",
+      "Marketer"
+    ],
+    "prompt": "A sleek AI assistant avatar rendered as a glowing [form type], [color palette] light forming a human silhouette, [particle detail] flowing around the body, appearing on a [background], futuristic and [mood], 16:9",
+    "variables": {
+      "form type": {
+        "default": "holographic figure",
+        "examples": [
+          "wireframe outline",
+          "particle cloud",
+          "light projection"
+        ]
+      },
+      "color palette": {
+        "default": "blue and white",
+        "examples": [
+          "gold and white",
+          "green and teal",
+          "purple and pink"
+        ]
+      },
+      "particle detail": {
+        "default": "data particles",
+        "examples": [
+          "light streams",
+          "geometric shapes",
+          "soft orbs"
+        ]
+      },
+      "background": {
+        "default": "dark background",
+        "examples": [
+          "white void",
+          "branded environment",
+          "abstract space"
+        ]
+      },
+      "mood": {
+        "default": "premium",
+        "examples": [
+          "approachable",
+          "powerful",
+          "intelligent"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles holographic light figures cleanly. Use 'holographic AI avatar' on Runway. HeyGen excels here \u2014 specify avatar expression and background scene for best results."
+  },
+  {
+    "id": 30,
+    "category": "AI Avatar & Character",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Runway",
+      "HeyGen"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "An anime [character type] in a long coat standing in a [weather condition] [location] at night, looking [direction] pensively, [atmospheric lighting] reflecting in puddles around them, [mood] atmosphere, slow camera push-in on face, 16:9",
+    "variables": {
+      "character type": {
+        "default": "detective",
+        "examples": [
+          "bounty hunter",
+          "wandering mage",
+          "secret agent",
+          "rebel leader"
+        ]
+      },
+      "weather condition": {
+        "default": "rain-soaked",
+        "examples": [
+          "fog-filled",
+          "snow-dusted",
+          "wind-swept"
+        ]
+      },
+      "location": {
+        "default": "street",
+        "examples": [
+          "rooftop",
+          "bridge",
+          "alleyway",
+          "harbor dock"
+        ]
+      },
+      "direction": {
+        "default": "up",
+        "examples": [
+          "into the distance",
+          "down at the ground",
+          "sideways off screen"
+        ]
+      },
+      "atmospheric lighting": {
+        "default": "neon signs",
+        "examples": [
+          "street lamps",
+          "distant fire",
+          "bioluminescent plants"
+        ]
+      },
+      "mood": {
+        "default": "noir and atmospheric",
+        "examples": [
+          "tense and urgent",
+          "melancholic and quiet",
+          "mysterious and eerie"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles rain and neon reflections for anime characters. Add 'anime noir' on Runway. HeyGen excels here \u2014 specify avatar expression and background scene for best results."
+  },
+  {
+    "id": 31,
+    "category": "Brand & Product Ads",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Runway"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "prompt": "A [decade] TV commercial for [product type], [presenter description] holding the product enthusiastically, [set description] background, VHS scan lines and film grain, bold [color palette] color grade, nostalgic and fun, 16:9",
+    "variables": {
+      "decade": {
+        "default": "1980s",
+        "examples": [
+          "1970s",
+          "1990s",
+          "early 2000s"
+        ]
+      },
+      "product type": {
+        "default": "sports drink",
+        "examples": [
+          "breakfast cereal",
+          "household cleaner",
+          "fast food"
+        ]
+      },
+      "presenter description": {
+        "default": "enthusiastic male presenter in a bright polo shirt",
+        "examples": [
+          "cheerful female host in pastels",
+          "suited salesman",
+          "group of excited teens"
+        ]
+      },
+      "set description": {
+        "default": "bright studio kitchen",
+        "examples": [
+          "colorful gym",
+          "suburban living room",
+          "neon-lit store"
+        ]
+      },
+      "color palette": {
+        "default": "warm orange and brown",
+        "examples": [
+          "teal and magenta",
+          "primary colors",
+          "pastel pink and blue"
+        ]
+      }
+    },
+    "tool_notes": "Pika handles VHS aesthetic well. Add 'retro TV commercial grain' on Runway."
+  },
+  {
+    "id": 32,
+    "category": "Brand & Product Ads",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Marketer",
+      "Developer"
+    ],
+    "prompt": "A [product type] displayed on a [surface] in a rain-soaked cyberpunk city at night, neon [brand colors] reflections all around it, [atmospheric element] drifting past, dramatic low angle hero shot, 16:9",
+    "variables": {
+      "product type": {
+        "default": "futuristic sneaker",
+        "examples": [
+          "premium headphones",
+          "smartwatch",
+          "gaming peripheral"
+        ]
+      },
+      "surface": {
+        "default": "wet black asphalt",
+        "examples": [
+          "glowing holographic pedestal",
+          "chrome platform",
+          "mirrored surface"
+        ]
+      },
+      "brand colors": {
+        "default": "blue and white",
+        "examples": [
+          "red and gold",
+          "green and black",
+          "purple and orange"
+        ]
+      },
+      "atmospheric element": {
+        "default": "steam rising from city vents",
+        "examples": [
+          "holographic advertisements floating past",
+          "falling rain streaks",
+          "flying vehicles overhead"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner atmosphere' on Runway."
+  },
+  {
+    "id": 33,
+    "category": "Brand & Product Ads",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "prompt": "Anime-style advertisement for [product type] \u2014 a [character description] discovers the product, [reaction] in exaggerated anime style, [visual effect] bursting around the product, bright [color palette], energetic and fun, 9:16 or 16:9",
+    "variables": {
+      "product type": {
+        "default": "energy drink",
+        "examples": [
+          "gaming headset",
+          "running shoes",
+          "snack food"
+        ]
+      },
+      "character description": {
+        "default": "enthusiastic high-school student",
+        "examples": [
+          "determined athlete",
+          "cool college student",
+          "surprised office worker"
+        ]
+      },
+      "reaction": {
+        "default": "eyes sparkling with stars and mouth wide open",
+        "examples": [
+          "jumping in the air with fist pump",
+          "freeze-frame pose with dramatic lines",
+          "speed-lines and impact effect"
+        ]
+      },
+      "visual effect": {
+        "default": "speed lines and starburst",
+        "examples": [
+          "confetti explosion",
+          "glowing aura",
+          "floating sparkles"
+        ]
+      },
+      "color palette": {
+        "default": "red, white and gold",
+        "examples": [
+          "blue and cyan",
+          "orange and yellow",
+          "pink and purple"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles anime ad style consistently. Add 'anime commercial energy' on Luma."
+  },
+  {
+    "id": 34,
+    "category": "Social & Short-Form Content",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Pika"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A single [subject] against a pure [background color] background, slow [camera move], [one subtle action] in perfect stillness, hyper-clean aesthetic, satisfying and meditative, 9:16 vertical",
+    "variables": {
+      "subject": {
+        "default": "hand holding a single white flower",
+        "examples": [
+          "ceramic cup being slowly filled with coffee",
+          "candle flame",
+          "open book"
+        ]
+      },
+      "background color": {
+        "default": "off-white",
+        "examples": [
+          "deep black",
+          "sage green",
+          "dusty rose"
+        ]
+      },
+      "camera move": {
+        "default": "very slow push in",
+        "examples": [
+          "gentle pull back",
+          "static hold",
+          "barely perceptible orbit"
+        ]
+      },
+      "one subtle action": {
+        "default": "single petal falling in slow motion",
+        "examples": [
+          "steam rising gently",
+          "page turning slowly",
+          "flame flickering once"
+        ]
+      }
+    },
+    "tool_notes": "Runway keeps backgrounds pristine. Pika handles satisfying minimal loops."
+  },
+  {
+    "id": 35,
+    "category": "Social & Short-Form Content",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "prompt": "A [person type] opens a door in the middle of [impossible location] and steps through into [contrasting world], camera slowly pulls back to reveal the surreal contrast, 9:16 vertical",
+    "variables": {
+      "person type": {
+        "default": "woman in a red coat",
+        "examples": [
+          "businessman in a suit",
+          "child with a backpack",
+          "elderly man with a cane"
+        ]
+      },
+      "impossible location": {
+        "default": "open ocean surface",
+        "examples": [
+          "outer space",
+          "barren desert",
+          "the middle of a snowy mountain"
+        ]
+      },
+      "contrasting world": {
+        "default": "a bustling tropical night market",
+        "examples": [
+          "a quiet Japanese garden in spring",
+          "a vibrant carnival",
+          "a cozy library on a rainy evening"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles portal world-transitions exceptionally well. Add 'seamless surreal transition' on Runway."
+  },
+  {
+    "id": 36,
+    "category": "Social & Short-Form Content",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A [influencer type] filming a [content type] on a [camera type] in the [decade], jump cuts and DIY energy, [color grade] color, authentic lo-fi creator vibe, 9:16 vertical",
+    "variables": {
+      "influencer type": {
+        "default": "fashion creator",
+        "examples": [
+          "fitness influencer",
+          "food blogger",
+          "travel vlogger"
+        ]
+      },
+      "content type": {
+        "default": "Get Ready With Me",
+        "examples": [
+          "workout routine",
+          "cooking tutorial",
+          "travel diary"
+        ]
+      },
+      "camera type": {
+        "default": "DV camcorder",
+        "examples": [
+          "flip phone camera",
+          "early iPhone",
+          "mini-DV tape camera"
+        ]
+      },
+      "decade": {
+        "default": "early 2000s",
+        "examples": [
+          "late 90s",
+          "mid 2000s"
+        ]
+      },
+      "color grade": {
+        "default": "warm orange overexposed",
+        "examples": [
+          "cool desaturated",
+          "high contrast faded film",
+          "washed-out pastel"
+        ]
+      }
+    },
+    "tool_notes": "Pika handles VHS jump cuts well. Add 'authentic DIY camcorder look' on Kling."
+  },
+  {
+    "id": 37,
+    "category": "Cinematic & Storytelling",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A single [character] in a vast empty [environment], camera slowly pulling back to emphasise isolation, [light condition], no dialogue, pure visual storytelling, 16:9",
+    "variables": {
+      "character": {
+        "default": "figure in a red coat",
+        "examples": [
+          "child with a balloon",
+          "elderly person with a walking stick",
+          "soldier in full uniform"
+        ]
+      },
+      "environment": {
+        "default": "flat white salt plain",
+        "examples": [
+          "black sandy desert",
+          "endless calm grey ocean",
+          "empty snow field"
+        ]
+      },
+      "light condition": {
+        "default": "flat overcast single horizon glow",
+        "examples": [
+          "single overhead spotlight",
+          "long golden hour shadow",
+          "dramatic approaching storm light"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles isolation framing cleanly. Add 'wide angle slow pull back single subject' on Luma."
+  },
+  {
+    "id": 38,
+    "category": "Cinematic & Storytelling",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [character] walks into a mirror and continues walking \u2014 the mirror world is [mirror world description] \u2014 the character doesn't notice the difference, dreamlike and unsettling, slow push-in, 16:9",
+    "variables": {
+      "character": {
+        "default": "woman in everyday clothes",
+        "examples": [
+          "businessman",
+          "child",
+          "elderly man"
+        ]
+      },
+      "mirror world description": {
+        "default": "identical but with wrong colors, reversed shadows, and impossible gravity",
+        "examples": [
+          "the same room but decades earlier, dust on everything and children's drawings on the walls",
+          "perfectly beautiful but utterly silent \u2014 no wind, no movement, no sound except the character's footsteps"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible world transitions. Add 'surreal mirror world continuity' on Runway."
+  },
+  {
+    "id": 39,
+    "category": "Cinematic & Storytelling",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [character type] with [augmentation] navigating a rain-soaked cyberpunk [environment] at night, [camera movement], neon [color palette] reflections everywhere, [emotional state] implied through body language, cinematic and moody, 16:9",
+    "variables": {
+      "character type": {
+        "default": "lone hacker",
+        "examples": [
+          "corporate operative",
+          "street medic",
+          "information courier"
+        ]
+      },
+      "augmentation": {
+        "default": "glowing cybernetic eye implants",
+        "examples": [
+          "chrome mechanical arm",
+          "neural interface visible at temple",
+          "bioluminescent tattoos on neck"
+        ]
+      },
+      "environment": {
+        "default": "narrow market alley",
+        "examples": [
+          "elevated highway overpass",
+          "underground transit tunnel",
+          "rooftop between towers"
+        ]
+      },
+      "camera movement": {
+        "default": "slow tracking shot from behind",
+        "examples": [
+          "steady push-in from front",
+          "handheld following closely",
+          "wide observational locked off"
+        ]
+      },
+      "color palette": {
+        "default": "cyan and magenta",
+        "examples": [
+          "amber and red",
+          "green and shadow",
+          "purple and gold"
+        ]
+      },
+      "emotional state": {
+        "default": "hunted and wary",
+        "examples": [
+          "determined and purposeful",
+          "weary and haunted",
+          "coldly focused"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles wet surface neon reflections. Add 'neo-noir tracking shot' on Runway."
+  },
+  {
+    "id": 40,
+    "category": "World & Environment Building",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A world where [physical rule] works in reverse \u2014 [specific example] \u2014 inhabitants going about daily life as if completely normal, wide observational shot, surreal and quietly absurd, 16:9",
+    "variables": {
+      "physical rule": {
+        "default": "gravity",
+        "examples": [
+          "time",
+          "scale",
+          "light and shadow"
+        ]
+      },
+      "specific example": {
+        "default": "people and objects fall upward, rain rises from puddles to sky, buildings grow downward from floating ground above",
+        "examples": [
+          "everything moves in reverse \u2014 people walk backward, broken objects repair themselves, conversations play in reverse",
+          "all large things are tiny and all tiny things are enormous \u2014 ants tower over skyscrapers, people are microscopic next to insects"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible physics scenarios best. Specify 'surreal reversed world documentary style' on Runway."
+  },
+  {
+    "id": 41,
+    "category": "World & Environment Building",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A single [natural element] in a vast empty [environment type], [camera movement], [light condition], nothing else in frame, meditative and powerful, 16:9",
+    "variables": {
+      "natural element": {
+        "default": "lone tree",
+        "examples": [
+          "single large boulder",
+          "one isolated house",
+          "lone lamp post"
+        ]
+      },
+      "environment type": {
+        "default": "flat white salt flat",
+        "examples": [
+          "still dark ocean surface",
+          "empty golden plain",
+          "grey concrete expanse"
+        ]
+      },
+      "camera movement": {
+        "default": "very slow distant orbit",
+        "examples": [
+          "slow push toward it",
+          "slow pull away",
+          "static locked off"
+        ]
+      },
+      "light condition": {
+        "default": "flat overcast with single warm horizon glow",
+        "examples": [
+          "harsh midday sun with hard long shadow",
+          "blue hour twilight glow",
+          "dramatic low golden hour backlight"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles minimalist environment composition. Add 'single subject vast landscape' on Luma."
+  },
+  {
+    "id": 42,
+    "category": "World & Environment Building",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [decade] travel documentary style film of [location], shaky handheld camera, [presenter type] in shot pointing out landmarks, VHS grain and [color cast] color, timestamp overlay, nostalgic and warm, 16:9",
+    "variables": {
+      "decade": {
+        "default": "late 1980s",
+        "examples": [
+          "early 1990s",
+          "mid 1990s",
+          "early 2000s"
+        ]
+      },
+      "location": {
+        "default": "coastal European city",
+        "examples": [
+          "tropical island",
+          "mountain ski resort",
+          "ancient desert ruins"
+        ]
+      },
+      "presenter type": {
+        "default": "enthusiastic tourist with a sun hat",
+        "examples": [
+          "local guide in regional dress",
+          "travel journalist with microphone",
+          "family member pointing excitedly"
+        ]
+      },
+      "color cast": {
+        "default": "warm amber and orange",
+        "examples": [
+          "faded cool blue-grey",
+          "overexposed yellow-white",
+          "washed-out pastel"
+        ]
+      }
+    },
+    "tool_notes": "Pika handles VHS travel documentary style. Add 'vintage travel film grain' on Runway."
+  },
+  {
+    "id": 43,
+    "category": "Abstract & Motion Art",
+    "style": "Cinematic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "Extreme macro close-up of [natural texture], camera very slowly drifting across the surface, [light source] raking across to reveal [detail], [color palette], abstract and cinematic \u2014 feels like an alien landscape, 16:9",
+    "variables": {
+      "natural texture": {
+        "default": "rough tree bark",
+        "examples": [
+          "sand dune ridges",
+          "volcanic rock face",
+          "flower petal surface"
+        ]
+      },
+      "light source": {
+        "default": "low raking side light",
+        "examples": [
+          "backlit through translucent material",
+          "overhead diffused light",
+          "harsh direct sunlight"
+        ]
+      },
+      "detail": {
+        "default": "micro-cracks, ridges and grain",
+        "examples": [
+          "crystalline structures in the surface",
+          "fine hair-like filaments",
+          "translucent layered depth"
+        ]
+      },
+      "color palette": {
+        "default": "warm amber and deep brown",
+        "examples": [
+          "cool grey and silver",
+          "deep green and shadow",
+          "ivory and gold"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles macro texture beautifully. Add 'extreme macro slow pan alien landscape feel' on Runway."
+  },
+  {
+    "id": 44,
+    "category": "Abstract & Motion Art",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [abstract visual type] filmed with [decade] consumer video equipment \u2014 [glitch effect] interrupting the image, [color grade], feels like a found tape of something unknowable, unsettling and artistic, loopable, 16:9",
+    "variables": {
+      "abstract visual type": {
+        "default": "empty playground at night",
+        "examples": [
+          "long corridor with one flickering light",
+          "static television in a dark room",
+          "bare tree in winter wind"
+        ]
+      },
+      "decade": {
+        "default": "late 80s",
+        "examples": [
+          "early 90s",
+          "mid 90s"
+        ]
+      },
+      "glitch effect": {
+        "default": "tape tracking error lines rolling through",
+        "examples": [
+          "color channel separation",
+          "signal dropout to static bursts",
+          "frame stutter and repeat"
+        ]
+      },
+      "color grade": {
+        "default": "overexposed and washed out",
+        "examples": [
+          "deep undersaturated and cold",
+          "wrong oversaturated hues",
+          "faded greenish tint"
+        ]
+      }
+    },
+    "tool_notes": "Pika handles found footage VHS aesthetic. Add 'degraded tape abstract art' on Runway."
+  },
+  {
+    "id": 45,
+    "category": "Abstract & Motion Art",
+    "style": "Anime",
+    "best_on": [
+      "Kling",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "Anime-style abstract opening sequence \u2014 [visual element] forming and dissolving in slow motion, [color palette] wash of light and shadow, [art style] aesthetic, camera drifting through the shapes, deeply atmospheric, 16:9",
+    "variables": {
+      "visual element": {
+        "default": "cherry blossom petals assembling into a landscape",
+        "examples": [
+          "ink brush strokes forming a face",
+          "light particles building a cityscape",
+          "geometric shapes revealing a character silhouette"
+        ]
+      },
+      "color palette": {
+        "default": "soft pink and white on deep blue",
+        "examples": [
+          "gold and black",
+          "cool grey and pale silver",
+          "warm amber and orange on dark"
+        ]
+      },
+      "art style": {
+        "default": "Makoto Shinkai cinematic",
+        "examples": [
+          "Studio Ghibli painterly",
+          "classic 90s cel animation",
+          "modern sharp anime"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles anime abstract sequences. Add 'anime abstract title sequence atmospheric' on Luma."
+  },
+  {
+    "id": 46,
+    "category": "AI Avatar & Character",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A [character type] in [plain clothing] against a pure [background color] background, single [light type], performing [simple gesture] in extreme slow motion, abstract character study, pure and cinematic, 16:9",
+    "variables": {
+      "character type": {
+        "default": "young woman",
+        "examples": [
+          "elderly man",
+          "child",
+          "androgynous figure"
+        ]
+      },
+      "plain clothing": {
+        "default": "simple white t-shirt",
+        "examples": [
+          "plain black turtleneck",
+          "neutral linen shirt",
+          "matte grey jacket"
+        ]
+      },
+      "background color": {
+        "default": "pure white",
+        "examples": [
+          "deep black",
+          "warm cream",
+          "cool mid-grey"
+        ]
+      },
+      "light type": {
+        "default": "soft overhead diffused light",
+        "examples": [
+          "dramatic side light",
+          "rim light from behind",
+          "low directional window light"
+        ]
+      },
+      "simple gesture": {
+        "default": "slowly raising one hand palm up",
+        "examples": [
+          "turning head to look directly at camera",
+          "closing eyes and opening them",
+          "taking one slow breath visibly"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles minimalist character motion cleanly. Add 'clean studio portrait extreme slow motion' on Luma."
+  },
+  {
+    "id": 47,
+    "category": "AI Avatar & Character",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Pika",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "prompt": "A [decade] style video introduction of a [character type] \u2014 handheld camcorder aesthetic, [color grade] tones, [setting description] in the background, warm and authentic, feels like a real person introducing themselves for the first time, 16:9",
+    "variables": {
+      "decade": {
+        "default": "early 90s",
+        "examples": [
+          "late 80s",
+          "mid 90s",
+          "early 2000s"
+        ]
+      },
+      "character type": {
+        "default": "friendly teacher",
+        "examples": [
+          "local business owner",
+          "coach giving a pep talk",
+          "someone recording a message for the future"
+        ]
+      },
+      "color grade": {
+        "default": "warm faded orange",
+        "examples": [
+          "cool blue-grey",
+          "overexposed pastel",
+          "washed-out yellow-green"
+        ]
+      },
+      "setting description": {
+        "default": "cluttered home office with family photos",
+        "examples": [
+          "outdoor garden in summer",
+          "school classroom",
+          "small local shop"
+        ]
+      }
+    },
+    "tool_notes": "Pika handles VHS character introductions. Add 'camcorder home video character intro' on Kling."
+  },
+  {
+    "id": 48,
+    "category": "AI Avatar & Character",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "prompt": "A [character type] whose [body part] is made of [impossible material], going about [mundane activity] completely normally \u2014 other characters treat it as unremarkable, deadpan and dreamlike, 16:9",
+    "variables": {
+      "character type": {
+        "default": "office worker",
+        "examples": [
+          "shopkeeper",
+          "teacher",
+          "parent"
+        ]
+      },
+      "body part": {
+        "default": "head",
+        "examples": [
+          "hands",
+          "torso",
+          "arms"
+        ]
+      },
+      "impossible material": {
+        "default": "slowly blooming flowers",
+        "examples": [
+          "flowing water",
+          "crackling fire",
+          "swirling storm clouds"
+        ]
+      },
+      "mundane activity": {
+        "default": "typing at a computer and drinking coffee",
+        "examples": [
+          "grocery shopping",
+          "reading a newspaper on a bench",
+          "waiting for a bus"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible body/material concepts. Add 'deadpan surreal character study' on Runway."
+  },
+  {
+    "id": 49,
+    "category": "AI Avatar & Character",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "prompt": "A [character archetype] with [visible tech augmentation] sits in a [location], [action], neon [color] light catching their features, portrait framing, [mood] energy, cyberpunk character reel shot, 16:9",
+    "variables": {
+      "character archetype": {
+        "default": "street hacker",
+        "examples": [
+          "corporate enforcer",
+          "underground medic",
+          "rebel leader"
+        ]
+      },
+      "visible tech augmentation": {
+        "default": "glowing neural interface ports at the temple",
+        "examples": [
+          "chrome mechanical hand",
+          "LED eye implant with visible iris data overlay",
+          "subdermal circuit patterns glowing beneath skin"
+        ]
+      },
+      "location": {
+        "default": "dim underground bar",
+        "examples": [
+          "rain-slicked rooftop",
+          "server room lit by indicator lights",
+          "moving underground train"
+        ]
+      },
+      "action": {
+        "default": "scrolling data on a holographic screen",
+        "examples": [
+          "cleaning a wound with steady hands",
+          "loading a device with quiet focus",
+          "staring out a window at the city below"
+        ]
+      },
+      "color": {
+        "default": "cyan and amber",
+        "examples": [
+          "red and dark",
+          "green and shadow",
+          "purple and silver"
+        ]
+      },
+      "mood": {
+        "default": "quietly dangerous",
+        "examples": [
+          "world-weary and haunted",
+          "coldly professional",
+          "defiant and fierce"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles cyberpunk character portraits consistently. Add 'neo-noir character study portrait' on Runway."
+  },
+  {
+    "id": 50,
+    "category": "AI Avatar & Character",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "prompt": "An abstract AI avatar represented only as a [geometric form] \u2014 [motion behavior] \u2014 against a [background color] void, [color], personality conveyed entirely through movement and rhythm, loopable, 16:9",
+    "variables": {
+      "geometric form": {
+        "default": "softly glowing sphere",
+        "examples": [
+          "slowly rotating cube",
+          "flowing ribbon of light",
+          "cluster of orbiting dots"
+        ]
+      },
+      "motion behavior": {
+        "default": "breathing gently \u2014 expanding and contracting",
+        "examples": [
+          "orbiting a central invisible point",
+          "pulsing in response to imagined sound",
+          "slowly morphing between shapes"
+        ]
+      },
+      "background color": {
+        "default": "pure black",
+        "examples": [
+          "deep navy",
+          "very dark grey",
+          "warm dark brown"
+        ]
+      },
+      "color": {
+        "default": "warm amber glow",
+        "examples": [
+          "cool electric blue",
+          "soft white",
+          "muted gold"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles abstract avatar concepts cleanly. Add 'abstract personality avatar seamless loop' on Luma."
+  }
+]

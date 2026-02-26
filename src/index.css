@@ -31,14 +31,14 @@
   }
 
   [data-theme="dark"] {
-    /* Night Mode */
-    --bg-primary: #0F1115;
-    --bg-secondary: #1A1D24;
-    --bg-card: #15171C;
+    /* Night Mode - Dark blue/purple tones */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e1b4b;
+    --bg-card: #1e293b;
     --text-primary: #F9FAFB;
     --text-secondary: #A1A5AD;
     --text-muted: #6B7280;
-    --border-color: #2D3139;
+    --border-color: #312e81;
     --shadow-soft: 0 4px 20px rgba(0,0,0,0.4);
     --shadow-card: 8px 8px 16px rgba(0,0,0,0.5), -8px -8px 16px rgba(255,255,255,0.03);
     --shadow-inset: inset 4px 4px 8px rgba(0,0,0,0.5), inset -4px -4px 8px rgba(255,255,255,0.03);

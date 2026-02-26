@@ -13,7 +13,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 lg:py-32">
+    <section className="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
