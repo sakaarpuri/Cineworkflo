@@ -1,4 +1,6 @@
-import { Check } from 'lucide-react'
+import { useState } from 'react'
+import { Check, Loader2 } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 
 const plans = [
   {
@@ -6,6 +8,7 @@ const plans = [
     price: '$0',
     description: 'Get started with AI video prompts',
     features: [
+      '30 AI generations per month',
       '25 core prompts',
       'Basic search',
       'Copy to clipboard',
@@ -15,25 +18,73 @@ const plans = [
     popular: false
   },
   {
-    name: 'Pro',
-    price: '$49',
-    priceNote: 'one-time payment',
-    description: 'Complete toolkit for serious creators',
+    name: 'Pro Monthly',
+    price: '$4.99',
+    priceNote: '/month',
+    description: 'Full access for active creators',
     features: [
+      'Unlimited AI generations',
       '150+ professional prompts',
+      'Multiple style interpretations',
       'Shot to Prompt AI tool',
       'Advanced search & filters',
-      'Workflow templates',
-      'Monthly new prompts',
+      'New prompts monthly',
       'Priority support',
-      'Lifetime access'
+      'Cancel anytime'
     ],
-    cta: 'Get Pro Access',
+    cta: 'Start Monthly Plan',
+    popular: false
+  },
+  {
+    name: 'Pro Yearly',
+    price: '$49',
+    priceNote: '/year',
+    description: 'Best value for committed creators',
+    features: [
+      'Everything in Pro Monthly',
+      '1 year access',
+      'All future updates',
+      'Workflow templates (Coming Soon)',
+      '30-day money-back guarantee'
+    ],
+    cta: 'Get Yearly Access',
     popular: true
   }
 ]
 
-export default function Pricing() {
+export default function Pricing({ onAuthClick }) {
+  const { user } = useAuth()
+  const [loading, setLoading] = useState(false)
+
+  const handleCheckout = async (planType) => {
+    if (!user) {
+      onAuthClick?.()
+      return
+    }
+
+    setLoading(true)
+    try {
+      const response = await fetch('/.netlify/functions/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: user.email,
+          plan: planType
+        })
+      })
+
+      const data = await response.json()
+      if (data.url) {
+        window.location.href = data.url
+      }
+    } catch (err) {
+      console.error('Checkout error:', err)
+      alert('Failed to start checkout. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <section 
       className="py-16 transition-colors relative overflow-hidden"
@@ -59,7 +110,7 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {plans.map((plan) => (
             <div 
               key={plan.name}
@@ -129,14 +180,18 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <button 
-                className="w-full py-3 rounded-xl font-medium transition-all"
+              <button
+                onClick={() => handleCheckout(plan.name.includes('Monthly') ? 'monthly' : 'yearly')}
+                disabled={loading}
+                className="w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
                 style={{
                   background: plan.popular ? '#fff' : 'var(--accent-blue)',
                   color: plan.popular ? 'var(--accent-blue)' : '#fff',
-                  boxShadow: plan.popular ? '0 4px 14px rgba(0,0,0,0.2)' : '0 4px 14px rgba(37,99,235,0.25)'
+                  boxShadow: plan.popular ? '0 4px 14px rgba(0,0,0,0.2)' : '0 4px 14px rgba(37,99,235,0.25)',
+                  opacity: loading ? 0.7 : 1
                 }}
               >
+                {loading && <Loader2 className="h-5 w-5 animate-spin" />}
                 {plan.cta}
               </button>
             </div>

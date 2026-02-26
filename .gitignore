@@ -3,3 +3,6 @@
 .env
 deploy*.zip
 package-lock.json
+
+# Local Netlify folder
+.netlify

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Sparkles, Copy, Check, Wand2 } from 'lucide-react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Sparkles, Copy, Check, Wand2, Zap, Palette, Camera, Film, Lock, Plus } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const MOODS = ["Epic", "Dramatic", "Thought-Provoking", "Whimsical", "Serene", "Mysterious", "Energetic", "Eerie", "Calm", "Surreal", "Hopeful", "Melancholic", "Tense", "Playful", "Dreamlike"];
 const MOOD_COLORS = {
@@ -19,7 +20,90 @@ const MOOD_COLORS = {
   "Playful": "#FFEB3B",
   "Dreamlike": "#9575CD"
 };
-const USES = ["Storytelling", "Short-form Content", "Product Showcase", "Concept Art", "Music Visualizer", "Education", "Explainer Video", "Social Media", "Brand Ad", "Short Film", "Background", "Music Video", "Documentary", "Experimental", "Gaming Cinematic"];
+// Smart prompt generator - analyzes input and creates professional prompts
+const generateSmartPrompt = (idea, mood, useCase) => {
+  const lowerIdea = idea.toLowerCase();
+  
+  // Detect subject categories
+  const hasVehicle = /car|truck|bike|motorcycle|bus|train|plane|vehicle|driving|riding/i.test(lowerIdea);
+  const hasNature = /tree|plant|flower|forest|mountain|ocean|water|sky|cloud|animal|bird|insect|bug|ant|leaf|grass|sunset|sunrise/i.test(lowerIdea);
+  const hasPerson = /person|people|man|woman|child|hand|face|chef|dancer|runner|walking|running|jumping|sitting|standing/i.test(lowerIdea);
+  const hasUrban = /city|street|building|neon|road|highway|flyover|bridge|alley|subway|metro|urban|downtown/i.test(lowerIdea);
+  const hasObject = /product|object|item|food|drink|coffee|book|phone|watch|jewelry/i.test(lowerIdea);
+  
+  // Mood modifiers
+  const moodConfig = {
+    "Epic": { lighting: "dramatic volumetric lighting with god rays", camera: "sweeping aerial drone shot descending to", lens: "wide angle", style: "cinematic, high contrast" },
+    "Dramatic": { lighting: "chiaroscuro lighting with deep shadows", camera: "slow push-in on", lens: "medium telephoto", style: "film noir inspired" },
+    "Thought-Provoking": { lighting: "soft diffused window light", camera: "contemplative static shot of", lens: "50mm", style: "documentary realism" },
+    "Whimsical": { lighting: "bright pastel tones with lens flare", camera: "playful handheld orbit around", lens: "wide angle", style: "fantasy color grading" },
+    "Serene": { lighting: "soft golden hour glow", camera: "slow glide revealing", lens: "85mm portrait", style: "peaceful, muted tones" },
+    "Mysterious": { lighting: "low-key lighting with fog", camera: "slow tracking shot through shadows toward", lens: "35mm", style: "desaturated, high contrast" },
+    "Energetic": { lighting: "punchy high-key with rim lights", camera: "dynamic gimbal chase following", lens: "24mm wide", style: "vibrant saturated colors" },
+    "Eerie": { lighting: "sickly green-blue moonlight", camera: "low angle creeping toward", lens: "wide angle distorted", style: "horror atmosphere" },
+    "Calm": { lighting: "soft overcast daylight", camera: "gentle static observation of", lens: "85mm", style: "naturalistic, minimal grade" },
+    "Surreal": { lighting: "impossible multi-colored light sources", camera: "dreamlike floating through", lens: "fisheye distortion", style: "hyper-stylized, impossible physics" },
+    "Hopeful": { lighting: "warm sunrise rim lighting", camera: "slow crane up from", lens: "50mm", style: "uplifting bright grade" },
+    "Melancholic": { lighting: "cool blue hour with soft shadows", camera: "lingering static on", lens: "135mm compressed", style: "desaturated, film grain" },
+    "Tense": { lighting: "harsh overhead creating eye shadows", camera: "unsteady handheld circling", lens: "35mm", style: "gritty documentary" },
+    "Playful": { lighting: "bouncing colorful practical lights", camera: "quick whip pans between", lens: "28mm", style: "pop colors, high saturation" },
+    "Dreamlike": { lighting: "ethereal soft glow with bloom", camera: "smooth floating motion toward", lens: "85mm anamorphic", style: "milky highlights, pastel shadows" }
+  };
+  
+  const moodSettings = mood && moodConfig[mood] ? moodConfig[mood] : moodConfig["Serene"];
+  
+  // Subject-specific templates
+  let subjectPrompt = "";
+  
+  if (hasVehicle) {
+    subjectPrompt = `${moodSettings.camera} a ${idea}, ${moodSettings.lighting} reflecting off chrome and glass. ${moodSettings.lens} lens capturing motion blur in the background, wheels spinning with subtle speed. ${moodSettings.style}, shallow depth isolating the vehicle from environment.`;
+  } else if (hasNature && (lowerIdea.includes("ant") || lowerIdea.includes("insect") || lowerIdea.includes("bug"))) {
+    subjectPrompt = `Macro extreme close-up, ${moodSettings.lighting} illuminating tiny details. ${idea} with shallow depth of field, background dissolving into creamy bokeh. Microscopic textures visible, morning dew on surfaces. ${moodSettings.style}, 100mm macro lens, intimate perspective.`;
+  } else if (hasNature) {
+    subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} filtering through. Organic textures in sharp focus, natural movement in breeze. ${moodSettings.lens} lens capturing environmental depth. ${moodSettings.style}, earthy color palette.`;
+  } else if (hasPerson && (lowerIdea.includes("hand") || lowerIdea.includes("face") || lowerIdea.includes("eye"))) {
+    subjectPrompt = `Intimate extreme close-up, ${moodSettings.lighting} sculpting features. ${idea} with skin texture visible, shallow depth isolating from background. ${moodSettings.lens} lens, cinematic focus pull. ${moodSettings.style}, emotional intensity.`;
+  } else if (hasPerson) {
+    subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} defining form. Authentic movement captured in real-time, subtle breathing and weight shift. ${moodSettings.lens} portrait lens. ${moodSettings.style}, natural skin tones.`;
+  } else if (hasUrban) {
+    subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} casting long shadows. Architectural geometry framing the shot, atmospheric haze adding depth. ${moodSettings.lens} perspective. ${moodSettings.style}, urban texture and grit.`;
+  } else if (hasObject) {
+    subjectPrompt = `Studio product shot, ${moodSettings.lighting} creating dimension. ${idea} rotating slowly on invisible axis, material properties catching light. ${moodSettings.lens} lens with controlled depth. ${moodSettings.style}, commercial quality.`;
+  } else {
+    subjectPrompt = `${moodSettings.camera} ${idea}, ${moodSettings.lighting} revealing form. Smooth camera motion exploring the subject from multiple angles. ${moodSettings.lens} lens. ${moodSettings.style}, professional production quality.`;
+  }
+  
+  // Use case modifiers
+  const useModifiers = {
+    "Storytelling": "Narrative pacing with motivated camera movement, emotional beats.",
+    "Short-form Content": "Fast cuts implied, vertical composition friendly, punchy visuals.",
+    "Product Showcase": "Clean backgrounds, hero lighting, feature-highlighting angles.",
+    "Concept Art": " painterly composition, rule of thirds, atmospheric depth, illustration quality.",
+    "Music Visualizer": "Rhythmic motion implied, audio-reactive lighting, synesthetic colors.",
+    "Education": "Clear visibility, slow reveals, infographic-friendly composition.",
+    "Explainer Video": "Clean minimal environment, focused attention, diagrammatic clarity.",
+    "Social Media": "Thumb-stopping composition, bold colors, immediate visual hook.",
+    "Brand Ad": "Premium polish, aspirational framing, logo-safe negative space.",
+    "Short Film": "Cinematic aspect ratio implied, motivated lighting, narrative subtext.",
+    "Background": "Clean looping potential, minimal focal point, ambient motion only.",
+    "Music Video": "Performance energy, stylized treatment, cut-friendly coverage.",
+    "Documentary": "Observational camera, available light, authentic location texture.",
+    "Experimental": "Rule-breaking composition, unconventional framing, artistic abstraction.",
+    "Gaming Cinematic": "Third-person camera distance, environmental storytelling, UI-safe zones.",
+    "Title Sequence": "Negative space for typography, graphic composition, readable contrast.",
+    "Logo Reveal": "Centered focus, symmetrical framing, reveal-friendly camera path.",
+    "B-Roll": "Cutaway-friendly, generic coverage, versatile framing options.",
+    "Spec Ad": "High production value, portfolio-worthy execution, attention to craft."
+  };
+  
+  if (useCase && useModifiers[useCase]) {
+    subjectPrompt += " " + useModifiers[useCase];
+  }
+  
+  return subjectPrompt + " 4K resolution, professional color grading.";
+};
+
+const USES = ["Storytelling", "Short-form Content", "Product Showcase", "Concept Art", "Music Visualizer", "Education", "Explainer Video", "Social Media", "Brand Ad", "Short Film", "Background", "Music Video", "Documentary", "Experimental", "Gaming Cinematic", "Title Sequence", "Logo Reveal", "B-Roll", "Spec Ad", "Visual Essay", "Lyric Video", "Podcast Visuals", "Event Promo", "Recruitment Video"];
 const USE_COLORS = {
   "Storytelling": "#3B82F6",
   "Short-form Content": "#F59E0B",
@@ -35,51 +119,145 @@ const USE_COLORS = {
   "Music Video": "#E91E63",
   "Documentary": "#795548",
   "Experimental": "#00BCD4",
-  "Gaming Cinematic": "#424242"
+  "Gaming Cinematic": "#424242",
+  "Title Sequence": "#9C27B0",
+  "Logo Reveal": "#FF5722",
+  "B-Roll": "#607D8B",
+  "Spec Ad": "#795548",
+  "Visual Essay": "#3F51B5",
+  "Lyric Video": "#E91E63",
+  "Podcast Visuals": "#009688",
+  "Event Promo": "#FF9800",
+  "Recruitment Video": "#4CAF50"
 };
 
-export default function PromptEnhancer() {
+// Usage tracking helpers
+const getUsageData = () => {
+  const data = localStorage.getItem('promptEnhancerUsage');
+  if (!data) return { count: 0, lastReset: new Date().toISOString(), isPro: false };
+  return JSON.parse(data);
+};
+
+const saveUsageData = (data) => {
+  localStorage.setItem('promptEnhancerUsage', JSON.stringify(data));
+};
+
+const shouldResetMonthly = (lastReset) => {
+  const last = new Date(lastReset);
+  const now = new Date();
+  return last.getMonth() !== now.getMonth() || last.getFullYear() !== now.getFullYear();
+};
+
+const INTERPRETATIONS = [
+  { key: 'cinematic', label: 'Cinematic', icon: Film, color: '#8B5CF6' },
+  { key: 'stylized', label: 'Stylized', icon: Palette, color: '#EC4899' },
+  { key: 'photorealistic', label: 'Photoreal', icon: Camera, color: '#10B981' },
+  { key: 'animated', label: 'Animated', icon: Zap, color: '#F59E0B' }
+];
+
+const PRO_DETAILS = [
+  { key: 'camera', label: '+ Camera Movement', desc: 'gimbal tracking, handheld, dolly zoom' },
+  { key: 'lens', label: '+ Lens Type', desc: '24mm wide, 50mm portrait, 85mm telephoto' },
+  { key: 'depth', label: '+ Depth of Field', desc: 'shallow bokeh, deep focus, f/1.4-f/22' },
+  { key: 'lighting', label: '+ Lighting Setup', desc: 'key light, rim light, softbox, golden hour' }
+];
+
+export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
   const [mood, setMood] = useState("");
   const [useCase, setUseCase] = useState("");
+  const [skillLevel, setSkillLevel] = useState('beginner'); // 'beginner' | 'pro'
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
+  const [usage, setUsage] = useState({ count: 0, isPro: false });
+  const [addedDetails, setAddedDetails] = useState([]);
+  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "" });
+  
+  const { user, isPro } = useAuth();
 
-  const canSubmit = idea.trim().length > 3 && !loading;
+  // Load usage on mount
+  useEffect(() => {
+    const data = getUsageData();
+    if (shouldResetMonthly(data.lastReset)) {
+      const resetData = { count: 0, lastReset: new Date().toISOString(), isPro: isPro };
+      saveUsageData(resetData);
+      setUsage(resetData);
+    } else {
+      setUsage({ ...data, isPro });
+    }
+  }, [isPro]);
 
-  const handleEnhance = async () => {
-    if (!canSubmit) return;
+  const remainingFree = Math.max(0, 30 - usage.count);
+  const isLimitReached = !isPro && remainingFree === 0;
+  const requiresAuth = !user && isLimitReached;
+  const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
+
+  const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
+    if (!canSubmit && !interpretationStyle) return;
     setLoading(true);
-    setResult(null);
+    // Only clear result on first generation, keep it visible during auto-updates
+    if (!isAutoUpdate) {
+      setResult(null);
+    }
     setCopied(false);
 
+    // Track usage for free users
+    if (!isPro && !interpretationStyle) {
+      const newData = { ...usage, count: usage.count + 1 };
+      saveUsageData(newData);
+      setUsage(newData);
+    }
+
     try {
+      const promptPayload = interpretationStyle 
+        ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel }
+        : { idea, mood, useCase, skillLevel };
+
       const response = await fetch('/.netlify/functions/enhance-prompt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idea, mood, useCase })
+        body: JSON.stringify(promptPayload)
       });
 
       const data = await response.json();
-      setResult(data.prompt || `Cinematic ${mood || 'wide'} shot of ${idea}, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
+      setResult(data.prompt || generateSmartPrompt(idea, mood, useCase));
       setHasGeneratedOnce(true);
     } catch (err) {
-      // Fallback demo response
-      setResult(`Cinematic ${mood || 'wide'} shot of ${idea}, soft natural lighting, smooth camera movement, ${useCase || 'high-quality'} production, 4K resolution.`);
+      // Fallback with smart prompt generator
+      setResult(generateSmartPrompt(idea, mood, useCase));
     }
     setLoading(false);
+  }, [canSubmit, idea, mood, useCase, isPro]);
+
+  const generateInterpretation = (style) => {
+    handleEnhance(false, style);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && canSubmit) {
+      handleEnhance(false);
+    }
   };
 
   useEffect(() => {
     if (hasGeneratedOnce && canSubmit) {
+      // Only trigger if params actually changed
+      const paramsChanged = 
+        idea !== lastParamsRef.current.idea ||
+        mood !== lastParamsRef.current.mood ||
+        useCase !== lastParamsRef.current.useCase;
+      
+      if (!paramsChanged) return;
+      
       const timeoutId = setTimeout(() => {
-        handleEnhance();
-      }, 500); // Debounce for 500ms
+        handleEnhance(true); // Pass true for auto-update (keeps result visible)
+        lastParamsRef.current = { idea, mood, useCase };
+      }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [mood, useCase, idea, hasGeneratedOnce, canSubmit]); // Depend on relevant states
+  }, [mood, useCase, idea, hasGeneratedOnce, canSubmit, handleEnhance]);
 
 
   const handleCopy = () => {
@@ -137,6 +315,45 @@ export default function PromptEnhancer() {
           >
             Describe your idea. <span style={{ color: 'var(--accent-blue)' }}>We'll write the prompt.</span>
           </h2>
+          
+          {/* Usage Counter for Free Users */}
+          {!isPro && (
+            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
+              style={{ 
+                background: remainingFree <= 5 ? 'var(--accent-red)15' : 'var(--bg-card)',
+                border: `1px solid ${remainingFree <= 5 ? 'var(--accent-red)30' : 'var(--border-color)'}`,
+                color: remainingFree <= 5 ? 'var(--accent-red)' : 'var(--text-muted)'
+              }}
+            >
+              <Zap className="h-3 w-3" />
+              {remainingFree > 0 ? (
+                <span>{remainingFree} free prompts remaining this month</span>
+              ) : (
+                <span>
+                  {!user ? 'Sign in to continue' : 'Free limit reached — '}
+                  <button 
+                    onClick={onAuthClick}
+                    style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}
+                  >
+                    {!user ? 'Sign in' : 'Upgrade to Pro'}
+                  </button>
+                </span>
+              )}
+            </div>
+          )}
+          
+          {/* Pro Badge */}
+          {isPro && (
+            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
+              style={{ 
+                background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)',
+                color: '#fff'
+              }}
+            >
+              <Zap className="h-3 w-3" />
+              <span>Pro — Unlimited prompts + Interpretations</span>
+            </div>
+          )}
         </div>
 
         {/* Wide Compact Card */}
@@ -155,6 +372,7 @@ export default function PromptEnhancer() {
               <input
                 value={idea}
                 onChange={(e) => setIdea(e.target.value)}
+                onKeyDown={handleKeyDown}
                 placeholder="e.g. a car driving through a neon-lit city at night..."
                 className="w-full px-4 py-3 rounded-xl outline-none transition-all"
                 style={{
@@ -167,7 +385,7 @@ export default function PromptEnhancer() {
 
             {/* Enhance Button */}
             <button
-              onClick={handleEnhance}
+              onClick={() => handleEnhance(false)}
               disabled={!canSubmit}
               className="px-6 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               style={{
@@ -188,14 +406,44 @@ export default function PromptEnhancer() {
             </button>
           </div>
 
-          {/* Options Row - Compact */}
-          <div className="flex flex-wrap items-center gap-4 text-sm">
-            <span style={{ color: 'var(--text-muted)' }}>Refine:</span>
-            
+          {/* Options - Stacked for better chip wrapping */}
+          <div className="space-y-3 text-sm">
+            {/* Skill Level Toggle */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Level</span>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setSkillLevel('beginner')}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+                  style={{
+                    background: skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--bg-primary)',
+                    color: skillLevel === 'beginner' ? '#fff' : 'var(--text-secondary)',
+                    border: `1px solid ${skillLevel === 'beginner' ? 'var(--accent-blue)' : 'var(--border-color)'}`
+                  }}
+                >
+                  Beginner
+                </button>
+                <button
+                  onClick={() => setSkillLevel('pro')}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+                  style={{
+                    background: skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--bg-primary)',
+                    color: skillLevel === 'pro' ? '#fff' : 'var(--text-secondary)',
+                    border: `1px solid ${skillLevel === 'pro' ? 'var(--accent-purple)' : 'var(--border-color)'}`
+                  }}
+                >
+                  Pro
+                </button>
+              </div>
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
+              </span>
+            </div>
+
             {/* Mood */}
-            <div className="flex flex-col items-start gap-1.5 min-w-0 pr-4">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs flex-shrink-0">Mood</span>
-              <div className="flex flex-wrap gap-1.5 overflow-x-auto custom-scroll pr-2">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Mood</span>
+              <div className="flex flex-wrap gap-1.5">
                 {MOODS.map(m => (
                   <Chip
                     key={m}
@@ -209,9 +457,9 @@ export default function PromptEnhancer() {
             </div>
 
             {/* Use Case */}
-            <div className="flex flex-col items-start gap-1.5 min-w-0">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs flex-shrink-0">Use</span>
-              <div className="flex flex-wrap gap-1.5 overflow-x-auto custom-scroll pr-2">
+            <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Use</span>
+              <div className="flex flex-wrap gap-1.5">
                 {USES.map(u => (
                   <Chip
                     key={u}
@@ -223,50 +471,191 @@ export default function PromptEnhancer() {
                 ))}
               </div>
             </div>
-
-            {/* Removed Tool Selection */}
-
           </div>
 
           {/* Removed Tool-specific info */}
 
         </div>
 
-        {/* Result - Compact */}
+        {/* Result - Copyable Text Field */}
         {result && (
           <div 
-            className="mt-4 p-4 rounded-2xl flex items-start gap-4"
+            className="mt-6 p-5 rounded-2xl"
             style={{
               background: 'var(--bg-secondary)',
               boxShadow: 'var(--shadow-card)',
               border: '1px solid var(--accent-green)40'
             }}
           >
-            <div 
-              className="text-xs font-bold flex items-center gap-1 flex-shrink-0"
-              style={{ color: 'var(--accent-green)' }}
-            >
-              <Check className="h-3 w-3" />
-              RESULT
+            <div className="flex items-center justify-between mb-3">
+              <div 
+                className="text-xs font-bold flex items-center gap-1.5"
+                style={{ color: 'var(--accent-green)' }}
+              >
+                <Check className="h-4 w-4" />
+                YOUR PROMPT
+              </div>
+              <button
+                onClick={handleCopy}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                style={{
+                  background: copied ? 'var(--accent-green)' : 'var(--bg-primary)',
+                  color: copied ? '#fff' : 'var(--text-secondary)',
+                  border: '1px solid var(--border-color)',
+                  boxShadow: copied ? '0 2px 8px var(--accent-green)40' : 'none'
+                }}
+              >
+                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                {copied ? 'Copied!' : 'Copy Prompt'}
+              </button>
             </div>
-            <p 
-              className="flex-1 text-sm leading-relaxed italic"
-              style={{ color: 'var(--text-primary)', fontFamily: 'Georgia, serif' }}
-            >
-              "{result}"
-            </p>
-            <button
-              onClick={handleCopy}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex-shrink-0"
+            <div
+              className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
               style={{
-                background: copied ? 'var(--accent-green)' : 'var(--bg-primary)',
-                color: copied ? '#fff' : 'var(--text-secondary)',
-                border: '1px solid var(--border-color)'
+                background: 'var(--bg-primary)',
+                border: '2px solid var(--border-color)',
+                color: 'var(--text-primary)',
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                minHeight: '100px'
+              }}
+              onClick={(e) => {
+                const range = document.createRange();
+                range.selectNodeContents(e.currentTarget);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
               }}
             >
-              {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-              {copied ? 'Copied' : 'Copy'}
-            </button>
+              {result}
+            </div>
+            <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+              Click text to select all, or use the Copy button
+            </p>
+            
+            {/* Beginner: Add Pro Details */}
+            {skillLevel === 'beginner' && (
+              <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
+                  Want more control? Add pro details:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {PRO_DETAILS.map((detail) => (
+                    <button
+                      key={detail.key}
+                      onClick={() => {
+                        if (!addedDetails.includes(detail.key)) {
+                          setAddedDetails([...addedDetails, detail.key]);
+                          // Append detail to result
+                          const detailText = {
+                            camera: ' Smooth gimbal tracking shot.',
+                            lens: ' Shot on 50mm lens, shallow depth of field.',
+                            depth: ' f/2.8 aperture, creamy bokeh background.',
+                            lighting: ' Three-point lighting with soft key light.'
+                          };
+                          setResult(result + detailText[detail.key]);
+                        }
+                      }}
+                      disabled={addedDetails.includes(detail.key)}
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all"
+                      style={{
+                        background: addedDetails.includes(detail.key) ? 'var(--accent-green)' : 'var(--bg-primary)',
+                        border: `2px solid ${addedDetails.includes(detail.key) ? 'var(--accent-green)' : 'var(--border-color)'}`,
+                        color: addedDetails.includes(detail.key) ? '#fff' : 'var(--text-secondary)',
+                        opacity: addedDetails.includes(detail.key) ? 1 : 0.8
+                      }}
+                    >
+                      {addedDetails.includes(detail.key) ? <Check className="h-3 w-3" /> : '+'}
+                      {detail.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                  Click to append technical specs to your prompt
+                </p>
+              </div>
+            )}
+            
+            {/* Pro Interpretations */}
+            {isPro && (
+              <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
+                <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
+                  Generate alternative interpretations:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {INTERPRETATIONS.map((interp) => {
+                    const Icon = interp.icon;
+                    return (
+                      <button
+                        key={interp.key}
+                        onClick={() => generateInterpretation(interp.key)}
+                        disabled={loading}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all"
+                        style={{
+                          background: 'var(--bg-primary)',
+                          border: `2px solid ${interp.color}40`,
+                          color: interp.color
+                        }}
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                        {interp.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            
+            {/* Free Upgrade Prompt */}
+            {!isPro && (
+              <div className="mt-5 pt-4 border-t text-center" style={{ borderColor: 'var(--border-color)' }}>
+                <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
+                  {!user ? 'Sign in to save progress and unlock Pro features:' : 'Want more options? Upgrade to Pro for:'}
+                </p>
+                <div className="flex flex-wrap justify-center gap-2 mb-3">
+                  {INTERPRETATIONS.map((interp) => {
+                    const Icon = interp.icon;
+                    return (
+                      <span
+                        key={interp.key}
+                        className="flex items-center gap-1 px-2 py-1 rounded text-xs opacity-50"
+                        style={{
+                          background: 'var(--bg-primary)',
+                          color: interp.color
+                        }}
+                      >
+                        <Icon className="h-3 w-3" />
+                        {interp.label}
+                      </span>
+                    );
+                  })}
+                </div>
+                {!user ? (
+                  <button
+                    onClick={onAuthClick}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all"
+                    style={{
+                      background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                      color: '#fff'
+                    }}
+                  >
+                    <Lock className="h-3.5 w-3.5" />
+                    Sign In to Continue
+                  </button>
+                ) : (
+                  <a
+                    href="#pricing"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all"
+                    style={{
+                      background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                      color: '#fff'
+                    }}
+                  >
+                    <Zap className="h-3.5 w-3.5" />
+                    Unlock Pro Features
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

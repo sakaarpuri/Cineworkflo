@@ -22,28 +22,63 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { email } = JSON.parse(event.body);
+    const { email, plan } = JSON.parse(event.body);
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'CineWorkflo Pro',
-              description: 'Lifetime access to 150+ AI video prompts and Shot-to-Prompt tool'
+    let session;
+
+    if (plan === 'monthly') {
+      // Monthly subscription
+      session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'CineWorkflo Pro Monthly',
+                description: 'Unlimited AI generations + all Pro features'
+              },
+              unit_amount: 499, // $4.99 in cents
+              recurring: { interval: 'month' }
             },
-            unit_amount: 4900 // $49.00 in cents
-          },
-          quantity: 1
+            quantity: 1
+          }
+        ],
+        mode: 'subscription',
+        success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=monthly`,
+        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/#pricing`,
+        customer_email: email,
+        metadata: {
+          plan: 'monthly'
         }
-      ],
-      mode: 'payment',
-      success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/`,
-      customer_email: email
-    });
+      });
+    } else if (plan === 'yearly') {
+      // Yearly subscription
+      session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'CineWorkflo Pro Yearly',
+                description: '1 year unlimited access to 150+ AI video prompts and all Pro features'
+              },
+              unit_amount: 4900, // $49.00 in cents
+              recurring: { interval: 'year' }
+            },
+            quantity: 1
+          }
+        ],
+        mode: 'subscription',
+        success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=yearly`,
+        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/#pricing`,
+        customer_email: email,
+        metadata: {
+          plan: 'yearly'
+        }
+      });
+    }
 
     return {
       statusCode: 200,

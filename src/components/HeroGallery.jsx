@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Sparkles, Copy, Check, Image as ImageIcon, X, Eye } from 'lucide-react'
+import { Sparkles, Copy, Check, Image as ImageIcon, X, Eye, ArrowRight } from 'lucide-react'
 
 // New prompts from JSON database
 const sampleShots = [
@@ -63,31 +63,12 @@ const CATEGORY_COLORS = {
 }
 
 export default function HeroGallery() {
-  const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
   const [copiedId, setCopiedId] = useState(null)
-  const [activeFilter, setActiveFilter] = useState('All')
-  const [selectedShot, setSelectedShot] = useState(null)
-
-  const categories = ['All', 'Brand & Product Ads', 'Social & Short-Form Content', 'Cinematic & Storytelling', 'World & Environment Building', 'Abstract & Motion Art', 'AI Avatar & Character']
-
-  const filteredShots = activeFilter === 'All' 
-    ? sampleShots 
-    : sampleShots.filter(shot => shot.category === activeFilter)
 
   const copyPrompt = (prompt, id) => {
     navigator.clipboard.writeText(prompt)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
-  }
-
-  const openModal = (shot) => setSelectedShot(shot)
-  const closeModal = () => setSelectedShot(null)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setEmail('')
   }
 
   return (
@@ -119,151 +100,103 @@ export default function HeroGallery() {
             Get consistent, commercial-quality results every time.
           </p>
 
-          {/* Category Filters - Colorful Neumorphic Toggles */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {categories.map((category) => {
-              const categoryColor = category === 'All' ? '#6366F1' : CATEGORY_COLORS[category]
-              const isActive = activeFilter === category
-              return (
-                <button
-                  key={category}
-                  onClick={() => setActiveFilter(category)}
-                  className="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                  style={{
-                    background: isActive 
-                      ? `linear-gradient(145deg, ${categoryColor}, ${categoryColor}DD)` 
-                      : 'var(--bg-card)',
-                    color: isActive ? '#fff' : 'var(--text-secondary)',
-                    border: `2px solid ${isActive ? categoryColor + '50' : 'var(--border-color)'}`,
-                    boxShadow: isActive 
-                      ? `inset 3px 3px 6px ${categoryColor}60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px ${categoryColor}40`
-                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
-                    transform: isActive ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
-                  }}
-                >
-                  {category}
-                </button>
-              )
-            })}
+          {/* Explore Prompt Vault Button */}
+          <div className="mb-8">
+            <a
+              href="#prompts"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all"
+              style={{
+                background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                color: '#fff',
+                boxShadow: '6px 6px 12px rgba(37,99,235,0.25), -6px -6px 12px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.2)',
+                border: '1px solid rgba(255,255,255,0.1)'
+              }}
+            >
+              Explore the Prompt Vault
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
-        {/* Prompt Gallery */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredShots.map((shot) => (
+        {/* Prompt Gallery - PromptVault Style Cards with Copy */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {sampleShots.map((shot) => (
             <div 
               key={shot.id}
-              className="group rounded-2xl overflow-hidden transition-all hover:-translate-y-1 cursor-pointer"
-              style={{ 
+              className="p-5 rounded-2xl transition-all hover:-translate-y-1 group"
+              style={{
                 background: 'var(--bg-card)',
                 boxShadow: 'var(--shadow-card)',
                 border: '1px solid var(--border-color)'
               }}
-              onClick={() => openModal(shot)}
             >
-              {/* Image Placeholder */}
-              <div className="h-48 relative overflow-hidden" style={{ background: `linear-gradient(135deg, ${CATEGORY_COLORS[shot.category]}20, ${CATEGORY_COLORS[shot.category]}05)` }}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <ImageIcon className="h-12 w-12 opacity-20" style={{ color: CATEGORY_COLORS[shot.category] }} />
-                </div>
-                <div className="absolute top-3 left-3">
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div>
                   <span 
-                    className="px-2 py-1 rounded-full text-xs font-semibold"
-                    style={{ background: CATEGORY_COLORS[shot.category] + '20', color: CATEGORY_COLORS[shot.category] }}
+                    className="text-xs font-bold uppercase tracking-wide"
+                    style={{ color: CATEGORY_COLORS[shot.category] || '#3B82F6' }}
                   >
                     {shot.category}
                   </span>
-                </div>
-                <div className="absolute top-3 right-3">
-                  <span 
-                    className="px-2 py-1 rounded-full text-xs font-semibold"
-                    style={{ background: 'var(--bg-primary)', color: 'var(--text-secondary)' }}
+                  <h3 
+                    className="font-bold mt-1"
+                    style={{ color: 'var(--text-primary)' }}
                   >
-                    {shot.tool}
-                  </span>
+                    {shot.title}
+                  </h3>
                 </div>
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <Eye className="h-8 w-8 text-white" />
-                </div>
+                <span 
+                  className="text-xs px-2 py-1 rounded"
+                  style={{ 
+                    background: 'var(--bg-primary)',
+                    color: 'var(--text-muted)'
+                  }}
+                >
+                  {shot.tool}
+                </span>
               </div>
 
-              {/* Content */}
-              <div className="p-5">
-                <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--text-primary)' }}>{shot.title}</h3>
-                <p className="text-sm line-clamp-2 mb-3" style={{ color: 'var(--text-secondary)' }}>
-                  {shot.prompt}
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {shot.tags.map((tag) => (
+              <p 
+                className="text-sm mb-4 font-mono line-clamp-3"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                {shot.prompt}
+              </p>
+
+              <div className="flex items-center justify-between">
+                <div className="flex gap-1.5">
+                  {shot.tags.slice(0, 2).map(tag => (
                     <span 
                       key={tag}
-                      className="px-2 py-1 rounded text-xs"
-                      style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}
+                      className="text-xs px-2 py-1 rounded"
+                      style={{ 
+                        background: 'var(--bg-primary)',
+                        color: 'var(--text-muted)'
+                      }}
                     >
-                      {tag}
+                      #{tag}
                     </span>
                   ))}
                 </div>
+                <button
+                  onClick={() => copyPrompt(shot.prompt, shot.id)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
+                  style={{
+                    background: copiedId === shot.id ? '#10B981' : 'var(--bg-primary)',
+                    color: copiedId === shot.id ? '#fff' : 'var(--text-secondary)',
+                    border: '1px solid var(--border-color)'
+                  }}
+                >
+                  {copiedId === shot.id ? (
+                    <><Check className="h-3.5 w-3.5" /> Copied</>
+                  ) : (
+                    <><Copy className="h-3.5 w-3.5" /> Copy</>
+                  )}
+                </button>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Prompt Modal */}
-        {selectedShot && (
-          <div 
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)' }}
-            onClick={closeModal}
-          >
-            <div 
-              className="max-w-2xl w-full rounded-2xl p-6 relative"
-              style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button 
-                onClick={closeModal}
-                className="absolute top-4 right-4 p-2 rounded-full transition-colors"
-                style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}
-              >
-                <X className="h-5 w-5" />
-              </button>
-
-              <div className="mb-4">
-                <span 
-                  className="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2"
-                  style={{ background: CATEGORY_COLORS[selectedShot.category] + '20', color: CATEGORY_COLORS[selectedShot.category] }}
-                >
-                  {selectedShot.category}
-                </span>
-                <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{selectedShot.title}</h2>
-                <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Best for: {selectedShot.tool}</p>
-              </div>
-
-              <div 
-                className="p-4 rounded-xl mb-4 font-mono text-sm leading-relaxed"
-                style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
-              >
-                {selectedShot.prompt}
-              </div>
-
-              <button
-                onClick={() => copyPrompt(selectedShot.prompt, selectedShot.id)}
-                className="w-full py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
-                style={{ 
-                  background: copiedId === selectedShot.id ? '#10B981' : 'var(--accent-blue)',
-                  color: '#fff'
-                }}
-              >
-                {copiedId === selectedShot.id ? (
-                  <><Check className="h-5 w-5" /> Copied!</>
-                ) : (
-                  <><Copy className="h-5 w-5" /> Copy Prompt</>
-                )}
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )

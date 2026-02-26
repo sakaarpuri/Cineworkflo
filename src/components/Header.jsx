@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Film, Sun, Moon } from 'lucide-react'
+import { Menu, X, Film, Sun, Moon, User, LogOut } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
-export default function Header() {
+export default function Header({ onAuthClick }) {
+  const { user, signOut, isPro } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
@@ -73,7 +75,7 @@ export default function Header() {
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg transition-all"
-              style={{ 
+              style={{
                 background: 'var(--bg-primary)',
                 border: '1px solid var(--border-color)'
               }}
@@ -86,18 +88,58 @@ export default function Header() {
               )}
             </button>
 
-            <a 
-              href="#pricing"
-              className="px-5 py-2 rounded-lg font-semibold transition-all hover:-translate-y-0.5"
-              style={{ 
-                background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
-                color: '#fff',
-                boxShadow: '4px 4px 8px rgba(37,99,235,0.25), -4px -4px 8px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.2)',
-                border: '1px solid rgba(255,255,255,0.1)'
-              }}
-            >
-              Get Pro
-            </a>
+            {/* Auth Buttons */}
+            {user ? (
+              <div className="flex items-center gap-3">
+                {isPro && (
+                  <span
+                    className="px-3 py-1 rounded-full text-xs font-bold"
+                    style={{
+                      background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)',
+                      color: '#fff'
+                    }}
+                  >
+                    PRO
+                  </span>
+                )}
+                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                  {user.email}
+                </span>
+                <button
+                  onClick={signOut}
+                  className="p-2 rounded-lg transition-all"
+                  style={{
+                    background: 'var(--bg-primary)',
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-muted)'
+                  }}
+                >
+                  <LogOut className="h-5 w-5" />
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={onAuthClick}
+                  className="font-medium transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Sign In
+                </button>
+                <a
+                  href="#pricing"
+                  className="px-5 py-2 rounded-lg font-semibold transition-all hover:-translate-y-0.5"
+                  style={{
+                    background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                    color: '#fff',
+                    boxShadow: '4px 4px 8px rgba(37,99,235,0.25), -4px -4px 8px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.2)',
+                    border: '1px solid rgba(255,255,255,0.1)'
+                  }}
+                >
+                  Get Pro
+                </a>
+              </>
+            )}
           </div>
 
           <button 
@@ -151,7 +193,7 @@ export default function Header() {
                 <button
                   onClick={toggleTheme}
                   className="flex items-center gap-2 px-4 py-2 rounded-lg"
-                  style={{ 
+                  style={{
                     background: 'var(--bg-primary)',
                     border: '1px solid var(--border-color)',
                     color: 'var(--text-secondary)'
@@ -160,16 +202,34 @@ export default function Header() {
                   {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                   {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
                 </button>
-                <a 
-                  href="#pricing"
-                  className="px-5 py-2 rounded-lg font-medium text-center flex-1"
-                  style={{ 
-                    background: 'var(--accent-blue)',
-                    color: '#fff'
-                  }}
-                >
-                  Get Pro
-                </a>
+                {user ? (
+                  <div className="flex-1 flex items-center gap-2">
+                    <span className="text-sm truncate" style={{ color: 'var(--text-secondary)' }}>
+                      {user.email}
+                    </span>
+                    <button
+                      onClick={() => { signOut(); setIsOpen(false); }}
+                      className="px-4 py-2 rounded-lg font-medium"
+                      style={{
+                        background: 'var(--accent-red)',
+                        color: '#fff'
+                      }}
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => { onAuthClick(); setIsOpen(false); }}
+                    className="px-5 py-2 rounded-lg font-medium text-center flex-1"
+                    style={{
+                      background: 'var(--accent-blue)',
+                      color: '#fff'
+                    }}
+                  >
+                    Sign In
+                  </button>
+                )}
               </div>
             </nav>
           </div>
