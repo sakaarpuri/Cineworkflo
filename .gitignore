@@ -1,13 +1,1 @@
-dist/
-node_modules/
-.env
-deploy.zip
-deploy_debug.zip
-deploy_simple.zip
-deploy_cachebust.zip
-deploy_fix.zip
-deploy_fix_tools.zip
-deploy_sonnet.zip
-deploy_clean_restore_main.zip
-deploy_prompt_enhancer.zip
-deploy_prompt_enhancer_final.zip
+package-lock.json
