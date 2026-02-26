@@ -18,6 +18,7 @@ const USE_COLORS = {
   "Background": "#10B981",
   "Music Video": "#EC4899"
 };
+const TOOLS = ["Runway", "Kling", "Sora", "Pika", "Luma", "Veo", "Higgsfield"];
 
 const TOOL_INFO = {
   "Runway": "Best for cinematic control and style consistency.",
