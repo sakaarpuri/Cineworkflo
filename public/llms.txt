@@ -1,0 +1,40 @@
+# CineWorkflo - AI Video Prompts for Filmmakers
+
+## Overview
+
+CineWorkflo is a curated library of 150+ professional AI video prompts for Runway Gen-2, Pika Labs, and other AI video generation tools. Created by filmmakers who've worked with Netflix, BBC, and major studios.
+
+## What We Offer
+
+- **150+ Tested Prompts**: Each prompt professionally written and tested for commercial use
+- **Shot-to-Prompt AI**: Upload any image and get an optimized prompt
+- **Smart Search**: Filter by tool (Runway, Pika), style, mood, shot type
+- **One-Click Copy**: Copy prompts instantly to your clipboard
+- **Workflow Templates**: Complete prompt sequences for scenes
+
+## Who It's For
+
+- Filmmakers and video creators
+- Content creators using AI video tools
+- Production companies exploring AI workflows
+- Agencies needing quick video concepts
+
+## Tools Supported
+
+- Runway Gen-2
+- Pika Labs
+- Stable Video Diffusion
+- Other AI video generators
+
+## Pricing
+
+$49 one-time purchase for lifetime access to all prompts + future updates.
+
+## Contact
+
+- Website: https://cineworkflo.com
+- Support: Available via website contact
+
+## Content Policy
+
+All prompts are original, tested content designed for commercial video production. No NSFW or harmful content.

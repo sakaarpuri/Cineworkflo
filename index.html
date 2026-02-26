@@ -24,12 +24,84 @@
     <!-- Canonical -->
     <link rel="canonical" href="https://cineworkflo.com" />
     
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "CineWorkflo",
+      "url": "https://cineworkflo.com",
+      "description": "150+ professional AI video prompts for Runway Gen-2, Pika Labs and AI video tools",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://cineworkflo.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "CineWorkflo AI Video Prompts",
+      "image": "https://cineworkflo.com/favicon.svg",
+      "description": "150+ tested AI video prompts for Runway Gen-2, Pika Labs and other AI video generation tools",
+      "brand": {
+        "@type": "Brand",
+        "name": "CineWorkflo"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "49.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static content for crawlers (replaced by React for real users) -->
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>CineWorkflo — Professional AI Video Prompts for Runway & Pika</h1>
+        <p><strong>150+ tested prompts for AI video generation.</strong> Stop guessing. Copy, paste, create.</p>
+        
+        <h2>What You Get</h2>
+        <ul>
+          <li>150+ professional prompts for Runway Gen-2, Pika Labs, and other AI video tools</li>
+          <li>Shot-to-Prompt AI: Upload any image, get an optimized prompt</li>
+          <li>Smart search and filtering by tool, style, mood, shot type</li>
+          <li>One-click copy to clipboard</li>
+          <li>Workflow templates for complete scenes</li>
+        </ul>
+        
+        <h2>Tools Supported</h2>
+        <ul>
+          <li>Runway Gen-2</li>
+          <li>Pika Labs</li>
+          <li>Stable Video Diffusion</li>
+          <li>Other AI video generators</li>
+        </ul>
+        
+        <h2>Pricing</h2>
+        <p><strong>$49 one-time</strong> — lifetime access to all prompts + future updates.</p>
+        
+        <h2>Who It's For</h2>
+        <p>Filmmakers, content creators, production companies, and agencies using AI video tools.</p>
+        
+        <h2>Additional Resources</h2>
+        <ul>
+          <li><a href="/camera-moves.html">Camera Movement Guide</a> — Classic, dynamic, and modern camera moves</li>
+          <li><a href="/llms.txt">AI Crawler Information</a> — Details for AI systems</li>
+        </ul>
+        
+        <p><em>Created by filmmakers who've worked with Netflix, BBC, and major studios.</em></p>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
