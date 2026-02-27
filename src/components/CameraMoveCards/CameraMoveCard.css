@@ -1,0 +1,341 @@
+/* Camera Move Cards - Shared Styles */
+/* Scope all styles under .camera-move-card to avoid global collisions */
+
+.camera-move-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
+  border: 1.5px solid #E2DDD6;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.camera-move-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+}
+
+/* Badge */
+.camera-move-card__badge-row {
+  padding: 16px 22px 0;
+}
+
+.camera-move-card__badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+.camera-move-card__badge--classic {
+  color: #2563EB;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+}
+
+.camera-move-card__badge--dynamic {
+  color: #BE185D;
+  background: #FDF2F8;
+  border: 1px solid #FBCFE8;
+}
+
+.camera-move-card__badge--ainative {
+  color: #6D28D9;
+  background: #F5F3FF;
+  border: 1px solid #DDD6FE;
+}
+
+/* Title Row */
+.camera-move-card__title-row {
+  padding: 8px 22px 2px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.camera-move-card__name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.03em;
+}
+
+.camera-move-card__tag {
+  font-size: 11px;
+  color: #9CA3AF;
+  font-family: 'DM Mono', monospace;
+}
+
+/* Stage (Animation Container) */
+.camera-move-card__stage {
+  margin: 12px 22px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  border-radius: 16px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid #1a2535;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.camera-move-card__stage--idle {
+  border-color: #2563EB55;
+  box-shadow: 0 0 0 3px #2563EB14;
+}
+
+.camera-move-card__stage--classic {
+  border-color: #2563EB55;
+  box-shadow: 0 0 0 3px #2563EB14;
+}
+
+.camera-move-card__stage--dynamic {
+  border-color: #BE185D55;
+  box-shadow: 0 0 0 3px #BE185D14;
+}
+
+.camera-move-card__stage--ainative {
+  border-color: #6D28D955;
+  box-shadow: 0 0 0 3px #6D28D914;
+}
+
+/* Floor elements */
+.camera-move-card__floor-line {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ffffff08 20%, #ffffff12 50%, #ffffff08 80%, transparent);
+}
+
+.camera-move-card__floor-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, rgba(15,23,42,0.9));
+}
+
+/* View Label */
+.camera-move-card__view-label {
+  position: absolute;
+  top: 11px;
+  right: 14px;
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: #4B6A8A;
+  letter-spacing: 0.1em;
+  z-index: 2;
+}
+
+/* Hover Hint */
+.camera-move-card__hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  background: rgba(15,23,42,0.45);
+  backdrop-filter: blur(2px);
+  border-radius: 15px;
+}
+
+.camera-move-card__hint--hidden {
+  opacity: 0;
+}
+
+.camera-move-card__hint-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.09em;
+  padding: 9px 20px;
+  border-radius: 99px;
+  box-shadow: 0 0 0 5px rgba(37,99,235,0.15), 0 4px 18px rgba(37,99,235,0.4);
+}
+
+.camera-move-card__hint-pill--classic {
+  background: #2563EB;
+  color: #fff;
+}
+
+.camera-move-card__hint-pill--dynamic {
+  background: #BE185D;
+  color: #fff;
+}
+
+.camera-move-card__hint-pill--ainative {
+  background: #6D28D9;
+  color: #fff;
+}
+
+.camera-move-card__play-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent #fff;
+}
+
+/* Direction Label */
+.camera-move-card__dir-label {
+  position: absolute;
+  bottom: 26px;
+  left: 14px;
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.07em;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.camera-move-card__dir-label--classic {
+  color: #3B82F6;
+}
+
+.camera-move-card__dir-label--dynamic {
+  color: #F472B6;
+}
+
+.camera-move-card__dir-label--ainative {
+  color: #A78BFA;
+}
+
+/* Stickman Elements */
+.camera-move-card__stickman-wrap {
+  position: absolute;
+  z-index: 2;
+  filter: drop-shadow(0 0 6px #E0850015);
+}
+
+.camera-move-card__sil-shadow {
+  position: absolute;
+  background: radial-gradient(ellipse, #E0850014 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.camera-move-card__fig-main {
+  fill: #E08500;
+}
+
+.camera-move-card__fig-dark {
+  fill: #C06A00;
+}
+
+/* Camera Elements */
+.camera-move-card__camera {
+  position: absolute;
+  z-index: 3;
+}
+
+.camera-move-card__camera-glow {
+  filter: drop-shadow(0 0 7px #2563EB88);
+}
+
+.camera-move-card__rec-dot {
+  transition: opacity 0.1s;
+}
+
+/* Description */
+.camera-move-card__desc {
+  padding: 8px 22px 10px;
+  font-size: 13px;
+  color: #4B5563;
+  line-height: 1.65;
+}
+
+/* Feel Row */
+.camera-move-card__feel-row {
+  margin: 2px 22px 12px;
+  background: #FAFAF8;
+  border: 1px solid #F0EDE6;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.camera-move-card__feel-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.camera-move-card__feel-text {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1.55;
+}
+
+.camera-move-card__feel-text strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* Prompt Row */
+.camera-move-card__prompt-row {
+  margin: 0 22px 20px;
+}
+
+.camera-move-card__prompt-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #9CA3AF;
+  letter-spacing: 0.08em;
+  margin-bottom: 7px;
+}
+
+.camera-move-card__prompt-chip {
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #78350F;
+  line-height: 1.75;
+}
+
+.camera-move-card__prompt-var {
+  color: #D97706;
+  font-weight: 500;
+}
+
+/* Animation-specific elements */
+.camera-move-card__dotted-track {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.camera-move-card__fov-beam {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Recording dot pulse animation */
+@keyframes recPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.camera-move-card__rec-dot--pulse {
+  animation: recPulse 0.36s ease-in-out infinite;
+}
