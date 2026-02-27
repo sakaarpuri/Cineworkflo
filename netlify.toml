@@ -7,6 +7,30 @@
   NODE_VERSION = "18"
 
 [[redirects]]
+  from = "/camera-moves.html"
+  to = "/camera-moves"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompts/"
+  to = "/prompts"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/shot-to-prompt/"
+  to = "/shot-to-prompt"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/camera-moves/"
+  to = "/camera-moves"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

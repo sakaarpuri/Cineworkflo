@@ -4,7 +4,7 @@ Allow: /
 # Sitemap location
 Sitemap: https://cineworkflo.com/sitemap.xml
 
-# Allow all AI crawlers
+# Explicit allow-list for major AI crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -28,7 +28,3 @@ Allow: /
 
 User-agent: ClaudeBot
 Allow: /
-
-# Specific crawl delays for polite bots
-User-agent: *
-Crawl-delay: 1
