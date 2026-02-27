@@ -126,33 +126,48 @@ const generateSmartPrompt = (idea, mood, useCase, skillLevel = 'beginner') => {
   return subjectPrompt + " 4K resolution, professional color grading.";
 };
 
-const USES = ["Storytelling", "Short-form Content", "Product Showcase", "Concept Art", "Music Visualizer", "Education", "Explainer Video", "Social Media", "Brand Ad", "Short Film", "Background", "Music Video", "Documentary", "Experimental", "Gaming Cinematic", "Title Sequence", "Logo Reveal", "B-Roll", "Spec Ad", "Visual Essay", "Lyric Video", "Podcast Visuals", "Event Promo", "Recruitment Video"];
-const USE_COLORS = {
-  "Storytelling": "#3B82F6",
-  "Short-form Content": "#F59E0B",
-  "Product Showcase": "#8B5CF6",
-  "Concept Art": "#10B981",
-  "Music Visualizer": "#06B6D4",
-  "Education": "#6366F1",
-  "Explainer Video": "#FF7043",
-  "Social Media": "#4CAF50",
-  "Brand Ad": "#FFC107",
-  "Short Film": "#2196F3",
-  "Background": "#FF9800",
-  "Music Video": "#E91E63",
-  "Documentary": "#795548",
-  "Experimental": "#00BCD4",
-  "Gaming Cinematic": "#424242",
-  "Title Sequence": "#9C27B0",
-  "Logo Reveal": "#FF5722",
-  "B-Roll": "#607D8B",
-  "Spec Ad": "#795548",
-  "Visual Essay": "#3F51B5",
-  "Lyric Video": "#E91E63",
-  "Podcast Visuals": "#009688",
-  "Event Promo": "#FF9800",
-  "Recruitment Video": "#4CAF50"
+// Organized USES by category with color shades
+const USES_CATEGORIES = {
+  "Commercial": {
+    items: ["Product Showcase", "Brand Ad", "Spec Ad", "Logo Reveal"],
+    baseColor: "#8B5CF6", // Purple
+    shades: ["#8B5CF6", "#A78BFA", "#7C3AED", "#6D28D9"]
+  },
+  "Social & Marketing": {
+    items: ["Short-form Content", "Social Media", "Event Promo", "Recruitment Video"],
+    baseColor: "#F59E0B", // Amber
+    shades: ["#F59E0B", "#FBBF24", "#D97706", "#B45309"]
+  },
+  "Storytelling": {
+    items: ["Storytelling", "Short Film", "Documentary", "Visual Essay"],
+    baseColor: "#3B82F6", // Blue
+    shades: ["#3B82F6", "#60A5FA", "#2563EB", "#1D4ED8"]
+  },
+  "Music & Arts": {
+    items: ["Music Visualizer", "Music Video", "Lyric Video", "Concept Art"],
+    baseColor: "#EC4899", // Pink
+    shades: ["#EC4899", "#F472B6", "#DB2777", "#BE185D"]
+  },
+  "Educational": {
+    items: ["Education", "Explainer Video", "Podcast Visuals"],
+    baseColor: "#10B981", // Emerald
+    shades: ["#10B981", "#34D399", "#059669", "#047857"]
+  },
+  "Technical": {
+    items: ["B-Roll", "Background", "Title Sequence", "Gaming Cinematic", "Experimental"],
+    baseColor: "#06B6D4", // Cyan
+    shades: ["#06B6D4", "#22D3EE", "#0891B2", "#0E7490", "#155E75"]
+  }
 };
+
+// Flatten for rendering
+const USES = Object.values(USES_CATEGORIES).flatMap(cat => cat.items);
+const USE_COLORS = {};
+Object.entries(USES_CATEGORIES).forEach(([category, data]) => {
+  data.items.forEach((item, index) => {
+    USE_COLORS[item] = data.shades[index % data.shades.length];
+  });
+});
 
 // Usage tracking helpers
 const getUsageData = () => {
@@ -249,7 +264,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setHasGeneratedOnce(true);
     } catch (err) {
       // Fallback with smart prompt generator
-      setResult(generateSmartPrompt(idea, mood, useCase));
+      setResult(generateSmartPrompt(idea, mood, useCase, skillLevel));
     }
     setLoading(false);
   }, [canSubmit, idea, mood, useCase, isPro]);
@@ -461,13 +476,13 @@ export default function PromptEnhancer({ onAuthClick }) {
                   className="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
                   style={{
                     background: skillLevel === 'beginner' 
-                      ? 'linear-gradient(145deg, var(--accent-blue), var(--accent-blue)DD)' 
-                      : 'var(--bg-card)',
-                    color: skillLevel === 'beginner' ? '#fff' : 'var(--text-secondary)',
-                    border: `2px solid ${skillLevel === 'beginner' ? 'var(--accent-blue)50' : 'var(--border-color)'}`,
+                      ? 'linear-gradient(145deg, #3B82F6, #3B82F6DD)' 
+                      : '#F0F4F8',
+                    color: skillLevel === 'beginner' ? '#fff' : '#3B82F6',
+                    border: `2px solid ${skillLevel === 'beginner' ? '#3B82F650' : '#93C5FD'}`,
                     boxShadow: skillLevel === 'beginner'
-                      ? 'inset 3px 3px 6px var(--accent-blue)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-blue)40'
-                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                      ? 'inset 3px 3px 6px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)'
+                      : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,1)',
                     transform: skillLevel === 'beginner' ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                 >
@@ -477,14 +492,14 @@ export default function PromptEnhancer({ onAuthClick }) {
                   onClick={() => setSkillLevel('pro')}
                   className="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
                   style={{
-                    background: skillLevel === 'pro' 
-                      ? 'linear-gradient(145deg, var(--accent-purple), var(--accent-purple)DD)' 
-                      : 'var(--bg-card)',
-                    color: skillLevel === 'pro' ? '#fff' : 'var(--text-secondary)',
-                    border: `2px solid ${skillLevel === 'pro' ? 'var(--accent-purple)50' : 'var(--border-color)'}`,
+                    background: skillLevel === 'pro'
+                      ? 'linear-gradient(145deg, #8B5CF6, #7C3AED)'
+                      : '#F5F3FF',
+                    color: skillLevel === 'pro' ? '#fff' : '#7C3AED',
+                    border: `2px solid ${skillLevel === 'pro' ? '#7C3AED50' : '#C4B5FD'}`,
                     boxShadow: skillLevel === 'pro'
-                      ? 'inset 3px 3px 6px var(--accent-purple)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-purple)40'
-                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                      ? 'inset 3px 3px 6px rgba(124,58,237,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(139,92,246,0.4)'
+                      : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,1)',
                     transform: skillLevel === 'pro' ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                 >
@@ -512,20 +527,30 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
             </div>
 
-            {/* Use Case */}
-            <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Use</span>
-              <div className="flex flex-wrap gap-1.5">
-                {USES.map(u => (
-                  <Chip
-                    key={u}
-                    label={u}
-                    selected={useCase === u}
-                    onClick={() => setUseCase(useCase === u ? '' : u)}
-                    color={USE_COLORS[u]}
-                  />
-                ))}
-              </div>
+            {/* Use Case - Organized by Category */}
+            <div className="flex flex-col gap-3">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium min-w-[40px]">Use</span>
+              {Object.entries(USES_CATEGORIES).map(([category, data]) => (
+                <div key={category} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+                  <span 
+                    className="text-[10px] font-bold uppercase tracking-wider flex-shrink-0 pt-1.5 min-w-[80px] text-right"
+                    style={{ color: data.baseColor }}
+                  >
+                    {category}
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {data.items.map(u => (
+                      <Chip
+                        key={u}
+                        label={u}
+                        selected={useCase === u}
+                        onClick={() => setUseCase(useCase === u ? '' : u)}
+                        color={USE_COLORS[u]}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -593,20 +618,19 @@ export default function PromptEnhancer({ onAuthClick }) {
               Click text to select all, or use the Copy button
             </p>
             
-            {/* Beginner: Add Pro Details */}
+            {/* Beginner: Add Pro Details - 3D Neumorphic with Amber accent */}
             {skillLevel === 'beginner' && (
               <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
                 <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
                   Want more control? Add pro details:
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {PRO_DETAILS.map((detail) => (
                     <button
                       key={detail.key}
                       onClick={() => {
                         if (!addedDetails.includes(detail.key)) {
                           setAddedDetails([...addedDetails, detail.key]);
-                          // Append detail to result
                           const detailText = {
                             camera: ' Smooth gimbal tracking shot.',
                             lens: ' Shot on 50mm lens, shallow depth of field.',
@@ -617,20 +641,39 @@ export default function PromptEnhancer({ onAuthClick }) {
                         }
                       }}
                       disabled={addedDetails.includes(detail.key)}
-                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
+                      className="flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-semibold transition-all duration-200"
                       style={{
-                        background: addedDetails.includes(detail.key) 
-                          ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
-                          : 'var(--bg-card)',
-                        border: `2px solid ${addedDetails.includes(detail.key) ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                        color: addedDetails.includes(detail.key) ? '#fff' : 'var(--text-secondary)',
+                        background: addedDetails.includes(detail.key)
+                          ? 'linear-gradient(145deg, #F59E0B, #D97706)'
+                          : 'linear-gradient(145deg, #FEF3C7, #FDE68A)',
+                        border: `2px solid ${addedDetails.includes(detail.key) ? '#D9770650' : '#FCD34D'}`,
+                        color: addedDetails.includes(detail.key) ? '#fff' : '#92400E',
                         boxShadow: addedDetails.includes(detail.key)
-                          ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                          : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
-                        transform: addedDetails.includes(detail.key) ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+                          ? 'inset 4px 4px 8px rgba(217,119,6,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(245,158,11,0.4)'
+                          : '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)',
+                        transform: addedDetails.includes(detail.key) ? 'translateY(2px) scale(0.96)' : 'translateY(0) scale(1)',
+                        textShadow: addedDetails.includes(detail.key) ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
+                      }}
+                      onMouseDown={(e) => {
+                        if (!addedDetails.includes(detail.key)) {
+                          e.currentTarget.style.transform = 'translateY(3px) scale(0.94)';
+                          e.currentTarget.style.boxShadow = 'inset 5px 5px 10px rgba(217,119,6,0.5), inset -3px -3px 6px rgba(255,255,255,0.4), 0 2px 4px rgba(245,158,11,0.3)';
+                        }
+                      }}
+                      onMouseUp={(e) => {
+                        if (!addedDetails.includes(detail.key)) {
+                          e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                          e.currentTarget.style.boxShadow = '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!addedDetails.includes(detail.key)) {
+                          e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                          e.currentTarget.style.boxShadow = '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)';
+                        }
                       }}
                     >
-                      {addedDetails.includes(detail.key) ? <Check className="h-3 w-3" /> : '+'}
+                      {addedDetails.includes(detail.key) ? <Check className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
                       {detail.label}
                     </button>
                   ))}
