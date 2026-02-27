@@ -2,19 +2,50 @@ import React, { useRef, useCallback } from 'react';
 import { useCameraAnimation, easeInOut } from '../useCameraAnimation';
 
 /**
- * Tracking Move - Top-down view camera and subject moving together
- * Exact SVG and animation from classic.html
+ * Tracking Shot - Exact copy from classic.html
+ * Full stickman + camera move together with FOV lines
  */
 export function TrackingMove({ isHovered }) {
   const stageRef = useRef(null);
   const hintRef = useRef(null);
+  const subRef = useRef(null);
   const camRef = useRef(null);
-  const subjRef = useRef(null);
+  const fov1Ref = useRef(null);
+  const fov2Ref = useRef(null);
   const labelRef = useRef(null);
   const recRef = useRef(null);
 
   const SX = 6;
-  const EX = 200;
+  const EX = 256;
+
+  const setTrack = useCallback((x) => {
+    const sub = subRef.current;
+    const cam = camRef.current;
+    const fov1 = fov1Ref.current;
+    const fov2 = fov2Ref.current;
+
+    if (sub) sub.style.left = x + 'px';
+    if (cam) cam.style.left = x + 'px';
+
+    // FOV from camera up toward subject — both move together
+    const camCX = x + 19;
+    const camCY = 138;
+    const subCX = x + 40;
+    const subCY = 78;
+
+    if (fov1) {
+      fov1.setAttribute('x1', camCX);
+      fov1.setAttribute('y1', camCY);
+      fov1.setAttribute('x2', subCX);
+      fov2.setAttribute('y2', subCY);
+    }
+    if (fov2) {
+      fov2.setAttribute('x1', camCX + 16);
+      fov2.setAttribute('y1', camCY);
+      fov2.setAttribute('x2', subCX + 18);
+      fov2.setAttribute('y2', subCY);
+    }
+  }, []);
 
   const animateFn = useCallback((p, ts) => {
     let x;
@@ -26,11 +57,7 @@ export function TrackingMove({ isHovered }) {
       x = EX - easeInOut((p - 0.56) / 0.44) * (EX - SX);
     }
 
-    const cam = camRef.current;
-    const subj = subjRef.current;
-
-    if (cam) cam.style.left = x + 'px';
-    if (subj) subj.style.left = x + 'px';
+    setTrack(x);
 
     const label = labelRef.current;
     const rec = recRef.current;
@@ -51,22 +78,18 @@ export function TrackingMove({ isHovered }) {
     if (rec) {
       rec.style.opacity = String(0.35 + 0.65 * Math.abs(Math.sin(ts / 360)));
     }
-  }, []);
+  }, [setTrack]);
 
   const resetFn = useCallback(() => {
-    const cam = camRef.current;
-    const subj = subjRef.current;
+    setTrack(SX);
     const label = labelRef.current;
     const rec = recRef.current;
-
-    if (cam) cam.style.left = SX + 'px';
-    if (subj) subj.style.left = SX + 'px';
     if (label) {
       label.style.opacity = '0';
       label.textContent = '';
     }
     if (rec) rec.style.opacity = '1';
-  }, []);
+  }, [setTrack]);
 
   const { start, stop } = useCameraAnimation({
     stageRef,
@@ -86,7 +109,7 @@ export function TrackingMove({ isHovered }) {
     <div 
       ref={stageRef}
       className="camera-move-card__stage camera-move-card__stage--classic camera-move-card__stage--idle"
-      aria-label="Tracking camera movement animation"
+      aria-label="Tracking shot camera movement animation"
     >
       <span className="camera-move-card__view-label">TOP-DOWN VIEW</span>
       
@@ -97,9 +120,32 @@ export function TrackingMove({ isHovered }) {
         </div>
       </div>
       
+      {/* FOV lines SVG */}
+      <svg 
+        className="camera-move-card__dotted-track"
+        viewBox="0 0 356 220"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <line 
+          ref={fov1Ref}
+          x1="25" y1="138" x2="46" y2="78"
+          stroke="#3B82F6" 
+          strokeOpacity="0.3" 
+          strokeWidth="1"
+        />
+        <line 
+          ref={fov2Ref}
+          x1="41" y1="138" x2="64" y2="78"
+          stroke="#3B82F6" 
+          strokeOpacity="0.3" 
+          strokeWidth="1"
+        />
+      </svg>
+      
       {/* Subject */}
       <div 
-        ref={subjRef}
+        ref={subRef}
         className="camera-move-card__stickman-wrap"
         style={{ 
           top: '50%', 
@@ -121,7 +167,7 @@ export function TrackingMove({ isHovered }) {
         className="camera-move-card__camera"
         style={{ 
           top: '50%', 
-          left: '14px',
+          left: '6px',
           transform: 'translateY(-50%)',
           zIndex: 3
         }}

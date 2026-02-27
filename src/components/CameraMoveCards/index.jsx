@@ -6,13 +6,13 @@ import {
   PanMove,
   TiltMove,
   TrackingMove,
-  TruckMove,
+  ZoomMove,
   HandheldMove,
   DroneMove,
   OrbitMove
 } from './moves';
 
-// Card metadata
+// Card metadata - ONLY using moves from actual HTML pages
 const CARD_DATA = [
   {
     id: 'dolly',
@@ -48,8 +48,19 @@ const CARD_DATA = [
     MoveComponent: TiltMove
   },
   {
+    id: 'zoom',
+    name: 'Zoom',
+    tag: 'lens in / lens out',
+    badge: 'CLASSIC MOVE',
+    badgeType: 'classic',
+    desc: 'The camera stays fixed while the lens zooms in or out. Perspective stays the same, only magnification changes.',
+    feelText: 'Quickly focusing attention. More abrupt than dolly, but easier to execute.',
+    prompts: ['slow zoom in', 'camera zooms toward subject', 'gradual magnification'],
+    MoveComponent: ZoomMove
+  },
+  {
     id: 'tracking',
-    name: 'Tracking',
+    name: 'Tracking Shot',
     tag: 'follow sideways',
     badge: 'CLASSIC MOVE',
     badgeType: 'classic',
@@ -57,17 +68,6 @@ const CARD_DATA = [
     feelText: 'Running alongside someone. Keeps energy and the subject always centred in frame.',
     prompts: ['tracking shot following subject', 'camera moves parallel sideways', 'side-on tracking as character walks'],
     MoveComponent: TrackingMove
-  },
-  {
-    id: 'truck',
-    name: 'Truck',
-    tag: 'side push / pull',
-    badge: 'CLASSIC MOVE',
-    badgeType: 'classic',
-    desc: 'The camera moves laterally left or right on a track — perpendicular to where it points.',
-    feelText: 'Sliding past the action. Reveals layers of the scene with smooth lateral motion.',
-    prompts: ['truck left along scene', 'camera tracks sideways perpendicular', 'lateral push revealing landscape'],
-    MoveComponent: TruckMove
   },
   {
     id: 'handheld',
@@ -82,8 +82,8 @@ const CARD_DATA = [
   },
   {
     id: 'drone',
-    name: 'FPV Drone',
-    tag: 'rise up + reveal',
+    name: 'Drone / Aerial',
+    tag: 'rise up + away',
     badge: 'AI-NATIVE MOVE',
     badgeType: 'ainative',
     desc: 'The camera rises and pulls away, revealing context and scale. In AI video, the drone can fly impossible paths.',
@@ -93,7 +93,7 @@ const CARD_DATA = [
   },
   {
     id: 'orbit',
-    name: 'AI Orbit',
+    name: 'Orbit / 360',
     tag: 'circles subject',
     badge: 'AI-NATIVE MOVE',
     badgeType: 'ainative',

@@ -2,26 +2,79 @@ import React, { useRef, useCallback } from 'react';
 import { useCameraAnimation, easeInOut } from '../useCameraAnimation';
 
 /**
- * Pan Move - Top-down view camera rotation
- * Exact SVG and animation from classic.html
+ * Pan Move - Exact copy from classic.html
+ * Top-down with FOV sweep visualization
  */
 export function PanMove({ isHovered }) {
   const stageRef = useRef(null);
   const hintRef = useRef(null);
-  const camRef = useRef(null);
   const labelRef = useRef(null);
   const recRef = useRef(null);
 
-  // Animation constants
-  const CX = 80;
-  const CY = 110;
-  const A_START = -35;
-  const A_END = 35;
+  // Camera sits left-centre in viewBox 356x220
+  const CX = 80, CY = 110;
+  const FOV_HALF = 22; // degrees each side of centre line
+  const LEN = 200;
+  const SWEEP_R = 150;
+  const A_START = -35, A_END = 35;
 
-  const setPan = useCallback((angle) => {
-    const cam = camRef.current;
-    if (cam) {
-      cam.style.transform = `translate(${CX}px, ${CY}px) rotate(${angle}deg)`;
+  const setPan = useCallback((centreDeg) => {
+    const camG = document.getElementById('pan-cam-g');
+    const fov = document.getElementById('pan-fov');
+    const edge1 = document.getElementById('pan-edge1');
+    const edge2 = document.getElementById('pan-edge2');
+    const sweep = document.getElementById('pan-sweep');
+    const rec = recRef.current;
+
+    if (camG) {
+      camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${centreDeg})`);
+    }
+
+    const toRad = d => d * Math.PI / 180;
+    const a1 = toRad(centreDeg - FOV_HALF);
+    const a2 = toRad(centreDeg + FOV_HALF);
+    const ac = toRad(centreDeg);
+
+    // Centre beam
+    if (edge1) {
+      const bx = CX + LEN * Math.cos(ac);
+      const by = CY + LEN * Math.sin(ac);
+      edge1.setAttribute('x1', CX);
+      edge1.setAttribute('y1', CY);
+      edge1.setAttribute('x2', bx);
+      edge1.setAttribute('y2', by);
+    }
+
+    // FOV edges
+    if (edge2 && fov) {
+      const e1x = CX + LEN * 0.9 * Math.cos(a1);
+      const e1y = CY + LEN * 0.9 * Math.sin(a1);
+      const e2x = CX + LEN * 0.9 * Math.cos(a2);
+      const e2y = CY + LEN * 0.9 * Math.sin(a2);
+      
+      edge2.setAttribute('x1', CX);
+      edge2.setAttribute('y1', CY);
+      edge2.setAttribute('x2', e2x);
+      edge2.setAttribute('y2', e2y);
+      
+      fov.setAttribute('d', `M${CX},${CY} L${e1x},${e1y} A${LEN * 0.9},${LEN * 0.9} 0 0,1 ${e2x},${e2y} Z`);
+    }
+
+    // Sweep arc shows where we came from
+    if (sweep) {
+      const saStart = toRad(A_START);
+      const saEnd = toRad(centreDeg);
+      const lf = (centreDeg - A_START) > 180 ? 1 : 0;
+      const sx1 = CX + SWEEP_R * Math.cos(saStart);
+      const sy1 = CY + SWEEP_R * Math.sin(saStart);
+      const sx2 = CX + SWEEP_R * Math.cos(saEnd);
+      const sy2 = CY + SWEEP_R * Math.sin(saEnd);
+      
+      if (Math.abs(centreDeg - A_START) > 1) {
+        sweep.setAttribute('d', `M${sx1},${sy1} A${SWEEP_R},${SWEEP_R} 0 ${lf},1 ${sx2},${sy2}`);
+      } else {
+        sweep.setAttribute('d', '');
+      }
     }
   }, []);
 
@@ -83,6 +136,11 @@ export function PanMove({ isHovered }) {
     else stop();
   }, [isHovered, start, stop]);
 
+  // Initialize
+  React.useEffect(() => {
+    setPan(A_START);
+  }, [setPan]);
+
   return (
     <div 
       ref={stageRef}
@@ -119,33 +177,46 @@ export function PanMove({ isHovered }) {
         </svg>
       </div>
       
-      {/* Camera */}
-      <div 
-        ref={camRef}
-        className="camera-move-card__camera"
-        style={{ 
-          top: '50%', 
-          left: '80px',
-          transform: `translate(${CX}px, ${CY}px) rotate(${A_START}deg)`,
-          transformOrigin: 'center center'
-        }}
+      {/* FOV Visualization SVG */}
+      <svg 
+        className="camera-move-card__dotted-track"
+        viewBox="0 0 356 220"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
       >
-        <svg width="38" height="28" viewBox="0 0 38 28" fill="none" aria-hidden="true">
-          <rect x="0" y="4" width="28" height="20" rx="3" fill="#1E40AF" stroke="#3B82F6" strokeWidth="0.75"/>
-          <rect x="28" y="8" width="9" height="10" rx="2" fill="#1D4ED8"/>
-          <circle cx="14" cy="14" r="6" fill="#0C1445" stroke="#3B82F6" strokeWidth="1"/>
-          <circle cx="14" cy="14" r="3.5" fill="#1E3A8A"/>
-          <circle cx="14" cy="14" r="1.4" fill="#60A5FA"/>
-          <circle 
-            ref={recRef}
-            cx="25" 
-            cy="6" 
-            r="1.8" 
-            fill="#EF4444"
-            className="camera-move-card__rec-dot"
-          />
-        </svg>
-      </div>
+        {/* Camera group */}
+        <g id="pan-cam-g" transform={`translate(${CX},${CY}) rotate(${A_START})`}>
+          <rect x="-6" y="-10" width="28" height="20" rx="4" fill="#1E40AF" stroke="#3B82F6" strokeWidth="0.75"/>
+          <rect x="22" y="-6" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#3B82F6" strokeWidth="0.5"/>
+          <circle cx="8" cy="0" r="7.5" fill="#0C1445" stroke="#3B82F6" strokeWidth="1.2"/>
+          <circle cx="8" cy="0" r="4.5" fill="#1E3A8A"/>
+          <circle cx="8" cy="0" r="2" fill="#60A5FA"/>
+          <circle cx="5" cy="-3" r="1.2" fill="#BAE6FD" opacity="0.6"/>
+          <rect x="3" y="-15" width="12" height="5" rx="1.5" fill="#1D4ED8" stroke="#3B82F6" strokeWidth="0.5"/>
+        </g>
+        
+        {/* Centre beam */}
+        <line id="pan-edge1" x1={CX} y1={CY} x2={CX + LEN} y2={CY} stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="2"/>
+        
+        {/* FOV edge */}
+        <line id="pan-edge2" x1={CX} y1={CY} x2={CX + LEN * 0.9} y2={CY} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
+        
+        {/* FOV area */}
+        <path id="pan-fov" d="" fill="#3B82F6" fillOpacity="0.08"/>
+        
+        {/* Sweep arc */}
+        <path id="pan-sweep" d="" fill="none" stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4 4"/>
+        
+        {/* Recording dot */}
+        <circle 
+          ref={recRef}
+          cx={CX + 19} 
+          cy={CY - 5} 
+          r="2" 
+          fill="#EF4444"
+          className="camera-move-card__rec-dot"
+        />
+      </svg>
       
       <div 
         ref={labelRef}
