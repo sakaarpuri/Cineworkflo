@@ -129,34 +129,34 @@ const generateSmartPrompt = (idea, mood, useCase, skillLevel = 'beginner') => {
 // Organized USES by category with color shades
 const USES_CATEGORIES = {
   "Commercial": {
-    items: ["Product Showcase", "Brand Ad", "Spec Ad", "Logo Reveal"],
-    baseColor: "#8B5CF6", // Purple
-    shades: ["#8B5CF6", "#A78BFA", "#7C3AED", "#6D28D9"]
+    items: ["Product", "Brand Ad", "Spec Ad", "Logo"],
+    baseColor: "#8B5CF6",
+    shades: ["#8B5CF6", "#7C3AED", "#6D28D9", "#A78BFA"]
   },
-  "Social & Marketing": {
-    items: ["Short-form Content", "Social Media", "Event Promo", "Recruitment Video"],
-    baseColor: "#F59E0B", // Amber
-    shades: ["#F59E0B", "#FBBF24", "#D97706", "#B45309"]
+  "Social": {
+    items: ["Short-form", "Social", "Event", "Recruit"],
+    baseColor: "#F59E0B",
+    shades: ["#F59E0B", "#D97706", "#B45309", "#FBBF24"]
   },
-  "Storytelling": {
-    items: ["Storytelling", "Short Film", "Documentary", "Visual Essay"],
-    baseColor: "#3B82F6", // Blue
-    shades: ["#3B82F6", "#60A5FA", "#2563EB", "#1D4ED8"]
+  "Story": {
+    items: ["Narrative", "Short Film", "Doc", "Essay"],
+    baseColor: "#3B82F6",
+    shades: ["#3B82F6", "#2563EB", "#1D4ED8", "#60A5FA"]
   },
-  "Music & Arts": {
-    items: ["Music Visualizer", "Music Video", "Lyric Video", "Concept Art"],
-    baseColor: "#EC4899", // Pink
-    shades: ["#EC4899", "#F472B6", "#DB2777", "#BE185D"]
+  "Music": {
+    items: ["Visualizer", "Music Vid", "Lyric", "Art"],
+    baseColor: "#EC4899",
+    shades: ["#EC4899", "#DB2777", "#BE185D", "#F472B6"]
   },
-  "Educational": {
-    items: ["Education", "Explainer Video", "Podcast Visuals"],
-    baseColor: "#10B981", // Emerald
-    shades: ["#10B981", "#34D399", "#059669", "#047857"]
+  "Learn": {
+    items: ["Education", "Explain", "Podcast"],
+    baseColor: "#10B981",
+    shades: ["#10B981", "#059669", "#047857"]
   },
-  "Technical": {
-    items: ["B-Roll", "Background", "Title Sequence", "Gaming Cinematic", "Experimental"],
-    baseColor: "#06B6D4", // Cyan
-    shades: ["#06B6D4", "#22D3EE", "#0891B2", "#0E7490", "#155E75"]
+  "Tech": {
+    items: ["B-Roll", "BG", "Titles", "Game", "Experimental"],
+    baseColor: "#06B6D4",
+    shades: ["#06B6D4", "#0891B2", "#0E7490", "#155E75", "#22D3EE"]
   }
 };
 
@@ -527,30 +527,39 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
             </div>
 
-            {/* Use Case - Organized by Category with headings on top */}
-            <div className="flex flex-col gap-4">
+            {/* Use Case - Compact grid layout */}
+            <div className="flex flex-col gap-3">
               <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium">Use</span>
-              {Object.entries(USES_CATEGORIES).map(([category, data]) => (
-                <div key={category} className="flex flex-col gap-2">
-                  <span 
-                    className="text-[10px] font-bold uppercase tracking-wider"
-                    style={{ color: 'var(--text-muted)' }}
-                  >
-                    {category}
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {data.items.map((u, index) => (
-                      <Chip
-                        key={u}
-                        label={u}
-                        selected={useCase === u}
-                        onClick={() => setUseCase(useCase === u ? '' : u)}
-                        color={data.shades[index % data.shades.length]}
-                      />
-                    ))}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2">
+                {Object.entries(USES_CATEGORIES).map(([category, data]) => (
+                  <div key={category} className="flex flex-col gap-1">
+                    <span className="text-[9px] font-semibold uppercase tracking-wider text-gray-400">
+                      {category}
+                    </span>
+                    <div className="flex flex-wrap gap-1">
+                      {data.items.map((u, index) => (
+                        <button
+                          key={u}
+                          onClick={() => setUseCase(useCase === u ? '' : u)}
+                          className="px-2 py-1 rounded-lg text-[10px] font-medium transition-all whitespace-nowrap"
+                          style={{
+                            background: useCase === u
+                              ? `linear-gradient(145deg, ${data.shades[index]}, ${data.shades[index]}DD)`
+                              : 'var(--bg-primary)',
+                            border: `1px solid ${useCase === u ? data.shades[index] + '60' : 'var(--border-color)'}`,
+                            color: useCase === u ? '#fff' : data.shades[index],
+                            boxShadow: useCase === u
+                              ? `inset 2px 2px 4px ${data.shades[index]}60, 0 2px 4px ${data.shades[index]}30`
+                              : 'none'
+                          }}
+                        >
+                          {u}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
