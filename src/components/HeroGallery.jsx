@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Sparkles, Copy, Check, Image as ImageIcon, X, Eye, ArrowRight } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // New prompts from JSON database
 const sampleShots = [
@@ -142,6 +142,30 @@ export default function HeroGallery() {
                 </span>
               </button>
             </div>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-2">
+            <Link
+              to="/prompts"
+              className="px-4 py-2 rounded-lg text-sm font-semibold"
+              style={{ background: 'var(--accent-blue)', color: '#fff' }}
+            >
+              Prompt Vault
+            </Link>
+            <Link
+              to="/shot-to-prompt"
+              className="px-4 py-2 rounded-lg text-sm font-semibold"
+              style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
+            >
+              Shot to Prompt
+            </Link>
+            <Link
+              to="/camera-moves"
+              className="px-4 py-2 rounded-lg text-sm font-semibold"
+              style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
+            >
+              Camera Moves
+            </Link>
           </div>
         </div>
 

@@ -1,0 +1,5 @@
+/success
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/success/*
+  X-Robots-Tag: noindex, nofollow, noarchive

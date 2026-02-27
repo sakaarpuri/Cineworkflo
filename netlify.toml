@@ -31,6 +31,12 @@
   force = true
 
 [[redirects]]
+  from = "/modern-moves/"
+  to = "/modern-moves"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

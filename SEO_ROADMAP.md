@@ -24,6 +24,10 @@ Tasks:
 - Remove dead redirects that point to deleted static pages.
 - Decide if `/modern-moves` is a public page or a demo page (indexable vs `noindex`).
 
+Status Update (Feb 27, 2026):
+- Canonicals are route-managed in app metadata.
+- Trailing-slash redirects now cover `/prompts`, `/shot-to-prompt`, `/camera-moves`, and `/modern-moves`.
+
 File Targets:
 - `netlify.toml`
 - `src/App.jsx`
@@ -268,6 +272,6 @@ Monthly:
   - [x] Social preview (`og:image`)
 
 - Pricing / checkout flows:
-  - [ ] Crawl-safe metadata
-  - [ ] No indexing of private/sensitive states
+  - [x] Crawl-safe metadata
+  - [x] No indexing of private/sensitive states
   - [ ] Conversion tracking by source/medium
