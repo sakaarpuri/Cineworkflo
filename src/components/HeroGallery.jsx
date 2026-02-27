@@ -100,16 +100,28 @@ export default function HeroGallery() {
             Get consistent, commercial-quality results every time.
           </p>
 
-          {/* Explore Prompt Vault Button */}
+          {/* Explore Prompt Vault Button - Neumorphic Toggle Style */}
           <div className="mb-8">
             <a
               href="#prompts"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 active:scale-95"
               style={{
-                background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
                 color: '#fff',
-                boxShadow: '6px 6px 12px rgba(37,99,235,0.25), -6px -6px 12px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.2)',
-                border: '1px solid rgba(255,255,255,0.1)'
+                border: '2px solid #3B82F650',
+                boxShadow: 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)'
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.transform = 'translateY(1px) scale(0.98)';
+                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
               }}
             >
               Explore the Prompt Vault
