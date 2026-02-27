@@ -149,20 +149,21 @@ export function PushThroughMove({ isHovered }) {
         </div>
       </div>
 
-      {/* Foreground window */}
+      {/* Foreground object (like a doorway / branch) */}
       <div
         ref={objRef}
         style={{
           position: 'absolute',
-          top: '52px',
           left: `${OBJ_X}px`,
+          bottom: '58px',
           width: `${OBJ_W}px`,
-          height: '116px',
-          borderRadius: '14px',
+          height: '130px',
+          borderRadius: '18px',
           border: '1px solid rgba(167,139,250,0.35)',
-          background: 'rgba(109,40,217,0.09)',
-          backdropFilter: 'blur(2px)',
-          zIndex: 2,
+          background: 'linear-gradient(180deg, rgba(167,139,250,0.35), rgba(109,40,217,0.16))',
+          zIndex: 4,
+          boxShadow: '0 0 0 6px rgba(109,40,217,0.10)',
+          backdropFilter: 'blur(1px)',
           opacity: 0.5,
           transition: 'opacity 0.08s linear'
         }}
@@ -171,17 +172,21 @@ export function PushThroughMove({ isHovered }) {
         ref={cutRef}
         style={{
           position: 'absolute',
-          top: '48px',
-          left: `${OBJ_X + 10}px`,
-          width: `${OBJ_W - 20}px`,
-          height: '2px',
-          background: 'rgba(167,139,250,0.55)',
-          zIndex: 3,
-          opacity: 0.55
+          left: `${OBJ_X + 12}px`,
+          bottom: '70px',
+          width: `${OBJ_W - 24}px`,
+          height: '106px',
+          borderRadius: '14px',
+          background: 'rgba(8,15,24,0.55)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          zIndex: 5,
+          opacity: 0.55,
+          transition: 'opacity 0.08s linear'
         }}
       />
 
       {/* Subject stands inside window plane */}
+      <div className="camera-move-card__sil-shadow" style={{ bottom: '45px', left: `${SUB_X - 38}px`, width: '76px', height: '9px' }} />
       <div ref={subRef} className="camera-move-card__stickman-wrap" style={{ bottom: '48px', left: `${SUB_X - 28}px`, zIndex: 2 }}>
         <svg width="56" height="142" viewBox="0 0 56 142" fill="none" aria-hidden="true">
           <circle cx="28" cy="12" r="11" className="camera-move-card__fig-main" />
@@ -219,13 +224,13 @@ export function PushThroughMove({ isHovered }) {
         <line ref={botLRef} x1="0" y1="0" x2="0" y2="0" stroke="#8B5CF6" strokeOpacity="0.20" strokeWidth="1" strokeDasharray="5 4" />
         <text
           ref={noteRef}
-          x="178"
-          y="34"
-          textAnchor="middle"
+          x="86"
+          y="32"
           fill="#A78BFA"
           fillOpacity="0"
-          fontSize="10"
-          fontFamily="DM Mono, monospace"
+          fontSize="8"
+          fontFamily="monospace"
+          letterSpacing="0.05em"
         >
           THROUGH FOREGROUND
         </text>
@@ -235,4 +240,3 @@ export function PushThroughMove({ isHovered }) {
     </div>
   );
 }
-
