@@ -183,12 +183,42 @@ export default function Pricing({ onAuthClick }) {
               <button
                 onClick={() => handleCheckout(plan.name.includes('Monthly') ? 'monthly' : 'yearly')}
                 disabled={loading}
-                className="w-full py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2"
                 style={{
-                  background: plan.popular ? '#fff' : 'var(--accent-blue)',
-                  color: plan.popular ? 'var(--accent-blue)' : '#fff',
-                  boxShadow: plan.popular ? '0 4px 14px rgba(0,0,0,0.2)' : '0 4px 14px rgba(37,99,235,0.25)',
+                  background: plan.popular
+                    ? 'linear-gradient(145deg, #fff, #f3f4f6)'
+                    : 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
+                  color: plan.popular ? '#3B82F6' : '#fff',
+                  border: `2px solid ${plan.popular ? '#E5E7EB' : '#3B82F650'}`,
+                  boxShadow: plan.popular
+                    ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15)'
+                    : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                  transform: 'translateY(0) scale(1)',
                   opacity: loading ? 0.7 : 1
+                }}
+                onMouseDown={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.transform = 'translateY(2px) scale(0.98)';
+                    e.currentTarget.style.boxShadow = plan.popular
+                      ? 'inset 4px 4px 8px rgba(0,0,0,0.15), inset -3px -3px 6px rgba(255,255,255,0.8), 0 2px 6px rgba(0,0,0,0.1)'
+                      : 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
+                  }
+                }}
+                onMouseUp={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = plan.popular
+                      ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15)'
+                      : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = plan.popular
+                      ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15)'
+                      : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
+                  }
                 }}
               >
                 {loading && <Loader2 className="h-5 w-5 animate-spin" />}

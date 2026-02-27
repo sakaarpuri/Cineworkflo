@@ -112,40 +112,37 @@ export default function HeroGallery() {
 
           {/* Explore Prompt Vault - Sliding Toggle Switch */}
           <div className="mb-8">
-            <div className="flex items-center justify-center gap-4">
-              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+            <div className="flex items-center justify-center gap-5">
+              <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
                 Explore Prompt Vault
               </span>
               <button
                 onClick={handleVaultToggle}
-                className="relative w-16 h-8 rounded-full transition-all duration-300"
+                className="relative w-20 h-10 rounded-full transition-all duration-300"
                 style={{
                   background: vaultToggle
-                    ? 'linear-gradient(145deg, #3B82F6, #2563EB)'
-                    : 'var(--bg-card)',
+                    ? 'linear-gradient(145deg, #10B981, #059669)'
+                    : 'linear-gradient(145deg, #3B82F6, #2563EB)',
                   boxShadow: vaultToggle
-                    ? 'inset 2px 2px 4px rgba(59,130,246,0.5), inset -2px -2px 4px rgba(255,255,255,0.3), 0 2px 8px rgba(59,130,246,0.4)'
-                    : 'inset 2px 2px 4px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.1)',
-                  border: `2px solid ${vaultToggle ? '#3B82F650' : 'var(--border-color)'}`
+                    ? 'inset 3px 3px 6px rgba(16,185,129,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(16,185,129,0.4)'
+                    : 'inset 3px 3px 6px rgba(59,130,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                  border: `2px solid ${vaultToggle ? '#10B98150' : '#3B82F650'}`
                 }}
                 aria-label="Toggle Prompt Vault"
               >
                 <span
-                  className="absolute top-1 left-1 w-5 h-5 rounded-full transition-all duration-300 flex items-center justify-center"
+                  className="absolute top-1 left-1 w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center"
                   style={{
-                    background: vaultToggle ? '#fff' : 'linear-gradient(145deg, #f3f4f6, #e5e7eb)',
-                    transform: vaultToggle ? 'translateX(30px)' : 'translateX(0)',
-                    boxShadow: vaultToggle
-                      ? '2px 2px 4px rgba(0,0,0,0.2)'
-                      : '2px 2px 4px rgba(0,0,0,0.1), inset 1px 1px 2px rgba(255,255,255,0.8)'
+                    background: '#fff',
+                    transform: vaultToggle ? 'translateX(38px)' : 'translateX(0)',
+                    boxShadow: '2px 2px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.8)'
                   }}
                 >
                   <ArrowRight
-                    className="h-3 w-3 transition-all duration-300"
+                    className="h-4 w-4 transition-all duration-300"
                     style={{
-                      color: vaultToggle ? '#3B82F6' : '#9CA3AF',
-                      transform: vaultToggle ? 'rotate(0deg)' : 'rotate(-45deg)',
-                      opacity: vaultToggle ? 1 : 0.5
+                      color: vaultToggle ? '#10B981' : '#3B82F6',
+                      transform: vaultToggle ? 'rotate(0deg)' : 'rotate(-45deg)'
                     }}
                   />
                 </span>
