@@ -241,8 +241,8 @@ Monthly:
   - [x] Unique metadata
   - [x] Structured data
   - [x] Social preview (`og:image`)
-  - [ ] Performance pass
-  - [ ] Internal links to `/prompts`, `/shot-to-prompt`, `/camera-moves`
+  - [x] Performance pass
+  - [x] Internal links to `/prompts`, `/shot-to-prompt`, `/camera-moves`
 
 - `/prompts`:
   - [ ] Category architecture

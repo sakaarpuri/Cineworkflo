@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Header from './components/Header'
@@ -271,6 +271,36 @@ function RouteSeo() {
   return null
 }
 
+function DeferredSection({ children, minHeight = 240, rootMargin = '320px 0px' }) {
+  const [shouldRender, setShouldRender] = useState(false)
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const node = containerRef.current
+    if (!node || shouldRender) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries
+        if (entry?.isIntersecting) {
+          setShouldRender(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [rootMargin, shouldRender])
+
+  return (
+    <div ref={containerRef} style={{ minHeight, contentVisibility: 'auto', containIntrinsicSize: `${minHeight}px` }}>
+      {shouldRender ? children : null}
+    </div>
+  )
+}
+
 function App() {
   const [authModalOpen, setAuthModalOpen] = useState(false)
 
@@ -295,24 +325,36 @@ function App() {
               <Route path="/" element={
                 <>
                   <HeroGallery />
-                  <Suspense fallback={sectionFallback(260)}>
-                    <PromptEnhancer />
-                  </Suspense>
-                  <Suspense fallback={sectionFallback(220)}>
-                    <ShotToPrompt preview={true} />
-                  </Suspense>
-                  <Suspense fallback={sectionFallback(220)}>
-                    <CameraMoveCards />
-                  </Suspense>
-                  <Suspense fallback={sectionFallback(160)}>
-                    <Features />
-                  </Suspense>
-                  <Suspense fallback={sectionFallback(240)}>
-                    <PromptVault preview={true} />
-                  </Suspense>
-                  <Suspense fallback={sectionFallback(180)}>
-                    <Pricing />
-                  </Suspense>
+                  <DeferredSection minHeight={260}>
+                    <Suspense fallback={sectionFallback(260)}>
+                      <PromptEnhancer />
+                    </Suspense>
+                  </DeferredSection>
+                  <DeferredSection minHeight={220}>
+                    <Suspense fallback={sectionFallback(220)}>
+                      <ShotToPrompt preview={true} />
+                    </Suspense>
+                  </DeferredSection>
+                  <DeferredSection minHeight={220}>
+                    <Suspense fallback={sectionFallback(220)}>
+                      <CameraMoveCards />
+                    </Suspense>
+                  </DeferredSection>
+                  <DeferredSection minHeight={160}>
+                    <Suspense fallback={sectionFallback(160)}>
+                      <Features />
+                    </Suspense>
+                  </DeferredSection>
+                  <DeferredSection minHeight={240}>
+                    <Suspense fallback={sectionFallback(240)}>
+                      <PromptVault preview={true} />
+                    </Suspense>
+                  </DeferredSection>
+                  <DeferredSection minHeight={180}>
+                    <Suspense fallback={sectionFallback(180)}>
+                      <Pricing />
+                    </Suspense>
+                  </DeferredSection>
                 </>
               } />
               <Route path="/prompts" element={<Suspense fallback={sectionFallback(300)}><PromptVault /></Suspense>} />
