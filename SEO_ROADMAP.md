@@ -41,6 +41,11 @@ Tasks:
 - Ensure key pages render crawlable HTML (prerender/SSR strategy for key routes).
 - Ensure social crawlers see usable metadata without client JS (fallback meta in `index.html`).
 
+Status Update (Feb 27, 2026):
+- `robots.txt`, `sitemap.xml`, and route metadata are in place.
+- Route snapshots are now generated during deploy (`build:seo`) for `/`, `/prompts`, `/shot-to-prompt`, `/camera-moves`.
+- Next verification step: confirm rendered snapshots in production with GSC URL Inspection.
+
 File Targets:
 - `public/robots.txt`
 - `public/sitemap.xml`
