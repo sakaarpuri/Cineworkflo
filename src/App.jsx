@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Header from './components/Header'
 import HeroGallery from './components/HeroGallery'
-import PromptEnhancer from './components/PromptEnhancer'
-import ShotToPrompt from './components/ShotToPrompt'
-import CameraMoveCards from './components/CameraMoveCards'
-import ModernAINativeMoves from './components/ModernAINativeMoves'
-import CameraMovesPage from './pages/CameraMovesPage'
-import Features from './components/Features'
-import PromptVault from './components/PromptVault'
-import Pricing from './components/Pricing'
 import Footer from './components/Footer'
 import Success from './components/Success'
 import AuthModal from './components/AuthModal'
+
+const PromptEnhancer = lazy(() => import('./components/PromptEnhancer'))
+const ShotToPrompt = lazy(() => import('./components/ShotToPrompt'))
+const CameraMoveCards = lazy(() => import('./components/CameraMoveCards'))
+const ModernAINativeMoves = lazy(() => import('./components/ModernAINativeMoves'))
+const CameraMovesPage = lazy(() => import('./pages/CameraMovesPage'))
+const Features = lazy(() => import('./components/Features'))
+const PromptVault = lazy(() => import('./components/PromptVault'))
+const Pricing = lazy(() => import('./components/Pricing'))
 
 const SEO_DEFAULT = {
   title: 'CineWorkflo - Professional AI Video Prompts for Runway & Pika',
@@ -198,6 +199,16 @@ function RouteSeo() {
 function App() {
   const [authModalOpen, setAuthModalOpen] = useState(false)
 
+  const sectionFallback = (minHeight = 240) => (
+    <div
+      aria-hidden="true"
+      style={{
+        minHeight,
+        background: 'var(--bg-primary)'
+      }}
+    />
+  )
+
   return (
     <AuthProvider>
       <Router>
@@ -209,18 +220,30 @@ function App() {
               <Route path="/" element={
                 <>
                   <HeroGallery />
-                  <PromptEnhancer />
-                  <ShotToPrompt preview={true} />
-                  <CameraMoveCards />
-                  <Features />
-                  <PromptVault preview={true} />
-                  <Pricing />
+                  <Suspense fallback={sectionFallback(260)}>
+                    <PromptEnhancer />
+                  </Suspense>
+                  <Suspense fallback={sectionFallback(220)}>
+                    <ShotToPrompt preview={true} />
+                  </Suspense>
+                  <Suspense fallback={sectionFallback(220)}>
+                    <CameraMoveCards />
+                  </Suspense>
+                  <Suspense fallback={sectionFallback(160)}>
+                    <Features />
+                  </Suspense>
+                  <Suspense fallback={sectionFallback(240)}>
+                    <PromptVault preview={true} />
+                  </Suspense>
+                  <Suspense fallback={sectionFallback(180)}>
+                    <Pricing />
+                  </Suspense>
                 </>
               } />
-              <Route path="/prompts" element={<PromptVault />} />
-              <Route path="/shot-to-prompt" element={<ShotToPrompt />} />
-              <Route path="/camera-moves" element={<CameraMovesPage />} />
-              <Route path="/modern-moves" element={<ModernAINativeMoves />} />
+              <Route path="/prompts" element={<Suspense fallback={sectionFallback(300)}><PromptVault /></Suspense>} />
+              <Route path="/shot-to-prompt" element={<Suspense fallback={sectionFallback(320)}><ShotToPrompt /></Suspense>} />
+              <Route path="/camera-moves" element={<Suspense fallback={sectionFallback(320)}><CameraMovesPage /></Suspense>} />
+              <Route path="/modern-moves" element={<Suspense fallback={sectionFallback(320)}><ModernAINativeMoves /></Suspense>} />
               <Route path="/success" element={<Success />} />
             </Routes>
           </main>
