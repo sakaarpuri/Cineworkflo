@@ -17,6 +17,9 @@ export function TrackingMove({ isHovered }) {
 
   const SX = 6;
   const EX = 256;
+  const CAM_X_OFFSET = -28; // camera lags slightly behind subject
+  const SUB_CY = 74; // subject center y in SVG space
+  const CAM_CY = 154; // camera center y in SVG space
 
   const setTrack = useCallback((x) => {
     const sub = subRef.current;
@@ -25,19 +28,19 @@ export function TrackingMove({ isHovered }) {
     const fov2 = fov2Ref.current;
 
     if (sub) sub.style.left = x + 'px';
-    if (cam) cam.style.left = x + 'px';
+    if (cam) cam.style.left = (x + CAM_X_OFFSET) + 'px';
 
     // FOV from camera up toward subject — both move together
-    const camCX = x + 19;
-    const camCY = 138;
+    const camCX = (x + CAM_X_OFFSET) + 19;
+    const camCY = CAM_CY;
     const subCX = x + 40;
-    const subCY = 78;
+    const subCY = SUB_CY;
 
     if (fov1) {
       fov1.setAttribute('x1', camCX);
       fov1.setAttribute('y1', camCY);
       fov1.setAttribute('x2', subCX);
-      fov2.setAttribute('y2', subCY);
+      fov1.setAttribute('y2', subCY);
     }
     if (fov2) {
       fov2.setAttribute('x1', camCX + 16);
@@ -129,14 +132,14 @@ export function TrackingMove({ isHovered }) {
       >
         <line 
           ref={fov1Ref}
-          x1="25" y1="138" x2="46" y2="78"
+          x1="25" y1={String(CAM_CY)} x2="46" y2={String(SUB_CY)}
           stroke="#3B82F6" 
           strokeOpacity="0.3" 
           strokeWidth="1"
         />
         <line 
           ref={fov2Ref}
-          x1="41" y1="138" x2="64" y2="78"
+          x1="41" y1={String(CAM_CY)} x2="64" y2={String(SUB_CY)}
           stroke="#3B82F6" 
           strokeOpacity="0.3" 
           strokeWidth="1"
@@ -148,9 +151,8 @@ export function TrackingMove({ isHovered }) {
         ref={subRef}
         className="camera-move-card__stickman-wrap"
         style={{ 
-          top: '50%', 
+          top: `${SUB_CY - 26}px`, 
           left: '6px',
-          transform: 'translateY(-50%)',
           transformOrigin: 'center center'
         }}
       >
@@ -166,9 +168,8 @@ export function TrackingMove({ isHovered }) {
         ref={camRef}
         className="camera-move-card__camera"
         style={{ 
-          top: '50%', 
+          top: `${CAM_CY - 14}px`, 
           left: '6px',
-          transform: 'translateY(-50%)',
           zIndex: 3
         }}
       >

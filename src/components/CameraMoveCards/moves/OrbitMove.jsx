@@ -16,6 +16,8 @@ export function OrbitMove({ isHovered }) {
   const CX = 178;
   const CY = 110;
   const R = 74;
+  const CAM_W = 38;
+  const CAM_H = 28;
 
   const animateFn = useCallback((p, ts) => {
     const t = p < 0.44 ? easeInOut(p / 0.44) : p < 0.56 ? 1 : 1 - easeInOut((p - 0.56) / 0.44);
@@ -30,7 +32,7 @@ export function OrbitMove({ isHovered }) {
 
     const cam = camRef.current;
     if (cam) {
-      cam.style.transform = `translate(${camX}px, ${camY}px) rotate(${aim}deg)`;
+      cam.style.transform = `translate(${camX - CAM_W / 2}px, ${camY - CAM_H / 2}px) rotate(${aim}deg)`;
     }
 
     const label = labelRef.current;
@@ -64,7 +66,7 @@ export function OrbitMove({ isHovered }) {
       const startX = CX + R;
       const startY = CY;
       const aim = Math.atan2(CY - startY, CX - startX) * 180 / Math.PI;
-      cam.style.transform = `translate(${startX}px, ${startY}px) rotate(${aim}deg)`;
+      cam.style.transform = `translate(${startX - CAM_W / 2}px, ${startY - CAM_H / 2}px) rotate(${aim}deg)`;
     }
     if (label) {
       label.style.opacity = '0';

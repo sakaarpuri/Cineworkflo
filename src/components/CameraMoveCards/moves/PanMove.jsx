@@ -10,6 +10,11 @@ export function PanMove({ isHovered }) {
   const hintRef = useRef(null);
   const labelRef = useRef(null);
   const recRef = useRef(null);
+  const camGRef = useRef(null);
+  const fovRef = useRef(null);
+  const edge1Ref = useRef(null);
+  const edge2Ref = useRef(null);
+  const sweepRef = useRef(null);
 
   // Camera sits left-centre in viewBox 356x220
   const CX = 80, CY = 110;
@@ -19,12 +24,11 @@ export function PanMove({ isHovered }) {
   const A_START = -35, A_END = 35;
 
   const setPan = useCallback((centreDeg) => {
-    const camG = document.getElementById('pan-cam-g');
-    const fov = document.getElementById('pan-fov');
-    const edge1 = document.getElementById('pan-edge1');
-    const edge2 = document.getElementById('pan-edge2');
-    const sweep = document.getElementById('pan-sweep');
-    const rec = recRef.current;
+    const camG = camGRef.current;
+    const fov = fovRef.current;
+    const edge1 = edge1Ref.current;
+    const edge2 = edge2Ref.current;
+    const sweep = sweepRef.current;
 
     if (camG) {
       camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${centreDeg})`);
@@ -156,24 +160,15 @@ export function PanMove({ isHovered }) {
         </div>
       </div>
       
-      {/* Subject */}
+      {/* Subject (top-down) */}
       <div 
         className="camera-move-card__stickman-wrap"
-        style={{ bottom: '48px', right: '38px' }}
+        style={{ top: '50%', right: '38px', transform: 'translateY(-50%)' }}
       >
-        <svg width="56" height="142" viewBox="0 0 56 142" fill="none" aria-hidden="true">
-          <circle cx="28" cy="12" r="11" className="camera-move-card__fig-main"/>
-          <rect x="23" y="22" width="10" height="8" rx="3" className="camera-move-card__fig-main"/>
-          <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" className="camera-move-card__fig-main"/>
-          <path d="M9 32L3 72L11 73L15 34Z" className="camera-move-card__fig-dark"/>
-          <circle cx="6" cy="75" r="5" className="camera-move-card__fig-dark"/>
-          <path d="M47 32L53 72L45 73L41 34Z" className="camera-move-card__fig-dark"/>
-          <circle cx="50" cy="75" r="5" className="camera-move-card__fig-dark"/>
-          <path d="M11 64L45 64L42 78L14 78Z" className="camera-move-card__fig-dark"/>
-          <path d="M14 76L12 124L22 124L24 76Z" className="camera-move-card__fig-main"/>
-          <path d="M11 122L23 122L24 132L9 132Z" className="camera-move-card__fig-dark"/>
-          <path d="M32 76L34 124L44 124L42 76Z" className="camera-move-card__fig-main"/>
-          <path d="M32 122L44 122L46 132L31 132Z" className="camera-move-card__fig-dark"/>
+        <svg width="80" height="52" viewBox="0 0 80 52" fill="none" aria-hidden="true">
+          <rect x="0" y="26" width="80" height="20" rx="10" fill="#C06A00"/>
+          <circle cx="40" cy="22" r="20" fill="#E08500"/>
+          <circle cx="40" cy="13" r="8" fill="#C06A00" opacity="0.35"/>
         </svg>
       </div>
       
@@ -185,7 +180,7 @@ export function PanMove({ isHovered }) {
         aria-hidden="true"
       >
         {/* Camera group */}
-        <g id="pan-cam-g" transform={`translate(${CX},${CY}) rotate(${A_START})`}>
+        <g ref={camGRef} transform={`translate(${CX},${CY}) rotate(${A_START})`}>
           <rect x="-6" y="-10" width="28" height="20" rx="4" fill="#1E40AF" stroke="#3B82F6" strokeWidth="0.75"/>
           <rect x="22" y="-6" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#3B82F6" strokeWidth="0.5"/>
           <circle cx="8" cy="0" r="7.5" fill="#0C1445" stroke="#3B82F6" strokeWidth="1.2"/>
@@ -196,16 +191,16 @@ export function PanMove({ isHovered }) {
         </g>
         
         {/* Centre beam */}
-        <line id="pan-edge1" x1={CX} y1={CY} x2={CX + LEN} y2={CY} stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="2"/>
+        <line ref={edge1Ref} x1={CX} y1={CY} x2={CX + LEN} y2={CY} stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="2"/>
         
         {/* FOV edge */}
-        <line id="pan-edge2" x1={CX} y1={CY} x2={CX + LEN * 0.9} y2={CY} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
+        <line ref={edge2Ref} x1={CX} y1={CY} x2={CX + LEN * 0.9} y2={CY} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
         
         {/* FOV area */}
-        <path id="pan-fov" d="" fill="#3B82F6" fillOpacity="0.08"/>
+        <path ref={fovRef} d="" fill="#3B82F6" fillOpacity="0.08"/>
         
         {/* Sweep arc */}
-        <path id="pan-sweep" d="" fill="none" stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4 4"/>
+        <path ref={sweepRef} d="" fill="none" stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4 4"/>
         
         {/* Recording dot */}
         <circle 
