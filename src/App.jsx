@@ -6,10 +6,8 @@ import HeroGallery from './components/HeroGallery'
 import PromptEnhancer from './components/PromptEnhancer'
 import ShotToPrompt from './components/ShotToPrompt'
 import CameraMoveCards from './components/CameraMoveCards'
-import CameraMoves from './components/CameraMoves'
-import CameraMovesNew from './components/CameraMovesNew'
 import ModernAINativeMoves from './components/ModernAINativeMoves'
-import CameraMovesPreviewPage from './pages/CameraMovesPreview'
+import CameraMovesPage from './pages/CameraMovesPage'
 import Features from './components/Features'
 import PromptVault from './components/PromptVault'
 import Pricing from './components/Pricing'
@@ -40,7 +38,7 @@ function App() {
               } />
               <Route path="/prompts" element={<PromptVault />} />
               <Route path="/shot-to-prompt" element={<ShotToPrompt />} />
-              <Route path="/camera-moves" element={<CameraMoves />} />
+              <Route path="/camera-moves" element={<CameraMovesPage />} />
               <Route path="/modern-moves" element={<ModernAINativeMoves />} />
               <Route path="/success" element={<Success />} />
             </Routes>

@@ -139,7 +139,7 @@ export default function CameraMovesPreview() {
           {PREVIEW_MOVES.map((move) => (
             <a 
               key={move.name}
-              href="/camera-moves.html"
+              href="/camera-moves"
               className="move-card group block"
               style={{ 
                 background: '#fff', 
@@ -284,7 +284,7 @@ export default function CameraMovesPreview() {
 
         <div className="text-center">
           <a 
-            href="/camera-moves.html"
+            href="/camera-moves"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
             style={{ 
               background: 'linear-gradient(145deg, #8B5CF6, #8B5CF6DD)', 

@@ -11,6 +11,12 @@ export function TiltMove({ isHovered }) {
   const labelRef = useRef(null);
   const recRef = useRef(null);
   const hitRef = useRef(null);
+  const camGRef = useRef(null);
+  const beamRef = useRef(null);
+  const edge1Ref = useRef(null);
+  const edge2Ref = useRef(null);
+  const fovRef = useRef(null);
+  const sweepRef = useRef(null);
 
   // Camera pivot on tripod
   const CX = 52;
@@ -24,13 +30,12 @@ export function TiltMove({ isHovered }) {
     const toRad = d => d * Math.PI / 180;
     const r = toRad(deg);
     
-    // Update SVG elements directly
-    const camG = document.getElementById('tilt-cam-g');
-    const beam = document.getElementById('tilt-beam');
-    const edge1 = document.getElementById('tilt-edge1');
-    const edge2 = document.getElementById('tilt-edge2');
-    const fov = document.getElementById('tilt-fov');
-    const sweep = document.getElementById('tilt-sweep');
+    const camG = camGRef.current;
+    const beam = beamRef.current;
+    const edge1 = edge1Ref.current;
+    const edge2 = edge2Ref.current;
+    const fov = fovRef.current;
+    const sweep = sweepRef.current;
 
     if (camG) camG.setAttribute('transform', `translate(${CX},${CY}) rotate(${deg})`);
     
@@ -180,7 +185,7 @@ export function TiltMove({ isHovered }) {
         preserveAspectRatio="xMidYMid slice"
         aria-hidden="true"
       >
-        <g id="tilt-cam-g" transform={`translate(${CX},${CY}) rotate(${A_START})`}>
+        <g ref={camGRef} transform={`translate(${CX},${CY}) rotate(${A_START})`}>
           {/* Camera body */}
           <rect x="-6" y="-10" width="28" height="20" rx="4" fill="#1E40AF" stroke="#3B82F6" strokeWidth="0.75"/>
           <rect x="22" y="-6" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#3B82F6" strokeWidth="0.5"/>
@@ -192,17 +197,17 @@ export function TiltMove({ isHovered }) {
         </g>
         
         {/* Main beam */}
-        <line id="tilt-beam" x1={CX} y1={CY} x2={CX + LEN} y2={CY} stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="2"/>
+        <line ref={beamRef} x1={CX} y1={CY} x2={CX + LEN} y2={CY} stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="2"/>
         
         {/* FOV edges */}
-        <line id="tilt-edge1" x1={CX} y1={CY} x2={CX + LEN * 0.85} y2={CY - LEN * 0.15} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
-        <line id="tilt-edge2" x1={CX} y1={CY} x2={CX + LEN * 0.85} y2={CY + LEN * 0.15} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
+        <line ref={edge1Ref} x1={CX} y1={CY} x2={CX + LEN * 0.85} y2={CY - LEN * 0.15} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
+        <line ref={edge2Ref} x1={CX} y1={CY} x2={CX + LEN * 0.85} y2={CY + LEN * 0.15} stroke="#3B82F6" strokeOpacity="0.2" strokeWidth="1"/>
         
         {/* FOV area */}
-        <path id="tilt-fov" d="" fill="#3B82F6" fillOpacity="0.08"/>
+        <path ref={fovRef} d="" fill="#3B82F6" fillOpacity="0.08"/>
         
         {/* Sweep arc */}
-        <path id="tilt-sweep" d="" fill="none" stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4 4"/>
+        <path ref={sweepRef} d="" fill="none" stroke="#3B82F6" strokeOpacity="0.25" strokeWidth="1.5" strokeDasharray="4 4"/>
         
         {/* Recording dot on camera */}
         <circle 
