@@ -8,6 +8,7 @@ import ShotToPrompt from './components/ShotToPrompt'
 import CameraMoveCards from './components/CameraMoveCards'
 import CameraMoves from './components/CameraMoves'
 import CameraMovesNew from './components/CameraMovesNew'
+import ModernAINativeMoves from './components/ModernAINativeMoves'
 import CameraMovesPreviewPage from './pages/CameraMovesPreview'
 import Features from './components/Features'
 import PromptVault from './components/PromptVault'
@@ -40,6 +41,7 @@ function App() {
               <Route path="/prompts" element={<PromptVault />} />
               <Route path="/shot-to-prompt" element={<ShotToPrompt />} />
               <Route path="/camera-moves" element={<CameraMoves />} />
+              <Route path="/modern-moves" element={<ModernAINativeMoves />} />
               <Route path="/success" element={<Success />} />
             </Routes>
           </main>
