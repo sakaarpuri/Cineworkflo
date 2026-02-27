@@ -160,7 +160,7 @@ function CameraMoveCard({ data }) {
 export default function CameraMoveCards() {
   return (
     <section className="py-14" style={{ background: '#F0EEE9' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider mb-3" 
                style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', color: '#2563EB' }}>
@@ -175,7 +175,10 @@ export default function CameraMoveCards() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
+        <div
+          className="grid gap-7 mb-10"
+          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))' }}
+        >
           {CARD_DATA.map((card) => (
             <CameraMoveCard key={card.id} data={card} />
           ))}
