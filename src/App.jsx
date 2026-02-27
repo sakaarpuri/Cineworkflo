@@ -5,7 +5,7 @@ import Header from './components/Header'
 import HeroGallery from './components/HeroGallery'
 import PromptEnhancer from './components/PromptEnhancer'
 import ShotToPrompt from './components/ShotToPrompt'
-import CameraMovesPreview from './components/CameraMovesPreview'
+import CameraMoveCards from './components/CameraMoveCards'
 import CameraMoves from './components/CameraMoves'
 import CameraMovesNew from './components/CameraMovesNew'
 import CameraMovesPreviewPage from './pages/CameraMovesPreview'
@@ -31,7 +31,7 @@ function App() {
                   <HeroGallery />
                   <PromptEnhancer />
                   <ShotToPrompt preview={true} />
-                  <CameraMovesPreview />
+                  <CameraMoveCards />
                   <Features />
                   <PromptVault preview={true} />
                   <Pricing />
