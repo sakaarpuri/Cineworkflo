@@ -17,7 +17,7 @@ export function TrackingMove({ isHovered }) {
 
   const SX = 6;
   const EX = 256;
-  const CAM_X_OFFSET = -28; // camera lags slightly behind subject
+  const CAM_X_OFFSET = 0; // camera stays aligned with subject
   const SUB_CY = 74; // subject center y in SVG space
   const CAM_CY = 154; // camera center y in SVG space
 
