@@ -527,25 +527,25 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
             </div>
 
-            {/* Use Case - Organized by Category */}
-            <div className="flex flex-col gap-3">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium min-w-[40px]">Use</span>
+            {/* Use Case - Organized by Category with headings on top */}
+            <div className="flex flex-col gap-4">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium">Use</span>
               {Object.entries(USES_CATEGORIES).map(([category, data]) => (
-                <div key={category} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+                <div key={category} className="flex flex-col gap-2">
                   <span 
-                    className="text-[10px] font-bold uppercase tracking-wider flex-shrink-0 pt-1.5 min-w-[80px] text-right"
-                    style={{ color: data.baseColor }}
+                    className="text-[10px] font-bold uppercase tracking-wider"
+                    style={{ color: 'var(--text-muted)' }}
                   >
                     {category}
                   </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {data.items.map(u => (
+                  <div className="flex flex-wrap gap-2">
+                    {data.items.map((u, index) => (
                       <Chip
                         key={u}
                         label={u}
                         selected={useCase === u}
                         onClick={() => setUseCase(useCase === u ? '' : u)}
-                        color={USE_COLORS[u]}
+                        color={data.shades[index % data.shades.length]}
                       />
                     ))}
                   </div>
