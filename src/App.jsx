@@ -80,6 +80,7 @@ function RouteSeo() {
     const seo = SEO_BY_PATH[normalizedPath] || { ...SEO_DEFAULT, path: normalizedPath || '/' }
     const origin = window.location.origin
     const canonicalUrl = `${origin}${seo.path}`
+    const ogImageUrl = `${origin}/og-default.svg`
 
     document.title = seo.title
 
@@ -121,9 +122,11 @@ function RouteSeo() {
     upsertMetaByProperty('og:description', seo.description)
     upsertMetaByProperty('og:url', canonicalUrl)
     upsertMetaByProperty('og:site_name', 'CineWorkflo')
+    upsertMetaByProperty('og:image', ogImageUrl)
     upsertMetaByName('twitter:card', 'summary_large_image')
     upsertMetaByName('twitter:title', seo.title)
     upsertMetaByName('twitter:description', seo.description)
+    upsertMetaByName('twitter:image', ogImageUrl)
     upsertLink('canonical', canonicalUrl)
 
     const homeSchema = [

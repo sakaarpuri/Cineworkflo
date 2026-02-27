@@ -10,6 +10,7 @@
 - `https://cineworkflo.com/prompts`
 - `https://cineworkflo.com/shot-to-prompt`
 - `https://cineworkflo.com/camera-moves`
+- `https://cineworkflo.com/modern-moves` (optional: indexable or `noindex` demo)
 
 ---
 
@@ -79,6 +80,18 @@
   - `/camera-moves` -> `/prompts`
   - `/camera-moves` -> `/shot-to-prompt`
 
+### 5) Modern Moves (`/modern-moves`)
+- Primary Intent: modern/AI-native camera motion patterns for prompt writing.
+- Secondary Intent: inspiration/education (not a transactional page).
+- SEO Role: optional. If it remains a development/demo page, set `noindex` and keep out of sitemap.
+- Primary Cluster:
+  - AI-native camera moves
+  - modern camera moves for AI video
+  - orbit, drone, dolly zoom, push through
+- Conversion Path:
+  - `/modern-moves` -> `/camera-moves`
+  - `/modern-moves` -> `/prompts`
+
 ---
 
 ## Cannibalization Guardrails
@@ -120,6 +133,10 @@
   - Title theme: "Camera movements guide".
   - Description theme: interactive card-based learning + prompt writing benefit.
 
+- `/#pricing` (section, not route)
+  - Conversion goal: reduce friction and increase trust.
+  - Avoid treating this as a standalone SEO page unless you add `/pricing`.
+
 ---
 
 ## Internal Link Rules
@@ -150,6 +167,12 @@
 - `/camera-moves/dynamic`
 - `/camera-moves/ai-native`
 
+### Thin Page Guardrail
+- Only ship new indexable routes if they include:
+  - unique copy (not templated duplicates)
+  - at least 1 concrete example (prompt or workflow)
+  - clear internal links to the core conversion path
+
 ---
 
 ## Measurement Setup for This Map
@@ -163,4 +186,3 @@
 - If route ranks for wrong cluster:
   - tighten H1/title/meta to intended intent
   - adjust internal links to reinforce target theme
-
