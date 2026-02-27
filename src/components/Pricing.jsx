@@ -48,7 +48,8 @@ const plans = [
       '30-day money-back guarantee'
     ],
     cta: 'Get Yearly Access',
-    popular: true
+    popular: true,
+    value: true
   }
 ]
 
@@ -110,11 +111,11 @@ export default function Pricing({ onAuthClick }) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
           {plans.map((plan) => (
             <div 
               key={plan.name}
-              className="rounded-2xl p-8 transition-all"
+              className="rounded-2xl p-8 transition-all flex flex-col"
               style={{
                 background: plan.popular ? 'var(--accent-blue)' : 'var(--bg-card)',
                 boxShadow: 'var(--shadow-card)',
@@ -130,7 +131,7 @@ export default function Pricing({ onAuthClick }) {
                     color: '#fff'
                   }}
                 >
-                  Most Popular
+                  Most Value
                 </span>
               )}
               <h3 
@@ -161,7 +162,7 @@ export default function Pricing({ onAuthClick }) {
                   </span>
                 )}
               </div>
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3">
                     <Check 

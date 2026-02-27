@@ -32,9 +32,8 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 40px;
 }
 .nav-logo {
   display: flex;
@@ -53,7 +52,7 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
 }
 .nav-links a {
   text-decoration: none;
@@ -135,32 +134,7 @@ h1 {
   margin-bottom: 20px;
   background: transparent;
 }
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 40px auto;
-  padding: 16px 32px;
-  background: linear-gradient(145deg, #3B82F6, #2563EB);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  border: 2px solid #3B82F650;
-  box-shadow: inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4);
-  transition: all 0.2s;
-}
-.back-link:hover {
-  box-shadow: inset 3px 3px 6px rgba(59,130,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 5px 15px rgba(59,130,246,0.5);
-}
-.back-link:active {
-  transform: translateY(2px) scale(0.96);
-  box-shadow: inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3);
-}
-.center {
-  text-align: center;
-}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -190,8 +164,8 @@ h1 {
         <a href="/shot-to-prompt">Shot to Prompt</a>
         <a href="/camera-moves.html">Camera Moves</a>
         <a href="/#pricing">Pricing</a>
-        <a href="/" class="nav-button">← Back Home</a>
       </div>
+      <a href="/" class="nav-button">Get Pro</a>
     </div>
   </nav>
 
@@ -210,8 +184,5 @@ h1 {
   <div class="section-title">MODERN / AI-NATIVE MOVES</div>
   <iframe src="/camera-moves/modern.html" width="100%" height="1100" style="border:none;" scrolling="no"></iframe>
 
-  <div class="center">
-    <a href="/" class="back-link">← Back Home</a>
-  </div>
 </body>
 </html>

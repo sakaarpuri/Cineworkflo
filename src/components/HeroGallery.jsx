@@ -113,7 +113,7 @@ export default function HeroGallery() {
           {/* Explore Prompt Vault - Sliding Toggle Switch */}
           <div className="mb-8">
             <div className="flex items-center justify-center gap-5">
-              <span className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>
+              <span className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                 Explore Prompt Vault
               </span>
               <button
