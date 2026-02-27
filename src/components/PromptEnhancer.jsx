@@ -96,27 +96,23 @@ const generateSmartPrompt = (idea, mood, useCase, skillLevel = 'beginner') => {
     }
   }
   
-  // Use case modifiers
+  // Use case modifiers - matching shortened names
   const useModifiers = {
     "Storytelling": "Narrative pacing with motivated camera movement, emotional beats.",
-    "Short-form Content": "Fast cuts implied, vertical composition friendly, punchy visuals.",
+    "Short-form": "Fast cuts implied, vertical composition friendly, punchy visuals.",
     "Product Showcase": "Clean backgrounds, hero lighting, feature-highlighting angles.",
-    "Concept Art": " painterly composition, rule of thirds, atmospheric depth, illustration quality.",
-    "Music Visualizer": "Rhythmic motion implied, audio-reactive lighting, synesthetic colors.",
     "Education": "Clear visibility, slow reveals, infographic-friendly composition.",
-    "Explainer Video": "Clean minimal environment, focused attention, diagrammatic clarity.",
+    "Explainer": "Clean minimal environment, focused attention, diagrammatic clarity.",
     "Social Media": "Thumb-stopping composition, bold colors, immediate visual hook.",
     "Brand Ad": "Premium polish, aspirational framing, logo-safe negative space.",
     "Short Film": "Cinematic aspect ratio implied, motivated lighting, narrative subtext.",
-    "Background": "Clean looping potential, minimal focal point, ambient motion only.",
-    "Music Video": "Performance energy, stylized treatment, cut-friendly coverage.",
     "Documentary": "Observational camera, available light, authentic location texture.",
-    "Experimental": "Rule-breaking composition, unconventional framing, artistic abstraction.",
-    "Gaming Cinematic": "Third-person camera distance, environmental storytelling, UI-safe zones.",
-    "Title Sequence": "Negative space for typography, graphic composition, readable contrast.",
+    "Visual Essay": "Editorial composition, text-friendly framing, intellectual tone.",
+    "Spec Ad": "High production value, portfolio-worthy execution, attention to craft.",
     "Logo Reveal": "Centered focus, symmetrical framing, reveal-friendly camera path.",
-    "B-Roll": "Cutaway-friendly, generic coverage, versatile framing options.",
-    "Spec Ad": "High production value, portfolio-worthy execution, attention to craft."
+    "Event Promo": "High energy, crowd-friendly angles, dynamic pacing.",
+    "Recruitment": "Professional tone, workplace authenticity, aspirational framing.",
+    "Podcast Visuals": "Static-friendly, face-focused, minimal background distraction."
   };
   
   if (useCase && useModifiers[useCase]) {
@@ -126,37 +122,23 @@ const generateSmartPrompt = (idea, mood, useCase, skillLevel = 'beginner') => {
   return subjectPrompt + " 4K resolution, professional color grading.";
 };
 
-// Organized USES by category with color shades
+// Organized USES by category - one color per category
 const USES_CATEGORIES = {
   "Commercial": {
-    items: ["Product", "Brand Ad", "Spec Ad", "Logo"],
-    baseColor: "#8B5CF6",
-    shades: ["#8B5CF6", "#7C3AED", "#6D28D9", "#A78BFA"]
+    items: ["Product Showcase", "Brand Ad", "Spec Ad", "Logo Reveal"],
+    color: "#8B5CF6" // Purple
   },
   "Social": {
-    items: ["Short-form", "Social", "Event", "Recruit"],
-    baseColor: "#F59E0B",
-    shades: ["#F59E0B", "#D97706", "#B45309", "#FBBF24"]
+    items: ["Short-form", "Social Media", "Event Promo", "Recruitment"],
+    color: "#F59E0B" // Amber
   },
   "Story": {
-    items: ["Narrative", "Short Film", "Doc", "Essay"],
-    baseColor: "#3B82F6",
-    shades: ["#3B82F6", "#2563EB", "#1D4ED8", "#60A5FA"]
-  },
-  "Music": {
-    items: ["Visualizer", "Music Vid", "Lyric", "Art"],
-    baseColor: "#EC4899",
-    shades: ["#EC4899", "#DB2777", "#BE185D", "#F472B6"]
+    items: ["Storytelling", "Short Film", "Documentary", "Visual Essay"],
+    color: "#3B82F6" // Blue
   },
   "Learn": {
-    items: ["Education", "Explain", "Podcast"],
-    baseColor: "#10B981",
-    shades: ["#10B981", "#059669", "#047857"]
-  },
-  "Tech": {
-    items: ["B-Roll", "BG", "Titles", "Game", "Experimental"],
-    baseColor: "#06B6D4",
-    shades: ["#06B6D4", "#0891B2", "#0E7490", "#155E75", "#22D3EE"]
+    items: ["Education", "Explainer", "Podcast Visuals"],
+    color: "#10B981" // Emerald
   }
 };
 
@@ -164,8 +146,8 @@ const USES_CATEGORIES = {
 const USES = Object.values(USES_CATEGORIES).flatMap(cat => cat.items);
 const USE_COLORS = {};
 Object.entries(USES_CATEGORIES).forEach(([category, data]) => {
-  data.items.forEach((item, index) => {
-    USE_COLORS[item] = data.shades[index % data.shades.length];
+  data.items.forEach(item => {
+    USE_COLORS[item] = data.color;
   });
 });
 
@@ -527,37 +509,18 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
             </div>
 
-            {/* Use Case - Compact grid layout */}
-            <div className="flex flex-col gap-3">
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium">Use</span>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2">
-                {Object.entries(USES_CATEGORIES).map(([category, data]) => (
-                  <div key={category} className="flex flex-col gap-1">
-                    <span className="text-[9px] font-semibold uppercase tracking-wider text-gray-400">
-                      {category}
-                    </span>
-                    <div className="flex flex-wrap gap-1">
-                      {data.items.map((u, index) => (
-                        <button
-                          key={u}
-                          onClick={() => setUseCase(useCase === u ? '' : u)}
-                          className="px-2 py-1 rounded-lg text-[10px] font-medium transition-all whitespace-nowrap"
-                          style={{
-                            background: useCase === u
-                              ? `linear-gradient(145deg, ${data.shades[index]}, ${data.shades[index]}DD)`
-                              : 'var(--bg-primary)',
-                            border: `1px solid ${useCase === u ? data.shades[index] + '60' : 'var(--border-color)'}`,
-                            color: useCase === u ? '#fff' : data.shades[index],
-                            boxShadow: useCase === u
-                              ? `inset 2px 2px 4px ${data.shades[index]}60, 0 2px 4px ${data.shades[index]}30`
-                              : 'none'
-                          }}
-                        >
-                          {u}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+            {/* Use Case - Same style as Mood buttons */}
+            <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Use</span>
+              <div className="flex flex-wrap gap-1.5">
+                {USES.map(u => (
+                  <Chip
+                    key={u}
+                    label={u}
+                    selected={useCase === u}
+                    onClick={() => setUseCase(useCase === u ? '' : u)}
+                    color={USE_COLORS[u]}
+                  />
                 ))}
               </div>
             </div>
