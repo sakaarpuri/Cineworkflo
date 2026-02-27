@@ -18,6 +18,74 @@ body {
   margin: 0 auto;
   padding: 40px 24px;
 }
+/* Navigation Bar */
+.nav-bar {
+  background: linear-gradient(145deg, #fafaf9, #f0eee9);
+  border-bottom: 1px solid #e5e1d8;
+  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.nav-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
+  color: #111827;
+}
+.nav-logo svg {
+  width: 32px;
+  height: 32px;
+  color: #3B82F6;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #6B7280;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.nav-links a:hover {
+  color: #111827;
+}
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: linear-gradient(145deg, #3B82F6, #3B82F6DD);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  border: 2px solid #3B82F650;
+  box-shadow: inset 2px 2px 4px rgba(59,130,246,0.4), inset -2px -2px 4px rgba(255,255,255,0.3), 0 2px 8px rgba(59,130,246,0.3);
+  transition: all 0.2s;
+}
+.nav-button:hover {
+  box-shadow: inset 2px 2px 4px rgba(59,130,246,0.5), inset -2px -2px 4px rgba(255,255,255,0.3), 0 3px 10px rgba(59,130,246,0.4);
+}
+.nav-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 3px 3px 6px rgba(59,130,246,0.6), inset -2px -2px 4px rgba(255,255,255,0.3), 0 1px 4px rgba(59,130,246,0.3);
+}
 .header {
   text-align: center;
   margin-bottom: 40px;
@@ -65,22 +133,65 @@ h1 {
   background: transparent;
 }
 .back-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin: 40px auto;
-  padding: 12px 24px;
-  background: #111827;
+  padding: 14px 28px;
+  background: linear-gradient(145deg, #8B5CF6, #8B5CF6DD);
   color: #fff;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
+  border: 2px solid #8B5CF650;
+  box-shadow: inset 3px 3px 6px rgba(139,92,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(139,92,246,0.4);
+  transition: all 0.2s;
+}
+.back-link:hover {
+  box-shadow: inset 3px 3px 6px rgba(139,92,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 5px 15px rgba(139,92,246,0.5);
+}
+.back-link:active {
+  transform: translateY(2px) scale(0.96);
+  box-shadow: inset 4px 4px 8px rgba(139,92,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(139,92,246,0.3);
 }
 .center {
   text-align: center;
 }
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
 </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <a href="/" class="nav-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="2.18"></rect>
+          <line x1="7" y1="2" x2="7" y2="22"></line>
+          <line x1="17" y1="2" x2="17" y2="22"></line>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <line x1="2" y1="7" x2="7" y2="7"></line>
+          <line x1="2" y1="17" x2="7" y2="17"></line>
+          <line x1="17" y1="17" x2="22" y2="17"></line>
+          <line x1="17" y1="7" x2="22" y2="7"></line>
+        </svg>
+        CineWorkflo
+      </a>
+      <div class="nav-links">
+        <a href="/prompts">Prompt Vault</a>
+        <a href="/shot-to-prompt">Shot to Prompt</a>
+        <a href="/camera-moves.html">Camera Moves</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/" class="nav-button">← Back Home</a>
+      </div>
+    </div>
+  </nav>
+
   <div class="header">
     <div class="eyebrow">CAMERA MOVES</div>
     <h1>Camera Movements</h1>

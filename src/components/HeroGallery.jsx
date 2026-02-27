@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Sparkles, Copy, Check, Image as ImageIcon, X, Eye, ArrowRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 // New prompts from JSON database
 const sampleShots = [
@@ -64,11 +65,20 @@ const CATEGORY_COLORS = {
 
 export default function HeroGallery() {
   const [copiedId, setCopiedId] = useState(null)
+  const [vaultToggle, setVaultToggle] = useState(false)
+  const navigate = useNavigate()
 
   const copyPrompt = (prompt, id) => {
     navigator.clipboard.writeText(prompt)
     setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
+  }
+
+  const handleVaultToggle = () => {
+    setVaultToggle(true)
+    setTimeout(() => {
+      navigate('/prompts')
+    }, 300)
   }
 
   return (
@@ -100,33 +110,47 @@ export default function HeroGallery() {
             Get consistent, commercial-quality results every time.
           </p>
 
-          {/* Explore Prompt Vault Button - Neumorphic Toggle Style */}
+          {/* Explore Prompt Vault - Sliding Toggle Switch */}
           <div className="mb-8">
-            <a
-              href="#prompts"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 active:scale-95"
-              style={{
-                background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
-                color: '#fff',
-                border: '2px solid #3B82F650',
-                boxShadow: 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)'
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = 'translateY(1px) scale(0.98)';
-                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
-              }}
-            >
-              Explore the Prompt Vault
-              <ArrowRight className="h-4 w-4" />
-            </a>
+            <div className="flex items-center justify-center gap-4">
+              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
+                Explore Prompt Vault
+              </span>
+              <button
+                onClick={handleVaultToggle}
+                className="relative w-16 h-8 rounded-full transition-all duration-300"
+                style={{
+                  background: vaultToggle
+                    ? 'linear-gradient(145deg, #3B82F6, #2563EB)'
+                    : 'var(--bg-card)',
+                  boxShadow: vaultToggle
+                    ? 'inset 2px 2px 4px rgba(59,130,246,0.5), inset -2px -2px 4px rgba(255,255,255,0.3), 0 2px 8px rgba(59,130,246,0.4)'
+                    : 'inset 2px 2px 4px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.1)',
+                  border: `2px solid ${vaultToggle ? '#3B82F650' : 'var(--border-color)'}`
+                }}
+                aria-label="Toggle Prompt Vault"
+              >
+                <span
+                  className="absolute top-1 left-1 w-5 h-5 rounded-full transition-all duration-300 flex items-center justify-center"
+                  style={{
+                    background: vaultToggle ? '#fff' : 'linear-gradient(145deg, #f3f4f6, #e5e7eb)',
+                    transform: vaultToggle ? 'translateX(30px)' : 'translateX(0)',
+                    boxShadow: vaultToggle
+                      ? '2px 2px 4px rgba(0,0,0,0.2)'
+                      : '2px 2px 4px rgba(0,0,0,0.1), inset 1px 1px 2px rgba(255,255,255,0.8)'
+                  }}
+                >
+                  <ArrowRight
+                    className="h-3 w-3 transition-all duration-300"
+                    style={{
+                      color: vaultToggle ? '#3B82F6' : '#9CA3AF',
+                      transform: vaultToggle ? 'rotate(0deg)' : 'rotate(-45deg)',
+                      opacity: vaultToggle ? 1 : 0.5
+                    }}
+                  />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 

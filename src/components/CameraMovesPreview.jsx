@@ -285,11 +285,25 @@ export default function CameraMovesPreview() {
         <div className="text-center">
           <a 
             href="/camera-moves.html"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
             style={{ 
-              background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)', 
+              background: 'linear-gradient(145deg, #8B5CF6, #8B5CF6DD)', 
               color: '#fff',
-              boxShadow: '6px 6px 12px rgba(124,58,237,0.3)'
+              border: '2px solid #8B5CF650',
+              boxShadow: 'inset 3px 3px 6px rgba(139,92,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(139,92,246,0.4)',
+              transform: 'translateY(0) scale(1)'
+            }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.transform = 'translateY(2px) scale(0.96)';
+              e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(139,92,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(139,92,246,0.3)';
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(139,92,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(139,92,246,0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(139,92,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(139,92,246,0.4)';
             }}
           >
             See all camera moves
