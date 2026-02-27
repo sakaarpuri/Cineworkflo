@@ -238,29 +238,29 @@ Monthly:
 ## Current Route Checklist
 
 - `/`:
-  - [ ] Unique metadata
-  - [ ] Structured data
-  - [ ] Social preview (`og:image`)
+  - [x] Unique metadata
+  - [x] Structured data
+  - [x] Social preview (`og:image`)
   - [ ] Performance pass
   - [ ] Internal links to `/prompts`, `/shot-to-prompt`, `/camera-moves`
 
 - `/prompts`:
   - [ ] Category architecture
-  - [ ] FAQ block/schema
-  - [ ] Social preview (`og:image`)
+  - [x] FAQ block/schema
+  - [x] Social preview (`og:image`)
   - [ ] Conversion CTA tests
 
 - `/shot-to-prompt`:
-  - [ ] Educational content sections
-  - [ ] FAQ schema
-  - [ ] Social preview (`og:image`)
-  - [ ] Internal links to prompt categories
+  - [x] Educational content sections
+  - [x] FAQ schema
+  - [x] Social preview (`og:image`)
+  - [x] Internal links to prompt categories
 
 - `/camera-moves`:
-  - [ ] Unique metadata for page intent
-  - [ ] Internal links to prompt workflows
-  - [ ] Structured data (breadcrumb + educational intent)
-  - [ ] Social preview (`og:image`)
+  - [x] Unique metadata for page intent
+  - [x] Internal links to prompt workflows
+  - [x] Structured data (breadcrumb + educational intent)
+  - [x] Social preview (`og:image`)
 
 - Pricing / checkout flows:
   - [ ] Crawl-safe metadata

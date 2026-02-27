@@ -69,6 +69,51 @@ const SEO_BY_PATH = {
   }
 }
 
+const FAQ_BY_PATH = {
+  '/prompts': [
+    {
+      question: 'Are these prompts specific to one tool?',
+      answer: 'They are optimized for AI video tools like Runway and Pika, but also work as a strong base for most text-to-video workflows.'
+    },
+    {
+      question: 'Should I copy prompts exactly as-is?',
+      answer: 'Start with the base prompt, then customize subject, style, lens, and motion terms to fit your scene.'
+    },
+    {
+      question: 'How do I get more consistent outputs?',
+      answer: 'Pair prompts with strong references in Shot to Prompt and use precise camera move language from the Camera Moves guide.'
+    }
+  ],
+  '/shot-to-prompt': [
+    {
+      question: 'What image works best for analysis?',
+      answer: 'Use a clean frame with visible subject, environment, and lighting. Blurry or very dark images reduce accuracy.'
+    },
+    {
+      question: 'Can I use movie stills or my own footage frames?',
+      answer: 'Yes. You can upload references from films, ads, or your own shots to reverse-engineer camera language.'
+    },
+    {
+      question: 'What should I do after generating the first prompt?',
+      answer: 'Treat it as a base draft, then add style, lens, and motion terms to match your final look.'
+    }
+  ],
+  '/camera-moves': [
+    {
+      question: 'What is the difference between tracking and steadicam?',
+      answer: 'Tracking usually means camera and subject move together on a matched path; steadicam means stabilized free movement that still follows naturally.'
+    },
+    {
+      question: 'Which camera moves are best for beginners?',
+      answer: 'Start with dolly, pan, tilt, and zoom. They are easy to describe in prompts and build a solid camera-language foundation.'
+    },
+    {
+      question: 'When should I use AI-native moves like push through or dolly zoom?',
+      answer: 'Use them for stylized transitions, dramatic tension, and shots that are expensive or physically difficult in real production.'
+    }
+  ]
+}
+
 function RouteSeo() {
   const location = useLocation()
 
@@ -149,6 +194,13 @@ function RouteSeo() {
           price: '49.00',
           priceCurrency: 'USD'
         }
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'CineWorkflo',
+        url: origin,
+        logo: `${origin}/og-default.svg`
       }
     ]
 
@@ -180,11 +232,31 @@ function RouteSeo() {
       ]
     }
 
+    const faqEntries = FAQ_BY_PATH[normalizedPath]
+    const faqSchema = faqEntries?.length
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqEntries.map((entry) => ({
+            '@type': 'Question',
+            name: entry.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: entry.answer
+            }
+          }))
+        }
+      : null
+
     const schemaPayload = normalizedPath === '/'
       ? homeSchema
       : breadcrumbSchema
         ? [pageSchema, breadcrumbSchema]
         : [pageSchema]
+
+    if (faqSchema) {
+      schemaPayload.push(faqSchema)
+    }
 
     let script = document.head.querySelector('script#route-seo-jsonld')
     if (!script) {

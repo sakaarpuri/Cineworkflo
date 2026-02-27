@@ -285,6 +285,69 @@ export default function PromptVault({ preview = false }) {
             </Link>
           </div>
         )}
+
+        {!preview && (
+          <section
+            className="mt-10 rounded-2xl p-6"
+            style={{
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-color)'
+            }}
+          >
+            <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              Build complete shots faster
+            </h2>
+            <p className="mb-4" style={{ color: 'var(--text-secondary)' }}>
+              Combine curated prompts with frame analysis and camera movement language for better AI video consistency.
+            </p>
+            <div className="flex flex-wrap gap-3 mb-6">
+              <Link
+                to="/shot-to-prompt"
+                className="px-4 py-2 rounded-lg text-sm font-semibold"
+                style={{ background: 'var(--accent-purple)', color: '#fff' }}
+              >
+                Open Shot to Prompt
+              </Link>
+              <Link
+                to="/camera-moves"
+                className="px-4 py-2 rounded-lg text-sm font-semibold"
+                style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
+              >
+                Learn Camera Moves
+              </Link>
+            </div>
+
+            <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
+              Prompt Vault FAQ
+            </h3>
+            <div className="space-y-4 text-sm">
+              <div>
+                <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                  Are these prompts specific to one tool?
+                </p>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  They are optimized for AI video tools like Runway and Pika, but also work as a strong base for most text-to-video workflows.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                  Should I copy prompts exactly as-is?
+                </p>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  Start with the base prompt, then customize subject, style, lens, and motion terms to fit your scene.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                  How do I get more consistent outputs?
+                </p>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  Pair prompts with strong references in Shot to Prompt and use precise camera move language from the Camera Moves guide.
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
 
       {/* Prompt Modal */}

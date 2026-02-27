@@ -1,5 +1,6 @@
 import React from 'react';
 import { Move3d } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import '../components/CameraMoveCards/CameraMoveCard.css';
 import { CameraMoveCard } from '../components/CameraMoveCards';
 import {
@@ -248,7 +249,92 @@ export default function CameraMovesPage() {
         MODERN / AI-NATIVE MOVES
       </div>
       <Grid moves={MODERN_MOVES} />
+
+      <section
+        style={{
+          maxWidth: 1200,
+          margin: '28px auto 0',
+          background: '#FFFFFF',
+          border: '1px solid #E5E7EB',
+          borderRadius: 16,
+          padding: 24
+        }}
+      >
+        <h2 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 8 }}>
+          Apply these moves in your prompts
+        </h2>
+        <p style={{ color: '#6B7280', marginBottom: 16 }}>
+          Use camera-language terms directly in your generation workflow, then refine from visual references.
+        </p>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <Link
+            to="/prompts"
+            style={{
+              background: '#2563EB',
+              color: '#fff',
+              padding: '10px 14px',
+              borderRadius: 10,
+              fontWeight: 700
+            }}
+          >
+            Browse Prompt Vault
+          </Link>
+          <Link
+            to="/shot-to-prompt"
+            style={{
+              border: '1px solid #D1D5DB',
+              color: '#111827',
+              background: '#fff',
+              padding: '10px 14px',
+              borderRadius: 10,
+              fontWeight: 700
+            }}
+          >
+            Try Shot to Prompt
+          </Link>
+        </div>
+      </section>
+
+      <section
+        style={{
+          maxWidth: 1200,
+          margin: '20px auto 0',
+          background: '#FFFFFF',
+          border: '1px solid #E5E7EB',
+          borderRadius: 16,
+          padding: 24
+        }}
+      >
+        <h2 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 14 }}>
+          Camera Moves FAQ
+        </h2>
+        <div style={{ display: 'grid', gap: 14 }}>
+          <div>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 4 }}>
+              What is the difference between tracking and steadicam?
+            </h3>
+            <p style={{ color: '#6B7280', lineHeight: 1.6 }}>
+              Tracking usually means camera and subject move together on a matched path; steadicam means stabilized free movement that still follows naturally.
+            </p>
+          </div>
+          <div>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 4 }}>
+              Which camera moves are best for beginners?
+            </h3>
+            <p style={{ color: '#6B7280', lineHeight: 1.6 }}>
+              Start with dolly, pan, tilt, and zoom. They are easy to describe in prompts and build a solid camera-language foundation.
+            </p>
+          </div>
+          <div>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 4 }}>
+              When should I use AI-native moves like push through or dolly zoom?
+            </h3>
+            <p style={{ color: '#6B7280', lineHeight: 1.6 }}>
+              Use them for stylized transitions, dramatic tension, and shots that are expensive or physically difficult in real production.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-

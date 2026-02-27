@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X, Copy, Check } from 'lucide-react'
 
 export default function ShotToPrompt({ preview = false }) {
@@ -365,6 +366,83 @@ export default function ShotToPrompt({ preview = false }) {
             </div>
           )}
         </div>
+
+        <section
+          className="mt-8 rounded-2xl p-6"
+          style={{
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-color)'
+          }}
+        >
+          <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
+            How to get better prompt results
+          </h2>
+          <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
+            <li>Use clear, well-lit frames where the subject fills enough of the image.</li>
+            <li>Upload the exact moment with the composition you want to replicate.</li>
+            <li>After generation, refine the result with style prompts from Prompt Vault.</li>
+          </ul>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              to="/prompts"
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+              style={{
+                background: 'var(--accent-blue)',
+                color: '#fff'
+              }}
+            >
+              Open Prompt Vault
+            </Link>
+            <Link
+              to="/camera-moves"
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+              style={{
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)'
+              }}
+            >
+              Learn Camera Moves
+            </Link>
+          </div>
+        </section>
+
+        <section
+          className="mt-6 rounded-2xl p-6"
+          style={{
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-color)'
+          }}
+        >
+          <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+            Shot to Prompt FAQ
+          </h2>
+          <div className="space-y-4 text-sm">
+            <div>
+              <h3 className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                What image works best for analysis?
+              </h3>
+              <p style={{ color: 'var(--text-secondary)' }}>
+                Use a clean frame with visible subject, environment, and lighting. Blurry or very dark images reduce accuracy.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                Can I use movie stills or my own footage frames?
+              </h3>
+              <p style={{ color: 'var(--text-secondary)' }}>
+                Yes. You can upload references from films, ads, or your own shots to reverse-engineer camera language.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                What should I do after generating the first prompt?
+              </h3>
+              <p style={{ color: 'var(--text-secondary)' }}>
+                Treat it as a base draft, then add style, lens, and motion terms to match your final look.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   )
