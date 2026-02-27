@@ -7,9 +7,7 @@ import {
   TiltMove,
   TrackingMove,
   ZoomMove,
-  HandheldMove,
-  DroneMove,
-  OrbitMove
+  HandheldMove
 } from './moves';
 
 // Card metadata - ONLY using moves from actual HTML pages
@@ -79,32 +77,10 @@ const CARD_DATA = [
     feelText: 'Present and personal. Adds realism, tension, and immediacy.',
     prompts: ['handheld camera', 'smooth natural micro-drift', 'human-operated', 'subtle breathing sway'],
     MoveComponent: HandheldMove
-  },
-  {
-    id: 'drone',
-    name: 'Drone / Aerial',
-    tag: 'rise up + away',
-    badge: 'AI-NATIVE MOVE',
-    badgeType: 'ainative',
-    desc: 'The camera rises and pulls away, revealing context and scale. In AI video, the drone can fly impossible paths.',
-    feelText: 'Expansion and grandeur. A reveal that opens the world.',
-    prompts: ['drone aerial', 'rise up and pull back', 'overhead reveal', 'wide establishing scale'],
-    MoveComponent: DroneMove
-  },
-  {
-    id: 'orbit',
-    name: 'Orbit / 360',
-    tag: 'circles subject',
-    badge: 'AI-NATIVE MOVE',
-    badgeType: 'ainative',
-    desc: 'The camera circles the subject while always keeping them centered. Great for hero moments.',
-    feelText: 'The world rotates around the character. Bold, stylized, and high-impact.',
-    prompts: ['360 orbit around subject', 'camera circles', 'keeps subject centered', 'smooth cinematic rotation'],
-    MoveComponent: OrbitMove
   }
 ];
 
-function CameraMoveCard({ data }) {
+export function CameraMoveCard({ data }) {
   const [isHovered, setIsHovered] = useState(false);
   const { MoveComponent } = data;
 
@@ -160,7 +136,7 @@ function CameraMoveCard({ data }) {
 export default function CameraMoveCards() {
   return (
     <section className="py-14" style={{ background: '#F0EEE9' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider mb-3" 
                style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', color: '#2563EB' }}>
@@ -175,7 +151,10 @@ export default function CameraMoveCards() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div
+          className="grid gap-7 mb-10"
+          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))' }}
+        >
           {CARD_DATA.map((card) => (
             <CameraMoveCard key={card.id} data={card} />
           ))}

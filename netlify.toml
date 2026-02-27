@@ -7,14 +7,8 @@
   NODE_VERSION = "18"
 
 [[redirects]]
-  from = "/camera-moves"
-  to = "/camera-moves.html"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/camera-moves/"
-  to = "/camera-moves.html"
+  from = "/camera-moves.html"
+  to = "/camera-moves"
   status = 301
   force = true
 

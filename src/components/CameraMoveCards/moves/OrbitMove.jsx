@@ -12,12 +12,17 @@ export function OrbitMove({ isHovered }) {
   const labelRef = useRef(null);
   const recRef = useRef(null);
 
-  // Orbit parameters
-  const CX = 178;
-  const CY = 110;
-  const R = 74;
+  const CAM_W = 38;
+  const CAM_H = 28;
 
   const animateFn = useCallback((p, ts) => {
+    const stage = stageRef.current;
+    const w = stage?.clientWidth ?? 356;
+    const h = stage?.clientHeight ?? 220;
+    const CX = w / 2;
+    const CY = h / 2;
+    const R = Math.min(w, h) * 0.34;
+
     const t = p < 0.44 ? easeInOut(p / 0.44) : p < 0.56 ? 1 : 1 - easeInOut((p - 0.56) / 0.44);
     
     // Calculate position on circle
@@ -30,7 +35,8 @@ export function OrbitMove({ isHovered }) {
 
     const cam = camRef.current;
     if (cam) {
-      cam.style.transform = `translate(${camX}px, ${camY}px) rotate(${aim}deg)`;
+      cam.style.transformOrigin = 'center center';
+      cam.style.transform = `translate(${camX - CAM_W / 2}px, ${camY - CAM_H / 2}px) rotate(${aim}deg)`;
     }
 
     const label = labelRef.current;
@@ -58,13 +64,20 @@ export function OrbitMove({ isHovered }) {
     const cam = camRef.current;
     const label = labelRef.current;
     const rec = recRef.current;
+    const stage = stageRef.current;
+    const w = stage?.clientWidth ?? 356;
+    const h = stage?.clientHeight ?? 220;
+    const CX = w / 2;
+    const CY = h / 2;
+    const R = Math.min(w, h) * 0.34;
 
     // Reset to starting position (right side of circle)
     if (cam) {
       const startX = CX + R;
       const startY = CY;
       const aim = Math.atan2(CY - startY, CX - startX) * 180 / Math.PI;
-      cam.style.transform = `translate(${startX}px, ${startY}px) rotate(${aim}deg)`;
+      cam.style.transformOrigin = 'center center';
+      cam.style.transform = `translate(${startX - CAM_W / 2}px, ${startY - CAM_H / 2}px) rotate(${aim}deg)`;
     }
     if (label) {
       label.style.opacity = '0';
@@ -79,7 +92,7 @@ export function OrbitMove({ isHovered }) {
     animateFn,
     resetFn,
     runs: 2,
-    duration: 3400
+    duration: 4200
   });
 
   React.useEffect(() => {
@@ -107,7 +120,7 @@ export function OrbitMove({ isHovered }) {
         </div>
       </div>
       
-      {/* Subject at center */}
+      {/* Subject at center (top-down) */}
       <div 
         className="camera-move-card__stickman-wrap"
         style={{ 
@@ -117,19 +130,10 @@ export function OrbitMove({ isHovered }) {
           zIndex: 2
         }}
       >
-        <svg width="56" height="142" viewBox="0 0 56 142" fill="none" aria-hidden="true">
-          <circle cx="28" cy="12" r="11" className="camera-move-card__fig-main"/>
-          <rect x="23" y="22" width="10" height="8" rx="3" className="camera-move-card__fig-main"/>
-          <path d="M7 30C7 27 17 25 28 25C39 25 49 27 49 30L45 66L11 66Z" className="camera-move-card__fig-main"/>
-          <path d="M9 32L3 72L11 73L15 34Z" className="camera-move-card__fig-dark"/>
-          <circle cx="6" cy="75" r="5" className="camera-move-card__fig-dark"/>
-          <path d="M47 32L53 72L45 73L41 34Z" className="camera-move-card__fig-dark"/>
-          <circle cx="50" cy="75" r="5" className="camera-move-card__fig-dark"/>
-          <path d="M11 64L45 64L42 78L14 78Z" className="camera-move-card__fig-dark"/>
-          <path d="M14 76L12 124L22 124L24 76Z" className="camera-move-card__fig-main"/>
-          <path d="M11 122L23 122L24 132L9 132Z" className="camera-move-card__fig-dark"/>
-          <path d="M32 76L34 124L44 124L42 76Z" className="camera-move-card__fig-main"/>
-          <path d="M32 122L44 122L46 132L31 132Z" className="camera-move-card__fig-dark"/>
+        <svg width="84" height="56" viewBox="0 0 80 52" fill="none" aria-hidden="true">
+          <rect x="0" y="26" width="80" height="20" rx="10" fill="#C06A00" />
+          <circle cx="40" cy="22" r="20" fill="#E08500" />
+          <circle cx="40" cy="13" r="8" fill="#C06A00" opacity="0.35" />
         </svg>
       </div>
       
