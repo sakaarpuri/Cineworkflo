@@ -203,6 +203,8 @@ export default function ShotToPrompt({ preview = false }) {
                       src={uploadedImage} 
                       alt="Uploaded" 
                       className="w-full h-48 object-cover rounded-xl"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <button
                       onClick={(e) => {
@@ -327,6 +329,9 @@ export default function ShotToPrompt({ preview = false }) {
                   src={uploadedImage} 
                   alt="Uploaded" 
                   className="w-full max-h-96 object-contain rounded-xl"
+                  style={{ minHeight: '15rem' }}
+                  loading="eager"
+                  decoding="async"
                 />
                 <button
                   onClick={(e) => {
