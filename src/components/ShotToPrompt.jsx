@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react'
-import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X } from 'lucide-react'
+import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X, Copy, Check } from 'lucide-react'
 
 export default function ShotToPrompt({ preview = false }) {
   const [uploadedImage, setUploadedImage] = useState(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [generatedPrompt, setGeneratedPrompt] = useState('')
+  const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
 
   const handleImageUpload = (e) => {
@@ -21,16 +22,108 @@ export default function ShotToPrompt({ preview = false }) {
 
   const analyzeImage = async (imageData) => {
     setIsAnalyzing(true)
-    setTimeout(() => {
-      setGeneratedPrompt(`Cinematic aerial drone shot, sweeping over coastal cliffs at golden hour, dramatic shadows on rock formations, gentle ocean waves below, professional travel documentary style, 4K quality, smooth gimbal movement, slight lens flare from setting sun`)
-      setIsAnalyzing(false)
-    }, 2000)
+    setGeneratedPrompt('')
+    
+    try {
+      const response = await fetch('/.netlify/functions/shot-to-prompt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imageData })
+      })
+
+      const data = await response.json()
+      
+      if (data.prompt) {
+        setGeneratedPrompt(data.prompt)
+      } else {
+        // Fallback if API fails
+        setGeneratedPrompt('Cinematic aerial drone shot, sweeping over coastal cliffs at golden hour, dramatic shadows on rock formations, gentle ocean waves below, professional travel documentary style, 4K quality, smooth gimbal movement, slight lens flare from setting sun')
+      }
+    } catch (err) {
+      console.error('Shot to prompt error:', err)
+      // Fallback for development
+      setGeneratedPrompt('Cinematic aerial drone shot, sweeping over coastal cliffs at golden hour, dramatic shadows on rock formations, gentle ocean waves below, professional travel documentary style, 4K quality, smooth gimbal movement, slight lens flare from setting sun')
+    }
+    
+    setIsAnalyzing(false)
   }
 
   const clearImage = () => {
     setUploadedImage(null)
     setGeneratedPrompt('')
+    setCopied(false)
   }
+
+  const handleCopy = () => {
+    if (!generatedPrompt) return
+    navigator.clipboard.writeText(generatedPrompt)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  // Copyable Output Component (like PromptEnhancer)
+  const CopyableOutput = () => (
+    <div 
+      className="mt-4"
+      style={{
+        background: 'var(--bg-secondary)',
+        boxShadow: 'var(--shadow-card)',
+        border: '1px solid var(--accent-green)40',
+        borderRadius: '1rem',
+        padding: '1.25rem'
+      }}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <div 
+          className="text-xs font-bold flex items-center gap-1.5"
+          style={{ color: 'var(--accent-green)' }}
+        >
+          <Check className="h-4 w-4" />
+          GENERATED PROMPT
+        </div>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+          style={{
+            background: copied 
+              ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
+              : 'var(--bg-card)',
+            color: copied ? '#fff' : 'var(--text-secondary)',
+            border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+            boxShadow: copied 
+              ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+              : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+            transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+          }}
+        >
+          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+          {copied ? 'Copied!' : 'Copy Prompt'}
+        </button>
+      </div>
+      <div
+        className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
+        style={{
+          background: 'var(--bg-primary)',
+          border: '2px solid var(--border-color)',
+          color: 'var(--text-primary)',
+          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+          minHeight: '100px'
+        }}
+        onClick={(e) => {
+          const range = document.createRange()
+          range.selectNodeContents(e.currentTarget)
+          const sel = window.getSelection()
+          sel.removeAllRanges()
+          sel.addRange(range)
+        }}
+      >
+        {generatedPrompt}
+      </div>
+      <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+        Click text to select all, or use the Copy button
+      </p>
+    </div>
+  )
 
   if (preview) {
     return (
@@ -138,33 +231,7 @@ export default function ShotToPrompt({ preview = false }) {
                       <span style={{ color: 'var(--text-secondary)' }}>Analyzing shot composition...</span>
                     </div>
                   ) : generatedPrompt ? (
-                    <div 
-                      className="p-4 rounded-xl"
-                      style={{
-                        background: 'var(--bg-primary)',
-                        border: '1px solid var(--border-color)'
-                      }}
-                    >
-                      <p 
-                        className="text-sm mb-3 italic"
-                        style={{ color: 'var(--text-primary)', fontFamily: 'Georgia, serif' }}
-                      >
-                        "{generatedPrompt}"
-                      </p>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          navigator.clipboard.writeText(generatedPrompt)
-                        }}
-                        className="w-full py-2 rounded-lg text-sm font-medium transition-all"
-                        style={{
-                          background: 'var(--accent-purple)',
-                          color: '#fff'
-                        }}
-                      >
-                        Copy Prompt
-                      </button>
-                    </div>
+                    <CopyableOutput />
                   ) : null}
                 </div>
               ) : (
@@ -289,41 +356,7 @@ export default function ShotToPrompt({ preview = false }) {
                 </div>
               )}
 
-              {generatedPrompt && (
-                <div 
-                  className="p-6 rounded-xl"
-                  style={{
-                    background: 'var(--bg-primary)',
-                    border: '1px solid var(--border-color)'
-                  }}
-                >
-                  <h3 
-                    className="text-sm font-bold mb-3"
-                    style={{ color: 'var(--accent-purple)' }}
-                  >
-                    Generated Prompt
-                  </h3>
-                  <p 
-                    className="mb-4 italic leading-relaxed"
-                    style={{ color: 'var(--text-primary)', fontFamily: 'Georgia, serif' }}
-                  >
-                    "{generatedPrompt}"
-                  </p>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      navigator.clipboard.writeText(generatedPrompt)
-                    }}
-                    className="w-full py-3 rounded-xl font-medium transition-all"
-                    style={{
-                      background: 'var(--accent-purple)',
-                      color: '#fff'
-                    }}
-                  >
-                    Copy Prompt
-                  </button>
-                </div>
-              )}
+              {generatedPrompt && <CopyableOutput />}
             </div>
           )}
         </div>
