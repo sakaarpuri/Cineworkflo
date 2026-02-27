@@ -117,10 +117,11 @@ export default function Pricing({ onAuthClick }) {
               key={plan.name}
               className="rounded-2xl p-8 transition-all flex flex-col"
               style={{
-                background: plan.popular ? 'var(--accent-blue)' : 'var(--bg-card)',
-                boxShadow: 'var(--shadow-card)',
-                border: `2px solid ${plan.popular ? 'var(--accent-blue)' : 'var(--border-color)'}`,
-                transform: plan.popular ? 'scale(1.02)' : 'scale(1)'
+                background: plan.popular ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--bg-card)',
+                boxShadow: plan.popular 
+                  ? 'inset 4px 4px 8px rgba(59,130,246,0.3), inset -4px -4px 8px rgba(255,255,255,0.1), 0 8px 24px rgba(59,130,246,0.3)'
+                  : 'var(--shadow-card)',
+                border: `2px solid ${plan.popular ? 'rgba(255,255,255,0.2)' : 'var(--border-color)'}`,
               }}
             >
               {plan.popular && (

@@ -86,6 +86,27 @@ body {
   transform: translateY(1px) scale(0.98);
   box-shadow: inset 3px 3px 6px rgba(59,130,246,0.6), inset -2px -2px 4px rgba(255,255,255,0.3), 0 1px 4px rgba(59,130,246,0.3);
 }
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fafaf9, #f0eee9);
+  border: 1px solid #e5e1d8;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.05), -2px -2px 4px rgba(255,255,255,0.8);
+}
+.theme-toggle:hover {
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.05), inset -2px -2px 4px rgba(255,255,255,0.8);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  color: #6B7280;
+}
 .header {
   text-align: center;
   margin-bottom: 40px;
@@ -165,7 +186,13 @@ h1 {
         <a href="/camera-moves.html">Camera Moves</a>
         <a href="/#pricing">Pricing</a>
       </div>
-      <a href="/" class="nav-button">Get Pro</a>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <a href="/" class="nav-button">Get Pro</a>
+      </div>
     </div>
   </nav>
 
@@ -184,5 +211,37 @@ h1 {
   <div class="section-title">MODERN / AI-NATIVE MOVES</div>
   <iframe src="/camera-moves/modern.html" width="100%" height="1100" style="border:none;" scrolling="no"></iframe>
 
+<script>
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('themeToggle');
+  const moonIcon = document.getElementById('moonIcon');
+  const sunIcon = document.getElementById('sunIcon');
+  
+  // Get theme from localStorage (sync with main site)
+  let currentTheme = localStorage.getItem('theme') || 'light';
+  
+  function updateThemeIcon() {
+    if (currentTheme === 'dark') {
+      moonIcon.style.display = 'none';
+      sunIcon.style.display = 'block';
+      sunIcon.style.color = '#3B82F6';
+    } else {
+      moonIcon.style.display = 'block';
+      sunIcon.style.display = 'none';
+      moonIcon.style.color = '#6B7280';
+    }
+  }
+  
+  function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', currentTheme);
+    updateThemeIcon();
+    // Apply theme to document
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  }
+  
+  themeToggle.addEventListener('click', toggleTheme);
+  updateThemeIcon();
+</script>
 </body>
 </html>
