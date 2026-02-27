@@ -193,7 +193,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
   const [usage, setUsage] = useState({ count: 0, isPro: false });
   const [addedDetails, setAddedDetails] = useState([]);
-  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "" });
+  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner" });
   
   const { user, isPro } = useAuth();
 
@@ -249,7 +249,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setResult(generateSmartPrompt(idea, mood, useCase, skillLevel));
     }
     setLoading(false);
-  }, [canSubmit, idea, mood, useCase, isPro]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, isPro]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -267,17 +267,18 @@ export default function PromptEnhancer({ onAuthClick }) {
       const paramsChanged = 
         idea !== lastParamsRef.current.idea ||
         mood !== lastParamsRef.current.mood ||
-        useCase !== lastParamsRef.current.useCase;
+        useCase !== lastParamsRef.current.useCase ||
+        skillLevel !== lastParamsRef.current.skillLevel;
       
       if (!paramsChanged) return;
       
       const timeoutId = setTimeout(() => {
         handleEnhance(true); // Pass true for auto-update (keeps result visible)
-        lastParamsRef.current = { idea, mood, useCase };
+        lastParamsRef.current = { idea, mood, useCase, skillLevel };
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [mood, useCase, idea, hasGeneratedOnce, canSubmit, handleEnhance]);
+  }, [mood, useCase, idea, skillLevel, hasGeneratedOnce, canSubmit, handleEnhance]);
 
 
   const handleCopy = () => {
