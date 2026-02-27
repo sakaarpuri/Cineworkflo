@@ -12,14 +12,17 @@ export function OrbitMove({ isHovered }) {
   const labelRef = useRef(null);
   const recRef = useRef(null);
 
-  // Orbit parameters
-  const CX = 178;
-  const CY = 110;
-  const R = 74;
   const CAM_W = 38;
   const CAM_H = 28;
 
   const animateFn = useCallback((p, ts) => {
+    const stage = stageRef.current;
+    const w = stage?.clientWidth ?? 356;
+    const h = stage?.clientHeight ?? 220;
+    const CX = w / 2;
+    const CY = h / 2;
+    const R = Math.min(w, h) * 0.34;
+
     const t = p < 0.44 ? easeInOut(p / 0.44) : p < 0.56 ? 1 : 1 - easeInOut((p - 0.56) / 0.44);
     
     // Calculate position on circle
@@ -61,6 +64,12 @@ export function OrbitMove({ isHovered }) {
     const cam = camRef.current;
     const label = labelRef.current;
     const rec = recRef.current;
+    const stage = stageRef.current;
+    const w = stage?.clientWidth ?? 356;
+    const h = stage?.clientHeight ?? 220;
+    const CX = w / 2;
+    const CY = h / 2;
+    const R = Math.min(w, h) * 0.34;
 
     // Reset to starting position (right side of circle)
     if (cam) {
