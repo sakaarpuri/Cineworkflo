@@ -301,8 +301,8 @@ export default function PromptEnhancer({ onAuthClick }) {
   const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
     if (!canSubmit && !interpretationStyle) return;
     setLoading(true);
-    // Only clear result on first generation, keep it visible during auto-updates
-    if (!isAutoUpdate) {
+    // Keep current result visible when generating interpretation variants.
+    if (!isAutoUpdate && !interpretationStyle) {
       setBaseResult(null);
       setResult(null);
     }
