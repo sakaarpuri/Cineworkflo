@@ -82,7 +82,7 @@ exports.handler = async (event) => {
         mode: 'subscription',
         client_reference_id: userId,
         success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=monthly`,
-        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing`,
+        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing?checkout=canceled&plan=monthly`,
         customer_email: email,
         subscription_data: {
           metadata: {
@@ -116,7 +116,7 @@ exports.handler = async (event) => {
         mode: 'subscription',
         client_reference_id: userId,
         success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=yearly`,
-        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing`,
+        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing?checkout=canceled&plan=yearly`,
         customer_email: email,
         subscription_data: {
           metadata: {
