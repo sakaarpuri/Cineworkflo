@@ -8,14 +8,33 @@ const ROUTES = [
   {
     path: '/',
     file: join(DIST_DIR, 'index.html'),
-    title: 'CineWorkflo - Professional AI Video Prompts for Runway & Pika | 150+ Tested Prompts',
-    description: 'Stop guessing with AI video. 150+ professional prompts for Runway Gen-2, Pika Labs, and AI video tools. Copy, paste, create.',
-    keywords: 'AI video prompts, Runway prompts, Pika prompts, AI filmmaking, video generation prompts, Runway Gen-2, Pika Labs',
+    title: 'CineWorkflo - Professional AI Video Prompts for Runway, Pika, Sora & Meta | 150+ Tested Prompts',
+    description: 'Stop guessing with AI video. 150+ professional prompts for Runway Gen-2, Pika Labs, Sora, Meta & AI video tools. Tested workflows for creators.',
+    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, camera moves, shot to prompt',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-        <h1>CineWorkflo — Professional AI Video Prompts for Runway & Pika</h1>
+        <h1>CineWorkflo — Professional AI Video Prompts for Runway, Pika, Sora & Meta</h1>
         <p><strong>150+ tested prompts for AI video generation.</strong> Stop guessing. Copy, paste, create.</p>
-        <p>Explore Prompt Vault, Shot to Prompt, and Camera Moves to build complete AI-video workflows.</p>
+        <p>CineWorkflo is a practical AI-video workflow for filmmakers and creator teams.</p>
+
+        <h2>Core Tools</h2>
+        <ul>
+          <li><a href="/prompts">Prompt Vault</a> — curated prompts by style and use case</li>
+          <li><a href="/shot-to-prompt">Shot to Prompt</a> — image reference to usable prompt</li>
+          <li><a href="/camera-moves">Camera Moves</a> — visual guide for motion language in prompts</li>
+        </ul>
+
+        <h2>Supported Platforms</h2>
+        <p>Runway, Pika, Kling, Luma, Sora, Meta, and similar video generation tools.</p>
+
+        <h2>Key Pages</h2>
+        <ul>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
       </main>
     `
   },
