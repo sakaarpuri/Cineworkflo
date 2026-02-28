@@ -23,13 +23,13 @@ exports.handler = async (event) => {
     };
   }
 
-    const anthropicApiKey = process.env.ANTHROPIC_API_KEY || '';
-    if (!anthropicApiKey) {
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: 'ANTHROPIC_API_KEY is not configured' })
-      };
+  const anthropicApiKey = process.env.ANTHROPIC_API_KEY || '';
+  if (!anthropicApiKey) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: 'ANTHROPIC_API_KEY is not configured' })
+    };
   }
 
   try {
