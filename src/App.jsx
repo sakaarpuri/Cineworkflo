@@ -12,6 +12,7 @@ const ShotToPrompt = lazy(() => import('./components/ShotToPrompt'))
 const CameraMoveCards = lazy(() => import('./components/CameraMoveCards'))
 const ModernAINativeMoves = lazy(() => import('./components/ModernAINativeMoves'))
 const CameraMovesPage = lazy(() => import('./pages/CameraMovesPage'))
+const PricingPage = lazy(() => import('./pages/PricingPage'))
 const Features = lazy(() => import('./components/Features'))
 const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
@@ -58,6 +59,13 @@ const SEO_BY_PATH = {
     description: 'Preview AI-native camera movement patterns for cinematic prompt design and previsualization.',
     keywords: 'AI-native camera moves, modern camera movement, orbit, drone, dolly zoom',
     path: '/modern-moves',
+    noindex: false
+  },
+  '/pricing': {
+    title: 'Pricing - CineWorkflo Plans for AI Video Creators',
+    description: 'Compare Free, Pro Monthly, and Pro Yearly plans for CineWorkflo. Unlock full prompt vault access and advanced AI video workflow tools.',
+    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans',
+    path: '/pricing',
     noindex: false
   },
   '/success': {
@@ -110,6 +118,20 @@ const FAQ_BY_PATH = {
     {
       question: 'When should I use AI-native moves like push through or dolly zoom?',
       answer: 'Use them for stylized transitions, dramatic tension, and shots that are expensive or physically difficult in real production.'
+    }
+  ],
+  '/pricing': [
+    {
+      question: 'Is this a recurring subscription?',
+      answer: 'The yearly plan is billed once for annual access. Monthly is billed per month and can be cancelled anytime.'
+    },
+    {
+      question: 'What do I get with Pro?',
+      answer: 'Pro unlocks the full prompt vault, unlimited AI generations, and advanced workflow tools including Shot to Prompt.'
+    },
+    {
+      question: 'Is there a refund policy?',
+      answer: 'Yes. Purchases include a 30-day money-back guarantee.'
     }
   ]
 }
@@ -352,7 +374,7 @@ function App() {
                   </DeferredSection>
                   <DeferredSection minHeight={180}>
                     <Suspense fallback={sectionFallback(180)}>
-                      <Pricing />
+                      <Pricing onAuthClick={() => setAuthModalOpen(true)} />
                     </Suspense>
                   </DeferredSection>
                 </>
@@ -361,6 +383,7 @@ function App() {
               <Route path="/shot-to-prompt" element={<Suspense fallback={sectionFallback(320)}><ShotToPrompt /></Suspense>} />
               <Route path="/camera-moves" element={<Suspense fallback={sectionFallback(320)}><CameraMovesPage /></Suspense>} />
               <Route path="/modern-moves" element={<Suspense fallback={sectionFallback(320)}><ModernAINativeMoves /></Suspense>} />
+              <Route path="/pricing" element={<Suspense fallback={sectionFallback(320)}><PricingPage onAuthClick={() => setAuthModalOpen(true)} /></Suspense>} />
               <Route path="/success" element={<Success />} />
             </Routes>
           </main>

@@ -63,13 +63,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="#pricing" 
+                <Link
+                  to="/pricing"
                   className="transition-colors hover:opacity-80"
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   Pricing
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

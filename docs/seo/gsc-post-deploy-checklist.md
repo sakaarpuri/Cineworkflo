@@ -13,6 +13,7 @@ Inspect these URLs one by one:
 - `https://cineworkflo.com/prompts`
 - `https://cineworkflo.com/shot-to-prompt`
 - `https://cineworkflo.com/camera-moves`
+- `https://cineworkflo.com/pricing`
 
 For each URL, validate:
 - Google-selected canonical matches page canonical.
@@ -21,7 +22,7 @@ For each URL, validate:
 - Metadata in rendered page includes route title and description.
 
 ## 3) Rich results and schema checks
-- Run Rich Results Test on `/`, `/prompts`, `/shot-to-prompt`, `/camera-moves`.
+- Run Rich Results Test on `/`, `/prompts`, `/shot-to-prompt`, `/camera-moves`, `/pricing`.
 - Confirm expected schema appears:
   - `/`: `WebSite`, `SoftwareApplication`, `Organization`
   - Child routes: `WebPage`, `BreadcrumbList`

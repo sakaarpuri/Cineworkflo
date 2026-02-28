@@ -92,6 +92,22 @@
   - `/modern-moves` -> `/camera-moves`
   - `/modern-moves` -> `/prompts`
 
+### 6) Pricing (`/pricing`)
+- Primary Intent: transactional intent for plan comparison and checkout entry.
+- Secondary Intent: creator-focused value/feature comparison.
+- SEO Role: dedicated conversion landing page instead of relying on home-page anchor only.
+- Primary Cluster:
+  - CineWorkflo pricing
+  - AI video prompt pricing
+  - prompt library subscription
+- Supporting Cluster:
+  - monthly vs yearly prompt plans
+  - AI video creator pricing
+- Conversion Path:
+  - `/pricing` -> checkout flow
+  - `/pricing` -> `/prompts` (product proof)
+  - `/pricing` -> `/shot-to-prompt` (tool proof)
+
 ---
 
 ## Cannibalization Guardrails

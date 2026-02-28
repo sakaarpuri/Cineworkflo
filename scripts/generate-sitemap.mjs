@@ -9,6 +9,7 @@ const routes = [
   { path: '/prompts', changefreq: 'weekly', priority: '0.9' },
   { path: '/shot-to-prompt', changefreq: 'weekly', priority: '0.9' },
   { path: '/camera-moves', changefreq: 'monthly', priority: '0.8' },
+  { path: '/pricing', changefreq: 'weekly', priority: '0.8' },
   { path: '/modern-moves', changefreq: 'monthly', priority: '0.5' }
 ]
 

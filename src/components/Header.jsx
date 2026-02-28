@@ -61,13 +61,13 @@ export default function Header({ onAuthClick }) {
             >
               Camera Moves
             </a>
-            <a 
-              href="#pricing" 
+            <Link
+              to="/pricing"
               className="font-medium transition-colors hover:opacity-80"
               style={{ color: 'var(--text-secondary)' }}
             >
               Pricing
-            </a>
+            </Link>
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
@@ -126,8 +126,8 @@ export default function Header({ onAuthClick }) {
                 >
                   Sign In
                 </button>
-                <a
-                  href="#pricing"
+                <Link
+                  to="/pricing"
                   className="px-5 py-2 rounded-lg font-semibold transition-all duration-200"
                   style={{
                     background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
@@ -150,7 +150,7 @@ export default function Header({ onAuthClick }) {
                   }}
                 >
                   Get Pro
-                </a>
+                </Link>
               </>
             )}
           </div>
@@ -194,14 +194,14 @@ export default function Header({ onAuthClick }) {
               >
                 Camera Moves
               </a>
-              <a 
-                href="#pricing" 
+              <Link
+                to="/pricing"
                 onClick={() => setIsOpen(false)}
                 className="font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Pricing
-              </a>
+              </Link>
               <div className="flex items-center gap-4 pt-2">
                 <button
                   onClick={toggleTheme}

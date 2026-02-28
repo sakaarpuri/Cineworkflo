@@ -72,6 +72,24 @@ const ROUTES = [
         </ul>
       </main>
     `
+  },
+  {
+    path: '/pricing',
+    file: join(DIST_DIR, 'pricing', 'index.html'),
+    title: 'Pricing - CineWorkflo Plans for AI Video Creators',
+    description: 'Compare Free, Pro Monthly, and Pro Yearly plans for CineWorkflo. Unlock full prompt vault access and advanced AI video workflow tools.',
+    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans',
+    fallbackHtml: `
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>CineWorkflo Pricing</h1>
+        <p>Choose a plan for AI video prompt workflows.</p>
+        <ul>
+          <li>Free: 30 generations monthly + core prompt set</li>
+          <li>Pro Monthly: unlimited generations + full prompt vault</li>
+          <li>Pro Yearly: best value with full access and updates</li>
+        </ul>
+      </main>
+    `
   }
 ]
 

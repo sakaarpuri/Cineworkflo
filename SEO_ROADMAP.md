@@ -276,6 +276,12 @@ Monthly:
   - [x] Structured data (breadcrumb + educational intent)
   - [x] Social preview (`og:image`)
 
+- `/pricing`:
+  - [x] Dedicated indexable route
+  - [x] Unique metadata for transactional intent
+  - [x] FAQ schema (with visible FAQ content)
+  - [ ] Conversion CTA tests
+
 - Pricing / checkout flows:
   - [x] Crawl-safe metadata
   - [x] No indexing of private/sensitive states
