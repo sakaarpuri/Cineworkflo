@@ -429,36 +429,44 @@ export default function PromptEnhancer({ onAuthClick }) {
             {/* Enhance Button - Orange Neumorphic Main Button */}
             <button
               onClick={() => handleEnhance(false)}
-              disabled={!canSubmit}
               className="px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
               style={{
                 background: canSubmit 
                   ? 'linear-gradient(145deg, #FF6B35, #FF6B35DD)' 
-                  : 'var(--border-color)',
-                color: canSubmit ? '#fff' : 'var(--text-muted)',
-                cursor: canSubmit ? 'pointer' : 'not-allowed',
+                  : 'linear-gradient(145deg, #E5E7EB, #D1D5DB)',
+                color: canSubmit ? '#fff' : '#4B5563',
+                cursor: 'pointer',
                 border: `2px solid ${canSubmit ? '#FF6B3550' : 'var(--border-color)'}`,
                 boxShadow: canSubmit 
                   ? 'inset 3px 3px 6px rgba(255,107,53,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(255,107,53,0.4)'
-                  : 'none',
+                  : 'inset 3px 3px 6px rgba(107,114,128,0.18), inset -3px -3px 6px rgba(255,255,255,0.72), 0 4px 12px rgba(107,114,128,0.18)',
                 transform: 'translateY(0) scale(1)'
               }}
               onMouseDown={(e) => {
                 if (canSubmit) {
                   e.currentTarget.style.transform = 'translateY(2px) scale(0.96)';
                   e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(255,107,53,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(255,107,53,0.3)';
+                } else {
+                  e.currentTarget.style.transform = 'translateY(2px) scale(0.97)';
+                  e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(107,114,128,0.24), inset -3px -3px 6px rgba(255,255,255,0.72), 0 2px 6px rgba(107,114,128,0.18)';
                 }
               }}
               onMouseUp={(e) => {
                 if (canSubmit) {
                   e.currentTarget.style.transform = 'translateY(0) scale(1)';
                   e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(255,107,53,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(255,107,53,0.4)';
+                } else {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(107,114,128,0.18), inset -3px -3px 6px rgba(255,255,255,0.72), 0 4px 12px rgba(107,114,128,0.18)';
                 }
               }}
               onMouseLeave={(e) => {
                 if (canSubmit) {
                   e.currentTarget.style.transform = 'translateY(0) scale(1)';
                   e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(255,107,53,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(255,107,53,0.4)';
+                } else {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(107,114,128,0.18), inset -3px -3px 6px rgba(255,255,255,0.72), 0 4px 12px rgba(107,114,128,0.18)';
                 }
               }}
             >
