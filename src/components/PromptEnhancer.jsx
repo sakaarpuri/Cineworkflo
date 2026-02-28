@@ -330,7 +330,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const levelPulseTimeoutRef = useRef(null);
   const [levelPulse, setLevelPulse] = useState('');
   
-  const { user, isPro } = useAuth();
+  const { user, session, isPro } = useAuth();
 
   // Load usage on mount
   useEffect(() => {
@@ -371,13 +371,24 @@ export default function PromptEnhancer({ onAuthClick }) {
         ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx, includeImages: includeImageDetails }
         : { idea, mood, useCase, skillLevel, includeAudioSfx, includeImages: includeImageDetails };
 
+      if (!session?.access_token) {
+        onAuthClick?.()
+        throw new Error('Sign in required to generate prompts.')
+      }
+
       const response = await fetch('/.netlify/functions/enhance-prompt', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        },
         body: JSON.stringify(promptPayload)
       });
 
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || `Enhancer failed (${response.status})`)
+      }
       const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
       const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
       const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
@@ -393,7 +404,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setResult(applySelectedProDetails(nextBaseResult, addedDetails));
     }
     setLoading(false);
-  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);

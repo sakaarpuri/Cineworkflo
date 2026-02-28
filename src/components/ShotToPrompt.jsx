@@ -9,7 +9,7 @@ export default function ShotToPrompt({ preview = false }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
-  const { user, isPro } = useAuth()
+  const { user, session, isPro } = useAuth()
 
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
   const FREE_LIMIT = 5
@@ -60,6 +60,11 @@ export default function ShotToPrompt({ preview = false }) {
   }
 
   const analyzeImage = async (imageData) => {
+    if (!session?.access_token) {
+      setGeneratedPrompt('Sign in required to use Shot to Prompt.')
+      return
+    }
+
     if (isLimitReached) {
       setGeneratedPrompt(!user
         ? 'Free limit reached (5 Shot to Prompt generations/month). Sign in or upgrade to continue.'
@@ -80,7 +85,10 @@ export default function ShotToPrompt({ preview = false }) {
     try {
       const response = await fetch('/.netlify/functions/shot-to-prompt', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`
+        },
         body: JSON.stringify({ image: imageData })
       })
 

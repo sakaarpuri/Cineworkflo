@@ -5,6 +5,95 @@ const MODEL_FALLBACK = [
   'claude-3-sonnet-20240229'
 ];
 
+const { createClient } = require('@supabase/supabase-js');
+
+const getEnvInt = (key, fallback) => {
+  const raw = process.env[key];
+  const value = Number.parseInt(String(raw ?? ''), 10);
+  return Number.isFinite(value) ? value : fallback;
+};
+
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const supabaseAdmin = supabaseUrl && supabaseServiceRoleKey
+  ? createClient(supabaseUrl, supabaseServiceRoleKey)
+  : null;
+
+const getBearerToken = (event) => {
+  const header = event?.headers?.authorization || event?.headers?.Authorization || '';
+  const value = String(header || '').trim();
+  if (!value.toLowerCase().startsWith('bearer ')) return '';
+  return value.slice(7).trim();
+};
+
+const isProUser = (user) => {
+  const meta = user?.user_metadata || {};
+  if (meta.is_pro !== true) return false;
+  if (!meta.pro_expires_at) return true;
+  const expires = new Date(meta.pro_expires_at);
+  return Number.isFinite(expires.getTime()) && expires > new Date();
+};
+
+const getDayKey = () => new Date().toISOString().slice(0, 10);
+const getMonthKey = () => new Date().toISOString().slice(0, 7);
+
+const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
+  const meta = { ...(user.user_metadata || {}) };
+  const now = Date.now();
+
+  const rpmLimit = isPro ? limits.proRpm : limits.freeRpm;
+  const dayLimit = isPro ? limits.proDaily : 0;
+  const monthLimit = !isPro ? limits.freeMonthly : 0;
+
+  const rlStartKey = `${prefix}_rl_start`;
+  const rlCountKey = `${prefix}_rl_count`;
+  const rlStart = Number(meta[rlStartKey] || 0);
+  const rlCount = Number(meta[rlCountKey] || 0);
+  const inWindow = rlStart && (now - rlStart) < 60_000;
+  const nextRpmCount = inWindow ? (rlCount + 1) : 1;
+  if (rpmLimit > 0 && nextRpmCount > rpmLimit) {
+    return { ok: false, statusCode: 429, error: 'Rate limit exceeded. Please slow down and try again.' };
+  }
+
+  if (dayLimit > 0) {
+    const dayKeyName = `${prefix}_day`;
+    const dayCountKey = `${prefix}_day_count`;
+    const day = getDayKey();
+    const storedDay = String(meta[dayKeyName] || '');
+    const dayCount = Number(meta[dayCountKey] || 0);
+    const nextDayCount = storedDay === day ? (dayCount + 1) : 1;
+    if (nextDayCount > dayLimit) {
+      return { ok: false, statusCode: 429, error: 'Daily fair-use limit reached. Please try again tomorrow.' };
+    }
+    meta[dayKeyName] = day;
+    meta[dayCountKey] = nextDayCount;
+  }
+
+  if (monthLimit > 0) {
+    const monthKeyName = `${prefix}_month`;
+    const monthCountKey = `${prefix}_month_count`;
+    const month = getMonthKey();
+    const storedMonth = String(meta[monthKeyName] || '');
+    const monthCount = Number(meta[monthCountKey] || 0);
+    const nextMonthCount = storedMonth === month ? (monthCount + 1) : 1;
+    if (nextMonthCount > monthLimit) {
+      return { ok: false, statusCode: 403, error: `Free limit reached (${monthLimit} per month). Upgrade to continue.` };
+    }
+    meta[monthKeyName] = month;
+    meta[monthCountKey] = nextMonthCount;
+  }
+
+  meta[rlStartKey] = inWindow ? rlStart : now;
+  meta[rlCountKey] = nextRpmCount;
+
+  const { error } = await supabaseAdmin.auth.admin.updateUserById(user.id, { user_metadata: meta });
+  if (error) {
+    return { ok: false, statusCode: 500, error: 'Unable to record usage. Please try again.' };
+  }
+
+  return { ok: true };
+};
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -33,7 +122,45 @@ exports.handler = async (event) => {
     };
   }
 
+  if (!supabaseAdmin) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: 'Supabase admin is not configured' })
+    };
+  }
+
   try {
+    const token = getBearerToken(event);
+    if (!token) {
+      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Sign in required' }) };
+    }
+
+    const { data: authData, error: authError } = await supabaseAdmin.auth.getUser(token);
+    if (authError || !authData?.user) {
+      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Invalid session. Please sign in again.' }) };
+    }
+
+    const authedUser = authData.user;
+    const pro = isProUser(authedUser);
+
+    const limits = {
+      freeMonthly: getEnvInt('CWF_FREE_MONTHLY_ENHANCE', 10),
+      freeRpm: getEnvInt('CWF_FREE_RPM_ENHANCE', 10),
+      proDaily: getEnvInt('CWF_PRO_DAILY_ENHANCE', 200),
+      proRpm: getEnvInt('CWF_PRO_RPM_ENHANCE', 30),
+    };
+
+    const gate = await enforceAndRecord({
+      user: authedUser,
+      prefix: 'cwf_enh',
+      isPro: pro,
+      limits,
+    });
+    if (!gate.ok) {
+      return { statusCode: gate.statusCode, headers, body: JSON.stringify({ error: gate.error }) };
+    }
+
     const {
       idea = '',
       mood = '',

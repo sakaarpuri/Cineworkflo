@@ -36,3 +36,4 @@ This project now supports secure Stripe activation through webhook events.
 
 - Frontend no longer grants Pro from local storage on success page.
 - Pro access is now tied to verified Stripe webhook events.
+- "Unlimited" is enforced as fair-use with server-side rate limits and daily caps (configurable via Netlify env vars `CWF_*`).
