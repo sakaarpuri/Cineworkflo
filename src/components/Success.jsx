@@ -1,33 +1,9 @@
-import { useEffect } from 'react'
 import { CheckCircle, Download, Mail, Sparkles } from 'lucide-react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
 
 export default function Success() {
   const [searchParams] = useSearchParams()
-  const sessionId = searchParams.get('session_id')
   const plan = searchParams.get('plan') || 'yearly'
-  const { user } = useAuth()
-
-  useEffect(() => {
-    // Update local storage to unlock Pro
-    const usageData = JSON.parse(localStorage.getItem('promptEnhancerUsage') || '{}')
-    usageData.isPro = true
-    usageData.proType = plan
-    const expiry = new Date()
-    if (plan === 'monthly') {
-      // Set expiry 30 days from now for monthly
-      expiry.setMonth(expiry.getMonth() + 1)
-      usageData.proExpiresAt = expiry.toISOString()
-    } else if (plan === 'yearly') {
-      // Set expiry 1 year from now for yearly
-      expiry.setFullYear(expiry.getFullYear() + 1)
-      usageData.proExpiresAt = expiry.toISOString()
-    }
-    localStorage.setItem('promptEnhancerUsage', JSON.stringify(usageData))
-
-    console.log('Payment successful:', sessionId, plan)
-  }, [sessionId, plan])
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
@@ -45,8 +21,8 @@ export default function Success() {
         </h1>
         <p className="text-gray-600 mb-8">
           {plan === 'monthly'
-            ? 'Your subscription is active. You now have unlimited AI generations and access to all Pro features.'
-            : 'Your payment was successful. You now have 1 year access to all 150+ prompts and the Shot-to-Prompt tool.'}
+            ? 'Payment received. Your Pro subscription is being finalized securely and usually appears within seconds.'
+            : 'Payment received. Your Pro yearly access is being finalized securely and usually appears within seconds.'}
         </p>
 
         <div className="space-y-4">

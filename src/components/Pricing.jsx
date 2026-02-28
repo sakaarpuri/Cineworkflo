@@ -103,6 +103,7 @@ export default function Pricing({ onAuthClick }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: user.email,
+          userId: user.id,
           plan: planType,
           attribution: getCheckoutAttributionPayload()
         })

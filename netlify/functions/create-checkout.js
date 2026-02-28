@@ -22,12 +22,30 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { email, plan, attribution = {} } = JSON.parse(event.body);
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'STRIPE_SECRET_KEY is not configured' })
+      };
+    }
+
+    const { email, plan, userId, attribution = {} } = JSON.parse(event.body);
+    if (!email || !plan || !userId) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'email, userId, and plan are required' })
+      };
+    }
+
     const normalize = (value) => String(value || '').slice(0, 500);
     const firstTouch = attribution.first_touch || {};
     const lastTouch = attribution.last_touch || {};
     const lastCta = attribution.cta_last || {};
     const sharedMetadata = {
+      user_id: normalize(userId),
+      email: normalize(email),
       first_utm_source: normalize(firstTouch.utm_source),
       first_utm_medium: normalize(firstTouch.utm_medium),
       first_utm_campaign: normalize(firstTouch.utm_campaign),
@@ -62,9 +80,16 @@ exports.handler = async (event) => {
           }
         ],
         mode: 'subscription',
+        client_reference_id: userId,
         success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=monthly`,
         cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing`,
         customer_email: email,
+        subscription_data: {
+          metadata: {
+            plan: 'monthly',
+            ...sharedMetadata
+          }
+        },
         metadata: {
           plan: 'monthly',
           ...sharedMetadata
@@ -89,14 +114,29 @@ exports.handler = async (event) => {
           }
         ],
         mode: 'subscription',
+        client_reference_id: userId,
         success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=yearly`,
         cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing`,
         customer_email: email,
+        subscription_data: {
+          metadata: {
+            plan: 'yearly',
+            ...sharedMetadata
+          }
+        },
         metadata: {
           plan: 'yearly',
           ...sharedMetadata
         }
       });
+    }
+
+    if (!session) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Invalid plan. Expected monthly or yearly.' })
+      };
     }
 
     return {
