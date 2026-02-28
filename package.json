@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "seo:sitemap": "node scripts/generate-sitemap.mjs",
+    "seo:phase1:verify": "node scripts/seo-phase1-verify.mjs",
     "prerender:routes": "node scripts/prerender-routes.mjs",
     "build:seo": "npm run seo:sitemap && vite build && npm run prerender:routes"
   },

@@ -17,6 +17,10 @@
 
 ## Phase 1: Technical SEO Foundation (Days 1-30)
 
+Phase Status (Feb 28, 2026):
+- In-repo implementation: complete (see `docs/seo/phase-1-closeout.md`)
+- External production validation pending: Netlify deploy + GSC URL Inspection + Rich Results checks
+
 ### Week 1: URL Canonicalization + Redirect Hygiene
 Tasks:
 - Enforce one canonical URL per page.
