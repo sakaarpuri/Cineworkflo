@@ -12,14 +12,14 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    /* Day background: almost-white base with soft pastel gradients. */
-    background-color: #FFFCFE;
+    /* Day background: near-white base with very subtle pastel tinting. */
+    background-color: #FFFEFF;
     background-image:
-      radial-gradient(72% 38% at 12% 8%, rgba(255, 120, 186, 0.08) 0%, rgba(255, 120, 186, 0) 60%),
-      radial-gradient(85% 45% at 88% 22%, rgba(255, 169, 64, 0.13) 0%, rgba(255, 169, 64, 0) 70%),
-      radial-gradient(88% 52% at 25% 76%, rgba(69, 183, 255, 0.11) 0%, rgba(69, 183, 255, 0) 72%),
-      radial-gradient(90% 52% at 86% 86%, rgba(167, 109, 255, 0.11) 0%, rgba(167, 109, 255, 0) 74%),
-      linear-gradient(180deg, #FFFCFE 0%, #FFFAFD 18%, #FFF9F0 42%, #F6FCFF 68%, #F8F5FF 86%, #FFFAFD 100%);
+      radial-gradient(72% 38% at 12% 8%, rgba(255, 120, 186, 0.04) 0%, rgba(255, 120, 186, 0) 62%),
+      radial-gradient(85% 45% at 88% 22%, rgba(255, 169, 64, 0.07) 0%, rgba(255, 169, 64, 0) 72%),
+      radial-gradient(88% 52% at 25% 76%, rgba(69, 183, 255, 0.06) 0%, rgba(69, 183, 255, 0) 74%),
+      radial-gradient(90% 52% at 86% 86%, rgba(167, 109, 255, 0.06) 0%, rgba(167, 109, 255, 0) 76%),
+      linear-gradient(180deg, #FFFEFF 0%, #FFFDFF 20%, #FFFCF8 44%, #FBFEFF 70%, #FCFAFF 88%, #FFFEFF 100%);
     background-repeat: no-repeat;
     background-size: 100% 260%;
   }
