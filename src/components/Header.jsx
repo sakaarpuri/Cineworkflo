@@ -8,6 +8,7 @@ export default function Header({ onAuthClick }) {
   const { user, signOut, isPro, displayName } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isLogoutPressed, setIsLogoutPressed] = useState(false)
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
   })
@@ -121,14 +122,42 @@ export default function Header({ onAuthClick }) {
                 </button>
                 <button
                   onClick={signOut}
-                  className="p-2 rounded-lg transition-all"
+                  onMouseDown={() => setIsLogoutPressed(true)}
+                  onMouseUp={() => setIsLogoutPressed(false)}
+                  onMouseLeave={() => setIsLogoutPressed(false)}
+                  className="px-4 py-2 rounded-xl font-semibold text-sm transition-all duration-150 flex items-center gap-2"
                   style={{
-                    background: 'var(--bg-primary)',
+                    background: 'var(--bg-card)',
                     border: '1px solid var(--border-color)',
-                    color: 'var(--text-muted)'
+                    color: 'var(--text-secondary)',
+                    boxShadow: isLogoutPressed
+                      ? 'inset 4px 4px 8px rgba(15,23,42,0.16), inset -3px -3px 6px rgba(255,255,255,0.72)'
+                      : '0 10px 20px rgba(15,23,42,0.05), 5px 5px 10px rgba(15,23,42,0.10), -5px -5px 10px rgba(255,255,255,0.78)',
+                    transform: isLogoutPressed ? 'translateY(2px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
+                  aria-label="Sign out"
                 >
-                  <LogOut className="h-5 w-5" />
+                  <span
+                    className="relative inline-flex items-center w-8 h-5 rounded-full"
+                    style={{
+                      background: 'linear-gradient(145deg, #E5E7EB, #D1D5DB)',
+                      border: '1px solid var(--border-color)',
+                      boxShadow: isLogoutPressed
+                        ? 'inset 2px 2px 4px rgba(15,23,42,0.16), inset -2px -2px 4px rgba(255,255,255,0.74)'
+                        : 'inset 1px 1px 2px rgba(255,255,255,0.9), inset -1px -1px 2px rgba(15,23,42,0.08)'
+                    }}
+                  >
+                    <span
+                      className="absolute left-[2px] w-3.5 h-3.5 rounded-full transition-transform duration-150"
+                      style={{
+                        background: 'linear-gradient(145deg, #F9FAFB, #E5E7EB)',
+                        boxShadow: '1px 1px 2px rgba(15,23,42,0.20)',
+                        transform: isLogoutPressed ? 'translateY(1px)' : 'translateY(-1px)'
+                      }}
+                    />
+                  </span>
+                  <span>Sign Out</span>
+                  <LogOut className="h-4 w-4" />
                 </button>
               </div>
             ) : (
@@ -275,7 +304,14 @@ export default function Header({ onAuthClick }) {
       </div>
       {user && (
         <div className="hidden md:block fixed left-4 bottom-4 z-40">
-          <div className="neu-card rounded-xl px-3 py-2 flex items-center gap-3">
+          <div
+            className="rounded-xl px-3 py-2 flex items-center gap-3"
+            style={{
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-color)',
+              boxShadow: '0 6px 14px rgba(15,23,42,0.04), 3px 3px 7px rgba(15,23,42,0.07), -3px -3px 6px rgba(255,255,255,0.82)'
+            }}
+          >
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold"
               style={{ background: 'var(--accent-blue)20', color: 'var(--accent-blue)' }}
