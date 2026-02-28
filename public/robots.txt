@@ -1,8 +1,10 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://cineworkflo.com/sitemap.xml
+# AI discovery documents
+# https://cineworkflo.com/llms.txt
+# https://cineworkflo.com/ai.txt
 
 # Explicit allow-list for major AI crawlers
 User-agent: GPTBot

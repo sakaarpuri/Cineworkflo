@@ -1,61 +1,51 @@
-# CineWorkflo - AI Video Prompts for Filmmakers
+# CineWorkflo
 
-## Overview
+> Official machine-readable guide for AI agents and LLM-assisted browsing.
 
-CineWorkflo is a curated library of 150+ professional AI video prompts for Runway Gen-2, Pika Labs, and other AI video generation tools. Created by filmmakers who've worked with Netflix, BBC, and major studios.
+## Canonical
+- Site: https://cineworkflo.com
+- Primary sitemap: https://cineworkflo.com/sitemap.xml
+- Contact: https://cineworkflo.com/contact
 
-## Core URLs
+## Product Summary
+CineWorkflo is an AI video prompting workflow for filmmakers and creators.
+It combines:
+- Prompt Enhancer (idea -> production-ready prompt)
+- Shot to Prompt (image -> detailed prompt)
+- Prompt Vault (curated prompt library)
+- Camera Moves guide (visual language for prompting motion)
 
+Supported workflows include Runway, Pika, Kling, Luma, Sora, and Meta video toolchains.
+
+## Core Public URLs
 - Home: https://cineworkflo.com/
 - Prompt Vault: https://cineworkflo.com/prompts
-- Prompt Category (Product Ads): https://cineworkflo.com/prompts/product-ads
-- Prompt Category (Short-Form Social): https://cineworkflo.com/prompts/short-form-social
-- Prompt Category (Cinematic Storytelling): https://cineworkflo.com/prompts/cinematic-storytelling
-- Prompt Category (World Building): https://cineworkflo.com/prompts/world-building
 - Shot to Prompt: https://cineworkflo.com/shot-to-prompt
-- Camera Moves Guide: https://cineworkflo.com/camera-moves
+- Camera Moves: https://cineworkflo.com/camera-moves
 - Pricing: https://cineworkflo.com/pricing
 - About: https://cineworkflo.com/about
 - Contact: https://cineworkflo.com/contact
 - Privacy: https://cineworkflo.com/privacy
 - Terms: https://cineworkflo.com/terms
 
-## What We Offer
+## Prompt Vault Categories
+- Product Ads: https://cineworkflo.com/prompts/product-ads
+- Short-Form Social: https://cineworkflo.com/prompts/short-form-social
+- Cinematic Storytelling: https://cineworkflo.com/prompts/cinematic-storytelling
+- World Building: https://cineworkflo.com/prompts/world-building
 
-- **150+ Tested Prompts**: Each prompt professionally written and tested for commercial use
-- **Shot-to-Prompt AI**: Upload any image and get an optimized prompt
-- **Smart Search**: Filter by tool (Runway, Pika), style, mood, shot type
-- **One-Click Copy**: Copy prompts instantly to your clipboard
-- **Workflow Templates**: Complete prompt sequences for scenes
+## Access + Plans (public marketing level)
+- Prompt Vault: open access
+- Prompt Enhancer: free tier with monthly generation cap, paid tier available
+- Shot to Prompt: free tier with monthly generation cap, paid tier available
+- Pro plan pricing is published on https://cineworkflo.com/pricing
 
-## Who It's For
+## Crawl Guidance
+- Public marketing, learning, and category pages are indexable.
+- Privacy/terms pages are public reference pages.
+- Do not treat ephemeral UI states (temporary loading/errors) as canonical content.
 
-- Filmmakers and video creators
-- Content creators using AI video tools
-- Production companies exploring AI workflows
-- Agencies needing quick video concepts
-
-## Tools Supported
-
-- Runway Gen-2
-- Pika Labs
-- Stable Video Diffusion
-- Other AI video generators
-
-## Pricing
-
-$49 one-time purchase for lifetime access to all prompts + future updates.
-
-## Contact
-
-- Website: https://cineworkflo.com
-- Support: Available via website contact
-
-## Content Policy
-
-All prompts are original, tested content designed for commercial video production. No NSFW or harmful content.
-
-## Indexing Guidance
-
-- Public marketing and educational pages are intended to be indexed.
-- Transactional success/checkout states are not intended as evergreen content pages.
+## Content Scope
+- Educational prompt-writing and camera-language guidance
+- Production-oriented AI video prompt examples
+- No NSFW or harmful instructional intent

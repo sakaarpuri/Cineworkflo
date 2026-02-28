@@ -150,7 +150,7 @@ export default function CameraMoveCards() {
             Camera Movements
           </h2>
           <p className="max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
-            Hover cards to preview animations. Click for full details.
+            Learn the language of the Camera to master the language of prompts.
           </p>
         </div>
         

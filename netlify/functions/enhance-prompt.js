@@ -58,10 +58,10 @@ exports.handler = async (event) => {
     let interpretationInstruction = '';
     if (interpretation) {
       const styleGuidelines = {
-        cinematic: 'Create a cinematic, film-like version with dramatic lighting, camera movement, and movie-quality aesthetics.',
-        stylized: 'Create a highly stylized, artistic version with bold colors, graphic design elements, and creative visual treatment.',
-        photorealistic: 'Create a photorealistic, hyper-realistic version that looks like professional photography.',
-        animated: 'Create an animated, motion graphics style version suitable for 2D/3D animation.'
+        'directors-cut': 'Create an auteur director\'s-cut version with motivated camera language, layered blocking, restrained color palette, and narrative subtext.',
+        'luxury-commercial': 'Create a premium luxury commercial version with elegant camera choreography, polished material rendering, controlled highlights, and brand-grade finish.',
+        'vfx-spectacle': 'Create a high-end VFX spectacle version with cinematic scale, dynamic environmental effects, depth layers, and hero-level visual impact.',
+        'prestige-animation': 'Create a prestige animation version with premium stylization, intentional shape language, rich lighting design, and feature-film quality motion.'
       };
       interpretationInstruction = styleGuidelines[interpretation] || '';
     }

@@ -1,0 +1,13 @@
+# CineWorkflo AI Access
+
+Canonical: https://cineworkflo.com/
+Sitemap: https://cineworkflo.com/sitemap.xml
+LLMs: https://cineworkflo.com/llms.txt
+
+Public tools:
+- https://cineworkflo.com/prompts
+- https://cineworkflo.com/shot-to-prompt
+- https://cineworkflo.com/camera-moves
+
+Website purpose:
+CineWorkflo helps creators generate higher-quality AI video prompts using a vault, enhancer, and camera movement training.

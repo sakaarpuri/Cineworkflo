@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Sparkles, Copy, Check, Wand2, Zap, Palette, Camera, Film, Lock, Plus } from 'lucide-react';
+import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const MOODS = ["Epic", "Dramatic", "Thought-Provoking", "Whimsical", "Serene", "Mysterious", "Energetic", "Eerie", "Calm", "Surreal", "Hopeful", "Melancholic", "Tense", "Playful", "Dreamlike"];
@@ -184,10 +184,10 @@ const shouldResetMonthly = (lastReset) => {
 };
 
 const INTERPRETATIONS = [
-  { key: 'cinematic', label: 'Cinematic', icon: Film, color: '#8B5CF6' },
-  { key: 'stylized', label: 'Stylized', icon: Palette, color: '#EC4899' },
-  { key: 'photorealistic', label: 'Photoreal', icon: Camera, color: '#10B981' },
-  { key: 'animated', label: 'Animated', icon: Zap, color: '#F59E0B' }
+  { key: 'directors-cut', label: "Director's Cut", icon: Film, color: '#8B5CF6' },
+  { key: 'luxury-commercial', label: 'Luxury Commercial', icon: Sparkles, color: '#0EA5E9' },
+  { key: 'vfx-spectacle', label: 'VFX Spectacle', icon: Zap, color: '#10B981' },
+  { key: 'prestige-animation', label: 'Prestige Animation', icon: Palette, color: '#F59E0B' }
 ];
 
 const PRO_DETAILS = [
@@ -837,7 +837,7 @@ export default function PromptEnhancer({ onAuthClick }) {
             {/* Pro Interpretations - Available to all users */}
             <div className="mt-5 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
               <p className="text-xs font-medium mb-3" style={{ color: 'var(--text-muted)' }}>
-                Generate alternative interpretations:
+                Generate high-end interpretation passes:
               </p>
               <div className="flex flex-wrap gap-3">
                 {INTERPRETATIONS.map((interp) => {
