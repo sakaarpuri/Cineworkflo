@@ -246,9 +246,7 @@ export default function CameraMovesPage() {
           Camera Movements
         </h1>
         <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.6 }}>
-          The foundational moves used in every film, TV show, and video.
-          <br />
-          Hover each card to see how it works.
+          Learn the language of the Camera to master the language of prompts
         </p>
       </div>
 
