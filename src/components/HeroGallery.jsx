@@ -7,7 +7,7 @@ export default function HeroGallery() {
 
   return (
     <section 
-      className="pt-16 pb-8 lg:pt-24 lg:pb-10 transition-colors relative overflow-hidden"
+      className="pt-16 pb-4 lg:pt-24 lg:pb-6 transition-colors relative overflow-hidden"
       style={{ 
         background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%)'
       }}
@@ -18,7 +18,7 @@ export default function HeroGallery() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
             Get <span style={{ color: 'var(--accent-blue)' }}>AI</span> videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
           </h1>
@@ -47,11 +47,19 @@ export default function HeroGallery() {
             >
               Learn Camera Moves
             </Link>
-          </div>
-
-          <div className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
-            Explore tools:{' '}
-            <Link to="/shot-to-prompt" onClick={() => trackCtaEvent('hero_shot_to_prompt_link', '/')} className="underline">Shot to Prompt</Link>
+            <Link
+              to="/shot-to-prompt"
+              onClick={() => trackCtaEvent('hero_shot_to_prompt_secondary', '/')}
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+              style={{
+                background: 'linear-gradient(145deg, rgba(255,255,255,0.88), rgba(255,255,255,0.64))',
+                color: 'var(--text-secondary)',
+                border: '1.5px solid var(--border-color)',
+                boxShadow: 'inset 2px 2px 5px rgba(255,255,255,0.65), inset -2px -2px 5px rgba(255,255,255,0.38), 0 3px 10px rgba(15,23,42,0.08)'
+              }}
+            >
+              Shot to Prompt
+            </Link>
           </div>
         </div>
       </div>
