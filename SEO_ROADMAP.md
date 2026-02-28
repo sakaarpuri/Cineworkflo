@@ -169,6 +169,9 @@ Tasks:
 Non-code:
 - Marketing content and partnerships.
 
+Execution artifact:
+- `docs/seo/link-acquisition-backlog.md`
+
 ### Week 10: Trust + Entity Signals
 Tasks:
 - Improve About, Contact, and policy pages.
@@ -246,6 +249,9 @@ P2:
 Weekly:
 - Index coverage, clicks, CTR, top queries, top pages, 404/redirect errors.
 - Organic landing page funnel (visit -> CTA -> signup -> purchase).
+
+Execution artifact:
+- `docs/seo/weekly-seo-report-template.md`
 
 Monthly:
 - Ranking movement by query cluster.
