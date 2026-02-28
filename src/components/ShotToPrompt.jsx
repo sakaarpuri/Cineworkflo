@@ -183,7 +183,7 @@ export default function ShotToPrompt({ preview = false }) {
     return (
       <section 
         className="py-16 transition-colors relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%)' }}
+        style={{ background: 'transparent' }}
       >
         {/* Decorative gradient orbs */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25" />
@@ -344,7 +344,7 @@ export default function ShotToPrompt({ preview = false }) {
   return (
     <div 
       className="min-h-screen py-12 transition-colors"
-      style={{ background: 'var(--bg-primary)' }}
+      style={{ background: 'transparent' }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div

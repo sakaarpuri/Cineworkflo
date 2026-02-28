@@ -9,7 +9,7 @@ export default function HeroGallery() {
     <section 
       className="pt-16 pb-4 lg:pt-24 lg:pb-6 transition-colors relative overflow-hidden"
       style={{ 
-        background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%)'
+        background: 'transparent'
       }}
     >
       {/* Decorative gradient orbs */}

@@ -130,7 +130,7 @@ export default function Pricing({ onAuthClick }) {
     <section 
       className="py-16 transition-colors relative overflow-hidden"
       id="pricing"
-      style={{ background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%)' }}
+      style={{ background: 'transparent' }}
     >
       {/* Decorative elements */}
       <div className="absolute -top-20 -right-20 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20" />

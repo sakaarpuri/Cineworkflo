@@ -388,7 +388,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     <section 
       id="prompt-enhancer"
       className="pt-6 pb-12 transition-colors relative overflow-hidden"
-      style={{ background: 'linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, var(--bg-secondary) 100%)' }}
+      style={{ background: 'transparent' }}
     >
       {/* Subtle gradient orbs */}
       <div className="absolute top-1/2 left-10 w-64 h-64 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-15 transform -translate-y-1/2" />

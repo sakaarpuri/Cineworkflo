@@ -137,7 +137,7 @@ export default function CameraMoveCards() {
   return (
     <section
       className="py-14 transition-colors"
-      style={{ background: 'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, var(--bg-secondary) 100%)' }}
+      style={{ background: 'transparent' }}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
