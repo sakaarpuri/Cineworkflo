@@ -98,9 +98,6 @@ export default function HeroGallery() {
         {/* Header */}
         <div className="text-center mb-12">
 
-          <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
-            Get videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
-          </h1>
           <div
             className="max-w-2xl mx-auto mb-8 rounded-2xl p-5"
             style={{
@@ -127,6 +124,10 @@ export default function HeroGallery() {
               Built for filmmakers and creator teams working across Runway, Pika, Kling, and more.
             </p>
           </div>
+
+          <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
+            Get videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
+          </h1>
 
           {/* Explore Prompt Vault - Sliding Toggle Switch */}
           <div className="mb-8">
