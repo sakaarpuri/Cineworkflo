@@ -13,9 +13,12 @@ This project now supports secure Stripe activation through webhook events.
 
 - URL: `https://cineworkflo.com/.netlify/functions/stripe-webhook`
 - Events to send:
-  - `checkout.session.completed`
+  - `checkout.session.completed` (Stripe UI may show “Checkout session completed”)
+  - `customer.subscription.created`
   - `customer.subscription.updated`
   - `customer.subscription.deleted`
+  - `invoice.paid`
+  - `invoice.payment_succeeded`
   - `invoice.payment_failed`
 
 ## Behavior

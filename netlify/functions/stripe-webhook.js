@@ -92,17 +92,23 @@ exports.handler = async (event) => {
       }
     }
 
-    if (stripeEvent.type === 'customer.subscription.updated' || stripeEvent.type === 'customer.subscription.deleted') {
+    if (
+      stripeEvent.type === 'customer.subscription.created' ||
+      stripeEvent.type === 'customer.subscription.updated' ||
+      stripeEvent.type === 'customer.subscription.deleted'
+    ) {
       await applySubscriptionState(object);
     }
 
-    if (stripeEvent.type === 'invoice.payment_failed') {
-      const userId = getUserIdFromPayload(object);
-      if (userId) {
-        await updateUserProStatus(userId, {
-          is_pro: false,
-          pro_status: 'payment_failed',
-        });
+    if (
+      stripeEvent.type === 'invoice.paid' ||
+      stripeEvent.type === 'invoice.payment_succeeded' ||
+      stripeEvent.type === 'invoice.payment_failed'
+    ) {
+      const subscriptionId = object.subscription ? String(object.subscription) : '';
+      if (subscriptionId) {
+        const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+        await applySubscriptionState(subscription);
       }
     }
 
