@@ -41,7 +41,8 @@ exports.handler = async (event) => {
       tool = 'General',
       interpretation = '',
       skillLevel = 'beginner',
-      includeAudioSfx = false
+      includeAudioSfx = false,
+      includeImages = false
     } = JSON.parse(event.body || '{}');
 
     const trimmedIdea = String(idea || '').trim();
@@ -76,10 +77,17 @@ exports.handler = async (event) => {
           : 'Include concise professional SFX design notes (ambience, foley, music texture, mix intent).')
       : 'Do not include any audio, SFX, music, dialogue, voiceover, foley, ambience, or sound design details.';
 
+    const imageInstruction = includeImages
+      ? (isBeginner
+          ? 'Include one short Image details line describing composition, color feel, and visual texture.'
+          : 'Include concise still-image direction for composition, palette control, focal hierarchy, and texture fidelity.')
+      : 'Do not include any dedicated still-image details line.';
+
     const promptInput = `Create an AI video generation prompt for ${isBeginner ? 'beginners' : 'professionals'}.
 
 ${skillInstruction}
 ${audioInstruction}
+${imageInstruction}
 
 Idea: "${trimmedIdea}"
 Mood: ${mood || 'Not specified'}

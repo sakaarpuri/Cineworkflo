@@ -205,6 +205,7 @@ const PRO_DETAIL_TEXT = {
 };
 
 const AUDIO_KEYWORDS_REGEX = /\b(audio|sound|sfx|music|foley|ambien|voiceover|soundscape|dialogue)\b/i;
+const IMAGE_KEYWORDS_REGEX = /\b(image|still|frame|composition|framing|palette|texture|detail pass|render)\b/i;
 
 const buildAudioSfxDetails = (mood, useCase, skillLevel = 'beginner') => {
   const moodSfx = {
@@ -255,6 +256,55 @@ const applyAudioPreference = (prompt, includeAudioSfx, mood, useCase, skillLevel
   return cleaned || normalizedPrompt;
 };
 
+const buildImageDetails = (mood, useCase, skillLevel = 'beginner') => {
+  const moodVisual = {
+    Epic: 'hero composition with dramatic scale and layered depth',
+    Dramatic: 'high-contrast framing with intentional negative space',
+    Whimsical: 'playful color palette with stylized texture accents',
+    Serene: 'balanced composition with soft gradients and calm spacing',
+    Mysterious: 'low-key framing with silhouette-led depth separation',
+    Energetic: 'dynamic diagonals with punchy color contrast',
+    Eerie: 'off-center framing with unsettling tonal control'
+  };
+
+  const useVisual = {
+    'Product Showcase': 'clean product hero framing with material realism',
+    'Brand Ad': 'premium ad-grade composition with polished highlights',
+    Storytelling: 'cinematic scene composition with clear focal hierarchy',
+    Documentary: 'naturalistic framing and grounded visual texture',
+    Explainer: 'clear educational framing with readable visual priority',
+    'Social Media': 'scroll-stopping composition with strong subject isolation'
+  };
+
+  const moodLayer = moodVisual[mood] || 'intentional composition and clean visual hierarchy';
+  const useLayer = useVisual[useCase] || 'balanced composition for versatile generation';
+
+  if (skillLevel === 'pro') {
+    return `Image details: ${moodLayer}, ${useLayer}, controlled color palette and texture fidelity.`;
+  }
+
+  return `Image details: ${moodLayer} with ${useLayer}.`;
+};
+
+const applyImagePreference = (prompt, includeImageDetails, mood, useCase, skillLevel) => {
+  const normalizedPrompt = (prompt || '').trim();
+  if (!normalizedPrompt) return normalizedPrompt;
+
+  if (includeImageDetails) {
+    if (IMAGE_KEYWORDS_REGEX.test(normalizedPrompt)) return normalizedPrompt;
+    return `${normalizedPrompt} ${buildImageDetails(mood, useCase, skillLevel)}`.trim();
+  }
+
+  const cleaned = normalizedPrompt
+    .split(/(?<=[.!?])\s+/)
+    .filter((line) => !/^Image details:/i.test(line.trim()))
+    .join(' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  return cleaned || normalizedPrompt;
+};
+
 const applySelectedProDetails = (prompt, detailKeys) => {
   const base = (prompt || '').trim();
   if (!base) return base;
@@ -275,7 +325,8 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [usage, setUsage] = useState({ count: 0, isPro: false });
   const [addedDetails, setAddedDetails] = useState([]);
   const [includeAudioSfx, setIncludeAudioSfx] = useState(false);
-  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner", includeAudioSfx: false });
+  const [includeImageDetails, setIncludeImageDetails] = useState(false);
+  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner", includeAudioSfx: false, includeImageDetails: false });
   const levelPulseTimeoutRef = useRef(null);
   const [levelPulse, setLevelPulse] = useState('');
   
@@ -317,8 +368,8 @@ export default function PromptEnhancer({ onAuthClick }) {
 
     try {
       const promptPayload = interpretationStyle 
-        ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx }
-        : { idea, mood, useCase, skillLevel, includeAudioSfx };
+        ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx, includeImages: includeImageDetails }
+        : { idea, mood, useCase, skillLevel, includeAudioSfx, includeImages: includeImageDetails };
 
       const response = await fetch('/.netlify/functions/enhance-prompt', {
         method: 'POST',
@@ -328,19 +379,21 @@ export default function PromptEnhancer({ onAuthClick }) {
 
       const data = await response.json();
       const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
-      const nextBaseResult = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
+      const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
+      const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
       setBaseResult(nextBaseResult);
       setResult(applySelectedProDetails(nextBaseResult, addedDetails));
       setHasGeneratedOnce(true);
     } catch (err) {
       // Fallback with smart prompt generator
       const fallbackPrompt = generateSmartPrompt(idea, mood, useCase, skillLevel);
-      const nextBaseResult = applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel);
+      const withAudio = applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel);
+      const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
       setBaseResult(nextBaseResult);
       setResult(applySelectedProDetails(nextBaseResult, addedDetails));
     }
     setLoading(false);
-  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, addedDetails]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -373,17 +426,18 @@ export default function PromptEnhancer({ onAuthClick }) {
         mood !== lastParamsRef.current.mood ||
         useCase !== lastParamsRef.current.useCase ||
         skillLevel !== lastParamsRef.current.skillLevel ||
-        includeAudioSfx !== lastParamsRef.current.includeAudioSfx;
+        includeAudioSfx !== lastParamsRef.current.includeAudioSfx ||
+        includeImageDetails !== lastParamsRef.current.includeImageDetails;
       
       if (!paramsChanged) return;
       
       const timeoutId = setTimeout(() => {
         handleEnhance(true); // Pass true for auto-update (keeps result visible)
-        lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx };
+        lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [mood, useCase, idea, skillLevel, includeAudioSfx, hasGeneratedOnce, canSubmit, handleEnhance]);
+  }, [mood, useCase, idea, skillLevel, includeAudioSfx, includeImageDetails, hasGeneratedOnce, canSubmit, handleEnhance]);
 
   useEffect(() => () => {
     if (levelPulseTimeoutRef.current) {
@@ -632,6 +686,54 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
+              </span>
+            </div>
+
+            {/* Images Toggle */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Images</span>
+              <div className="flex items-center gap-2">
+                <span
+                  className="text-xs font-semibold transition-all"
+                  style={{ color: includeImageDetails ? 'var(--text-muted)' : '#6B7280' }}
+                >
+                  Off
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={includeImageDetails}
+                  aria-label="Toggle image details"
+                  onClick={() => setIncludeImageDetails((prev) => !prev)}
+                  className="relative w-[62px] h-[32px] rounded-full transition-all duration-250"
+                  style={{
+                    background: includeImageDetails
+                      ? 'linear-gradient(145deg, #22C55E, #16A34A)'
+                      : 'linear-gradient(145deg, #D1D5DB, #9CA3AF)',
+                    border: `2px solid ${includeImageDetails ? '#22C55E50' : '#9CA3AF55'}`,
+                    boxShadow: includeImageDetails
+                      ? 'inset 3px 3px 6px rgba(22,163,74,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(34,197,94,0.35)'
+                      : 'inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2)'
+                  }}
+                >
+                  <span
+                    className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-all duration-250"
+                    style={{
+                      left: includeImageDetails ? '35px' : '4px',
+                      background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
+                      boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                    }}
+                  />
+                </button>
+                <span
+                  className="text-xs font-semibold transition-all"
+                  style={{ color: includeImageDetails ? '#16A34A' : 'var(--text-muted)' }}
+                >
+                  On
+                </span>
+              </div>
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                {includeImageDetails ? 'Include still-image composition cues' : 'Video-focused output only'}
               </span>
             </div>
 
