@@ -23,7 +23,7 @@ const plans = [
   {
     name: 'Pro Monthly',
     planType: 'monthly',
-    price: '$4.99',
+    price: '$7.99',
     priceNote: '/month',
     description: 'Full access for active creators',
     features: [
@@ -146,7 +146,7 @@ export default function Pricing({ onAuthClick }) {
             className="text-xl"
             style={{ color: 'var(--text-secondary)' }}
           >
-            One payment. Lifetime access. No subscriptions.
+            Monthly or yearly. Cancel anytime.
           </p>
         </div>
 

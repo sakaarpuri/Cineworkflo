@@ -55,7 +55,7 @@ exports.handler = async (event) => {
                 name: 'CineWorkflo Pro Monthly',
                 description: 'Unlimited AI generations + all Pro features'
               },
-              unit_amount: 499, // $4.99 in cents
+              unit_amount: 799, // $7.99 in cents
               recurring: { interval: 'month' }
             },
             quantity: 1
