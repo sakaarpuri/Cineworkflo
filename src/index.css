@@ -12,21 +12,21 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #FFF7FB;
+    background-color: #FBFBFF;
     background-image:
       /* Big, high-contrast pastel zones with soft blends (no hard bands) */
-      radial-gradient(120% 72% at 50% 0%, rgba(255, 86, 170, 0.62) 0%, rgba(255, 86, 170, 0) 62%),
-      radial-gradient(120% 72% at 50% 56%, rgba(0, 204, 176, 0.52) 0%, rgba(0, 204, 176, 0) 66%),
-      radial-gradient(120% 78% at 50% 100%, rgba(74, 144, 255, 0.56) 0%, rgba(74, 144, 255, 0) 64%),
-      radial-gradient(85% 60% at 82% 96%, rgba(179, 102, 255, 0.32) 0%, rgba(179, 102, 255, 0) 70%),
+      radial-gradient(120% 74% at 50% 0%, rgba(255, 86, 170, 0.34) 0%, rgba(255, 86, 170, 0) 64%),
+      radial-gradient(120% 72% at 50% 58%, rgba(0, 204, 176, 0.62) 0%, rgba(0, 204, 176, 0) 66%),
+      radial-gradient(120% 78% at 50% 102%, rgba(74, 144, 255, 0.70) 0%, rgba(74, 144, 255, 0) 62%),
+      radial-gradient(90% 60% at 20% 96%, rgba(179, 102, 255, 0.46) 0%, rgba(179, 102, 255, 0) 70%),
       /* Underlay to keep the page bright and cohesive */
       linear-gradient(
         180deg,
-        #FFE0F1 0%,
-        #FFE0F1 38%,
-        #D6FFF7 64%,
-        #D9F2FF 82%,
-        #F4ECFF 100%
+        #FFEAF4 0%,
+        #FFF2F9 34%,
+        #D8FFF7 62%,
+        #D6F0FF 80%,
+        #F1EAFF 100%
       );
     background-repeat: no-repeat;
     background-size: 100% 280%;
