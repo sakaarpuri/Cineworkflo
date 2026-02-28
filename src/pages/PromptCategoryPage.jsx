@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Check, Copy } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
+import { trackCtaEvent } from '../lib/marketingAttribution'
 
 export default function PromptCategoryPage() {
   const { categorySlug } = useParams()
@@ -98,10 +99,20 @@ export default function PromptCategoryPage() {
         <section className="mt-8 rounded-2xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
           <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Next step</h2>
           <div className="flex flex-wrap gap-3">
-            <Link to="/shot-to-prompt" className="px-4 py-2 rounded-lg text-sm font-semibold" style={{ background: 'var(--accent-purple)', color: '#fff' }}>
+            <Link
+              to="/shot-to-prompt"
+              onClick={() => trackCtaEvent(`prompt_category_${category.slug}_shot_to_prompt`, `/prompts/${category.slug}`)}
+              className="px-4 py-2 rounded-lg text-sm font-semibold"
+              style={{ background: 'var(--accent-purple)', color: '#fff' }}
+            >
               Convert a reference to prompt
             </Link>
-            <Link to="/pricing" className="px-4 py-2 rounded-lg text-sm font-semibold" style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}>
+            <Link
+              to="/pricing"
+              onClick={() => trackCtaEvent(`prompt_category_${category.slug}_pricing`, `/prompts/${category.slug}`)}
+              className="px-4 py-2 rounded-lg text-sm font-semibold"
+              style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
+            >
               Unlock full prompt library
             </Link>
           </div>

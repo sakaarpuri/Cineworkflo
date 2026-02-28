@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import Success from './components/Success'
 import AuthModal from './components/AuthModal'
 import { PROMPT_CATEGORY_PAGES } from './data/promptCategories'
+import { captureAttributionTouch } from './lib/marketingAttribution'
 
 const PromptEnhancer = lazy(() => import('./components/PromptEnhancer'))
 const ShotToPrompt = lazy(() => import('./components/ShotToPrompt'))
@@ -348,23 +349,11 @@ function AttributionTracker() {
   const location = useLocation()
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search)
-    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
-    const attribution = keys.reduce((accumulator, key) => {
-      const value = searchParams.get(key)
-      if (value) accumulator[key] = value
-      return accumulator
-    }, {})
-
-    if (Object.keys(attribution).length > 0) {
-      const payload = {
-        ...attribution,
-        landing_path: location.pathname,
-        first_seen_at: new Date().toISOString(),
-        referrer: document.referrer || ''
-      }
-      localStorage.setItem('cwf_attribution', JSON.stringify(payload))
-    }
+    captureAttributionTouch({
+      pathname: location.pathname,
+      search: location.search,
+      referrer: document.referrer || ''
+    })
   }, [location.pathname, location.search])
 
   return null

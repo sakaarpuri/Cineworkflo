@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Sparkles, Copy, Check, Image as ImageIcon, X, Eye, ArrowRight } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
+import { trackCtaEvent } from '../lib/marketingAttribution'
+import SocialProofBar from './SocialProofBar'
 
 // New prompts from JSON database
 const sampleShots = [
@@ -75,6 +77,7 @@ export default function HeroGallery() {
   }
 
   const handleVaultToggle = () => {
+    trackCtaEvent('hero_toggle_prompt_vault', '/')
     setVaultToggle(true)
     setTimeout(() => {
       navigate('/prompts')
@@ -147,6 +150,7 @@ export default function HeroGallery() {
           <div className="flex flex-wrap items-center justify-center gap-3 mb-2">
             <Link
               to="/prompts"
+              onClick={() => trackCtaEvent('hero_prompt_vault_cta', '/')}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ background: 'var(--accent-blue)', color: '#fff' }}
             >
@@ -154,6 +158,7 @@ export default function HeroGallery() {
             </Link>
             <Link
               to="/shot-to-prompt"
+              onClick={() => trackCtaEvent('hero_shot_to_prompt_cta', '/')}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
             >
@@ -161,12 +166,15 @@ export default function HeroGallery() {
             </Link>
             <Link
               to="/camera-moves"
+              onClick={() => trackCtaEvent('hero_camera_moves_cta', '/')}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
             >
               Camera Moves
             </Link>
           </div>
+
+          <SocialProofBar />
         </div>
 
         {/* Prompt Gallery - PromptVault Style Cards with Copy */}

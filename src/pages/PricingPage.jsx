@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Pricing from '../components/Pricing'
+import SocialProofBar from '../components/SocialProofBar'
 
 export default function PricingPage({ onAuthClick }) {
   return (
@@ -19,8 +20,10 @@ export default function PricingPage({ onAuthClick }) {
       <Pricing onAuthClick={onAuthClick} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <SocialProofBar />
+
         <section
-          className="rounded-2xl p-6"
+          className="rounded-2xl p-6 mt-6"
           style={{
             background: 'var(--bg-card)',
             border: '1px solid var(--border-color)'

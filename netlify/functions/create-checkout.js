@@ -24,14 +24,21 @@ exports.handler = async (event) => {
   try {
     const { email, plan, attribution = {} } = JSON.parse(event.body);
     const normalize = (value) => String(value || '').slice(0, 500);
+    const firstTouch = attribution.first_touch || {};
+    const lastTouch = attribution.last_touch || {};
+    const lastCta = attribution.cta_last || {};
     const sharedMetadata = {
-      utm_source: normalize(attribution.utm_source),
-      utm_medium: normalize(attribution.utm_medium),
-      utm_campaign: normalize(attribution.utm_campaign),
-      utm_content: normalize(attribution.utm_content),
-      utm_term: normalize(attribution.utm_term),
-      landing_path: normalize(attribution.landing_path),
-      referrer: normalize(attribution.referrer)
+      first_utm_source: normalize(firstTouch.utm_source),
+      first_utm_medium: normalize(firstTouch.utm_medium),
+      first_utm_campaign: normalize(firstTouch.utm_campaign),
+      last_utm_source: normalize(lastTouch.utm_source),
+      last_utm_medium: normalize(lastTouch.utm_medium),
+      last_utm_campaign: normalize(lastTouch.utm_campaign),
+      last_landing_path: normalize(lastTouch.landing_path),
+      last_referrer: normalize(lastTouch.referrer),
+      cta_last_name: normalize(lastCta.cta_name),
+      cta_last_path: normalize(lastCta.cta_path),
+      cta_count: normalize(attribution.cta_count)
     };
 
     let session;

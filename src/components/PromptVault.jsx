@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Search, Copy, Check, Lock, ArrowRight, Eye, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
+import { trackCtaEvent } from '../lib/marketingAttribution'
 
 export default function PromptVault({ preview = false }) {
   const [searchQuery, setSearchQuery] = useState('')
@@ -233,6 +234,7 @@ export default function PromptVault({ preview = false }) {
           <div className="text-center mt-10">
             <Link
               to="/prompts"
+              onClick={() => trackCtaEvent('prompt_vault_view_all_preview', '/')}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
               style={{
                 background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
@@ -277,6 +279,7 @@ export default function PromptVault({ preview = false }) {
             <div className="flex flex-wrap gap-3 mb-6">
               <Link
                 to="/shot-to-prompt"
+                onClick={() => trackCtaEvent('prompt_vault_shot_to_prompt_cta', '/prompts')}
                 className="px-4 py-2 rounded-lg text-sm font-semibold"
                 style={{ background: 'var(--accent-purple)', color: '#fff' }}
               >
@@ -284,6 +287,7 @@ export default function PromptVault({ preview = false }) {
               </Link>
               <Link
                 to="/camera-moves"
+                onClick={() => trackCtaEvent('prompt_vault_camera_moves_cta', '/prompts')}
                 className="px-4 py-2 rounded-lg text-sm font-semibold"
                 style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
               >
@@ -299,6 +303,7 @@ export default function PromptVault({ preview = false }) {
                 <Link
                   key={categoryPage.slug}
                   to={`/prompts/${categoryPage.slug}`}
+                  onClick={() => trackCtaEvent(`prompt_category_${categoryPage.slug}_cta`, '/prompts')}
                   className="px-3 py-2 rounded-lg text-sm font-semibold"
                   style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
                 >
