@@ -1,9 +1,3 @@
-const Anthropic = require('@anthropic-ai/sdk');
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
-});
-
 const MODEL_FALLBACK = [
   'claude-3-5-sonnet-latest',
   'claude-3-5-haiku-latest',
@@ -29,12 +23,13 @@ exports.handler = async (event) => {
     };
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: 'ANTHROPIC_API_KEY is not configured' })
-    };
+    const anthropicApiKey = process.env.ANTHROPIC_API_KEY || '';
+    if (!anthropicApiKey) {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'ANTHROPIC_API_KEY is not configured' })
+      };
   }
 
   try {
@@ -64,32 +59,47 @@ exports.handler = async (event) => {
     let lastError = null;
     for (const model of MODEL_FALLBACK) {
       try {
-        response = await anthropic.messages.create({
-          model,
-          max_tokens: 500,
-          messages: [
-            {
-              role: 'user',
-              content: [
-                {
-                  type: 'image',
-                  source: {
-                    type: 'base64',
-                    media_type: mediaType,
-                    data: base64Image
-                  }
-                },
-                {
-                  type: 'text',
-                  text: `Analyze this shot and create a detailed AI video generation prompt to recreate it.
+        const apiResponse = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': anthropicApiKey,
+            'anthropic-version': '2023-06-01'
+          },
+          body: JSON.stringify({
+            model,
+            max_tokens: 500,
+            messages: [
+              {
+                role: 'user',
+                content: [
+                  {
+                    type: 'image',
+                    source: {
+                      type: 'base64',
+                      media_type: mediaType,
+                      data: base64Image
+                    }
+                  },
+                  {
+                    type: 'text',
+                    text: `Analyze this shot and create a detailed AI video generation prompt to recreate it.
 
 Include camera movement, lighting style, composition, subject, mood, and technical details.
 Format as a single paragraph optimized for Runway/Pika-style video generation.`
-                }
-              ]
-            }
-          ]
+                  }
+                ]
+              }
+            ]
+          })
         });
+
+        const apiData = await apiResponse.json();
+        if (!apiResponse.ok) {
+          throw new Error(apiData?.error?.message || apiData?.error || `Anthropic request failed (${apiResponse.status})`);
+        }
+
+        response = apiData;
         break;
       } catch (error) {
         lastError = error;
