@@ -85,7 +85,7 @@ export default function PromptVault({ preview = false }) {
             className="text-3xl lg:text-4xl font-bold mb-4"
             style={{ color: 'var(--text-primary)' }}
           >
-            Prompt Vault
+            Explore Prompt Vault
           </h2>
           <p 
             className="text-xl max-w-2xl mx-auto"
