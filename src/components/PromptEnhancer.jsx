@@ -152,14 +152,29 @@ Object.entries(USES_CATEGORIES).forEach(([category, data]) => {
 });
 
 // Usage tracking helpers
+const USAGE_SCHEMA_VERSION = 2;
+
 const getUsageData = () => {
   const data = localStorage.getItem('promptEnhancerUsage');
-  if (!data) return { count: 0, lastReset: new Date().toISOString(), isPro: false };
-  return JSON.parse(data);
+  const defaultData = { count: 0, lastReset: new Date().toISOString(), isPro: false, schemaVersion: USAGE_SCHEMA_VERSION };
+  if (!data) return defaultData;
+  try {
+    const parsed = JSON.parse(data);
+    if (!parsed || parsed.schemaVersion !== USAGE_SCHEMA_VERSION) {
+      return defaultData;
+    }
+    return {
+      ...defaultData,
+      ...parsed,
+      count: Number.isFinite(parsed.count) ? parsed.count : 0
+    };
+  } catch {
+    return defaultData;
+  }
 };
 
 const saveUsageData = (data) => {
-  localStorage.setItem('promptEnhancerUsage', JSON.stringify(data));
+  localStorage.setItem('promptEnhancerUsage', JSON.stringify({ ...data, schemaVersion: USAGE_SCHEMA_VERSION }));
 };
 
 const shouldResetMonthly = (lastReset) => {
