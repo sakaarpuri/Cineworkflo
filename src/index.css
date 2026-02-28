@@ -12,15 +12,14 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #FFE7F2;
+    background-color: #FFDCEB;
     background-image:
-      radial-gradient(80% 45% at 12% 9%, rgba(255, 120, 186, 0.26) 0%, rgba(255, 120, 186, 0) 72%),
-      radial-gradient(85% 45% at 88% 22%, rgba(255, 169, 64, 0.24) 0%, rgba(255, 169, 64, 0) 70%),
-      radial-gradient(85% 50% at 25% 76%, rgba(69, 183, 255, 0.24) 0%, rgba(69, 183, 255, 0) 72%),
-      radial-gradient(88% 50% at 86% 86%, rgba(167, 109, 255, 0.24) 0%, rgba(167, 109, 255, 0) 74%),
-      linear-gradient(180deg, #FFE4F2 0%, #FFD6E7 20%, #FFE6C6 44%, #DFF5FF 68%, #E8D9FF 84%, #FFDDF4 100%);
+      radial-gradient(78% 48% at 14% 16%, rgba(255, 126, 188, 0.40) 0%, rgba(255, 126, 188, 0) 72%),
+      radial-gradient(88% 50% at 84% 26%, rgba(255, 181, 107, 0.36) 0%, rgba(255, 181, 107, 0) 74%),
+      radial-gradient(92% 56% at 34% 82%, rgba(112, 196, 255, 0.38) 0%, rgba(112, 196, 255, 0) 76%),
+      linear-gradient(170deg, #FFDDEB 0%, #FFCFE4 42%, #FFE0BC 67%, #D9F2FF 100%);
     background-repeat: no-repeat;
-    background-size: 100% 260%;
+    background-size: 100% 240%;
   }
 
   /* Theme Variables */
