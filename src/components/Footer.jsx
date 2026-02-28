@@ -1,6 +1,8 @@
 import { Film, Twitter, Mail, Github } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+const BUILD_TAG = 'v2026.02.28.2'
+
 export default function Footer() {
   return (
     <footer 
@@ -134,7 +136,7 @@ export default function Footer() {
           <p style={{ color: 'var(--text-muted)' }} className="text-sm">
             © 2026 CineWorkflo. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm">
+          <div className="flex items-center gap-4 text-sm">
             <Link
               to="/privacy"
               className="transition-colors hover:opacity-80"
@@ -149,6 +151,16 @@ export default function Footer() {
             >
               Terms
             </Link>
+            <span
+              className="px-2 py-1 rounded-md text-xs font-semibold"
+              style={{
+                color: 'var(--text-muted)',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-color)'
+              }}
+            >
+              {BUILD_TAG}
+            </span>
           </div>
         </div>
       </div>

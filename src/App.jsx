@@ -419,6 +419,11 @@ function App() {
                       <PromptEnhancer />
                     </Suspense>
                   </DeferredSection>
+                  <DeferredSection minHeight={240}>
+                    <Suspense fallback={sectionFallback(240)}>
+                      <PromptVault preview={true} />
+                    </Suspense>
+                  </DeferredSection>
                   <DeferredSection minHeight={220}>
                     <Suspense fallback={sectionFallback(220)}>
                       <ShotToPrompt preview={true} />
@@ -432,11 +437,6 @@ function App() {
                   <DeferredSection minHeight={160}>
                     <Suspense fallback={sectionFallback(160)}>
                       <Features />
-                    </Suspense>
-                  </DeferredSection>
-                  <DeferredSection minHeight={240}>
-                    <Suspense fallback={sectionFallback(240)}>
-                      <PromptVault preview={true} />
                     </Suspense>
                   </DeferredSection>
                   <DeferredSection minHeight={180}>
