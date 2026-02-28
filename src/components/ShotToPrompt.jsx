@@ -469,11 +469,7 @@ export default function ShotToPrompt({ preview = false }) {
         </div>
 
         <section
-          className="mt-8 rounded-2xl p-6"
-          style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-color)'
-          }}
+          className="neu-card mt-8 rounded-2xl p-6"
         >
           <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
             How to get better prompt results
@@ -508,11 +504,7 @@ export default function ShotToPrompt({ preview = false }) {
         </section>
 
         <section
-          className="mt-6 rounded-2xl p-6"
-          style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border-color)'
-          }}
+          className="neu-card mt-6 rounded-2xl p-6"
         >
           <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
             Shot to Prompt FAQ

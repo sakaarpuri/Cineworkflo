@@ -193,12 +193,7 @@ export default function PromptVault({ preview = false }) {
             <div 
               key={prompt.id}
               onClick={() => openModal(prompt)}
-              className="p-5 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer group"
-              style={{
-                background: 'var(--bg-card)',
-                boxShadow: 'var(--shadow-card)',
-                border: '1px solid var(--border-color)'
-              }}
+              className="neu-card p-5 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer group"
             >
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div>
@@ -283,11 +278,7 @@ export default function PromptVault({ preview = false }) {
 
         {!preview && (
           <section
-            className="mt-10 rounded-2xl p-6"
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border-color)'
-            }}
+            className="neu-card mt-10 rounded-2xl p-6"
           >
             <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
               Build complete shots faster
@@ -372,8 +363,7 @@ export default function PromptVault({ preview = false }) {
           onClick={closeModal}
         >
           <div 
-            className="max-w-2xl w-full rounded-2xl p-6 relative"
-            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
+            className="neu-card max-w-2xl w-full rounded-2xl p-6 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button 

@@ -92,8 +92,13 @@
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.92);
-    opacity: 0.9;
+    /* Extra edge definition so borders feel 3D on near-white backgrounds. */
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.92),
+      inset 0 -1px 0 rgba(15,23,42,0.06),
+      inset 1px 0 0 rgba(255,255,255,0.55),
+      inset -1px 0 0 rgba(15,23,42,0.04);
+    opacity: 0.95;
   }
 
   .neu-inset {
@@ -124,5 +129,12 @@
 
   [data-theme="dark"] .neu-button:hover {
     box-shadow: 6px 6px 12px rgba(0,0,0,0.6), -6px -6px 12px rgba(255,255,255,0.05);
+  }
+
+  [data-theme="dark"] .neu-card::before {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      inset 0 -1px 0 rgba(0,0,0,0.25);
+    opacity: 0.7;
   }
 }

@@ -547,10 +547,9 @@ export default function PromptEnhancer({ onAuthClick }) {
 
         {/* Wide Compact Card */}
         <div 
-          className="p-5 rounded-2xl"
+          className="neu-card p-5 rounded-2xl"
           style={{
             background: 'var(--bg-secondary)',
-            boxShadow: 'var(--shadow-card)',
             border: '1px solid var(--border-color)'
           }}
         >
@@ -825,10 +824,9 @@ export default function PromptEnhancer({ onAuthClick }) {
         {/* Result - Copyable Text Field */}
         {result && (
           <div 
-            className="mt-6 p-5 rounded-2xl"
+            className="neu-card mt-6 p-5 rounded-2xl"
             style={{
               background: 'var(--bg-secondary)',
-              boxShadow: 'var(--shadow-card)',
               border: '1px solid var(--accent-green)40'
             }}
           >

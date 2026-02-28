@@ -67,12 +67,7 @@ export default function Features() {
           {features.map((feature) => (
             <div 
               key={feature.title} 
-              className="p-6 rounded-2xl transition-all hover:-translate-y-1"
-              style={{
-                background: 'var(--bg-card)',
-                boxShadow: 'var(--shadow-card)',
-                border: '1px solid var(--border-color)'
-              }}
+              className="neu-card p-6 rounded-2xl transition-all hover:-translate-y-1"
             >
               <div 
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
