@@ -277,8 +277,8 @@ export default function PromptEnhancer({ onAuthClick }) {
     }
     setCopied(false);
 
-    // Track usage for free users
-    if (!isPro && !interpretationStyle) {
+    // Track usage only for manual generations (not auto-update refreshes)
+    if (!isPro && !interpretationStyle && !isAutoUpdate) {
       const newData = { ...usage, count: usage.count + 1 };
       saveUsageData(newData);
       setUsage(newData);
