@@ -147,31 +147,32 @@ export default function HeroGallery() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-2">
-            <Link
-              to="/prompts"
-              onClick={() => trackCtaEvent('hero_prompt_vault_cta', '/')}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-1">
+            <button
+              onClick={() => {
+                trackCtaEvent('hero_prompt_enhancer_primary', '/')
+                document.getElementById('prompt-enhancer')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ background: 'var(--accent-blue)', color: '#fff' }}
             >
-              Prompt Vault
-            </Link>
+              Try Prompt Enhancer
+            </button>
             <Link
-              to="/shot-to-prompt"
-              onClick={() => trackCtaEvent('hero_shot_to_prompt_cta', '/')}
+              to="/prompts"
+              onClick={() => trackCtaEvent('hero_prompt_vault_secondary', '/')}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
             >
-              Shot to Prompt
+              Browse Prompt Vault
             </Link>
-            <Link
-              to="/camera-moves"
-              onClick={() => trackCtaEvent('hero_camera_moves_cta', '/')}
-              className="px-4 py-2 rounded-lg text-sm font-semibold"
-              style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
-            >
-              Camera Moves
-            </Link>
+          </div>
+
+          <div className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
+            Explore tools:{' '}
+            <Link to="/shot-to-prompt" onClick={() => trackCtaEvent('hero_shot_to_prompt_link', '/')} className="underline">Shot to Prompt</Link>
+            {' '}·{' '}
+            <Link to="/camera-moves" onClick={() => trackCtaEvent('hero_camera_moves_link', '/')} className="underline">Camera Moves</Link>
           </div>
 
           <SocialProofBar />
