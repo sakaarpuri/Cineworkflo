@@ -97,37 +97,13 @@ export default function HeroGallery() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-
-          <div
-            className="max-w-2xl mx-auto mb-8 rounded-2xl p-5"
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--border-color)',
-              boxShadow: 'var(--shadow-card)'
-            }}
-          >
-            <div className="grid sm:grid-cols-3 gap-4">
-              <div className="text-center">
-                <div className="text-xs font-semibold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>WORKS WITH</div>
-                <div className="text-sm font-semibold mt-1" style={{ color: 'var(--text-primary)' }}>Runway • Pika • Kling • Luma</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xs font-semibold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>MODES</div>
-                <div className="text-sm font-semibold mt-1" style={{ color: 'var(--text-primary)' }}>Beginner + Pro detail level</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xs font-semibold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>WORKFLOW</div>
-                <div className="text-sm font-semibold mt-1" style={{ color: 'var(--text-primary)' }}>Vault + tools + camera moves</div>
-              </div>
-            </div>
-            <p className="text-xs text-center mt-3" style={{ color: 'var(--text-muted)' }}>
-              Built for filmmakers and creator teams working across Runway, Pika, Kling, and more.
-            </p>
-          </div>
-
           <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
-            Get videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
+            Get <span style={{ color: 'var(--accent-blue)' }}>AI</span> videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
           </h1>
+          <p className="text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
+            Professionally crafted prompts for Runway, Pika, Kling, Luma, and other AI video tools.
+            Get consistent, commercial-quality results every time.
+          </p>
 
           {/* Explore Prompt Vault - Sliding Toggle Switch */}
           <div className="mb-8">
