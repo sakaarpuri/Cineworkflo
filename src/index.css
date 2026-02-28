@@ -14,18 +14,18 @@
     overflow-x: hidden;
     background-color: #FBFBFF;
     background-image:
-      /* Big, high-contrast pastel zones with soft blends (no hard bands) */
-      radial-gradient(120% 74% at 50% 0%, rgba(255, 86, 170, 0.34) 0%, rgba(255, 86, 170, 0) 64%),
-      radial-gradient(120% 72% at 50% 58%, rgba(0, 204, 176, 0.62) 0%, rgba(0, 204, 176, 0) 66%),
-      radial-gradient(120% 78% at 50% 102%, rgba(74, 144, 255, 0.70) 0%, rgba(74, 144, 255, 0) 62%),
-      radial-gradient(90% 60% at 20% 96%, rgba(179, 102, 255, 0.46) 0%, rgba(179, 102, 255, 0) 70%),
-      /* Underlay to keep the page bright and cohesive */
+      /* Smaller pink zone (top), stronger mint + blue zones (mid/bottom). */
+      radial-gradient(120% 70% at 50% 0%, rgba(255, 86, 170, 0.22) 0%, rgba(255, 86, 170, 0) 56%),
+      radial-gradient(140% 80% at 50% 52%, rgba(0, 204, 176, 0.74) 0%, rgba(0, 204, 176, 0) 62%),
+      radial-gradient(140% 88% at 50% 104%, rgba(74, 144, 255, 0.82) 0%, rgba(74, 144, 255, 0) 58%),
+      radial-gradient(110% 70% at 18% 92%, rgba(179, 102, 255, 0.54) 0%, rgba(179, 102, 255, 0) 66%),
+      /* Underlay: reduce pink area, extend mint/blue, keep soft transitions. */
       linear-gradient(
         180deg,
-        #FFEAF4 0%,
-        #FFF2F9 34%,
-        #D8FFF7 62%,
-        #D6F0FF 80%,
+        #FFF2F9 0%,
+        #FFF8FD 22%,
+        #D7FFF7 48%,
+        #D6F0FF 76%,
         #F1EAFF 100%
       );
     background-repeat: no-repeat;

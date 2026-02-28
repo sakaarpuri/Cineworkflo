@@ -185,9 +185,6 @@ export default function ShotToPrompt({ preview = false }) {
         className="py-16 transition-colors relative overflow-hidden"
         style={{ background: 'transparent' }}
       >
-        {/* Decorative gradient orbs */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="rounded-3xl p-6 lg:p-8"
