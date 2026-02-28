@@ -20,7 +20,7 @@ export default function PricingPage({ onAuthClick }) {
       <Pricing onAuthClick={onAuthClick} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <SocialProofBar />
+        <SocialProofBar variant="pricing" />
 
         <section
           className="rounded-2xl p-6 mt-6"

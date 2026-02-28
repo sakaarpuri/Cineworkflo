@@ -175,7 +175,7 @@ export default function HeroGallery() {
             <Link to="/camera-moves" onClick={() => trackCtaEvent('hero_camera_moves_link', '/')} className="underline">Camera Moves</Link>
           </div>
 
-          <SocialProofBar />
+          <SocialProofBar variant="hero" />
         </div>
 
         {/* Prompt Gallery - PromptVault Style Cards with Copy */}

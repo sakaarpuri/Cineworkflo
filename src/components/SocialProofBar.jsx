@@ -1,9 +1,15 @@
-export default function SocialProofBar() {
-  const items = [
-    { value: '150+', label: 'Prompt templates' },
-    { value: '10+', label: 'Indexable SEO pages' },
-    { value: '30-day', label: 'Money-back guarantee' }
-  ]
+export default function SocialProofBar({ variant = 'hero' }) {
+  const items = variant === 'pricing'
+    ? [
+        { value: '30-day', label: 'Money-back guarantee' },
+        { value: 'Instant', label: 'Access after checkout' },
+        { value: 'Works with', label: 'Runway • Pika • Kling • Luma' }
+      ]
+    : [
+        { value: 'Works with', label: 'Runway • Pika • Kling • Luma' },
+        { value: 'Modes', label: 'Beginner + Pro detail level' },
+        { value: 'Workflow', label: 'Vault + tools + camera moves' }
+      ]
 
   return (
     <div
@@ -16,8 +22,8 @@ export default function SocialProofBar() {
       <div className="grid sm:grid-cols-3 gap-3">
         {items.map((item) => (
           <div key={item.label} className="text-center py-2">
-            <div className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{item.value}</div>
-            <div className="text-xs" style={{ color: 'var(--text-muted)' }}>{item.label}</div>
+            <div className="text-xs font-semibold tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>{item.value}</div>
+            <div className="text-sm font-semibold mt-1" style={{ color: 'var(--text-primary)' }}>{item.label}</div>
           </div>
         ))}
       </div>
