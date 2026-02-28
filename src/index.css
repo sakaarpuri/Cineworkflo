@@ -12,24 +12,15 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #FBFBFF;
+    background-color: #FFE7F2;
     background-image:
-      /* Smaller pink zone (top), stronger mint + blue zones (mid/bottom). */
-      radial-gradient(120% 70% at 50% 0%, rgba(255, 86, 170, 0.22) 0%, rgba(255, 86, 170, 0) 56%),
-      radial-gradient(140% 80% at 50% 52%, rgba(0, 204, 176, 0.74) 0%, rgba(0, 204, 176, 0) 62%),
-      radial-gradient(140% 88% at 50% 104%, rgba(74, 144, 255, 0.82) 0%, rgba(74, 144, 255, 0) 58%),
-      radial-gradient(110% 70% at 18% 92%, rgba(179, 102, 255, 0.54) 0%, rgba(179, 102, 255, 0) 66%),
-      /* Underlay: reduce pink area, extend mint/blue, keep soft transitions. */
-      linear-gradient(
-        180deg,
-        #FFF2F9 0%,
-        #FFF8FD 22%,
-        #D7FFF7 48%,
-        #D6F0FF 76%,
-        #F1EAFF 100%
-      );
+      radial-gradient(80% 45% at 12% 9%, rgba(255, 120, 186, 0.26) 0%, rgba(255, 120, 186, 0) 72%),
+      radial-gradient(85% 45% at 88% 22%, rgba(255, 169, 64, 0.24) 0%, rgba(255, 169, 64, 0) 70%),
+      radial-gradient(85% 50% at 25% 76%, rgba(69, 183, 255, 0.24) 0%, rgba(69, 183, 255, 0) 72%),
+      radial-gradient(88% 50% at 86% 86%, rgba(167, 109, 255, 0.24) 0%, rgba(167, 109, 255, 0) 74%),
+      linear-gradient(180deg, #FFE4F2 0%, #FFD6E7 20%, #FFE6C6 44%, #DFF5FF 68%, #E8D9FF 84%, #FFDDF4 100%);
     background-repeat: no-repeat;
-    background-size: 100% 280%;
+    background-size: 100% 260%;
   }
 
   /* Theme Variables */
