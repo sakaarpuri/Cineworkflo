@@ -135,18 +135,21 @@ export function CameraMoveCard({ data }) {
 
 export default function CameraMoveCards() {
   return (
-    <section className="py-14" style={{ background: '#F0EEE9' }}>
+    <section
+      className="py-14 transition-colors"
+      style={{ background: 'linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 30%, var(--bg-primary) 70%, var(--bg-secondary) 100%)' }}
+    >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider mb-3" 
-               style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', color: '#2563EB' }}>
+               style={{ background: 'var(--accent-blue)15', border: '1px solid var(--accent-blue)30', color: 'var(--accent-blue)' }}>
             <Move3d className="h-3.5 w-3.5" />
             CAMERA MOVES
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold mb-2" style={{ color: '#111827' }}>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
             Camera Movements
           </h2>
-          <p className="max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
+          <p className="max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
             Hover cards to preview animations. Click for full details.
           </p>
         </div>

@@ -7,7 +7,7 @@ export default function HeroGallery() {
 
   return (
     <section 
-      className="py-16 lg:py-24 transition-colors relative overflow-hidden"
+      className="pt-16 pb-8 lg:pt-24 lg:pb-10 transition-colors relative overflow-hidden"
       style={{ 
         background: 'linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%)'
       }}
@@ -18,7 +18,7 @@ export default function HeroGallery() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-6">
           <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
             Get <span style={{ color: 'var(--accent-blue)' }}>AI</span> videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
           </h1>
