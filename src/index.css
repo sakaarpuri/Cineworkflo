@@ -12,14 +12,28 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #FFDCEB;
+    background-color: #FFF4FA;
     background-image:
-      radial-gradient(78% 48% at 14% 16%, rgba(255, 126, 188, 0.40) 0%, rgba(255, 126, 188, 0) 72%),
-      radial-gradient(88% 50% at 84% 26%, rgba(255, 181, 107, 0.36) 0%, rgba(255, 181, 107, 0) 74%),
-      radial-gradient(92% 56% at 34% 82%, rgba(112, 196, 255, 0.38) 0%, rgba(112, 196, 255, 0) 76%),
-      linear-gradient(170deg, #FFDDEB 0%, #FFCFE4 42%, #FFE0BC 67%, #D9F2FF 100%);
+      /* Zone 1 (largest): Pink */
+      radial-gradient(82% 52% at 18% 14%, rgba(255, 118, 186, 0.52) 0%, rgba(255, 118, 186, 0) 72%),
+      radial-gradient(70% 44% at 78% 12%, rgba(255, 170, 220, 0.40) 0%, rgba(255, 170, 220, 0) 70%),
+      /* Zone 2 (medium): Mint/Teal */
+      radial-gradient(92% 58% at 82% 56%, rgba(72, 220, 189, 0.44) 0%, rgba(72, 220, 189, 0) 74%),
+      radial-gradient(78% 48% at 38% 60%, rgba(167, 255, 240, 0.34) 0%, rgba(167, 255, 240, 0) 76%),
+      /* Zone 3 (smallest): Blue/Lavender */
+      radial-gradient(96% 62% at 26% 96%, rgba(120, 165, 255, 0.42) 0%, rgba(120, 165, 255, 0) 78%),
+      radial-gradient(86% 56% at 82% 92%, rgba(186, 154, 255, 0.34) 0%, rgba(186, 154, 255, 0) 78%),
+      /* Soft vertical blend with uneven ratios (no hard lines) */
+      linear-gradient(
+        180deg,
+        #FFE0F1 0%,
+        #FFD3EA 46%,
+        #D9FFF6 66%,
+        #D6F6FF 78%,
+        #E5DCFF 100%
+      );
     background-repeat: no-repeat;
-    background-size: 100% 240%;
+    background-size: 100% 260%;
   }
 
   /* Theme Variables */
