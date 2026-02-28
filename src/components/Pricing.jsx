@@ -57,6 +57,25 @@ export default function Pricing({ onAuthClick }) {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
 
+  const getStoredAttribution = () => {
+    try {
+      const raw = localStorage.getItem('cwf_attribution')
+      if (!raw) return {}
+      const data = JSON.parse(raw)
+      return {
+        utm_source: data.utm_source || '',
+        utm_medium: data.utm_medium || '',
+        utm_campaign: data.utm_campaign || '',
+        utm_content: data.utm_content || '',
+        utm_term: data.utm_term || '',
+        landing_path: data.landing_path || '',
+        referrer: data.referrer || ''
+      }
+    } catch {
+      return {}
+    }
+  }
+
   const handleCheckout = async (planType) => {
     if (!user) {
       onAuthClick?.()
@@ -70,7 +89,8 @@ export default function Pricing({ onAuthClick }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: user.email,
-          plan: planType
+          plan: planType,
+          attribution: getStoredAttribution()
         })
       })
 

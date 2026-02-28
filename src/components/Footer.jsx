@@ -71,6 +71,24 @@ export default function Footer() {
                   Pricing
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="transition-colors hover:opacity-80"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -117,20 +135,20 @@ export default function Footer() {
             © 2026 CineWorkflo. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a 
-              href="#" 
+            <Link
+              to="/privacy"
               className="transition-colors hover:opacity-80"
               style={{ color: 'var(--text-muted)' }}
             >
               Privacy
-            </a>
-            <a 
-              href="#" 
+            </Link>
+            <Link
+              to="/terms"
               className="transition-colors hover:opacity-80"
               style={{ color: 'var(--text-muted)' }}
             >
               Terms
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -22,7 +22,17 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { email, plan } = JSON.parse(event.body);
+    const { email, plan, attribution = {} } = JSON.parse(event.body);
+    const normalize = (value) => String(value || '').slice(0, 500);
+    const sharedMetadata = {
+      utm_source: normalize(attribution.utm_source),
+      utm_medium: normalize(attribution.utm_medium),
+      utm_campaign: normalize(attribution.utm_campaign),
+      utm_content: normalize(attribution.utm_content),
+      utm_term: normalize(attribution.utm_term),
+      landing_path: normalize(attribution.landing_path),
+      referrer: normalize(attribution.referrer)
+    };
 
     let session;
 
@@ -46,10 +56,11 @@ exports.handler = async (event) => {
         ],
         mode: 'subscription',
         success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=monthly`,
-        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/#pricing`,
+        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing`,
         customer_email: email,
         metadata: {
-          plan: 'monthly'
+          plan: 'monthly',
+          ...sharedMetadata
         }
       });
     } else if (plan === 'yearly') {
@@ -72,10 +83,11 @@ exports.handler = async (event) => {
         ],
         mode: 'subscription',
         success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=yearly`,
-        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/#pricing`,
+        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing`,
         customer_email: email,
         metadata: {
-          plan: 'yearly'
+          plan: 'yearly',
+          ...sharedMetadata
         }
       });
     }

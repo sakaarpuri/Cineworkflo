@@ -14,6 +14,10 @@ Inspect these URLs one by one:
 - `https://cineworkflo.com/shot-to-prompt`
 - `https://cineworkflo.com/camera-moves`
 - `https://cineworkflo.com/pricing`
+- `https://cineworkflo.com/about`
+- `https://cineworkflo.com/contact`
+- `https://cineworkflo.com/privacy`
+- `https://cineworkflo.com/terms`
 
 For each URL, validate:
 - Google-selected canonical matches page canonical.

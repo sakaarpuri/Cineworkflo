@@ -13,6 +13,10 @@ const CameraMoveCards = lazy(() => import('./components/CameraMoveCards'))
 const ModernAINativeMoves = lazy(() => import('./components/ModernAINativeMoves'))
 const CameraMovesPage = lazy(() => import('./pages/CameraMovesPage'))
 const PricingPage = lazy(() => import('./pages/PricingPage'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
+const TermsPage = lazy(() => import('./pages/TermsPage'))
 const Features = lazy(() => import('./components/Features'))
 const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
@@ -66,6 +70,34 @@ const SEO_BY_PATH = {
     description: 'Compare Free, Pro Monthly, and Pro Yearly plans for CineWorkflo. Unlock full prompt vault access and advanced AI video workflow tools.',
     keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans',
     path: '/pricing',
+    noindex: false
+  },
+  '/about': {
+    title: 'About CineWorkflo - AI Video Prompt Workflows',
+    description: 'Learn about CineWorkflo and how it helps filmmakers and creators build reliable AI video workflows.',
+    keywords: 'about CineWorkflo, AI video workflow platform, filmmaker prompt tools',
+    path: '/about',
+    noindex: false
+  },
+  '/contact': {
+    title: 'Contact CineWorkflo Support',
+    description: 'Contact CineWorkflo for support, billing, and partnership inquiries.',
+    keywords: 'contact CineWorkflo, CineWorkflo support, prompt tool support',
+    path: '/contact',
+    noindex: false
+  },
+  '/privacy': {
+    title: 'Privacy Policy | CineWorkflo',
+    description: 'Read the CineWorkflo privacy policy and how account, usage, and billing data are handled.',
+    keywords: 'CineWorkflo privacy policy, data policy, creator tool privacy',
+    path: '/privacy',
+    noindex: false
+  },
+  '/terms': {
+    title: 'Terms of Service | CineWorkflo',
+    description: 'Read the CineWorkflo terms of service for platform usage and account policies.',
+    keywords: 'CineWorkflo terms, terms of service, AI tool terms',
+    path: '/terms',
     noindex: false
   },
   '/success': {
@@ -293,6 +325,32 @@ function RouteSeo() {
   return null
 }
 
+function AttributionTracker() {
+  const location = useLocation()
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+    const attribution = keys.reduce((accumulator, key) => {
+      const value = searchParams.get(key)
+      if (value) accumulator[key] = value
+      return accumulator
+    }, {})
+
+    if (Object.keys(attribution).length > 0) {
+      const payload = {
+        ...attribution,
+        landing_path: location.pathname,
+        first_seen_at: new Date().toISOString(),
+        referrer: document.referrer || ''
+      }
+      localStorage.setItem('cwf_attribution', JSON.stringify(payload))
+    }
+  }, [location.pathname, location.search])
+
+  return null
+}
+
 function DeferredSection({ children, minHeight = 240, rootMargin = '320px 0px' }) {
   const [shouldRender, setShouldRender] = useState(false)
   const containerRef = useRef(null)
@@ -340,6 +398,7 @@ function App() {
     <AuthProvider>
       <Router>
         <RouteSeo />
+        <AttributionTracker />
         <div className="min-h-screen transition-colors" style={{ background: 'var(--bg-primary)' }}>
           <Header onAuthClick={() => setAuthModalOpen(true)} />
           <main>
@@ -384,6 +443,10 @@ function App() {
               <Route path="/camera-moves" element={<Suspense fallback={sectionFallback(320)}><CameraMovesPage /></Suspense>} />
               <Route path="/modern-moves" element={<Suspense fallback={sectionFallback(320)}><ModernAINativeMoves /></Suspense>} />
               <Route path="/pricing" element={<Suspense fallback={sectionFallback(320)}><PricingPage onAuthClick={() => setAuthModalOpen(true)} /></Suspense>} />
+              <Route path="/about" element={<Suspense fallback={sectionFallback(220)}><AboutPage /></Suspense>} />
+              <Route path="/contact" element={<Suspense fallback={sectionFallback(220)}><ContactPage /></Suspense>} />
+              <Route path="/privacy" element={<Suspense fallback={sectionFallback(220)}><PrivacyPage /></Suspense>} />
+              <Route path="/terms" element={<Suspense fallback={sectionFallback(220)}><TermsPage /></Suspense>} />
               <Route path="/success" element={<Success />} />
             </Routes>
           </main>

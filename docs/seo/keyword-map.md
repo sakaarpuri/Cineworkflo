@@ -108,6 +108,15 @@
   - `/pricing` -> `/prompts` (product proof)
   - `/pricing` -> `/shot-to-prompt` (tool proof)
 
+### 7) Trust + Policy Routes (`/about`, `/contact`, `/privacy`, `/terms`)
+- Primary Intent: trust, legal clarity, support discoverability.
+- SEO Role: entity credibility and policy completeness.
+- Cluster:
+  - about CineWorkflo
+  - CineWorkflo contact
+  - CineWorkflo privacy policy
+  - CineWorkflo terms of service
+
 ---
 
 ## Cannibalization Guardrails

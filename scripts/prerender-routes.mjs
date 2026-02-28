@@ -90,6 +90,58 @@ const ROUTES = [
         </ul>
       </main>
     `
+  },
+  {
+    path: '/about',
+    file: join(DIST_DIR, 'about', 'index.html'),
+    title: 'About CineWorkflo - AI Video Prompt Workflows',
+    description: 'Learn about CineWorkflo and how it helps filmmakers and creators build reliable AI video workflows.',
+    keywords: 'about CineWorkflo, AI video workflow platform, filmmaker prompt tools',
+    fallbackHtml: `
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>About CineWorkflo</h1>
+        <p>CineWorkflo provides practical prompt workflows for AI video creators and filmmaking teams.</p>
+      </main>
+    `
+  },
+  {
+    path: '/contact',
+    file: join(DIST_DIR, 'contact', 'index.html'),
+    title: 'Contact CineWorkflo Support',
+    description: 'Contact CineWorkflo for support, billing, and partnership inquiries.',
+    keywords: 'contact CineWorkflo, CineWorkflo support, prompt tool support',
+    fallbackHtml: `
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>Contact</h1>
+        <p>Reach support at support@cineworkflo.com for product and billing questions.</p>
+      </main>
+    `
+  },
+  {
+    path: '/privacy',
+    file: join(DIST_DIR, 'privacy', 'index.html'),
+    title: 'Privacy Policy | CineWorkflo',
+    description: 'Read the CineWorkflo privacy policy and how account, usage, and billing data are handled.',
+    keywords: 'CineWorkflo privacy policy, data policy, creator tool privacy',
+    fallbackHtml: `
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>Privacy Policy</h1>
+        <p>This page explains how CineWorkflo handles account, usage, and billing-related data.</p>
+      </main>
+    `
+  },
+  {
+    path: '/terms',
+    file: join(DIST_DIR, 'terms', 'index.html'),
+    title: 'Terms of Service | CineWorkflo',
+    description: 'Read the CineWorkflo terms of service for platform usage and account policies.',
+    keywords: 'CineWorkflo terms, terms of service, AI tool terms',
+    fallbackHtml: `
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>Terms of Service</h1>
+        <p>This page outlines service terms, account responsibilities, and usage policies.</p>
+      </main>
+    `
   }
 ]
 

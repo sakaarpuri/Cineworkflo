@@ -10,6 +10,10 @@ const routes = [
   { path: '/shot-to-prompt', changefreq: 'weekly', priority: '0.9' },
   { path: '/camera-moves', changefreq: 'monthly', priority: '0.8' },
   { path: '/pricing', changefreq: 'weekly', priority: '0.8' },
+  { path: '/about', changefreq: 'monthly', priority: '0.6' },
+  { path: '/contact', changefreq: 'monthly', priority: '0.6' },
+  { path: '/privacy', changefreq: 'yearly', priority: '0.4' },
+  { path: '/terms', changefreq: 'yearly', priority: '0.4' },
   { path: '/modern-moves', changefreq: 'monthly', priority: '0.5' }
 ]
 

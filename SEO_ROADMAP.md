@@ -177,6 +177,11 @@ Tasks:
 File Targets:
 - Footer links and legal/info pages once added in app routes.
 
+Status Update (Feb 28, 2026):
+- Added dedicated `/about`, `/contact`, `/privacy`, and `/terms` routes.
+- Footer now links to trust/legal routes directly.
+- Trust routes are included in metadata, sitemap, prerender snapshots, and trailing-slash redirects.
+
 ### Week 11: CTR Optimization
 Tasks:
 - Use GSC to identify high-impression/low-CTR pages.
@@ -285,4 +290,4 @@ Monthly:
 - Pricing / checkout flows:
   - [x] Crawl-safe metadata
   - [x] No indexing of private/sensitive states
-  - [ ] Conversion tracking by source/medium
+  - [x] Conversion tracking by source/medium
