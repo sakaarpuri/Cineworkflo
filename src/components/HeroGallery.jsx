@@ -154,25 +154,41 @@ export default function HeroGallery() {
                 document.getElementById('prompt-enhancer')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
-              style={{ background: 'var(--accent-blue)', color: '#fff' }}
+              style={{
+                background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
+                color: '#fff',
+                border: '2px solid #3B82F650',
+                boxShadow: 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                transform: 'translateY(0) scale(1)'
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.transform = 'translateY(2px) scale(0.96)'
+                e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)'
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)'
+              }}
             >
               Try Prompt Enhancer
             </button>
             <Link
-              to="/prompts"
-              onClick={() => trackCtaEvent('hero_prompt_vault_secondary', '/')}
+              to="/camera-moves"
+              onClick={() => trackCtaEvent('hero_camera_moves_secondary', '/')}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
               style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
             >
-              Browse Prompt Vault
+              Learn Camera Moves
             </Link>
           </div>
 
           <div className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>
             Explore tools:{' '}
             <Link to="/shot-to-prompt" onClick={() => trackCtaEvent('hero_shot_to_prompt_link', '/')} className="underline">Shot to Prompt</Link>
-            {' '}·{' '}
-            <Link to="/camera-moves" onClick={() => trackCtaEvent('hero_camera_moves_link', '/')} className="underline">Camera Moves</Link>
           </div>
 
           <SocialProofBar variant="hero" />
