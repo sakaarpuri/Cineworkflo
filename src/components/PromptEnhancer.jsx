@@ -197,6 +197,13 @@ const PRO_DETAILS = [
   { key: 'lighting', label: '+ Lighting Setup', desc: 'key light, rim light, softbox, golden hour' }
 ];
 
+const PRO_DETAIL_TEXT = {
+  camera: ' Smooth gimbal tracking shot.',
+  lens: ' Shot on 50mm lens, shallow depth of field.',
+  depth: ' f/2.8 aperture, creamy bokeh background.',
+  lighting: ' Three-point lighting with soft key light.'
+};
+
 const AUDIO_KEYWORDS_REGEX = /\b(audio|sound|sfx|music|foley|ambien|voiceover|soundscape|dialogue)\b/i;
 
 const buildAudioSfxDetails = (mood, useCase, skillLevel = 'beginner') => {
@@ -248,12 +255,20 @@ const applyAudioPreference = (prompt, includeAudioSfx, mood, useCase, skillLevel
   return cleaned || normalizedPrompt;
 };
 
+const applySelectedProDetails = (prompt, detailKeys) => {
+  const base = (prompt || '').trim();
+  if (!base) return base;
+  if (!Array.isArray(detailKeys) || detailKeys.length === 0) return base;
+  return detailKeys.reduce((current, key) => `${current}${PRO_DETAIL_TEXT[key] || ''}`, base).trim();
+};
+
 export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
   const [mood, setMood] = useState("");
   const [useCase, setUseCase] = useState("");
   const [skillLevel, setSkillLevel] = useState('beginner'); // 'beginner' | 'pro'
   const [loading, setLoading] = useState(false);
+  const [baseResult, setBaseResult] = useState(null);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
@@ -288,6 +303,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     setLoading(true);
     // Only clear result on first generation, keep it visible during auto-updates
     if (!isAutoUpdate) {
+      setBaseResult(null);
       setResult(null);
     }
     setCopied(false);
@@ -312,15 +328,19 @@ export default function PromptEnhancer({ onAuthClick }) {
 
       const data = await response.json();
       const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
-      setResult(applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel));
+      const nextBaseResult = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
+      setBaseResult(nextBaseResult);
+      setResult(applySelectedProDetails(nextBaseResult, addedDetails));
       setHasGeneratedOnce(true);
     } catch (err) {
       // Fallback with smart prompt generator
       const fallbackPrompt = generateSmartPrompt(idea, mood, useCase, skillLevel);
-      setResult(applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel));
+      const nextBaseResult = applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel);
+      setBaseResult(nextBaseResult);
+      setResult(applySelectedProDetails(nextBaseResult, addedDetails));
     }
     setLoading(false);
-  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, addedDetails]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -370,6 +390,11 @@ export default function PromptEnhancer({ onAuthClick }) {
       clearTimeout(levelPulseTimeoutRef.current);
     }
   }, []);
+
+  useEffect(() => {
+    if (!baseResult) return;
+    setResult(applySelectedProDetails(baseResult, addedDetails));
+  }, [baseResult, addedDetails]);
 
 
   const handleCopy = () => {
@@ -766,18 +791,12 @@ export default function PromptEnhancer({ onAuthClick }) {
                     <button
                       key={detail.key}
                       onClick={() => {
-                        if (!addedDetails.includes(detail.key)) {
-                          setAddedDetails([...addedDetails, detail.key]);
-                          const detailText = {
-                            camera: ' Smooth gimbal tracking shot.',
-                            lens: ' Shot on 50mm lens, shallow depth of field.',
-                            depth: ' f/2.8 aperture, creamy bokeh background.',
-                            lighting: ' Three-point lighting with soft key light.'
-                          };
-                          setResult(result + detailText[detail.key]);
-                        }
+                        setAddedDetails((previous) => (
+                          previous.includes(detail.key)
+                            ? previous.filter((key) => key !== detail.key)
+                            : [...previous, detail.key]
+                        ));
                       }}
-                      disabled={addedDetails.includes(detail.key)}
                       className="flex items-center gap-2 px-4 py-3 rounded-xl text-xs font-semibold transition-all duration-200"
                       style={{
                         background: addedDetails.includes(detail.key)
@@ -792,22 +811,16 @@ export default function PromptEnhancer({ onAuthClick }) {
                         textShadow: addedDetails.includes(detail.key) ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
                       }}
                       onMouseDown={(e) => {
-                        if (!addedDetails.includes(detail.key)) {
-                          e.currentTarget.style.transform = 'translateY(3px) scale(0.94)';
-                          e.currentTarget.style.boxShadow = 'inset 5px 5px 10px rgba(217,119,6,0.5), inset -3px -3px 6px rgba(255,255,255,0.4), 0 2px 4px rgba(245,158,11,0.3)';
-                        }
+                        e.currentTarget.style.transform = 'translateY(3px) scale(0.94)';
+                        e.currentTarget.style.boxShadow = 'inset 5px 5px 10px rgba(217,119,6,0.5), inset -3px -3px 6px rgba(255,255,255,0.4), 0 2px 4px rgba(245,158,11,0.3)';
                       }}
                       onMouseUp={(e) => {
-                        if (!addedDetails.includes(detail.key)) {
-                          e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                          e.currentTarget.style.boxShadow = '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)';
-                        }
+                        e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                        e.currentTarget.style.boxShadow = '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)';
                       }}
                       onMouseLeave={(e) => {
-                        if (!addedDetails.includes(detail.key)) {
-                          e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                          e.currentTarget.style.boxShadow = '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)';
-                        }
+                        e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                        e.currentTarget.style.boxShadow = '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)';
                       }}
                     >
                       {addedDetails.includes(detail.key) ? <Check className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
