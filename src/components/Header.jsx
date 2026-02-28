@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Film, Sun, Moon, User, LogOut } from 'lucide-react'
+import { Menu, X, Film, Sun, Moon, LogOut, Settings } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import UserSettingsModal from './UserSettingsModal'
 
 export default function Header({ onAuthClick }) {
-  const { user, signOut, isPro } = useAuth()
+  const { user, signOut, isPro, displayName } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
   })
@@ -103,8 +105,20 @@ export default function Header({ onAuthClick }) {
                   </span>
                 )}
                 <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  {user.email}
+                  {displayName}
                 </span>
+                <button
+                  onClick={() => setIsSettingsOpen(true)}
+                  className="p-2 rounded-lg transition-all"
+                  style={{
+                    background: 'var(--bg-primary)',
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-muted)'
+                  }}
+                  aria-label="Open user settings"
+                >
+                  <Settings className="h-5 w-5" />
+                </button>
                 <button
                   onClick={signOut}
                   className="p-2 rounded-lg transition-all"
@@ -218,8 +232,19 @@ export default function Header({ onAuthClick }) {
                 {user ? (
                   <div className="flex-1 flex items-center gap-2">
                     <span className="text-sm truncate" style={{ color: 'var(--text-secondary)' }}>
-                      {user.email}
+                      {displayName}
                     </span>
+                    <button
+                      onClick={() => { setIsSettingsOpen(true); setIsOpen(false) }}
+                      className="px-3 py-2 rounded-lg font-medium"
+                      style={{
+                        background: 'var(--bg-primary)',
+                        border: '1px solid var(--border-color)',
+                        color: 'var(--text-secondary)'
+                      }}
+                    >
+                      Settings
+                    </button>
                     <button
                       onClick={() => { signOut(); setIsOpen(false); }}
                       className="px-4 py-2 rounded-lg font-medium"
@@ -248,6 +273,31 @@ export default function Header({ onAuthClick }) {
           </div>
         )}
       </div>
+      {user && (
+        <div className="hidden md:block fixed left-4 bottom-4 z-40">
+          <div className="neu-card rounded-xl px-3 py-2 flex items-center gap-3">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold"
+              style={{ background: 'var(--accent-blue)20', color: 'var(--accent-blue)' }}
+            >
+              {(displayName || 'U').slice(0, 1).toUpperCase()}
+            </div>
+            <div className="min-w-0">
+              <div className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)', maxWidth: '120px' }}>
+                {displayName}
+              </div>
+              <button
+                onClick={() => setIsSettingsOpen(true)}
+                className="text-xs font-medium hover:underline"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                User Settings
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <UserSettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </header>
   )
 }

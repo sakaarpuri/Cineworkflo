@@ -25,10 +25,17 @@ export function AuthProvider({ children }) {
     return () => subscription.unsubscribe()
   }, [])
 
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, fullName = '') => {
+    const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/` : undefined
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: redirectTo,
+        data: {
+          full_name: fullName?.trim() || '',
+        },
+      },
     })
     return { data, error }
   }
@@ -41,10 +48,21 @@ export function AuthProvider({ children }) {
     return { data, error }
   }
 
-  const signInWithGoogle = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+  const updateFullName = async (fullName) => {
+    const { data, error } = await supabase.auth.updateUser({
+      data: { full_name: fullName?.trim() || '' },
     })
+    if (!error && data?.user) {
+      setUser(data.user)
+    }
+    return { data, error }
+  }
+
+  const updatePassword = async (newPassword) => {
+    const { data, error } = await supabase.auth.updateUser({ password: newPassword })
+    if (!error && data?.user) {
+      setUser(data.user)
+    }
     return { data, error }
   }
 
@@ -52,6 +70,10 @@ export function AuthProvider({ children }) {
     const { error } = await supabase.auth.signOut()
     return { error }
   }
+
+  const displayName = user?.user_metadata?.full_name?.trim()
+    || user?.email?.split('@')?.[0]
+    || 'User'
 
   const isPro = () => {
     if (!user) return false
@@ -69,9 +91,11 @@ export function AuthProvider({ children }) {
     loading,
     signUp,
     signIn,
-    signInWithGoogle,
+    updateFullName,
+    updatePassword,
     signOut,
     isPro: isPro(),
+    displayName,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
