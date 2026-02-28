@@ -1,75 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Search, Copy, Check, Lock, ArrowRight, Eye, X } from 'lucide-react'
 import { Link } from 'react-router-dom'
-
-const samplePrompts = [
-  {
-    id: 1,
-    title: 'Cinematic Product Rotation',
-    category: 'Product Demo',
-    tool: 'Runway',
-    prompt: 'Cinematic product shot, rotating 360° on seamless black background, studio lighting with soft reflections, shallow depth of field, 8K quality, motion blur on rotation, professional commercial aesthetic',
-    tags: ['product', 'commercial', 'rotation']
-  },
-  {
-    id: 2,
-    title: 'Smooth Aerial Drone Shot',
-    category: 'B-Roll',
-    tool: 'Pika',
-    prompt: 'Aerial drone footage, smooth gliding motion over landscape, golden hour lighting, cinematic color grade, slight lens flare, professional travel documentary style, 4K resolution',
-    tags: ['drone', 'landscape', 'travel']
-  },
-  {
-    id: 3,
-    title: 'Dramatic Lighting Portrait',
-    category: 'Interview',
-    tool: 'Runway',
-    prompt: 'Dramatic interview lighting, Rembrandt style, subject looking slightly off-camera, shallow depth of field, film grain texture, cinematic mood, dark background with rim light',
-    tags: ['interview', 'portrait', 'dramatic']
-  },
-  {
-    id: 4,
-    title: 'Seamless Loop Background',
-    category: 'Motion Graphics',
-    tool: 'Runway',
-    prompt: 'Abstract flowing particles, seamless loop, soft gradients in teal and coral, gentle organic motion, perfect for text overlay, 4K, smooth 60fps',
-    tags: ['background', 'loop', 'abstract']
-  },
-  {
-    id: 5,
-    title: 'Handheld Documentary Style',
-    category: 'B-Roll',
-    tool: 'Pika',
-    prompt: 'Handheld camera movement, subtle shake, following subject through environment, natural lighting, documentary style, authentic feel, slight motion blur on edges',
-    tags: ['handheld', 'documentary', 'natural']
-  },
-  {
-    id: 6,
-    title: 'Luxury Product Showcase',
-    category: 'Product Demo',
-    tool: 'Runway',
-    prompt: 'Luxury product cinematography, slow push-in movement, dramatic rim lighting on black background, shallow depth of field, premium aesthetic, reflections on glossy surface, high-end commercial',
-    tags: ['luxury', 'product', 'premium']
-  }
-]
-
-const CATEGORY_COLORS = {
-  'Product Demo': '#3B82F6',
-  'B-Roll': '#F59E0B',
-  'Interview': '#10B981',
-  'Motion Graphics': '#06B6D4',
-  'Transition': '#8B5CF6'
-}
+import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 
 export default function PromptVault({ preview = false }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [copiedId, setCopiedId] = useState(null)
   const [selectedPrompt, setSelectedPrompt] = useState(null)
+  const [ctaVariant, setCtaVariant] = useState('a')
 
   const categories = ['All', 'Product Demo', 'B-Roll', 'Interview', 'Motion Graphics', 'Transition']
 
-  const filteredPrompts = samplePrompts.filter(prompt => {
+  useEffect(() => {
+    if (preview) return
+    const params = new URLSearchParams(window.location.search)
+    const forcedVariant = params.get('cta_variant')
+    if (forcedVariant === 'a' || forcedVariant === 'b') {
+      localStorage.setItem('cwf_prompt_cta_variant', forcedVariant)
+      setCtaVariant(forcedVariant)
+      return
+    }
+    const stored = localStorage.getItem('cwf_prompt_cta_variant')
+    if (stored === 'a' || stored === 'b') {
+      setCtaVariant(stored)
+      return
+    }
+    const random = Math.random() < 0.5 ? 'a' : 'b'
+    localStorage.setItem('cwf_prompt_cta_variant', random)
+    setCtaVariant(random)
+  }, [preview])
+
+  const filteredPrompts = PROMPT_LIBRARY.filter(prompt => {
     const matchesSearch = prompt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          prompt.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
     const matchesCategory = selectedCategory === 'All' || prompt.category === selectedCategory
@@ -318,7 +280,7 @@ export default function PromptVault({ preview = false }) {
                 className="px-4 py-2 rounded-lg text-sm font-semibold"
                 style={{ background: 'var(--accent-purple)', color: '#fff' }}
               >
-                Open Shot to Prompt
+                {ctaVariant === 'a' ? 'Open Shot to Prompt' : 'Generate from Reference'}
               </Link>
               <Link
                 to="/camera-moves"
@@ -327,6 +289,22 @@ export default function PromptVault({ preview = false }) {
               >
                 Learn Camera Moves
               </Link>
+            </div>
+
+            <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
+              Browse prompt categories
+            </h3>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {PROMPT_CATEGORY_PAGES.map((categoryPage) => (
+                <Link
+                  key={categoryPage.slug}
+                  to={`/prompts/${categoryPage.slug}`}
+                  className="px-3 py-2 rounded-lg text-sm font-semibold"
+                  style={{ border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
+                >
+                  {categoryPage.name}
+                </Link>
+              ))}
             </div>
 
             <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>

@@ -100,6 +100,10 @@ Definition of Done:
 
 ## Phase 2: Content Architecture + Topic Clusters (Days 31-60)
 
+Phase Status (Feb 28, 2026):
+- In-repo implementation: complete (see `docs/seo/phase-2-closeout.md`)
+- External production validation pending: GSC indexing/CTR review for new prompt category routes
+
 ### Week 5: Keyword Map + Page Intent Map
 Tasks:
 - Define target query clusters per route.
@@ -121,6 +125,14 @@ Tasks:
 - Create category pages and use-case landing pages for prompts.
 - Add supporting copy with examples and clear CTA blocks.
 - Avoid thin pages: only ship new routes if each page has unique copy, examples, and internal links.
+
+Status Update (Feb 28, 2026):
+- Added indexable category routes:
+  - `/prompts/product-ads`
+  - `/prompts/short-form-social`
+  - `/prompts/cinematic-storytelling`
+  - `/prompts/world-building`
+- Category pages include unique intent copy, prompt examples, and conversion CTAs.
 
 File Targets:
 - `src/components/PromptVault.jsx` (or route equivalent)
@@ -274,10 +286,10 @@ Monthly:
   - [x] Internal links to `/prompts`, `/shot-to-prompt`, `/camera-moves`
 
 - `/prompts`:
-  - [ ] Category architecture
+  - [x] Category architecture
   - [x] FAQ block/schema
   - [x] Social preview (`og:image`)
-  - [ ] Conversion CTA tests
+  - [x] Conversion CTA tests
 
 - `/shot-to-prompt`:
   - [x] Educational content sections
@@ -295,7 +307,7 @@ Monthly:
   - [x] Dedicated indexable route
   - [x] Unique metadata for transactional intent
   - [x] FAQ schema (with visible FAQ content)
-  - [ ] Conversion CTA tests
+  - [x] Conversion CTA tests
 
 - Pricing / checkout flows:
   - [x] Crawl-safe metadata

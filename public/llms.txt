@@ -8,6 +8,10 @@ CineWorkflo is a curated library of 150+ professional AI video prompts for Runwa
 
 - Home: https://cineworkflo.com/
 - Prompt Vault: https://cineworkflo.com/prompts
+- Prompt Category (Product Ads): https://cineworkflo.com/prompts/product-ads
+- Prompt Category (Short-Form Social): https://cineworkflo.com/prompts/short-form-social
+- Prompt Category (Cinematic Storytelling): https://cineworkflo.com/prompts/cinematic-storytelling
+- Prompt Category (World Building): https://cineworkflo.com/prompts/world-building
 - Shot to Prompt: https://cineworkflo.com/shot-to-prompt
 - Camera Moves Guide: https://cineworkflo.com/camera-moves
 - Pricing: https://cineworkflo.com/pricing

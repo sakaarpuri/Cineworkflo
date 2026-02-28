@@ -158,9 +158,9 @@
   - Title theme: "Camera movements guide".
   - Description theme: interactive card-based learning + prompt writing benefit.
 
-- `/#pricing` (section, not route)
+- `/pricing`
   - Conversion goal: reduce friction and increase trust.
-  - Avoid treating this as a standalone SEO page unless you add `/pricing`.
+  - Serve as standalone transactional landing page for plan comparison.
 
 ---
 
@@ -179,9 +179,9 @@
 
 ---
 
-## Content Expansion Targets (Next Step)
+## Content Expansion Targets
 
-### High-Value Child Pages to Add Under `/prompts`
+### High-Value Child Pages Under `/prompts` (Implemented Feb 28, 2026)
 - `/prompts/product-ads`
 - `/prompts/short-form-social`
 - `/prompts/cinematic-storytelling`

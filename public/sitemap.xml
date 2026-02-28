@@ -43,6 +43,30 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://cineworkflo.com/prompts/product-ads</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cineworkflo.com/prompts/short-form-social</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cineworkflo.com/prompts/cinematic-storytelling</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cineworkflo.com/prompts/world-building</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://cineworkflo.com/privacy</loc>
     <lastmod>2026-02-28</lastmod>
     <changefreq>yearly</changefreq>

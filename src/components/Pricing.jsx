@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Check, Loader2 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const plans = [
   {
     name: 'Free',
+    planType: 'free',
     price: '$0',
     description: 'Get started with AI video prompts',
     features: [
@@ -19,6 +21,7 @@ const plans = [
   },
   {
     name: 'Pro Monthly',
+    planType: 'monthly',
     price: '$4.99',
     priceNote: '/month',
     description: 'Full access for active creators',
@@ -37,6 +40,7 @@ const plans = [
   },
   {
     name: 'Pro Yearly',
+    planType: 'yearly',
     price: '$49',
     priceNote: '/year',
     description: 'Best value for committed creators',
@@ -56,6 +60,26 @@ const plans = [
 export default function Pricing({ onAuthClick }) {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
+  const [ctaVariant, setCtaVariant] = useState('a')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const forcedVariant = params.get('cta_variant')
+    if (forcedVariant === 'a' || forcedVariant === 'b') {
+      localStorage.setItem('cwf_pricing_cta_variant', forcedVariant)
+      setCtaVariant(forcedVariant)
+      return
+    }
+    const stored = localStorage.getItem('cwf_pricing_cta_variant')
+    if (stored === 'a' || stored === 'b') {
+      setCtaVariant(stored)
+      return
+    }
+    const random = Math.random() < 0.5 ? 'a' : 'b'
+    localStorage.setItem('cwf_pricing_cta_variant', random)
+    setCtaVariant(random)
+  }, [])
 
   const getStoredAttribution = () => {
     try {
@@ -77,6 +101,11 @@ export default function Pricing({ onAuthClick }) {
   }
 
   const handleCheckout = async (planType) => {
+    if (planType === 'free') {
+      navigate('/prompts')
+      return
+    }
+
     if (!user) {
       onAuthClick?.()
       return
@@ -104,6 +133,12 @@ export default function Pricing({ onAuthClick }) {
     } finally {
       setLoading(false)
     }
+  }
+
+  const getPlanCta = (plan) => {
+    if (plan.planType === 'monthly') return ctaVariant === 'a' ? 'Start Monthly Plan' : 'Start Pro Monthly'
+    if (plan.planType === 'yearly') return ctaVariant === 'a' ? 'Get Yearly Access' : 'Unlock Pro Yearly'
+    return plan.cta
   }
 
   return (
@@ -203,7 +238,7 @@ export default function Pricing({ onAuthClick }) {
                 ))}
               </ul>
               <button
-                onClick={() => handleCheckout(plan.name.includes('Monthly') ? 'monthly' : 'yearly')}
+                onClick={() => handleCheckout(plan.planType)}
                 disabled={loading}
                 className="w-full py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2"
                 style={{
@@ -244,7 +279,7 @@ export default function Pricing({ onAuthClick }) {
                 }}
               >
                 {loading && <Loader2 className="h-5 w-5 animate-spin" />}
-                {plan.cta}
+                {getPlanCta(plan)}
               </button>
             </div>
           ))}

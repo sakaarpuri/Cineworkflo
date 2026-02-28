@@ -19,6 +19,30 @@
   force = true
 
 [[redirects]]
+  from = "/prompts/product-ads/"
+  to = "/prompts/product-ads"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompts/short-form-social/"
+  to = "/prompts/short-form-social"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompts/cinematic-storytelling/"
+  to = "/prompts/cinematic-storytelling"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/prompts/world-building/"
+  to = "/prompts/world-building"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/shot-to-prompt/"
   to = "/shot-to-prompt"
   status = 301

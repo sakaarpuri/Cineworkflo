@@ -6,6 +6,7 @@ import HeroGallery from './components/HeroGallery'
 import Footer from './components/Footer'
 import Success from './components/Success'
 import AuthModal from './components/AuthModal'
+import { PROMPT_CATEGORY_PAGES } from './data/promptCategories'
 
 const PromptEnhancer = lazy(() => import('./components/PromptEnhancer'))
 const ShotToPrompt = lazy(() => import('./components/ShotToPrompt'))
@@ -13,6 +14,7 @@ const CameraMoveCards = lazy(() => import('./components/CameraMoveCards'))
 const ModernAINativeMoves = lazy(() => import('./components/ModernAINativeMoves'))
 const CameraMovesPage = lazy(() => import('./pages/CameraMovesPage'))
 const PricingPage = lazy(() => import('./pages/PricingPage'))
+const PromptCategoryPage = lazy(() => import('./pages/PromptCategoryPage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
@@ -176,7 +178,24 @@ function RouteSeo() {
       ? location.pathname.slice(0, -1)
       : location.pathname
 
-    const seo = SEO_BY_PATH[normalizedPath] || { ...SEO_DEFAULT, path: normalizedPath || '/' }
+    const categorySlug = normalizedPath.startsWith('/prompts/')
+      ? normalizedPath.replace('/prompts/', '')
+      : null
+    const promptCategory = categorySlug
+      ? PROMPT_CATEGORY_PAGES.find((category) => category.slug === categorySlug)
+      : null
+
+    const promptCategorySeo = promptCategory
+      ? {
+          title: `${promptCategory.name} AI Video Prompts | CineWorkflo`,
+          description: `${promptCategory.description} Explore copy-ready prompts for ${promptCategory.name.toLowerCase()} workflows.`,
+          keywords: `${promptCategory.name.toLowerCase()} prompts, AI video prompts, cinematic prompt templates, ${promptCategory.slug.replace('-', ' ')}`,
+          path: normalizedPath,
+          noindex: false
+        }
+      : null
+
+    const seo = SEO_BY_PATH[normalizedPath] || promptCategorySeo || { ...SEO_DEFAULT, path: normalizedPath || '/' }
     const origin = window.location.origin
     const canonicalUrl = `${origin}${seo.path}`
     const ogImageUrl = `${origin}/og-default.svg`
@@ -439,6 +458,7 @@ function App() {
                 </>
               } />
               <Route path="/prompts" element={<Suspense fallback={sectionFallback(300)}><PromptVault /></Suspense>} />
+              <Route path="/prompts/:categorySlug" element={<Suspense fallback={sectionFallback(320)}><PromptCategoryPage /></Suspense>} />
               <Route path="/shot-to-prompt" element={<Suspense fallback={sectionFallback(320)}><ShotToPrompt /></Suspense>} />
               <Route path="/camera-moves" element={<Suspense fallback={sectionFallback(320)}><CameraMovesPage /></Suspense>} />
               <Route path="/modern-moves" element={<Suspense fallback={sectionFallback(320)}><ModernAINativeMoves /></Suspense>} />

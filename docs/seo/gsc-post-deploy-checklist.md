@@ -18,6 +18,10 @@ Inspect these URLs one by one:
 - `https://cineworkflo.com/contact`
 - `https://cineworkflo.com/privacy`
 - `https://cineworkflo.com/terms`
+- `https://cineworkflo.com/prompts/product-ads`
+- `https://cineworkflo.com/prompts/short-form-social`
+- `https://cineworkflo.com/prompts/cinematic-storytelling`
+- `https://cineworkflo.com/prompts/world-building`
 
 For each URL, validate:
 - Google-selected canonical matches page canonical.
