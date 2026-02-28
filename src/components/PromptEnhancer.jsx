@@ -454,41 +454,54 @@ export default function PromptEnhancer({ onAuthClick }) {
             {/* Skill Level Toggle */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
               <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Level</span>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setSkillLevel('beginner')}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
-                  style={{
-                    background: skillLevel === 'beginner' 
-                      ? 'linear-gradient(145deg, #3B82F6, #3B82F6DD)' 
-                      : '#F0F4F8',
-                    color: skillLevel === 'beginner' ? '#fff' : '#3B82F6',
-                    border: `2px solid ${skillLevel === 'beginner' ? '#3B82F650' : '#93C5FD'}`,
-                    boxShadow: skillLevel === 'beginner'
-                      ? 'inset 3px 3px 6px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)'
-                      : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,1)',
-                    transform: skillLevel === 'beginner' ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
-                  }}
+              <div className="flex items-center gap-2">
+                <span
+                  className="text-xs font-semibold transition-all"
+                  style={{ color: skillLevel === 'beginner' ? '#3B82F6' : 'var(--text-muted)' }}
                 >
                   Beginner
-                </button>
+                </span>
                 <button
-                  onClick={() => setSkillLevel('pro')}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200"
+                  type="button"
+                  role="switch"
+                  aria-checked={skillLevel === 'pro'}
+                  aria-label="Toggle prompt level"
+                  onClick={() => setSkillLevel(skillLevel === 'beginner' ? 'pro' : 'beginner')}
+                  className="relative w-[68px] h-[34px] rounded-full transition-all duration-250"
                   style={{
                     background: skillLevel === 'pro'
-                      ? 'linear-gradient(145deg, #8B5CF6, #7C3AED)'
-                      : '#F5F3FF',
-                    color: skillLevel === 'pro' ? '#fff' : '#7C3AED',
-                    border: `2px solid ${skillLevel === 'pro' ? '#7C3AED50' : '#C4B5FD'}`,
+                      ? 'linear-gradient(145deg, #A855F7, #7C3AED)'
+                      : 'linear-gradient(145deg, #60A5FA, #2563EB)',
+                    border: `2px solid ${skillLevel === 'pro' ? '#A855F750' : '#60A5FA50'}`,
                     boxShadow: skillLevel === 'pro'
-                      ? 'inset 3px 3px 6px rgba(124,58,237,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(139,92,246,0.4)'
-                      : '4px 4px 8px rgba(0,0,0,0.08), -4px -4px 8px rgba(255,255,255,0.9), inset 0 1px 0 rgba(255,255,255,1)',
-                    transform: skillLevel === 'pro' ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+                      ? 'inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(124,58,237,0.35)'
+                      : 'inset 3px 3px 6px rgba(37,99,235,0.5), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(37,99,235,0.35)'
+                  }}
+                  onMouseDown={(e) => {
+                    e.currentTarget.style.transform = 'translateY(2px) scale(0.97)'
+                  }}
+                  onMouseUp={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)'
                   }}
                 >
-                  Pro
+                  <span
+                    className="absolute top-[3px] h-[24px] w-[24px] rounded-full transition-all duration-250"
+                    style={{
+                      left: skillLevel === 'pro' ? '38px' : '4px',
+                      background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
+                      boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                    }}
+                  />
                 </button>
+                <span
+                  className="text-xs font-semibold transition-all"
+                  style={{ color: skillLevel === 'pro' ? '#7C3AED' : 'var(--text-muted)' }}
+                >
+                  Pro
+                </span>
               </div>
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
