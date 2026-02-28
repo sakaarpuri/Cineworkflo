@@ -69,6 +69,12 @@
     --accent-pink: #EC4899;
   }
 
+  /* Keep night mode background as a simple dark surface (no light gradients). */
+  [data-theme="dark"] body {
+    background-color: var(--bg-primary);
+    background-image: none;
+  }
+
 }
 
 @layer utilities {
