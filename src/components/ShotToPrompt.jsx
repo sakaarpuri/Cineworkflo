@@ -189,6 +189,14 @@ export default function ShotToPrompt({ preview = false }) {
         <div className="absolute top-0 right-0 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-25" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className="rounded-3xl p-6 lg:p-8"
+            style={{
+              background: 'var(--bg-secondary)',
+              border: '1px solid var(--border-color)',
+              boxShadow: 'inset 8px 8px 18px rgba(0,0,0,0.08), inset -8px -8px 18px rgba(255,255,255,0.85), 0 10px 28px rgba(15,23,42,0.08)'
+            }}
+          >
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div 
@@ -326,6 +334,7 @@ export default function ShotToPrompt({ preview = false }) {
               )}
             </div>
           </div>
+          </div>
         </div>
       </section>
     )
@@ -338,6 +347,14 @@ export default function ShotToPrompt({ preview = false }) {
       style={{ background: 'var(--bg-primary)' }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className="rounded-3xl p-6 lg:p-8"
+          style={{
+            background: 'var(--bg-secondary)',
+            border: '1px solid var(--border-color)',
+            boxShadow: 'inset 8px 8px 18px rgba(0,0,0,0.08), inset -8px -8px 18px rgba(255,255,255,0.85), 0 10px 28px rgba(15,23,42,0.08)'
+          }}
+        >
         <nav
           aria-label="Breadcrumb"
           className="mb-5 text-sm flex items-center gap-2"
@@ -530,6 +547,7 @@ export default function ShotToPrompt({ preview = false }) {
             </div>
           </div>
         </section>
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Search, Copy, Check, Lock, ArrowRight, Eye, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Search, Copy, Check, ArrowRight, Eye, X } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
@@ -10,6 +10,8 @@ export default function PromptVault({ preview = false }) {
   const [copiedId, setCopiedId] = useState(null)
   const [selectedPrompt, setSelectedPrompt] = useState(null)
   const [ctaVariant, setCtaVariant] = useState('a')
+  const [vaultToggle, setVaultToggle] = useState(false)
+  const navigate = useNavigate()
 
   const categories = ['All', 'Product Demo', 'B-Roll', 'Interview', 'Motion Graphics', 'Transition']
 
@@ -49,6 +51,13 @@ export default function PromptVault({ preview = false }) {
 
   const openModal = (prompt) => setSelectedPrompt(prompt)
   const closeModal = () => setSelectedPrompt(null)
+  const handleVaultToggle = () => {
+    trackCtaEvent('prompt_vault_toggle_preview', '/')
+    setVaultToggle(true)
+    setTimeout(() => {
+      navigate('/prompts')
+    }, 300)
+  }
 
   return (
     <section 
@@ -232,33 +241,41 @@ export default function PromptVault({ preview = false }) {
         {/* Preview CTA */}
         {preview && (
           <div className="text-center mt-10">
-            <Link
-              to="/prompts"
-              onClick={() => trackCtaEvent('prompt_vault_view_all_preview', '/')}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
-              style={{
-                background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
-                color: '#fff',
-                border: '2px solid #3B82F650',
-                boxShadow: 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
-                transform: 'translateY(0) scale(1)'
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = 'translateY(2px) scale(0.96)';
-                e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
-              }}
-            >
-              View All Prompts
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="flex items-center justify-center gap-5">
+              <span className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+                Explore Prompt Vault
+              </span>
+              <button
+                onClick={handleVaultToggle}
+                className="relative w-20 h-10 rounded-full transition-all duration-300"
+                style={{
+                  background: vaultToggle
+                    ? 'linear-gradient(145deg, #10B981, #059669)'
+                    : 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                  boxShadow: vaultToggle
+                    ? 'inset 3px 3px 6px rgba(16,185,129,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(16,185,129,0.4)'
+                    : 'inset 3px 3px 6px rgba(59,130,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                  border: `2px solid ${vaultToggle ? '#10B98150' : '#3B82F650'}`
+                }}
+                aria-label="Toggle Prompt Vault"
+              >
+                <span
+                  className="absolute top-1 left-1 w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center"
+                  style={{
+                    background: '#fff',
+                    transform: vaultToggle ? 'translateX(38px)' : 'translateX(0)',
+                    boxShadow: '2px 2px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.8)'
+                  }}
+                >
+                  <ArrowRight
+                    className="h-4 w-4 transition-all duration-300"
+                    style={{
+                      color: vaultToggle ? '#10B981' : '#3B82F6'
+                    }}
+                  />
+                </span>
+              </button>
+            </div>
           </div>
         )}
 
