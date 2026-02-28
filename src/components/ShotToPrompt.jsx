@@ -12,6 +12,13 @@ export default function ShotToPrompt({ preview = false }) {
   const handleImageUpload = (e) => {
     const file = e.target.files[0]
     if (file) {
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+      if (!allowedTypes.includes(file.type)) {
+        setUploadedImage(null)
+        setGeneratedPrompt('Unsupported file format. Please upload JPG, PNG, WEBP, or GIF.')
+        return
+      }
+
       const reader = new FileReader()
       reader.onloadend = () => {
         setUploadedImage(reader.result)
@@ -44,7 +51,7 @@ export default function ShotToPrompt({ preview = false }) {
       }
     } catch (err) {
       console.error('Shot to prompt error:', err)
-      setGeneratedPrompt('Unable to generate prompt right now. Please retry in a moment.')
+      setGeneratedPrompt(err.message || 'Unable to generate prompt right now. Please retry in a moment.')
     } finally {
       setIsAnalyzing(false)
     }
@@ -194,7 +201,7 @@ export default function ShotToPrompt({ preview = false }) {
                 type="file"
                 ref={fileInputRef}
                 onChange={handleImageUpload}
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,image/gif"
                 className="hidden"
               />
 
@@ -309,7 +316,7 @@ export default function ShotToPrompt({ preview = false }) {
             type="file"
             ref={fileInputRef}
             onChange={handleImageUpload}
-            accept="image/*"
+            accept="image/jpeg,image/png,image/webp,image/gif"
             className="hidden"
           />
 

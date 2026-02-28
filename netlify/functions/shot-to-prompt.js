@@ -4,6 +4,12 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
 });
 
+const MODEL_FALLBACK = [
+  'claude-3-5-sonnet-latest',
+  'claude-3-5-haiku-latest',
+  'claude-3-sonnet-20240229'
+];
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -43,34 +49,56 @@ exports.handler = async (event) => {
 
     const mediaMatch = image.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,/);
     const mediaType = mediaMatch?.[1] || 'image/jpeg';
+    const allowedMediaTypes = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+    if (!allowedMediaTypes.has(mediaType)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Unsupported image format. Use JPG, PNG, WEBP, or GIF.' })
+      };
+    }
+
     const base64Image = mediaMatch ? image.slice(mediaMatch[0].length) : image;
 
-    const response = await anthropic.messages.create({
-      model: 'claude-3-sonnet-20240229',
-      max_tokens: 500,
-      messages: [
-        {
-          role: 'user',
-          content: [
+    let response = null;
+    let lastError = null;
+    for (const model of MODEL_FALLBACK) {
+      try {
+        response = await anthropic.messages.create({
+          model,
+          max_tokens: 500,
+          messages: [
             {
-              type: 'image',
-              source: {
-                type: 'base64',
-                media_type: mediaType,
-                data: base64Image
-              }
-            },
-            {
-              type: 'text',
-              text: `Analyze this shot and create a detailed AI video generation prompt to recreate it.
+              role: 'user',
+              content: [
+                {
+                  type: 'image',
+                  source: {
+                    type: 'base64',
+                    media_type: mediaType,
+                    data: base64Image
+                  }
+                },
+                {
+                  type: 'text',
+                  text: `Analyze this shot and create a detailed AI video generation prompt to recreate it.
 
 Include camera movement, lighting style, composition, subject, mood, and technical details.
 Format as a single paragraph optimized for Runway/Pika-style video generation.`
+                }
+              ]
             }
           ]
-        }
-      ]
-    });
+        });
+        break;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    if (!response) {
+      throw lastError || new Error('Model request failed');
+    }
 
     const prompt = response?.content?.[0]?.text?.trim();
     if (!prompt) {
