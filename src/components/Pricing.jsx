@@ -11,8 +11,9 @@ const plans = [
     price: '$0',
     description: 'Get started with AI video prompts',
     features: [
-      '30 AI generations per month',
-      '25 core prompts',
+      '10 Prompt Enhancer generations / month',
+      '5 Shot to Prompt generations / month',
+      'Prompt Vault (open access)',
       'Basic search',
       'Copy to clipboard',
       'Email support'

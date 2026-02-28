@@ -263,7 +263,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     }
   }, [isPro]);
 
-  const remainingFree = Math.max(0, 30 - usage.count);
+  const remainingFree = Math.max(0, 10 - usage.count);
   const isLimitReached = !isPro && remainingFree === 0;
   const requiresAuth = !user && isLimitReached;
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
@@ -425,7 +425,7 @@ export default function PromptEnhancer({ onAuthClick }) {
             >
               <Zap className="h-3 w-3" />
               {remainingFree > 0 ? (
-                <span>{remainingFree} free prompts remaining this month</span>
+                <span>{remainingFree} free Prompt Enhancer generations remaining this month</span>
               ) : (
                 <span>
                   {!user ? 'Sign in to continue' : 'Free limit reached — '}

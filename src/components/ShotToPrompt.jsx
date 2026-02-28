@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X, Copy, Check } from 'lucide-react'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function ShotToPrompt({ preview = false }) {
   const [uploadedImage, setUploadedImage] = useState(null)
@@ -8,6 +9,36 @@ export default function ShotToPrompt({ preview = false }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
+  const { user, isPro } = useAuth()
+
+  const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
+  const FREE_LIMIT = 5
+
+  useEffect(() => {
+    const raw = localStorage.getItem('shotToPromptUsage')
+    if (!raw) return
+    try {
+      const parsed = JSON.parse(raw)
+      if (parsed && typeof parsed.count === 'number' && parsed.lastReset) {
+        setUsage({ count: parsed.count, lastReset: parsed.lastReset })
+      }
+    } catch {
+      // ignore
+    }
+  }, [])
+
+  useEffect(() => {
+    const last = new Date(usage.lastReset)
+    const now = new Date()
+    const shouldReset = last.getMonth() !== now.getMonth() || last.getFullYear() !== now.getFullYear()
+    if (!shouldReset) return
+    const reset = { count: 0, lastReset: now.toISOString() }
+    setUsage(reset)
+    localStorage.setItem('shotToPromptUsage', JSON.stringify(reset))
+  }, [usage.lastReset])
+
+  const remainingFree = Math.max(0, FREE_LIMIT - usage.count)
+  const isLimitReached = !isPro && remainingFree === 0
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0]
@@ -29,8 +60,22 @@ export default function ShotToPrompt({ preview = false }) {
   }
 
   const analyzeImage = async (imageData) => {
+    if (isLimitReached) {
+      setGeneratedPrompt(!user
+        ? 'Free limit reached (5 Shot to Prompt generations/month). Sign in or upgrade to continue.'
+        : 'Free limit reached (5 Shot to Prompt generations/month). Upgrade to continue.'
+      )
+      return
+    }
+
     setIsAnalyzing(true)
     setGeneratedPrompt('')
+
+    if (!isPro) {
+      const next = { count: usage.count + 1, lastReset: usage.lastReset }
+      setUsage(next)
+      localStorage.setItem('shotToPromptUsage', JSON.stringify(next))
+    }
     
     try {
       const response = await fetch('/.netlify/functions/shot-to-prompt', {
@@ -162,6 +207,18 @@ export default function ShotToPrompt({ preview = false }) {
               >
                 Shot to Prompt
               </h2>
+              {!isPro && (
+                <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
+                  style={{
+                    background: remainingFree <= 1 ? 'var(--accent-red)15' : 'var(--bg-card)',
+                    border: `1px solid ${remainingFree <= 1 ? 'var(--accent-red)30' : 'var(--border-color)'}`,
+                    color: remainingFree <= 1 ? 'var(--accent-red)' : 'var(--text-muted)'
+                  }}
+                >
+                  <Sparkles className="h-3 w-3" />
+                  <span>{remainingFree} free Shot to Prompt generations remaining this month</span>
+                </div>
+              )}
               <p 
                 className="text-xl mb-6"
                 style={{ color: 'var(--text-secondary)' }}
@@ -263,7 +320,7 @@ export default function ShotToPrompt({ preview = false }) {
                     Drop an image here
                   </p>
                   <p style={{ color: 'var(--text-muted)' }} className="text-sm">
-                    or click to browse
+                    {isLimitReached ? 'Free limit reached — upgrade to continue' : 'or click to browse'}
                   </p>
                 </div>
               )}
@@ -301,6 +358,18 @@ export default function ShotToPrompt({ preview = false }) {
           <p style={{ color: 'var(--text-secondary)' }}>
             Upload any image and get the AI prompt to recreate it
           </p>
+          {!isPro && (
+            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
+              style={{
+                background: remainingFree <= 1 ? 'var(--accent-red)15' : 'var(--bg-card)',
+                border: `1px solid ${remainingFree <= 1 ? 'var(--accent-red)30' : 'var(--border-color)'}`,
+                color: remainingFree <= 1 ? 'var(--accent-red)' : 'var(--text-muted)'
+              }}
+            >
+              <Sparkles className="h-3 w-3" />
+              <span>{remainingFree} free Shot to Prompt generations remaining this month</span>
+            </div>
+          )}
         </div>
 
         <div
