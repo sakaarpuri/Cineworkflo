@@ -7,7 +7,7 @@ export default async (req, context) => {
   }
 
   try {
-    const { idea, mood, useCase, tool, interpretation, skillLevel } = await req.json();
+    const { idea, mood, useCase, tool, interpretation, skillLevel, includeAudioSfx } = await req.json();
     const isBeginner = skillLevel === 'beginner';
 
     // Build interpretation instruction if provided
@@ -27,6 +27,12 @@ export default async (req, context) => {
       ? `Use simple, accessible language. Avoid technical jargon. Focus on describing the scene in plain English. Always include aspect ratio (16:9 or 9:16) and resolution (4K) at the end.`
       : `Use professional cinematography terminology. Include specific camera movements, lens types (24mm, 50mm, 85mm), aperture settings (f/1.4, f/2.8), lighting setups, and technical specs. Always include aspect ratio and resolution.`;
 
+    const audioInstruction = includeAudioSfx
+      ? (isBeginner
+          ? `Include one short audio/SFX line with ambience, music feel, and simple foley cues.`
+          : `Include concise professional audio design notes (ambience, foley, music texture, mix intent).`)
+      : `Do not include any audio, SFX, music, dialogue, voiceover, foley, ambience, or sound design details.`;
+
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -42,6 +48,7 @@ export default async (req, context) => {
           content: `Create an AI video generation prompt for ${isBeginner ? 'beginners' : 'professionals'}.
 
 ${skillInstruction}
+${audioInstruction}
 
 Idea: "${idea}"
 Mood: ${mood || 'Not specified'}

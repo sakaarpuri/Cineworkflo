@@ -12,31 +12,23 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #F9EEF4;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background:
-      radial-gradient(120% 90% at 8% 12%, rgba(255, 204, 229, 0.45) 0%, rgba(255, 204, 229, 0) 62%),
-      radial-gradient(100% 80% at 84% 18%, rgba(255, 220, 197, 0.35) 0%, rgba(255, 220, 197, 0) 68%),
-      radial-gradient(95% 80% at 26% 82%, rgba(214, 228, 255, 0.38) 0%, rgba(214, 228, 255, 0) 66%),
-      radial-gradient(110% 85% at 86% 74%, rgba(224, 214, 255, 0.34) 0%, rgba(224, 214, 255, 0) 70%),
-      linear-gradient(140deg, #FCEFF5 0%, #F7EEF8 35%, #F1F3FF 68%, #FDF1EC 100%);
-    background-size: 145% 145%;
-    animation: pastelDrift 42s ease-in-out infinite alternate;
+    background-color: #FFE7F2;
+    background-image:
+      radial-gradient(80% 45% at 12% 9%, rgba(255, 120, 186, 0.26) 0%, rgba(255, 120, 186, 0) 72%),
+      radial-gradient(85% 45% at 88% 22%, rgba(255, 169, 64, 0.24) 0%, rgba(255, 169, 64, 0) 70%),
+      radial-gradient(85% 50% at 25% 76%, rgba(69, 183, 255, 0.24) 0%, rgba(69, 183, 255, 0) 72%),
+      radial-gradient(88% 50% at 86% 86%, rgba(167, 109, 255, 0.24) 0%, rgba(167, 109, 255, 0) 74%),
+      linear-gradient(180deg, #FFE4F2 0%, #FFD6E7 20%, #FFE6C6 44%, #DFF5FF 68%, #E8D9FF 84%, #FFDDF4 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 260%;
   }
 
   /* Theme Variables */
   :root {
     /* Day Mode (default) */
-    --bg-primary: rgba(252, 244, 249, 0.84);
-    --bg-secondary: rgba(255, 250, 253, 0.9);
-    --bg-card: rgba(255, 252, 254, 0.92);
+    --bg-primary: rgba(255, 244, 250, 0.94);
+    --bg-secondary: rgba(255, 250, 253, 0.97);
+    --bg-card: rgba(255, 252, 254, 0.98);
     --text-primary: #111827;
     --text-secondary: #6B7280;
     --text-muted: #9CA3AF;
@@ -68,20 +60,6 @@
     --accent-pink: #EC4899;
   }
 
-  @keyframes pastelDrift {
-    0% {
-      background-position: 0% 0%;
-      filter: saturate(1);
-    }
-    50% {
-      background-position: 55% 45%;
-      filter: saturate(1.04);
-    }
-    100% {
-      background-position: 100% 100%;
-      filter: saturate(1);
-    }
-  }
 }
 
 @layer utilities {

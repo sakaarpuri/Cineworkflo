@@ -182,6 +182,57 @@ const PRO_DETAILS = [
   { key: 'lighting', label: '+ Lighting Setup', desc: 'key light, rim light, softbox, golden hour' }
 ];
 
+const AUDIO_KEYWORDS_REGEX = /\b(audio|sound|sfx|music|foley|ambien|voiceover|soundscape|dialogue)\b/i;
+
+const buildAudioSfxDetails = (mood, useCase, skillLevel = 'beginner') => {
+  const moodSfx = {
+    Epic: 'deep cinematic hits and rising orchestral swells',
+    Dramatic: 'low tense pulses with restrained room tone',
+    Whimsical: 'light playful motifs with soft foley accents',
+    Serene: 'gentle ambient bed with subtle natural textures',
+    Mysterious: 'subtle drones and distant textured ambience',
+    Energetic: 'tight percussive rhythm with punchy transitions',
+    Eerie: 'minimal unsettling drones and sparse eerie foley'
+  };
+
+  const useSfx = {
+    'Product Showcase': 'clean polished foley for material details',
+    'Brand Ad': 'premium branded sonic texture',
+    Storytelling: 'emotion-led ambience matched to scene beats',
+    Documentary: 'natural location ambience and grounded foley',
+    Explainer: 'clean minimal background audio with clear focus',
+    'Social Media': 'short punchy sound accents for hooks'
+  };
+
+  const moodLayer = moodSfx[mood] || 'subtle cinematic ambience';
+  const useLayer = useSfx[useCase] || 'realistic environmental foley';
+
+  if (skillLevel === 'pro') {
+    return `Audio design: ${moodLayer}, ${useLayer}, balanced mix with controlled dynamics.`;
+  }
+
+  return `Audio/SFX: ${moodLayer} with ${useLayer}.`;
+};
+
+const applyAudioPreference = (prompt, includeAudioSfx, mood, useCase, skillLevel) => {
+  const normalizedPrompt = (prompt || '').trim();
+  if (!normalizedPrompt) return normalizedPrompt;
+
+  if (includeAudioSfx) {
+    if (AUDIO_KEYWORDS_REGEX.test(normalizedPrompt)) return normalizedPrompt;
+    return `${normalizedPrompt} ${buildAudioSfxDetails(mood, useCase, skillLevel)}`.trim();
+  }
+
+  const cleaned = normalizedPrompt
+    .split(/(?<=[.!?])\s+/)
+    .filter((line) => !AUDIO_KEYWORDS_REGEX.test(line))
+    .join(' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  return cleaned || normalizedPrompt;
+};
+
 export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
   const [mood, setMood] = useState("");
@@ -193,7 +244,8 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
   const [usage, setUsage] = useState({ count: 0, isPro: false });
   const [addedDetails, setAddedDetails] = useState([]);
-  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner" });
+  const [includeAudioSfx, setIncludeAudioSfx] = useState(false);
+  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner", includeAudioSfx: false });
   const levelPulseTimeoutRef = useRef(null);
   const [levelPulse, setLevelPulse] = useState('');
   
@@ -234,8 +286,8 @@ export default function PromptEnhancer({ onAuthClick }) {
 
     try {
       const promptPayload = interpretationStyle 
-        ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel }
-        : { idea, mood, useCase, skillLevel };
+        ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx }
+        : { idea, mood, useCase, skillLevel, includeAudioSfx };
 
       const response = await fetch('/.netlify/functions/enhance-prompt', {
         method: 'POST',
@@ -244,14 +296,16 @@ export default function PromptEnhancer({ onAuthClick }) {
       });
 
       const data = await response.json();
-      setResult(data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel));
+      const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
+      setResult(applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel));
       setHasGeneratedOnce(true);
     } catch (err) {
       // Fallback with smart prompt generator
-      setResult(generateSmartPrompt(idea, mood, useCase, skillLevel));
+      const fallbackPrompt = generateSmartPrompt(idea, mood, useCase, skillLevel);
+      setResult(applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel));
     }
     setLoading(false);
-  }, [canSubmit, idea, mood, useCase, skillLevel, isPro]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -283,17 +337,18 @@ export default function PromptEnhancer({ onAuthClick }) {
         idea !== lastParamsRef.current.idea ||
         mood !== lastParamsRef.current.mood ||
         useCase !== lastParamsRef.current.useCase ||
-        skillLevel !== lastParamsRef.current.skillLevel;
+        skillLevel !== lastParamsRef.current.skillLevel ||
+        includeAudioSfx !== lastParamsRef.current.includeAudioSfx;
       
       if (!paramsChanged) return;
       
       const timeoutId = setTimeout(() => {
         handleEnhance(true); // Pass true for auto-update (keeps result visible)
-        lastParamsRef.current = { idea, mood, useCase, skillLevel };
+        lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx };
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [mood, useCase, idea, skillLevel, hasGeneratedOnce, canSubmit, handleEnhance]);
+  }, [mood, useCase, idea, skillLevel, includeAudioSfx, hasGeneratedOnce, canSubmit, handleEnhance]);
 
   useEffect(() => () => {
     if (levelPulseTimeoutRef.current) {
@@ -540,6 +595,54 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
+              </span>
+            </div>
+
+            {/* Audio / SFX Toggle */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Audio</span>
+              <div className="flex items-center gap-2">
+                <span
+                  className="text-xs font-semibold transition-all"
+                  style={{ color: includeAudioSfx ? 'var(--text-muted)' : '#6B7280' }}
+                >
+                  Off
+                </span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={includeAudioSfx}
+                  aria-label="Toggle audio and sfx details"
+                  onClick={() => setIncludeAudioSfx((prev) => !prev)}
+                  className="relative w-[62px] h-[32px] rounded-full transition-all duration-250"
+                  style={{
+                    background: includeAudioSfx
+                      ? 'linear-gradient(145deg, #F97316, #EA580C)'
+                      : 'linear-gradient(145deg, #D1D5DB, #9CA3AF)',
+                    border: `2px solid ${includeAudioSfx ? '#F9731650' : '#9CA3AF55'}`,
+                    boxShadow: includeAudioSfx
+                      ? 'inset 3px 3px 6px rgba(194,65,12,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(249,115,22,0.35)'
+                      : 'inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2)'
+                  }}
+                >
+                  <span
+                    className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-all duration-250"
+                    style={{
+                      left: includeAudioSfx ? '35px' : '4px',
+                      background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
+                      boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                    }}
+                  />
+                </button>
+                <span
+                  className="text-xs font-semibold transition-all"
+                  style={{ color: includeAudioSfx ? '#EA580C' : 'var(--text-muted)' }}
+                >
+                  On
+                </span>
+              </div>
+              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                {includeAudioSfx ? 'Include ambience, music, and foley in output' : 'Output stays visual-only'}
               </span>
             </div>
 
