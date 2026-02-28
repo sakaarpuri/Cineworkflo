@@ -598,9 +598,9 @@ export default function PromptEnhancer({ onAuthClick }) {
               </span>
             </div>
 
-            {/* Audio / SFX Toggle */}
+            {/* SFX Toggle */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Audio</span>
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">SFX</span>
               <div className="flex items-center gap-2">
                 <span
                   className="text-xs font-semibold transition-all"
@@ -642,7 +642,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                 </span>
               </div>
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                {includeAudioSfx ? 'Include ambience, music, and foley in output' : 'Output stays visual-only'}
+                {includeAudioSfx ? 'Include sound effects cues in output' : 'Output stays visual-only'}
               </span>
             </div>
 
