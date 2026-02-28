@@ -205,6 +205,23 @@ function Grid({ moves }) {
 export default function CameraMovesPage() {
   return (
     <div style={{ background: '#F0EEE9', padding: '60px 24px 80px' }}>
+      <nav
+        aria-label="Breadcrumb"
+        style={{
+          maxWidth: 1200,
+          margin: '0 auto 16px',
+          fontSize: 14,
+          color: '#6B7280',
+          display: 'flex',
+          gap: 8,
+          alignItems: 'center'
+        }}
+      >
+        <Link to="/" style={{ textDecoration: 'underline' }}>Home</Link>
+        <span>/</span>
+        <span style={{ color: '#374151' }}>Camera Moves</span>
+      </nav>
+
       <div style={{ textAlign: 'center', marginBottom: 52 }}>
         <div
           style={{

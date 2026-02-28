@@ -273,6 +273,16 @@ export default function ShotToPrompt({ preview = false }) {
       style={{ background: 'var(--bg-primary)' }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-5 text-sm flex items-center gap-2"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          <Link to="/" className="hover:underline">Home</Link>
+          <span>/</span>
+          <span style={{ color: 'var(--text-secondary)' }}>Shot to Prompt</span>
+        </nav>
+
         <div className="text-center mb-8">
           <h1 
             className="text-3xl font-bold mb-2"

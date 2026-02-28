@@ -142,6 +142,11 @@ Tasks:
 - Add route-level breadcrumbs where useful.
 - Add "next step" CTAs on education pages (apply moves in prompts, generate from reference, etc.).
 
+Status Update (Feb 27, 2026):
+- Core routes now include cross-page CTA links and breadcrumb navigation.
+- Homepage hero now links directly to `/prompts`, `/shot-to-prompt`, and `/camera-moves`.
+- Post-deploy verification checklist added at `docs/seo/gsc-post-deploy-checklist.md`.
+
 File Targets:
 - `src/components/Header.jsx`
 - `src/components/Footer.jsx`

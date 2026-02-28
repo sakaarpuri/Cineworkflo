@@ -96,6 +96,18 @@ export default function PromptVault({ preview = false }) {
       {/* Decorative gradient */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-32 bg-gradient-to-b from-purple-100 to-transparent opacity-30" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {!preview && (
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-5 text-sm flex items-center gap-2"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            <Link to="/" className="hover:underline">Home</Link>
+            <span>/</span>
+            <span style={{ color: 'var(--text-secondary)' }}>Prompt Vault</span>
+          </nav>
+        )}
+
         <div className="text-center mb-10">
           <h2 
             className="text-3xl lg:text-4xl font-bold mb-4"
