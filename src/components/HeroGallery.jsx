@@ -101,7 +101,7 @@ export default function HeroGallery() {
             Get <span style={{ color: 'var(--accent-blue)' }}>AI</span> videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
           </h1>
           <p className="text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
-            Professionally crafted prompts for Runway, Pika, Kling, Luma, and other AI video tools.
+            Professionally crafted prompts for Runway, Pika, Kling, Luma, Sora, Meta, and other AI video tools.
             Get consistent, commercial-quality results every time.
           </p>
 

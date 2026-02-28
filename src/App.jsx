@@ -25,25 +25,25 @@ const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
 
 const SEO_DEFAULT = {
-  title: 'CineWorkflo - Professional AI Video Prompts for Runway & Pika',
+  title: 'CineWorkflo - Professional AI Video Prompts for Runway, Pika, Sora & Meta',
   description: 'Professional AI video prompt workflows for filmmakers. Access curated prompts, shot-to-prompt tools, and camera movement guides.',
-  keywords: 'AI video prompts, Runway prompts, Pika prompts, AI filmmaking, video generation prompts',
+  keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts',
   path: '/',
   noindex: false
 }
 
 const SEO_BY_PATH = {
   '/': {
-    title: 'CineWorkflo - Professional AI Video Prompts for Runway & Pika | 150+ Tested Prompts',
-    description: 'Stop guessing with AI video. 150+ professional prompts for Runway Gen-2, Pika Labs, and AI video tools. Copy, paste, create.',
-    keywords: 'AI video prompts, Runway prompts, Pika prompts, AI filmmaking, video generation prompts, Runway Gen-2, Pika Labs',
+    title: 'CineWorkflo - Professional AI Video Prompts for Runway, Pika, Sora & Meta | 150+ Tested Prompts',
+    description: 'Stop guessing with AI video. 150+ professional prompts for Runway Gen-2, Pika Labs, Sora, Meta, and AI video tools. Copy, paste, create.',
+    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, Runway Gen-2, Pika Labs',
     path: '/',
     noindex: false
   },
   '/prompts': {
     title: 'Prompt Vault - AI Video Prompts for Filmmakers | CineWorkflo',
-    description: 'Browse curated AI video prompts by style, mood, and shot type. Built for creators using Runway, Pika, and other video tools.',
-    keywords: 'prompt vault, AI prompts for video, Runway prompt library, Pika prompt library, cinematic AI prompts',
+    description: 'Browse curated AI video prompts by style, mood, and shot type. Built for creators using Runway, Pika, Sora, Meta, and other video tools.',
+    keywords: 'prompt vault, AI prompts for video, Runway prompt library, Pika prompt library, Sora prompt library, Meta prompt library, cinematic AI prompts',
     path: '/prompts',
     noindex: false
   },
@@ -71,7 +71,7 @@ const SEO_BY_PATH = {
   '/pricing': {
     title: 'Pricing - CineWorkflo Plans for AI Video Creators',
     description: 'Compare Free, Pro Monthly, and Pro Yearly plans for CineWorkflo. Unlock full prompt vault access and advanced AI video workflow tools.',
-    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans',
+    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans, Sora prompt plans, Meta prompt plans',
     path: '/pricing',
     noindex: false
   },
@@ -116,7 +116,7 @@ const FAQ_BY_PATH = {
   '/prompts': [
     {
       question: 'Are these prompts specific to one tool?',
-      answer: 'They are optimized for AI video tools like Runway and Pika, but also work as a strong base for most text-to-video workflows.'
+      answer: 'They are optimized for AI video tools like Runway, Pika, Sora, and Meta, but also work as a strong base for most text-to-video workflows.'
     },
     {
       question: 'Should I copy prompts exactly as-is?',
