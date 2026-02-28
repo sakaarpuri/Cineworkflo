@@ -32,21 +32,22 @@ export default function ShotToPrompt({ preview = false }) {
         body: JSON.stringify({ image: imageData })
       })
 
-      const data = await response.json()
-      
+      const data = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(data.error || `Shot to Prompt failed (${response.status})`)
+      }
+
       if (data.prompt) {
         setGeneratedPrompt(data.prompt)
       } else {
-        // Fallback if API fails
-        setGeneratedPrompt('Cinematic aerial drone shot, sweeping over coastal cliffs at golden hour, dramatic shadows on rock formations, gentle ocean waves below, professional travel documentary style, 4K quality, smooth gimbal movement, slight lens flare from setting sun')
+        throw new Error('No prompt returned by Shot to Prompt API')
       }
     } catch (err) {
       console.error('Shot to prompt error:', err)
-      // Fallback for development
-      setGeneratedPrompt('Cinematic aerial drone shot, sweeping over coastal cliffs at golden hour, dramatic shadows on rock formations, gentle ocean waves below, professional travel documentary style, 4K quality, smooth gimbal movement, slight lens flare from setting sun')
+      setGeneratedPrompt('Unable to generate prompt right now. Please retry in a moment.')
+    } finally {
+      setIsAnalyzing(false)
     }
-    
-    setIsAnalyzing(false)
   }
 
   const clearImage = () => {
