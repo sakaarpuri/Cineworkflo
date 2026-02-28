@@ -12,28 +12,24 @@
     position: relative;
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: #FFF4FA;
+    background-color: #FFF7FB;
     background-image:
-      /* Zone 1 (largest): Pink */
-      radial-gradient(82% 52% at 18% 14%, rgba(255, 118, 186, 0.52) 0%, rgba(255, 118, 186, 0) 72%),
-      radial-gradient(70% 44% at 78% 12%, rgba(255, 170, 220, 0.40) 0%, rgba(255, 170, 220, 0) 70%),
-      /* Zone 2 (medium): Mint/Teal */
-      radial-gradient(92% 58% at 82% 56%, rgba(72, 220, 189, 0.44) 0%, rgba(72, 220, 189, 0) 74%),
-      radial-gradient(78% 48% at 38% 60%, rgba(167, 255, 240, 0.34) 0%, rgba(167, 255, 240, 0) 76%),
-      /* Zone 3 (smallest): Blue/Lavender */
-      radial-gradient(96% 62% at 26% 96%, rgba(120, 165, 255, 0.42) 0%, rgba(120, 165, 255, 0) 78%),
-      radial-gradient(86% 56% at 82% 92%, rgba(186, 154, 255, 0.34) 0%, rgba(186, 154, 255, 0) 78%),
-      /* Soft vertical blend with uneven ratios (no hard lines) */
+      /* Big, high-contrast pastel zones with soft blends (no hard bands) */
+      radial-gradient(120% 72% at 50% 0%, rgba(255, 86, 170, 0.62) 0%, rgba(255, 86, 170, 0) 62%),
+      radial-gradient(120% 72% at 50% 56%, rgba(0, 204, 176, 0.52) 0%, rgba(0, 204, 176, 0) 66%),
+      radial-gradient(120% 78% at 50% 100%, rgba(74, 144, 255, 0.56) 0%, rgba(74, 144, 255, 0) 64%),
+      radial-gradient(85% 60% at 82% 96%, rgba(179, 102, 255, 0.32) 0%, rgba(179, 102, 255, 0) 70%),
+      /* Underlay to keep the page bright and cohesive */
       linear-gradient(
         180deg,
         #FFE0F1 0%,
-        #FFD3EA 46%,
-        #D9FFF6 66%,
-        #D6F6FF 78%,
-        #E5DCFF 100%
+        #FFE0F1 38%,
+        #D6FFF7 64%,
+        #D9F2FF 82%,
+        #F4ECFF 100%
       );
     background-repeat: no-repeat;
-    background-size: 100% 260%;
+    background-size: 100% 280%;
   }
 
   /* Theme Variables */
