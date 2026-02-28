@@ -194,6 +194,8 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [usage, setUsage] = useState({ count: 0, isPro: false });
   const [addedDetails, setAddedDetails] = useState([]);
   const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner" });
+  const levelPulseTimeoutRef = useRef(null);
+  const [levelPulse, setLevelPulse] = useState('');
   
   const { user, isPro } = useAuth();
 
@@ -261,6 +263,19 @@ export default function PromptEnhancer({ onAuthClick }) {
     }
   };
 
+  const handleToggleSkillLevel = () => {
+    const nextLevel = skillLevel === 'beginner' ? 'pro' : 'beginner';
+    setSkillLevel(nextLevel);
+    setLevelPulse(nextLevel);
+    if (levelPulseTimeoutRef.current) {
+      clearTimeout(levelPulseTimeoutRef.current);
+    }
+    levelPulseTimeoutRef.current = setTimeout(() => {
+      setLevelPulse('');
+      levelPulseTimeoutRef.current = null;
+    }, 450);
+  };
+
   useEffect(() => {
     if (hasGeneratedOnce && canSubmit) {
       // Only trigger if params actually changed
@@ -279,6 +294,12 @@ export default function PromptEnhancer({ onAuthClick }) {
       return () => clearTimeout(timeoutId);
     }
   }, [mood, useCase, idea, skillLevel, hasGeneratedOnce, canSubmit, handleEnhance]);
+
+  useEffect(() => () => {
+    if (levelPulseTimeoutRef.current) {
+      clearTimeout(levelPulseTimeoutRef.current);
+    }
+  }, []);
 
 
   const handleCopy = () => {
@@ -457,7 +478,10 @@ export default function PromptEnhancer({ onAuthClick }) {
               <div className="flex items-center gap-2">
                 <span
                   className="text-xs font-semibold transition-all"
-                  style={{ color: skillLevel === 'beginner' ? '#3B82F6' : 'var(--text-muted)' }}
+                  style={{
+                    color: skillLevel === 'beginner' ? '#3B82F6' : 'var(--text-muted)',
+                    textShadow: levelPulse === 'beginner' ? '0 0 10px rgba(59,130,246,0.65)' : 'none'
+                  }}
                 >
                   Beginner
                 </span>
@@ -466,7 +490,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   role="switch"
                   aria-checked={skillLevel === 'pro'}
                   aria-label="Toggle prompt level"
-                  onClick={() => setSkillLevel(skillLevel === 'beginner' ? 'pro' : 'beginner')}
+                  onClick={handleToggleSkillLevel}
                   className="relative w-[68px] h-[34px] rounded-full transition-all duration-250"
                   style={{
                     background: skillLevel === 'pro'
@@ -474,8 +498,8 @@ export default function PromptEnhancer({ onAuthClick }) {
                       : 'linear-gradient(145deg, #60A5FA, #2563EB)',
                     border: `2px solid ${skillLevel === 'pro' ? '#A855F750' : '#60A5FA50'}`,
                     boxShadow: skillLevel === 'pro'
-                      ? 'inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(124,58,237,0.35)'
-                      : 'inset 3px 3px 6px rgba(37,99,235,0.5), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(37,99,235,0.35)'
+                      ? `inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(124,58,237,0.35)${levelPulse === 'pro' ? ', 0 0 16px rgba(168,85,247,0.55)' : ''}`
+                      : `inset 3px 3px 6px rgba(37,99,235,0.5), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(37,99,235,0.35)${levelPulse === 'beginner' ? ', 0 0 16px rgba(96,165,250,0.55)' : ''}`
                   }}
                   onMouseDown={(e) => {
                     e.currentTarget.style.transform = 'translateY(2px) scale(0.97)'
@@ -498,7 +522,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                 </button>
                 <span
                   className="text-xs font-semibold transition-all"
-                  style={{ color: skillLevel === 'pro' ? '#7C3AED' : 'var(--text-muted)' }}
+                  style={{
+                    color: skillLevel === 'pro' ? '#7C3AED' : 'var(--text-muted)',
+                    textShadow: levelPulse === 'pro' ? '0 0 10px rgba(124,58,237,0.65)' : 'none'
+                  }}
                 >
                   Pro
                 </span>
