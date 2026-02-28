@@ -81,12 +81,53 @@ export default function PromptVault({ preview = false }) {
         )}
 
         <div className="text-center mb-10">
-          <h2 
-            className="text-3xl lg:text-4xl font-bold mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
-            Explore Prompt Vault
-          </h2>
+          {preview ? (
+            <div className="flex items-center justify-center gap-5 mb-4">
+              <h2
+                className="text-3xl lg:text-4xl font-bold"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                Explore Prompt Vault
+              </h2>
+              <button
+                onClick={handleVaultToggle}
+                className="relative w-20 h-10 rounded-full transition-all duration-300"
+                style={{
+                  background: vaultToggle
+                    ? 'linear-gradient(145deg, #10B981, #059669)'
+                    : 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                  boxShadow: vaultToggle
+                    ? 'inset 3px 3px 6px rgba(16,185,129,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(16,185,129,0.4)'
+                    : 'inset 3px 3px 6px rgba(59,130,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                  border: `2px solid ${vaultToggle ? '#10B98150' : '#3B82F650'}`
+                }}
+                aria-label="Explore Prompt Vault"
+              >
+                <span
+                  className="absolute top-1 left-1 w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center"
+                  style={{
+                    background: '#fff',
+                    transform: vaultToggle ? 'translateX(38px)' : 'translateX(0)',
+                    boxShadow: '2px 2px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.8)'
+                  }}
+                >
+                  <ArrowRight
+                    className="h-4 w-4 transition-all duration-300"
+                    style={{
+                      color: vaultToggle ? '#10B981' : '#3B82F6'
+                    }}
+                  />
+                </span>
+              </button>
+            </div>
+          ) : (
+            <h2
+              className="text-3xl lg:text-4xl font-bold mb-4"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Explore Prompt Vault
+            </h2>
+          )}
           <p 
             className="text-xl max-w-2xl mx-auto"
             style={{ color: 'var(--text-secondary)' }}
@@ -238,46 +279,7 @@ export default function PromptVault({ preview = false }) {
           ))}
         </div>
 
-        {/* Preview CTA */}
-        {preview && (
-          <div className="text-center mt-10">
-            <div className="flex items-center justify-center gap-5">
-              <span className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
-                Explore Prompt Vault
-              </span>
-              <button
-                onClick={handleVaultToggle}
-                className="relative w-20 h-10 rounded-full transition-all duration-300"
-                style={{
-                  background: vaultToggle
-                    ? 'linear-gradient(145deg, #10B981, #059669)'
-                    : 'linear-gradient(145deg, #3B82F6, #2563EB)',
-                  boxShadow: vaultToggle
-                    ? 'inset 3px 3px 6px rgba(16,185,129,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(16,185,129,0.4)'
-                    : 'inset 3px 3px 6px rgba(59,130,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
-                  border: `2px solid ${vaultToggle ? '#10B98150' : '#3B82F650'}`
-                }}
-                aria-label="Toggle Prompt Vault"
-              >
-                <span
-                  className="absolute top-1 left-1 w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center"
-                  style={{
-                    background: '#fff',
-                    transform: vaultToggle ? 'translateX(38px)' : 'translateX(0)',
-                    boxShadow: '2px 2px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.8)'
-                  }}
-                >
-                  <ArrowRight
-                    className="h-4 w-4 transition-all duration-300"
-                    style={{
-                      color: vaultToggle ? '#10B981' : '#3B82F6'
-                    }}
-                  />
-                </span>
-              </button>
-            </div>
-          </div>
-        )}
+        {/* Preview CTA removed (toggle lives in section heading) */}
 
         {!preview && (
           <section
