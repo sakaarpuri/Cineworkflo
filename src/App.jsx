@@ -407,7 +407,7 @@ function App() {
       <Router>
         <RouteSeo />
         <AttributionTracker />
-        <div className="min-h-screen transition-colors" style={{ background: 'var(--bg-primary)' }}>
+        <div className="min-h-screen transition-colors" style={{ background: 'transparent' }}>
           <Header onAuthClick={() => setAuthModalOpen(true)} />
           <main>
             <Routes>
