@@ -1,115 +1,153 @@
+import rawPromptLibrary from './ai_video_prompt_library.json'
+
+const CATEGORY_ORDER = [
+  'Brand & Product Ads',
+  'Social & Short-Form Content',
+  'Cinematic & Storytelling',
+  'World & Environment Building',
+  'Abstract & Motion Art',
+  'AI Avatar & Character',
+  'Sci-Fi & Concept Film',
+  'Food & Cooking',
+  'Real Estate & Architecture'
+]
+
 export const CATEGORY_COLORS = {
-  'Product Demo': '#3B82F6',
-  'B-Roll': '#F59E0B',
-  Interview: '#10B981',
-  'Motion Graphics': '#06B6D4',
-  Transition: '#8B5CF6'
+  'Brand & Product Ads': '#F59E0B',
+  'Social & Short-Form Content': '#10B981',
+  'Cinematic & Storytelling': '#3B82F6',
+  'World & Environment Building': '#14B8A6',
+  'Abstract & Motion Art': '#8B5CF6',
+  'AI Avatar & Character': '#EC4899',
+  'Sci-Fi & Concept Film': '#6366F1',
+  'Food & Cooking': '#F97316',
+  'Real Estate & Architecture': '#78716C'
 }
 
-export const PROMPT_LIBRARY = [
-  {
-    id: 1,
-    title: 'Cinematic Product Rotation',
-    category: 'Product Demo',
-    tool: 'Runway',
-    prompt: 'Cinematic product shot, rotating 360° on seamless black background, studio lighting with soft reflections, shallow depth of field, 8K quality, motion blur on rotation, professional commercial aesthetic',
-    tags: ['product', 'commercial', 'rotation']
+const CATEGORY_METADATA = {
+  'Brand & Product Ads': {
+    description: 'Commercial prompt structures for high-conversion brand and product videos.',
+    intent: 'Prompts for product reveals, brand films, and ad-ready visual storytelling.'
   },
-  {
-    id: 2,
-    title: 'Smooth Aerial Drone Shot',
-    category: 'B-Roll',
-    tool: 'Pika',
-    prompt: 'Aerial drone footage, smooth gliding motion over landscape, golden hour lighting, cinematic color grade, slight lens flare, professional travel documentary style, 4K resolution',
-    tags: ['drone', 'landscape', 'travel']
+  'Social & Short-Form Content': {
+    description: 'Fast, scroll-stopping prompts designed for short-form social formats.',
+    intent: 'Prompts for creator-style hooks, vertical edits, and high-retention short videos.'
   },
-  {
-    id: 3,
-    title: 'Dramatic Lighting Portrait',
-    category: 'Interview',
-    tool: 'Runway',
-    prompt: 'Dramatic interview lighting, Rembrandt style, subject looking slightly off-camera, shallow depth of field, film grain texture, cinematic mood, dark background with rim light',
-    tags: ['interview', 'portrait', 'dramatic']
+  'Cinematic & Storytelling': {
+    description: 'Narrative-focused prompts with cinematic camera language and pacing.',
+    intent: 'Prompts for dramatic scenes, storytelling arcs, and film-style visual sequences.'
   },
-  {
-    id: 4,
-    title: 'Seamless Loop Background',
-    category: 'Motion Graphics',
-    tool: 'Runway',
-    prompt: 'Abstract flowing particles, seamless loop, soft gradients in teal and coral, gentle organic motion, perfect for text overlay, 4K, smooth 60fps',
-    tags: ['background', 'loop', 'abstract']
+  'World & Environment Building': {
+    description: 'Environment-first prompts for immersive locations and world scale.',
+    intent: 'Prompts for establishing shots, atmospheric landscapes, and place-driven storytelling.'
   },
-  {
-    id: 5,
-    title: 'Handheld Documentary Style',
-    category: 'B-Roll',
-    tool: 'Pika',
-    prompt: 'Handheld camera movement, subtle shake, following subject through environment, natural lighting, documentary style, authentic feel, slight motion blur on edges',
-    tags: ['handheld', 'documentary', 'natural']
+  'Abstract & Motion Art': {
+    description: 'Experimental prompts built around motion design and abstract visuals.',
+    intent: 'Prompts for non-literal concepts, kinetic art, and stylized visual loops.'
   },
-  {
-    id: 6,
-    title: 'Luxury Product Showcase',
-    category: 'Product Demo',
-    tool: 'Runway',
-    prompt: 'Luxury product cinematography, slow push-in movement, dramatic rim lighting on black background, shallow depth of field, premium aesthetic, reflections on glossy surface, high-end commercial',
-    tags: ['luxury', 'product', 'premium']
+  'AI Avatar & Character': {
+    description: 'Character-centric prompts for digital avatars and persona-driven content.',
+    intent: 'Prompts for talking avatars, character performances, and identity-led narratives.'
   },
-  {
-    id: 7,
-    title: 'Streetwear Drop Teaser',
-    category: 'Product Demo',
-    tool: 'Kling',
-    prompt: 'Urban fashion product teaser, gritty night alley, dramatic edge lighting, quick push-ins and close-up fabric texture reveals, high-contrast commercial style, social ad pacing',
-    tags: ['streetwear', 'ad', 'teaser']
+  'Sci-Fi & Concept Film': {
+    description: 'Concept-heavy prompts for futuristic worlds and speculative visual fiction.',
+    intent: 'Prompts for sci-fi scenes, future tech visuals, and cinematic concept pieces.'
   },
-  {
-    id: 8,
-    title: 'Vertical Social Hook Shot',
-    category: 'Transition',
-    tool: 'Luma',
-    prompt: '9:16 social-first opener, quick subject reveal with whip pan transition, bright practical lights, punchy high-saturation grade, thumb-stopping composition for short-form video',
-    tags: ['short-form', 'vertical', 'hook']
+  'Food & Cooking': {
+    description: 'Food-focused prompts for recipe visuals, culinary branding, and table aesthetics.',
+    intent: 'Prompts for cooking sequences, macro food shots, and restaurant-style storytelling.'
   },
-  {
-    id: 9,
-    title: 'Fantasy City Establishing',
-    category: 'Motion Graphics',
-    tool: 'Runway',
-    prompt: 'Epic fantasy city at dawn, layered atmospheric fog, slow drone rise and pullback revealing scale, cinematic world-building tone, volumetric light and rich environmental detail',
-    tags: ['world-building', 'fantasy', 'establishing']
+  'Real Estate & Architecture': {
+    description: 'Spatial prompts for property showcases and architectural visualization.',
+    intent: 'Prompts for walkthroughs, exterior reveals, and design-focused property narratives.'
   }
-]
+}
 
-export const PROMPT_CATEGORY_PAGES = [
-  {
-    slug: 'product-ads',
-    name: 'Product Ads',
-    intent: 'Commercial product storytelling with conversion-focused visuals.',
-    description: 'Use these prompts for premium ad-style product shots, launch teasers, and feature highlight sequences.',
-    promptIds: [1, 6, 7]
-  },
-  {
-    slug: 'short-form-social',
-    name: 'Short-Form Social',
-    intent: 'Fast, high-impact prompt structures for vertical and short social formats.',
-    description: 'Designed for hooks, motion-heavy transitions, and creator-style pacing in short social videos.',
-    promptIds: [8, 5, 3]
-  },
-  {
-    slug: 'cinematic-storytelling',
-    name: 'Cinematic Storytelling',
-    intent: 'Narrative scene prompts with mood, lens language, and shot progression.',
-    description: 'Use for dramatic scenes, interview-driven storytelling, and cinematic pacing.',
-    promptIds: [3, 2, 5]
-  },
-  {
-    slug: 'world-building',
-    name: 'World Building',
-    intent: 'Environment and atmosphere-first prompts for scale and immersion.',
-    description: 'Built for establishing shots, world reveals, and location mood design.',
-    promptIds: [9, 2, 4]
+const FALLBACK_TOOL = 'Runway'
+
+const toSlug = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim()
+
+const deriveTitle = (videoPrompt) => {
+  const normalized = normalizeWhitespace(videoPrompt)
+  if (!normalized) return 'Untitled Prompt'
+  const firstClause = normalized.split(/[.,]/)[0].trim()
+  if (firstClause.length <= 72) return firstClause
+  return `${firstClause.slice(0, 69).trim()}...`
+}
+
+const dedupeKeepFirst = (values) => {
+  const seen = new Set()
+  const output = []
+  for (const rawValue of values) {
+    const value = normalizeWhitespace(rawValue)
+    if (!value) continue
+    const key = value.toLowerCase()
+    if (seen.has(key)) continue
+    seen.add(key)
+    output.push(value)
   }
-]
+  return output
+}
+
+const orderedCategories = (() => {
+  const found = [...new Set(rawPromptLibrary.map((prompt) => prompt.category))]
+  return found.sort((left, right) => {
+    const leftIndex = CATEGORY_ORDER.indexOf(left)
+    const rightIndex = CATEGORY_ORDER.indexOf(right)
+    const normalizedLeft = leftIndex === -1 ? Number.MAX_SAFE_INTEGER : leftIndex
+    const normalizedRight = rightIndex === -1 ? Number.MAX_SAFE_INTEGER : rightIndex
+    if (normalizedLeft !== normalizedRight) return normalizedLeft - normalizedRight
+    return left.localeCompare(right)
+  })
+})()
+
+export const PROMPT_LIBRARY = rawPromptLibrary.map((rawPrompt, index) => {
+  const bestOn = Array.isArray(rawPrompt.best_on) ? dedupeKeepFirst(rawPrompt.best_on) : []
+  const audience = Array.isArray(rawPrompt.audience) ? dedupeKeepFirst(rawPrompt.audience) : []
+  const style = normalizeWhitespace(rawPrompt.style)
+  const videoPrompt = normalizeWhitespace(rawPrompt.video_prompt)
+  const imagePrompt = normalizeWhitespace(rawPrompt.image_prompt)
+  const sfxPrompt = normalizeWhitespace(rawPrompt.sfx_prompt)
+
+  return {
+    id: index + 1,
+    source_id: rawPrompt.id,
+    category: normalizeWhitespace(rawPrompt.category),
+    style,
+    audience,
+    best_on: bestOn,
+    image_prompt: imagePrompt,
+    video_prompt: videoPrompt,
+    sfx_prompt: sfxPrompt,
+    variables: rawPrompt.variables || {},
+    tool_notes: normalizeWhitespace(rawPrompt.tool_notes),
+    title: deriveTitle(videoPrompt),
+    tool: bestOn[0] || FALLBACK_TOOL,
+    prompt: videoPrompt,
+    tags: dedupeKeepFirst([style, ...bestOn, ...audience])
+  }
+})
+
+export const PROMPT_CATEGORY_PAGES = orderedCategories.map((category) => {
+  const fallbackDescription = `Curated ${category.toLowerCase()} prompts for AI video workflows.`
+  const fallbackIntent = `Copy-ready ${category.toLowerCase()} prompt structures for filmmakers and creators.`
+  const categoryPrompts = PROMPT_LIBRARY.filter((prompt) => prompt.category === category)
+  const meta = CATEGORY_METADATA[category] || {}
+
+  return {
+    slug: toSlug(category),
+    name: category,
+    description: meta.description || fallbackDescription,
+    intent: meta.intent || fallbackIntent,
+    promptIds: categoryPrompts.map((prompt) => prompt.id)
+  }
+})
 
 export const PROMPT_CATEGORY_SLUGS = PROMPT_CATEGORY_PAGES.map((category) => category.slug)

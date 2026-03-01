@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Search, Copy, Check, ArrowRight, Eye, X } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
@@ -13,7 +13,15 @@ export default function PromptVault({ preview = false }) {
   const [vaultToggle, setVaultToggle] = useState(false)
   const navigate = useNavigate()
 
-  const categories = ['All', 'Product Demo', 'B-Roll', 'Interview', 'Motion Graphics', 'Transition']
+  const categories = useMemo(() => {
+    const orderedFromPages = PROMPT_CATEGORY_PAGES.map((categoryPage) => categoryPage.name)
+    const fromLibrary = [...new Set(PROMPT_LIBRARY.map((prompt) => prompt.category))]
+    const ordered = [...orderedFromPages]
+    fromLibrary.forEach((category) => {
+      if (!ordered.includes(category)) ordered.push(category)
+    })
+    return ['All', ...ordered]
+  }, [])
 
   useEffect(() => {
     if (preview) return
@@ -35,8 +43,13 @@ export default function PromptVault({ preview = false }) {
   }, [preview])
 
   const filteredPrompts = PROMPT_LIBRARY.filter(prompt => {
-    const matchesSearch = prompt.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         prompt.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    const query = searchQuery.trim().toLowerCase()
+    const matchesSearch = !query ||
+      prompt.title.toLowerCase().includes(query) ||
+      prompt.tags.some(tag => tag.toLowerCase().includes(query)) ||
+      prompt.prompt.toLowerCase().includes(query) ||
+      prompt.image_prompt.toLowerCase().includes(query) ||
+      prompt.sfx_prompt.toLowerCase().includes(query)
     const matchesCategory = selectedCategory === 'All' || prompt.category === selectedCategory
     return matchesSearch && matchesCategory
   })
