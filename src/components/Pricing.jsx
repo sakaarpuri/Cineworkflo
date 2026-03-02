@@ -36,7 +36,7 @@ const plans = [
       'Cancel anytime'
     ],
     cta: 'Start Pro',
-    popular: false
+    popular: true
   }
 ]
 
@@ -176,7 +176,7 @@ export default function Pricing({ onAuthClick }) {
           </div>
         )}
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
           {plans.map((plan) => (
             <div 
               key={plan.name}
