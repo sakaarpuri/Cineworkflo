@@ -29,6 +29,35 @@ export default function PricingPage({ onAuthClick }) {
             border: '1px solid var(--border-color)'
           }}
         >
+          <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            Build your AI video workflow
+          </h2>
+          <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+            Compare plans, then move through the full workflow used by creators in the US, Canada, and UK.
+          </p>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <Link to="/prompts" className="underline" style={{ color: 'var(--accent-blue)' }}>
+              Prompt Vault
+            </Link>
+            <Link to="/shot-to-prompt" className="underline" style={{ color: 'var(--accent-blue)' }}>
+              Shot to Prompt
+            </Link>
+            <Link to="/camera-moves" className="underline" style={{ color: 'var(--accent-blue)' }}>
+              Camera Moves
+            </Link>
+            <Link to="/about" className="underline" style={{ color: 'var(--accent-blue)' }}>
+              About CineWorkflo
+            </Link>
+          </div>
+        </section>
+
+        <section
+          className="rounded-2xl p-6 mt-6"
+          style={{
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border-color)'
+          }}
+        >
           <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
             Pricing FAQ
           </h2>

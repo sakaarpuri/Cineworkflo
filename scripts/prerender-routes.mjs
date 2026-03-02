@@ -8,9 +8,9 @@ const ROUTES = [
   {
     path: '/',
     file: join(DIST_DIR, 'index.html'),
-    title: 'CineWorkflo - Professional AI Video Prompts for Runway, Pika, Sora & Meta | 150+ Tested Prompts',
-    description: 'Stop guessing with AI video. 150+ professional prompts for Runway Gen-2, Pika Labs, Sora, Meta & AI video tools. Tested workflows for creators.',
-    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, camera moves, shot to prompt',
+    title: 'CineWorkflo - AI Video Prompts for US, Canada, and UK Creators | Prompt Vault + Tools',
+    description: 'Create AI video faster with Prompt Vault, Shot to Prompt, and Camera Moves. Built for filmmakers and creator teams across the US, Canada, and UK.',
+    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, camera moves, shot to prompt, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>CineWorkflo — Professional AI Video Prompts for Runway, Pika, Sora & Meta</h1>
@@ -41,9 +41,9 @@ const ROUTES = [
   {
     path: '/prompts',
     file: join(DIST_DIR, 'prompts', 'index.html'),
-    title: 'Prompt Vault - Pro AI Video Prompts (Image + Video + SFX) | CineWorkflo',
-    description: 'Browse pro prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls. Built for filmmakers using Runway, Kling, Luma, Sora, Higgsfield, and more.',
-    keywords: 'prompt vault, AI video prompts, image prompt, video prompt, sfx prompt, variable prompts, Runway prompts, Kling prompts, Luma prompts, Sora prompts, Higgsfield prompts',
+    title: 'Prompt Vault - AI Video Prompts for US, Canada, and UK Teams | CineWorkflo',
+    description: 'Browse AI video prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls for creator workflows in the US, Canada, and UK.',
+    keywords: 'prompt vault, AI video prompts, image prompt, video prompt, sfx prompt, variable prompts, Runway prompts, Kling prompts, Luma prompts, Sora prompts, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>Prompt Vault</h1>
@@ -76,9 +76,9 @@ const ROUTES = [
   {
     path: '/shot-to-prompt',
     file: join(DIST_DIR, 'shot-to-prompt', 'index.html'),
-    title: 'Shot to Prompt - Turn Visual References into AI Video Prompts | CineWorkflo',
-    description: 'Upload a shot reference and generate an optimized AI video prompt. Speed up concepting and previsualization workflows.',
-    keywords: 'shot to prompt, image to prompt, AI video prompt generator, filmmaking prompt tool',
+    title: 'Shot to Prompt - Convert Frames into AI Video Prompts | CineWorkflo',
+    description: 'Upload an image or short video reference and generate an AI video prompt. Built for previsualization workflows in the US, Canada, and UK.',
+    keywords: 'shot to prompt, image to prompt, AI video prompt generator, filmmaking prompt tool, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>Shot to Prompt</h1>
@@ -95,8 +95,8 @@ const ROUTES = [
     path: '/camera-moves',
     file: join(DIST_DIR, 'camera-moves', 'index.html'),
     title: 'Camera Movements Guide - Classic, Dynamic, and AI-Native Moves | CineWorkflo',
-    description: 'Learn camera movement language with interactive cards for dolly, pan, tracking, handheld, steadicam, orbit, drone, and more.',
-    keywords: 'camera movements, dolly shot, pan shot, steadicam, handheld, whip pan, dutch angle, dolly zoom, AI camera moves',
+    description: 'Learn camera movement language with interactive cards for dolly, pan, tracking, handheld, steadicam, orbit, drone, and more for US, Canada, and UK creators.',
+    keywords: 'camera movements, dolly shot, pan shot, steadicam, handheld, whip pan, dutch angle, dolly zoom, AI camera moves, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>Camera Movements Guide</h1>
@@ -112,9 +112,9 @@ const ROUTES = [
   {
     path: '/pricing',
     file: join(DIST_DIR, 'pricing', 'index.html'),
-    title: 'Pricing - CineWorkflo Plans for AI Video Creators',
-    description: 'Compare Free, Pro Monthly, and Pro Yearly plans for CineWorkflo. Unlock full prompt vault access and advanced AI video workflow tools.',
-    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans',
+    title: 'Pricing - CineWorkflo Plans for AI Video Creators in US, Canada, and UK',
+    description: 'Compare Free and Pro plans for CineWorkflo. Unlock the ever-growing Prompt Vault and unlimited Prompt Enhancer generations for creator workflows in the US, Canada, and UK.',
+    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>CineWorkflo Pricing</h1>
@@ -131,8 +131,8 @@ const ROUTES = [
     path: '/about',
     file: join(DIST_DIR, 'about', 'index.html'),
     title: 'About CineWorkflo - AI Video Prompt Workflows',
-    description: 'Learn about CineWorkflo and how it helps filmmakers and creators build reliable AI video workflows.',
-    keywords: 'about CineWorkflo, AI video workflow platform, filmmaker prompt tools',
+    description: 'Learn how CineWorkflo helps filmmakers and creator teams in the US, Canada, and UK build reliable AI video workflows.',
+    keywords: 'about CineWorkflo, AI video workflow platform, filmmaker prompt tools, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>About CineWorkflo</h1>
@@ -196,8 +196,8 @@ const ROUTES = [
     path: '/contact',
     file: join(DIST_DIR, 'contact', 'index.html'),
     title: 'Contact CineWorkflo Support',
-    description: 'Contact CineWorkflo for support, billing, and partnership inquiries.',
-    keywords: 'contact CineWorkflo, CineWorkflo support, prompt tool support',
+    description: 'Contact CineWorkflo for support, billing, and partnership inquiries from the US, Canada, and UK.',
+    keywords: 'contact CineWorkflo, CineWorkflo support, prompt tool support, US Canada UK',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>Contact</h1>
