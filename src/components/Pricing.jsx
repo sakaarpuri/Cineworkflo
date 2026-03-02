@@ -36,20 +36,18 @@ const plans = [
       'Cancel anytime'
     ],
     cta: 'Start Pro',
-    popular: false
+    popular: true
   }
 ]
 
 export default function Pricing({ onAuthClick }) {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
-  const [confirmPlan, setConfirmPlan] = useState(null) // 'monthly' | null
+  const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutCanceled, setCheckoutCanceled] = useState(false)
   const [checkoutCanceledPlan, setCheckoutCanceledPlan] = useState(null)
   const [ctaVariant, setCtaVariant] = useState('a')
   const navigate = useNavigate()
-
-  const closeConfirm = () => setConfirmPlan(null)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -93,12 +91,11 @@ export default function Pricing({ onAuthClick }) {
       return
     }
 
-    // Add a quick, explicit confirm step so users can back out without leaving the site.
-    setConfirmPlan(planType)
+    startCheckout(planType)
   }
 
   const startCheckout = async (planType) => {
-    setConfirmPlan(null)
+    setCheckoutError(null)
     setLoading(true)
     try {
       const response = await fetch('/.netlify/functions/create-checkout', {
@@ -112,13 +109,26 @@ export default function Pricing({ onAuthClick }) {
         })
       })
 
-      const data = await response.json()
-      if (data.url) {
-        window.location.href = data.url
+      const text = await response.text()
+      let data = {}
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        data = {}
       }
+
+      if (!response.ok) {
+        throw new Error(data?.error || `Failed to start checkout (HTTP ${response.status}).`)
+      }
+
+      if (!data?.url) {
+        throw new Error('Stripe Checkout did not return a redirect URL. Please try again.')
+      }
+
+      window.location.assign(data.url)
     } catch (err) {
       console.error('Checkout error:', err)
-      alert('Failed to start checkout. Please try again.')
+      setCheckoutError(err?.message || 'Failed to start checkout. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -159,7 +169,21 @@ export default function Pricing({ onAuthClick }) {
           </div>
         )}
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+        {checkoutError && (
+          <div
+            className="neu-card rounded-2xl p-4 mb-6 text-center"
+            style={{
+              background: 'rgba(239, 68, 68, 0.08)',
+              border: '1px solid rgba(239, 68, 68, 0.25)'
+            }}
+          >
+            <p className="text-sm" style={{ color: 'var(--text-primary)' }}>
+              {checkoutError}
+            </p>
+          </div>
+        )}
+
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
           {plans.map((plan) => (
             <div 
               key={plan.name}
@@ -285,51 +309,6 @@ export default function Pricing({ onAuthClick }) {
           30-day money-back guarantee. No questions asked.
         </p>
       </div>
-
-      {confirmPlan && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)' }}
-          onClick={closeConfirm}
-        >
-          <div
-            className="neu-card w-full max-w-md rounded-2xl p-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-              Continue to secure checkout?
-            </h3>
-            <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>
-              You are about to leave CineWorkflo and open Stripe Checkout. You can cancel on Stripe and come back here.
-            </p>
-            <div className="flex gap-3">
-              <button
-                onClick={closeConfirm}
-                className="flex-1 py-3 rounded-xl font-semibold"
-                style={{
-                  background: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-secondary)'
-                }}
-              >
-                Stay here
-              </button>
-              <button
-                onClick={() => startCheckout(confirmPlan)}
-                className="flex-1 py-3 rounded-xl font-semibold"
-                style={{
-                  background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
-                  color: '#fff',
-                  opacity: loading ? 0.7 : 1
-                }}
-                disabled={loading}
-              >
-                {loading ? 'Opening…' : 'Continue'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   )
 }
