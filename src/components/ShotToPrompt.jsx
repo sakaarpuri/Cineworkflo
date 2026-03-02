@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X, Copy, Check } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import { supabase } from '../lib/supabase'
 
 export default function ShotToPrompt({ preview = false }) {
   const [uploadedImage, setUploadedImage] = useState(null)
@@ -9,7 +10,7 @@ export default function ShotToPrompt({ preview = false }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
-  const { user, session, isPro } = useAuth()
+  const { user, isPro } = useAuth()
 
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
   const FREE_LIMIT = 5
@@ -122,7 +123,11 @@ export default function ShotToPrompt({ preview = false }) {
   }
 
   const analyzeImage = async (imageData) => {
-    if (!session?.access_token) {
+    // Always pull a fresh session at request time to avoid expired-token errors.
+    const { data: latestAuth } = await supabase.auth.getSession()
+    const accessToken = latestAuth?.session?.access_token
+
+    if (!accessToken) {
       setGeneratedPrompt('Sign in required to use Shot to Prompt.')
       return
     }
@@ -149,7 +154,7 @@ export default function ShotToPrompt({ preview = false }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify({ image: imageData })
       })
