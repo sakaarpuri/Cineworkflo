@@ -152,7 +152,7 @@ export default function PromptVault({ preview = false }) {
         </div>
 
         {/* Search & Filter */}
-        <div className="mb-8 flex flex-col md:flex-row gap-4">
+        <div className="mb-8 flex flex-col gap-4">
           <div 
             className="relative flex-1"
             style={{ color: 'var(--text-muted)' }}
@@ -372,17 +372,26 @@ export default function PromptVault({ preview = false }) {
       {selectedPrompt && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)' }}
+          style={{ background: 'rgba(15,23,42,0.55)', backdropFilter: 'blur(2px)' }}
           onClick={closeModal}
         >
           <div 
-            className="neu-card max-w-2xl w-full rounded-2xl p-6 relative"
+            className="max-w-2xl w-full rounded-2xl p-6 relative"
+            style={{
+              background: 'var(--bg-card)',
+              border: '1px solid rgba(15,23,42,0.10)',
+              boxShadow: '0 22px 70px rgba(15,23,42,0.28), 0 2px 10px rgba(15,23,42,0.10)'
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             <button 
               onClick={closeModal}
               className="absolute top-4 right-4 p-2 rounded-full transition-colors"
-              style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}
+              style={{
+                background: 'var(--bg-primary)',
+                color: 'var(--text-muted)',
+                border: '1px solid var(--border-color)'
+              }}
             >
               <X className="h-5 w-5" />
             </button>
