@@ -18,8 +18,14 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   || process.env.SUPABASE_SERVICE_KEY
   || process.env.SUPABASE_SERVICE_ROLE
   || '';
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY
+  || process.env.VITE_SUPABASE_ANON_KEY
+  || '';
 const supabaseAdmin = supabaseUrl && supabaseServiceRoleKey
   ? createClient(supabaseUrl, supabaseServiceRoleKey)
+  : null;
+const supabasePublic = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
 const getBearerToken = (event) => {
@@ -41,6 +47,8 @@ const getDayKey = () => new Date().toISOString().slice(0, 10);
 const getMonthKey = () => new Date().toISOString().slice(0, 7);
 
 const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
+  if (!supabaseAdmin) return { ok: true };
+
   const meta = { ...(user.user_metadata || {}) };
   const now = Date.now();
 
@@ -91,16 +99,37 @@ const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
 
   const { error } = await supabaseAdmin.auth.admin.updateUserById(user.id, { user_metadata: meta });
   if (error) {
-    return { ok: false, statusCode: 500, error: 'Unable to record usage. Please try again.' };
+    // Keep generation working even if metadata write fails.
+    return { ok: true };
   }
 
   return { ok: true };
 };
 
+const resolveAuthedUser = async (token) => {
+  if (!token) return { user: null, message: 'Missing bearer token.' };
+
+  if (supabaseAdmin) {
+    const { data, error } = await supabaseAdmin.auth.getUser(token);
+    if (!error && data?.user) return { user: data.user, message: null };
+  }
+
+  if (supabasePublic) {
+    const { data, error } = await supabasePublic.auth.getUser(token);
+    if (!error && data?.user) return { user: data.user, message: null };
+    return { user: null, message: error?.message || 'Token validation failed.' };
+  }
+
+  return {
+    user: null,
+    message: 'Supabase auth verify is not configured (missing SUPABASE_ANON_KEY or SUPABASE_SERVICE_ROLE_KEY).',
+  };
+};
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 
@@ -125,28 +154,20 @@ exports.handler = async (event) => {
     };
   }
 
-  if (!supabaseAdmin) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({
-        error: 'Supabase admin is not configured (missing SUPABASE_URL and/or SUPABASE_SERVICE_ROLE_KEY).'
-      })
-    };
-  }
-
   try {
     const token = getBearerToken(event);
     if (!token) {
       return { statusCode: 401, headers, body: JSON.stringify({ error: 'Sign in required' }) };
     }
 
-    const { data: authData, error: authError } = await supabaseAdmin.auth.getUser(token);
-    if (authError || !authData?.user) {
-      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Invalid session. Please sign in again.' }) };
+    const { user: authedUser, message: authMessage } = await resolveAuthedUser(token);
+    if (!authedUser) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ error: `Invalid session. Please sign in again. (${authMessage})` })
+      };
     }
-
-    const authedUser = authData.user;
     const pro = isProUser(authedUser);
 
     const limits = {
