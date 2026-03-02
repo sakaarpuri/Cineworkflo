@@ -266,15 +266,83 @@ function PromptCard({ prompt, globalView }) {
   const videoNodes = useMemo(() => renderTemplateNodes(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
 
   const heading = useMemo(() => {
+    const getVar = (...keys) => {
+      for (const k of keys) {
+        const v = valueByNormKey[normalize(k)]
+        if (v) return String(v).trim()
+      }
+      return ''
+    }
+
+    const compact = (s) =>
+      String(s || '')
+        .replace(/\s+/g, ' ')
+        .replace(/\s*[,.;:!?]\s*$/g, '')
+        .trim()
+
+    const clamp = (s, max = 56) => {
+      const text = compact(s)
+      if (text.length <= max) return text
+      return text.slice(0, max - 1).trimEnd() + '…'
+    }
+
+    const product = getVar('product type')
+    if (product) return clamp(`${product} ad`)
+
+    const liquid = getVar('liquid or sauce')
+    if (liquid) return clamp(`Slow-motion ${liquid} pour`)
+
+    const city = getVar('futuristic city type')
+    if (city) return clamp(`${city} descent`)
+
+    const futureLocation = getVar('proposed future location')
+    if (futureLocation) return clamp(`Documentary expedition at ${futureLocation}`)
+
+    const neonForm = getVar('neon architectural form')
+    if (neonForm) return clamp(`Neon impossible architecture: ${neonForm}`)
+
+    const property = getVar('property type')
+    const impossible = getVar('impossible context', 'specific impossibility')
+    if (property && impossible) return clamp(`${property} in ${impossible}`)
+
+    const objectType = getVar('object type')
+    const stimulus = getVar('stimulus')
+    if (objectType && stimulus) return clamp(`${objectType} reacts to ${stimulus}`)
+    if (objectType) return clamp(objectType)
+
+    const familiar = getVar('familiar object')
+    const becomes = getVar('something else entirely')
+    if (familiar && becomes) return clamp(`${familiar} becomes ${becomes}`)
+    if (familiar) return clamp(`${familiar} transforms`)
+
+    const landscape = getVar('natural landscape element')
+    const substance = getVar('different substance')
+    if (landscape && substance) return clamp(`${landscape} as ${substance}`)
+
+    const abstractVisual = getVar('abstract visual type')
+    const decade = getVar('decade')
+    if (abstractVisual && decade) return clamp(`${abstractVisual} (${decade})`)
+    if (abstractVisual) return clamp(abstractVisual)
+
+    const character = getVar('character description', 'character type', 'person type', 'user type')
+    const action = getVar('action', 'activity', 'specific task')
+    if (character && action) return clamp(`${character} — ${action}`)
+    if (character) return clamp(character)
+
+    // Fallback: short summary from filled prompt (strip aspect ratio + any leading lens clause).
     const candidate = String(filledImage || filledVideo || '')
       .replace(/\s*,\s*(16:9|9:16|1:1|4:5)\s*$/i, '')
       .trim()
+
     const first = candidate.split('—')[0]?.trim() || candidate
-    const cleaned = first.replace(/^(an|a)\s+/i, '').trim()
-    const max = 72
-    if (cleaned.length <= max) return cleaned
-    return cleaned.slice(0, max - 1).trimEnd() + '…'
-  }, [filledImage, filledVideo])
+    const withoutLensLead = first
+      .replace(/^\s*\d{1,3}mm\s+lens\s+framing\s*[-—]\s*/i, '')
+      .replace(/^\s*lens\s+framing\s*[-—]\s*/i, '')
+      .replace(/^\s*(an|a)\s+/i, '')
+      .trim()
+
+    return clamp(withoutLensLead || first || prompt.category)
+  }, [filledImage, filledVideo, prompt.category, valueByNormKey])
 
   const copyText = async (key, raw) => {
     try {
