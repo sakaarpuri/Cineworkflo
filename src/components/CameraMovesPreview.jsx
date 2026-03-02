@@ -1,4 +1,5 @@
 import { ArrowRight, Move3d } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const PREVIEW_MOVES = [
   {
@@ -137,9 +138,9 @@ export default function CameraMovesPreview() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {PREVIEW_MOVES.map((move) => (
-            <a 
+            <Link
               key={move.name}
-              href="/camera-moves"
+              to="/camera-moves"
               className="move-card group block"
               style={{ 
                 background: '#fff', 
@@ -278,13 +279,13 @@ export default function CameraMovesPreview() {
                   ))}
                 </div>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div className="text-center">
-          <a 
-            href="/camera-moves"
+          <Link
+            to="/camera-moves"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
             style={{ 
               background: 'linear-gradient(145deg, #8B5CF6, #8B5CF6DD)', 
@@ -308,7 +309,7 @@ export default function CameraMovesPreview() {
           >
             See all camera moves
             <ArrowRight className="h-5 w-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

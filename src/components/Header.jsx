@@ -89,13 +89,13 @@ export default function Header({ onAuthClick }) {
             >
               Shot to Prompt
             </Link>
-            <a
-              href="/camera-moves"
+            <Link
+              to="/camera-moves"
               className="font-medium transition-colors hover:opacity-80"
               style={{ color: 'var(--text-secondary)' }}
             >
               Camera Moves
-            </a>
+            </Link>
             <Link
               to="/pricing"
               className="font-medium transition-colors hover:opacity-80"
@@ -271,14 +271,14 @@ export default function Header({ onAuthClick }) {
               >
                 Shot to Prompt
               </Link>
-              <a
-                href="/camera-moves"
+              <Link
+                to="/camera-moves"
                 onClick={() => setIsOpen(false)}
                 className="font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 Camera Moves
-              </a>
+              </Link>
               <Link
                 to="/pricing"
                 onClick={() => setIsOpen(false)}

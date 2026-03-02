@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Move3d } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './CameraMoveCard.css';
 import {
   DollyMove,
@@ -164,8 +165,8 @@ export default function CameraMoveCards() {
         </div>
         
         <div className="text-center">
-          <a 
-            href="/camera-moves" 
+          <Link
+            to="/camera-moves"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
             style={{ 
               background: 'linear-gradient(145deg, #8B5CF6, #8B5CF6DD)', 
@@ -189,7 +190,7 @@ export default function CameraMoveCards() {
           >
             See all camera moves
             <ArrowRight className="h-5 w-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
