@@ -590,6 +590,51 @@ export default function VaultPage() {
         fontFamily: UI_STACK,
       }}
     >
+      <style>{`
+        .cwf-neu-pill {
+          -webkit-tap-highlight-color: transparent;
+          user-select: none;
+          border-radius: 999px;
+          padding: 9px 12px;
+          font-weight: 900;
+          font-size: 12px;
+          cursor: pointer;
+          border: 1px solid rgba(255,255,255,0.10);
+          color: rgba(231,231,234,0.78);
+          background: linear-gradient(145deg, #1B1B1E, #141416);
+          box-shadow:
+            10px 10px 18px rgba(0,0,0,0.55),
+            -10px -10px 18px rgba(255,255,255,0.03),
+            inset 1px 1px 0 rgba(255,255,255,0.06);
+          transform: translateY(0) scale(1);
+          transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease, border-color 140ms ease, color 140ms ease;
+        }
+
+        .cwf-neu-pill:active {
+          transform: translateY(1px) scale(0.99);
+          box-shadow:
+            inset 10px 10px 18px rgba(0,0,0,0.55),
+            inset -10px -10px 18px rgba(255,255,255,0.04);
+        }
+
+        .cwf-neu-pill--active {
+          color: var(--pill-fg, rgba(255,255,255,0.92));
+          border-color: rgba(255,255,255,0.14);
+          background: linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+          box-shadow:
+            10px 10px 18px rgba(0,0,0,0.55),
+            -10px -10px 18px rgba(255,255,255,0.03),
+            inset 1px 1px 0 rgba(255,255,255,0.06),
+            0 0 0 1px var(--pill-bg, rgba(255,255,255,0.06));
+        }
+
+        .cwf-neu-pill--active:active {
+          box-shadow:
+            inset 10px 10px 18px rgba(0,0,0,0.55),
+            inset -10px -10px 18px rgba(255,255,255,0.04),
+            0 0 0 1px var(--pill-bg, rgba(255,255,255,0.06));
+        }
+      `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, marginBottom: 18 }}>
           <div>
@@ -663,22 +708,16 @@ export default function VaultPage() {
           >
             {categories.map((c) => {
               const active = category === c
-              const cc = c === 'All' ? { fg: 'rgba(255,255,255,0.88)', bg: 'rgba(255,255,255,0.10)' } : CATEGORY_COLORS[c]
+              const cc = c === 'All'
+                ? { fg: 'rgba(255,255,255,0.90)', bg: 'rgba(255,255,255,0.10)' }
+                : (CATEGORY_COLORS[c] || { fg: 'rgba(255,255,255,0.90)', bg: 'rgba(255,255,255,0.10)' })
               return (
                 <button
                   key={c}
                   type="button"
                   onClick={() => setCategory(c)}
-                  style={{
-                    padding: '8px 12px',
-                    borderRadius: 999,
-                    cursor: 'pointer',
-                    fontWeight: 900,
-                    fontSize: 12,
-                    border: active ? `1px solid ${cc.bg}` : `1px solid ${BORDER}`,
-                    background: active ? cc.bg : 'transparent',
-                    color: active ? cc.fg : 'rgba(231,231,234,0.72)',
-                  }}
+                  className={`cwf-neu-pill${active ? ' cwf-neu-pill--active' : ''}`}
+                  style={active ? { '--pill-fg': cc.fg, '--pill-bg': cc.bg } : undefined}
                 >
                   {c}
                 </button>
@@ -704,16 +743,7 @@ export default function VaultPage() {
                   key={s}
                   type="button"
                   onClick={() => setStyle(s)}
-                  style={{
-                    padding: '7px 12px',
-                    borderRadius: 999,
-                    cursor: 'pointer',
-                    fontWeight: 800,
-                    fontSize: 12,
-                    border: active ? '1px solid rgba(255,255,255,0.18)' : `1px solid ${BORDER}`,
-                    background: active ? 'rgba(255,255,255,0.10)' : 'transparent',
-                    color: active ? 'rgba(255,255,255,0.88)' : 'rgba(231,231,234,0.65)',
-                  }}
+                  className={`cwf-neu-pill${active ? ' cwf-neu-pill--active' : ''}`}
                 >
                   {s}
                 </button>
