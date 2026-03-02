@@ -12,7 +12,7 @@ const normalizeText = (value) => String(value || '').trim();
 const looksLikeOffTaskRequest = (idea) => {
   const text = String(idea || '');
   const offTask = /\b(essay|homework|assignment|resume|cover letter|linkedin|blog post|tweet|thread|email|letter|poem|code|javascript|typescript|python|sql|excel|business plan|press release)\b/i;
-  const onTask = /\b(prompt|video|film|cinematic|shot|camera|scene|runway|pika|kling|luma|sora|meta|veo|higgsfield)\b/i;
+  const onTask = /\b(prompt|video|film|cinematic|shot|camera|scene|image|still|photo|photograph|frame|keyframe|storyboard|runway|pika|kling|luma|sora|meta|veo|higgsfield)\b/i;
   return offTask.test(text) && !onTask.test(text);
 };
 
@@ -240,7 +240,7 @@ exports.handler = async (event) => {
         statusCode: 400,
         headers,
         body: JSON.stringify({
-          error: 'Prompt Enhancer is for AI video prompt generation only. Describe a shot/scene you want to generate.'
+          error: 'Prompt Enhancer is for generating AI video/image prompts only. Describe a shot, scene, or image you want to generate.'
         })
       };
     }
