@@ -152,7 +152,7 @@ export default function PromptVault({ preview = false }) {
           {!preview && (
             <div className="mt-4">
               <Link
-                to="/vault"
+                to="/prompts"
                 className="inline-flex items-center justify-center px-4 py-2 rounded-xl font-semibold text-sm transition-all"
                 style={{
                   background: 'linear-gradient(145deg, rgba(79,142,247,0.18), rgba(164,126,245,0.18))',
@@ -160,7 +160,7 @@ export default function PromptVault({ preview = false }) {
                   color: 'var(--text-primary)'
                 }}
               >
-                Try Prompt Vault v2 (beta)
+                Try Prompt Vault v2
               </Link>
             </div>
           )}

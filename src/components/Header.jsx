@@ -13,7 +13,7 @@ export default function Header({ onAuthClick }) {
     return localStorage.getItem('theme') || 'light'
   })
   const location = useLocation()
-  const isVaultPage = location?.pathname?.startsWith('/vault')
+  const isVaultPage = location?.pathname === '/prompts'
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)

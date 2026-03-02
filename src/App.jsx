@@ -43,16 +43,16 @@ const SEO_BY_PATH = {
     noindex: false
   },
   '/prompts': {
-    title: 'Prompt Vault - AI Video Prompts for Filmmakers | CineWorkflo',
-    description: 'Browse curated AI video prompts by style, mood, and shot type. Built for creators using Runway, Pika, Sora, Meta, and other video tools.',
-    keywords: 'prompt vault, AI prompts for video, Runway prompt library, Pika prompt library, Sora prompt library, Meta prompt library, cinematic AI prompts',
+    title: 'Prompt Vault - Pro AI Video Prompts (Image + Video + SFX) | CineWorkflo',
+    description: 'Browse pro prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls. Built for filmmakers using Runway, Kling, Luma, Sora, Higgsfield, and more.',
+    keywords: 'prompt vault, AI video prompts, image prompt, video prompt, sfx prompt, variable prompts, Runway prompts, Kling prompts, Luma prompts, Sora prompts, Higgsfield prompts',
     path: '/prompts',
     noindex: false
   },
   '/vault': {
-    title: 'Prompt Vault (v2) - Pro AI Video Prompts | CineWorkflo',
-    description: 'A pro prompt format with image/video/sfx blocks and variable controls. Preview the next Prompt Vault experience.',
-    keywords: 'prompt vault v2, pro AI prompts, image prompt, video prompt, sfx prompt, variable prompts',
+    title: 'Prompt Vault (v1) - Classic Prompt Cards | CineWorkflo',
+    description: 'The original Prompt Vault experience with classic prompt cards and quick copy.',
+    keywords: 'prompt vault v1, AI prompts for video, prompt cards, copy prompts',
     path: '/vault',
     noindex: true
   },
@@ -462,9 +462,9 @@ function App() {
                   </DeferredSection>
                 </>
               } />
-              <Route path="/prompts" element={<Suspense fallback={sectionFallback(300)}><PromptVault /></Suspense>} />
+              <Route path="/prompts" element={<Suspense fallback={sectionFallback(320)}><VaultPage /></Suspense>} />
               <Route path="/prompts/:categorySlug" element={<Suspense fallback={sectionFallback(320)}><PromptCategoryPage /></Suspense>} />
-              <Route path="/vault" element={<Suspense fallback={sectionFallback(320)}><VaultPage /></Suspense>} />
+              <Route path="/vault" element={<Suspense fallback={sectionFallback(300)}><PromptVault /></Suspense>} />
               <Route path="/shot-to-prompt" element={<Suspense fallback={sectionFallback(320)}><ShotToPrompt /></Suspense>} />
               <Route path="/camera-moves" element={<Suspense fallback={sectionFallback(320)}><CameraMovesPage /></Suspense>} />
               <Route path="/modern-moves" element={<Suspense fallback={sectionFallback(320)}><ModernAINativeMoves /></Suspense>} />

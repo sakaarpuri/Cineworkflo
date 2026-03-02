@@ -41,17 +41,17 @@ const ROUTES = [
   {
     path: '/prompts',
     file: join(DIST_DIR, 'prompts', 'index.html'),
-    title: 'Prompt Vault - AI Video Prompts for Filmmakers | CineWorkflo',
-    description: 'Browse curated AI video prompts by style, mood, and shot type. Built for creators using Runway, Pika, and other video tools.',
-    keywords: 'prompt vault, AI prompts for video, Runway prompt library, Pika prompt library, cinematic AI prompts',
+    title: 'Prompt Vault - Pro AI Video Prompts (Image + Video + SFX) | CineWorkflo',
+    description: 'Browse pro prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls. Built for filmmakers using Runway, Kling, Luma, Sora, Higgsfield, and more.',
+    keywords: 'prompt vault, AI video prompts, image prompt, video prompt, sfx prompt, variable prompts, Runway prompts, Kling prompts, Luma prompts, Sora prompts, Higgsfield prompts',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
         <h1>Prompt Vault</h1>
-        <p>Curated AI video prompts for filmmakers and creators.</p>
+        <p>Pro prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls.</p>
         <ul>
-          <li>Search prompts by style, use case, and tool</li>
-          <li>Copy ready-to-use prompt templates</li>
-          <li>Use with Runway, Pika, Kling, Luma, and related tools</li>
+          <li>Search across image/video/sfx prompts</li>
+          <li>Copy each block independently</li>
+          <li>Use variable controls to adapt prompts fast</li>
         </ul>
       </main>
     `
@@ -59,17 +59,16 @@ const ROUTES = [
   {
     path: '/vault',
     file: join(DIST_DIR, 'vault', 'index.html'),
-    title: 'Prompt Vault (v2) - Pro AI Video Prompts | CineWorkflo',
-    description: 'A pro prompt format with image/video/sfx blocks and variable controls. Preview the next Prompt Vault experience.',
-    keywords: 'prompt vault v2, pro AI prompts, image prompt, video prompt, sfx prompt, variable prompts',
+    title: 'Prompt Vault (v1) - Classic Prompt Cards | CineWorkflo',
+    description: 'The original Prompt Vault experience with classic prompt cards and quick copy.',
+    keywords: 'prompt vault v1, AI prompts for video, prompt cards, copy prompts',
     fallbackHtml: `
       <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-        <h1>Prompt Vault (v2)</h1>
-        <p>A pro prompt format with image/video/sfx blocks and variable controls.</p>
+        <h1>Prompt Vault (v1)</h1>
+        <p>The original Prompt Vault experience with classic prompt cards and quick copy.</p>
         <ul>
-          <li>Image Prompt + Video Prompt + SFX blocks</li>
-          <li>Variables panel with fast variants</li>
-          <li>Tool notes per prompt</li>
+          <li>Browse prompts by category</li>
+          <li>Search and copy quickly</li>
         </ul>
       </main>
     `
