@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
 
 const MOODS = ["Epic", "Dramatic", "Thought-Provoking", "Whimsical", "Serene", "Mysterious", "Energetic", "Eerie", "Calm", "Surreal", "Hopeful", "Melancholic", "Tense", "Playful", "Dreamlike"];
 const MOOD_COLORS = {
@@ -329,6 +330,9 @@ export default function PromptEnhancer({ onAuthClick }) {
   const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner", includeAudioSfx: false, includeImageDetails: false });
   const levelPulseTimeoutRef = useRef(null);
   const [levelPulse, setLevelPulse] = useState('');
+  const [saveStatus, setSaveStatus] = useState('idle');
+  const [saveError, setSaveError] = useState('');
+  const requestIdRef = useRef(0);
   
   const { user, session, isPro } = useAuth();
 
@@ -351,12 +355,8 @@ export default function PromptEnhancer({ onAuthClick }) {
 
   const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
     if (!canSubmit && !interpretationStyle) return;
+    const requestId = ++requestIdRef.current;
     setLoading(true);
-    // Keep current result visible when generating interpretation variants.
-    if (!isAutoUpdate && !interpretationStyle) {
-      setBaseResult(null);
-      setResult(null);
-    }
     setCopied(false);
 
     // Track usage only for manual generations (not auto-update refreshes)
@@ -392,18 +392,29 @@ export default function PromptEnhancer({ onAuthClick }) {
       const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
       const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
       const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
+      if (requestId !== requestIdRef.current) return;
       setBaseResult(nextBaseResult);
       setResult(applySelectedProDetails(nextBaseResult, addedDetails));
       setHasGeneratedOnce(true);
+      setSaveStatus('idle');
+      setSaveError('');
+      lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
       // Fallback with smart prompt generator
       const fallbackPrompt = generateSmartPrompt(idea, mood, useCase, skillLevel);
       const withAudio = applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel);
       const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
+      if (requestId !== requestIdRef.current) return;
       setBaseResult(nextBaseResult);
       setResult(applySelectedProDetails(nextBaseResult, addedDetails));
+      setHasGeneratedOnce(true);
+      setSaveStatus('idle');
+      setSaveError('');
+      lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     }
-    setLoading(false);
+    if (requestId === requestIdRef.current) {
+      setLoading(false);
+    }
   }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick]);
 
   const generateInterpretation = (style) => {
@@ -444,7 +455,6 @@ export default function PromptEnhancer({ onAuthClick }) {
       
       const timeoutId = setTimeout(() => {
         handleEnhance(true); // Pass true for auto-update (keeps result visible)
-        lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
       }, 500);
       return () => clearTimeout(timeoutId);
     }
@@ -467,6 +477,36 @@ export default function PromptEnhancer({ onAuthClick }) {
     navigator.clipboard.writeText(result);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSavePrompt = async () => {
+    if (!user || !result) return;
+    setSaveStatus('saving');
+    setSaveError('');
+    const payload = {
+      user_id: user.id,
+      idea: idea.trim(),
+      prompt: result.trim(),
+      mood: mood || null,
+      use_case: useCase || null,
+      skill_level: skillLevel,
+      include_audio_sfx: includeAudioSfx,
+      include_image_details: includeImageDetails,
+      metadata: {
+        added_details: addedDetails
+      }
+    };
+    const { error } = await supabase.from('saved_prompts').insert(payload);
+    if (!error) {
+      setSaveStatus('saved');
+      return;
+    }
+    if (error.code === '23505') {
+      setSaveStatus('exists');
+      return;
+    }
+    setSaveStatus('error');
+    setSaveError(error.message || 'Unable to save prompt right now.');
   };
 
   const Chip = ({ label, selected, onClick, color }) => (
@@ -639,7 +679,8 @@ export default function PromptEnhancer({ onAuthClick }) {
             {/* Skill Level Toggle */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
               <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Level</span>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2">
                 <span
                   className="text-xs font-semibold transition-all"
                   style={{
@@ -693,57 +734,51 @@ export default function PromptEnhancer({ onAuthClick }) {
                 >
                   Pro
                 </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className="text-xs font-semibold transition-all"
+                    style={{ color: includeImageDetails ? 'var(--text-muted)' : '#6B7280' }}
+                  >
+                    Images Off
+                  </span>
+                  <button
+                    type="button"
+                    role="switch"
+                    aria-checked={includeImageDetails}
+                    aria-label="Toggle image details"
+                    onClick={() => setIncludeImageDetails((prev) => !prev)}
+                    className="relative w-[62px] h-[32px] rounded-full transition-all duration-250"
+                    style={{
+                      background: includeImageDetails
+                        ? 'linear-gradient(145deg, #22C55E, #16A34A)'
+                        : 'linear-gradient(145deg, #D1D5DB, #9CA3AF)',
+                      border: `2px solid ${includeImageDetails ? '#22C55E50' : '#9CA3AF55'}`,
+                      boxShadow: includeImageDetails
+                        ? 'inset 3px 3px 6px rgba(22,163,74,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(34,197,94,0.35)'
+                        : 'inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2)'
+                    }}
+                  >
+                    <span
+                      className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-all duration-250"
+                      style={{
+                        left: includeImageDetails ? '35px' : '4px',
+                        background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
+                        boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                      }}
+                    />
+                  </button>
+                  <span
+                    className="text-xs font-semibold transition-all"
+                    style={{ color: includeImageDetails ? '#16A34A' : 'var(--text-muted)' }}
+                  >
+                    On
+                  </span>
+                </div>
               </div>
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
                 {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
-              </span>
-            </div>
-
-            {/* Images Toggle */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
-              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Images</span>
-              <div className="flex items-center gap-2">
-                <span
-                  className="text-xs font-semibold transition-all"
-                  style={{ color: includeImageDetails ? 'var(--text-muted)' : '#6B7280' }}
-                >
-                  Off
-                </span>
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={includeImageDetails}
-                  aria-label="Toggle image details"
-                  onClick={() => setIncludeImageDetails((prev) => !prev)}
-                  className="relative w-[62px] h-[32px] rounded-full transition-all duration-250"
-                  style={{
-                    background: includeImageDetails
-                      ? 'linear-gradient(145deg, #22C55E, #16A34A)'
-                      : 'linear-gradient(145deg, #D1D5DB, #9CA3AF)',
-                    border: `2px solid ${includeImageDetails ? '#22C55E50' : '#9CA3AF55'}`,
-                    boxShadow: includeImageDetails
-                      ? 'inset 3px 3px 6px rgba(22,163,74,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(34,197,94,0.35)'
-                      : 'inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2)'
-                  }}
-                >
-                  <span
-                    className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-all duration-250"
-                    style={{
-                      left: includeImageDetails ? '35px' : '4px',
-                      background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
-                      boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
-                    }}
-                  />
-                </button>
-                <span
-                  className="text-xs font-semibold transition-all"
-                  style={{ color: includeImageDetails ? '#16A34A' : 'var(--text-muted)' }}
-                >
-                  On
-                </span>
-              </div>
-              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                {includeImageDetails ? 'Include still-image composition cues' : 'Video-focused output only'}
+                {includeImageDetails ? ' + still-image cues' : ''}
               </span>
             </div>
 
@@ -841,7 +876,7 @@ export default function PromptEnhancer({ onAuthClick }) {
               border: '1px solid var(--accent-green)40'
             }}
           >
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-3 gap-3">
               <div 
                 className="text-xs font-bold flex items-center gap-1.5"
                 style={{ color: 'var(--accent-green)' }}
@@ -849,24 +884,45 @@ export default function PromptEnhancer({ onAuthClick }) {
                 <Check className="h-4 w-4" />
                 YOUR PROMPT
               </div>
-              <button
-                onClick={handleCopy}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                style={{
-                  background: copied 
-                    ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
-                    : 'var(--bg-card)',
-                  color: copied ? '#fff' : 'var(--text-secondary)',
-                  border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                  boxShadow: copied 
-                    ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                    : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
-                  transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
-                }}
-              >
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                {copied ? 'Copied!' : 'Copy Prompt'}
-              </button>
+              <div className="flex items-center gap-2 flex-wrap justify-end">
+                {user && (
+                  <button
+                    onClick={handleSavePrompt}
+                    disabled={saveStatus === 'saving'}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                    style={{
+                      background: saveStatus === 'saved'
+                        ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)'
+                        : 'var(--bg-card)',
+                      color: saveStatus === 'saved' ? '#fff' : 'var(--text-secondary)',
+                      border: `2px solid ${saveStatus === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                      boxShadow: saveStatus === 'saved'
+                        ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+                        : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)'
+                    }}
+                  >
+                    {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved' : saveStatus === 'exists' ? 'Already Saved' : 'Save Prompt'}
+                  </button>
+                )}
+                <button
+                  onClick={handleCopy}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                  style={{
+                    background: copied 
+                      ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
+                      : 'var(--bg-card)',
+                    color: copied ? '#fff' : 'var(--text-secondary)',
+                    border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                    boxShadow: copied 
+                      ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                    transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+                  }}
+                >
+                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                  {copied ? 'Copied!' : 'Copy Prompt'}
+                </button>
+              </div>
             </div>
             <div
               className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
@@ -890,6 +946,11 @@ export default function PromptEnhancer({ onAuthClick }) {
             <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
               Click text to select all, or use the Copy button
             </p>
+            {saveStatus === 'error' && (
+              <p className="mt-1 text-xs" style={{ color: 'var(--accent-red)' }}>
+                {saveError}
+              </p>
+            )}
             
             {/* Beginner: Add Pro Details - 3D Neumorphic with Amber accent */}
             {skillLevel === 'beginner' && (

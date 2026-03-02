@@ -20,6 +20,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
+const MyLibraryPage = lazy(() => import('./pages/MyLibraryPage'))
 const Features = lazy(() => import('./components/Features'))
 const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
@@ -108,6 +109,13 @@ const SEO_BY_PATH = {
     description: 'Purchase confirmation page for CineWorkflo.',
     keywords: 'purchase success, confirmation',
     path: '/success',
+    noindex: true
+  },
+  '/my-library': {
+    title: 'My Library | CineWorkflo',
+    description: 'Saved prompts for your CineWorkflo account.',
+    keywords: 'saved prompts, my library, cineworkflo',
+    path: '/my-library',
     noindex: true
   }
 }
@@ -456,6 +464,7 @@ function App() {
               <Route path="/contact" element={<Suspense fallback={sectionFallback(220)}><ContactPage /></Suspense>} />
               <Route path="/privacy" element={<Suspense fallback={sectionFallback(220)}><PrivacyPage /></Suspense>} />
               <Route path="/terms" element={<Suspense fallback={sectionFallback(220)}><TermsPage /></Suspense>} />
+              <Route path="/my-library" element={<Suspense fallback={sectionFallback(220)}><MyLibraryPage /></Suspense>} />
               <Route path="/success" element={<Success />} />
             </Routes>
           </main>

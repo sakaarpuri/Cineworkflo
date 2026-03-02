@@ -50,6 +50,15 @@ export default function Header({ onAuthClick }) {
             >
               Prompt Vault
             </Link>
+            {user && (
+              <Link
+                to="/my-library"
+                className="font-medium transition-colors hover:opacity-80"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                My Library
+              </Link>
+            )}
             <Link 
               to="/shot-to-prompt" 
               className="font-medium transition-colors hover:opacity-80"
@@ -221,6 +230,16 @@ export default function Header({ onAuthClick }) {
               >
                 Prompt Vault
               </Link>
+              {user && (
+                <Link
+                  to="/my-library"
+                  onClick={() => setIsOpen(false)}
+                  className="font-medium"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  My Library
+                </Link>
+              )}
               <Link 
                 to="/shot-to-prompt" 
                 onClick={() => setIsOpen(false)}
