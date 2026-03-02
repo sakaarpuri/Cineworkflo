@@ -661,7 +661,17 @@ export default function VaultPage() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 10,
+              background: PANEL,
+              border: `1px solid ${BORDER}`,
+              borderRadius: 16,
+              padding: 10,
+            }}
+          >
             {categories.map((c) => {
               const active = category === c
               const cc = c === 'All' ? { fg: 'rgba(255,255,255,0.88)', bg: 'rgba(255,255,255,0.10)' } : CATEGORY_COLORS[c]
