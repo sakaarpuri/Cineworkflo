@@ -44,12 +44,15 @@ export default function Pricing({ onAuthClick }) {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
   const [confirmPlan, setConfirmPlan] = useState(null) // 'monthly' | null
+  const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutCanceled, setCheckoutCanceled] = useState(false)
   const [checkoutCanceledPlan, setCheckoutCanceledPlan] = useState(null)
   const [ctaVariant, setCtaVariant] = useState('a')
   const navigate = useNavigate()
 
-  const closeConfirm = () => setConfirmPlan(null)
+  const closeConfirm = () => {
+    if (!loading) setConfirmPlan(null)
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -94,11 +97,12 @@ export default function Pricing({ onAuthClick }) {
     }
 
     // Add a quick, explicit confirm step so users can back out without leaving the site.
+    setCheckoutError(null)
     setConfirmPlan(planType)
   }
 
   const startCheckout = async (planType) => {
-    setConfirmPlan(null)
+    setCheckoutError(null)
     setLoading(true)
     try {
       const response = await fetch('/.netlify/functions/create-checkout', {
@@ -112,13 +116,26 @@ export default function Pricing({ onAuthClick }) {
         })
       })
 
-      const data = await response.json()
-      if (data.url) {
-        window.location.href = data.url
+      const text = await response.text()
+      let data = {}
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        data = {}
       }
+
+      if (!response.ok) {
+        throw new Error(data?.error || `Failed to start checkout (HTTP ${response.status}).`)
+      }
+
+      if (!data?.url) {
+        throw new Error('Stripe Checkout did not return a redirect URL. Please try again.')
+      }
+
+      window.location.assign(data.url)
     } catch (err) {
       console.error('Checkout error:', err)
-      alert('Failed to start checkout. Please try again.')
+      setCheckoutError(err?.message || 'Failed to start checkout. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -302,6 +319,18 @@ export default function Pricing({ onAuthClick }) {
             <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>
               You are about to leave CineWorkflo and open Stripe Checkout. You can cancel on Stripe and come back here.
             </p>
+            {checkoutError && (
+              <div
+                className="rounded-xl p-3 mb-4 text-sm"
+                style={{
+                  background: 'rgba(239, 68, 68, 0.08)',
+                  border: '1px solid rgba(239, 68, 68, 0.25)',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                {checkoutError}
+              </div>
+            )}
             <div className="flex gap-3">
               <button
                 onClick={closeConfirm}
@@ -309,8 +338,10 @@ export default function Pricing({ onAuthClick }) {
                 style={{
                   background: 'var(--bg-primary)',
                   border: '1px solid var(--border-color)',
-                  color: 'var(--text-secondary)'
+                  color: 'var(--text-secondary)',
+                  opacity: loading ? 0.6 : 1
                 }}
+                disabled={loading}
               >
                 Stay here
               </button>
