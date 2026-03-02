@@ -149,4 +149,16 @@
   [data-theme="dark"] .neu-card:hover {
     box-shadow: 6px 6px 12px rgba(0,0,0,0.6), -6px -6px 12px rgba(255,255,255,0.05);
   }
+
+  /* Homepage dark mode: reduce bright glow on inline-styled button shadows. */
+  [data-theme="dark"] .home-route button,
+  [data-theme="dark"] .home-route a[class*="rounded"] {
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.42), -4px -4px 8px rgba(255,255,255,0.02), inset 0 1px 0 rgba(255,255,255,0.03) !important;
+    filter: none !important;
+  }
+
+  [data-theme="dark"] .home-route button:active,
+  [data-theme="dark"] .home-route a[class*="rounded"]:active {
+    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.50), inset -3px -3px 6px rgba(255,255,255,0.02) !important;
+  }
 }

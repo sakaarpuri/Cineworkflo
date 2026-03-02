@@ -428,7 +428,7 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={
-                <>
+                <div className="home-route">
                   <HeroGallery />
                   <DeferredSection minHeight={260}>
                     <Suspense fallback={sectionFallback(260)}>
@@ -460,7 +460,7 @@ function App() {
                       <Pricing onAuthClick={() => setAuthModalOpen(true)} />
                     </Suspense>
                   </DeferredSection>
-                </>
+                </div>
               } />
               <Route path="/prompts" element={<Suspense fallback={sectionFallback(320)}><VaultPage /></Suspense>} />
               <Route path="/prompts/:categorySlug" element={<Suspense fallback={sectionFallback(320)}><PromptCategoryPage /></Suspense>} />
