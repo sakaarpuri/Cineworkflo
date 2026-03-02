@@ -35,19 +35,31 @@ const UI_STACK =
 
 const normalize = (value) => String(value || '').trim().toLowerCase()
 
-const highlightBracketed = (text) => {
-  const raw = String(text || '')
-  const parts = []
+const fillTemplateText = (template, valueByNormKey) => {
+  const raw = String(template || '')
+  return raw.replace(/\[([^\]]+)\]/g, (_m, inner) => {
+    const key = normalize(inner)
+    const value = valueByNormKey?.[key]
+    return value ? String(value) : `[${inner}]`
+  })
+}
+
+const renderTemplateNodes = (template, valueByNormKey) => {
+  const raw = String(template || '')
+  const nodes = []
   let last = 0
   const re = /\[([^\]]+)\]/g
   let m
   while ((m = re.exec(raw))) {
-    if (m.index > last) parts.push({ t: raw.slice(last, m.index), v: false })
-    parts.push({ t: m[0], v: true })
+    if (m.index > last) nodes.push({ type: 'text', value: raw.slice(last, m.index) })
+    const inner = m[1]
+    const key = normalize(inner)
+    const resolved = valueByNormKey?.[key]
+    nodes.push({ type: 'var', value: resolved ? String(resolved) : `[${inner}]`, missing: !resolved })
     last = m.index + m[0].length
   }
-  if (last < raw.length) parts.push({ t: raw.slice(last), v: false })
-  return parts
+  if (last < raw.length) nodes.push({ type: 'text', value: raw.slice(last) })
+  return nodes
 }
 
 const TOOL_NAMES = new Set(['Runway', 'Kling', 'Luma', 'Pika', 'Sora', 'Higgsfield', 'Google Veo', 'HeyGen'])
@@ -97,7 +109,7 @@ function CopyButton({ onCopy, copied }) {
   )
 }
 
-function PromptBlock({ label, color, text, onCopy, copied, highlight = true }) {
+function PromptBlock({ label, color, nodes, text, onCopy, copied, highlight = true }) {
   return (
     <section
       style={{
@@ -135,8 +147,8 @@ function PromptBlock({ label, color, text, onCopy, copied, highlight = true }) {
         }}
       >
         {highlight
-          ? highlightBracketed(text).map((p, idx) =>
-              p.v ? (
+          ? nodes.map((p, idx) =>
+              p.type === 'var' ? (
                 <span
                   key={idx}
                   style={{
@@ -146,10 +158,10 @@ function PromptBlock({ label, color, text, onCopy, copied, highlight = true }) {
                     borderRadius: 4,
                   }}
                 >
-                  {p.t}
+                  {p.value}
                 </span>
               ) : (
-                <span key={idx}>{p.t}</span>
+                <span key={idx}>{p.value}</span>
               )
             )
           : String(text || '')}
@@ -240,7 +252,20 @@ function PromptCard({ prompt, globalView }) {
 
   const proMode = globalView === 'pro' || expanded
 
-  const copyRaw = async (key, raw) => {
+  const valueByNormKey = useMemo(() => {
+    const next = {}
+    for (const [k, v] of Object.entries(varValues || {})) next[normalize(k)] = v
+    return next
+  }, [varValues])
+
+  const filledImage = useMemo(() => fillTemplateText(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
+  const filledVideo = useMemo(() => fillTemplateText(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
+  const filledSfx = useMemo(() => fillTemplateText(prompt.sfx_prompt, valueByNormKey), [prompt.sfx_prompt, valueByNormKey])
+
+  const imageNodes = useMemo(() => renderTemplateNodes(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
+  const videoNodes = useMemo(() => renderTemplateNodes(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
+
+  const copyText = async (key, raw) => {
     try {
       await navigator.clipboard.writeText(String(raw || ''))
       setCopiedKey(key)
@@ -376,6 +401,31 @@ function PromptCard({ prompt, globalView }) {
       )}
 
       {proMode && (
+        <>
+          {globalView !== 'pro' && (
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 10 }}>
+              <button
+                type="button"
+                onClick={() => setExpanded(false)}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.14)',
+                  color: 'rgba(231,231,234,0.82)',
+                  borderRadius: 12,
+                  padding: '8px 10px',
+                  fontWeight: 900,
+                  fontSize: 12,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              >
+                Back to beginner <ChevronUp size={16} />
+              </button>
+            </div>
+          )}
+
         <div
           style={{
             display: 'grid',
@@ -388,25 +438,28 @@ function PromptCard({ prompt, globalView }) {
             <PromptBlock
               label="🖼️ IMAGE PROMPT"
               color={COLOR.blue}
-              text={prompt.image_prompt}
+              nodes={imageNodes}
+              text={filledImage}
               copied={copiedKey === 'image'}
-              onCopy={() => copyRaw('image', prompt.image_prompt)}
+              onCopy={() => copyText('image', filledImage)}
               highlight={true}
             />
             <PromptBlock
               label="🎥 VIDEO PROMPT"
               color={COLOR.purple}
-              text={prompt.video_prompt}
+              nodes={videoNodes}
+              text={filledVideo}
               copied={copiedKey === 'video'}
-              onCopy={() => copyRaw('video', prompt.video_prompt)}
+              onCopy={() => copyText('video', filledVideo)}
               highlight={true}
             />
             <PromptBlock
               label="🔊 SFX"
               color={COLOR.red}
-              text={prompt.sfx_prompt}
+              nodes={[]}
+              text={filledSfx}
               copied={copiedKey === 'sfx'}
-              onCopy={() => copyRaw('sfx', prompt.sfx_prompt)}
+              onCopy={() => copyText('sfx', filledSfx)}
               highlight={false}
             />
           </div>
@@ -450,30 +503,9 @@ function PromptCard({ prompt, globalView }) {
               <ToolNotes text={prompt.tool_notes} />
             </div>
 
-            {globalView !== 'pro' && (
-              <button
-                type="button"
-                onClick={() => setExpanded(false)}
-                style={{
-                  background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.14)',
-                  color: 'rgba(231,231,234,0.82)',
-                  borderRadius: 12,
-                  padding: '10px 12px',
-                  fontWeight: 800,
-                  fontSize: 12,
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 6,
-                }}
-              >
-                Hide pro controls <ChevronUp size={16} />
-              </button>
-            )}
           </div>
         </div>
+        </>
       )}
 
       {!proMode && (
@@ -481,9 +513,10 @@ function PromptCard({ prompt, globalView }) {
           <PromptBlock
             label="🎥 VIDEO PROMPT"
             color={COLOR.purple}
-            text={prompt.video_prompt}
+            nodes={videoNodes}
+            text={filledVideo}
             copied={copiedKey === 'video'}
-            onCopy={() => copyRaw('video', prompt.video_prompt)}
+            onCopy={() => copyText('video', filledVideo)}
             highlight={true}
           />
         </div>
