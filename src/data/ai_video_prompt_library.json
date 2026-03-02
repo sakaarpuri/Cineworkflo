@@ -9796,5 +9796,3504 @@
     },
     "tool_notes": "Sora handles impossible building placement in surreal environments. Luma maintains building detail through the orbit. Add 'surrealist domestic architecture impossible location' for best results.",
     "source_id": 100
+  },
+  {
+    "id": 151,
+    "category": "Brand & Product Ads",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [product type] placed on [natural surface] in an outdoor [natural setting], [lens] at ground level — the product sitting in direct contact with the environment, [natural element] in the immediate foreground slightly out of focus, [time of day] light falling across both the product and its surroundings equally, no studio — entirely location-shot, photorealistic, 16:9",
+    "video_prompt": "A gentle [natural movement] passes through the frame — [natural element] in the foreground shifting, the [natural setting] breathing behind the product, the product itself completely still and sovereign within the living environment, the camera locked without movement, the world moving around the product rather than the product being presented to the world.",
+    "sfx_prompt": "The full ambient sound of the [natural setting] — [natural movement] sounds, birdsong or weather at the appropriate distance, wind moving through [natural element], the product existing within a real acoustic world rather than a studio silence",
+    "variables": {
+      "product type": {
+        "default": "glass water bottle",
+        "examples": [
+          "running shoe",
+          "sunscreen tube",
+          "outdoor watch"
+        ]
+      },
+      "natural surface": {
+        "default": "mossy rock",
+        "examples": [
+          "river stone",
+          "pine needle forest floor",
+          "sand"
+        ]
+      },
+      "natural setting": {
+        "default": "forest clearing",
+        "examples": [
+          "mountain stream",
+          "coastal dune",
+          "open meadow"
+        ]
+      },
+      "natural element": {
+        "default": "ferns",
+        "examples": [
+          "wildflowers",
+          "river grass",
+          "sea grass"
+        ]
+      },
+      "time of day": {
+        "default": "dappled morning light",
+        "examples": [
+          "golden hour side light",
+          "overcast diffused",
+          "dawn mist light"
+        ]
+      },
+      "natural movement": {
+        "default": "light breeze",
+        "examples": [
+          "passing cloud shadow",
+          "water ripple reflection",
+          "grass moving in wind"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles natural environment product placement. Runway maintains product sharpness against moving backgrounds. Add 'product in natural environment photorealistic location shoot' for correct aesthetic.",
+    "source_id": 101
+  },
+  {
+    "id": 152,
+    "category": "Brand & Product Ads",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [product type] in active use by [user type] in [real environment] — [lens] catching the product mid-use, [user type] not posed but genuinely engaged with the [activity], [light condition] the available light of the [real environment], the product visible but not the subject — the [activity] is the subject, photorealistic, 16:9",
+    "video_prompt": "The [activity] continues — [user type] moving naturally, the [product type] visible and functional throughout, the camera tracking the [activity] rather than the product, [real environment] passing in the background, the product earning its place in the frame by being genuinely useful rather than being displayed, one moment where [product detail] catches the light and holds it briefly before the activity moves on.",
+    "sfx_prompt": "The ambient sound of [real environment] during [activity] — the product's own sounds if any (a zip, a click, a pour), the [user type]'s movement sounds, the soundscape of a real place with real activity — no studio, no design, just location audio",
+    "variables": {
+      "product type": {
+        "default": "trail running pack",
+        "examples": [
+          "camera bag",
+          "travel coffee cup",
+          "cycling helmet"
+        ]
+      },
+      "user type": {
+        "default": "runner on a mountain trail",
+        "examples": [
+          "photographer in the field",
+          "commuter in a city",
+          "cyclist on a road"
+        ]
+      },
+      "real environment": {
+        "default": "mountain trail at dawn",
+        "examples": [
+          "urban street at rush hour",
+          "coffee shop in the morning",
+          "coastal road"
+        ]
+      },
+      "activity": {
+        "default": "trail running",
+        "examples": [
+          "documentary photography",
+          "morning commute",
+          "long-distance cycling"
+        ]
+      },
+      "light condition": {
+        "default": "early morning trail light",
+        "examples": [
+          "overcast urban",
+          "warm indoor ambient",
+          "bright outdoor midday"
+        ]
+      },
+      "product detail": {
+        "default": "the reflective strip on the pack",
+        "examples": [
+          "the lens of the camera",
+          "the steam from the cup lid",
+          "the helmet's ventilation"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles active use product shots in real environments. Kling maintains motion consistency through the activity. Specify 'product in use lifestyle photorealistic' for correct approach.",
+    "source_id": 102
+  },
+  {
+    "id": 153,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [product type] that is [impossible scale] — sitting in a [real environment] where everything else is normal size, [lens] wide enough to show both the product and sufficient [real environment] to make the scale contrast legible, [user or passerby] providing the human scale reference, [time of day] light treating the impossible scale as entirely unremarkable, cinematic still frame, 16:9",
+    "video_prompt": "A [user or passerby] approaches the [product type] and interacts with it at its [impossible scale] — the interaction completely natural, no surprise, no performance of shock, the camera executing a slow arc around the encounter as if documenting something ordinary, the [real environment] continuing its life around the impossible scale event with complete indifference.",
+    "sfx_prompt": "The normal sounds of the [real environment] — the [product type] at [impossible scale] producing sounds proportional to its size if relevant (a colossal pour, a thunderous click, a vast zipper), the [user or passerby] interaction sounds, the [real environment] indifferent beneath it all",
+    "variables": {
+      "product type": {
+        "default": "perfume bottle",
+        "examples": [
+          "coffee cup",
+          "sneaker",
+          "watch"
+        ]
+      },
+      "impossible scale": {
+        "default": "the size of a building",
+        "examples": [
+          "the size of a car",
+          "microscopic — barely visible",
+          "the size of a person"
+        ]
+      },
+      "real environment": {
+        "default": "a normal city street",
+        "examples": [
+          "a park",
+          "a living room",
+          "a beach"
+        ]
+      },
+      "user or passerby": {
+        "default": "a commuter walking past",
+        "examples": [
+          "a child looking up at it",
+          "someone attempting to use it normally",
+          "a crowd gathered to observe"
+        ]
+      },
+      "time of day": {
+        "default": "overcast midday",
+        "examples": [
+          "golden hour",
+          "blue hour",
+          "bright noon"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "50mm",
+          "14mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible scale in real environments. Runway maintains product detail at surreal scale. Add 'surrealist scale product placement' for correct aesthetic.",
+    "source_id": 103
+  },
+  {
+    "id": 154,
+    "category": "Brand & Product Ads",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [product type] that [impossible behaviour] — [lens] locked close enough to make the impossible behaviour the entire subject, the product otherwise entirely normal in appearance, [background] simple and undistracting, [light source] treating the impossible event as physically unremarkable, cinematic still frame, 16:9",
+    "video_prompt": "The [impossible behaviour] continues at its own unhurried pace — the product experiencing its impossibility without drama, the camera holding still as the event unfolds, [secondary effect] visible as a consequence of the [impossible behaviour], the shot ending before the impossible event resolves — no explanation, no conclusion, only the ongoing impossible fact of it.",
+    "sfx_prompt": "The sound of [impossible behaviour] rendered as if it were a normal physical event — a liquid sound, a growing sound, a dissolving sound — specific and grounded rather than abstract or sci-fi, the sound design making the impossible feel physically inevitable",
+    "variables": {
+      "product type": {
+        "default": "glass watch",
+        "examples": [
+          "ceramic mug",
+          "leather wallet",
+          "glass bottle"
+        ]
+      },
+      "impossible behaviour": {
+        "default": "slowly fills with light from within, the light overflowing at the edges",
+        "examples": [
+          "grows roots and begins to become a plant",
+          "very slowly levitates one centimetre above its surface",
+          "casts a shadow in the wrong direction"
+        ]
+      },
+      "background": {
+        "default": "dark matte surface",
+        "examples": [
+          "pure white",
+          "natural wood",
+          "concrete"
+        ]
+      },
+      "light source": {
+        "default": "single directional side light",
+        "examples": [
+          "overhead soft light",
+          "backlit",
+          "ambient only"
+        ]
+      },
+      "secondary effect": {
+        "default": "the surface beneath warming to the overflow light",
+        "examples": [
+          "small leaves appearing at the product's base",
+          "the surface below showing the shadow of where it was",
+          "surrounding objects bending toward it slightly"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible product behaviours. Luma maintains product detail through the surreal event. Add 'surrealist product commercial impossible behaviour' for correct approach.",
+    "source_id": 104
+  },
+  {
+    "id": 155,
+    "category": "Brand & Product Ads",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "The making of [product type] — a [craftsperson type] at [stage of production] in [workshop or facility], [lens] observing at mid-distance, [craftsperson type] absorbed in [specific task], [light condition] the available light of the [workshop or facility], the product in its unfinished state visible, documentary still frame, 16:9",
+    "video_prompt": "The camera observes the [specific task] without intervention — the [craftsperson type] working at their own rhythm, the [stage of production] advancing through the duration, the camera making one quiet reframe to follow the most active part of the [specific task], the [workshop or facility] alive with the evidence of everything that has been made here before.",
+    "sfx_prompt": "The working sounds of [specific task] at natural volume — the [workshop or facility] acoustic with its particular reverb and ambient machinery or tools, the [craftsperson type]'s focused movement sounds, no commentary, no score — just the sounds of making",
+    "variables": {
+      "product type": {
+        "default": "handmade ceramic mug",
+        "examples": [
+          "leather bag",
+          "wooden furniture",
+          "artisan chocolate"
+        ]
+      },
+      "craftsperson type": {
+        "default": "ceramicist",
+        "examples": [
+          "leatherworker",
+          "cabinet maker",
+          "chocolatier"
+        ]
+      },
+      "stage of production": {
+        "default": "throwing on the wheel",
+        "examples": [
+          "hand-stitching the seams",
+          "jointing and assembly",
+          "tempering and moulding"
+        ]
+      },
+      "workshop or facility": {
+        "default": "small independent pottery studio",
+        "examples": [
+          "leather workshop",
+          "traditional joinery",
+          "artisan chocolate kitchen"
+        ]
+      },
+      "specific task": {
+        "default": "shaping the rim with wet hands",
+        "examples": [
+          "punching and threading the stitching",
+          "cutting dovetail joints by hand",
+          "hand-painting the chocolate mould"
+        ]
+      },
+      "light condition": {
+        "default": "north-facing studio light through large windows",
+        "examples": [
+          "single work lamp over the bench",
+          "warm workshop ambient",
+          "mixed natural and task light"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles craft documentary observation. Luma maintains material detail through the making process. Specify 'product provenance documentary craft making' for correct approach.",
+    "source_id": 105
+  },
+  {
+    "id": 156,
+    "category": "Brand & Product Ads",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [person type] who uses [product type] every day — [lens] observing in their [real space], the [product type] present but not staged, the [person type] going about [daily routine] with [product type] a natural part of it, [light condition] the light of their real life, documentary portrait still frame, 16:9",
+    "video_prompt": "The camera observes as [daily routine] unfolds — the [product type] appearing and disappearing from frame as the [person type] uses it without thinking, the camera following the [person type] rather than the product, the [real space] telling the story of who uses this and why, one moment where the [product type] is the only thing in frame — brief, unposed, real.",
+    "sfx_prompt": "The ambient sound of [real space] during [daily routine] — the [product type] sounds in context (a zip, a pour, a click), the [person type]'s domestic or working sounds, the sound of a real life in which this product plays a small but genuine role",
+    "variables": {
+      "person type": {
+        "default": "architect in their studio",
+        "examples": [
+          "nurse starting a shift",
+          "teacher before class",
+          "parent at the school run"
+        ]
+      },
+      "product type": {
+        "default": "quality pen",
+        "examples": [
+          "thermos flask",
+          "tote bag",
+          "notebook"
+        ]
+      },
+      "real space": {
+        "default": "design studio with drawings and models",
+        "examples": [
+          "hospital locker room",
+          "school staffroom",
+          "family kitchen"
+        ]
+      },
+      "daily routine": {
+        "default": "reviewing drawings and making notes",
+        "examples": [
+          "preparing for the shift",
+          "marking and planning",
+          "morning school preparation"
+        ]
+      },
+      "light condition": {
+        "default": "natural studio light through large windows",
+        "examples": [
+          "hospital fluorescent",
+          "warm staffroom ambient",
+          "morning kitchen light"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles real-person documentary product integration. Luma maintains consistent available light. Add 'product user documentary real life portrait' for correct approach.",
+    "source_id": 106
+  },
+  {
+    "id": 157,
+    "category": "Brand & Product Ads",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [decade] home shopping channel segment for [product type] — [lens] locked on a studio set that is trying too hard to look aspirational, [host type] holding [product type] toward camera with scripted enthusiasm, [set detail] visible behind, VHS scan lines and colour bleed, [color palette] pushed beyond natural, broadcast-era television aesthetic, 16:9",
+    "video_prompt": "The [host type] demonstrates [product feature] with the practised enthusiasm of someone on their fourth take — the camera cutting between the close-up of [product type] and the wide shot of the [host type] with the rhythm of live broadcast, a phone number or price superimposed in the lower third in the typography of the era, the [set detail] never quite as good as intended.",
+    "sfx_prompt": "The specific audio of home shopping television — slightly over-compressed, the [host type]'s voice too close to the microphone, a jingle or sting at the price reveal, hold music implied between segments, the acoustic signature of broadcast television from the era",
+    "variables": {
+      "decade": {
+        "default": "1990s",
+        "examples": [
+          "1980s",
+          "early 2000s"
+        ]
+      },
+      "product type": {
+        "default": "kitchen gadget",
+        "examples": [
+          "exercise equipment",
+          "beauty device",
+          "home organiser"
+        ]
+      },
+      "host type": {
+        "default": "enthusiastic female host in bright blazer",
+        "examples": [
+          "male host with a moustache",
+          "celebrity guest co-host",
+          "duo presenting together"
+        ]
+      },
+      "product feature": {
+        "default": "its ten different functions",
+        "examples": [
+          "before and after results",
+          "how easy it is to use",
+          "its compact storage"
+        ]
+      },
+      "set detail": {
+        "default": "a kitchen backdrop with plastic fruit",
+        "examples": [
+          "a living room set with fake fireplace",
+          "a fitness studio backdrop",
+          "a beauty salon set"
+        ]
+      },
+      "color palette": {
+        "default": "teal and coral and white",
+        "examples": [
+          "burgundy and gold and cream",
+          "bright primary colours",
+          "pastel and chrome"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles broadcast TV era aesthetics. Kling maintains VHS colour bleed consistently. Add 'home shopping channel 1990s VHS broadcast television' for correct style reference.",
+    "source_id": 107
+  },
+  {
+    "id": 158,
+    "category": "Brand & Product Ads",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [decade] local TV commercial for [local business type] — [lens] slightly too wide, the [owner or spokesperson] standing in front of their actual [business location], [product or service] visible in the background, VHS grain and washed-out [color tone], the production values of a commercial made for a few hundred dollars, endearingly earnest, 16:9",
+    "video_prompt": "The [owner or spokesperson] delivers their lines directly to camera — slightly stilted, clearly not an actor, the [business location] visible and recognisable behind them, a [product or service] demonstration happening in the background with someone who is clearly a family member or employee, the VHS frame occasionally breathing with the slight instability of a camera that was not locked off properly.",
+    "sfx_prompt": "The audio quality of a local cable commercial — slightly overmodulated, the [owner or spokesperson]'s voice recorded on a camera microphone, the [business location] ambient sound bleeding in around the edges, a royalty-free jingle that was used by seventeen other local businesses that year",
+    "variables": {
+      "decade": {
+        "default": "1980s",
+        "examples": [
+          "1990s",
+          "early 2000s"
+        ]
+      },
+      "local business type": {
+        "default": "family-owned car dealership",
+        "examples": [
+          "local furniture store",
+          "independent pizza restaurant",
+          "neighbourhood gym"
+        ]
+      },
+      "owner or spokesperson": {
+        "default": "the owner in a shirt and tie",
+        "examples": [
+          "a mascot character in costume",
+          "the owner's teenage child",
+          "a local minor celebrity"
+        ]
+      },
+      "business location": {
+        "default": "the car lot with vehicles behind",
+        "examples": [
+          "the store floor with products visible",
+          "the restaurant kitchen",
+          "the gym floor"
+        ]
+      },
+      "product or service": {
+        "default": "a car being shown by a salesperson",
+        "examples": [
+          "furniture being arranged",
+          "pizza being made",
+          "someone using the equipment"
+        ]
+      },
+      "color tone": {
+        "default": "warm yellow",
+        "examples": [
+          "faded blue",
+          "oversaturated red",
+          "milky green"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "28mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles local TV commercial VHS aesthetic. Kling maintains period-accurate colour and grain. Add 'local cable TV commercial VHS 1980s earnest' for correct nostalgic approach.",
+    "source_id": 108
+  },
+  {
+    "id": 159,
+    "category": "Social & Short-Form Content",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Pika"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [person type] performing [single action] against a pure [background color] background — [lens] locked at medium distance, the person centred, [clothing color] providing the only contrast against the background, no props, no environment, no context beyond the action itself, minimalist vertical composition, 9:16",
+    "video_prompt": "The [single action] completes in real time — no slow motion, no speed change, just the action at its natural pace, the person returning to stillness after, the camera holding on the stillness for three seconds before the frame ends, the action so stripped of context that it reads as pure movement rather than narrative.",
+    "sfx_prompt": "Only the sound of [single action] — clean, isolated, no room tone, no music, the sound sitting in a dry acoustic space that matches the visual void, ending when the action ends, silence after",
+    "variables": {
+      "person type": {
+        "default": "dancer",
+        "examples": [
+          "martial artist",
+          "gymnast",
+          "someone very ordinary doing something very ordinary"
+        ]
+      },
+      "single action": {
+        "default": "a single turn",
+        "examples": [
+          "one kick",
+          "a backflip",
+          "sitting down slowly"
+        ]
+      },
+      "background color": {
+        "default": "pure white",
+        "examples": [
+          "black",
+          "warm cream",
+          "pale grey"
+        ]
+      },
+      "clothing color": {
+        "default": "black",
+        "examples": [
+          "red",
+          "white",
+          "neutral grey"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles clean background action shots. Pika maintains person consistency through movement. Add 'minimalist action portrait pure background vertical' for correct framing.",
+    "source_id": 109
+  },
+  {
+    "id": 160,
+    "category": "Social & Short-Form Content",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "image_prompt": "An extreme close-up of [everyday object] performing [everyday function] — [lens] macro, the object filling the entire frame, [background] eliminated entirely, [light source] from one precise direction revealing [texture or detail], the familiar made completely abstract, vertical composition, 9:16",
+    "video_prompt": "The [everyday function] unfolds at extreme close-up — familiar sounds would place this immediately but the visual alone is unrecognisable as what it is, the camera locked without movement, the [everyday object] completing its [everyday function] over the duration, the shot ending before the wider context is revealed.",
+    "sfx_prompt": "The isolated sound of [everyday function] with no other audio — close-mic'd, the specific acoustic of the material of [everyday object], the sounds that are always present but never heard this clearly, in complete audio isolation",
+    "variables": {
+      "everyday object": {
+        "default": "a zip being pulled",
+        "examples": [
+          "a match being struck",
+          "ice melting in a glass",
+          "a key entering a lock"
+        ]
+      },
+      "everyday function": {
+        "default": "closing",
+        "examples": [
+          "igniting",
+          "melting",
+          "turning"
+        ]
+      },
+      "background": {
+        "default": "rendered irrelevant by the macro distance",
+        "examples": [
+          "dark",
+          "light",
+          "blurred beyond recognition"
+        ]
+      },
+      "light source": {
+        "default": "single raking side light",
+        "examples": [
+          "backlit",
+          "overhead",
+          "ring light"
+        ]
+      },
+      "texture or detail": {
+        "default": "the teeth of the zip interlocking",
+        "examples": [
+          "the ignition of the sulphur",
+          "the crystalline ice surface cracking",
+          "the pin tumbler mechanism"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles extreme macro vertical composition. Luma maintains texture detail at macro distances. Add 'extreme macro everyday object abstract vertical' for correct aesthetic.",
+    "source_id": 110
+  },
+  {
+    "id": 161,
+    "category": "Social & Short-Form Content",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [person type] going about [mundane activity] in a [location] where [impossible environmental condition] — the [person type] entirely unbothered, [impossible environmental condition] visible throughout the frame, [lens] at mid-distance treating the impossible as documentary fact, vertical composition, 9:16",
+    "video_prompt": "The [mundane activity] continues — the [person type] navigating the [impossible environmental condition] with practiced ease, finding solutions to the impossible that should not work but do, the camera following the [mundane activity] rather than the [impossible environmental condition], as if what is impossible is simply weather.",
+    "sfx_prompt": "The normal sounds of [mundane activity] layered over the sound of [impossible environmental condition] — the two sound worlds coexisting as naturally as they appear to visually, no score, no comedic effect — just the ordinary and the impossible breathing together",
+    "variables": {
+      "person type": {
+        "default": "office worker",
+        "examples": [
+          "barista",
+          "librarian",
+          "jogger"
+        ]
+      },
+      "mundane activity": {
+        "default": "replying to emails",
+        "examples": [
+          "making coffee",
+          "shelving books",
+          "going for a run"
+        ]
+      },
+      "location": {
+        "default": "an office",
+        "examples": [
+          "a café",
+          "a library",
+          "a park"
+        ]
+      },
+      "impossible environmental condition": {
+        "default": "the room is slowly filling with water but nobody is wet",
+        "examples": [
+          "the ceiling is a sky with weather happening inside",
+          "everything is upside down but gravity works normally",
+          "the walls are made of a forest but the room functions normally"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible environmental conditions in everyday settings. Runway maintains person consistency through the surreal. Add 'surrealist everyday impossible condition deadpan vertical' for correct approach.",
+    "source_id": 111
+  },
+  {
+    "id": 162,
+    "category": "Social & Short-Form Content",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Kling"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [object type] that [impossible response to stimulus] — [lens] locked on the [object type] at close-mid distance, the [stimulus] applied by [hand or agent] visible entering frame, [background] simple and undistracting, the [impossible response] beginning at the frame edge, vertical composition, 9:16",
+    "video_prompt": "The [stimulus] is applied — the [object type] responds with [impossible response to stimulus] in slow, deliberate, physically specific detail, the camera holding still as the response unfolds completely, the [hand or agent] withdrawing from frame as the [impossible response] completes and the [object type] returns to stillness changed.",
+    "sfx_prompt": "The sound of [stimulus] — then the sound of [impossible response to stimulus] rendered as if it were a real physical event, specific material sounds for what should be impossible, silence after the response completes and the [object type] settles",
+    "variables": {
+      "object type": {
+        "default": "houseplant",
+        "examples": [
+          "ceramic bowl",
+          "book",
+          "clock"
+        ]
+      },
+      "impossible response to stimulus": {
+        "default": "blooms a dozen flowers instantly when spoken to gently",
+        "examples": [
+          "cracks and reassembles into a different shape when touched",
+          "opens like a door revealing a tiny complete room inside",
+          "melts and reforms into whatever the viewer needs"
+        ]
+      },
+      "stimulus": {
+        "default": "a whispered word",
+        "examples": [
+          "a gentle touch",
+          "being opened",
+          "being looked at"
+        ]
+      },
+      "hand or agent": {
+        "default": "a hand",
+        "examples": [
+          "a finger",
+          "a breath",
+          "eye contact implied"
+        ]
+      },
+      "background": {
+        "default": "a plain domestic interior wall",
+        "examples": [
+          "white",
+          "wooden shelf",
+          "dark background"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "100mm macro",
+          "135mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible object behaviours. Kling maintains object consistency through the transformation. Add 'surrealist object transformation social video vertical' for correct approach.",
+    "source_id": 112
+  },
+  {
+    "id": 163,
+    "category": "Social & Short-Form Content",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "image_prompt": "A [person type] at [specific real moment] — [lens] close, the [specific real moment] visible in the face and body, [light condition] the available light of where this moment happens, no performance, no staging — the camera present at the right second, photorealistic vertical portrait, 9:16",
+    "video_prompt": "The [specific real moment] passes through the [person type] — the face changing as the moment arrives, peaks and begins to resolve, the camera holding the tight frame throughout, [secondary detail] visible at the edge of the frame placing the moment in its context, the shot ending before the moment is fully over — while it is still happening.",
+    "sfx_prompt": "The ambient sound of where this [specific real moment] takes place — the [person type]'s own sounds if any (a breath, a laugh, a word), the location audio beneath, no music — the sound of a real moment in a real place",
+    "variables": {
+      "person type": {
+        "default": "athlete crossing a finish line",
+        "examples": [
+          "parent at a child's first steps",
+          "musician hearing their song played back for the first time",
+          "someone opening an important letter"
+        ]
+      },
+      "specific real moment": {
+        "default": "the moment of realising they've won",
+        "examples": [
+          "the moment of watching a first step",
+          "the moment of hearing themselves",
+          "the moment of reading the result"
+        ]
+      },
+      "light condition": {
+        "default": "harsh outdoor race finish lighting",
+        "examples": [
+          "warm home interior",
+          "studio headphone monitoring light",
+          "natural window light"
+        ]
+      },
+      "secondary detail": {
+        "default": "other runners behind them",
+        "examples": [
+          "a toddler's feet at the bottom of frame",
+          "headphones around the neck",
+          "the letter in hand"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "135mm",
+          "50mm",
+          "100mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles real-moment photorealistic portraits. Runway maintains facial expression consistency. Add 'photorealistic authentic moment portrait vertical social' for correct approach.",
+    "source_id": 113
+  },
+  {
+    "id": 164,
+    "category": "Social & Short-Form Content",
+    "style": "Photorealistic",
+    "best_on": [
+      "Kling",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "Point-of-view shot walking through [specific real location] at [time of day] — [lens] at eye height, the [specific real location] opening ahead, [people or activity] moving naturally in the space, [light condition] the actual light of the [specific real location] at [time of day], photorealistic first-person vertical, 9:16",
+    "video_prompt": "The walk continues — the [specific real location] unfolding as it does in real life, no cinematic framing, no hero moment, just the experience of being in this place at this time — [people or activity] passing on either side, [specific detail] catching the eye briefly, the [light condition] changing slightly as the walk moves between open and sheltered areas, the POV completely immersive.",
+    "sfx_prompt": "Binaural or spatial audio of the [specific real location] at [time of day] — [people or activity] sounds from their actual directions, the acoustic of the space (open, enclosed, hard surfaces, soft), footstep sounds on the ground surface, the complete sonic experience of being there",
+    "variables": {
+      "specific real location": {
+        "default": "a Tokyo street at rush hour",
+        "examples": [
+          "a morning food market",
+          "a coastal path at dawn",
+          "a museum on a quiet weekday"
+        ]
+      },
+      "time of day": {
+        "default": "evening rush hour",
+        "examples": [
+          "early morning before crowds",
+          "dawn",
+          "midday"
+        ]
+      },
+      "people or activity": {
+        "default": "commuters moving in both directions",
+        "examples": [
+          "vendors setting up stalls",
+          "lone walkers and dog owners",
+          "guided tour groups and individuals"
+        ]
+      },
+      "light condition": {
+        "default": "city evening light — artificial and fading natural",
+        "examples": [
+          "pre-dawn artificial market light",
+          "dawn coastal light",
+          "museum interior diffused light"
+        ]
+      },
+      "specific detail": {
+        "default": "a street food stall sending steam into the cold air",
+        "examples": [
+          "a fishmonger arranging the first catch",
+          "a seal on the rocks below",
+          "a single painting that stops the walk"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "28mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles first-person walk-through consistently. Luma maintains photorealistic environment detail. Add 'POV walk photorealistic immersive vertical social' for correct approach.",
+    "source_id": 114
+  },
+  {
+    "id": 165,
+    "category": "Social & Short-Form Content",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [person type] in [neon-lit location] at night — [lens] tight on the face, neon [color] light from an off-camera source striking one side of the face, deep shadow on the other, [expression or action] caught mid-way, the [neon-lit location] visible as pure abstracted colour in the background, vertical portrait, 9:16",
+    "video_prompt": "The [person type] moves through the [neon-lit location] — the neon [color] light raking across the face as they turn, other colours entering briefly as different signs pass, the camera tracking at the same pace as the [person type] maintaining the tight frame, [expression or action] resolving at the midpoint of the shot before the [person type] moves on, the neon city indifferent around them.",
+    "sfx_prompt": "The dense audio of a [neon-lit location] at night — bass from somewhere below, voices and movement at the edges, the specific electric hum of neon signs, rain on hard surfaces if weather present, the [person type]'s own sounds close in the mix with the city pushed to the background",
+    "variables": {
+      "person type": {
+        "default": "young woman",
+        "examples": [
+          "teenager",
+          "older man",
+          "non-binary person in dramatic clothing"
+        ]
+      },
+      "neon-lit location": {
+        "default": "a narrow alley with competing signs",
+        "examples": [
+          "the entrance to an underground club",
+          "a neon-lit market",
+          "a rain-soaked intersection"
+        ]
+      },
+      "color": {
+        "default": "magenta",
+        "examples": [
+          "electric blue",
+          "toxic green",
+          "amber"
+        ]
+      },
+      "expression or action": {
+        "default": "looking directly into lens with complete stillness",
+        "examples": [
+          "laughing at something off-camera",
+          "mid-conversation",
+          "looking away then back"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon portrait tracking shots. Runway maintains neon colour consistency on skin. Add 'cyberpunk neon portrait vertical social night' for correct aesthetic.",
+    "source_id": 115
+  },
+  {
+    "id": 166,
+    "category": "Social & Short-Form Content",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Sora"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "Time-lapse of a [neon location type] from [start time] to [end time] — [lens] locked on a tripod, the [neon location type] transforming from [start state] to [end state], neon [color palette] dominant in the final state, [movement element] creating light trails across the duration, vertical composition, 9:16",
+    "video_prompt": "The time-lapse compresses the transformation — [movement element] becoming light trails at speed, neon [color palette] blooming as darkness arrives and signs switch on in sequence, the [neon location type] going from [start state] to [end state] in a continuous uncut move, the light trails of [movement element] writing the story of time passing across the frame.",
+    "sfx_prompt": "Audio compressed to match the visual time-lapse — the sounds of [start state] accelerating and blurring into the sounds of [end state], neon hum rising as the signs switch on, [movement element] sounds becoming a continuous tone, the city's acoustic transformation matching its visual one",
+    "variables": {
+      "neon location type": {
+        "default": "street intersection",
+        "examples": [
+          "market street",
+          "club district",
+          "elevated walkway"
+        ]
+      },
+      "start time": {
+        "default": "late afternoon",
+        "examples": [
+          "dusk",
+          "sunset",
+          "early evening"
+        ]
+      },
+      "end time": {
+        "default": "deep night",
+        "examples": [
+          "midnight",
+          "early hours",
+          "before dawn"
+        ]
+      },
+      "start state": {
+        "default": "ordinary daylight street with shops closing",
+        "examples": [
+          "golden hour quiet",
+          "dusk amber light",
+          "early evening foot traffic"
+        ]
+      },
+      "end state": {
+        "default": "full neon night with club crowds and rain reflection",
+        "examples": [
+          "midnight neon and empty streets",
+          "3am wet pavement and closing signs",
+          "pre-dawn quiet with neon still lit"
+        ]
+      },
+      "color palette": {
+        "default": "pink and blue and white",
+        "examples": [
+          "amber and red",
+          "green and purple",
+          "all colours competing"
+        ]
+      },
+      "movement element": {
+        "default": "vehicles and pedestrians",
+        "examples": [
+          "pedestrians only",
+          "vehicles only",
+          "drones and delivery robots"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon time-lapse vertical compositions. Sora manages city transformation from day to night at scale. Add 'cyberpunk neon city time-lapse vertical' for correct approach.",
+    "source_id": 116
+  },
+  {
+    "id": 167,
+    "category": "Cinematic & Storytelling",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [person type] in [their space] at [time of day] — [lens] observing at a distance that feels respectful rather than intrusive, [person type] mid-[activity] unaware of or indifferent to the camera, [light condition] the light of their real world, [environmental detail] making their life legible without narration, documentary portrait still frame, 16:9",
+    "video_prompt": "The camera holds on the [person type] as [activity] continues — one slow careful reframe over the duration finding the angle that tells the most, [environmental detail] visible and accumulating meaning as the shot holds, a single [unrehearsed moment] occurring that no scripted film could plan — the camera present for it, the [person type] not performing it.",
+    "sfx_prompt": "The unmanipulated audio of [their space] at [time of day] — [activity] sounds at natural distance and volume, [environmental detail] acoustic, the [person type]'s own sounds, the specific silence between sounds that belongs to this place and no other",
+    "variables": {
+      "person type": {
+        "default": "retired fisherman",
+        "examples": [
+          "elderly seamstress",
+          "night shift security guard",
+          "small-town postmaster"
+        ]
+      },
+      "their space": {
+        "default": "a harbour workshop full of nets and tools",
+        "examples": [
+          "a small alterations shop",
+          "an empty building lobby at 3am",
+          "a sorting office before dawn"
+        ]
+      },
+      "time of day": {
+        "default": "early morning before anyone else arrives",
+        "examples": [
+          "late afternoon at the end of a long day",
+          "deep night mid-shift",
+          "pre-dawn before opening"
+        ]
+      },
+      "activity": {
+        "default": "mending nets by a small light",
+        "examples": [
+          "hemming a garment by hand",
+          "doing rounds of an empty building",
+          "sorting the day's mail"
+        ]
+      },
+      "light condition": {
+        "default": "a single work light in pre-dawn dark",
+        "examples": [
+          "last afternoon light through a small window",
+          "fluorescent overhead in a dark building",
+          "artificial light before dawn"
+        ]
+      },
+      "environmental detail": {
+        "default": "decades of accumulated tools and habit visible in every surface",
+        "examples": [
+          "a photograph above the workbench",
+          "family photos on the security desk",
+          "a handwritten note on the sorting frame"
+        ]
+      },
+      "unrehearsed moment": {
+        "default": "a pause to look out at the water",
+        "examples": [
+          "a smile at a memory triggered by something handled",
+          "a moment of stillness between tasks",
+          "a brief unconscious hum"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "135mm",
+          "50mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles long observational holds. Luma maintains available light consistency. Add 'documentary portrait observational slow cinema' for correct approach.",
+    "source_id": 117
+  },
+  {
+    "id": 168,
+    "category": "Cinematic & Storytelling",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "Two [relationship type] in [shared space] — [lens] at a distance that holds both without crowding, [interaction] happening between them, [light condition] the light of their real life, [shared space] telling the story of their relationship through its contents and condition, documentary two-shot still frame, 16:9",
+    "video_prompt": "The camera observes the [interaction] without intervening — the [relationship type] talking or working or being silent together with the ease of people who know each other completely, the camera making one gentle reframe over the duration to find the best angle on the [interaction], [a moment] occurring that needed no direction — the kind that happens when people forget the camera is there.",
+    "sfx_prompt": "The sound of the [shared space] and the [interaction] — voices if present at their natural pace and volume, the sounds of what they are doing together, the ambient acoustic of a space shared by [relationship type] over time, no music — the sound of people who know each other",
+    "variables": {
+      "relationship type": {
+        "default": "elderly couple",
+        "examples": [
+          "parent and adult child",
+          "lifelong friends",
+          "siblings"
+        ]
+      },
+      "shared space": {
+        "default": "their kitchen after fifty years of use",
+        "examples": [
+          "a workshop they share",
+          "a living room that shows their whole life",
+          "a garden they tend together"
+        ]
+      },
+      "interaction": {
+        "default": "making tea together without needing to speak about it",
+        "examples": [
+          "working on something together",
+          "one helping the other with a task",
+          "sitting in comfortable silence"
+        ]
+      },
+      "light condition": {
+        "default": "morning kitchen light",
+        "examples": [
+          "afternoon workshop light",
+          "late afternoon living room light",
+          "outdoor garden light"
+        ]
+      },
+      "a moment": {
+        "default": "a look exchanged that contains fifty years",
+        "examples": [
+          "one touching the other's arm briefly",
+          "a shared laugh at something small",
+          "a moment of one simply watching the other"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles two-person observational documentary scenes. Luma maintains consistent light through the observational hold. Add 'documentary relationship portrait two-shot observational' for correct approach.",
+    "source_id": 118
+  },
+  {
+    "id": 169,
+    "category": "Cinematic & Storytelling",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [character type] walking through [environment] where [their emotional state] has become [physical manifestation] — the [physical manifestation] visible throughout the frame, the [character type] moving through it as if it were weather, [lens] at mid-distance treating the emotional landscape as documentary fact, cinematic still frame, 16:9",
+    "video_prompt": "The [character type] continues walking — the [physical manifestation] of [their emotional state] moving with them, thickening or thinning with the rhythm of their pace, a moment where [physical manifestation] clears briefly as [turning point] occurs, then resettles differently than before — the [character type] arriving somewhere changed without the film ever naming what happened.",
+    "sfx_prompt": "The sound of [physical manifestation] as a weather system — the acoustic of [their emotional state] made environmental, beneath it the [character type]'s footsteps and breathing, the [turning point] audible as a shift in the [physical manifestation] sound, no dialogue, no score — only the emotional weather",
+    "variables": {
+      "character type": {
+        "default": "young woman",
+        "examples": [
+          "elderly man",
+          "child",
+          "soldier returning home"
+        ]
+      },
+      "environment": {
+        "default": "a city street",
+        "examples": [
+          "a forest path",
+          "a hospital corridor",
+          "a beach"
+        ]
+      },
+      "their emotional state": {
+        "default": "grief",
+        "examples": [
+          "anxiety",
+          "longing",
+          "rage slowly becoming peace"
+        ]
+      },
+      "physical manifestation": {
+        "default": "a dense fog that follows only her",
+        "examples": [
+          "fallen leaves that orbit him and won't settle",
+          "a sound like distant crying that only she generates",
+          "cracks in the ground that heal behind each step"
+        ]
+      },
+      "turning point": {
+        "default": "she stops and looks up",
+        "examples": [
+          "he sits down on a bench",
+          "she sees something that makes her pause",
+          "he speaks for the first time"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles emotional weather surrealism in real environments. Runway maintains character consistency through the atmospheric event. Add 'surrealist emotional landscape cinematic storytelling' for correct approach.",
+    "source_id": 119
+  },
+  {
+    "id": 170,
+    "category": "Cinematic & Storytelling",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [domestic scene] that is [slightly wrong in one specific way] — [lens] at mid-distance, the [domestic scene] otherwise completely normal, the [one wrongness] visible without being emphasised, [character or characters] present and behaving normally within the [one wrongness], [light condition] treating the scene as entirely unremarkable, cinematic still frame, 16:9",
+    "video_prompt": "The [domestic scene] continues — the [character or characters] going about [normal activity] as if the [one wrongness] does not exist, the camera never drawing attention to the [one wrongness] with framing or focus, a [visitor or new element] entering the scene and also not reacting, the [one wrongness] present throughout and never explained or resolved.",
+    "sfx_prompt": "The completely normal sounds of the [domestic scene] — [normal activity] sounds, the [character or characters]' domestic audio, no sound acknowledging the [one wrongness], the [visitor or new element]'s arrival sounds entirely normal, the audio maintaining the deadpan that the visual commits to",
+    "variables": {
+      "domestic scene": {
+        "default": "a family having breakfast",
+        "examples": [
+          "a couple watching television",
+          "someone cooking dinner alone",
+          "a child doing homework"
+        ]
+      },
+      "slightly wrong in one specific way": {
+        "default": "the table they are eating at is on the ceiling but gravity works normally for them",
+        "examples": [
+          "one family member is transparent — not a ghost, just transparent",
+          "the window shows a completely different season outside than the one it should",
+          "everyone in the scene has the same face"
+        ]
+      },
+      "one wrongness": {
+        "default": "ceiling table",
+        "examples": [
+          "the transparency",
+          "the wrong season",
+          "the identical faces"
+        ]
+      },
+      "character or characters": {
+        "default": "a family of four",
+        "examples": [
+          "a couple",
+          "a person alone",
+          "a child and parent"
+        ]
+      },
+      "light condition": {
+        "default": "normal morning domestic light",
+        "examples": [
+          "afternoon living room light",
+          "evening kitchen light",
+          "daytime homework light"
+        ]
+      },
+      "normal activity": {
+        "default": "eating and talking about the day",
+        "examples": [
+          "watching and commenting on a programme",
+          "cooking and moving around the kitchen",
+          "working through a problem together"
+        ]
+      },
+      "visitor or new element": {
+        "default": "someone arriving at the door",
+        "examples": [
+          "a delivery arriving",
+          "a phone ringing and being answered",
+          "a pet entering the room"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles surrealist domestic wrongness with deadpan realism. Luma maintains scene consistency through the impossible detail. Add 'domestic surrealism deadpan one impossible detail cinematic' for correct approach.",
+    "source_id": 120
+  },
+  {
+    "id": 171,
+    "category": "Cinematic & Storytelling",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [character type] at [location] at [time] — [lens] at medium distance, the [character type] in the act of [decision moment], [light condition] reflecting the weight of the moment, [environmental detail] providing the world the decision exists within, photorealistic cinematic still frame, 16:9",
+    "video_prompt": "The [decision moment] plays out without music and without dialogue — the [character type]'s body doing the work that words would do in lesser films, a hand movement, a breath, a look at [environmental detail] that tells us everything, the camera holding completely still, the [decision moment] resolving in the body before any action is taken, the shot ending at the moment of resolution before the consequence begins.",
+    "sfx_prompt": "The ambient sound of [location] at [time] — present and real, the [character type]'s own sounds amplified by the silence of the scene: a breath, the fabric of their clothing as they shift weight, [environmental detail] sounds placing them in the world, no score — the silence is the score",
+    "variables": {
+      "character type": {
+        "default": "middle-aged man",
+        "examples": [
+          "young woman",
+          "elderly person",
+          "teenager"
+        ]
+      },
+      "location": {
+        "default": "a hospital corridor",
+        "examples": [
+          "an airport departure gate",
+          "a courtroom steps",
+          "a childhood home doorstep"
+        ]
+      },
+      "time": {
+        "default": "late at night",
+        "examples": [
+          "early morning before anyone is up",
+          "a moment before something begins",
+          "just after something has ended"
+        ]
+      },
+      "decision moment": {
+        "default": "whether to go through a door",
+        "examples": [
+          "whether to make a call",
+          "whether to say something to someone passing",
+          "whether to leave or stay"
+        ]
+      },
+      "light condition": {
+        "default": "cold fluorescent corridor light with warm room light visible through the door",
+        "examples": [
+          "grey dawn light",
+          "the harsh light of consequence",
+          "warm interior vs cold exterior"
+        ]
+      },
+      "environmental detail": {
+        "default": "the door and what is implied beyond it",
+        "examples": [
+          "the phone and who might answer",
+          "the person who has not seen them yet",
+          "the house that was their childhood"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles photorealistic decision-moment cinematic scenes. Runway maintains character and light consistency through the held moment. Add 'photorealistic cinematic decision moment held shot' for correct approach.",
+    "source_id": 121
+  },
+  {
+    "id": 172,
+    "category": "Cinematic & Storytelling",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [location] immediately after [event has occurred] — [lens] wide, the [evidence of event] visible throughout the frame, no [people involved] present — only the aftermath, [light condition] the light of what comes after, [one detail] carrying the most concentrated evidence of what happened, photorealistic cinematic still frame, 16:9",
+    "video_prompt": "The camera moves slowly through the [location] aftermath — not searching, just witnessing, [evidence of event] passing through frame, [one detail] held in the centre of the frame for the longest time, the [light condition] shifting slightly as time continues to pass in the aftermath, no character enters — this is the world without whoever was here, and the shot holds that absence.",
+    "sfx_prompt": "The sound of [location] with no people present — the specific quiet of a place that has had people in it and now does not, [evidence of event] sounds if any (dripping, settling, wind through something open), the acoustic of aftermath — not silence but the world continuing after humans have left it",
+    "variables": {
+      "location": {
+        "default": "a kitchen",
+        "examples": [
+          "a living room",
+          "a campsite",
+          "a classroom"
+        ]
+      },
+      "event has occurred": {
+        "default": "a family has left the house for the last time",
+        "examples": [
+          "a party ended hours ago",
+          "a camp was broken in a hurry",
+          "the school year ended today"
+        ]
+      },
+      "evidence of event": {
+        "default": "drawers open, a forgotten photograph on the counter, the outline of furniture on carpet",
+        "examples": [
+          "empty bottles and deflated balloons",
+          "fire ring still warm, possessions left behind",
+          "drawings still on the board, chairs pushed back"
+        ]
+      },
+      "people involved": {
+        "default": "the family",
+        "examples": [
+          "the guests",
+          "the campers",
+          "the students"
+        ]
+      },
+      "light condition": {
+        "default": "afternoon light through uncurtained windows",
+        "examples": [
+          "morning light through mess",
+          "outdoor daylight on abandoned things",
+          "classroom fluorescent still on"
+        ]
+      },
+      "one detail": {
+        "default": "a child's drawing left on the refrigerator",
+        "examples": [
+          "a single shoe under the sofa",
+          "a note held down by a stone",
+          "a name written in a corner of the board"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles aftermath scene cinematography. Runway maintains consistent light through the slow move. Add 'photorealistic aftermath empty location cinematic slow move' for correct approach.",
+    "source_id": 122
+  },
+  {
+    "id": 173,
+    "category": "Cinematic & Storytelling",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "Two chairs in an empty [space type] — [lens] locked at mid-distance, one chair [occupied or not] and one [occupied or not], [light condition] creating the only complexity in an otherwise bare frame, [one object] on or near one of the chairs the only narrative element, cinematic minimalist still frame, 16:9",
+    "video_prompt": "The camera holds for the full duration — the chairs present, the [light condition] shifting slightly as time passes, [one object] remaining where it is, the [space type] completely still, no character enters — the shot ends with the scene exactly as it began except that the viewer has spent time with it, and time changes everything.",
+    "sfx_prompt": "The acoustic of the [space type] — its particular reverb and ambient, wind or ventilation if present, the [space type]'s own sounds, no human sounds — the acoustic portrait of an empty room that has had people in it",
+    "variables": {
+      "space type": {
+        "default": "waiting room",
+        "examples": [
+          "interview room",
+          "visiting room",
+          "rehearsal room"
+        ]
+      },
+      "occupied or not": {
+        "default": "empty",
+        "examples": [
+          "with a coat over it",
+          "pulled slightly out from the table",
+          "turned away from the other"
+        ]
+      },
+      "light condition": {
+        "default": "a single overhead light creating a pool",
+        "examples": [
+          "natural light from one window moving across the floor",
+          "fluorescent overhead",
+          "low lamp between the chairs"
+        ]
+      },
+      "one object": {
+        "default": "a cup of tea, still warm",
+        "examples": [
+          "a folded piece of paper",
+          "a single photograph face-down",
+          "a hand-written note"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "24mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles minimalist static storytelling scenes. Luma captures light movement across still compositions. Add 'minimalist two chairs empty room cinematic storytelling' for correct approach.",
+    "source_id": 123
+  },
+  {
+    "id": 174,
+    "category": "Cinematic & Storytelling",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [character type] walking away from camera down [path or corridor] — [lens] locked, the [character type] already at middle distance and receding, [path or corridor] stretching ahead with [end condition], [light condition] providing the only directionality in an otherwise simple frame, cinematic minimalist still frame, 16:9",
+    "video_prompt": "The [character type] continues walking — growing smaller in the frame, the [path or corridor] not shortening, the [end condition] never arriving — the camera holds as the [character type] walks, walks, walks, and does not arrive, the [light condition] holding throughout, the shot eventually ending not because the [character type] has gone but because the film decides to let them go.",
+    "sfx_prompt": "Footsteps — the specific sound of [path or corridor] underfoot, growing quieter as the [character type] recedes, until they can no longer be heard, the [path or corridor] ambient sound remaining after the footsteps have gone, silence that still implies presence",
+    "variables": {
+      "path or corridor": {
+        "default": "a long empty hospital corridor",
+        "examples": [
+          "a country road disappearing into hills",
+          "a beach at low tide stretching to the horizon",
+          "a train platform after the train has gone"
+        ]
+      },
+      "end condition": {
+        "default": "a turn that is too far away to reach in the duration of the shot",
+        "examples": [
+          "the horizon",
+          "a vanishing point that never arrives",
+          "a door that stays the same size no matter how far they walk"
+        ]
+      },
+      "character type": {
+        "default": "a woman in a winter coat",
+        "examples": [
+          "a child",
+          "an elderly man with a cane",
+          "a soldier in uniform"
+        ]
+      },
+      "light condition": {
+        "default": "fluorescent corridor light with darkness beyond the turn",
+        "examples": [
+          "golden afternoon light on the road",
+          "flat grey beach light",
+          "platform light with darkness beyond"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "135mm",
+          "50mm",
+          "200mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles receding figure minimalist composition. Luma maintains the long hold without drift. Add 'minimalist receding figure walking away cinematic held shot' for correct approach.",
+    "source_id": 124
+  },
+  {
+    "id": 175,
+    "category": "Abstract & Motion Art",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "Extreme macro of [natural process] in real time — [lens] locked so close the subject is unrecognisable as what it is, [light source] raking across the surface at low angle to reveal [texture detail], the camera treating the [natural process] with the neutrality of scientific observation, documentary macro still frame, 16:9",
+    "video_prompt": "The [natural process] continues at its own pace — the camera not intervening, not speeding up or slowing down, observing the [natural process] at its actual speed which turns out to be [quality of motion] and more complex than imagined, [secondary detail] becoming visible as the observation continues, the shot ending while the [natural process] is still happening — not waiting for completion.",
+    "sfx_prompt": "The amplified sound of [natural process] — what this sounds like close-mic'd at macro distance, the sounds always present but never audible without amplification, specific and surprising in their texture and rhythm, documentary audio treating the [natural process] with the same seriousness as the visual",
+    "variables": {
+      "natural process": {
+        "default": "rust forming on iron",
+        "examples": [
+          "ice forming on glass",
+          "mould growing on fruit",
+          "salt crystallising on evaporating water"
+        ]
+      },
+      "light source": {
+        "default": "raking side light at 15 degrees",
+        "examples": [
+          "backlit to show translucency",
+          "ring light for even revelation",
+          "single point light creating maximum shadow depth"
+        ]
+      },
+      "texture detail": {
+        "default": "the microscopic structure of the rust formation",
+        "examples": [
+          "the crystal lattice forming in real time",
+          "the mycelium network visible at macro scale",
+          "the crystal geometry of salt"
+        ]
+      },
+      "quality of motion": {
+        "default": "imperceptibly slow",
+        "examples": [
+          "surprisingly fast once you watch",
+          "rhythmic and almost musical",
+          "chaotic then suddenly organised"
+        ]
+      },
+      "secondary detail": {
+        "default": "colour changes in the material as the rust spreads",
+        "examples": [
+          "refraction in the forming crystal",
+          "the network structure becoming visible",
+          "the geometry of the crystal faces catching light"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles macro documentary observation. Luma maintains texture detail at extreme close range. Add 'extreme macro natural process documentary observation' for correct approach.",
+    "source_id": 125
+  },
+  {
+    "id": 176,
+    "category": "Abstract & Motion Art",
+    "style": "Documentary",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "The interior of [mechanical system] in operation — [lens] inside or very close to the mechanism, [components] moving with [quality of mechanical motion], [light condition] the light that exists within the [mechanical system] or introduced single work light, the mechanical process treated as landscape, documentary mechanical still frame, 16:9",
+    "video_prompt": "The [mechanical system] continues its operation — [components] completing their cycles with the precision of things designed to repeat forever, the camera holding without movement as the mechanism passes through it, [specific mechanical moment] occurring once in the duration as a point of maximum clarity, the [mechanical system] indifferent to being observed, the observation the whole of the film.",
+    "sfx_prompt": "The actual sound of the [mechanical system] in operation — not designed, not mixed, just the acoustic reality of [components] doing what they do, the rhythm and texture of functional machinery, the sound of something that works recorded with the same attention as something beautiful",
+    "variables": {
+      "mechanical system": {
+        "default": "an antique clock mechanism",
+        "examples": [
+          "a printing press",
+          "a loom",
+          "a bicycle drivetrain in motion"
+        ]
+      },
+      "components": {
+        "default": "gears and escapements",
+        "examples": [
+          "rollers and type",
+          "shuttles and heddles",
+          "chain and sprockets and cassette"
+        ]
+      },
+      "quality of mechanical motion": {
+        "default": "precise, inevitable, repeating",
+        "examples": [
+          "powerful, rhythmic, industrial",
+          "complex, interdependent, musical in its rhythm",
+          "simple, continuous, meditative"
+        ]
+      },
+      "light condition": {
+        "default": "single work lamp illuminating the mechanism from above",
+        "examples": [
+          "existing machine-room lighting",
+          "backlit to silhouette the moving parts",
+          "raking light to reveal worn surfaces"
+        ]
+      },
+      "specific mechanical moment": {
+        "default": "the escapement releasing one tick",
+        "examples": [
+          "the impression moment when type meets paper",
+          "the shed opening as the shuttle passes",
+          "the moment of maximum chain tension"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "50mm",
+          "135mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles mechanical interior observation. Runway maintains mechanical motion consistency. Add 'documentary mechanical interior macro observation' for correct approach.",
+    "source_id": 126
+  },
+  {
+    "id": 177,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A single [color] circle on a [contrasting background color] field — [lens] locked, perfectly centred, no texture, no gradient, pure geometric form, [size] relative to the frame, perfectly still, 16:9",
+    "video_prompt": "The circle [motion behavior] — the motion completely predictable once it begins but the beginning is the event, the [contrasting background color] field unchanging, the camera locked without movement, the circle's [motion behavior] having a logic that becomes apparent over the duration, the sequence looping at a point where the logic has completed one full cycle.",
+    "sfx_prompt": "A single tone — the pitch and character of [color] if colour had sound, beginning when the [motion behavior] begins, its frequency changing with the geometry of the [motion behavior], ending when the loop completes, silence before and after each cycle",
+    "variables": {
+      "color": {
+        "default": "deep red",
+        "examples": [
+          "electric blue",
+          "pure white",
+          "yellow"
+        ]
+      },
+      "contrasting background color": {
+        "default": "black",
+        "examples": [
+          "white",
+          "deep navy",
+          "warm grey"
+        ]
+      },
+      "size": {
+        "default": "occupying one quarter of the frame height",
+        "examples": [
+          "filling the frame edge to edge",
+          "a small point",
+          "half the frame height"
+        ]
+      },
+      "motion behavior": {
+        "default": "expands slowly until it fills the frame then contracts back to its original size",
+        "examples": [
+          "moves to each corner of the frame in sequence",
+          "divides into two circles that move apart then return and merge",
+          "oscillates between red and its complement colour while holding position"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "24mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles pure geometric animation. Luma maintains clean colour field backgrounds. Add 'minimalist geometric abstract single circle motion loop' for correct approach.",
+    "source_id": 127
+  },
+  {
+    "id": 178,
+    "category": "Abstract & Motion Art",
+    "style": "Minimalist",
+    "best_on": [
+      "Runway",
+      "Pika"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A pure [background color] field with [one element] — [lens] locked, the [one element] placed precisely at [position in frame], no other visual information, the composition so reduced that [one element] carries the entire weight of the frame, 16:9",
+    "video_prompt": "[One element] [single motion] — one action, one direction, one speed, no variation, no acceleration, no easing — the motion so deliberate and unnegotiable that it acquires inevitability, the [background color] field unchanged throughout, the action completing and the frame returning to the same composition it began with — identical but having passed through an event.",
+    "sfx_prompt": "Silence before [single motion] — then one sound, the sound of [one element] in motion in a space with no acoustic character, dry and present and specific, then silence again after the motion completes, the silence after feeling different from the silence before",
+    "variables": {
+      "background color": {
+        "default": "warm white",
+        "examples": [
+          "black",
+          "deep teal",
+          "warm cream"
+        ]
+      },
+      "one element": {
+        "default": "a single horizontal black line",
+        "examples": [
+          "a small white square",
+          "a single dot",
+          "one diagonal stroke"
+        ]
+      },
+      "position in frame": {
+        "default": "the exact vertical centre",
+        "examples": [
+          "the upper third",
+          "the lower right",
+          "the exact centre"
+        ]
+      },
+      "single motion": {
+        "default": "moves from left to right across the frame and exits",
+        "examples": [
+          "rotates 90 degrees and stops",
+          "expands to fill the frame then contracts to nothing",
+          "descends to the bottom of the frame and holds"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "24mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles pure field single element animation. Pika maintains clean background through motion. Add 'minimalist abstract single element motion pure field loopable' for correct approach.",
+    "source_id": 128
+  },
+  {
+    "id": 179,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "Data visualised as [neon visual form] moving through a pure black void — [lens] locked, [neon color palette] dominant, [data structure] implied in the geometry and movement of the [neon visual form], no labels, no text — pure information as light, 16:9",
+    "video_prompt": "The [neon visual form] evolves — [data structure] changing state, new [neon visual form] elements appearing as data arrives and existing ones fading as data resolves, the overall system maintaining its [system quality] throughout the change, the camera locked as the living data architecture shifts, the black void the only constant.",
+    "sfx_prompt": "Digital data sounds — the audio of information in motion, each [neon visual form] element producing a tone proportional to its intensity, the overall system creating a chord that changes with the [data structure] state, the sound of data that has been given physical properties",
+    "variables": {
+      "neon visual form": {
+        "default": "flowing particle streams",
+        "examples": [
+          "pulsing node networks",
+          "geometric lattice structures",
+          "concentric wave rings"
+        ]
+      },
+      "neon color palette": {
+        "default": "electric blue and cyan",
+        "examples": [
+          "magenta and white",
+          "amber and red",
+          "green and dark green"
+        ]
+      },
+      "data structure": {
+        "default": "a network with nodes of varying size indicating traffic volume",
+        "examples": [
+          "a timeline with event density shown by brightness",
+          "a hierarchy with parent-child relationships as geometry",
+          "a geographic distribution shown as altitude"
+        ]
+      },
+      "system quality": {
+        "default": "organised chaos — ordered at scale, turbulent up close",
+        "examples": [
+          "crystalline regularity — every element in its place",
+          "organic growth — expanding outward from a centre",
+          "rhythmic pulsing — the whole system breathing"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon data visualisation motion. Runway maintains consistent neon colour in void environments. Add 'neon data visualisation abstract cyberpunk dark void' for correct approach.",
+    "source_id": 129
+  },
+  {
+    "id": 180,
+    "category": "Abstract & Motion Art",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Sora"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [neon architectural form] impossible in physical space — [lens] wide enough to contain it, [neon color] dominant, [architectural logic] obeyed within the impossibility making it feel designed rather than random, pure black environment, no floor, no ceiling, no walls — the [neon architectural form] existing only in void, 16:9",
+    "video_prompt": "The camera executes a slow orbit around the [neon architectural form] — the [architectural logic] revealing itself from different angles as the camera moves, [neon color] light casting no shadow (there is nothing to cast shadow on), new aspects of the impossible architecture visible with each degree of orbit, the camera completing one full revolution and finding the [neon architectural form] exactly as it began but now understood differently.",
+    "sfx_prompt": "The hum of the [neon architectural form]'s own light — low and constant, each element at a slightly different frequency creating a chord that changes as the camera orbit changes the listener's relationship to different elements, the void producing no acoustic reflection — the [neon architectural form] sounding as impossible as it looks",
+    "variables": {
+      "neon architectural form": {
+        "default": "a staircase that connects to itself in a loop",
+        "examples": [
+          "a corridor that exits into itself",
+          "a building facade with no interior",
+          "a bridge from nowhere to nowhere"
+        ]
+      },
+      "neon color": {
+        "default": "cold blue-white",
+        "examples": [
+          "electric pink",
+          "toxic green",
+          "amber gold"
+        ]
+      },
+      "architectural logic": {
+        "default": "standard stair geometry and proportions throughout despite the impossible topology",
+        "examples": [
+          "correct perspective and vanishing points for each section despite the impossible connections",
+          "realistic facade proportions and detailing despite the missing interior",
+          "accurate structural engineering despite the impossible endpoints"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "14mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon impossible architecture in void. Sora manages the camera orbit around impossible geometry. Add 'neon cyberpunk impossible architecture void orbit' for correct approach.",
+    "source_id": 130
+  },
+  {
+    "id": 181,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [familiar object] that [slowly becomes something else entirely] — [lens] locked at medium close, the [familiar object] beginning in its entirely normal state, the transformation not yet begun, [light source] treating the incoming [something else] as entirely ordinary, 16:9",
+    "video_prompt": "The transformation from [familiar object] to [something else entirely] unfolds with geological patience — the [familiar object] not resisting, the [something else entirely] not dramatic in its arrival, the change happening through the middle of the frame with no cut, no effect — just one thing becoming another over the full duration of the shot, the camera not moving, not commenting, simply present for the change.",
+    "sfx_prompt": "The sound of [familiar object] transitioning to [something else entirely] — what does this specific transformation sound like if given physical properties? The sound design committed to making the impossible sound inevitable and specific rather than generic or fantastical",
+    "variables": {
+      "familiar object": {
+        "default": "a clock",
+        "examples": [
+          "a telephone",
+          "a chair",
+          "a book"
+        ]
+      },
+      "slowly becomes something else entirely": {
+        "default": "a small ecosystem — soil, moss, insects, eventually a tiny tree",
+        "examples": [
+          "water — not melting but simply becoming liquid while holding its form briefly before falling",
+          "a map of somewhere — its surfaces becoming paper and lines and place names",
+          "a musical instrument — reshaping itself into something that could make sound"
+        ]
+      },
+      "something else entirely": {
+        "default": "a small ecosystem",
+        "examples": [
+          "water",
+          "a map",
+          "a musical instrument"
+        ]
+      },
+      "light source": {
+        "default": "steady side light unchanged throughout the transformation",
+        "examples": [
+          "overhead light",
+          "backlit",
+          "ambient only"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "100mm macro",
+          "135mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles slow object transformation surrealism. Runway maintains transformation continuity without cuts. Add 'surrealist object transformation slow continuous no cut' for correct approach.",
+    "source_id": 131
+  },
+  {
+    "id": 182,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [natural landscape element] behaving as if it were [different substance] — [lens] wide enough to show the full extent of the [natural landscape element], [quality of wrong substance] visible in the motion and surface, [scale] preserved making the impossible legible, [time of day] light treating the impossible substance as unremarkable, 16:9",
+    "video_prompt": "The [natural landscape element] continues behaving as [different substance] — [quality of wrong substance] motion playing out at the scale of the landscape, a [scale reference element] present in the frame for scale — something normal-sized moving normally in front of the impossible landscape, the camera executing a slow pull-back that reveals more of the extent of the [natural landscape element]'s wrongness, the wrongness more complete than initially visible.",
+    "sfx_prompt": "The sound of [different substance] at landscape scale — what does [natural landscape element] sound like if it is made of [different substance]? The sound design committed to the physics of the wrong material at the right scale, the [scale reference element] producing entirely normal sounds in contrast",
+    "variables": {
+      "natural landscape element": {
+        "default": "a mountain range",
+        "examples": [
+          "the ocean",
+          "a forest",
+          "a desert plain"
+        ]
+      },
+      "different substance": {
+        "default": "fabric — vast curtains of stone-coloured cloth",
+        "examples": [
+          "glass — transparent and refracting the sky",
+          "liquid — flowing slowly in the shape of hills",
+          "smoke — the mountains present but permeable"
+        ]
+      },
+      "quality of wrong substance": {
+        "default": "the billowing and draping of heavy cloth at mountain scale",
+        "examples": [
+          "the refraction and reflection of glass terrain",
+          "the slow viscous flow of hills rearranging",
+          "the slow drift and dissolution of smoke mountains"
+        ]
+      },
+      "scale reference element": {
+        "default": "a person walking at the base",
+        "examples": [
+          "a vehicle on a road below",
+          "a bird flying past the peaks",
+          "a building at the foot of the range"
+        ]
+      },
+      "time of day": {
+        "default": "golden hour",
+        "examples": [
+          "overcast midday",
+          "dawn mist",
+          "blue hour"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles landscape-scale surrealist material transformation. Luma manages the scale reference element against the impossible landscape. Add 'surrealist landscape wrong material scale cinematic' for correct approach.",
+    "source_id": 132
+  },
+  {
+    "id": 183,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Photorealistic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [future technology] that exists in the near future — [lens] at the distance of casual observation, the [future technology] in use by [user type] in a [mundane context], the [future technology] remarkable only in what it can do rather than how it looks, [light condition] the ordinary light of [mundane context], photorealistic near-future still frame, 16:9",
+    "video_prompt": "The [user type] uses the [future technology] for [specific task] — the interaction completely natural, learned, habitual, the [future technology] performing [specific task] with a capability that would be extraordinary today but is clearly routine here, the [mundane context] continuing around it, no one reacting to the [future technology] — it is furniture in their world.",
+    "sfx_prompt": "The sounds of [mundane context] with [future technology] operating within it — the [future technology]'s own sounds (quieter, more precise, less mechanical than today's equivalent), the [user type]'s interaction sounds, the ambient audio of a near-future that sounds like today but with the rough edges smoothed",
+    "variables": {
+      "future technology": {
+        "default": "a translucent flexible display worn as a sleeve",
+        "examples": [
+          "a compact medical scanner the size of a phone",
+          "an earpiece that translates all languages in real time",
+          "a personal air filtration device worn discreetly"
+        ]
+      },
+      "user type": {
+        "default": "commuter",
+        "examples": [
+          "doctor",
+          "tourist",
+          "student"
+        ]
+      },
+      "mundane context": {
+        "default": "a morning train",
+        "examples": [
+          "a hospital corridor",
+          "a foreign city street",
+          "a university library"
+        ]
+      },
+      "specific task": {
+        "default": "reading documents and making annotations in the air",
+        "examples": [
+          "scanning a patient at a glance",
+          "navigating and communicating in a language they don't speak",
+          "accessing all research on a subject instantly"
+        ]
+      },
+      "light condition": {
+        "default": "train window light",
+        "examples": [
+          "hospital overhead light",
+          "outdoor city light",
+          "library ambient light"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles near-future photorealistic environments. Luma maintains technology integration into everyday settings. Add 'near future technology in use photorealistic mundane context' for correct approach.",
+    "source_id": 133
+  },
+  {
+    "id": 184,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Photorealistic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "The moment of [first historic space event] — [lens] at the distance of a documentary camera present for history, the [event hardware] visible in full, [environmental detail] placing this in its real historical context, [light condition] the actual light of the event, photorealistic historical-fictional still frame, 16:9",
+    "video_prompt": "The [first historic space event] unfolds — the camera present as if a documentary crew somehow had access, following the event with the controlled urgency of people who know they are filming something that will be watched forever, [human element] visible and real in the frame, [moment of peak visual drama] occurring at the midpoint, the camera holding on [human element] as the [event hardware] does what it was built to do.",
+    "sfx_prompt": "The actual sounds of [first historic space event] — mechanical, specific, period-accurate, the radio communication crackle of [human element] if applicable, the environmental audio of [environmental detail], the sounds of history being made without a score to tell the viewer how to feel about it",
+    "variables": {
+      "first historic space event": {
+        "default": "the first crewed lunar landing — reimagined with modern camera access",
+        "examples": [
+          "the first Mars landing",
+          "humanity's first contact with an alien signal source",
+          "the first departure of a generation ship"
+        ]
+      },
+      "event hardware": {
+        "default": "the lunar module at the moment of touchdown",
+        "examples": [
+          "the Mars lander deploying its first instruments",
+          "the signal array locking onto the source",
+          "the generation ship's engines lighting for the first time"
+        ]
+      },
+      "environmental detail": {
+        "default": "the lunar surface, Earth visible in the sky",
+        "examples": [
+          "Martian landscape in all directions",
+          "deep space with the source ahead",
+          "Earth shrinking behind"
+        ]
+      },
+      "light condition": {
+        "default": "harsh unfiltered sunlight in vacuum",
+        "examples": [
+          "Martian dust-filtered sunlight",
+          "the light of a distant star strengthening",
+          "Earth-reflected light fading"
+        ]
+      },
+      "human element": {
+        "default": "astronaut boots on the lunar surface",
+        "examples": [
+          "suited figure at the instrument panel",
+          "the crew gathered at the observation window",
+          "a single figure at the airlock looking out"
+        ]
+      },
+      "moment of peak visual drama": {
+        "default": "the moment the boot touches the surface",
+        "examples": [
+          "the first data return lighting the displays",
+          "the signal confirmation arriving",
+          "the engines reaching full thrust and the ship beginning to move"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles historical-fictional space event photorealism. Luma maintains the period-accurate visual texture. Add 'photorealistic historical space event documentary aesthetic' for correct approach.",
+    "source_id": 134
+  },
+  {
+    "id": 185,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Sora"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [alien environment] that is clearly not Earth but could be somewhere in our solar system — [lens] wide, [geological or atmospheric feature] providing the primary visual information, [light quality] from [light source] establishing the alienness, no human presence — a place never visited, [color of sky or environment] unlike any photograph from Earth, photorealistic alien solar system still frame, 16:9",
+    "video_prompt": "The camera makes a slow pan across the [alien environment] — the pan taking in the full extent of [geological or atmospheric feature], [atmospheric motion] if present moving at its own unhurried alien pace, [light quality] shifting slightly as the pan moves the camera's relationship to [light source], the [alien environment] revealing more of its character with each degree of the pan — beautiful, hostile, real.",
+    "sfx_prompt": "The sounds of [alien environment] if sounds could travel here — [atmospheric motion] as wind or movement through [geological or atmospheric feature], the subsonic frequencies of the environment felt rather than heard, or silence if atmosphere is absent — the acoustic reality of a real place in our solar system that no human has stood in",
+    "variables": {
+      "alien environment": {
+        "default": "the surface of Titan — methane lakes and orange haze",
+        "examples": [
+          "the volcanic surface of Io",
+          "the ice plains of Europa",
+          "the canyon system of Valles Marineris on Mars"
+        ]
+      },
+      "geological or atmospheric feature": {
+        "default": "methane lake shore with haze mountains beyond",
+        "examples": [
+          "active volcanic vents and lava flows",
+          "fractured ice plain with subsurface ocean implied",
+          "canyon walls 7km high with dust storms below"
+        ]
+      },
+      "light quality": {
+        "default": "orange-filtered distant sunlight through thick haze",
+        "examples": [
+          "sulphurous yellow volcanic light",
+          "cold blue-grey light from a distant small sun",
+          "red-orange dusty Martian sunlight"
+        ]
+      },
+      "light source": {
+        "default": "the sun — small and distant through haze",
+        "examples": [
+          "the sun — bright but cold",
+          "Jupiter — massive in the sky above",
+          "the sun — small and cold, little stronger than a bright star"
+        ]
+      },
+      "atmospheric motion": {
+        "default": "haze layers moving slowly at altitude",
+        "examples": [
+          "volcanic plumes rising from vents",
+          "ice crystals drifting at the surface",
+          "dust devil crossing the canyon floor far below"
+        ]
+      },
+      "color of sky or environment": {
+        "default": "deep amber and ochre",
+        "examples": [
+          "sulphurous yellow and orange",
+          "grey-blue and white",
+          "rust red and pale pink"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles photorealistic alien solar system environments. Sora manages atmospheric alien landscape pans. Add 'photorealistic alien solar system environment NASA aesthetic' for correct approach.",
+    "source_id": 135
+  },
+  {
+    "id": 186,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [scientist or engineer type] at work on [project type] in [real facility type] — [lens] observing at documentary distance, the [project type] visible in its actual complexity, [scientist or engineer type] absorbed in [specific task], [light condition] the available light of the [real facility type], not science fiction — actual science, documentary still frame, 16:9",
+    "video_prompt": "The camera observes [specific task] in progress — the [scientist or engineer type] working with the focused efficiency of someone at the frontier of what is known, the [project type] visible and real and complex and imperfect in the way actual science is, one moment where [scientist or engineer type] pauses and stares at [something in the work] with the particular expression of someone encountering something they do not yet understand, the camera present for that pause.",
+    "sfx_prompt": "The sounds of [real facility type] at work — equipment specific to [project type], [scientist or engineer type] movement sounds and the occasional voice, the ambient acoustic of a place where the future is being made without fanfare, the sounds of actual science rather than cinematic science",
+    "variables": {
+      "scientist or engineer type": {
+        "default": "aerospace engineer",
+        "examples": [
+          "astrophysicist",
+          "robotics engineer",
+          "materials scientist"
+        ]
+      },
+      "project type": {
+        "default": "spacecraft component assembly",
+        "examples": [
+          "deep space telescope calibration",
+          "autonomous rover testing",
+          "new propulsion system testing"
+        ]
+      },
+      "real facility type": {
+        "default": "clean room assembly facility",
+        "examples": [
+          "observatory control room",
+          "robotics test floor",
+          "propulsion laboratory"
+        ]
+      },
+      "specific task": {
+        "default": "fitting a component by hand in a clean suit",
+        "examples": [
+          "analysing data on multiple screens simultaneously",
+          "running the rover through a simulated terrain",
+          "reading instrument outputs during a test firing"
+        ]
+      },
+      "light condition": {
+        "default": "clean room bright fluorescent",
+        "examples": [
+          "control room screens and low overhead",
+          "test floor industrial lighting",
+          "laboratory mixed task and ambient"
+        ]
+      },
+      "something in the work": {
+        "default": "a reading that should not be what it is",
+        "examples": [
+          "a component that is not quite fitting as designed",
+          "a data point that contradicts the model",
+          "a behaviour the rover was not programmed for"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles documentary science facility observation. Luma maintains available light consistency. Add 'documentary actual science facility observational real scientist' for correct approach.",
+    "source_id": 136
+  },
+  {
+    "id": 187,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Documentary",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "The control room during [critical space mission moment] — [lens] at mid-distance, [controllers type] at their stations, screens showing [mission data type], [critical moment] either approaching or in progress, [light condition] the particular atmosphere of a room where consequential things happen, documentary still frame, 16:9",
+    "video_prompt": "The [critical space mission moment] unfolds in the control room — the camera moving quietly between [controllers type], catching faces and screens and hands, not missing the [peak moment] when it comes — a collective held breath, then [result], the camera on [human reaction] before any word is spoken, the science and the humanity of the moment both present in the frame.",
+    "sfx_prompt": "The control room audio — communications protocols, the murmur of parallel conversations, equipment tone, the particular silence that descends at [critical space mission moment], then [result] sounds — the cheer or the silence or the release of breath that is [result] expressed in human sound",
+    "variables": {
+      "critical space mission moment": {
+        "default": "Mars landing sequence",
+        "examples": [
+          "first contact signal verification",
+          "orbital insertion burn",
+          "sample return capsule reentry"
+        ]
+      },
+      "controllers type": {
+        "default": "flight controllers in headsets",
+        "examples": [
+          "mission scientists at data stations",
+          "communications team and flight directors",
+          "recovery team monitoring descent"
+        ]
+      },
+      "mission data type": {
+        "default": "telemetry and landing simulation",
+        "examples": [
+          "signal analysis and frequency data",
+          "orbital mechanics and burn timing",
+          "trajectory and heat shield data"
+        ]
+      },
+      "critical moment": {
+        "default": "the seven minutes of silence during automated landing",
+        "examples": [
+          "the first signal arriving",
+          "the burn window opening",
+          "reentry blackout beginning"
+        ]
+      },
+      "light condition": {
+        "default": "screen light and overhead in a dim room",
+        "examples": [
+          "full overhead in a bright modern facility",
+          "red alert lighting",
+          "the particular light of a room that has been occupied for days"
+        ]
+      },
+      "peak moment": {
+        "default": "touchdown confirmation",
+        "examples": [
+          "signal confirmed",
+          "burn complete",
+          "signal restored after blackout"
+        ]
+      },
+      "result": {
+        "default": "success — the room erupts",
+        "examples": [
+          "success — quiet tears and embraces",
+          "partial success — relief mixed with concern",
+          "something unexpected requiring immediate response"
+        ]
+      },
+      "human reaction": {
+        "default": "the mission director's face in the second after confirmation",
+        "examples": [
+          "a young engineer who has worked on this for seven years",
+          "the communications officer hearing the first signal",
+          "the team lead as the unexpected data arrives"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles control room documentary observation. Luma maintains consistent screen light atmosphere. Add 'documentary space mission control room critical moment' for correct approach.",
+    "source_id": 137
+  },
+  {
+    "id": 188,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Documentary",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [proposed future location] being [surveyed or studied] by [expedition type] — [lens] observing the [expedition type] at work, the [proposed future location] visible and real around them, [current real technology] they are using to study it, [light condition] the actual conditions of the [proposed future location], documentary near-future still frame, 16:9",
+    "video_prompt": "The [expedition type] moves through the [proposed future location] conducting [survey activity] — the camera following at documentary distance, [current real technology] in active use, the [proposed future location] indifferent to their presence, one moment where [expedition member] stops and simply looks — the act of a human being present somewhere important and knowing it, the survey continuing after the pause.",
+    "sfx_prompt": "The environmental audio of [proposed future location] layered with [expedition type] working sounds — [current real technology] sounds, [expedition member] communication if radio or direct, the [proposed future location]'s own acoustic environment which may be wind, silence, or water, the sounds of people doing serious work in a serious place",
+    "variables": {
+      "proposed future location": {
+        "default": "an Arctic test site for Mars habitat prototypes",
+        "examples": [
+          "an underwater habitat at depth",
+          "a volcanic lava field used for spacesuit testing",
+          "a high-altitude plateau for telescope array construction"
+        ]
+      },
+      "expedition type": {
+        "default": "analog astronaut crew",
+        "examples": [
+          "deep sea habitat team",
+          "ESA engineering field team",
+          "observatory construction crew"
+        ]
+      },
+      "current real technology": {
+        "default": "geological survey instruments and habitat components",
+        "examples": [
+          "saturation diving equipment",
+          "precision alignment tools",
+          "large-scale construction in extreme conditions"
+        ]
+      },
+      "survey activity": {
+        "default": "site assessment and habitat deployment testing",
+        "examples": [
+          "habitat systems checks and EVA simulation",
+          "instrument calibration and site preparation",
+          "structure assembly in high-altitude conditions"
+        ]
+      },
+      "light condition": {
+        "default": "Arctic overcast flat light",
+        "examples": [
+          "deep water artificial light",
+          "volcanic region haze light",
+          "high altitude clear thin light"
+        ]
+      },
+      "expedition member": {
+        "default": "crew commander",
+        "examples": [
+          "youngest team member",
+          "scientist on their first field deployment",
+          "engineer who designed the equipment being tested"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles real analog environment documentary. Runway maintains expedition team consistency through movement. Add 'documentary near-future space analog expedition real location' for correct approach.",
+    "source_id": 138
+  },
+  {
+    "id": 189,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [decade] science fiction television production — [lens] wide, a [set type] built with the craft and the budget constraints of the era, [actor type] in [costume type] against the [set type], VHS broadcast quality with [era visual quality], the production values of science fiction television from this era, 16:9",
+    "video_prompt": "The scene plays out with the pacing and coverage of [decade] television drama — single camera setups with cuts that follow a shot-reverse-shot logic, the [set type] visible in its seams and its effort, the [actor type] delivering [dialogue style] with the performance register of the era, the VHS format softening and warming everything, [iconic era sci-fi moment type] occurring as the scene's payoff.",
+    "sfx_prompt": "The audio of [decade] science fiction television — the synthesiser or electronic music score of the era, the sound effects that were themselves innovative when made, the audio compression of broadcast television, the [actor type]'s voices with the slight distance of on-set boom microphone recording",
+    "variables": {
+      "decade": {
+        "default": "1980s",
+        "examples": [
+          "1970s",
+          "1990s"
+        ]
+      },
+      "set type": {
+        "default": "spaceship bridge",
+        "examples": [
+          "alien planet surface — studio bound",
+          "futuristic laboratory",
+          "space station corridor"
+        ]
+      },
+      "actor type": {
+        "default": "ensemble cast in matching uniforms",
+        "examples": [
+          "lone hero in utilitarian costume",
+          "alien character in makeup and costume",
+          "scientist in slightly-too-clean lab coat"
+        ]
+      },
+      "costume type": {
+        "default": "matching crew uniforms with insignia",
+        "examples": [
+          "hero's practical adventurer gear",
+          "elaborate alien design",
+          "scientist's clean costume with tech props"
+        ]
+      },
+      "era visual quality": {
+        "default": "the colour saturation and soft focus of broadcast tape",
+        "examples": [
+          "16mm film transferred to VHS",
+          "early video production aesthetic",
+          "film with video post-production"
+        ]
+      },
+      "dialogue style": {
+        "default": "expository and earnest",
+        "examples": [
+          "clipped and action-oriented",
+          "philosophical and measured",
+          "technical and efficient"
+        ]
+      },
+      "iconic era sci-fi moment type": {
+        "default": "a viewscreen communication with an alien dignitary",
+        "examples": [
+          "the hero's plan coming together dramatically",
+          "a scientific revelation delivered to camera",
+          "the villain's ultimatum"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles period television production aesthetics. Kling maintains era-accurate VHS quality. Add '1980s science fiction television production VHS broadcast aesthetic' for correct approach.",
+    "source_id": 139
+  },
+  {
+    "id": 190,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [decade] corporate or government training video about [fictional sci-fi technology] — [lens] locked on a [presenter type] in front of a [educational backdrop], the [fictional sci-fi technology] explained with the visual aids of the era — [visual aid type] — VHS quality, [era graphic style] title cards, the tone completely serious about something completely fictional, 16:9",
+    "video_prompt": "The [presenter type] explains [fictional sci-fi technology] with the earnest authority of an industrial training film — [visual aid type] appearing as the explanation proceeds, the camera cutting between the [presenter type] and the [visual aid type] with the functional coverage of educational video, the [fictional sci-fi technology] treated as entirely real and requiring careful instruction, the era's production conventions applied without irony.",
+    "sfx_prompt": "The audio of an industrial training video — the [presenter type]'s voice slightly over-processed, the room acoustic of the recording studio or office space, [era graphic style] title card sounds, the background music of institutional video from the period — purposeful, neutral, unremarkable",
+    "variables": {
+      "decade": {
+        "default": "1980s",
+        "examples": [
+          "1970s",
+          "1990s"
+        ]
+      },
+      "fictional sci-fi technology": {
+        "default": "proper use of personal teleportation devices",
+        "examples": [
+          "maintenance of household anti-gravity units",
+          "correct operation of residential time management systems",
+          "integration of personal AI assistants"
+        ]
+      },
+      "presenter type": {
+        "default": "a man in a blazer and tie",
+        "examples": [
+          "a woman in professional attire",
+          "an actor playing a scientist in a lab coat",
+          "an animated character"
+        ]
+      },
+      "educational backdrop": {
+        "default": "a neutral studio backdrop with the company logo",
+        "examples": [
+          "the actual workplace being trained for",
+          "a diagram-covered whiteboard",
+          "a branded set"
+        ]
+      },
+      "visual aid type": {
+        "default": "diagrams appearing beside the presenter via 1980s graphics technology",
+        "examples": [
+          "physical props being demonstrated step by step",
+          "cutaway illustrations of the mechanism",
+          "before and after comparisons"
+        ]
+      },
+      "era graphic style": {
+        "default": "1980s corporate motion graphics",
+        "examples": [
+          "1970s public information film style",
+          "1990s corporate video production design"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles period training video aesthetics. Kling maintains era-accurate graphics and presentation style. Add 'corporate training video VHS 1980s sci-fi technology earnest' for correct approach.",
+    "source_id": 140
+  },
+  {
+    "id": 191,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [decade] found footage recording of [unexplained sci-fi event] — [lens] handheld camcorder at the height of whoever is filming, the [unexplained sci-fi event] visible at a distance that could be coincidence or could be something, VHS grain and colour bleed, [time of day] light, the specific energy of amateur footage of something genuinely strange, 16:9",
+    "video_prompt": "The [unexplained sci-fi event] continues — the person filming adjusting their position to get a better angle, the zoom used impulsively and then pulled back, [other people] in the scene with natural reactions that range from curious to alarmed, the [unexplained sci-fi event] not performing for the camera — indifferent to being filmed, the VHS format adding its own layer of ambiguity to something already ambiguous.",
+    "sfx_prompt": "Camcorder audio — the automatic gain control breathing with the volume of the scene, [other people] voices talking over each other and reacting, wind hitting the built-in microphone, the [unexplained sci-fi event]'s own sounds if any — possibly nothing, the absence of sound from [unexplained sci-fi event] itself the most unsettling possibility",
+    "variables": {
+      "decade": {
+        "default": "1990s",
+        "examples": [
+          "1980s",
+          "early 2000s"
+        ]
+      },
+      "unexplained sci-fi event": {
+        "default": "a large geometric shape of light maintaining a stationary position in the sky",
+        "examples": [
+          "a section of landscape visibly aging rapidly in a contained area",
+          "a figure moving in a way that is not consistent with human locomotion",
+          "an object on the ground that should not exist"
+        ]
+      },
+      "time of day": {
+        "default": "late afternoon",
+        "examples": [
+          "night with poor camcorder low-light quality",
+          "overcast morning",
+          "sunset"
+        ]
+      },
+      "other people": {
+        "default": "other bystanders who have also stopped to watch",
+        "examples": [
+          "the filmer's family on a trip",
+          "work colleagues",
+          "strangers at an event"
+        ]
+      },
+      "lens": {
+        "default": "consumer zoom lens pulled wide",
+        "examples": [
+          "zoom lens at maximum",
+          "wide fixed consumer lens",
+          "automatic consumer camcorder lens"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles amateur footage of impossible events. Runway maintains VHS found footage aesthetic. Add 'VHS found footage amateur camcorder unexplained event 1990s' for correct approach.",
+    "source_id": 141
+  },
+  {
+    "id": 192,
+    "category": "Food & Cooking",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [decade] cooking show episode — [lens] on a purpose-built cooking set of the era, [host type] at a [cooking station type], [dish being made] in various stages visible around them, [set design] visible in the background, VHS broadcast quality, the production warmth of cooking television from this era, 16:9",
+    "video_prompt": "The [host type] demonstrates [technique] at the [cooking station type] — talking directly to camera with the inclusive warmth of the era's cooking television, [technique] shown step by step with the camera cutting to close-ups on [specific detail] before returning to the [host type], the pacing unhurried, the VHS format adding warmth to the food and the presenter, the [dish being made] coming together visibly.",
+    "sfx_prompt": "The audio of [decade] cooking television — the [host type]'s voice warm and slightly over-enunciated for the camera, the cooking sounds of [technique] at natural volume, the studio hum beneath, a brief signature tune at the segment's open or close, the comfortable audio of television that felt like company",
+    "variables": {
+      "decade": {
+        "default": "1980s",
+        "examples": [
+          "1970s",
+          "1990s"
+        ]
+      },
+      "host type": {
+        "default": "warm female host in a floral apron",
+        "examples": [
+          "patrician male host in a blazer",
+          "duo presenting together",
+          "celebrity chef before they were famous"
+        ]
+      },
+      "cooking station type": {
+        "default": "home kitchen set with everything within reach",
+        "examples": [
+          "professional restaurant kitchen adapted for television",
+          "outdoor cooking set",
+          "baking station with marble and copper"
+        ]
+      },
+      "dish being made": {
+        "default": "a classic roast dinner",
+        "examples": [
+          "a layered cake from scratch",
+          "a regional pasta dish",
+          "a dinner party centrepiece"
+        ]
+      },
+      "set design": {
+        "default": "deliberately homely — plants, recipe books, the suggestion of a real kitchen",
+        "examples": [
+          "professional kitchen dressed for television",
+          "rustic outdoor setting",
+          "elegant and aspirational with period props"
+        ]
+      },
+      "technique": {
+        "default": "preparing and seasoning a joint of meat",
+        "examples": [
+          "building the layers of a cake",
+          "making fresh pasta by hand",
+          "preparing a complicated sauce"
+        ]
+      },
+      "specific detail": {
+        "default": "the hands and the meat",
+        "examples": [
+          "the mixing in the bowl",
+          "the pasta dough texture",
+          "the consistency of the sauce"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles period cooking show production values. Kling maintains era-accurate VHS warmth on food. Add '1980s cooking show VHS broadcast television warm aesthetic' for correct approach.",
+    "source_id": 142
+  },
+  {
+    "id": 193,
+    "category": "Food & Cooking",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "image_prompt": "A [decade] family home video of [family food occasion] — [lens] consumer camcorder held by a family member, [family members] gathered around [food occasion set], the food in various states of being eaten and enjoyed, VHS grain and [color temperature] tones, a timestamp in the corner, the specific energy of footage that was shot to preserve a moment not to be watched, 16:9",
+    "video_prompt": "The camera operator tries to document [family food occasion] — zooming in on [specific food detail] then pulling back to get the [family members] in frame, someone calling to them from off camera, a brief pan that loses the subject and finds it again, the [family members] performing slightly for the camera while also just being a family, the [family food occasion] continuing around the camera's attempts to document it.",
+    "sfx_prompt": "The camcorder audio of a [family food occasion] — overlapping voices, laughter, the sounds of the meal, someone addressing the camera operator directly, the ambient sound of the specific space (indoors or outdoors), the occasional wind hit on the camcorder microphone, the most real sound in the library",
+    "variables": {
+      "decade": {
+        "default": "1990s",
+        "examples": [
+          "1980s",
+          "early 2000s"
+        ]
+      },
+      "family food occasion": {
+        "default": "Christmas dinner",
+        "examples": [
+          "summer barbecue",
+          "birthday cake moment",
+          "Thanksgiving or equivalent gathering"
+        ]
+      },
+      "family members": {
+        "default": "grandparents, parents and children across three generations",
+        "examples": [
+          "siblings and cousins",
+          "parents and young children",
+          "the whole extended family"
+        ]
+      },
+      "food occasion set": {
+        "default": "a dining table laid for Christmas dinner",
+        "examples": [
+          "the garden with barbecue and tables outside",
+          "the birthday table with cake in the centre",
+          "a long table for the full gathering"
+        ]
+      },
+      "specific food detail": {
+        "default": "the turkey being carried to the table",
+        "examples": [
+          "the barbecue in full heat",
+          "the birthday cake before the candles are blown",
+          "the full table of dishes"
+        ]
+      },
+      "color temperature": {
+        "default": "warm indoor incandescent",
+        "examples": [
+          "outdoor daylight slightly overexposed",
+          "mixed indoor and daylight",
+          "evening light plus indoor warmth"
+        ]
+      },
+      "lens": {
+        "default": "consumer wide zoom",
+        "examples": [
+          "zoom at maximum range",
+          "consumer standard zoom",
+          "disposable camcorder equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles family home video camcorder aesthetics. Runway maintains period-accurate VHS family occasion warmth. Add 'family home video VHS 1990s food occasion gathering' for correct approach.",
+    "source_id": 143
+  },
+  {
+    "id": 194,
+    "category": "Food & Cooking",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [decade] fast food television commercial — [lens] locked on a [product type] on a [set surface], the food styled beyond realism in the way of era advertising, [era graphic style] title cards and [brand color palette] dominant, VHS broadcast quality, the saturated appetite-engineering of fast food advertising from the era, 16:9",
+    "video_prompt": "The commercial plays out in its 30-second logic — [product type] presented in hero close-up with [food styling technique], a [consumer type] appearing to receive and react to the [product type] with the performed delight of an advertisement, [era graphic style] graphics announcing [price or offer], the whole thing at the pace of broadcast television advertising and not a second longer.",
+    "sfx_prompt": "The audio of a fast food commercial from the era — a jingle or modified version of an era-appropriate pop song, the [product type] sounds (the crinkle, the pour, the crunch) foley-enhanced beyond reality, the [consumer type]'s delight sounds, a voice-over with the specific energy of advertising voice-over from this decade",
+    "variables": {
+      "decade": {
+        "default": "1990s",
+        "examples": [
+          "1980s",
+          "early 2000s"
+        ]
+      },
+      "product type": {
+        "default": "a burger and large fries",
+        "examples": [
+          "a milkshake in three flavours",
+          "a value meal deal",
+          "a limited edition menu item"
+        ]
+      },
+      "set surface": {
+        "default": "a branded tray on a clean restaurant table",
+        "examples": [
+          "a picnic table outside",
+          "a kitchen counter",
+          "a branded bag being opened"
+        ]
+      },
+      "era graphic style": {
+        "default": "1990s motion graphics with bold sans-serif",
+        "examples": [
+          "1980s chrome and neon graphic style",
+          "early 2000s curved gradient graphics"
+        ]
+      },
+      "brand color palette": {
+        "default": "red and yellow",
+        "examples": [
+          "red and white",
+          "orange and brown",
+          "primary colours"
+        ]
+      },
+      "food styling technique": {
+        "default": "sesame seeds in perfect placement, sauce visible at the perfect angle",
+        "examples": [
+          "condensation on the cup, straw at the exact right angle",
+          "fries arranged to suggest abundance",
+          "the hero ingredient shot before the full meal"
+        ]
+      },
+      "consumer type": {
+        "default": "group of teenagers sharing the meal",
+        "examples": [
+          "family in a restaurant booth",
+          "young couple on an outing",
+          "friend group outdoors"
+        ]
+      },
+      "price or offer": {
+        "default": "a specific low price point",
+        "examples": [
+          "a combo deal",
+          "a limited time offer",
+          "a value menu item"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "85mm",
+          "35mm",
+          "100mm macro for food close-up"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles era fast food advertising aesthetics. Kling maintains period-accurate VHS commercial quality. Add 'fast food television commercial VHS 1990s broadcast advertising' for correct approach.",
+    "source_id": 144
+  },
+  {
+    "id": 195,
+    "category": "Food & Cooking",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [meal type] being eaten in [impossible location] — [lens] wide enough to show both the meal and the [impossible location], [diners] treating the [impossible location] as an entirely normal place to eat, the meal set correctly — tablecloth, proper service, the food entirely real — the [impossible location] the only impossible thing, cinematic still frame, 16:9",
+    "video_prompt": "The meal continues — [diners] eating and talking with the ease of people at a good table, the [impossible location] doing what it does (a storm, a precipice, weightlessness, the deep sea) around them without affecting them or the meal, a [waiter or server] arriving to attend to the table as if this service were completely routine, the camera executing a slow pull-back that reveals more of the [impossible location]'s extent.",
+    "sfx_prompt": "The sounds of a pleasant meal — [diners] conversation, cutlery, glass — layered over the sounds of the [impossible location]: the storm, the height, the deep water, the environmental audio of somewhere a meal should not be possible, the two soundscapes coexisting with the same deadpan as the visual",
+    "variables": {
+      "meal type": {
+        "default": "a formal white-tablecloth dinner service",
+        "examples": [
+          "a casual family lunch",
+          "a street food spread",
+          "a picnic"
+        ]
+      },
+      "impossible location": {
+        "default": "the eye of a hurricane — calm within, visible storm wall all around",
+        "examples": [
+          "the surface of the moon with Earth overhead",
+          "the bottom of the ocean — pressurised but open",
+          "the interior of a working volcano crater"
+        ]
+      },
+      "diners": {
+        "default": "four formally dressed adults",
+        "examples": [
+          "a family of four",
+          "two people on a date",
+          "a large celebration group"
+        ]
+      },
+      "waiter or server": {
+        "default": "a formally dressed waiter",
+        "examples": [
+          "a casual server",
+          "the chef appearing from the kitchen",
+          "a robot server"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible dining location surrealism. Runway maintains meal and diner consistency within the impossible environment. Add 'surrealist dining impossible location deadpan formal meal' for correct approach.",
+    "source_id": 145
+  },
+  {
+    "id": 196,
+    "category": "Food & Cooking",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Marketer"
+    ],
+    "image_prompt": "A [dish type] that [impossible quality] — [lens] locked close enough to make the [impossible quality] legible, the [dish type] otherwise entirely normal and beautifully presented, [light source] treating the [impossible quality] as unremarkable, [surface] and [background] the components of a normal food photograph, cinematic food surrealist still frame, 16:9",
+    "video_prompt": "The [impossible quality] of the [dish type] continues in its own logic — the [dish type] experiencing its impossibility with the patience of something that has always been this way, [one new development] occurring as a natural extension of the [impossible quality] rather than as a new event, the camera holding still throughout, the shot ending before the [impossible quality] fully resolves — the food still impossible as the frame ends.",
+    "sfx_prompt": "The normal sounds of [dish type] — sizzle, steam, texture — alongside the sound of [impossible quality] rendered as a specific physical event, the two sound worlds coexisting as naturally as they appear to visually, the audio committing to the impossibility with the same deadpan as the image",
+    "variables": {
+      "dish type": {
+        "default": "a soup bowl",
+        "examples": [
+          "a perfectly risen soufflé",
+          "a bowl of fresh fruit",
+          "a steak on a board"
+        ]
+      },
+      "impossible quality": {
+        "default": "contains a small storm — rain and lightning visible within the bowl, the soup untouched below it",
+        "examples": [
+          "is slowly levitating, one centimetre above the plate and rising imperceptibly",
+          "reflects a completely different room in its surface — not the one it is in",
+          "casts a shadow in the shape of something that is not a bowl"
+        ]
+      },
+      "light source": {
+        "default": "single overhead warm pendant",
+        "examples": [
+          "natural side window light",
+          "professional studio food lighting",
+          "candlelight"
+        ]
+      },
+      "surface": {
+        "default": "dark slate",
+        "examples": [
+          "white ceramic",
+          "natural wood",
+          "marble"
+        ]
+      },
+      "background": {
+        "default": "dark restaurant interior",
+        "examples": [
+          "white studio",
+          "natural linen",
+          "blurred kitchen"
+        ]
+      },
+      "one new development": {
+        "default": "a small rainbow appearing within the bowl's storm",
+        "examples": [
+          "the levitation reaching two centimetres",
+          "a door visible in the reflection opening slightly",
+          "a second shadow appearing beside the first"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "100mm macro",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible food qualities with deadpan realism. Luma maintains food presentation detail through the surreal event. Add 'surrealist food impossible quality deadpan food photography' for correct approach.",
+    "source_id": 146
+  },
+  {
+    "id": 197,
+    "category": "Food & Cooking",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [cooking action] being performed by [impossible agent] in an otherwise normal kitchen — [lens] at mid-distance, the [impossible agent] executing the [cooking action] with genuine competence, the kitchen entirely normal, [kitchen occupant] present and treating the [impossible agent] as an unremarkable kitchen assistant, cinematic surrealist still frame, 16:9",
+    "video_prompt": "The [cooking action] continues — the [impossible agent] working with the focused efficiency of someone who knows exactly what they are doing, the [kitchen occupant] occasionally giving instruction or acknowledgement as if this were a normal working partnership, the food being made visibly progressing, the camera observing with the neutrality of a documentary that has decided not to comment on the impossible.",
+    "sfx_prompt": "The normal sounds of a kitchen performing [cooking action] — the [impossible agent]'s sounds (which may be surprising or absent), the [kitchen occupant]'s sounds and occasional instructions, the food's sounds, the kitchen's ambient, no score or comedic effect — the deadpan audio of an impossible situation being treated as entirely ordinary",
+    "variables": {
+      "cooking action": {
+        "default": "pastry making",
+        "examples": [
+          "soup preparation",
+          "bread baking",
+          "plating a complex dish"
+        ]
+      },
+      "impossible agent": {
+        "default": "a ghost — visible but translucent, handling physical objects perfectly",
+        "examples": [
+          "a very small giant — 30cm tall and fully proportional, using normal-sized equipment with difficulty",
+          "a precise mechanical arm — clearly robotic but with the judgment of an experienced cook",
+          "an animal — a large cat moving with unexpected culinary competence"
+        ]
+      },
+      "kitchen occupant": {
+        "default": "a home cook working alongside the impossible agent",
+        "examples": [
+          "a professional chef supervising the impossible agent",
+          "an elderly person being assisted by the impossible agent",
+          "a child watching and learning from the impossible agent"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible kitchen assistants. Runway maintains cooking action consistency through the surreal partnership. Add 'surrealist kitchen impossible assistant cooking deadpan' for correct approach.",
+    "source_id": 147
+  },
+  {
+    "id": 198,
+    "category": "Food & Cooking",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [specific dish type] served at [specific restaurant type] — [lens] at a slight low angle, the dish as it arrives at the table, [table context] visible — the real environment of the restaurant present around the dish, [light condition] the actual light of the [specific restaurant type], photorealistic food in context rather than food as object, 16:9",
+    "video_prompt": "The dish is set down at the table by [server type] — the camera holds on the dish as [server type] withdraws from frame, [table context] visible and real, [light condition] settling on the dish's surface and [garnish or detail], the [specific restaurant type] continuing its life in the soft background, a hand entering from the edge of the frame to reach for a fork — the meal beginning.",
+    "sfx_prompt": "The ambient sound of [specific restaurant type] — conversation at the edges, the specific acoustic of the space (high ceilings, soft furnishings, outdoor), the sound of the dish being placed on the table, [table context] sounds, the restaurant continuing around the moment of the dish arriving",
+    "variables": {
+      "specific dish type": {
+        "default": "hand-cut pasta with truffle and aged parmesan",
+        "examples": [
+          "whole grilled fish with salsa verde",
+          "a tasting menu amuse-bouche",
+          "regional stew in an earthenware pot"
+        ]
+      },
+      "specific restaurant type": {
+        "default": "intimate Italian restaurant with low warm lighting",
+        "examples": [
+          "casual outdoor seafood restaurant by the water",
+          "high-end tasting menu restaurant",
+          "traditional regional restaurant in its original location"
+        ]
+      },
+      "table context": {
+        "default": "linen, wine glasses, bread already partly eaten",
+        "examples": [
+          "simple paper, wine in a carafe, the outdoors all around",
+          "tasting menu settings, amuse-bouche preceding dishes",
+          "earthenware and simple cutlery, local wine"
+        ]
+      },
+      "light condition": {
+        "default": "warm pendant light above the table",
+        "examples": [
+          "outdoor evening light and candles",
+          "theatrical spotlighting on the table only",
+          "natural light from large windows"
+        ]
+      },
+      "server type": {
+        "default": "a waiter in a long apron",
+        "examples": [
+          "the chef themselves delivering the dish",
+          "a casual server in house uniform",
+          "an older traditional restaurant server"
+        ]
+      },
+      "garnish or detail": {
+        "default": "truffle shaved at the table and settling on the pasta",
+        "examples": [
+          "salsa verde bright green against the fish",
+          "the amuse arriving under a glass cloche",
+          "herbs from the garden placed fresh at service"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles photorealistic restaurant environment food shots. Kling maintains consistent light through the service moment. Add 'photorealistic food in restaurant context served at table' for correct approach.",
+    "source_id": 148
+  },
+  {
+    "id": 199,
+    "category": "Food & Cooking",
+    "style": "Photorealistic",
+    "best_on": [
+      "Kling",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [food tradition type] being performed by [practitioner type] in [authentic location] — [lens] observing at documentary distance but with the photorealistic quality of a high-end magazine, the [food tradition type] in progress, [practitioner type] absorbed in [specific moment of tradition], [light condition] the actual light of the [authentic location], every detail photorealistic and real, 16:9",
+    "video_prompt": "The [specific moment of tradition] continues — the [practitioner type] moving with the practiced ease of someone who has done this [timeframe], the [authentic location] providing its real context and its real light, the camera making one careful reframe to find the optimal angle on [specific moment of tradition], the [food tradition type] progressing at its own unhurried pace — this is not a demonstration, this is the thing itself.",
+    "sfx_prompt": "The undesigned sounds of [food tradition type] in [authentic location] — [specific moment of tradition] sounds, the [authentic location] acoustic, [practitioner type] sounds including any verbal elements of the tradition (a prayer, a recipe recited, instructions to an apprentice), the sounds of continuity — something that has happened this way for a very long time",
+    "variables": {
+      "food tradition type": {
+        "default": "mole negro preparation — a three-day process",
+        "examples": [
+          "hand-harvesting and processing saffron",
+          "traditional sourdough culture maintenance and baking",
+          "the annual making of preserved lemons for the year"
+        ]
+      },
+      "practitioner type": {
+        "default": "a matriarch who learned from her mother who learned from hers",
+        "examples": [
+          "a saffron farmer and their family",
+          "a village baker who has made this bread every day for forty years",
+          "an elderly woman whose family has made this every winter for generations"
+        ]
+      },
+      "authentic location": {
+        "default": "a kitchen in Oaxaca with equipment that spans generations",
+        "examples": [
+          "saffron fields in La Mancha at harvest",
+          "a bakery in San Francisco with a starter culture kept for thirty years",
+          "a family kitchen in Morocco in early winter"
+        ]
+      },
+      "specific moment of tradition": {
+        "default": "the grinding of the chiles on the metate",
+        "examples": [
+          "the harvesting of the stigmas by hand at dawn",
+          "the scoring of the loaves before the final proof",
+          "the packing of the lemons into the jar with salt and preserved juice"
+        ]
+      },
+      "light condition": {
+        "default": "the natural light of a working Mexican kitchen",
+        "examples": [
+          "pre-dawn field light in La Mancha",
+          "the early morning light of a bakery before it opens",
+          "winter morning light through a kitchen window"
+        ]
+      },
+      "timeframe": {
+        "default": "their whole life",
+        "examples": [
+          "every harvest for fifty years",
+          "every day for four decades",
+          "every winter since childhood"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles photorealistic food tradition documentation. Luma maintains authentic location light quality. Add 'photorealistic food tradition cultural practice authentic location' for correct approach.",
+    "source_id": 149
+  },
+  {
+    "id": 200,
+    "category": "Food & Cooking",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [season and location] harvest at peak — [lens] wide, [produce type] in abundance creating a [color palette] across the frame, [harvester type] working in the mid-ground, [time of day] light making [produce type] glow, the harvest both beautiful and practical, photorealistic agricultural landscape still frame, 16:9",
+    "video_prompt": "Camera moves slowly through the harvest at a walking pace — [produce type] on all sides, the [harvester type] working around and ahead of the camera, [time of day] light changing quality as the camera moves between open and shaded areas, [seasonal detail] visible in the quality of light and the state of [produce type], the camera eventually rising to a higher angle that reveals the full scale of the harvest and the [season and location]'s landscape beyond it.",
+    "sfx_prompt": "The full audio of a harvest — [produce type] sounds as they are picked and handled, [harvester type] working sounds and voices at natural distance, the sounds of the [season and location] landscape: insects, wind, birds — the richest and most specific agricultural audio of the year",
+    "variables": {
+      "season and location": {
+        "default": "late summer lavender harvest in Provence",
+        "examples": [
+          "autumn apple harvest in an English orchard",
+          "early summer strawberry harvest in a field",
+          "autumn grape harvest in a Burgundy vineyard"
+        ]
+      },
+      "produce type": {
+        "default": "lavender at peak bloom",
+        "examples": [
+          "apples at full colour",
+          "strawberries at peak red",
+          "grapes at harvest ripeness"
+        ]
+      },
+      "color palette": {
+        "default": "purple and green and gold",
+        "examples": [
+          "red and green and autumn brown",
+          "red and green and cream",
+          "purple and gold and green"
+        ]
+      },
+      "harvester type": {
+        "default": "traditional lavender harvesters with hand scythes",
+        "examples": [
+          "pickers with ladders and baskets",
+          "pickers in hats moving along rows",
+          "a mixed family and hired picker team"
+        ]
+      },
+      "time of day": {
+        "default": "early morning before the heat",
+        "examples": [
+          "golden hour late afternoon",
+          "overcast working day light",
+          "dawn beginning of the harvest day"
+        ]
+      },
+      "seasonal detail": {
+        "default": "morning dew still visible on the lavender",
+        "examples": [
+          "autumn light and the first leaves turning at the field's edge",
+          "summer morning warmth and morning shadow still long",
+          "harvest morning with mist in the valley below"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles agricultural landscape photorealism. Kling maintains harvest motion and produce colour through the camera move. Add 'photorealistic seasonal harvest agricultural landscape golden hour' for correct approach.",
+    "source_id": 150
   }
 ]

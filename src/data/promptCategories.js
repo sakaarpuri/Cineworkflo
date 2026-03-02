@@ -117,7 +117,7 @@ export const PROMPT_LIBRARY = rawPromptLibrary.map((rawPrompt, index) => {
   const sfxPrompt = normalizeWhitespace(rawPrompt.sfx_prompt)
 
   return {
-    id: index + 1,
+    id: rawPrompt.id ?? index + 1,
     source_id: rawPrompt.source_id ?? rawPrompt.id,
     category: normalizeWhitespace(rawPrompt.category),
     style,
