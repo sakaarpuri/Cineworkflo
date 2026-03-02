@@ -57,6 +57,24 @@ const ROUTES = [
     `
   },
   {
+    path: '/vault',
+    file: join(DIST_DIR, 'vault', 'index.html'),
+    title: 'Prompt Vault (v2) - Pro AI Video Prompts | CineWorkflo',
+    description: 'A pro prompt format with image/video/sfx blocks and variable controls. Preview the next Prompt Vault experience.',
+    keywords: 'prompt vault v2, pro AI prompts, image prompt, video prompt, sfx prompt, variable prompts',
+    fallbackHtml: `
+      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+        <h1>Prompt Vault (v2)</h1>
+        <p>A pro prompt format with image/video/sfx blocks and variable controls.</p>
+        <ul>
+          <li>Image Prompt + Video Prompt + SFX blocks</li>
+          <li>Variables panel with fast variants</li>
+          <li>Tool notes per prompt</li>
+        </ul>
+      </main>
+    `
+  },
+  {
     path: '/shot-to-prompt',
     file: join(DIST_DIR, 'shot-to-prompt', 'index.html'),
     title: 'Shot to Prompt - Turn Visual References into AI Video Prompts | CineWorkflo',

@@ -19,6 +19,12 @@
   force = true
 
 [[redirects]]
+  from = "/vault/"
+  to = "/vault"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/prompts/product-ads/"
   to = "/prompts/product-ads"
   status = 301

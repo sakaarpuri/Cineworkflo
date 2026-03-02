@@ -149,6 +149,21 @@ export default function PromptVault({ preview = false }) {
               ? 'Preview of professional prompts. Get full access with Pro.' 
               : 'Browse our complete collection of tested prompts for AI video creation.'}
           </p>
+          {!preview && (
+            <div className="mt-4">
+              <Link
+                to="/vault"
+                className="inline-flex items-center justify-center px-4 py-2 rounded-xl font-semibold text-sm transition-all"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(79,142,247,0.18), rgba(164,126,245,0.18))',
+                  border: '1px solid rgba(255,255,255,0.16)',
+                  color: 'var(--text-primary)'
+                }}
+              >
+                Try Prompt Vault v2 (beta)
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* Search & Filter */}

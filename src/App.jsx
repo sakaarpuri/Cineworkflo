@@ -21,6 +21,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'))
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
 const MyLibraryPage = lazy(() => import('./pages/MyLibraryPage'))
+const VaultPage = lazy(() => import('./pages/VaultPage'))
 const Features = lazy(() => import('./components/Features'))
 const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
@@ -47,6 +48,13 @@ const SEO_BY_PATH = {
     keywords: 'prompt vault, AI prompts for video, Runway prompt library, Pika prompt library, Sora prompt library, Meta prompt library, cinematic AI prompts',
     path: '/prompts',
     noindex: false
+  },
+  '/vault': {
+    title: 'Prompt Vault (v2) - Pro AI Video Prompts | CineWorkflo',
+    description: 'A pro prompt format with image/video/sfx blocks and variable controls. Preview the next Prompt Vault experience.',
+    keywords: 'prompt vault v2, pro AI prompts, image prompt, video prompt, sfx prompt, variable prompts',
+    path: '/vault',
+    noindex: true
   },
   '/shot-to-prompt': {
     title: 'Shot to Prompt - Turn Visual References into AI Video Prompts | CineWorkflo',
@@ -456,6 +464,7 @@ function App() {
               } />
               <Route path="/prompts" element={<Suspense fallback={sectionFallback(300)}><PromptVault /></Suspense>} />
               <Route path="/prompts/:categorySlug" element={<Suspense fallback={sectionFallback(320)}><PromptCategoryPage /></Suspense>} />
+              <Route path="/vault" element={<Suspense fallback={sectionFallback(320)}><VaultPage /></Suspense>} />
               <Route path="/shot-to-prompt" element={<Suspense fallback={sectionFallback(320)}><ShotToPrompt /></Suspense>} />
               <Route path="/camera-moves" element={<Suspense fallback={sectionFallback(320)}><CameraMovesPage /></Suspense>} />
               <Route path="/modern-moves" element={<Suspense fallback={sectionFallback(320)}><ModernAINativeMoves /></Suspense>} />
