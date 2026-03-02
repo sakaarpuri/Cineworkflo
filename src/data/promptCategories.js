@@ -118,7 +118,7 @@ export const PROMPT_LIBRARY = rawPromptLibrary.map((rawPrompt, index) => {
 
   return {
     id: index + 1,
-    source_id: rawPrompt.id,
+    source_id: rawPrompt.source_id ?? rawPrompt.id,
     category: normalizeWhitespace(rawPrompt.category),
     style,
     audience,

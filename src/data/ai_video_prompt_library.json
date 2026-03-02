@@ -56,7 +56,8 @@
         ]
       }
     },
-    "tool_notes": "On Pika add 'smooth rotation'. Luma handles reflective surfaces cleanly. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "On Pika add 'smooth rotation'. Luma handles reflective surfaces cleanly. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 1
   },
   {
     "id": 2,
@@ -115,7 +116,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles glass refraction well. Add 'photorealistic product' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Kling handles glass refraction well. Add 'photorealistic product' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 2
   },
   {
     "id": 3,
@@ -175,7 +177,8 @@
         ]
       }
     },
-    "tool_notes": "Luma excels at vehicle motion. Add 'tracking shot' explicitly on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Luma excels at vehicle motion. Add 'tracking shot' explicitly on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 3
   },
   {
     "id": 4,
@@ -243,7 +246,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles liquid dynamics well. On Runway use 'slow motion pour'. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Kling handles liquid dynamics well. On Runway use 'slow motion pour'. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 4
   },
   {
     "id": 5,
@@ -295,7 +299,8 @@
         ]
       }
     },
-    "tool_notes": "Sora excels at surreal scale and space environments. Add 'photorealistic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Sora excels at surreal scale and space environments. Add 'photorealistic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 5
   },
   {
     "id": 6,
@@ -355,7 +360,8 @@
         ]
       }
     },
-    "tool_notes": "On Pika add 'smooth motion'. On Kling specify '6 seconds'. Google Veo 3.1 handles this well and auto-generates matching audio."
+    "tool_notes": "On Pika add 'smooth motion'. On Kling specify '6 seconds'. Google Veo 3.1 handles this well and auto-generates matching audio.",
+    "source_id": 6
   },
   {
     "id": 7,
@@ -422,7 +428,8 @@
         ]
       }
     },
-    "tool_notes": "Use 'slow motion' keyword explicitly on Pika for best results. Google Veo 3.1 handles this well and auto-generates matching audio."
+    "tool_notes": "Use 'slow motion' keyword explicitly on Pika for best results. Google Veo 3.1 handles this well and auto-generates matching audio.",
+    "source_id": 7
   },
   {
     "id": 8,
@@ -472,7 +479,8 @@
         ]
       }
     },
-    "tool_notes": "Add 'VHS grain overlay' on Runway for stronger retro effect."
+    "tool_notes": "Add 'VHS grain overlay' on Runway for stronger retro effect.",
+    "source_id": 8
   },
   {
     "id": 9,
@@ -539,7 +547,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime style consistently. On Luma add 'Studio Ghibli' as style reference."
+    "tool_notes": "Kling handles anime style consistently. On Luma add 'Studio Ghibli' as style reference.",
+    "source_id": 9
   },
   {
     "id": 10,
@@ -613,7 +622,8 @@
         ]
       }
     },
-    "tool_notes": "Specify 'flat anime shading' on Runway to avoid 3D look."
+    "tool_notes": "Specify 'flat anime shading' on Runway to avoid 3D look.",
+    "source_id": 10
   },
   {
     "id": 11,
@@ -682,7 +692,8 @@
         ]
       }
     },
-    "tool_notes": "Luma handles atmospheric lighting well. Add 'handheld camera drift' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Luma handles atmospheric lighting well. Add 'handheld camera drift' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 11
   },
   {
     "id": 12,
@@ -742,7 +753,8 @@
         ]
       }
     },
-    "tool_notes": "Sora excels at wide environmental shots. Use 'slow zoom out reveal' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Sora excels at wide environmental shots. Use 'slow zoom out reveal' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 12
   },
   {
     "id": 13,
@@ -809,7 +821,8 @@
         ]
       }
     },
-    "tool_notes": "Pika handles VHS grain consistently. Add 'home video aesthetic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Pika handles VHS grain consistently. Add 'home video aesthetic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 13
   },
   {
     "id": 14,
@@ -893,7 +906,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime transitions. Add 'soft watercolor animation' on Luma. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Kling handles anime transitions. Add 'soft watercolor animation' on Luma. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 14
   },
   {
     "id": 15,
@@ -961,7 +975,8 @@
         ]
       }
     },
-    "tool_notes": "Luma handles candlelight dynamics well. Specify 'slow motion blow' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Luma handles candlelight dynamics well. Specify 'slow motion blow' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 15
   },
   {
     "id": 16,
@@ -1023,7 +1038,8 @@
         ]
       }
     },
-    "tool_notes": "Sora excels at large-scale historical world building. Luma maintains architectural detail. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Sora excels at large-scale historical world building. Luma maintains architectural detail. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 16
   },
   {
     "id": 17,
@@ -1100,7 +1116,8 @@
         ]
       }
     },
-    "tool_notes": "Luma handles fog and atmospheric depth beautifully. Add 'volumetric morning mist' on Sora. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Luma handles fog and atmospheric depth beautifully. Add 'volumetric morning mist' on Sora. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 17
   },
   {
     "id": 18,
@@ -1153,7 +1170,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner 2049 mood' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner 2049 mood' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 18
   },
   {
     "id": 19,
@@ -1237,7 +1255,8 @@
         ]
       }
     },
-    "tool_notes": "Luma captures Ghibli environmental warmth. Kling maintains consistent anime style. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Luma captures Ghibli environmental warmth. Kling maintains consistent anime style. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 19
   },
   {
     "id": 20,
@@ -1298,7 +1317,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles large-scale sci-fi cityscapes best. Use 'cyberpunk megacity descent' on Luma. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot."
+    "tool_notes": "Sora handles large-scale sci-fi cityscapes best. Use 'cyberpunk megacity descent' on Luma. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
+    "source_id": 20
   },
   {
     "id": 21,
@@ -1349,7 +1369,8 @@
         ]
       }
     },
-    "tool_notes": "Runway handles minimalist animation cleanly. Specify 'perfect loop' on Pika."
+    "tool_notes": "Runway handles minimalist animation cleanly. Specify 'perfect loop' on Pika.",
+    "source_id": 21
   },
   {
     "id": 22,
@@ -1392,7 +1413,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible geometry best. On Runway use 'Escher architectural loop'."
+    "tool_notes": "Sora handles impossible geometry best. On Runway use 'Escher architectural loop'.",
+    "source_id": 22
   },
   {
     "id": 23,
@@ -1435,7 +1457,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles neon glow effects cleanly. Specify 'loopable neon fluid art' on Runway."
+    "tool_notes": "Kling handles neon glow effects cleanly. Specify 'loopable neon fluid art' on Runway.",
+    "source_id": 23
   },
   {
     "id": 24,
@@ -1486,7 +1509,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles portal and world-transition concepts exceptionally well."
+    "tool_notes": "Sora handles portal and world-transition concepts exceptionally well.",
+    "source_id": 24
   },
   {
     "id": 25,
@@ -1528,7 +1552,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles infinite zoom concepts. On Runway use 'fractal zoom cyberpunk colors'."
+    "tool_notes": "Sora handles infinite zoom concepts. On Runway use 'fractal zoom cyberpunk colors'.",
+    "source_id": 25
   },
   {
     "id": 26,
@@ -1597,7 +1622,8 @@
         ]
       }
     },
-    "tool_notes": "Luma maintains face consistency. Add 'professional broadcast' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here — specify avatar expression and background scene for best results."
+    "tool_notes": "Luma maintains face consistency. Add 'professional broadcast' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here — specify avatar expression and background scene for best results.",
+    "source_id": 26
   },
   {
     "id": 27,
@@ -1673,7 +1699,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles natural body movement. Specify 'natural gesture' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here — specify avatar expression and background scene for best results."
+    "tool_notes": "Kling handles natural body movement. Specify 'natural gesture' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here — specify avatar expression and background scene for best results.",
+    "source_id": 27
   },
   {
     "id": 28,
@@ -1746,7 +1773,8 @@
         ]
       }
     },
-    "tool_notes": "Kling maintains anime character consistency. Use 'anime dramatic zoom' on Luma. HeyGen excels here — specify avatar expression and background scene for best results."
+    "tool_notes": "Kling maintains anime character consistency. Use 'anime dramatic zoom' on Luma. HeyGen excels here — specify avatar expression and background scene for best results.",
+    "source_id": 28
   },
   {
     "id": 29,
@@ -1814,7 +1842,8 @@
         ]
       }
     },
-    "tool_notes": "Luma handles holographic light figures cleanly. Use 'holographic AI avatar' on Runway. HeyGen excels here — specify avatar expression and background scene for best results."
+    "tool_notes": "Luma handles holographic light figures cleanly. Use 'holographic AI avatar' on Runway. HeyGen excels here — specify avatar expression and background scene for best results.",
+    "source_id": 29
   },
   {
     "id": 30,
@@ -1891,7 +1920,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles rain and neon reflections for anime characters. Add 'anime noir' on Runway. HeyGen excels here — specify avatar expression and background scene for best results."
+    "tool_notes": "Kling handles rain and neon reflections for anime characters. Add 'anime noir' on Runway. HeyGen excels here — specify avatar expression and background scene for best results.",
+    "source_id": 30
   },
   {
     "id": 31,
@@ -1958,7 +1988,8 @@
         ]
       }
     },
-    "tool_notes": "Pika handles VHS aesthetic well. Add 'retro TV commercial grain' on Runway."
+    "tool_notes": "Pika handles VHS aesthetic well. Add 'retro TV commercial grain' on Runway.",
+    "source_id": 31
   },
   {
     "id": 32,
@@ -2017,7 +2048,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner atmosphere' on Runway."
+    "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner atmosphere' on Runway.",
+    "source_id": 32
   },
   {
     "id": 33,
@@ -2084,7 +2116,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime ad style consistently. Add 'anime commercial energy' on Luma."
+    "tool_notes": "Kling handles anime ad style consistently. Add 'anime commercial energy' on Luma.",
+    "source_id": 33
   },
   {
     "id": 34,
@@ -2143,7 +2176,8 @@
         ]
       }
     },
-    "tool_notes": "Runway keeps backgrounds pristine. Pika handles satisfying minimal loops."
+    "tool_notes": "Runway keeps backgrounds pristine. Pika handles satisfying minimal loops.",
+    "source_id": 34
   },
   {
     "id": 35,
@@ -2193,7 +2227,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles portal world-transitions exceptionally well. Add 'seamless surreal transition' on Runway."
+    "tool_notes": "Sora handles portal world-transitions exceptionally well. Add 'seamless surreal transition' on Runway.",
+    "source_id": 35
   },
   {
     "id": 36,
@@ -2259,7 +2294,8 @@
         ]
       }
     },
-    "tool_notes": "Pika handles VHS jump cuts well. Add 'authentic DIY camcorder look' on Kling."
+    "tool_notes": "Pika handles VHS jump cuts well. Add 'authentic DIY camcorder look' on Kling.",
+    "source_id": 36
   },
   {
     "id": 37,
@@ -2310,7 +2346,8 @@
         ]
       }
     },
-    "tool_notes": "Runway handles isolation framing cleanly. Add 'wide angle slow pull back single subject' on Luma."
+    "tool_notes": "Runway handles isolation framing cleanly. Add 'wide angle slow pull back single subject' on Luma.",
+    "source_id": 37
   },
   {
     "id": 38,
@@ -2352,7 +2389,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible world transitions. Add 'surreal mirror world continuity' on Runway."
+    "tool_notes": "Sora handles impossible world transitions. Add 'surreal mirror world continuity' on Runway.",
+    "source_id": 38
   },
   {
     "id": 39,
@@ -2427,7 +2465,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles wet surface neon reflections. Add 'neo-noir tracking shot' on Runway."
+    "tool_notes": "Kling handles wet surface neon reflections. Add 'neo-noir tracking shot' on Runway.",
+    "source_id": 39
   },
   {
     "id": 40,
@@ -2469,7 +2508,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible physics scenarios best. Specify 'surreal reversed world documentary style' on Runway."
+    "tool_notes": "Sora handles impossible physics scenarios best. Specify 'surreal reversed world documentary style' on Runway.",
+    "source_id": 40
   },
   {
     "id": 41,
@@ -2528,7 +2568,8 @@
         ]
       }
     },
-    "tool_notes": "Runway handles minimalist environment composition. Add 'single subject vast landscape' on Luma."
+    "tool_notes": "Runway handles minimalist environment composition. Add 'single subject vast landscape' on Luma.",
+    "source_id": 41
   },
   {
     "id": 42,
@@ -2587,7 +2628,8 @@
         ]
       }
     },
-    "tool_notes": "Pika handles VHS travel documentary style. Add 'vintage travel film grain' on Runway."
+    "tool_notes": "Pika handles VHS travel documentary style. Add 'vintage travel film grain' on Runway.",
+    "source_id": 42
   },
   {
     "id": 43,
@@ -2646,7 +2688,8 @@
         ]
       }
     },
-    "tool_notes": "Luma handles macro texture beautifully. Add 'extreme macro slow pan alien landscape feel' on Runway."
+    "tool_notes": "Luma handles macro texture beautifully. Add 'extreme macro slow pan alien landscape feel' on Runway.",
+    "source_id": 43
   },
   {
     "id": 44,
@@ -2704,7 +2747,8 @@
         ]
       }
     },
-    "tool_notes": "Pika handles found footage VHS aesthetic. Add 'degraded tape abstract art' on Runway."
+    "tool_notes": "Pika handles found footage VHS aesthetic. Add 'degraded tape abstract art' on Runway.",
+    "source_id": 44
   },
   {
     "id": 45,
@@ -2755,7 +2799,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime abstract sequences. Add 'anime abstract title sequence atmospheric' on Luma."
+    "tool_notes": "Kling handles anime abstract sequences. Add 'anime abstract title sequence atmospheric' on Luma.",
+    "source_id": 45
   },
   {
     "id": 46,
@@ -2822,7 +2867,8 @@
         ]
       }
     },
-    "tool_notes": "Runway handles minimalist character motion cleanly. Add 'clean studio portrait extreme slow motion' on Luma."
+    "tool_notes": "Runway handles minimalist character motion cleanly. Add 'clean studio portrait extreme slow motion' on Luma.",
+    "source_id": 46
   },
   {
     "id": 47,
@@ -2881,7 +2927,8 @@
         ]
       }
     },
-    "tool_notes": "Pika handles VHS character introductions. Add 'camcorder home video character intro' on Kling."
+    "tool_notes": "Pika handles VHS character introductions. Add 'camcorder home video character intro' on Kling.",
+    "source_id": 47
   },
   {
     "id": 48,
@@ -2940,7 +2987,8 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible body/material concepts. Add 'deadpan surreal character study' on Runway."
+    "tool_notes": "Sora handles impossible body/material concepts. Add 'deadpan surreal character study' on Runway.",
+    "source_id": 48
   },
   {
     "id": 49,
@@ -3015,7 +3063,8 @@
         ]
       }
     },
-    "tool_notes": "Kling handles cyberpunk character portraits consistently. Add 'neo-noir character study portrait' on Runway."
+    "tool_notes": "Kling handles cyberpunk character portraits consistently. Add 'neo-noir character study portrait' on Runway.",
+    "source_id": 49
   },
   {
     "id": 50,
@@ -3074,10 +3123,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles abstract avatar concepts cleanly. Add 'abstract personality avatar seamless loop' on Luma."
+    "tool_notes": "Runway handles abstract avatar concepts cleanly. Add 'abstract personality avatar seamless loop' on Luma.",
+    "source_id": 50
   },
   {
-    "id": 1,
+    "id": 51,
     "category": "Brand & Product Ads",
     "style": "Minimalist",
     "best_on": [
@@ -3133,10 +3183,11 @@
     "tool_notes": "On Pika add 'smooth rotation'. Luma handles reflective surfaces cleanly. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A single [product color] [product type] floating in a pure white void, [lens] locked-off shot, single overhead key light casting one precise shadow directly below, the product's surface filling two-thirds of frame, ultra-sharp texture detail on [material detail], negative space breathing on all sides, clean [brand aesthetic] aesthetic, 16:9",
     "video_prompt": "Imperceptibly slow 360-degree rotation over 20 seconds — the product turns on its axis with absolute mechanical precision, shadow rotates in lockstep below, no camera movement whatsoever, premium and clinical in tone",
-    "sfx_prompt": "Near-total silence with only the faintest studio room tone beneath everything. A soft, barely-perceptible pulse at the moment the product's highlight reaches peak reflection. No ambient noise, no handling sounds, no music."
+    "sfx_prompt": "Near-total silence with only the faintest studio room tone beneath everything. A soft, barely-perceptible pulse at the moment the product's highlight reaches peak reflection. No ambient noise, no handling sounds, no music.",
+    "source_id": 1
   },
   {
-    "id": 2,
+    "id": 52,
     "category": "Brand & Product Ads",
     "style": "Minimalist",
     "best_on": [
@@ -3192,10 +3243,11 @@
     "tool_notes": "Kling handles glass refraction well. Add 'photorealistic product' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [product type] on a [surface material] surface, [lens] locked close — single overhead light source casting a razor-precise shadow that anchors the product to the surface, hyper-realistic [material detail] catching the light, dry air with no atmospheric haze, minimal and [mood] feel, 16:9",
     "video_prompt": "Camera begins at eye-level and executes a slow deliberate 180-degree orbit revealing every angle over full duration — [material detail] catching the light as the angle changes, the product never moving, only the perspective shifting",
-    "sfx_prompt": "Studio silence — absolute and controlled, no ambient noise whatsoever. A barely perceptible whisper of air movement from the controlled environment. No handling sounds, no reflections, the [mood] aesthetic expressed as acoustic emptiness."
+    "sfx_prompt": "Studio silence — absolute and controlled, no ambient noise whatsoever. A barely perceptible whisper of air movement from the controlled environment. No handling sounds, no reflections, the [mood] aesthetic expressed as acoustic emptiness.",
+    "source_id": 2
   },
   {
-    "id": 3,
+    "id": 53,
     "category": "Brand & Product Ads",
     "style": "Cinematic",
     "best_on": [
@@ -3252,10 +3304,11 @@
     "tool_notes": "Luma excels at vehicle motion. Add 'tracking shot' explicitly on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [vehicle type] on a [road type] at [time of day], [lens] low-angle shot locked at tire height — [atmospheric detail] billowing from tires and catching the backlight, warm side-raking dramatic light sculpting the body panels, heat shimmer visible in the far distance, cinematic 2.39:1 color grade, 16:9",
     "video_prompt": "Tracking shot locked at tire height keeping perfect pace with the vehicle over full duration — vehicle stays fixed in frame, only the road rushing beneath it, [atmospheric detail] billowing continuously, heat shimmer rippling at distance, the vehicle never moving in frame",
-    "sfx_prompt": "Deep engine note of the [vehicle type] at speed, road surface texture rushing beneath with tactile presence, [atmospheric detail] hissing through the air as it catches the backlight — no music, the mechanical and natural sounds forming the entire atmosphere."
+    "sfx_prompt": "Deep engine note of the [vehicle type] at speed, road surface texture rushing beneath with tactile presence, [atmospheric detail] hissing through the air as it catches the backlight — no music, the mechanical and natural sounds forming the entire atmosphere.",
+    "source_id": 3
   },
   {
-    "id": 4,
+    "id": 54,
     "category": "Brand & Product Ads",
     "style": "Cinematic",
     "best_on": [
@@ -3320,10 +3373,11 @@
     "tool_notes": "Kling handles liquid dynamics well. On Runway use 'slow motion pour'. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [drink type] in a glass, [lens] locked from low three-quarter angle — [ice detail] visible in crystalline detail, [liquid color] liquid in the glass, [surface type] surface reflecting below, single warm [light color] practical source from camera-left, deep shadow on right side, cinematic macro photography style, 16:9",
     "video_prompt": "Extreme slow motion pour over full duration — [liquid color] liquid folding and splashing upward catching the light at every droplet, moment of impact frozen and released in waves, [ice detail] reacting with crystalline precision, [surface type] reflecting the motion throughout",
-    "sfx_prompt": "The crystalline crack of [ice detail] amplified to cinematic scale, [liquid color] liquid impact deconstructed into individual droplet sounds at extreme slow motion, the deep resonant tone of the glass itself as liquid fills it — no music, pure liquid acoustics."
+    "sfx_prompt": "The crystalline crack of [ice detail] amplified to cinematic scale, [liquid color] liquid impact deconstructed into individual droplet sounds at extreme slow motion, the deep resonant tone of the glass itself as liquid fills it — no music, pure liquid acoustics.",
+    "source_id": 4
   },
   {
-    "id": 5,
+    "id": 55,
     "category": "Brand & Product Ads",
     "style": "Surrealist",
     "best_on": [
@@ -3372,10 +3426,11 @@
     "tool_notes": "Sora excels at surreal scale and space environments. Add 'photorealistic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [product type] suspended motionless in the middle of [surreal environment], [lens] holding the subject small in frame with the environment pressing in from all sides, the product emitting a soft internal glow that lights the immediate environment, dramatic scale contrast between product's familiar size and the impossible world surrounding it, cinematic and otherworldly, 16:9",
     "video_prompt": "Slow deliberate push-in from distance over full duration — product small at first, gradually filling frame, [atmospheric element] swirling around it in slow deliberate arcs disturbed by nothing, the world compressing around the product as it grows",
-    "sfx_prompt": "Deep spatial resonance of the [surreal environment] — vast and impossible in its acoustic character. The faintest high crystalline hum from the product's internal glow. No wind, no impact, no earthly sounds — implied cosmic silence throughout."
+    "sfx_prompt": "Deep spatial resonance of the [surreal environment] — vast and impossible in its acoustic character. The faintest high crystalline hum from the product's internal glow. No wind, no impact, no earthly sounds — implied cosmic silence throughout.",
+    "source_id": 5
   },
   {
-    "id": 6,
+    "id": 56,
     "category": "Social & Short-Form Content",
     "style": "Cinematic",
     "best_on": [
@@ -3432,10 +3487,11 @@
     "tool_notes": "On Pika add 'smooth motion'. On Kling specify '6 seconds'. Google Veo 3.1 handles this well and auto-generates matching audio.",
     "image_prompt": "Extreme close-up of a [subject] on a [location] at [time of day], [lens] at f/1.4 — background rendered completely abstract, [light description] striking from a 45-degree angle and wrapping around contours, a trace of atmospheric haze softening the far edges, Instagram Reels format 9:16",
     "video_prompt": "Camera handheld with only the faintest organic drift — never still, never shaky — over the full duration, [light description] holding its 45-degree wrap on contours, the abstract background shifting subtly with the organic camera drift",
-    "sfx_prompt": "Ambient acoustic texture of [location] at [time of day] beneath everything — the specific environmental sound softened by the intimacy of the close framing. One isolated sound rising briefly above the ambient wash. No music, no narration."
+    "sfx_prompt": "Ambient acoustic texture of [location] at [time of day] beneath everything — the specific environmental sound softened by the intimacy of the close framing. One isolated sound rising briefly above the ambient wash. No music, no narration.",
+    "source_id": 6
   },
   {
-    "id": 7,
+    "id": 57,
     "category": "Social & Short-Form Content",
     "style": "Cinematic",
     "best_on": [
@@ -3499,10 +3555,11 @@
     "tool_notes": "Use 'slow motion' keyword explicitly on Pika for best results. Google Veo 3.1 handles this well and auto-generates matching audio.",
     "image_prompt": "A [subject] at a slight low angle, [lens] — [atmospheric detail] rising in columns catching a single backlight source, [background description] as pure abstract bokeh with [light type] reduced to soft halos of color, subject sharp against the dissolving world behind, rich [color palette] tones with lifted blacks and rolled highlights, 9:16",
     "video_prompt": "Captured at 240fps played back at 24fps — time nearly stopped, [subject] in motion with [atmospheric detail] rising in slow deliberate columns catching backlight, the background bokeh shifting imperceptibly, every movement decelerated to its essential core",
-    "sfx_prompt": "The ambient environment of [background description] reduced to its low-frequency foundation in extreme slow motion. [Atmospheric detail] movement as a deep sustained note. The [subject]'s specific sound decelerated to near-inaudibility — no music, only slowed environmental acoustics."
+    "sfx_prompt": "The ambient environment of [background description] reduced to its low-frequency foundation in extreme slow motion. [Atmospheric detail] movement as a deep sustained note. The [subject]'s specific sound decelerated to near-inaudibility — no music, only slowed environmental acoustics.",
+    "source_id": 7
   },
   {
-    "id": 8,
+    "id": 58,
     "category": "Social & Short-Form Content",
     "style": "Retro/VHS",
     "best_on": [
@@ -3549,10 +3606,11 @@
     "tool_notes": "Add 'VHS grain overlay' on Runway for stronger retro effect.",
     "image_prompt": "A [scene description] in the [decade], [lens] wide shot at chest height — washed-out [color tone] colors with crushed whites and milky shadows, horizontal scan lines rolling slowly up the frame, film grain overlay visible on every surface, blinking timestamp burned into the lower-right corner, warm and irreversibly nostalgic, 9:16",
     "video_prompt": "Camera held at chest height, slightly unsteady, operator breathing visible in the movement throughout — frame occasionally losing tracking for a single frame at irregular intervals, [scene description] unfolding with the instinctive framing of an amateur recording a meaningful moment",
-    "sfx_prompt": "Consumer VHS camcorder audio — the built-in microphone's narrow frequency range compressing the ambient sounds of [scene description], everything slightly too bright acoustically, one moment of genuine laughter or joy cutting through the compression. No music beyond what was naturally playing at the scene."
+    "sfx_prompt": "Consumer VHS camcorder audio — the built-in microphone's narrow frequency range compressing the ambient sounds of [scene description], everything slightly too bright acoustically, one moment of genuine laughter or joy cutting through the compression. No music beyond what was naturally playing at the scene.",
+    "source_id": 8
   },
   {
-    "id": 9,
+    "id": 59,
     "category": "Social & Short-Form Content",
     "style": "Anime",
     "best_on": [
@@ -3616,10 +3674,11 @@
     "tool_notes": "Kling handles anime style consistently. On Luma add 'Studio Ghibli' as style reference.",
     "image_prompt": "An anime-style [character description] in a [environment] at mid-distance, [lens] framing — character centred in frame, [atmospheric element] in the character's wake, soft [color palette] color palette with elevated saturation and luminous shadows, [art style] aesthetic, 9:16",
     "video_prompt": "Camera locked in side-on position — character running at full pace while the background streaks past in motion blur, [atmospheric element] swirling upward in slow motion contrasting forward speed, gentle vertical camera drift as if breathing, character staying centred throughout",
-    "sfx_prompt": "Rushing wind of full-speed movement through [environment], [atmospheric element] whipping upward with a distinct textural sound, rhythmic percussion of running steps below the wind — no score, no music, speed and environment carrying all narrative weight."
+    "sfx_prompt": "Rushing wind of full-speed movement through [environment], [atmospheric element] whipping upward with a distinct textural sound, rhythmic percussion of running steps below the wind — no score, no music, speed and environment carrying all narrative weight.",
+    "source_id": 9
   },
   {
-    "id": 10,
+    "id": 60,
     "category": "Social & Short-Form Content",
     "style": "Anime",
     "best_on": [
@@ -3690,10 +3749,11 @@
     "tool_notes": "Specify 'flat anime shading' on Runway to avoid 3D look.",
     "image_prompt": "Anime-style [location] at [time of day], [lens] at mid-distance — [character count] characters [activity] in the middle ground, [background element] glowing [color] in the far distance creating a gradient wash of light, foreground slightly silhouetted, three distinct depth planes, 9:16",
     "video_prompt": "Camera locked on tripod throughout — wind moving through hair and fabric from a consistent direction over full duration, subtle parallax between foreground and background layers, [background element] glow holding steady while foreground elements respond to wind, held breath emotional energy",
-    "sfx_prompt": "Ambient [location] tone at [time of day] — wind moving through hair and fabric as a consistent low rustle. [Background element] providing a distant tonal resonance. No dialogue, no score — only the environmental acoustic implying the emotion."
+    "sfx_prompt": "Ambient [location] tone at [time of day] — wind moving through hair and fabric as a consistent low rustle. [Background element] providing a distant tonal resonance. No dialogue, no score — only the environmental acoustic implying the emotion.",
+    "source_id": 10
   },
   {
-    "id": 11,
+    "id": 61,
     "category": "Cinematic & Storytelling",
     "style": "Cinematic",
     "best_on": [
@@ -3759,10 +3819,11 @@
     "tool_notes": "Luma handles atmospheric lighting well. Add 'handheld camera drift' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [character description] sitting alone at a [location] at [time], [lens] framing a tight medium shot — [atmospheric element] streaking down the window backlit by exterior light, soft [light source] from one side casting long colored shadows across the character's face, deep shadow throughout the rest of the frame, dust particles barely visible in the light shaft, melancholic and still, 16:9",
     "video_prompt": "Camera handheld, barely moving, just the faintest clockwise orbit over 30 seconds — [atmospheric element] continuing to streak down the window throughout, dust particles drifting in the light shaft, the character completely still, the world outside continuing to move behind them",
-    "sfx_prompt": "Near-complete silence with only the acoustic texture of [location] at [time] — [atmospheric element] against glass barely audible as a continuous low presence. No interior sounds. No score. The weight of the scene expressed entirely through what is not heard."
+    "sfx_prompt": "Near-complete silence with only the acoustic texture of [location] at [time] — [atmospheric element] against glass barely audible as a continuous low presence. No interior sounds. No score. The weight of the scene expressed entirely through what is not heard.",
+    "source_id": 11
   },
   {
-    "id": 12,
+    "id": 62,
     "category": "Cinematic & Storytelling",
     "style": "Cinematic",
     "best_on": [
@@ -3819,10 +3880,11 @@
     "tool_notes": "Sora excels at wide environmental shots. Use 'slow zoom out reveal' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [character description] standing at [dramatic location], [lens] wide — [clothing detail] moving in a consistent wind from camera-left, [sky description] filling the upper two-thirds of the frame, horizon line sitting low, faint atmospheric haze softening the far distance, emotional and powerful in the way only scale achieves, 16:9",
     "video_prompt": "Extremely slow zoom-out over full duration — character shrinking as the scale of the world around them is revealed, [clothing detail] moving in consistent wind throughout, the enormous [sky description] and [dramatic location] revealed in full, scale communicating what no sound could",
-    "sfx_prompt": "Wind at [dramatic location] — deep and sustained from camera-left, [clothing detail] catching and releasing in audible gusts of genuine force. The resonant low tone of the [dramatic location] environment beneath the wind. No music — the scale and the wind carry everything."
+    "sfx_prompt": "Wind at [dramatic location] — deep and sustained from camera-left, [clothing detail] catching and releasing in audible gusts of genuine force. The resonant low tone of the [dramatic location] environment beneath the wind. No music — the scale and the wind carry everything.",
+    "source_id": 12
   },
   {
-    "id": 13,
+    "id": 63,
     "category": "Cinematic & Storytelling",
     "style": "Retro/VHS",
     "best_on": [
@@ -3886,10 +3948,11 @@
     "tool_notes": "Pika handles VHS grain consistently. Add 'home video aesthetic' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [nostalgic scene] in the [decade], [lens] consumer VHS framing — instinctive rather than composed, warm [color description] tones with blown-out highlights in direct sunlight, [VHS artifact] visible at natural intervals, the format's texture doing all the emotional work, 16:9",
     "video_prompt": "Zoom used impulsively to bring [family members] into focus then pulled back again throughout — operator movements and breathing visible in the image, [VHS artifact] appearing at natural irregular intervals, the whole scene unfolding with the quality of memory being made",
-    "sfx_prompt": "Consumer VHS audio through a built-in microphone — voices slightly muffled, ambient [nostalgic scene] sounds compressed through the narrow frequency range of the era. One moment of laughter or joy that cuts through everything. No score — the format's acoustic imperfections are the music."
+    "sfx_prompt": "Consumer VHS audio through a built-in microphone — voices slightly muffled, ambient [nostalgic scene] sounds compressed through the narrow frequency range of the era. One moment of laughter or joy that cuts through everything. No score — the format's acoustic imperfections are the music.",
+    "source_id": 13
   },
   {
-    "id": 14,
+    "id": 64,
     "category": "Cinematic & Storytelling",
     "style": "Anime",
     "best_on": [
@@ -3970,10 +4033,11 @@
     "tool_notes": "Kling handles anime transitions. Add 'soft watercolor animation' on Luma. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "An anime [scene type] — a [character description] [action] in the foreground, [atmospheric element] in the middle ground, three distinct depth planes creating depth, soft [art style] aesthetic with painterly backgrounds and detailed foreground character, 16:9",
     "video_prompt": "Camera locked off completely still as the world moves through it — [atmospheric element] drifting laterally across the frame in middle ground at half-speed, foreground and background moving at different parallax rates throughout, slow dissolve to [color] over 4 seconds, deliberate theatrical pace",
-    "sfx_prompt": "Ambient tone of the [scene type] setting — [atmospheric element] movement barely audible as a sustained atmospheric whisper. A deep breath underlying the scene, implying the [music mood] score without it being present. No music, no dialogue — acoustic space of held emotion."
+    "sfx_prompt": "Ambient tone of the [scene type] setting — [atmospheric element] movement barely audible as a sustained atmospheric whisper. A deep breath underlying the scene, implying the [music mood] score without it being present. No music, no dialogue — acoustic space of held emotion.",
+    "source_id": 14
   },
   {
-    "id": 15,
+    "id": 65,
     "category": "Cinematic & Storytelling",
     "style": "Cinematic",
     "best_on": [
@@ -4038,10 +4102,11 @@
     "tool_notes": "Luma handles candlelight dynamics well. Specify 'slow motion blow' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [character description] at face-height, [lens] locked three feet away — [light source] glow casting warm light on the subject, [background description] as pure bokeh, [subject focus] in sharp focus throughout with surrounding world soft and close, joyful and intimate, 16:9",
     "video_prompt": "Extreme slow motion — [character description] blowing out [celebration detail], flame bending and extinguishing frame by frame, [light source] glow dying with the flame as the frame briefly plunges to softer ambient light, faint trail of smoke rising after the light is gone",
-    "sfx_prompt": "A soft whoosh of breath in extreme slow motion — each component of exhalation audible separately. The flame's hiss as it bends. The near-inaudible pop of extinction. Then the ambient room sound returning. No music — only the intimate acoustic of a small, perfect moment."
+    "sfx_prompt": "A soft whoosh of breath in extreme slow motion — each component of exhalation audible separately. The flame's hiss as it bends. The near-inaudible pop of extinction. Then the ambient room sound returning. No music — only the intimate acoustic of a small, perfect moment.",
+    "source_id": 15
   },
   {
-    "id": 16,
+    "id": 66,
     "category": "World & Environment Building",
     "style": "Cinematic",
     "best_on": [
@@ -4100,10 +4165,11 @@
     "tool_notes": "Sora excels at large-scale historical world building. Luma maintains architectural detail. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "Aerial view of [historical or fantasy setting], [lens] holding the full scale — [population detail] visible in the streets below, [landmark description] in the upper frame, [light quality] raking across surfaces casting long directional shadows, dust or smoke haze softening far edges of the world, epic and majestic, 16:9",
     "video_prompt": "Drone ascending slowly from low altitude over full duration — camera tilting from near-horizontal to slightly downward as height increases, [population detail] growing smaller below, [landmark description] entering top of frame as drone clears rooftops, [light quality] revealing every architectural detail throughout",
-    "sfx_prompt": "Wind at altitude increasing as the drone climbs. Distant crowd noise of [population detail] becoming less distinct with height. The structural resonance of [historical or fantasy setting] from a distance. No music — scale communicated through the changing acoustic perspective alone."
+    "sfx_prompt": "Wind at altitude increasing as the drone climbs. Distant crowd noise of [population detail] becoming less distinct with height. The structural resonance of [historical or fantasy setting] from a distance. No music — scale communicated through the changing acoustic perspective alone.",
+    "source_id": 16
   },
   {
-    "id": 17,
+    "id": 67,
     "category": "World & Environment Building",
     "style": "Cinematic",
     "best_on": [
@@ -4177,10 +4243,11 @@
     "tool_notes": "Luma handles fog and atmospheric depth beautifully. Add 'volumetric morning mist' on Sora. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [landscape type] at [time of day], [lens] wide holding the full scale — [atmospheric effect] between [natural features] at ground level, a single [detail element] catching the first available light in the far distance, [wildlife detail] at frame edge, breathtaking natural beauty with no human presence, 16:9",
     "video_prompt": "Camera on aerial glide moving forward at low altitude over full duration — never rising, maintaining constant height just above the [atmospheric effect] layer, [wildlife detail] visible briefly at frame edge then gone, the world enormous and unhurried, forward momentum never varying",
-    "sfx_prompt": "Deep natural ambience of [landscape type] at [time of day] — [atmospheric effect] as a low constant wash of sound throughout. [Wildlife detail] briefly audible then gone, leaving only the vast empty acoustic of the environment. No human sounds, no score — pure environmental space."
+    "sfx_prompt": "Deep natural ambience of [landscape type] at [time of day] — [atmospheric effect] as a low constant wash of sound throughout. [Wildlife detail] briefly audible then gone, leaving only the vast empty acoustic of the environment. No human sounds, no score — pure environmental space.",
+    "source_id": 17
   },
   {
-    "id": 18,
+    "id": 68,
     "category": "World & Environment Building",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -4230,10 +4297,11 @@
     "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner 2049 mood' on Runway. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A rain-soaked [location type] at night, [lens] framing — neon signs in [language/style] reflected in puddles and wet surfaces doubling light sources, steam rising from grates backlit by neon into distinct color columns, [character detail] in the middle distance, atmospheric and moody, 16:9",
     "video_prompt": "Camera on slow dolly advancing at walking pace over full duration — the inevitable, operator-less feel of the advance, [character detail] maintaining their distance in middle ground as camera advances, the gap never closing, steam and neon reflections alive around them throughout",
-    "sfx_prompt": "Rain on concrete and wet urban surfaces. The specific hiss of steam from grates backlit into color columns. Distant city traffic and neon signage creating a layered urban acoustic floor — no music, the rain and the city's indifferent sound forming the entire atmosphere."
+    "sfx_prompt": "Rain on concrete and wet urban surfaces. The specific hiss of steam from grates backlit into color columns. Distant city traffic and neon signage creating a layered urban acoustic floor — no music, the rain and the city's indifferent sound forming the entire atmosphere.",
+    "source_id": 18
   },
   {
-    "id": 19,
+    "id": 69,
     "category": "World & Environment Building",
     "style": "Anime",
     "best_on": [
@@ -4314,10 +4382,11 @@
     "tool_notes": "Luma captures Ghibli environmental warmth. Kling maintains consistent anime style. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "An anime-style [settlement type] in a [natural setting], [lens] holding the full settlement in frame — [architectural detail] with [atmospheric detail] visible throughout, [activity description] in mid-ground for human scale, soft [light quality] at low angle picking out every surface texture, [art style] warmth and detail, 16:9",
     "video_prompt": "Slow deliberate horizontal pan from left to right over full duration — unhurried and contemplative, three depth planes moving at slightly different parallax rates, [atmospheric detail] creating movement within the still composition, [activity description] providing life and human scale",
-    "sfx_prompt": "Ambient town sounds of [settlement type] — [atmospheric detail] as a gentle persistent acoustic presence. [Activity description] providing distant human-scale sound. Nature sounds of [natural setting] underlying everything. No music — the acoustic life of a community in quiet activity."
+    "sfx_prompt": "Ambient town sounds of [settlement type] — [atmospheric detail] as a gentle persistent acoustic presence. [Activity description] providing distant human-scale sound. Nature sounds of [natural setting] underlying everything. No music — the acoustic life of a community in quiet activity.",
+    "source_id": 19
   },
   {
-    "id": 20,
+    "id": 70,
     "category": "World & Environment Building",
     "style": "Cinematic",
     "best_on": [
@@ -4375,10 +4444,11 @@
     "tool_notes": "Sora handles large-scale sci-fi cityscapes best. Use 'cyberpunk megacity descent' on Luma. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
     "image_prompt": "A [futuristic city type] at night, [lens] compressing distance between [infrastructure detail] layers — [transport detail] as luminous lines in organized streams, atmospheric haze and light pollution creating a glow with no single source, the entire sky lit from below, epic in scale, 16:9",
     "video_prompt": "Descending approach shot on long lens over full duration — city appearing impossibly dense as layers compress, [transport detail] tracing luminous lines in organized streams, camera continuing descent and never quite arriving, scale making viewer feel small before a single cut",
-    "sfx_prompt": "The enormous low-frequency hum of a city-wide power grid felt throughout. [Transport detail] creating layered directional sound streams. Atmospheric haze and light pollution having an acoustic equivalent — the dense silence of a world too large and too lit to sleep. No music."
+    "sfx_prompt": "The enormous low-frequency hum of a city-wide power grid felt throughout. [Transport detail] creating layered directional sound streams. Atmospheric haze and light pollution having an acoustic equivalent — the dense silence of a world too large and too lit to sleep. No music.",
+    "source_id": 20
   },
   {
-    "id": 21,
+    "id": 71,
     "category": "Abstract & Motion Art",
     "style": "Minimalist",
     "best_on": [
@@ -4426,10 +4496,11 @@
     "tool_notes": "Runway handles minimalist animation cleanly. Specify 'perfect loop' on Pika.",
     "image_prompt": "A single [line type] on a [background], [lens] locked — the line resting at left edge, the [background]'s clean expanse waiting ahead, negative space of the undrawn portion balanced against the completed section, clean and hypnotic, 16:9",
     "video_prompt": "Line drawing itself from left to right over the first half of the duration, thickening slightly as it moves and accumulates weight — reaching the far edge and folding back on itself, transforming into a [pattern type], the construction visible in real time, perfect seamless loop",
-    "sfx_prompt": "Near-total silence throughout — the conceptual equivalent of a pen on paper rendered as barely audible friction, present only if listened for. The space between sounds as deliberate as the line's movement. No ambient noise, no music — pure minimalist acoustic space."
+    "sfx_prompt": "Near-total silence throughout — the conceptual equivalent of a pen on paper rendered as barely audible friction, present only if listened for. The space between sounds as deliberate as the line's movement. No ambient noise, no music — pure minimalist acoustic space.",
+    "source_id": 21
   },
   {
-    "id": 22,
+    "id": 72,
     "category": "Abstract & Motion Art",
     "style": "Surrealist",
     "best_on": [
@@ -4469,10 +4540,11 @@
     "tool_notes": "Sora handles impossible geometry best. On Runway use 'Escher architectural loop'.",
     "image_prompt": "An infinite [architectural element] folding in on itself — M.C. Escher geometry made physically real, [surface texture] catching raking light from a paradoxical source, small figures in period-appropriate clothing on surfaces that should not support them, 16:9",
     "video_prompt": "Camera on slow continuous rotation that never completes a full revolution — always discovering a new impossible angle over full duration, the structure breathing with slow hydraulic inevitability, small figures walking in opposing directions throughout, no cut, no edit, just rotation and geometry",
-    "sfx_prompt": "Deep stone resonance of [architectural element] under perpetual slow movement. Footsteps from figures in opposing directions creating an impossible spatial audio paradox. The architecture's impossible breathing as a low subsonic pressure. No music — the geometry generates its own sound."
+    "sfx_prompt": "Deep stone resonance of [architectural element] under perpetual slow movement. Footsteps from figures in opposing directions creating an impossible spatial audio paradox. The architecture's impossible breathing as a low subsonic pressure. No music — the geometry generates its own sound.",
+    "source_id": 22
   },
   {
-    "id": 23,
+    "id": 73,
     "category": "Abstract & Motion Art",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -4512,10 +4584,11 @@
     "tool_notes": "Kling handles neon glow effects cleanly. Specify 'loopable neon fluid art' on Runway.",
     "image_prompt": "Neon light tubes suspended in a lightless void, [lens] locked — tubes in their positions, electric [color palette] colors bleeding at the edges where tube meets darkness, reflected streaks on the black beneath, hypnotic, 16:9",
     "video_prompt": "Tubes bending with the slow logic of heated glass, folding into each other and pulling apart over full duration — each movement casting a brief reflected streak on the black beneath, motion smooth and fluid with no mechanical hesitation, the rhythm of [music genre] implied without a sound, seamlessly loopable",
-    "sfx_prompt": "Near-total silence of the lightless void. The faintest electrical hum from the neon tubes — barely perceptible. A barely audible crackle at the moment of extreme bend, then return to near-silence. No music — the rhythm of the motion is the only score."
+    "sfx_prompt": "Near-total silence of the lightless void. The faintest electrical hum from the neon tubes — barely perceptible. A barely audible crackle at the moment of extreme bend, then return to near-silence. No music — the rhythm of the motion is the only score.",
+    "source_id": 23
   },
   {
-    "id": 24,
+    "id": 74,
     "category": "Abstract & Motion Art",
     "style": "Surrealist",
     "best_on": [
@@ -4563,10 +4636,11 @@
     "tool_notes": "Sora handles portal and world-transition concepts exceptionally well.",
     "image_prompt": "A [object] standing alone in [impossible environment], [lens] holding the subject small in frame with the environment pressing in from all sides — [object] closed, the impossible world surrounding it, cinematic and dreamlike, 16:9",
     "video_prompt": "Slow deliberate push toward [object] over 15 seconds — [object] beginning to open as camera crosses the halfway point, interior light of [contrasting world] spilling out and warming the impossible environment, camera continuing through the opening without cutting — a single unbroken move from exterior to interior",
-    "sfx_prompt": "Ambient acoustic of [impossible environment] — present and deeply wrong for a familiar setting. The first sounds of [contrasting world] bleeding through as [object] begins to open. The two acoustic worlds mixing and [contrasting world] winning as the camera passes through. No music."
+    "sfx_prompt": "Ambient acoustic of [impossible environment] — present and deeply wrong for a familiar setting. The first sounds of [contrasting world] bleeding through as [object] begins to open. The two acoustic worlds mixing and [contrasting world] winning as the camera passes through. No music.",
+    "source_id": 24
   },
   {
-    "id": 25,
+    "id": 75,
     "category": "Abstract & Motion Art",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -4605,10 +4679,11 @@
     "tool_notes": "Sora handles infinite zoom concepts. On Runway use 'fractal zoom cyberpunk colors'.",
     "image_prompt": "Fractal patterns of [color palette] light growing from a central point in deep black space, [lens] locked — mathematical beauty in self-similar structures, patterns at edge of frame in mid-dissolution, deep black void giving scale, [aesthetic style] quality to the geometry, 16:9",
     "video_prompt": "Continuous push-in at constant velocity over full duration — the centre always retreating at the same speed the camera advances, sensation of infinite depth with no arrival, [aesthetic style] patterns dissolving at frame edge as camera passes, no loop seam — genuinely endless movement",
-    "sfx_prompt": "Deep space silence — the mathematical precision of the patterns expressed as a near-inaudible high-frequency tone that shifts as new structures form. The subsonic resonance of implied infinite depth. No music — the acoustic is as abstract as the visual."
+    "sfx_prompt": "Deep space silence — the mathematical precision of the patterns expressed as a near-inaudible high-frequency tone that shifts as new structures form. The subsonic resonance of implied infinite depth. No music — the acoustic is as abstract as the visual.",
+    "source_id": 25
   },
   {
-    "id": 26,
+    "id": 76,
     "category": "AI Avatar & Character",
     "style": "Cinematic",
     "best_on": [
@@ -4674,10 +4749,11 @@
     "tool_notes": "Luma maintains face consistency. Add 'professional broadcast' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here — specify avatar expression and background scene for best results.",
     "image_prompt": "A photorealistic AI [role] behind a [set description], [lens] at eye level — medium close-up, gaze direct and equal, [backdrop detail] visible over shoulder, single key light from camera-left at 45 degrees with soft fill, [personality trait] in micro-expression and posture, [tone] broadcast-grade style, 16:9",
     "video_prompt": "[Personality trait] expressed through micro-expression and subtle posture — natural eye movement and breathing over full duration, [tone] presentation energy building from stillness to presence, no camera movement, the performance the only motion in the frame",
-    "sfx_prompt": "Studio room tone — perfectly controlled acoustic space, no reverb, no ambient noise. Only the sound of controlled breathing and the presence of a human intelligence gathering itself. The [tone] presentation's acoustic texture implied through silence. No music."
+    "sfx_prompt": "Studio room tone — perfectly controlled acoustic space, no reverb, no ambient noise. Only the sound of controlled breathing and the presence of a human intelligence gathering itself. The [tone] presentation's acoustic texture implied through silence. No music.",
+    "source_id": 26
   },
   {
-    "id": 27,
+    "id": 77,
     "category": "AI Avatar & Character",
     "style": "Cinematic",
     "best_on": [
@@ -4750,10 +4826,11 @@
     "tool_notes": "Kling handles natural body movement. Specify 'natural gesture' on Runway. Google Veo 3.1 handles this well and auto-generates matching audio. HeyGen excels here — specify avatar expression and background scene for best results.",
     "image_prompt": "A photorealistic AI [character type] in a [environment], [lens] at full-body distance — subject occupying right two-thirds, environment breathing on left, [light description] picking out [outfit description] and separating figure cleanly from background, atmospheric depth making the space three-dimensional, 16:9",
     "video_prompt": "Subtle hand gestures timed to natural speech rhythm over full duration, weight shifting slightly between words — alive rather than posed, [personality] and [quality] expressed through the body's quiet aliveness, no camera movement, the natural human presence the only motion",
-    "sfx_prompt": "Natural acoustic environment of [environment] — ambient room tone specific to the space, the subtle texture of a real location. [Character type]'s presence audible as breath and natural body sound. No music — [personality] and [quality] expressed through the acoustic honesty of the environment."
+    "sfx_prompt": "Natural acoustic environment of [environment] — ambient room tone specific to the space, the subtle texture of a real location. [Character type]'s presence audible as breath and natural body sound. No music — [personality] and [quality] expressed through the acoustic honesty of the environment.",
+    "source_id": 27
   },
   {
-    "id": 28,
+    "id": 78,
     "category": "AI Avatar & Character",
     "style": "Anime",
     "best_on": [
@@ -4823,10 +4900,11 @@
     "tool_notes": "Kling maintains anime character consistency. Use 'anime dramatic zoom' on Luma. HeyGen excels here — specify avatar expression and background scene for best results.",
     "image_prompt": "An anime [character archetype] in a [environment], [lens] wide — character standing still in centre, [natural element] in middle ground, [light quality] filtering through environment and falling across character at low angle, [expression description] holding, highly detailed character design, 16:9",
     "video_prompt": "Extremely slow zoom toward the face over full duration — world compressing around character as they grow in frame, [natural element] moving gently through middle ground at unhurried pace, [expression description] holding without change, the stillness doing more work than movement",
-    "sfx_prompt": "Ambient acoustic of [environment] — [natural element] providing gentle consistent sound appropriate to its nature. Deep stillness despite natural movement. [Light quality] having no sound but the atmosphere it creates. No music — the environment speaks for the character's silence."
+    "sfx_prompt": "Ambient acoustic of [environment] — [natural element] providing gentle consistent sound appropriate to its nature. Deep stillness despite natural movement. [Light quality] having no sound but the atmosphere it creates. No music — the environment speaks for the character's silence.",
+    "source_id": 28
   },
   {
-    "id": 29,
+    "id": 79,
     "category": "AI Avatar & Character",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -4891,10 +4969,11 @@
     "tool_notes": "Luma handles holographic light figures cleanly. Use 'holographic AI avatar' on Runway. HeyGen excels here — specify avatar expression and background scene for best results.",
     "image_prompt": "AI avatar as [form type] in centre of frame, [lens] locked medium shot — [color palette] light in stable human silhouette form, [particle detail] in slow elliptical orbits, [background] absorbing all other light, figure's edges slightly unstable, futuristic and [mood], 16:9",
     "video_prompt": "[Color palette] light assembling from outside inward over 3 seconds — human silhouette snapping into coherence, [particle detail] continuing to orbit in slow ellipses catching and scattering the figure's light throughout, figure's edges remaining always slightly unstable — always almost solid",
-    "sfx_prompt": "High-frequency crystalline build over 3 seconds as light assembles — resolving into a stable low hum. [Particle detail] creating a soft orbital whisper around the stable form. The [background]'s silence broken only by the avatar's own acoustic presence. No music."
+    "sfx_prompt": "High-frequency crystalline build over 3 seconds as light assembles — resolving into a stable low hum. [Particle detail] creating a soft orbital whisper around the stable form. The [background]'s silence broken only by the avatar's own acoustic presence. No music.",
+    "source_id": 29
   },
   {
-    "id": 30,
+    "id": 80,
     "category": "AI Avatar & Character",
     "style": "Anime",
     "best_on": [
@@ -4968,10 +5047,11 @@
     "tool_notes": "Kling handles rain and neon reflections for anime characters. Add 'anime noir' on Runway. HeyGen excels here — specify avatar expression and background scene for best results.",
     "image_prompt": "An anime [character type] in a long coat at [weather condition] [location] at night, [lens] at medium distance — character occupying the frame, [atmospheric lighting] fracturing in puddles providing illumination in the lower half, eye-line fixed on [direction], [mood] atmosphere, 16:9",
     "video_prompt": "Slow continuous push-in over full duration — beginning at medium distance and reaching extreme close-up on the face by final frame, the move never pausing, distance closing with quiet inevitability, [atmospheric lighting] and puddles constant throughout, character never acknowledging the camera",
-    "sfx_prompt": "[Weather condition] ambient — rain on surfaces and the long coat, [atmospheric lighting] providing its own physical sound (neon electrical buzz, lamp hum, fire crackle). Night acoustic landscape of [location] beneath everything. No music — [mood] expressed through layered environmental sound alone."
+    "sfx_prompt": "[Weather condition] ambient — rain on surfaces and the long coat, [atmospheric lighting] providing its own physical sound (neon electrical buzz, lamp hum, fire crackle). Night acoustic landscape of [location] beneath everything. No music — [mood] expressed through layered environmental sound alone.",
+    "source_id": 30
   },
   {
-    "id": 31,
+    "id": 81,
     "category": "Brand & Product Ads",
     "style": "Retro/VHS",
     "best_on": [
@@ -5035,10 +5115,11 @@
     "tool_notes": "Pika handles VHS aesthetic well. Add 'retro TV commercial grain' on Runway.",
     "image_prompt": "A [decade] TV commercial setting for [product type], [lens] studio-wide — [presenter description] holding product toward lens, [set description] background with cheerful artificiality of the era, VHS scan lines rolling slowly upward, film grain on every surface, [color palette] grade pushed beyond natural, 16:9",
     "video_prompt": "[Presenter description] performing to camera with practiced third-take enthusiasm over full duration — product held toward lens, body language and energy of [decade] in every beat, the commercial format's performance rhythms fully embodied throughout",
-    "sfx_prompt": "[Decade] broadcast television audio — slightly too compressed, slightly too present. Product-appropriate sound effects performed with exaggerated commercial impact. The upbeat acoustic silence between the presenter's beats. No score beyond what the format implies in its bones."
+    "sfx_prompt": "[Decade] broadcast television audio — slightly too compressed, slightly too present. Product-appropriate sound effects performed with exaggerated commercial impact. The upbeat acoustic silence between the presenter's beats. No score beyond what the format implies in its bones.",
+    "source_id": 31
   },
   {
-    "id": 32,
+    "id": 82,
     "category": "Brand & Product Ads",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -5094,10 +5175,11 @@
     "tool_notes": "Kling handles neon reflections on wet surfaces cleanly. Add 'Blade Runner atmosphere' on Runway.",
     "image_prompt": "[Product type] on a [surface] in a cyberpunk city at night, [lens] locked at near-ground level — product large in foreground, city compressed and teeming in background, neon [brand colors] reflected in wet surface beneath product creating a framing pool of light, [atmospheric element] in mid-ground backlit by neon, hard top-light separating product, 16:9",
     "video_prompt": "[Atmospheric element] drifting through mid-ground in slow horizontal streaks over full duration, neon [brand colors] reflections shifting with environmental movement, city breathing and alive in background — the product perfectly still, sovereign within the moving world",
-    "sfx_prompt": "Rain on asphalt and neon-lit surfaces. [Atmospheric element] hissing through the mid-ground with directional presence. Distant cyberpunk city as a constant, indifferent acoustic backdrop. No music — the product's silence is more powerful than the city's relentless sound."
+    "sfx_prompt": "Rain on asphalt and neon-lit surfaces. [Atmospheric element] hissing through the mid-ground with directional presence. Distant cyberpunk city as a constant, indifferent acoustic backdrop. No music — the product's silence is more powerful than the city's relentless sound.",
+    "source_id": 32
   },
   {
-    "id": 33,
+    "id": 83,
     "category": "Brand & Product Ads",
     "style": "Anime",
     "best_on": [
@@ -5161,10 +5243,11 @@
     "tool_notes": "Kling handles anime ad style consistently. Add 'anime commercial energy' on Luma.",
     "image_prompt": "Anime-style advertisement for [product type] — [character description] with [reaction] expression in the frame, [visual effect] radiating outward from centred product, [color palette] graphic energy in background, product centred and still throughout, energetic and sincerely fun, 9:16",
     "video_prompt": "[Character description] entering frame at normal pace, discovering product — frame itself responding over 2 seconds as [reaction] bursts into full exaggerated anime register, [visual effect] radiating outward in arcs, background replacing itself with [color palette] graphic energy, character proportions briefly exceeding realism then snapping back",
-    "sfx_prompt": "Anime commercial sound design — [reaction] as a rising tonal build resolving into a bright crystalline impact. [Visual effect] as a whoosh of radiating energy. The background transformation as a rush of graphic sound. No dialogue beyond the implied — pure commercially-heightened anime acoustic design."
+    "sfx_prompt": "Anime commercial sound design — [reaction] as a rising tonal build resolving into a bright crystalline impact. [Visual effect] as a whoosh of radiating energy. The background transformation as a rush of graphic sound. No dialogue beyond the implied — pure commercially-heightened anime acoustic design.",
+    "source_id": 33
   },
   {
-    "id": 34,
+    "id": 84,
     "category": "Social & Short-Form Content",
     "style": "Minimalist",
     "best_on": [
@@ -5220,10 +5303,11 @@
     "tool_notes": "Runway keeps backgrounds pristine. Pika handles satisfying minimal loops.",
     "image_prompt": "A single [subject] in precise centre of a pure [background color] background, [lens] at distance rendering subject at roughly one-quarter of frame height — maximum negative space on all sides, hyper-clean aesthetic, meditative, 9:16",
     "video_prompt": "[Camera move] executed over the full duration at a speed barely perceptible in real time — [one subtle action] occurring once in the middle of the sequence, the only event, after which the frame returns to held stillness as if nothing happened, satisfying and meditative",
-    "sfx_prompt": "Absolute silence until [one subtle action] — the action creating a single, minimal, perfect sound: a petal landing, steam escaping, a page whispering. Then silence returning as completely as before. No ambient noise, no music — the sound of one moment mattering."
+    "sfx_prompt": "Absolute silence until [one subtle action] — the action creating a single, minimal, perfect sound: a petal landing, steam escaping, a page whispering. Then silence returning as completely as before. No ambient noise, no music — the sound of one moment mattering.",
+    "source_id": 34
   },
   {
-    "id": 35,
+    "id": 85,
     "category": "Social & Short-Form Content",
     "style": "Surrealist",
     "best_on": [
@@ -5270,10 +5354,11 @@
     "tool_notes": "Sora handles portal world-transitions exceptionally well. Add 'seamless surreal transition' on Runway.",
     "image_prompt": "A [person type] approaching a freestanding door in [impossible location], [lens] locked wide — door standing small against the vast impossible setting, [contrasting world] briefly visible through the open door, the absurdity of the door's placement treated as completely unremarkable, 9:16",
     "video_prompt": "[Person type] opening the door and stepping through without pause — door swinging closed, then camera executing slow pull-back that increases scale of [impossible location] and smallness of the door within it, the contrast between two worlds closing with the door",
-    "sfx_prompt": "Ambient acoustic of [impossible location] — wrong and strange, the wrong kind of silence for the environment. Brief warm acoustic bleed from [contrasting world] as door opens. [Impossible location]'s ambience returning alone as door closes. No music — the wrongness expressed through sound."
+    "sfx_prompt": "Ambient acoustic of [impossible location] — wrong and strange, the wrong kind of silence for the environment. Brief warm acoustic bleed from [contrasting world] as door opens. [Impossible location]'s ambience returning alone as door closes. No music — the wrongness expressed through sound.",
+    "source_id": 35
   },
   {
-    "id": 36,
+    "id": 86,
     "category": "Social & Short-Form Content",
     "style": "Retro/VHS",
     "best_on": [
@@ -5336,10 +5421,11 @@
     "tool_notes": "Pika handles VHS jump cuts well. Add 'authentic DIY camcorder look' on Kling.",
     "image_prompt": "A [influencer type] filming [content type] on a [camera type] in the [decade], [lens] approximate — camera held at arm's length or pointed at mirror, framing impulsive and slightly wrong, [color grade] with clipped highlights and blocked shadows from era's dynamic range limits, lo-fi and completely genuine, 9:16",
     "video_prompt": "Jump cuts between moments with no transition — time simply missing between them throughout, camera held at arm's length with impulsive framing, operator's hand and presence visible, the [content type] progressing through missing time with complete authenticity",
-    "sfx_prompt": "[Camera type] audio limitations in full effect — compression artifacts, clipping on loud sounds, the specific room noise of [content type]'s location. [Influencer type]'s natural voice unprocessed. No music beyond what's playing in the environment — the acoustic imperfection is the authenticity."
+    "sfx_prompt": "[Camera type] audio limitations in full effect — compression artifacts, clipping on loud sounds, the specific room noise of [content type]'s location. [Influencer type]'s natural voice unprocessed. No music beyond what's playing in the environment — the acoustic imperfection is the authenticity.",
+    "source_id": 36
   },
   {
-    "id": 37,
+    "id": 87,
     "category": "Cinematic & Storytelling",
     "style": "Minimalist",
     "best_on": [
@@ -5387,10 +5473,11 @@
     "tool_notes": "Runway handles isolation framing cleanly. Add 'wide angle slow pull back single subject' on Luma.",
     "image_prompt": "A single [character] in a vast empty [environment], [lens] at distance — character at roughly one-quarter of frame height, [light condition] providing the only directional information in an otherwise featureless expanse, isolation visible in the scale relationship, 16:9",
     "video_prompt": "Continuous pull-back that will not stop for the full duration — character shrinking as the world's scale is revealed to be more enormous than the opening suggested, the isolation becoming more complete with every metre added, no dialogue, no score, pure visual storytelling",
-    "sfx_prompt": "The specific sound of empty [environment] — wind or the absence of wind, the acoustic texture of an enormous space with a single figure in it. No echo, no ambient life. The quiet becoming quieter as the camera retreats. Isolation expressed in descending decibels — no music."
+    "sfx_prompt": "The specific sound of empty [environment] — wind or the absence of wind, the acoustic texture of an enormous space with a single figure in it. No echo, no ambient life. The quiet becoming quieter as the camera retreats. Isolation expressed in descending decibels — no music.",
+    "source_id": 37
   },
   {
-    "id": 38,
+    "id": 88,
     "category": "Cinematic & Storytelling",
     "style": "Surrealist",
     "best_on": [
@@ -5437,10 +5524,11 @@
     "tool_notes": "Sora handles impossible world transitions. Add 'surreal mirror world continuity' on Runway.",
     "image_prompt": "A [character] approaching a full-length mirror in a [ordinary room], [lens] at tracking position — mirror occupying significant portion of the frame, the room reflected behind the character, the threshold between worlds visible in the glass surface, 16:9",
     "video_prompt": "Camera tracking alongside [character] at walking pace on smooth dolly — character passing through mirror surface without resistance, camera continuing through with them into [mirror world description], transition marked only by single frame of lens flare, slow push-in beginning once both are fully through",
-    "sfx_prompt": "The [ordinary room]'s ambient acoustic — footsteps approaching the mirror. The single frame of completely different silence as the threshold is crossed. [Mirror world description]'s acoustic space establishing itself in contrast. Footsteps continuing at the same pace on the other side. No music."
+    "sfx_prompt": "The [ordinary room]'s ambient acoustic — footsteps approaching the mirror. The single frame of completely different silence as the threshold is crossed. [Mirror world description]'s acoustic space establishing itself in contrast. Footsteps continuing at the same pace on the other side. No music.",
+    "source_id": 38
   },
   {
-    "id": 39,
+    "id": 89,
     "category": "Cinematic & Storytelling",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -5512,10 +5600,11 @@
     "tool_notes": "Kling handles wet surface neon reflections. Add 'neo-noir tracking shot' on Runway.",
     "image_prompt": "A [character type] with [augmentation] in rain-soaked cyberpunk [environment] at night, [lens] framing — [color palette] neon fracturing in wet ground, augmentation catching specific colors that bare skin cannot, [emotional state] expressed through posture and stance, city indifferent and enormous behind the figure, 16:9",
     "video_prompt": "[Camera movement] maintaining consistent relationship to figure over full duration — never closing, never falling behind, [color palette] neon reflections shifting with every step, augmentation catching light in movement, [emotional state] expressed entirely through pace and posture",
-    "sfx_prompt": "Rain on the cyberpunk [environment] — wet asphalt, neon-lit surfaces, the distinctive subtle sound of [augmentation] in motion. The enormous city as an indifferent acoustic backdrop. No music — [emotional state] expressed through the way sound surrounds and ignores the figure equally."
+    "sfx_prompt": "Rain on the cyberpunk [environment] — wet asphalt, neon-lit surfaces, the distinctive subtle sound of [augmentation] in motion. The enormous city as an indifferent acoustic backdrop. No music — [emotional state] expressed through the way sound surrounds and ignores the figure equally.",
+    "source_id": 39
   },
   {
-    "id": 40,
+    "id": 90,
     "category": "World & Environment Building",
     "style": "Surrealist",
     "best_on": [
@@ -5554,10 +5643,11 @@
     "tool_notes": "Sora handles impossible physics scenarios best. Specify 'surreal reversed world documentary style' on Runway.",
     "image_prompt": "Wide observational view of a world where [physical rule] works in reverse, [lens] locked on tripod at street level — [specific example] visible in every corner of the frame, inhabitants navigating impossible physics with practiced ease, documentary framing treating the surreal as routine, 16:9",
     "video_prompt": "Camera completely locked on tripod throughout full duration — [specific example] playing out in every corner of frame simultaneously, inhabitants moving through reversed physics as if it were ordinary, no reaction shots, no comedy beats, documentary neutrality for the entire shot",
-    "sfx_prompt": "Familiar ambient sounds with the specific wrongness of [physical rule] reversed — footsteps going the wrong direction in acoustic space, objects making impossible sounds, the inhabitants' complete acoustic normality making the wrongness more disturbing than any strange sound could. No music."
+    "sfx_prompt": "Familiar ambient sounds with the specific wrongness of [physical rule] reversed — footsteps going the wrong direction in acoustic space, objects making impossible sounds, the inhabitants' complete acoustic normality making the wrongness more disturbing than any strange sound could. No music.",
+    "source_id": 40
   },
   {
-    "id": 41,
+    "id": 91,
     "category": "World & Environment Building",
     "style": "Minimalist",
     "best_on": [
@@ -5613,10 +5703,11 @@
     "tool_notes": "Runway handles minimalist environment composition. Add 'single subject vast landscape' on Luma.",
     "image_prompt": "A single [natural element] in the precise centre of vast empty [environment type], [lens] at maximum distance — subject almost invisible in the frame, surrounded by enormous emptiness, [light condition] the only variable in a still and silent world, 16:9",
     "video_prompt": "[Camera movement] at a speed that will not reach the subject for the full duration — distance closing so slowly the movement is almost imperceptible, [light condition] shifting as the only variable, subject never growing large enough to lose its relationship to the space that contains it",
-    "sfx_prompt": "The acoustic texture of [environment type] — [light condition] having no sound but the atmosphere it creates. The near-silence of an enormous empty space. [Natural element] providing the only specific sound source where relevant — wind in branches, water, or total absence of natural sound. No music."
+    "sfx_prompt": "The acoustic texture of [environment type] — [light condition] having no sound but the atmosphere it creates. The near-silence of an enormous empty space. [Natural element] providing the only specific sound source where relevant — wind in branches, water, or total absence of natural sound. No music.",
+    "source_id": 41
   },
   {
-    "id": 42,
+    "id": 92,
     "category": "World & Environment Building",
     "style": "Retro/VHS",
     "best_on": [
@@ -5672,10 +5763,11 @@
     "tool_notes": "Pika handles VHS travel documentary style. Add 'vintage travel film grain' on Runway.",
     "image_prompt": "A [decade] travel documentary setting at [location], [lens] VHS camcorder wide — [presenter type] in frame, VHS grain and [color cast] color present throughout, timestamp burning in corner marking a day that no longer exists, nostalgic and warm, 16:9",
     "video_prompt": "Operator walking while filming over full duration — horizon line tilting slightly with each step, [presenter type] turning back to address camera while continuing forward, [location] appearing in glimpses between gestures and body, the physical presence of the walking operator throughout",
-    "sfx_prompt": "VHS camcorder audio outdoors at [location] — ambient sounds compressed and slightly distorted, [presenter type]'s voice as if speaking from memory rather than the present. Wind occasionally overwhelming the built-in microphone. The inadequacy of the era's consumer audio as the sound of irretrievable time. No music."
+    "sfx_prompt": "VHS camcorder audio outdoors at [location] — ambient sounds compressed and slightly distorted, [presenter type]'s voice as if speaking from memory rather than the present. Wind occasionally overwhelming the built-in microphone. The inadequacy of the era's consumer audio as the sound of irretrievable time. No music.",
+    "source_id": 42
   },
   {
-    "id": 43,
+    "id": 93,
     "category": "Abstract & Motion Art",
     "style": "Cinematic",
     "best_on": [
@@ -5731,10 +5823,11 @@
     "tool_notes": "Luma handles macro texture beautifully. Add 'extreme macro slow pan alien landscape feel' on Runway.",
     "image_prompt": "Extreme macro close-up of [natural texture], [lens] so close the subject reads only as landscape — [light source] raking across the surface at a 15-degree angle, every elevation casting its own shadow, [detail] revealed in three dimensions, [color palette] present in the material itself, 16:9",
     "video_prompt": "Micro-dolly moving laterally across surface at 2mm per second over full duration — individual features entering and exiting frame with geographic unhurriedness, [light source] maintaining raking angle throughout, [detail] continuously emerging and receding, the alien landscape building and dissolving",
-    "sfx_prompt": "The acoustic equivalent of extreme macro scale — sounds inaudible at normal scale implied at landscape proportions. [Light source] creating the specific silence of concentrated illumination. [Natural texture]'s material resonance as an almost-inaudible foundation tone. No music — the alien landscape's silence is total."
+    "sfx_prompt": "The acoustic equivalent of extreme macro scale — sounds inaudible at normal scale implied at landscape proportions. [Light source] creating the specific silence of concentrated illumination. [Natural texture]'s material resonance as an almost-inaudible foundation tone. No music — the alien landscape's silence is total.",
+    "source_id": 43
   },
   {
-    "id": 44,
+    "id": 94,
     "category": "Abstract & Motion Art",
     "style": "Retro/VHS",
     "best_on": [
@@ -5789,10 +5882,11 @@
     "tool_notes": "Pika handles found footage VHS aesthetic. Add 'degraded tape abstract art' on Runway.",
     "image_prompt": "[Abstract visual type] on [decade] consumer video equipment, [lens] wide, camera placed on surface rather than held — framing accidental, [glitch effect] interrupting the image, [color grade] from medium limitations not grade decisions, unremarkable content made strange by the medium, 16:9",
     "video_prompt": "Camera running continuously with accidental framing over the full duration — [glitch effect] interrupting at irregular intervals with unpredictability of actual tape degradation, [color grade] unchanging as medium limitation, loop point invisible because content has no natural beginning or end",
-    "sfx_prompt": "[Decade] consumer video equipment audio — persistent hiss throughout, [glitch effect] creating audio artifacts that match the visual ones. [Abstract visual type]'s ambient sound compressed to near-unrecognisability. No music — the audio is as accidentally strange as the image, equally a product of the medium's limitations."
+    "sfx_prompt": "[Decade] consumer video equipment audio — persistent hiss throughout, [glitch effect] creating audio artifacts that match the visual ones. [Abstract visual type]'s ambient sound compressed to near-unrecognisability. No music — the audio is as accidentally strange as the image, equally a product of the medium's limitations.",
+    "source_id": 44
   },
   {
-    "id": 45,
+    "id": 95,
     "category": "Abstract & Motion Art",
     "style": "Anime",
     "best_on": [
@@ -5840,10 +5934,11 @@
     "tool_notes": "Kling handles anime abstract sequences. Add 'anime abstract title sequence atmospheric' on Luma.",
     "image_prompt": "Anime-style abstract space — [visual element] assembling in the middle distance at too large a scale to read as any single thing, [color palette] light from sources with no origin point, [art style] aesthetic in the quality of line and light-shadow relationship, deeply atmospheric and pre-story, 16:9",
     "video_prompt": "Camera drifting through lightless space at low constant speed on a path that curves slowly without completing its arc — [visual element] assembling and dissolving in middle distance over full duration, [color palette] shifting as sourceless light moves, the sequence feeling like the moment before a story begins",
-    "sfx_prompt": "Deep atmospheric tone of pre-story space — [visual element] having an ambient acoustic presence that is felt without being identified. [Color palette]'s light sources creating a low sustained resonance that shifts with the drift. Profound silence of the moment before. No music — only the sound of a world preparing to exist."
+    "sfx_prompt": "Deep atmospheric tone of pre-story space — [visual element] having an ambient acoustic presence that is felt without being identified. [Color palette]'s light sources creating a low sustained resonance that shifts with the drift. Profound silence of the moment before. No music — only the sound of a world preparing to exist.",
+    "source_id": 45
   },
   {
-    "id": 46,
+    "id": 96,
     "category": "AI Avatar & Character",
     "style": "Minimalist",
     "best_on": [
@@ -5907,10 +6002,11 @@
     "tool_notes": "Runway handles minimalist character motion cleanly. Add 'clean studio portrait extreme slow motion' on Luma.",
     "image_prompt": "[Character type] in [plain clothing] in exact centre of frame against a pure [background color] background, [lens] at distance rendering them from mid-chest to top of head — single [light type] from camera-right at 45 degrees with no fill, shadow side of face near-black, pure and cinematic, 16:9",
     "video_prompt": "[Simple gesture] performed once in extreme slow motion — 120fps played back at 24fps, the movement so decelerated that intention becomes visible in the body before the action begins, then return to absolute stillness, no camera movement throughout",
-    "sfx_prompt": "Studio silence — absolute and sustained throughout. The only sound the extremely decelerated [simple gesture]: a near-inaudible movement, breath, or the physical acoustic of slow human motion. No ambient noise, no music — the character study pure, unadorned, and complete in its quiet."
+    "sfx_prompt": "Studio silence — absolute and sustained throughout. The only sound the extremely decelerated [simple gesture]: a near-inaudible movement, breath, or the physical acoustic of slow human motion. No ambient noise, no music — the character study pure, unadorned, and complete in its quiet.",
+    "source_id": 46
   },
   {
-    "id": 47,
+    "id": 97,
     "category": "AI Avatar & Character",
     "style": "Retro/VHS",
     "best_on": [
@@ -5966,10 +6062,11 @@
     "tool_notes": "Pika handles VHS character introductions. Add 'camcorder home video character intro' on Kling.",
     "image_prompt": "[Decade] self-introduction setting, [lens] wide — [color grade] tones with era sensor limitations turning indoor light amber and slightly overexposed, [setting description] in background with the specific accidental detail of an untidied space, warm and completely authentic, 16:9",
     "video_prompt": "Operator and subject the same person — slight forward lean as they adjust something out of frame before stepping back, framing remaining a little wide throughout, [color grade] holding its amber overexposure as indoor light plays across the scene, completely authentic and unrepeatable",
-    "sfx_prompt": "[Decade] consumer camcorder audio indoors — ambient room sound present and slightly hollow. [Character type]'s voice with over-proximity of direct built-in microphone address. [Setting description]'s specific ambient detail bleeding in from the background. No music — the acoustic imperfection is the warmth."
+    "sfx_prompt": "[Decade] consumer camcorder audio indoors — ambient room sound present and slightly hollow. [Character type]'s voice with over-proximity of direct built-in microphone address. [Setting description]'s specific ambient detail bleeding in from the background. No music — the acoustic imperfection is the warmth.",
+    "source_id": 47
   },
   {
-    "id": 48,
+    "id": 98,
     "category": "AI Avatar & Character",
     "style": "Surrealist",
     "best_on": [
@@ -6033,10 +6130,11 @@
     "tool_notes": "Sora handles impossible body/material concepts. Add 'deadpan surreal character study' on Runway.",
     "image_prompt": "[Character type] with [impossible material] [body part] at a desk in [ordinary setting] performing [mundane activity], [lens] locked wide medium shot at eye level — [impossible material] visible and behaving according to its own logic, everything else completely normal, deadpan framing treating impossible as fact, 16:9",
     "video_prompt": "Camera completely locked at eye level throughout full duration — [impossible material] shifting, moving, responding to impossible physics while [character type] and every other element behaves with complete normalcy, no reaction from anyone in the periphery, deadpan framing for the entire duration",
-    "sfx_prompt": "The completely ordinary ambient sound of [ordinary setting] — [mundane activity] sounds entirely normal. No acknowledgment of [impossible material]'s presence. Underneath, only the [impossible material]'s own specific sound: flowers blooming, water flowing, or fire crackling beneath ordinary sound. No music."
+    "sfx_prompt": "The completely ordinary ambient sound of [ordinary setting] — [mundane activity] sounds entirely normal. No acknowledgment of [impossible material]'s presence. Underneath, only the [impossible material]'s own specific sound: flowers blooming, water flowing, or fire crackling beneath ordinary sound. No music.",
+    "source_id": 48
   },
   {
-    "id": 49,
+    "id": 99,
     "category": "AI Avatar & Character",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -6108,10 +6206,11 @@
     "tool_notes": "Kling handles cyberpunk character portraits consistently. Add 'neo-noir character study portrait' on Runway.",
     "image_prompt": "[Character archetype] with [visible tech augmentation] in tight three-quarter portrait, [lens] at slightly below eye level — face dominant, hands in lower third, neon [color] light from camera-left at steep angle catching [visible tech augmentation], opposite side of face in near-total shadow, [mood] energy in jaw and eyes, 16:9",
     "video_prompt": "[Action] performed with hands in lower third of frame over full duration — [visible tech augmentation] catching neon [color] light with each movement, [mood] energy maintained in the jaw and the stillness of the eyes, no camera movement, the performance the entire content of the shot",
-    "sfx_prompt": "Low electrical hum from [visible tech augmentation] — specific and identifiable, not generic. The ambient background of [location] just audible beneath it. [Action]'s sound precise and controlled. No music — [mood] expressed entirely through acoustic restraint and what the sound withholds."
+    "sfx_prompt": "Low electrical hum from [visible tech augmentation] — specific and identifiable, not generic. The ambient background of [location] just audible beneath it. [Action]'s sound precise and controlled. No music — [mood] expressed entirely through acoustic restraint and what the sound withholds.",
+    "source_id": 49
   },
   {
-    "id": 50,
+    "id": 100,
     "category": "AI Avatar & Character",
     "style": "Minimalist",
     "best_on": [
@@ -6167,10 +6266,11 @@
     "tool_notes": "Runway handles abstract avatar concepts cleanly. Add 'abstract personality avatar seamless loop' on Luma.",
     "image_prompt": "Abstract AI avatar — a [geometric form] — suspended in absolute centre of [background color] void, [lens] locked off, [color] light emanating from within the form and falling off before reaching frame edges, occupying the uncanny space between mechanical and alive, 16:9",
     "video_prompt": "Camera completely locked off throughout full duration — all animation contained within the subject itself, [motion behavior] with rhythm slightly too organic to be mechanical and slightly too regular to be alive, loop point invisible because motion has no climax and no rest — only continuance",
-    "sfx_prompt": "The uncanny sound of near-life — [motion behavior] expressed as a low sustained resonance that breathes with the form's rhythm. Neither fully mechanical nor fully organic. [Color] light having a tone that falls off to near-silence at the frame edges. No music — the avatar's presence is its own ambient sound."
+    "sfx_prompt": "The uncanny sound of near-life — [motion behavior] expressed as a low sustained resonance that breathes with the form's rhythm. Neither fully mechanical nor fully organic. [Color] light having a tone that falls off to near-silence at the frame edges. No music — the avatar's presence is its own ambient sound.",
+    "source_id": 50
   },
   {
-    "id": 51,
+    "id": 101,
     "category": "Sci-Fi & Concept Film",
     "style": "Cinematic",
     "best_on": [
@@ -6218,10 +6318,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles large-scale atmospheric ascent. Luma maintains structural detail on the vessel. Add 'IMAX cinematic space launch' for scale."
+    "tool_notes": "Sora handles large-scale atmospheric ascent. Luma maintains structural detail on the vessel. Add 'IMAX cinematic space launch' for scale.",
+    "source_id": 51
   },
   {
-    "id": 52,
+    "id": 102,
     "category": "Sci-Fi & Concept Film",
     "style": "Cinematic",
     "best_on": [
@@ -6277,10 +6378,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles corridor scale and depth. Add 'anamorphic lens flare' on Runway for cinematic quality."
+    "tool_notes": "Sora handles corridor scale and depth. Add 'anamorphic lens flare' on Runway for cinematic quality.",
+    "source_id": 52
   },
   {
-    "id": 53,
+    "id": 103,
     "category": "Sci-Fi & Concept Film",
     "style": "Cinematic",
     "best_on": [
@@ -6351,10 +6453,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles atmospheric alien environments. Sora manages impossible scale contrasts between figures and environment."
+    "tool_notes": "Luma handles atmospheric alien environments. Sora manages impossible scale contrasts between figures and environment.",
+    "source_id": 53
   },
   {
-    "id": 54,
+    "id": 104,
     "category": "Sci-Fi & Concept Film",
     "style": "Cinematic",
     "best_on": [
@@ -6418,10 +6521,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles weightless motion physics. Sora manages the scale of space environments. Add 'zero gravity interior cinematic' for consistency."
+    "tool_notes": "Runway handles weightless motion physics. Sora manages the scale of space environments. Add 'zero gravity interior cinematic' for consistency.",
+    "source_id": 54
   },
   {
-    "id": 55,
+    "id": 105,
     "category": "Sci-Fi & Concept Film",
     "style": "Cinematic",
     "best_on": [
@@ -6476,10 +6580,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles astronomical scale. Luma maintains surface detail on the star. Use 'astronomical cinematic scale' to guide the AI toward correct proportions."
+    "tool_notes": "Sora handles astronomical scale. Luma maintains surface detail on the star. Use 'astronomical cinematic scale' to guide the AI toward correct proportions.",
+    "source_id": 55
   },
   {
-    "id": 56,
+    "id": 106,
     "category": "Sci-Fi & Concept Film",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -6543,10 +6648,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles neon skin-trace effects consistently. Add 'cyberpunk neural interface close-up' on Runway. Higgsfield Cinema Studio works well for the held tight frame."
+    "tool_notes": "Kling handles neon skin-trace effects consistently. Add 'cyberpunk neural interface close-up' on Runway. Higgsfield Cinema Studio works well for the held tight frame.",
+    "source_id": 56
   },
   {
-    "id": 57,
+    "id": 107,
     "category": "Sci-Fi & Concept Film",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -6618,10 +6724,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles android uncanny valley motion well. Runway maintains consistent character appearance across the shot."
+    "tool_notes": "Kling handles android uncanny valley motion well. Runway maintains consistent character appearance across the shot.",
+    "source_id": 57
   },
   {
-    "id": 58,
+    "id": 108,
     "category": "Sci-Fi & Concept Film",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -6693,10 +6800,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles holographic display interactions. Sora manages room-scale holograms. Specify 'volumetric hologram light spill' for realism."
+    "tool_notes": "Kling handles holographic display interactions. Sora manages room-scale holograms. Specify 'volumetric hologram light spill' for realism.",
+    "source_id": 58
   },
   {
-    "id": 59,
+    "id": 109,
     "category": "Sci-Fi & Concept Film",
     "style": "Neon/Cyberpunk",
     "best_on": [
@@ -6752,10 +6860,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles megacity aerial descent at scale. Runway maintains neon atmosphere consistency. Use 'Blade Runner 2049 aerial descent' as style reference."
+    "tool_notes": "Sora handles megacity aerial descent at scale. Runway maintains neon atmosphere consistency. Use 'Blade Runner 2049 aerial descent' as style reference.",
+    "source_id": 59
   },
   {
-    "id": 60,
+    "id": 110,
     "category": "Sci-Fi & Concept Film",
     "style": "Anime",
     "best_on": [
@@ -6819,10 +6928,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime mecha scale consistently. Luma maintains mechanical detail. Specify 'Evangelion or Gundam aesthetic' for style reference."
+    "tool_notes": "Kling handles anime mecha scale consistently. Luma maintains mechanical detail. Specify 'Evangelion or Gundam aesthetic' for style reference.",
+    "source_id": 60
   },
   {
-    "id": 61,
+    "id": 111,
     "category": "Sci-Fi & Concept Film",
     "style": "Anime",
     "best_on": [
@@ -6885,10 +6995,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime space environments. Runway maintains character consistency through the reflection reveal. Add 'anime space opera cinematic' for style."
+    "tool_notes": "Kling handles anime space environments. Runway maintains character consistency through the reflection reveal. Add 'anime space opera cinematic' for style.",
+    "source_id": 61
   },
   {
-    "id": 62,
+    "id": 112,
     "category": "Sci-Fi & Concept Film",
     "style": "Anime",
     "best_on": [
@@ -6968,10 +7079,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime environmental detail. Luma captures light quality in post-apocalyptic settings. Specify 'Nausicaä or Castle in the Sky aesthetic' for reference."
+    "tool_notes": "Kling handles anime environmental detail. Luma captures light quality in post-apocalyptic settings. Specify 'Nausicaä or Castle in the Sky aesthetic' for reference.",
+    "source_id": 62
   },
   {
-    "id": 63,
+    "id": 113,
     "category": "Sci-Fi & Concept Film",
     "style": "Anime",
     "best_on": [
@@ -7042,10 +7154,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime transformation sequences consistently. Runway maintains energy effect quality. Specify 'anime power transformation cinematic' for best results."
+    "tool_notes": "Kling handles anime transformation sequences consistently. Runway maintains energy effect quality. Specify 'anime power transformation cinematic' for best results.",
+    "source_id": 63
   },
   {
-    "id": 64,
+    "id": 114,
     "category": "Sci-Fi & Concept Film",
     "style": "Minimalist",
     "best_on": [
@@ -7101,10 +7214,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles clean void environments. Luma maintains object surface detail through rotation. Add 'product photography in space void' for clean results."
+    "tool_notes": "Runway handles clean void environments. Luma maintains object surface detail through rotation. Add 'product photography in space void' for clean results.",
+    "source_id": 64
   },
   {
-    "id": 65,
+    "id": 115,
     "category": "Sci-Fi & Concept Film",
     "style": "Minimalist",
     "best_on": [
@@ -7176,10 +7290,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles minimalist planetary landscapes. Sora manages the scale of environments. Add 'lone figure alien landscape wide shot' for correct framing."
+    "tool_notes": "Runway handles minimalist planetary landscapes. Sora manages the scale of environments. Add 'lone figure alien landscape wide shot' for correct framing.",
+    "source_id": 65
   },
   {
-    "id": 66,
+    "id": 116,
     "category": "Sci-Fi & Concept Film",
     "style": "Minimalist",
     "best_on": [
@@ -7235,10 +7350,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles clean UI assembly animations. Add 'HUD interface assembly minimalist sci-fi' for correct aesthetic."
+    "tool_notes": "Runway handles clean UI assembly animations. Add 'HUD interface assembly minimalist sci-fi' for correct aesthetic.",
+    "source_id": 66
   },
   {
-    "id": 67,
+    "id": 117,
     "category": "Sci-Fi & Concept Film",
     "style": "Minimalist",
     "best_on": [
@@ -7285,10 +7401,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles symmetrical human composition. Runway maintains figure consistency. Add 'minimalist doppelganger concept film' for style reference."
+    "tool_notes": "Luma handles symmetrical human composition. Runway maintains figure consistency. Add 'minimalist doppelganger concept film' for style reference.",
+    "source_id": 67
   },
   {
-    "id": 68,
+    "id": 118,
     "category": "Food & Cooking",
     "style": "Cinematic",
     "best_on": [
@@ -7360,10 +7477,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles food steam and liquid motion. Luma maintains surface texture detail. Add 'cinematic food photography slow push' on Runway."
+    "tool_notes": "Kling handles food steam and liquid motion. Luma maintains surface texture detail. Add 'cinematic food photography slow push' on Runway.",
+    "source_id": 68
   },
   {
-    "id": 69,
+    "id": 119,
     "category": "Food & Cooking",
     "style": "Cinematic",
     "best_on": [
@@ -7451,10 +7569,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles kitchen action and fire dynamics. Runway maintains chef motion consistency. Specify 'Chef's Table cinematic kitchen' for aesthetic reference."
+    "tool_notes": "Kling handles kitchen action and fire dynamics. Runway maintains chef motion consistency. Specify 'Chef's Table cinematic kitchen' for aesthetic reference.",
+    "source_id": 69
   },
   {
-    "id": 70,
+    "id": 120,
     "category": "Food & Cooking",
     "style": "Cinematic",
     "best_on": [
@@ -7527,10 +7646,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles liquid dynamics exceptionally well. Add 'extreme slow motion liquid pour cinematic' on Runway. Luma maintains light-through-liquid translucency."
+    "tool_notes": "Kling handles liquid dynamics exceptionally well. Add 'extreme slow motion liquid pour cinematic' on Runway. Luma maintains light-through-liquid translucency.",
+    "source_id": 70
   },
   {
-    "id": 71,
+    "id": 121,
     "category": "Food & Cooking",
     "style": "Cinematic",
     "best_on": [
@@ -7618,10 +7738,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles top-down composition and entering hands cleanly. Add 'overhead food table community meal cinematic' on Runway."
+    "tool_notes": "Luma handles top-down composition and entering hands cleanly. Add 'overhead food table community meal cinematic' on Runway.",
+    "source_id": 71
   },
   {
-    "id": 72,
+    "id": 122,
     "category": "Food & Cooking",
     "style": "Cinematic",
     "best_on": [
@@ -7693,10 +7814,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles market walk-through motion. Luma maintains colour richness in produce. Specify 'food provenance cinematic documentary' for the right aesthetic."
+    "tool_notes": "Kling handles market walk-through motion. Luma maintains colour richness in produce. Specify 'food provenance cinematic documentary' for the right aesthetic.",
+    "source_id": 72
   },
   {
-    "id": 73,
+    "id": 123,
     "category": "Food & Cooking",
     "style": "Minimalist",
     "best_on": [
@@ -7760,10 +7882,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles minimalist food composition. Luma maintains surface texture detail. Add 'minimalist food photography single subject' for clean results."
+    "tool_notes": "Runway handles minimalist food composition. Luma maintains surface texture detail. Add 'minimalist food photography single subject' for clean results.",
+    "source_id": 73
   },
   {
-    "id": 74,
+    "id": 124,
     "category": "Food & Cooking",
     "style": "Minimalist",
     "best_on": [
@@ -7826,10 +7949,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles hand motion consistency. Luma captures light on skin and food texture. Specify 'craft hands food preparation minimalist' for correct framing."
+    "tool_notes": "Runway handles hand motion consistency. Luma captures light on skin and food texture. Specify 'craft hands food preparation minimalist' for correct framing.",
+    "source_id": 74
   },
   {
-    "id": 75,
+    "id": 125,
     "category": "Food & Cooking",
     "style": "Minimalist",
     "best_on": [
@@ -7893,10 +8017,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles steam motion loops cleanly. Pika excels at satisfying minimal steam sequences. Add 'steam slow motion minimalist' on Luma."
+    "tool_notes": "Runway handles steam motion loops cleanly. Pika excels at satisfying minimal steam sequences. Add 'steam slow motion minimalist' on Luma.",
+    "source_id": 75
   },
   {
-    "id": 76,
+    "id": 126,
     "category": "Food & Cooking",
     "style": "Minimalist",
     "best_on": [
@@ -7951,10 +8076,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles macro food cross-section detail. Runway maintains cut motion consistency. Add 'extreme macro food cross-section slow cut' for best results."
+    "tool_notes": "Luma handles macro food cross-section detail. Runway maintains cut motion consistency. Add 'extreme macro food cross-section slow cut' for best results.",
+    "source_id": 76
   },
   {
-    "id": 77,
+    "id": 127,
     "category": "Food & Cooking",
     "style": "Documentary",
     "best_on": [
@@ -8018,10 +8144,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles observational camera movement without feeling staged. Luma maintains consistent available light. Add 'Chef's Table documentary handheld observational' for style reference."
+    "tool_notes": "Runway handles observational camera movement without feeling staged. Luma maintains consistent available light. Add 'Chef's Table documentary handheld observational' for style reference.",
+    "source_id": 77
   },
   {
-    "id": 78,
+    "id": 128,
     "category": "Food & Cooking",
     "style": "Documentary",
     "best_on": [
@@ -8084,10 +8211,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles naturalistic group scene pans. Kling maintains consistent group composition. Add 'documentary observational shared meal' for style."
+    "tool_notes": "Runway handles naturalistic group scene pans. Kling maintains consistent group composition. Add 'documentary observational shared meal' for style.",
+    "source_id": 78
   },
   {
-    "id": 79,
+    "id": 129,
     "category": "Food & Cooking",
     "style": "Documentary",
     "best_on": [
@@ -8151,10 +8279,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles landscape and agricultural environments. Runway maintains light consistency through movement. Add 'food provenance documentary landscape' for style."
+    "tool_notes": "Luma handles landscape and agricultural environments. Runway maintains light consistency through movement. Add 'food provenance documentary landscape' for style.",
+    "source_id": 79
   },
   {
-    "id": 80,
+    "id": 130,
     "category": "Food & Cooking",
     "style": "Documentary",
     "best_on": [
@@ -8225,10 +8354,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles naturalistic portrait eye contact moments. Luma captures available light on faces. Add 'documentary chef portrait unposed' for correct style."
+    "tool_notes": "Runway handles naturalistic portrait eye contact moments. Luma captures available light on faces. Add 'documentary chef portrait unposed' for correct style.",
+    "source_id": 80
   },
   {
-    "id": 81,
+    "id": 131,
     "category": "Food & Cooking",
     "style": "Anime",
     "best_on": [
@@ -8299,10 +8429,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime food glow effects. Luma captures luminous colour in anime food. Specify 'anime food porn Studio Ghibli style' for the warmth and magic of the aesthetic."
+    "tool_notes": "Kling handles anime food glow effects. Luma captures luminous colour in anime food. Specify 'anime food porn Studio Ghibli style' for the warmth and magic of the aesthetic.",
+    "source_id": 81
   },
   {
-    "id": 82,
+    "id": 132,
     "category": "Food & Cooking",
     "style": "Anime",
     "best_on": [
@@ -8389,10 +8520,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime cooking action sequences. Runway maintains consistent character and kitchen style. Specify 'anime cooking show dramatic peak moment' for best results."
+    "tool_notes": "Kling handles anime cooking action sequences. Runway maintains consistent character and kitchen style. Specify 'anime cooking show dramatic peak moment' for best results.",
+    "source_id": 82
   },
   {
-    "id": 83,
+    "id": 133,
     "category": "Food & Cooking",
     "style": "Anime",
     "best_on": [
@@ -8479,10 +8611,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime facial expression sequences. Luma manages the background reaction effect transitions. Specify 'anime food reaction scene' for the exaggerated taste response aesthetic."
+    "tool_notes": "Kling handles anime facial expression sequences. Luma manages the background reaction effect transitions. Specify 'anime food reaction scene' for the exaggerated taste response aesthetic.",
+    "source_id": 83
   },
   {
-    "id": 84,
+    "id": 134,
     "category": "Food & Cooking",
     "style": "Anime",
     "best_on": [
@@ -8570,10 +8703,11 @@
         ]
       }
     },
-    "tool_notes": "Kling handles anime table assembly sequences. Luma maintains colour luminosity. Specify 'anime magical food table assembly overhead' for the choreographed arrival aesthetic."
+    "tool_notes": "Kling handles anime table assembly sequences. Luma maintains colour luminosity. Specify 'anime magical food table assembly overhead' for the choreographed arrival aesthetic.",
+    "source_id": 84
   },
   {
-    "id": 85,
+    "id": 135,
     "category": "Real Estate & Architecture",
     "style": "Cinematic",
     "best_on": [
@@ -8645,10 +8779,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles architectural crane moves. Sora manages large-scale building exteriors. Add 'architectural cinematic crane reveal' for correct camera movement."
+    "tool_notes": "Luma handles architectural crane moves. Sora manages large-scale building exteriors. Add 'architectural cinematic crane reveal' for correct camera movement.",
+    "source_id": 85
   },
   {
-    "id": 86,
+    "id": 136,
     "category": "Real Estate & Architecture",
     "style": "Cinematic",
     "best_on": [
@@ -8735,10 +8870,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles interior walk-throughs with natural light. Runway maintains consistent interior atmosphere. Add 'architectural interior slow walk reveal' for correct movement."
+    "tool_notes": "Luma handles interior walk-throughs with natural light. Runway maintains consistent interior atmosphere. Add 'architectural interior slow walk reveal' for correct movement.",
+    "source_id": 86
   },
   {
-    "id": 87,
+    "id": 137,
     "category": "Real Estate & Architecture",
     "style": "Cinematic",
     "best_on": [
@@ -8810,10 +8946,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles aerial architectural orbits at scale. Luma maintains building detail through the orbit. Add 'aerial architectural drone orbit golden hour' for best results."
+    "tool_notes": "Sora handles aerial architectural orbits at scale. Luma maintains building detail through the orbit. Add 'aerial architectural drone orbit golden hour' for best results.",
+    "source_id": 87
   },
   {
-    "id": 88,
+    "id": 138,
     "category": "Real Estate & Architecture",
     "style": "Cinematic",
     "best_on": [
@@ -8884,10 +9021,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles material detail lateral moves. Runway maintains texture consistency through movement. Add 'architectural material close-up lateral reveal' for correct approach."
+    "tool_notes": "Luma handles material detail lateral moves. Runway maintains texture consistency through movement. Add 'architectural material close-up lateral reveal' for correct approach.",
+    "source_id": 88
   },
   {
-    "id": 89,
+    "id": 139,
     "category": "Real Estate & Architecture",
     "style": "Minimalist",
     "best_on": [
@@ -8951,10 +9089,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles minimalist interior light shifts. Luma captures architectural geometry precisely. Add 'minimalist interior architecture light study' for correct aesthetic."
+    "tool_notes": "Runway handles minimalist interior light shifts. Luma captures architectural geometry precisely. Add 'minimalist interior architecture light study' for correct aesthetic.",
+    "source_id": 89
   },
   {
-    "id": 90,
+    "id": 140,
     "category": "Real Estate & Architecture",
     "style": "Minimalist",
     "best_on": [
@@ -9001,10 +9140,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles architectural macro shadow movement. Luma maintains material texture through the shadow transition. Add 'architectural material macro shadow study' for correct approach."
+    "tool_notes": "Runway handles architectural macro shadow movement. Luma maintains material texture through the shadow transition. Add 'architectural material macro shadow study' for correct approach.",
+    "source_id": 90
   },
   {
-    "id": 91,
+    "id": 141,
     "category": "Real Estate & Architecture",
     "style": "Minimalist",
     "best_on": [
@@ -9060,10 +9200,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles sky evolution against static architecture. Runway maintains building silhouette consistency. Add 'architectural sky study building silhouette' for correct framing."
+    "tool_notes": "Luma handles sky evolution against static architecture. Runway maintains building silhouette consistency. Add 'architectural sky study building silhouette' for correct framing.",
+    "source_id": 91
   },
   {
-    "id": 92,
+    "id": 142,
     "category": "Real Estate & Architecture",
     "style": "Minimalist",
     "best_on": [
@@ -9127,10 +9268,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles threshold crossing with light change. Luma captures the acoustic and light transition. Add 'minimalist architectural threshold passage' for correct approach."
+    "tool_notes": "Runway handles threshold crossing with light change. Luma captures the acoustic and light transition. Add 'minimalist architectural threshold passage' for correct approach.",
+    "source_id": 92
   },
   {
-    "id": 93,
+    "id": 143,
     "category": "Real Estate & Architecture",
     "style": "Documentary",
     "best_on": [
@@ -9186,10 +9328,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles observational exterior-to-interior shots. Luma maintains light consistency at dusk. Add 'documentary inhabited building observational' for correct approach."
+    "tool_notes": "Runway handles observational exterior-to-interior shots. Luma maintains light consistency at dusk. Add 'documentary inhabited building observational' for correct approach.",
+    "source_id": 93
   },
   {
-    "id": 94,
+    "id": 144,
     "category": "Real Estate & Architecture",
     "style": "Documentary",
     "best_on": [
@@ -9252,10 +9395,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles architectural transition states. Runway maintains worker motion consistency. Add 'documentary architecture in transition' for correct observational style."
+    "tool_notes": "Luma handles architectural transition states. Runway maintains worker motion consistency. Add 'documentary architecture in transition' for correct observational style.",
+    "source_id": 94
   },
   {
-    "id": 95,
+    "id": 145,
     "category": "Real Estate & Architecture",
     "style": "Documentary",
     "best_on": [
@@ -9311,10 +9455,11 @@
         ]
       }
     },
-    "tool_notes": "Runway handles following-distance documentary camera work. Luma maintains consistent interior available light. Add 'documentary architect building portrait observational' for style."
+    "tool_notes": "Runway handles following-distance documentary camera work. Luma maintains consistent interior available light. Add 'documentary architect building portrait observational' for style.",
+    "source_id": 95
   },
   {
-    "id": 96,
+    "id": 146,
     "category": "Real Estate & Architecture",
     "style": "Documentary",
     "best_on": [
@@ -9378,10 +9523,11 @@
         ]
       }
     },
-    "tool_notes": "Luma handles historic building surface detail in pans. Runway maintains architectural consistency. Add 'documentary historic building portrait slow pan' for correct approach."
+    "tool_notes": "Luma handles historic building surface detail in pans. Runway maintains architectural consistency. Add 'documentary historic building portrait slow pan' for correct approach.",
+    "source_id": 96
   },
   {
-    "id": 97,
+    "id": 147,
     "category": "Real Estate & Architecture",
     "style": "Surrealist",
     "best_on": [
@@ -9445,10 +9591,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible interior scale. Add 'backrooms infinite space domestic interior' or 'liminal space architecture surrealist' for the correct uncanny aesthetic."
+    "tool_notes": "Sora handles impossible interior scale. Add 'backrooms infinite space domestic interior' or 'liminal space architecture surrealist' for the correct uncanny aesthetic.",
+    "source_id": 97
   },
   {
-    "id": 98,
+    "id": 148,
     "category": "Real Estate & Architecture",
     "style": "Surrealist",
     "best_on": [
@@ -9520,10 +9667,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible material transformation on buildings. Luma manages the environmental indifference around the transformation. Add 'surrealist building transformation material' for best results."
+    "tool_notes": "Sora handles impossible material transformation on buildings. Luma manages the environmental indifference around the transformation. Add 'surrealist building transformation material' for best results.",
+    "source_id": 98
   },
   {
-    "id": 99,
+    "id": 149,
     "category": "Real Estate & Architecture",
     "style": "Surrealist",
     "best_on": [
@@ -9586,10 +9734,11 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible gravity and geometry in interior spaces. Runway manages tracking shots through impossible architecture. Add 'Escher house impossible gravity interior surrealist' for style reference."
+    "tool_notes": "Sora handles impossible gravity and geometry in interior spaces. Runway manages tracking shots through impossible architecture. Add 'Escher house impossible gravity interior surrealist' for style reference.",
+    "source_id": 99
   },
   {
-    "id": 100,
+    "id": 150,
     "category": "Real Estate & Architecture",
     "style": "Surrealist",
     "best_on": [
@@ -9645,6 +9794,7 @@
         ]
       }
     },
-    "tool_notes": "Sora handles impossible building placement in surreal environments. Luma maintains building detail through the orbit. Add 'surrealist domestic architecture impossible location' for best results."
+    "tool_notes": "Sora handles impossible building placement in surreal environments. Luma maintains building detail through the orbit. Add 'surrealist domestic architecture impossible location' for best results.",
+    "source_id": 100
   }
 ]
