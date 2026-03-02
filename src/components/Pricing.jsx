@@ -43,16 +43,11 @@ const plans = [
 export default function Pricing({ onAuthClick }) {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
-  const [confirmPlan, setConfirmPlan] = useState(null) // 'monthly' | null
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutCanceled, setCheckoutCanceled] = useState(false)
   const [checkoutCanceledPlan, setCheckoutCanceledPlan] = useState(null)
   const [ctaVariant, setCtaVariant] = useState('a')
   const navigate = useNavigate()
-
-  const closeConfirm = () => {
-    if (!loading) setConfirmPlan(null)
-  }
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -96,9 +91,7 @@ export default function Pricing({ onAuthClick }) {
       return
     }
 
-    // Add a quick, explicit confirm step so users can back out without leaving the site.
-    setCheckoutError(null)
-    setConfirmPlan(planType)
+    startCheckout(planType)
   }
 
   const startCheckout = async (planType) => {
@@ -172,6 +165,20 @@ export default function Pricing({ onAuthClick }) {
           <div className="neu-card rounded-2xl p-4 mb-6 text-center">
             <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
               Checkout canceled{checkoutCanceledPlan ? ` (${checkoutCanceledPlan})` : ''}. You can restart anytime.
+            </p>
+          </div>
+        )}
+
+        {checkoutError && (
+          <div
+            className="neu-card rounded-2xl p-4 mb-6 text-center"
+            style={{
+              background: 'rgba(239, 68, 68, 0.08)',
+              border: '1px solid rgba(239, 68, 68, 0.25)'
+            }}
+          >
+            <p className="text-sm" style={{ color: 'var(--text-primary)' }}>
+              {checkoutError}
             </p>
           </div>
         )}
@@ -302,65 +309,6 @@ export default function Pricing({ onAuthClick }) {
           30-day money-back guarantee. No questions asked.
         </p>
       </div>
-
-      {confirmPlan && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)' }}
-          onClick={closeConfirm}
-        >
-          <div
-            className="neu-card w-full max-w-md rounded-2xl p-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-              Continue to secure checkout?
-            </h3>
-            <p className="text-sm mb-5" style={{ color: 'var(--text-secondary)' }}>
-              You are about to leave CineWorkflo and open Stripe Checkout. You can cancel on Stripe and come back here.
-            </p>
-            {checkoutError && (
-              <div
-                className="rounded-xl p-3 mb-4 text-sm"
-                style={{
-                  background: 'rgba(239, 68, 68, 0.08)',
-                  border: '1px solid rgba(239, 68, 68, 0.25)',
-                  color: 'var(--text-primary)'
-                }}
-              >
-                {checkoutError}
-              </div>
-            )}
-            <div className="flex gap-3">
-              <button
-                onClick={closeConfirm}
-                className="flex-1 py-3 rounded-xl font-semibold"
-                style={{
-                  background: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-secondary)',
-                  opacity: loading ? 0.6 : 1
-                }}
-                disabled={loading}
-              >
-                Stay here
-              </button>
-              <button
-                onClick={() => startCheckout(confirmPlan)}
-                className="flex-1 py-3 rounded-xl font-semibold"
-                style={{
-                  background: 'linear-gradient(145deg, #3B82F6, #2563EB)',
-                  color: '#fff',
-                  opacity: loading ? 0.7 : 1
-                }}
-                disabled={loading}
-              >
-                {loading ? 'Opening…' : 'Continue'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   )
 }
