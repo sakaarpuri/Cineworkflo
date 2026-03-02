@@ -13,6 +13,9 @@ export default function ShotToPrompt({ preview = false }) {
 
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
   const FREE_LIMIT = 5
+  const MAX_UPLOAD_MB = 25
+  const MAX_VIDEO_SECONDS = 15
+  const MAX_BYTES = MAX_UPLOAD_MB * 1024 * 1024
 
   useEffect(() => {
     const raw = localStorage.getItem('shotToPromptUsage')
@@ -40,22 +43,81 @@ export default function ShotToPrompt({ preview = false }) {
   const remainingFree = Math.max(0, FREE_LIMIT - usage.count)
   const isLimitReached = !isPro && remainingFree === 0
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
-      if (!allowedTypes.includes(file.type)) {
-        setUploadedImage(null)
-        setGeneratedPrompt('Unsupported file format. Please upload JPG, PNG, WEBP, or GIF.')
-        return
-      }
+  const handleMediaUpload = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    // allow re-uploading the same file
+    e.target.value = ''
 
+    if (file.size > MAX_BYTES) {
+      setUploadedImage(null)
+      setGeneratedPrompt(`File too large. Max ${MAX_UPLOAD_MB}MB.`)
+      return
+    }
+
+    const allowedImages = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+    const allowedVideos = new Set(['video/mp4', 'video/webm', 'video/quicktime'])
+
+    if (allowedImages.has(file.type)) {
       const reader = new FileReader()
       reader.onloadend = () => {
         setUploadedImage(reader.result)
         analyzeImage(reader.result)
       }
       reader.readAsDataURL(file)
+      return
+    }
+
+    if (!allowedVideos.has(file.type)) {
+      setUploadedImage(null)
+      setGeneratedPrompt('Unsupported file format. Upload JPG/PNG/WEBP/GIF, or MP4/WEBM/MOV (≤15s).')
+      return
+    }
+
+    // Video: extract a representative frame client-side and analyze as an image.
+    setGeneratedPrompt('')
+
+    const objectUrl = URL.createObjectURL(file)
+    try {
+      const video = document.createElement('video')
+      video.preload = 'metadata'
+      video.muted = true
+      video.playsInline = true
+      video.src = objectUrl
+
+      await new Promise((resolve, reject) => {
+        video.onloadedmetadata = () => resolve()
+        video.onerror = () => reject(new Error('Unable to read video metadata.'))
+      })
+
+      const duration = Number(video.duration || 0)
+      if (!Number.isFinite(duration) || duration <= 0) {
+        throw new Error('Unable to read video duration.')
+      }
+      if (duration > MAX_VIDEO_SECONDS) {
+        throw new Error(`Video too long. Max ${MAX_VIDEO_SECONDS} seconds.`)
+      }
+
+      const captureTime = Math.max(0.05, Math.min(duration * 0.5, duration - 0.05))
+      await new Promise((resolve) => {
+        video.currentTime = captureTime
+        video.onseeked = () => resolve()
+      })
+
+      const canvas = document.createElement('canvas')
+      canvas.width = video.videoWidth || 1280
+      canvas.height = video.videoHeight || 720
+      const ctx = canvas.getContext('2d')
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+      const frameDataUrl = canvas.toDataURL('image/jpeg', 0.92)
+
+      setUploadedImage(frameDataUrl)
+      await analyzeImage(frameDataUrl)
+    } catch (err) {
+      setUploadedImage(null)
+      setGeneratedPrompt(err.message || 'Unable to read video. Please try a shorter MP4/WEBM/MOV.')
+    } finally {
+      URL.revokeObjectURL(objectUrl)
     }
   }
 
@@ -267,13 +329,13 @@ export default function ShotToPrompt({ preview = false }) {
               }}
               onClick={() => fileInputRef.current?.click()}
             >
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleImageUpload}
-                accept="image/jpeg,image/png,image/webp,image/gif"
-                className="hidden"
-              />
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleMediaUpload}
+                    accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime"
+                    className="hidden"
+                  />
 
               {uploadedImage ? (
                 <div className="space-y-4">
@@ -334,6 +396,9 @@ export default function ShotToPrompt({ preview = false }) {
                   </p>
                   <p style={{ color: 'var(--text-muted)' }} className="text-sm">
                     {isLimitReached ? 'Free limit reached — upgrade to continue' : 'or click to browse'}
+                  </p>
+                  <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">
+                    Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s
                   </p>
                 </div>
               )}
@@ -406,8 +471,8 @@ export default function ShotToPrompt({ preview = false }) {
           <input
             type="file"
             ref={fileInputRef}
-            onChange={handleImageUpload}
-            accept="image/jpeg,image/png,image/webp,image/gif"
+            onChange={handleMediaUpload}
+            accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime"
             className="hidden"
           />
 
@@ -430,6 +495,9 @@ export default function ShotToPrompt({ preview = false }) {
               </p>
               <p style={{ color: 'var(--text-muted)' }}>
                 or click to browse from your device
+              </p>
+              <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">
+                Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s
               </p>
             </div>
           ) : (

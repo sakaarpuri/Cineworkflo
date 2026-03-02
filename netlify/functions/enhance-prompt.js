@@ -7,6 +7,47 @@ const MODEL_FALLBACK = [
 
 const { createClient } = require('@supabase/supabase-js');
 
+const normalizeText = (value) => String(value || '').trim();
+
+const looksLikeOffTaskRequest = (idea) => {
+  const text = String(idea || '');
+  const offTask = /\b(essay|homework|assignment|resume|cover letter|linkedin|blog post|tweet|thread|email|letter|poem|code|javascript|typescript|python|sql|excel|business plan|press release)\b/i;
+  const onTask = /\b(prompt|video|film|cinematic|shot|camera|scene|runway|pika|kling|luma|sora|meta|veo|higgsfield)\b/i;
+  return offTask.test(text) && !onTask.test(text);
+};
+
+const enforcePromptShape = (raw, { maxWords = 90 } = {}) => {
+  let text = normalizeText(raw);
+  if (!text) return '';
+
+  // Strip common wrappers.
+  text = text
+    .replace(/^```[\s\S]*?\n/, '')
+    .replace(/```$/g, '')
+    .replace(/^\s*(prompt|final|output)\s*:\s*/i, '')
+    .trim();
+
+  // Prefer the first paragraph if the model returns extra commentary.
+  const firstParagraph = text.split(/\n\s*\n/)[0]?.trim();
+  if (firstParagraph) text = firstParagraph;
+
+  // Hard cap on word count for cost control and consistency.
+  const words = text.split(/\s+/).filter(Boolean);
+  if (words.length > maxWords) {
+    text = words.slice(0, maxWords).join(' ').replace(/[,\s]+$/g, '').trim();
+  }
+
+  // Enforce aspect ratio + resolution as a footer if missing.
+  const hasRatio = /\b(16:9|9:16|1:1|4:5)\b/.test(text);
+  const hasRes = /\b(4k|8k|1080p|720p)\b/i.test(text);
+  if (!hasRatio || !hasRes) {
+    const suffix = `${hasRatio ? '' : '16:9'}${!hasRatio && !hasRes ? ', ' : ''}${hasRes ? '' : '4K'}`.trim();
+    text = `${text.replace(/[.\s]+$/g, '')} — ${suffix}`.trim();
+  }
+
+  return text;
+};
+
 const getEnvInt = (key, fallback) => {
   const raw = process.env[key];
   const value = Number.parseInt(String(raw ?? ''), 10);
@@ -177,12 +218,30 @@ exports.handler = async (event) => {
       includeImages = false
     } = JSON.parse(event.body || '{}');
 
-    const trimmedIdea = String(idea || '').trim();
+    const trimmedIdea = normalizeText(idea);
     if (trimmedIdea.length < 3) {
       return {
         statusCode: 400,
         headers,
         body: JSON.stringify({ error: 'Idea must be at least 3 characters' })
+      };
+    }
+
+    if (trimmedIdea.length > 500) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Idea is too long. Keep it under 500 characters.' })
+      };
+    }
+
+    if (looksLikeOffTaskRequest(trimmedIdea)) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({
+          error: 'Prompt Enhancer is for AI video prompt generation only. Describe a shot/scene you want to generate.'
+        })
       };
     }
 
@@ -264,7 +323,8 @@ Format: ${isBeginner ? 'Simple descriptive prompt ending with aspect ratio and r
       throw lastError || new Error('Model request failed');
     }
 
-    const prompt = response?.content?.[0]?.text?.trim();
+    const rawPrompt = response?.content?.[0]?.text;
+    const prompt = enforcePromptShape(rawPrompt, { maxWords: isBeginner ? 90 : 120 });
     if (!prompt) {
       return {
         statusCode: 502,
