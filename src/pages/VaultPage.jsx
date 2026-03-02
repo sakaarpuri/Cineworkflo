@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Search, Copy, Check, Lightbulb, ChevronDown, ChevronUp } from 'lucide-react'
 import PROMPTS_RAW from '../data/ai_video_prompt_library.json'
 
@@ -556,6 +556,8 @@ export default function VaultPage() {
   const [category, setCategory] = useState('All')
   const [style, setStyle] = useState('All')
   const globalView = 'beginner'
+  const prevCategoryRef = useRef(null)
+  const prevStyleRef = useRef(null)
 
   const categories = useMemo(() => {
     const list = [...new Set(prompts.map((p) => p.category))].sort()
@@ -715,7 +717,17 @@ export default function VaultPage() {
                 <button
                   key={c}
                   type="button"
-                  onClick={() => setCategory(c)}
+                  onClick={() => {
+                    if (c === category) {
+                      if (c === 'All') return
+                      const previous = prevCategoryRef.current || 'All'
+                      prevCategoryRef.current = category
+                      setCategory(previous)
+                      return
+                    }
+                    prevCategoryRef.current = category
+                    setCategory(c)
+                  }}
                   className={`cwf-neu-pill${active ? ' cwf-neu-pill--active' : ''}`}
                   style={active ? { '--pill-fg': cc.fg, '--pill-bg': cc.bg } : undefined}
                 >
@@ -742,7 +754,17 @@ export default function VaultPage() {
                 <button
                   key={s}
                   type="button"
-                  onClick={() => setStyle(s)}
+                  onClick={() => {
+                    if (s === style) {
+                      if (s === 'All') return
+                      const previous = prevStyleRef.current || 'All'
+                      prevStyleRef.current = style
+                      setStyle(previous)
+                      return
+                    }
+                    prevStyleRef.current = style
+                    setStyle(s)
+                  }}
                   className={`cwf-neu-pill${active ? ' cwf-neu-pill--active' : ''}`}
                 >
                   {s}
