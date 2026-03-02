@@ -108,11 +108,11 @@ export default function PromptVault({ preview = false }) {
                 style={{
                   background: vaultToggle
                     ? 'linear-gradient(145deg, #10B981, #059669)'
-                    : 'linear-gradient(145deg, #3B82F6, #2563EB)',
+                    : 'linear-gradient(145deg, #6366F1, #4F46E5)',
                   boxShadow: vaultToggle
                     ? 'inset 3px 3px 6px rgba(16,185,129,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(16,185,129,0.4)'
-                    : 'inset 3px 3px 6px rgba(59,130,246,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
-                  border: `2px solid ${vaultToggle ? '#10B98150' : '#3B82F650'}`
+                    : 'inset 3px 3px 6px rgba(99,102,241,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(99,102,241,0.4)',
+                  border: `2px solid ${vaultToggle ? '#10B98150' : '#6366F150'}`
                 }}
                 aria-label="Explore Prompt Vault"
               >
@@ -127,7 +127,7 @@ export default function PromptVault({ preview = false }) {
                   <ArrowRight
                     className="h-4 w-4 transition-all duration-300"
                     style={{
-                      color: vaultToggle ? '#10B981' : '#3B82F6'
+                      color: vaultToggle ? '#10B981' : '#6366F1'
                     }}
                   />
                 </span>
