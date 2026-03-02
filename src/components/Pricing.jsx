@@ -159,6 +159,9 @@ export default function Pricing({ onAuthClick }) {
           >
             Cancel anytime.
           </p>
+          <p className="mt-3 italic text-sm" style={{ color: 'var(--text-muted)' }}>
+            Support is coming soon. We’re currently hiring our best apologetic tone.
+          </p>
         </div>
 
         {checkoutCanceled && (

@@ -30,6 +30,16 @@ export default function Header({ onAuthClick }) {
         borderBottom: '1px solid var(--border-color)'
       }}
     >
+      <div
+        className="text-center text-xs sm:text-sm py-2"
+        style={{
+          background: 'var(--bg-primary)',
+          borderBottom: '1px solid var(--border-color)',
+          color: 'var(--text-secondary)'
+        }}
+      >
+        Beta v2 is en route — we’re tuning the Enhancer and expanding the Vault.
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center gap-2">
