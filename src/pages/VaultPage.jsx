@@ -795,6 +795,28 @@ export default function VaultPage() {
           box-shadow:
             var(--shadow-inset);
         }
+
+        /* Night mode: remove any bright "glow" from pill shadows. */
+        [data-theme="dark"] .cwf-neu-pill {
+          box-shadow:
+            4px 4px 8px rgba(0,0,0,0.55),
+            -4px -4px 8px rgba(255,255,255,0.03),
+            inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+
+        [data-theme="dark"] .cwf-neu-pill:active {
+          box-shadow:
+            inset 4px 4px 8px rgba(0,0,0,0.60),
+            inset -4px -4px 8px rgba(255,255,255,0.03);
+        }
+
+        [data-theme="dark"] .cwf-neu-pill--active {
+          background: rgba(255,255,255,0.06);
+          box-shadow:
+            4px 4px 8px rgba(0,0,0,0.55),
+            -4px -4px 8px rgba(255,255,255,0.03),
+            inset 0 1px 0 rgba(255,255,255,0.06);
+        }
       `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, marginBottom: 18 }}>

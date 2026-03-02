@@ -383,22 +383,22 @@ export default function PromptVault({ preview = false }) {
         )}
       </div>
 
-      {/* Prompt Modal */}
-      {selectedPrompt && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(15,23,42,0.55)', backdropFilter: 'blur(2px)' }}
-          onClick={closeModal}
-        >
-          <div 
-            className="max-w-2xl w-full rounded-2xl p-6 relative"
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid rgba(15,23,42,0.10)',
-              boxShadow: '0 22px 70px rgba(15,23,42,0.28), 0 2px 10px rgba(15,23,42,0.10)'
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
+	      {/* Prompt Modal */}
+	      {selectedPrompt && (
+	        <div 
+	          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+	          style={{ background: 'rgba(15,23,42,0.55)', backdropFilter: 'blur(2px)' }}
+	          onClick={closeModal}
+	        >
+	          <div 
+	            className="max-w-2xl w-full rounded-2xl p-6 relative"
+	            style={{
+	              background: 'var(--bg-card)',
+	              border: '1px solid rgba(15,23,42,0.10)',
+	              boxShadow: '0 22px 70px rgba(15,23,42,0.28), 0 2px 10px rgba(15,23,42,0.10)'
+	            }}
+	            onClick={(e) => e.stopPropagation()}
+	          >
             <button 
               onClick={closeModal}
               className="absolute top-4 right-4 p-2 rounded-full transition-colors"
@@ -411,16 +411,26 @@ export default function PromptVault({ preview = false }) {
               <X className="h-5 w-5" />
             </button>
 
-            <div className="mb-4">
-              <span 
-                className="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2"
-                style={{ background: CATEGORY_COLORS[selectedPrompt.category] + '20', color: CATEGORY_COLORS[selectedPrompt.category] }}
-              >
-                {selectedPrompt.category}
-              </span>
-              <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{selectedPrompt.title}</h2>
-              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Best for: {selectedPrompt.tool}</p>
-            </div>
+	            <div className="mb-4">
+	              <span 
+	                className="inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2"
+	                style={{ background: CATEGORY_COLORS[selectedPrompt.category] + '20', color: CATEGORY_COLORS[selectedPrompt.category] }}
+	              >
+	                {selectedPrompt.category}
+	              </span>
+	              <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>{selectedPrompt.title}</h2>
+	              <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Best for: {selectedPrompt.tool}</p>
+	              <div className="mt-2">
+	                <Link
+	                  to="/prompts"
+	                  onClick={() => trackCtaEvent('prompt_modal_to_vault_v2', '/')}
+	                  className="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+	                  style={{ color: 'var(--accent-purple)' }}
+	                >
+	                  See pro prompts in the Vault <ArrowRight className="h-4 w-4" />
+	                </Link>
+	              </div>
+	            </div>
 
             <div 
               className="p-4 rounded-xl mb-4 font-mono text-sm leading-relaxed"
