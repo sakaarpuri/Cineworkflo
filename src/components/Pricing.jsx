@@ -15,54 +15,35 @@ const plans = [
       '5 Shot to Prompt generations / month',
       'Prompt Vault (open access)',
       'Basic search',
-      'Copy to clipboard',
-      'Email support'
+      'Copy to clipboard'
     ],
     cta: 'Get Started',
     popular: false
   },
   {
-    name: 'Pro Monthly',
+    name: 'Pro',
     planType: 'monthly',
     price: '$7.99',
     priceNote: '/month',
     description: 'Full access for active creators',
     features: [
-      'Unlimited AI generations',
-      '150+ professional prompts',
+      'Unlimited Prompt Enhancer generations',
+      'Ever-growing Prompt Vault',
       'Multiple style interpretations',
       'Shot to Prompt AI tool',
       'Advanced search & filters',
       'New prompts monthly',
-      'Priority support',
       'Cancel anytime'
     ],
-    cta: 'Start Monthly Plan',
+    cta: 'Start Pro',
     popular: false
-  },
-  {
-    name: 'Pro Yearly',
-    planType: 'yearly',
-    price: '$49',
-    priceNote: '/year',
-    description: 'Best value for committed creators',
-    features: [
-      'Everything in Pro Monthly',
-      '1 year access',
-      'All future updates',
-      'Workflow templates (Coming Soon)',
-      '30-day money-back guarantee'
-    ],
-    cta: 'Get Yearly Access',
-    popular: true,
-    value: true
   }
 ]
 
 export default function Pricing({ onAuthClick }) {
   const { user } = useAuth()
   const [loading, setLoading] = useState(false)
-  const [confirmPlan, setConfirmPlan] = useState(null) // 'monthly' | 'yearly' | null
+  const [confirmPlan, setConfirmPlan] = useState(null) // 'monthly' | null
   const [checkoutCanceled, setCheckoutCanceled] = useState(false)
   const [checkoutCanceledPlan, setCheckoutCanceledPlan] = useState(null)
   const [ctaVariant, setCtaVariant] = useState('a')
@@ -76,7 +57,7 @@ export default function Pricing({ onAuthClick }) {
     if (checkout === 'canceled') {
       setCheckoutCanceled(true)
       const plan = params.get('plan')
-      if (plan === 'monthly' || plan === 'yearly') setCheckoutCanceledPlan(plan)
+      if (plan === 'monthly') setCheckoutCanceledPlan(plan)
       params.delete('checkout')
       params.delete('plan')
       const query = params.toString()
@@ -144,8 +125,7 @@ export default function Pricing({ onAuthClick }) {
   }
 
   const getPlanCta = (plan) => {
-    if (plan.planType === 'monthly') return ctaVariant === 'a' ? 'Start Monthly Plan' : 'Start Pro Monthly'
-    if (plan.planType === 'yearly') return ctaVariant === 'a' ? 'Get Yearly Access' : 'Unlock Pro Yearly'
+    if (plan.planType === 'monthly') return ctaVariant === 'a' ? 'Start Pro' : 'Go Pro'
     return plan.cta
   }
 
@@ -167,7 +147,7 @@ export default function Pricing({ onAuthClick }) {
             className="text-xl"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Monthly or yearly. Cancel anytime.
+            Cancel anytime.
           </p>
         </div>
 

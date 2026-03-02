@@ -71,7 +71,7 @@ const SEO_BY_PATH = {
   },
   '/pricing': {
     title: 'Pricing - CineWorkflo Plans for AI Video Creators',
-    description: 'Compare Free, Pro Monthly, and Pro Yearly plans for CineWorkflo. Unlock full prompt vault access and advanced AI video workflow tools.',
+    description: 'Compare Free and Pro plans for CineWorkflo. Unlock the ever-growing prompt vault and unlimited Prompt Enhancer generations.',
     keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans, Sora prompt plans, Meta prompt plans',
     path: '/pricing',
     noindex: false
@@ -166,11 +166,11 @@ const FAQ_BY_PATH = {
   '/pricing': [
     {
       question: 'Is this a recurring subscription?',
-      answer: 'The yearly plan is billed once for annual access. Monthly is billed per month and can be cancelled anytime.'
+      answer: 'Yes. Pro is billed monthly and can be cancelled anytime.'
     },
     {
       question: 'What do I get with Pro?',
-      answer: 'Pro unlocks the full prompt vault, unlimited AI generations, and advanced workflow tools including Shot to Prompt.'
+      answer: 'Pro unlocks the ever-growing prompt vault, unlimited Prompt Enhancer generations, and advanced workflow tools including Shot to Prompt.'
     },
     {
       question: 'Is there a refund policy?',

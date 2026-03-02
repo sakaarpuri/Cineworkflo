@@ -38,7 +38,7 @@ export default function PricingPage({ onAuthClick }) {
                 Is this a recurring subscription?
               </h3>
               <p style={{ color: 'var(--text-secondary)' }}>
-                The yearly plan is billed once for annual access. Monthly is billed per month and can be cancelled anytime.
+                Yes. Pro is billed monthly and can be cancelled anytime.
               </p>
             </div>
             <div>
@@ -46,7 +46,7 @@ export default function PricingPage({ onAuthClick }) {
                 What do I get with Pro?
               </h3>
               <p style={{ color: 'var(--text-secondary)' }}>
-                Pro unlocks the full prompt vault, unlimited AI generations, and advanced workflow tools including Shot to Prompt.
+                Pro unlocks the ever-growing prompt vault, unlimited Prompt Enhancer generations, and advanced workflow tools including Shot to Prompt.
               </p>
             </div>
             <div>
