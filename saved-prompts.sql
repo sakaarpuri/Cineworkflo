@@ -17,17 +17,20 @@ create unique index if not exists saved_prompts_user_prompt_unique
 
 alter table public.saved_prompts enable row level security;
 
-create policy if not exists "saved_prompts_select_own"
+drop policy if exists "saved_prompts_select_own" on public.saved_prompts;
+create policy "saved_prompts_select_own"
   on public.saved_prompts
   for select
   using (auth.uid() = user_id);
 
-create policy if not exists "saved_prompts_insert_own"
+drop policy if exists "saved_prompts_insert_own" on public.saved_prompts;
+create policy "saved_prompts_insert_own"
   on public.saved_prompts
   for insert
   with check (auth.uid() = user_id);
 
-create policy if not exists "saved_prompts_delete_own"
+drop policy if exists "saved_prompts_delete_own" on public.saved_prompts;
+create policy "saved_prompts_delete_own"
   on public.saved_prompts
   for delete
   using (auth.uid() = user_id);
