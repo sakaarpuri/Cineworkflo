@@ -7585,7 +7585,7 @@
     ],
     "image_prompt": "A [liquid or sauce] being poured in extreme slow motion, [lens] locked at the point of impact — [liquid color] [liquid or sauce] folding into [vessel or surface], [ice or element] visible, [light source] from behind making the liquid translucent, [background] in soft focus, cinematic macro food still, 16:9",
     "video_prompt": "The pour continues frame by frame — the [liquid or sauce] folding and crashing in slow motion waves, air bubbles rising and bursting at the surface, the impact point sending ripples outward across [vessel or surface], the [light source] finding every droplet as it moves, the motion so slow the liquid appears almost geological — the whole shot the time it takes to pour a single second of liquid.",
-    "sfx_prompt": "The pour sound pitch-shifted and slowed to match the slow motion — a deep resonant cascade, individual droplets audible as distinct impacts, ice or [element] sounds slowed to low metallic tones, then the sound returns to real speed at the shot's end with the abruptness of normal time resuming",
+    "sfx_prompt": "The pour sound pitch-shifted and slowed to match the slow motion — a deep resonant cascade, individual droplets audible as distinct impacts, [ice or element] sounds slowed to low metallic tones, then the sound returns to real speed at the shot's end with the abruptness of normal time resuming",
     "variables": {
       "liquid or sauce": {
         "default": "dark chocolate ganache",
@@ -9750,7 +9750,7 @@
       "Developer"
     ],
     "image_prompt": "A [property type] in an impossible location — [specific impossibility] visible clearly, the building itself entirely normal in its design, [lens] wide to show the full relationship between the building and its [impossible context], [one normal detail] — a light on, a garden chair, a welcome mat — grounding the impossible in the domestic, cinematic still frame, 16:9",
-    "video_prompt": "The camera executes a slow orbit around the [property type] — the [impossible context] moving through frame as the camera circles, always present, always ignored by the building which sits in its [impossible location] with complete domestic indifference, [one normal detail] visible from multiple angles during the orbit, the camera completing the orbit and finding the building unchanged and unchanging in its impossible situation.",
+    "video_prompt": "The camera executes a slow orbit around the [property type] — the [impossible context] moving through frame as the camera circles, always present, always ignored by the building which sits in its [impossible context] with complete domestic indifference, [one normal detail] visible from multiple angles during the orbit, the camera completing the orbit and finding the building unchanged and unchanging in its impossible situation.",
     "sfx_prompt": "The normal sounds of a [property type] — a door, wind chimes, birdsong — transposed into the [impossible context], the domestic sounds sitting over whatever the [impossible context] should sound like, the combination both absurd and, after a moment, completely natural",
     "variables": {
       "property type": {
@@ -10573,8 +10573,8 @@
     "audience": [
       "Creator"
     ],
-    "image_prompt": "A [object type] that [impossible response to stimulus] — [lens] locked on the [object type] at close-mid distance, the [stimulus] applied by [hand or agent] visible entering frame, [background] simple and undistracting, the [impossible response] beginning at the frame edge, vertical composition, 9:16",
-    "video_prompt": "The [stimulus] is applied — the [object type] responds with [impossible response to stimulus] in slow, deliberate, physically specific detail, the camera holding still as the response unfolds completely, the [hand or agent] withdrawing from frame as the [impossible response] completes and the [object type] returns to stillness changed.",
+    "image_prompt": "A [object type] that [impossible response to stimulus] — [lens] locked on the [object type] at close-mid distance, the [stimulus] applied by [hand or agent] visible entering frame, [background] simple and undistracting, the [impossible response to stimulus] beginning at the frame edge, vertical composition, 9:16",
+    "video_prompt": "The [stimulus] is applied — the [object type] responds with [impossible response to stimulus] in slow, deliberate, physically specific detail, the camera holding still as the response unfolds completely, the [hand or agent] withdrawing from frame as the [impossible response to stimulus] completes and the [object type] returns to stillness changed.",
     "sfx_prompt": "The sound of [stimulus] — then the sound of [impossible response to stimulus] rendered as if it were a real physical event, specific material sounds for what should be impossible, silence after the response completes and the [object type] settles",
     "variables": {
       "object type": {
@@ -11847,7 +11847,7 @@
     "audience": [
       "Creator"
     ],
-    "image_prompt": "A [familiar object] that [slowly becomes something else entirely] — [lens] locked at medium close, the [familiar object] beginning in its entirely normal state, the transformation not yet begun, [light source] treating the incoming [something else] as entirely ordinary, 16:9",
+    "image_prompt": "A [familiar object] that [slowly becomes something else entirely] — [lens] locked at medium close, the [familiar object] beginning in its entirely normal state, the transformation not yet begun, [light source] treating the incoming [something else entirely] as entirely ordinary, 16:9",
     "video_prompt": "The transformation from [familiar object] to [something else entirely] unfolds with geological patience — the [familiar object] not resisting, the [something else entirely] not dramatic in its arrival, the change happening through the middle of the frame with no cut, no effect — just one thing becoming another over the full duration of the shot, the camera not moving, not commenting, simply present for the change.",
     "sfx_prompt": "The sound of [familiar object] transitioning to [something else entirely] — what does this specific transformation sound like if given physical properties? The sound design committed to making the impossible sound inevitable and specific rather than generic or fantastical",
     "variables": {
@@ -11906,7 +11906,7 @@
     "audience": [
       "Creator"
     ],
-    "image_prompt": "A [natural landscape element] behaving as if it were [different substance] — [lens] wide enough to show the full extent of the [natural landscape element], [quality of wrong substance] visible in the motion and surface, [scale] preserved making the impossible legible, [time of day] light treating the impossible substance as unremarkable, 16:9",
+    "image_prompt": "A [natural landscape element] behaving as if it were [different substance] — [lens] wide enough to show the full extent of the [natural landscape element], [quality of wrong substance] visible in the motion and surface, [scale reference element] present to preserve scale and make the impossible legible, [time of day] light treating the impossible substance as unremarkable, 16:9",
     "video_prompt": "The [natural landscape element] continues behaving as [different substance] — [quality of wrong substance] motion playing out at the scale of the landscape, a [scale reference element] present in the frame for scale — something normal-sized moving normally in front of the impossible landscape, the camera executing a slow pull-back that reveals more of the extent of the [natural landscape element]'s wrongness, the wrongness more complete than initially visible.",
     "sfx_prompt": "The sound of [different substance] at landscape scale — what does [natural landscape element] sound like if it is made of [different substance]? The sound design committed to the physics of the wrong material at the right scale, the [scale reference element] producing entirely normal sounds in contrast",
     "variables": {
