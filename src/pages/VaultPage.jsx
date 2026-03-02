@@ -4,10 +4,11 @@ import PROMPTS_RAW from '../data/ai_video_prompt_library.json'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 
-const BG = '#0E0E0F'
-const CARD = '#161618'
-const BORDER = '#2A2A2E'
-const PANEL = '#1E1E21'
+// Use the site's theme variables (light by default, dark when user toggles).
+const BG = 'transparent'
+const CARD = 'var(--bg-card)'
+const BORDER = 'var(--border-color)'
+const PANEL = 'var(--bg-secondary)'
 
 const COLOR = {
   blue: '#4F8EF7',
@@ -71,10 +72,10 @@ function ToolNotes({ text }) {
   const raw = String(text || '')
   const parts = raw.split(TOOL_BOLD_RE)
   return (
-    <p style={{ color: 'rgba(231,231,234,0.65)', fontSize: 12.5, lineHeight: 1.55, margin: 0 }}>
+    <p style={{ color: 'var(--text-secondary)', fontSize: 12.5, lineHeight: 1.55, margin: 0 }}>
       {parts.map((p, idx) =>
         TOOL_NAMES.has(p) ? (
-          <strong key={idx} style={{ color: 'rgba(255,255,255,0.92)' }}>
+          <strong key={idx} style={{ color: 'var(--text-primary)' }}>
             {p}
           </strong>
         ) : (
@@ -96,9 +97,9 @@ function CopyButton({ onCopy, copied }) {
         fontWeight: 800,
         padding: '6px 10px',
         borderRadius: 10,
-        background: copied ? 'rgba(92,201,148,0.08)' : 'rgba(255,255,255,0.08)',
-        border: copied ? '1px solid rgba(92,201,148,0.35)' : '1px solid rgba(255,255,255,0.12)',
-        color: copied ? COLOR.green : 'rgba(255,255,255,0.82)',
+        background: copied ? 'rgba(5,150,105,0.10)' : 'var(--bg-primary)',
+        border: copied ? '1px solid rgba(5,150,105,0.35)' : `1px solid ${BORDER}`,
+        color: copied ? 'var(--accent-green)' : 'var(--text-secondary)',
         cursor: 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
@@ -127,9 +128,9 @@ function SaveButton({ onSave, status }) {
         fontWeight: 800,
         padding: '6px 10px',
         borderRadius: 10,
-        background: saved ? 'rgba(92,201,148,0.08)' : 'rgba(255,255,255,0.08)',
-        border: saved ? '1px solid rgba(92,201,148,0.35)' : '1px solid rgba(255,255,255,0.12)',
-        color: saved ? COLOR.green : 'rgba(255,255,255,0.82)',
+        background: saved ? 'rgba(5,150,105,0.10)' : 'var(--bg-primary)',
+        border: saved ? '1px solid rgba(5,150,105,0.35)' : `1px solid ${BORDER}`,
+        color: saved ? 'var(--accent-green)' : 'var(--text-secondary)',
         cursor: saving || saved ? 'default' : 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
@@ -147,8 +148,8 @@ function PromptBlock({ label, color, nodes, text, onCopy, copied, highlight = tr
   return (
     <section
       style={{
-        background: 'rgba(14, 14, 15, 0.35)',
-        border: '1px solid rgba(255,255,255,0.10)',
+        background: 'var(--bg-secondary)',
+        border: `1px solid ${BORDER}`,
         borderRadius: 14,
         padding: 12,
       }}
@@ -176,7 +177,7 @@ function PromptBlock({ label, color, nodes, text, onCopy, copied, highlight = tr
           fontFamily: MONO_STACK,
           fontSize: 12.5,
           lineHeight: 1.75,
-          color: 'rgba(255,255,255,0.88)',
+          color: 'var(--text-primary)',
           whiteSpace: 'pre-wrap',
         }}
       >
@@ -208,8 +209,8 @@ function VariableCard({ name, spec, value, onPick }) {
   return (
     <div
       style={{
-        background: 'rgba(22, 22, 24, 0.75)',
-        border: '1px solid rgba(255,255,255,0.10)',
+        background: 'var(--bg-card)',
+        border: `1px solid ${BORDER}`,
         borderRadius: 14,
         padding: 10,
       }}
@@ -217,7 +218,7 @@ function VariableCard({ name, spec, value, onPick }) {
       <div style={{ fontFamily: MONO_STACK, fontSize: 12, color: COLOR.amber, fontWeight: 700, marginBottom: 6 }}>
         {name}
       </div>
-      <div style={{ color: 'rgba(255,255,255,0.90)', fontSize: 12.5, lineHeight: 1.5, marginBottom: 8 }}>
+      <div style={{ color: 'var(--text-primary)', fontSize: 12.5, lineHeight: 1.5, marginBottom: 8 }}>
         {value}
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -230,9 +231,9 @@ function VariableCard({ name, spec, value, onPick }) {
               fontSize: 11,
               padding: '5px 8px',
               borderRadius: 999,
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.10)',
-              color: 'rgba(255,255,255,0.78)',
+              background: 'var(--bg-primary)',
+              border: `1px solid ${BORDER}`,
+              color: 'var(--text-secondary)',
               cursor: 'pointer',
             }}
           >
@@ -403,7 +404,7 @@ function PromptCard({ prompt, globalView }) {
     }
   }
 
-  const categoryColor = CATEGORY_COLORS[prompt.category] || { fg: 'rgba(231,231,234,0.85)', bg: 'rgba(231,231,234,0.08)' }
+  const categoryColor = CATEGORY_COLORS[prompt.category] || { fg: 'var(--text-primary)', bg: 'rgba(37,99,235,0.10)' }
 
   const bestOn = Array.isArray(prompt.best_on) ? prompt.best_on : []
 
@@ -467,9 +468,9 @@ function PromptCard({ prompt, globalView }) {
               fontSize: 12,
               padding: '6px 10px',
               borderRadius: 999,
-              background: 'rgba(30,30,33,0.75)',
+              background: 'var(--bg-primary)',
               border: `1px solid ${BORDER}`,
-              color: 'rgba(231,231,234,0.45)',
+              color: 'var(--text-muted)',
             }}
           >
             #{prompt.id}
@@ -493,7 +494,7 @@ function PromptCard({ prompt, globalView }) {
             title={prompt.style}
             style={{
               fontSize: 12,
-              color: 'rgba(231,231,234,0.65)',
+              color: 'var(--text-secondary)',
               whiteSpace: 'nowrap',
               overflow: 'hidden',
               textOverflow: 'ellipsis',
@@ -513,9 +514,9 @@ function PromptCard({ prompt, globalView }) {
                 fontSize: 12,
                 padding: '6px 10px',
                 borderRadius: 999,
-                border: '1px solid rgba(255,255,255,0.10)',
-                color: idx === 0 ? 'rgba(255,255,255,0.92)' : 'rgba(231,231,234,0.65)',
-                background: idx === 0 ? 'rgba(255,255,255,0.12)' : 'rgba(14,14,15,0.35)',
+                border: `1px solid ${BORDER}`,
+                color: idx === 0 ? 'var(--text-primary)' : 'var(--text-secondary)',
+                background: idx === 0 ? 'var(--bg-primary)' : 'var(--bg-secondary)',
                 lineHeight: 1,
                 userSelect: 'none',
               }}
@@ -531,7 +532,7 @@ function PromptCard({ prompt, globalView }) {
           fontSize: 16,
           fontWeight: 900,
           letterSpacing: '-0.02em',
-          color: 'rgba(255,255,255,0.92)',
+          color: 'var(--text-primary)',
           marginBottom: 10,
           lineHeight: 1.2,
         }}
@@ -565,8 +566,8 @@ function PromptCard({ prompt, globalView }) {
             onClick={() => setExpanded(true)}
             style={{
               background: 'transparent',
-              border: '1px solid rgba(255,255,255,0.14)',
-              color: 'rgba(255,255,255,0.86)',
+              border: `1px solid ${BORDER}`,
+              color: 'var(--text-primary)',
               borderRadius: 12,
               padding: '8px 10px',
               fontWeight: 800,
@@ -592,8 +593,8 @@ function PromptCard({ prompt, globalView }) {
                 onClick={() => setExpanded(false)}
                 style={{
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.14)',
-                  color: 'rgba(231,231,234,0.82)',
+                  border: `1px solid ${BORDER}`,
+                  color: 'var(--text-secondary)',
                   borderRadius: 12,
                   padding: '8px 10px',
                   fontWeight: 900,
@@ -658,7 +659,7 @@ function PromptCard({ prompt, globalView }) {
             >
               <div
                 style={{
-                  color: 'rgba(231,231,234,0.45)',
+                  color: 'var(--text-muted)',
                   fontWeight: 900,
                   fontSize: 10,
                   letterSpacing: '0.16em',
@@ -682,7 +683,7 @@ function PromptCard({ prompt, globalView }) {
             </section>
 
             <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-              <Lightbulb size={18} color="rgba(231,231,234,0.75)" style={{ marginTop: 2, flex: '0 0 auto' }} />
+              <Lightbulb size={18} color="var(--text-secondary)" style={{ marginTop: 2, flex: '0 0 auto' }} />
               <ToolNotes text={prompt.tool_notes} />
             </div>
 
@@ -760,13 +761,14 @@ export default function VaultPage() {
           font-weight: 900;
           font-size: 12px;
           cursor: pointer;
-          border: 1px solid rgba(255,255,255,0.10);
-          color: rgba(231,231,234,0.78);
-          background: linear-gradient(145deg, #1B1B1E, #141416);
+          border: 1px solid var(--border-color);
+          color: var(--text-secondary);
+          background: var(--bg-card);
           box-shadow:
-            10px 10px 18px rgba(0,0,0,0.55),
-            -10px -10px 18px rgba(255,255,255,0.03),
-            inset 1px 1px 0 rgba(255,255,255,0.06);
+            10px 10px 18px rgba(15,23,42,0.06),
+            6px 6px 12px rgba(15,23,42,0.08),
+            -6px -6px 12px rgba(255,255,255,0.72),
+            inset 0 1px 0 rgba(255,255,255,0.92);
           transform: translateY(0) scale(1);
           transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease, border-color 140ms ease, color 140ms ease;
         }
@@ -774,35 +776,33 @@ export default function VaultPage() {
         .cwf-neu-pill:active {
           transform: translateY(1px) scale(0.99);
           box-shadow:
-            inset 10px 10px 18px rgba(0,0,0,0.55),
-            inset -10px -10px 18px rgba(255,255,255,0.04);
+            var(--shadow-inset);
         }
 
         .cwf-neu-pill--active {
           color: var(--pill-fg, rgba(255,255,255,0.92));
-          border-color: rgba(255,255,255,0.14);
-          background: linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+          border-color: var(--border-color);
+          background: linear-gradient(145deg, var(--pill-bg, rgba(37,99,235,0.10)), rgba(255,255,255,0.85));
           box-shadow:
-            10px 10px 18px rgba(0,0,0,0.55),
-            -10px -10px 18px rgba(255,255,255,0.03),
-            inset 1px 1px 0 rgba(255,255,255,0.06),
-            0 0 0 1px var(--pill-bg, rgba(255,255,255,0.06));
+            10px 10px 18px rgba(15,23,42,0.06),
+            6px 6px 12px rgba(15,23,42,0.08),
+            -6px -6px 12px rgba(255,255,255,0.72),
+            inset 0 1px 0 rgba(255,255,255,0.92),
+            0 0 0 1px rgba(37,99,235,0.06);
         }
 
         .cwf-neu-pill--active:active {
           box-shadow:
-            inset 10px 10px 18px rgba(0,0,0,0.55),
-            inset -10px -10px 18px rgba(255,255,255,0.04),
-            0 0 0 1px var(--pill-bg, rgba(255,255,255,0.06));
+            var(--shadow-inset);
         }
       `}</style>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, marginBottom: 18 }}>
           <div>
-            <div style={{ fontSize: 24, fontWeight: 900, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.92)' }}>
+            <div style={{ fontSize: 24, fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
               Prompt Vault (v2)
             </div>
-            <div style={{ color: 'rgba(231,231,234,0.65)', fontSize: 13, marginTop: 6 }}>
+            <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 6 }}>
               Pro prompts start with image generation — the foundation for strong video generations.
             </div>
             <div style={{ marginTop: 10 }}>
@@ -814,9 +814,9 @@ export default function VaultPage() {
                   gap: 8,
                   padding: '8px 12px',
                   borderRadius: 999,
-                  background: 'rgba(255,255,255,0.08)',
+                  background: 'var(--bg-card)',
                   border: `1px solid ${BORDER}`,
-                  color: 'rgba(231,231,234,0.80)',
+                  color: 'var(--text-primary)',
                   fontWeight: 900,
                   fontSize: 12,
                   textDecoration: 'none',
@@ -826,7 +826,7 @@ export default function VaultPage() {
               </a>
             </div>
           </div>
-          <div style={{ color: 'rgba(231,231,234,0.65)', fontSize: 13, whiteSpace: 'nowrap' }}>
+          <div style={{ color: 'var(--text-secondary)', fontSize: 13, whiteSpace: 'nowrap' }}>
             Showing {filtered.length} of {prompts.length} prompts
           </div>
         </div>
@@ -836,7 +836,7 @@ export default function VaultPage() {
             <div style={{ position: 'relative', flex: '1 1 360px', minWidth: 280 }}>
               <Search
                 size={18}
-                color="rgba(231,231,234,0.55)"
+                color="var(--text-muted)"
                 style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)' }}
               />
               <input
@@ -849,7 +849,7 @@ export default function VaultPage() {
                   borderRadius: 14,
                   background: CARD,
                   border: `1px solid ${BORDER}`,
-                  color: 'rgba(255,255,255,0.90)',
+                  color: 'var(--text-primary)',
                   outline: 'none',
                 }}
               />
@@ -869,12 +869,12 @@ export default function VaultPage() {
           >
             {categories.map((c) => {
               const active = category === c
-              const cc = c === 'All'
-                ? { fg: 'rgba(255,255,255,0.90)', bg: 'rgba(255,255,255,0.10)' }
-                : (CATEGORY_COLORS[c] || { fg: 'rgba(255,255,255,0.90)', bg: 'rgba(255,255,255,0.10)' })
-              return (
-                <button
-                  key={c}
+                  const cc = c === 'All'
+                ? { fg: 'var(--text-primary)', bg: 'rgba(37,99,235,0.10)' }
+                : (CATEGORY_COLORS[c] || { fg: 'var(--text-primary)', bg: 'rgba(37,99,235,0.10)' })
+                  return (
+                    <button
+                      key={c}
                   type="button"
                   onClick={() => {
                     if (c === category) {
@@ -901,7 +901,7 @@ export default function VaultPage() {
               display: 'flex',
               flexWrap: 'wrap',
               gap: 10,
-              background: 'rgba(30,30,33,0.55)',
+              background: PANEL,
               border: `1px solid ${BORDER}`,
               borderRadius: 16,
               padding: 10,

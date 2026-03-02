@@ -76,11 +76,16 @@ export default function UserSettingsModal({ isOpen, onClose }) {
   return (
     <div
       className="fixed inset-0 z-[70] flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}
+      style={{ background: 'rgba(17,24,39,0.18)', backdropFilter: 'blur(6px)' }}
       onClick={onClose}
     >
       <div
-        className="neu-card max-w-md w-full rounded-2xl p-6 relative"
+        className="max-w-md w-full rounded-2xl p-6 relative"
+        style={{
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-color)',
+          boxShadow: 'var(--shadow-soft)',
+        }}
         onClick={(event) => event.stopPropagation()}
       >
         <button
