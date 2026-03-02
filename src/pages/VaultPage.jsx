@@ -265,6 +265,17 @@ function PromptCard({ prompt, globalView }) {
   const imageNodes = useMemo(() => renderTemplateNodes(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
   const videoNodes = useMemo(() => renderTemplateNodes(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
 
+  const heading = useMemo(() => {
+    const candidate = String(filledImage || filledVideo || '')
+      .replace(/\s*,\s*(16:9|9:16|1:1|4:5)\s*$/i, '')
+      .trim()
+    const first = candidate.split('—')[0]?.trim() || candidate
+    const cleaned = first.replace(/^(an|a)\s+/i, '').trim()
+    const max = 72
+    if (cleaned.length <= max) return cleaned
+    return cleaned.slice(0, max - 1).trimEnd() + '…'
+  }, [filledImage, filledVideo])
+
   const copyText = async (key, raw) => {
     try {
       await navigator.clipboard.writeText(String(raw || ''))
@@ -354,6 +365,19 @@ function PromptCard({ prompt, globalView }) {
             </span>
           ))}
         </div>
+      </div>
+
+      <div
+        style={{
+          fontSize: 16,
+          fontWeight: 900,
+          letterSpacing: '-0.02em',
+          color: 'rgba(255,255,255,0.92)',
+          marginBottom: 10,
+          lineHeight: 1.2,
+        }}
+      >
+        {heading}
       </div>
 
       {!proMode && (
@@ -531,12 +555,7 @@ export default function VaultPage() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
   const [style, setStyle] = useState('All')
-  const [globalView, setGlobalView] = useState('beginner') // 'beginner' | 'pro'
-
-  useEffect(() => {
-    const stored = localStorage.getItem('cwf_vault_view')
-    if (stored === 'beginner' || stored === 'pro') setGlobalView(stored)
-  }, [])
+  const globalView = 'beginner'
 
   const categories = useMemo(() => {
     const list = [...new Set(prompts.map((p) => p.category))].sort()
@@ -562,11 +581,6 @@ export default function VaultPage() {
     })
   }, [prompts, query, category, style])
 
-  const setView = (next) => {
-    setGlobalView(next)
-    localStorage.setItem('cwf_vault_view', next)
-  }
-
   return (
     <div
       style={{
@@ -584,6 +598,26 @@ export default function VaultPage() {
             </div>
             <div style={{ color: 'rgba(231,231,234,0.65)', fontSize: 13, marginTop: 6 }}>
               Pro prompts start with image generation — the foundation for strong video generations.
+            </div>
+            <div style={{ marginTop: 10 }}>
+              <a
+                href="/vault"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  padding: '8px 12px',
+                  borderRadius: 999,
+                  background: 'rgba(255,255,255,0.08)',
+                  border: `1px solid ${BORDER}`,
+                  color: 'rgba(231,231,234,0.80)',
+                  fontWeight: 900,
+                  fontSize: 12,
+                  textDecoration: 'none',
+                }}
+              >
+                Open Prompt Vault v1
+              </a>
             </div>
           </div>
           <div style={{ color: 'rgba(231,231,234,0.65)', fontSize: 13, whiteSpace: 'nowrap' }}>
@@ -613,51 +647,6 @@ export default function VaultPage() {
                   outline: 'none',
                 }}
               />
-            </div>
-
-            <div
-              style={{
-                display: 'inline-flex',
-                gap: 8,
-                alignItems: 'center',
-                background: CARD,
-                border: `1px solid ${BORDER}`,
-                borderRadius: 14,
-                padding: 8,
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => setView('beginner')}
-                style={{
-                  borderRadius: 12,
-                  padding: '8px 10px',
-                  fontWeight: 900,
-                  fontSize: 12,
-                  cursor: 'pointer',
-                  border: '1px solid rgba(255,255,255,0.10)',
-                  background: globalView === 'beginner' ? 'rgba(255,255,255,0.12)' : 'transparent',
-                  color: globalView === 'beginner' ? 'rgba(255,255,255,0.92)' : 'rgba(231,231,234,0.70)',
-                }}
-              >
-                Beginner view
-              </button>
-              <button
-                type="button"
-                onClick={() => setView('pro')}
-                style={{
-                  borderRadius: 12,
-                  padding: '8px 10px',
-                  fontWeight: 900,
-                  fontSize: 12,
-                  cursor: 'pointer',
-                  border: '1px solid rgba(255,255,255,0.10)',
-                  background: globalView === 'pro' ? 'rgba(255,255,255,0.12)' : 'transparent',
-                  color: globalView === 'pro' ? 'rgba(255,255,255,0.92)' : 'rgba(231,231,234,0.70)',
-                }}
-              >
-                Pro controls
-              </button>
             </div>
           </div>
 
@@ -697,7 +686,17 @@ export default function VaultPage() {
             })}
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 10,
+              background: 'rgba(30,30,33,0.55)',
+              border: `1px solid ${BORDER}`,
+              borderRadius: 16,
+              padding: 10,
+            }}
+          >
             {styles.map((s) => {
               const active = style === s
               return (
