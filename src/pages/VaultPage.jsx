@@ -338,6 +338,10 @@ function PromptCard({ prompt, globalView }) {
     const withoutLensLead = first
       .replace(/^\s*\d{1,3}mm\s+lens\s+framing\s*[-—]\s*/i, '')
       .replace(/^\s*lens\s+framing\s*[-—]\s*/i, '')
+      .replace(/\b\d{1,3}mm\b/gi, '')
+      .replace(/\b(telephoto|macro)\b/gi, '')
+      .replace(/\b(lens|framing|locked)\b/gi, '')
+      .replace(/\s{2,}/g, ' ')
       .replace(/^\s*(an|a)\s+/i, '')
       .trim()
 

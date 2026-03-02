@@ -74,12 +74,74 @@ const toSlug = (value) =>
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim()
 
-const deriveTitle = (videoPrompt) => {
-  const normalized = normalizeWhitespace(videoPrompt)
+const normalizeKey = (value) => String(value || '').trim().toLowerCase()
+
+const clampTitle = (value, max = 58) => {
+  const normalized = normalizeWhitespace(value)
   if (!normalized) return 'Untitled Prompt'
-  const firstClause = normalized.split(/[.,]/)[0].trim()
-  if (firstClause.length <= 72) return firstClause
-  return `${firstClause.slice(0, 69).trim()}...`
+  if (normalized.length <= max) return normalized
+  return `${normalized.slice(0, max - 1).trim()}…`
+}
+
+const stripLensAndTech = (value) =>
+  normalizeWhitespace(value)
+    .replace(/\b\d{1,3}mm\b/gi, '')
+    .replace(/\b(telephoto|macro)\b/gi, '')
+    .replace(/\b(lens|framing|locked)\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s*[-—]\s*$/g, '')
+    .trim()
+
+const getVarDefault = (variables, ...keys) => {
+  const byNormKey = new Map(
+    Object.entries(variables || {}).map(([key, spec]) => [normalizeKey(key), normalizeWhitespace(spec?.default)])
+  )
+  for (const key of keys) {
+    const found = byNormKey.get(normalizeKey(key))
+    if (found) return found
+  }
+  return ''
+}
+
+const buildPromptTitle = ({ variables = {}, image_prompt = '', video_prompt = '', category = '' }) => {
+  const product = getVarDefault(variables, 'product type')
+  if (product) return clampTitle(`${stripLensAndTech(product)} ad`)
+
+  const liquid = getVarDefault(variables, 'liquid or sauce')
+  if (liquid) return clampTitle(`Slow-motion ${stripLensAndTech(liquid)} pour`)
+
+  const city = getVarDefault(variables, 'futuristic city type')
+  if (city) return clampTitle(`${stripLensAndTech(city)} descent`)
+
+  const futureLocation = getVarDefault(variables, 'proposed future location')
+  if (futureLocation) return clampTitle(`Documentary expedition: ${stripLensAndTech(futureLocation)}`)
+
+  const property = getVarDefault(variables, 'property type')
+  const impossible = getVarDefault(variables, 'impossible context', 'specific impossibility')
+  if (property && impossible) return clampTitle(`${stripLensAndTech(property)} in ${stripLensAndTech(impossible)}`)
+
+  const objectType = getVarDefault(variables, 'object type')
+  const stimulus = getVarDefault(variables, 'stimulus')
+  if (objectType && stimulus) return clampTitle(`${stripLensAndTech(objectType)} reacts to ${stripLensAndTech(stimulus)}`)
+  if (objectType) return clampTitle(stripLensAndTech(objectType))
+
+  const familiar = getVarDefault(variables, 'familiar object')
+  const becomes = getVarDefault(variables, 'something else entirely')
+  if (familiar && becomes) return clampTitle(`${stripLensAndTech(familiar)} becomes ${stripLensAndTech(becomes)}`)
+  if (familiar) return clampTitle(`${stripLensAndTech(familiar)} transforms`)
+
+  const character = getVarDefault(variables, 'character description', 'character type', 'person type', 'user type')
+  const action = getVarDefault(variables, 'action', 'activity', 'specific task')
+  if (character && action) return clampTitle(`${stripLensAndTech(character)} — ${stripLensAndTech(action)}`)
+  if (character) return clampTitle(stripLensAndTech(character))
+
+  const fallbackSource = normalizeWhitespace(image_prompt || video_prompt)
+  if (fallbackSource) {
+    const firstClause = fallbackSource.split(/[.]/)[0]
+    return clampTitle(stripLensAndTech(firstClause))
+  }
+
+  return clampTitle(category || 'Prompt')
 }
 
 const dedupeKeepFirst = (values) => {
@@ -128,7 +190,12 @@ export const PROMPT_LIBRARY = rawPromptLibrary.map((rawPrompt, index) => {
     sfx_prompt: sfxPrompt,
     variables: rawPrompt.variables || {},
     tool_notes: normalizeWhitespace(rawPrompt.tool_notes),
-    title: deriveTitle(videoPrompt),
+    title: buildPromptTitle({
+      variables: rawPrompt.variables || {},
+      image_prompt: imagePrompt,
+      video_prompt: videoPrompt,
+      category: rawPrompt.category
+    }),
     tool: bestOn[0] || FALLBACK_TOOL,
     prompt: videoPrompt,
     tags: dedupeKeepFirst([style, ...bestOn, ...audience])
