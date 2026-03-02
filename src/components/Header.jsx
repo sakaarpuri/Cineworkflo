@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Film, Sun, Moon, LogOut, Settings } from 'lucide-react'
+import { Menu, X, Film, Sun, Moon, LogOut, Settings, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import UserSettingsModal from './UserSettingsModal'
@@ -31,14 +31,27 @@ export default function Header({ onAuthClick }) {
       }}
     >
       <div
-        className="text-center text-xs sm:text-sm py-2"
+        className="text-center text-sm sm:text-base py-2.5"
         style={{
-          background: 'var(--bg-primary)',
+          background: 'linear-gradient(90deg, rgba(59,130,246,0.12), rgba(139,92,246,0.12))',
           borderBottom: '1px solid var(--border-color)',
           color: 'var(--text-secondary)'
         }}
       >
-        Beta v2 is en route — we’re tuning the Enhancer and expanding the Vault.
+        <span
+          className="inline-flex items-center justify-center gap-2 px-4 py-1 rounded-full font-semibold"
+          style={{
+            background: 'var(--bg-secondary)',
+            border: '1px solid var(--border-color)',
+            boxShadow: '0 10px 24px rgba(15,23,42,0.06), 6px 6px 12px rgba(15,23,42,0.08), -6px -6px 12px rgba(255,255,255,0.75)',
+            color: 'var(--text-primary)'
+          }}
+        >
+          <Sparkles className="h-4 w-4" style={{ color: 'var(--accent-blue)' }} />
+          <span>
+            <span style={{ color: 'var(--accent-blue)' }}>Beta v2</span> is en route — we’re tuning the Enhancer and expanding the Vault.
+          </span>
+        </span>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">

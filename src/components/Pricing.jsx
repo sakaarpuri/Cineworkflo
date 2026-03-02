@@ -159,9 +159,19 @@ export default function Pricing({ onAuthClick }) {
           >
             Cancel anytime.
           </p>
-          <p className="mt-3 italic text-sm" style={{ color: 'var(--text-muted)' }}>
-            Support is coming soon. We’re currently hiring our best apologetic tone.
-          </p>
+          <div className="mt-4 flex justify-center">
+            <div
+              className="px-4 py-2 rounded-2xl italic text-sm"
+              style={{
+                background: 'linear-gradient(145deg, rgba(59,130,246,0.10), rgba(139,92,246,0.10))',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)',
+                boxShadow: '0 10px 24px rgba(15,23,42,0.05), 6px 6px 12px rgba(15,23,42,0.07), -6px -6px 12px rgba(255,255,255,0.75)'
+              }}
+            >
+              Support is coming soon. We’re currently hiring our best apologetic tone.
+            </div>
+          </div>
         </div>
 
         {checkoutCanceled && (
