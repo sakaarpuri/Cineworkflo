@@ -4031,7 +4031,7 @@
       }
     },
     "tool_notes": "Kling handles anime transitions. Add 'soft watercolor animation' on Luma. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
-    "image_prompt": "An anime [scene type] — a [character description] [action] in the foreground, [atmospheric element] in the middle ground, three distinct depth planes creating depth, soft [art style] aesthetic with painterly backgrounds and detailed foreground character, 16:9",
+    "image_prompt": "An anime [scene type] — [lens] lens framing — a [character description] [action] in the foreground, [atmospheric element] in the middle ground, three distinct depth planes creating depth, soft [art style] aesthetic with painterly backgrounds and detailed foreground character, 16:9",
     "video_prompt": "Camera locked off completely still as the world moves through it — [atmospheric element] drifting laterally across the frame in middle ground at half-speed, foreground and background moving at different parallax rates throughout, slow dissolve to [color] over 4 seconds, deliberate theatrical pace",
     "sfx_prompt": "Ambient tone of the [scene type] setting — [atmospheric element] movement barely audible as a sustained atmospheric whisper. A deep breath underlying the scene, implying the [music mood] score without it being present. No music, no dialogue — acoustic space of held emotion.",
     "source_id": 14
@@ -4442,8 +4442,8 @@
       }
     },
     "tool_notes": "Sora handles large-scale sci-fi cityscapes best. Use 'cyberpunk megacity descent' on Luma. Google Veo 3.1 handles this well and auto-generates matching audio. Higgsfield's Cinema Studio gives precise camera keyframe control for this shot.",
-    "image_prompt": "A [futuristic city type] at night, [lens] compressing distance between [infrastructure detail] layers — [transport detail] as luminous lines in organized streams, atmospheric haze and light pollution creating a glow with no single source, the entire sky lit from below, epic in scale, 16:9",
-    "video_prompt": "Descending approach shot on long lens over full duration — city appearing impossibly dense as layers compress, [transport detail] tracing luminous lines in organized streams, camera continuing descent and never quite arriving, scale making viewer feel small before a single cut",
+    "image_prompt": "A [futuristic city type] at night from [camera position], [lens] compressing distance between [infrastructure detail] layers — [transport detail] as luminous lines in organized streams, atmospheric haze and light pollution creating a glow with no single source, the entire sky lit from below, epic in scale, 16:9",
+    "video_prompt": "Descending approach shot from [camera position] on long lens over full duration — city appearing impossibly dense as layers compress, [transport detail] tracing luminous lines in organized streams, camera continuing descent and never quite arriving, scale making viewer feel small before a single cut",
     "sfx_prompt": "The enormous low-frequency hum of a city-wide power grid felt throughout. [Transport detail] creating layered directional sound streams. Atmospheric haze and light pollution having an acoustic equivalent — the dense silence of a world too large and too lit to sleep. No music.",
     "source_id": 20
   },
@@ -4538,7 +4538,7 @@
       }
     },
     "tool_notes": "Sora handles impossible geometry best. On Runway use 'Escher architectural loop'.",
-    "image_prompt": "An infinite [architectural element] folding in on itself — M.C. Escher geometry made physically real, [surface texture] catching raking light from a paradoxical source, small figures in period-appropriate clothing on surfaces that should not support them, 16:9",
+    "image_prompt": "An infinite [architectural element] folding in on itself — [lens] lens framing — M.C. Escher geometry made physically real, [surface texture] catching raking light from a paradoxical source, small figures in period-appropriate clothing on surfaces that should not support them, 16:9",
     "video_prompt": "Camera on slow continuous rotation that never completes a full revolution — always discovering a new impossible angle over full duration, the structure breathing with slow hydraulic inevitability, small figures walking in opposing directions throughout, no cut, no edit, just rotation and geometry",
     "sfx_prompt": "Deep stone resonance of [architectural element] under perpetual slow movement. Footsteps from figures in opposing directions creating an impossible spatial audio paradox. The architecture's impossible breathing as a low subsonic pressure. No music — the geometry generates its own sound.",
     "source_id": 22
@@ -5241,7 +5241,7 @@
       }
     },
     "tool_notes": "Kling handles anime ad style consistently. Add 'anime commercial energy' on Luma.",
-    "image_prompt": "Anime-style advertisement for [product type] — [character description] with [reaction] expression in the frame, [visual effect] radiating outward from centred product, [color palette] graphic energy in background, product centred and still throughout, energetic and sincerely fun, 9:16",
+    "image_prompt": "Anime-style advertisement for [product type] — [lens] lens framing — [character description] with [reaction] expression in the frame, [visual effect] radiating outward from centred product, [color palette] graphic energy in background, product centred and still throughout, energetic and sincerely fun, 9:16",
     "video_prompt": "[Character description] entering frame at normal pace, discovering product — frame itself responding over 2 seconds as [reaction] bursts into full exaggerated anime register, [visual effect] radiating outward in arcs, background replacing itself with [color palette] graphic energy, character proportions briefly exceeding realism then snapping back",
     "sfx_prompt": "Anime commercial sound design — [reaction] as a rising tonal build resolving into a bright crystalline impact. [Visual effect] as a whoosh of radiating energy. The background transformation as a rush of graphic sound. No dialogue beyond the implied — pure commercially-heightened anime acoustic design.",
     "source_id": 33
@@ -5932,7 +5932,7 @@
       }
     },
     "tool_notes": "Kling handles anime abstract sequences. Add 'anime abstract title sequence atmospheric' on Luma.",
-    "image_prompt": "Anime-style abstract space — [visual element] assembling in the middle distance at too large a scale to read as any single thing, [color palette] light from sources with no origin point, [art style] aesthetic in the quality of line and light-shadow relationship, deeply atmospheric and pre-story, 16:9",
+    "image_prompt": "Anime-style abstract space — [lens] lens framing — [visual element] assembling in the middle distance at too large a scale to read as any single thing, [color palette] light from sources with no origin point, [art style] aesthetic in the quality of line and light-shadow relationship, deeply atmospheric and pre-story, 16:9",
     "video_prompt": "Camera drifting through lightless space at low constant speed on a path that curves slowly without completing its arc — [visual element] assembling and dissolving in middle distance over full duration, [color palette] shifting as sourceless light moves, the sequence feeling like the moment before a story begins",
     "sfx_prompt": "Deep atmospheric tone of pre-story space — [visual element] having an ambient acoustic presence that is felt without being identified. [Color palette]'s light sources creating a low sustained resonance that shifts with the drift. Profound silence of the moment before. No music — only the sound of a world preparing to exist.",
     "source_id": 45
@@ -12359,7 +12359,7 @@
       "Creator",
       "Developer"
     ],
-    "image_prompt": "A [proposed future location] being [surveyed or studied] by [expedition type] — [lens] observing the [expedition type] at work, the [proposed future location] visible and real around them, [current real technology] they are using to study it, [light condition] the actual conditions of the [proposed future location], documentary near-future still frame, 16:9",
+    "image_prompt": "A [proposed future location] being surveyed or studied by [expedition type] — [lens] observing the [expedition type] at work, the [proposed future location] visible and real around them, [current real technology] they are using to study it, [light condition] the actual conditions of the [proposed future location], documentary near-future still frame, 16:9",
     "video_prompt": "The [expedition type] moves through the [proposed future location] conducting [survey activity] — the camera following at documentary distance, [current real technology] in active use, the [proposed future location] indifferent to their presence, one moment where [expedition member] stops and simply looks — the act of a human being present somewhere important and knowing it, the survey continuing after the pause.",
     "sfx_prompt": "The environmental audio of [proposed future location] layered with [expedition type] working sounds — [current real technology] sounds, [expedition member] communication if radio or direct, the [proposed future location]'s own acoustic environment which may be wind, silence, or water, the sounds of people doing serious work in a serious place",
     "variables": {
