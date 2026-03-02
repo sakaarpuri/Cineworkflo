@@ -38,8 +38,7 @@ export default function Header({ onAuthClick }) {
           color: 'var(--text-secondary)'
         }}
       >
-        <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>v2</span>{' '}
-        with upgrades coming soon to Prompt Enhancer and Prompt Vault
+        Beta v2 is en route — we’re tuning the Enhancer and expanding the Vault.
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
