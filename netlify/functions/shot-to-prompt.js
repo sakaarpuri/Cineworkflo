@@ -14,7 +14,10 @@ const getEnvInt = (key, fallback) => {
 };
 
 const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  || process.env.SUPABASE_SERVICE_KEY
+  || process.env.SUPABASE_SERVICE_ROLE
+  || '';
 const supabaseAdmin = supabaseUrl && supabaseServiceRoleKey
   ? createClient(supabaseUrl, supabaseServiceRoleKey)
   : null;
@@ -126,7 +129,9 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Supabase admin is not configured' })
+      body: JSON.stringify({
+        error: 'Supabase admin is not configured (missing SUPABASE_URL and/or SUPABASE_SERVICE_ROLE_KEY).'
+      })
     };
   }
 
