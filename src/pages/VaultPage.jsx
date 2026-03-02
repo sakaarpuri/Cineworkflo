@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Search, Copy, Check, Lightbulb, ChevronDown, ChevronUp } from 'lucide-react'
+import { Search, Copy, Check, Lightbulb, ChevronDown, ChevronUp, BookmarkPlus } from 'lucide-react'
 import PROMPTS_RAW from '../data/ai_video_prompt_library.json'
+import { useAuth } from '../contexts/AuthContext'
+import { supabase } from '../lib/supabase'
 
 const BG = '#0E0E0F'
 const CARD = '#161618'
@@ -105,6 +107,38 @@ function CopyButton({ onCopy, copied }) {
     >
       {copied ? <Check size={16} /> : <Copy size={16} />}
       {copied ? 'Copied ✓' : 'Copy'}
+    </button>
+  )
+}
+
+function SaveButton({ onSave, status }) {
+  const saving = status === 'saving'
+  const saved = status === 'saved' || status === 'exists'
+
+  return (
+    <button
+      type="button"
+      onClick={onSave}
+      disabled={saving}
+      title={status === 'exists' ? 'Already in My Library' : 'Save to My Library'}
+      style={{
+        fontFamily: UI_STACK,
+        fontSize: 12,
+        fontWeight: 800,
+        padding: '6px 10px',
+        borderRadius: 10,
+        background: saved ? 'rgba(92,201,148,0.08)' : 'rgba(255,255,255,0.08)',
+        border: saved ? '1px solid rgba(92,201,148,0.35)' : '1px solid rgba(255,255,255,0.12)',
+        color: saved ? COLOR.green : 'rgba(255,255,255,0.82)',
+        cursor: saving || saved ? 'default' : 'pointer',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 8,
+        opacity: saving ? 0.8 : 1,
+      }}
+    >
+      {saved ? <Check size={16} /> : <BookmarkPlus size={16} />}
+      {saving ? 'Saving…' : saved ? 'Saved' : 'Save'}
     </button>
   )
 }
@@ -242,8 +276,11 @@ function pickKeyVariables(variables) {
 }
 
 function PromptCard({ prompt, globalView }) {
+  const { user } = useAuth()
   const [expanded, setExpanded] = useState(false)
   const [copiedKey, setCopiedKey] = useState(null) // 'image' | 'video' | 'sfx' | null
+  const [saveStatus, setSaveStatus] = useState('idle') // idle | saving | saved | exists | error
+  const [lastSavedText, setLastSavedText] = useState('')
   const [varValues, setVarValues] = useState(() => {
     const next = {}
     for (const [k, spec] of Object.entries(prompt.variables || {})) next[k] = spec?.default ?? ''
@@ -261,6 +298,14 @@ function PromptCard({ prompt, globalView }) {
   const filledImage = useMemo(() => fillTemplateText(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
   const filledVideo = useMemo(() => fillTemplateText(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
   const filledSfx = useMemo(() => fillTemplateText(prompt.sfx_prompt, valueByNormKey), [prompt.sfx_prompt, valueByNormKey])
+
+  useEffect(() => {
+    if (!lastSavedText) return
+    if (String(filledVideo || '').trim() !== String(lastSavedText || '').trim()) {
+      setSaveStatus('idle')
+      setLastSavedText('')
+    }
+  }, [filledVideo, lastSavedText])
 
   const imageNodes = useMemo(() => renderTemplateNodes(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
   const videoNodes = useMemo(() => renderTemplateNodes(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
@@ -364,6 +409,47 @@ function PromptCard({ prompt, globalView }) {
 
   const keyVars = useMemo(() => pickKeyVariables(prompt.variables), [prompt.variables])
 
+  const handleSave = async () => {
+    if (!user) return
+    if (saveStatus === 'saving' || saveStatus === 'saved' || saveStatus === 'exists') return
+    setSaveStatus('saving')
+
+    const payload = {
+      user_id: user.id,
+      idea: heading || `Prompt #${prompt.id}`,
+      prompt: String(filledVideo || '').trim(),
+      mood: null,
+      use_case: null,
+      skill_level: 'vault',
+      include_audio_sfx: Boolean(String(filledSfx || '').trim()),
+      include_image_details: Boolean(String(filledImage || '').trim()),
+      metadata: {
+        source: 'prompt_vault',
+        library_id: prompt.id,
+        category: prompt.category,
+        style: prompt.style,
+        best_on: bestOn,
+        image_prompt: String(filledImage || '').trim(),
+        sfx_prompt: String(filledSfx || '').trim(),
+        variables: varValues,
+      },
+    }
+
+    const { error } = await supabase.from('saved_prompts').insert(payload)
+    if (!error) {
+      setSaveStatus('saved')
+      setLastSavedText(payload.prompt)
+      return
+    }
+    if (error.code === '23505') {
+      setSaveStatus('exists')
+      setLastSavedText(payload.prompt)
+      return
+    }
+    setSaveStatus('error')
+    window.setTimeout(() => setSaveStatus('idle'), 2500)
+  }
+
   return (
     <article
       style={{
@@ -418,7 +504,8 @@ function PromptCard({ prompt, globalView }) {
           </span>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end', alignItems: 'center' }}>
+          {user && <SaveButton onSave={handleSave} status={saveStatus} />}
           {bestOn.map((tool, idx) => (
             <span
               key={`${prompt.id}-${tool}-${idx}`}
