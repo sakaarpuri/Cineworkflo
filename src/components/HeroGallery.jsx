@@ -50,16 +50,8 @@ export default function HeroGallery() {
         background: 'transparent'
       }}
     >
-      {/* subtle film grain */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            'repeating-radial-gradient(circle at 20% 30%, rgba(255,255,255,0.18) 0 1px, rgba(255,255,255,0) 1px 3px)',
-          backgroundSize: '220px 220px',
-        }}
-      />
+      {/* film grain */}
+      <div aria-hidden="true" className="cwf-hero-grain" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Left */}
