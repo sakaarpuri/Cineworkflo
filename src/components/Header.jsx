@@ -43,7 +43,7 @@ export default function Header({ onAuthClick }) {
         }}
       >
         <span
-          className="inline-flex items-center justify-center gap-2 px-4 py-1 rounded-full font-semibold"
+          className="inline-flex items-center justify-center gap-2 px-4 py-1 rounded-full font-semibold cwf-banner-clapper"
           style={{
             background: 'var(--bg-secondary)',
             border: '1px solid var(--border-color)',

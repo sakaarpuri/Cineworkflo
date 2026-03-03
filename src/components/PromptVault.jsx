@@ -230,7 +230,7 @@ export default function PromptVault({ preview = false }) {
             <div 
               key={prompt.id}
               onClick={() => openModal(prompt)}
-              className="neu-card p-5 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer group"
+              className="neu-card p-5 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer group cwf-scanline-hover"
             >
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div>
@@ -292,7 +292,7 @@ export default function PromptVault({ preview = false }) {
                       e.stopPropagation()
                       copyPrompt(prompt.prompt, prompt.id)
                     }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${copiedId === prompt.id ? 'cwf-rec-flash' : ''}`}
                     style={{
                       background: copiedId === prompt.id ? 'var(--accent-green)' : 'var(--bg-primary)',
                       color: copiedId === prompt.id ? '#fff' : 'var(--text-secondary)',

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
@@ -6,6 +6,42 @@ const TOOL_LOGOS = ['Runway', 'Pika', 'Sora', 'Kling', 'Luma', 'Higgsfield', 'Se
 
 export default function HeroGallery() {
   const [cameraCtaPressed, setCameraCtaPressed] = useState(false)
+  const [heroVideoOk, setHeroVideoOk] = useState(true)
+  const heroOverlayText = useMemo(
+    () => 'slow tracking shot, neon reflections on wet street, shallow depth of field, 16:9, 4K',
+    []
+  )
+  const [typed, setTyped] = useState('')
+
+  useEffect(() => {
+    let idx = 0
+    let direction = 1 // 1 typing, -1 deleting
+    let pauseMs = 0
+    const full = heroOverlayText
+
+    const tick = () => {
+      if (pauseMs > 0) {
+        pauseMs -= 30
+        return
+      }
+
+      idx += direction
+      if (idx >= full.length) {
+        idx = full.length
+        direction = -1
+        pauseMs = 900
+      } else if (idx <= 0) {
+        idx = 0
+        direction = 1
+        pauseMs = 350
+      }
+      setTyped(full.slice(0, idx))
+    }
+
+    setTyped('')
+    const id = window.setInterval(tick, 30)
+    return () => window.clearInterval(id)
+  }, [heroOverlayText])
 
   return (
     <section 
@@ -131,16 +167,30 @@ export default function HeroGallery() {
               </div>
             </div>
 
-            <div className="rounded-2xl overflow-hidden mb-4" style={{ border: '1px solid var(--border-color)', background: 'var(--bg-card)' }}>
-              <div
-                className="h-[180px] lg:h-[210px] relative"
-                style={{
-                  background:
-                    'radial-gradient(80% 60% at 25% 30%, rgba(59,130,246,0.35), rgba(59,130,246,0) 60%), radial-gradient(70% 55% at 70% 65%, rgba(245,158,11,0.26), rgba(245,158,11,0) 62%), linear-gradient(180deg, rgba(2,6,23,0.82), rgba(2,6,23,0.96))',
-                }}
-              >
+            <div className="rounded-2xl overflow-hidden mb-4 cwf-scanline-hover" style={{ border: '1px solid var(--border-color)', background: 'var(--bg-card)' }}>
+              <div className="h-[180px] lg:h-[210px] relative" style={{ background: 'rgba(2,6,23,0.92)' }}>
+                {heroVideoOk ? (
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    src="/hero-demo.mp4"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    onError={() => setHeroVideoOk(false)}
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        'radial-gradient(80% 60% at 25% 30%, rgba(59,130,246,0.35), rgba(59,130,246,0) 60%), radial-gradient(70% 55% at 70% 65%, rgba(245,158,11,0.26), rgba(245,158,11,0) 62%), linear-gradient(180deg, rgba(2,6,23,0.82), rgba(2,6,23,0.96))',
+                    }}
+                  />
+                )}
+
                 <div
-                  className="absolute inset-0 opacity-[0.35]"
+                  className="absolute inset-0 opacity-[0.30]"
                   style={{
                     backgroundImage:
                       'linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)',
@@ -159,7 +209,8 @@ export default function HeroGallery() {
                     lineHeight: 1.45,
                   }}
                 >
-                  slow tracking shot, neon reflections on wet street, shallow depth of field, 16:9, 4K
+                  {typed}
+                  <span style={{ opacity: 0.8 }}>▋</span>
                 </div>
               </div>
             </div>

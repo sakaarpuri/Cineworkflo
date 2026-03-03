@@ -92,6 +92,7 @@ function CopyButton({ onCopy, copied }) {
     <button
       type="button"
       onClick={onCopy}
+      className={copied ? 'cwf-rec-flash' : undefined}
       style={{
         fontFamily: UI_STACK,
         fontSize: 12,
@@ -454,6 +455,7 @@ function PromptCard({ prompt, globalView }) {
 
   return (
     <article
+      className="cwf-scanline-hover"
       style={{
         background: CARD,
         border: `1px solid ${BORDER}`,

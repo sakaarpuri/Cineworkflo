@@ -187,4 +187,99 @@
   [data-theme="dark"] .home-route a[class*="rounded"]:active {
     box-shadow: inset 4px 4px 8px rgba(0,0,0,0.50), inset -3px -3px 6px rgba(255,255,255,0.02) !important;
   }
+
+  /* Clapperboard banner treatment */
+  .cwf-banner-clapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cwf-banner-clapper::before,
+  .cwf-banner-clapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    opacity: 0.55;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        rgba(0,0,0,0.52) 0 8px,
+        rgba(255,255,255,0.10) 8px 16px
+      );
+    filter: blur(0.1px);
+  }
+
+  .cwf-banner-clapper::before { left: 0; }
+  .cwf-banner-clapper::after { right: 0; transform: scaleX(-1); }
+
+  /* Subtle scanline flicker on hover (cinema monitor feel) */
+  .cwf-scanline-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cwf-scanline-hover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 160ms ease;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.06) 0px,
+        rgba(255,255,255,0.06) 1px,
+        rgba(255,255,255,0.00) 2px,
+        rgba(255,255,255,0.00) 4px
+      );
+    mix-blend-mode: overlay;
+  }
+
+  .cwf-scanline-hover:hover::after {
+    opacity: 0.22;
+    animation: cwfScanFlicker 520ms ease-in-out 1;
+  }
+
+  @keyframes cwfScanFlicker {
+    0% { opacity: 0.0; }
+    22% { opacity: 0.26; }
+    55% { opacity: 0.12; }
+    100% { opacity: 0.22; }
+  }
+
+  /* REC flash for copy actions */
+  .cwf-rec-flash {
+    position: relative;
+  }
+
+  .cwf-rec-flash::after {
+    content: "REC";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    padding: 6px 8px;
+    border-radius: 999px;
+    background: rgba(239, 68, 68, 0.16);
+    border: 1px solid rgba(239, 68, 68, 0.30);
+    color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 12px 30px rgba(239,68,68,0.12);
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    animation: cwfRecFlash 740ms ease-out 1;
+    pointer-events: none;
+  }
+
+  @keyframes cwfRecFlash {
+    0% { opacity: 0; transform: translateY(6px) scale(0.96); }
+    20% { opacity: 1; transform: translateY(0px) scale(1.0); }
+    70% { opacity: 0.85; transform: translateY(0px) scale(1.0); }
+    100% { opacity: 0; transform: translateY(-2px) scale(0.98); }
+  }
 }
