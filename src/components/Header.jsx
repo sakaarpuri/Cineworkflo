@@ -12,9 +12,6 @@ export default function Header({ onAuthClick }) {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme')
     if (saved === 'light' || saved === 'dark') return saved
-    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: light)').matches) {
-      return 'light'
-    }
     return 'dark'
   })
   const location = useLocation()

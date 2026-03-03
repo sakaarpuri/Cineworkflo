@@ -1,7 +1,7 @@
 import { Film, Twitter, Mail, Github } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const BUILD_TAG = 'v2026.03.03.1'
+const BUILD_TAG = 'v2026.03.03.2'
 
 export default function Footer() {
   return (
