@@ -9,15 +9,14 @@ const plans = [
     name: 'Free',
     planType: 'free',
     price: '$0',
-    description: 'Get started with AI video prompts',
+    description: 'Dip your toes in. No credit card, no catch.',
     features: [
-      '10 Prompt Enhancer generations / month',
-      '5 Shot to Prompt generations / month',
-      'Prompt Vault (open access)',
+      '5 total generations / month (Enhancer + Shot to Prompt)',
+      'Prompt Vault (25 prompts)',
       'Basic search',
       'Copy to clipboard'
     ],
-    cta: 'Get Started',
+    cta: 'Start Free — No Card Needed',
     popular: false
   },
   {
@@ -25,17 +24,16 @@ const plans = [
     planType: 'monthly',
     price: '$7.99',
     priceNote: '/month',
-    description: 'Full access for active creators',
+    description: 'For creators who ship. Unlimited everything.',
     features: [
       'Unlimited Prompt Enhancer generations',
-      'Ever-growing Prompt Vault',
-      'Multiple style interpretations',
+      'Full Prompt Vault (150+)',
       'Shot to Prompt AI tool',
       'Advanced search & filters',
-      'New prompts monthly',
+      'New prompts weekly',
       'Cancel anytime'
     ],
-    cta: 'Start Pro',
+    cta: 'Go Pro — $7.99/mo',
     popular: true
   }
 ]
@@ -46,7 +44,6 @@ export default function Pricing({ onAuthClick }) {
   const [checkoutError, setCheckoutError] = useState(null)
   const [checkoutCanceled, setCheckoutCanceled] = useState(false)
   const [checkoutCanceledPlan, setCheckoutCanceledPlan] = useState(null)
-  const [ctaVariant, setCtaVariant] = useState('a')
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -62,20 +59,6 @@ export default function Pricing({ onAuthClick }) {
       const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash || ''}`
       window.history.replaceState({}, '', nextUrl)
     }
-    const forcedVariant = params.get('cta_variant')
-    if (forcedVariant === 'a' || forcedVariant === 'b') {
-      localStorage.setItem('cwf_pricing_cta_variant', forcedVariant)
-      setCtaVariant(forcedVariant)
-      return
-    }
-    const stored = localStorage.getItem('cwf_pricing_cta_variant')
-    if (stored === 'a' || stored === 'b') {
-      setCtaVariant(stored)
-      return
-    }
-    const random = Math.random() < 0.5 ? 'a' : 'b'
-    localStorage.setItem('cwf_pricing_cta_variant', random)
-    setCtaVariant(random)
   }, [])
 
   const handleCheckout = async (planType) => {
@@ -134,10 +117,7 @@ export default function Pricing({ onAuthClick }) {
     }
   }
 
-  const getPlanCta = (plan) => {
-    if (plan.planType === 'monthly') return ctaVariant === 'a' ? 'Start Pro' : 'Go Pro'
-    return plan.cta
-  }
+  const getPlanCta = (plan) => plan.cta
 
   return (
     <section 
@@ -151,13 +131,13 @@ export default function Pricing({ onAuthClick }) {
             className="text-3xl lg:text-4xl font-bold mb-4"
             style={{ color: 'var(--text-primary)' }}
           >
-            Simple Pricing
+            Simple pricing. No enterprise tier nonsense.
           </h2>
           <p 
             className="text-xl"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Cancel anytime.
+            Cancel anytime. No guilt trip, no pop-up begging you to stay.
           </p>
           <div className="mt-4 flex justify-center">
             <div
@@ -319,7 +299,7 @@ export default function Pricing({ onAuthClick }) {
           className="text-center mt-10"
           style={{ color: 'var(--text-muted)' }}
         >
-          30-day money-back guarantee. No questions asked.
+          30-day money-back guarantee. No passive-aggressive follow-up emails either.
         </p>
       </div>
     </section>

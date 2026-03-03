@@ -25,8 +25,7 @@ export default function Footer() {
               </span>
             </div>
             <p style={{ color: 'var(--text-secondary)' }} className="max-w-sm">
-              Professional AI video prompts for filmmakers. 
-              Create stunning content with Runway, Pika, and more.
+              The prompt toolkit for AI filmmakers. Less guessing, more directing.
             </p>
           </div>
           <div>

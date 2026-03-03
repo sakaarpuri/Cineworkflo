@@ -3,8 +3,10 @@ import { Search, Copy, Check, ArrowRight, Eye, X } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 import { trackCtaEvent } from '../lib/marketingAttribution'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function PromptVault({ preview = false }) {
+  const { isPro } = useAuth()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [copiedId, setCopiedId] = useState(null)
@@ -13,15 +15,20 @@ export default function PromptVault({ preview = false }) {
   const [vaultToggle, setVaultToggle] = useState(false)
   const navigate = useNavigate()
 
+  const visiblePromptLibrary = useMemo(
+    () => (isPro ? PROMPT_LIBRARY : PROMPT_LIBRARY.slice(0, 25)),
+    [isPro]
+  )
+
   const categories = useMemo(() => {
     const orderedFromPages = PROMPT_CATEGORY_PAGES.map((categoryPage) => categoryPage.name)
-    const fromLibrary = [...new Set(PROMPT_LIBRARY.map((prompt) => prompt.category))]
+    const fromLibrary = [...new Set(visiblePromptLibrary.map((prompt) => prompt.category))]
     const ordered = [...orderedFromPages]
     fromLibrary.forEach((category) => {
       if (!ordered.includes(category)) ordered.push(category)
     })
     return ['All', ...ordered]
-  }, [])
+  }, [visiblePromptLibrary])
 
   useEffect(() => {
     if (preview) return
@@ -42,7 +49,7 @@ export default function PromptVault({ preview = false }) {
     setCtaVariant(random)
   }, [preview])
 
-  const filteredPrompts = PROMPT_LIBRARY.filter(prompt => {
+  const filteredPrompts = visiblePromptLibrary.filter(prompt => {
     const query = searchQuery.trim().toLowerCase()
     const matchesSearch = !query ||
       prompt.title.toLowerCase().includes(query) ||
@@ -100,7 +107,7 @@ export default function PromptVault({ preview = false }) {
                 className="text-3xl lg:text-4xl font-bold"
                 style={{ color: 'var(--text-primary)' }}
               >
-                Explore Prompt Vault
+                150+ prompts that actually work.
               </h2>
               <button
                 onClick={handleVaultToggle}
@@ -138,7 +145,7 @@ export default function PromptVault({ preview = false }) {
               className="text-3xl lg:text-4xl font-bold mb-4"
               style={{ color: 'var(--text-primary)' }}
             >
-              Explore Prompt Vault
+              150+ prompts that actually work. We tested them so you don&apos;t have to.
             </h2>
           )}
           <p 
@@ -146,8 +153,10 @@ export default function PromptVault({ preview = false }) {
             style={{ color: 'var(--text-secondary)' }}
           >
             {preview 
-              ? 'Preview of professional prompts. Get full access with Pro.' 
-              : 'Browse our complete collection of tested prompts for AI video creation.'}
+              ? 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.' 
+              : (isPro
+                  ? 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.'
+                  : 'Browse 25 free prompts by mood, genre, or use case. Upgrade for the full vault.')}
           </p>
           {!preview && (
             <div className="mt-4">

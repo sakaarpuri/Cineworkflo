@@ -46,7 +46,7 @@ const isProUser = (user) => {
 const getDayKey = () => new Date().toISOString().slice(0, 10);
 const getMonthKey = () => new Date().toISOString().slice(0, 7);
 
-const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
+const enforceAndRecord = async ({ user, prefix, isPro, limits, monthlyCounterPrefix = prefix }) => {
   if (!supabaseAdmin) return { ok: true };
 
   const meta = { ...(user.user_metadata || {}) };
@@ -81,8 +81,8 @@ const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
   }
 
   if (monthLimit > 0) {
-    const monthKeyName = `${prefix}_month`;
-    const monthCountKey = `${prefix}_month_count`;
+    const monthKeyName = `${monthlyCounterPrefix}_month`;
+    const monthCountKey = `${monthlyCounterPrefix}_month_count`;
     const month = getMonthKey();
     const storedMonth = String(meta[monthKeyName] || '');
     const monthCount = Number(meta[monthCountKey] || 0);
@@ -171,7 +171,7 @@ exports.handler = async (event) => {
     const pro = isProUser(authedUser);
 
     const limits = {
-      freeMonthly: getEnvInt('CWF_FREE_MONTHLY_SHOT', 5),
+      freeMonthly: getEnvInt('CWF_FREE_MONTHLY_TOTAL', 5),
       freeRpm: getEnvInt('CWF_FREE_RPM_SHOT', 6),
       proDaily: getEnvInt('CWF_PRO_DAILY_SHOT', 60),
       proRpm: getEnvInt('CWF_PRO_RPM_SHOT', 12),
@@ -182,6 +182,7 @@ exports.handler = async (event) => {
       prefix: 'cwf_shot',
       isPro: pro,
       limits,
+      monthlyCounterPrefix: 'cwf_free_total',
     });
     if (!gate.ok) {
       return { statusCode: gate.statusCode, headers, body: JSON.stringify({ error: gate.error }) };

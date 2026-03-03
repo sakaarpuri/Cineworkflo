@@ -153,11 +153,13 @@ Object.entries(USES_CATEGORIES).forEach(([category, data]) => {
 });
 
 // Usage tracking helpers
-const USAGE_SCHEMA_VERSION = 2;
+const USAGE_SCHEMA_VERSION = 3;
+const FREE_USAGE_KEY = 'cwfFreeUsageTotal';
+const FREE_TOTAL_LIMIT = 5;
 
 const getUsageData = () => {
-  const data = localStorage.getItem('promptEnhancerUsage');
-  const defaultData = { count: 0, lastReset: new Date().toISOString(), isPro: false, schemaVersion: USAGE_SCHEMA_VERSION };
+  const data = localStorage.getItem(FREE_USAGE_KEY);
+  const defaultData = { count: 0, lastReset: new Date().toISOString(), schemaVersion: USAGE_SCHEMA_VERSION };
   if (!data) return defaultData;
   try {
     const parsed = JSON.parse(data);
@@ -175,7 +177,7 @@ const getUsageData = () => {
 };
 
 const saveUsageData = (data) => {
-  localStorage.setItem('promptEnhancerUsage', JSON.stringify({ ...data, schemaVersion: USAGE_SCHEMA_VERSION }));
+  localStorage.setItem(FREE_USAGE_KEY, JSON.stringify({ ...data, schemaVersion: USAGE_SCHEMA_VERSION }));
 };
 
 const shouldResetMonthly = (lastReset) => {
@@ -323,7 +325,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
-  const [usage, setUsage] = useState({ count: 0, isPro: false });
+  const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() });
   const [addedDetails, setAddedDetails] = useState([]);
   const [includeAudioSfx, setIncludeAudioSfx] = useState(false);
   const [includeImageDetails, setIncludeImageDetails] = useState(false);
@@ -332,6 +334,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [levelPulse, setLevelPulse] = useState('');
   const [saveStatus, setSaveStatus] = useState('idle');
   const [saveError, setSaveError] = useState('');
+  const [generationError, setGenerationError] = useState('');
   const requestIdRef = useRef(0);
   
   const { user, session, isPro } = useAuth();
@@ -340,17 +343,16 @@ export default function PromptEnhancer({ onAuthClick }) {
   useEffect(() => {
     const data = getUsageData();
     if (shouldResetMonthly(data.lastReset)) {
-      const resetData = { count: 0, lastReset: new Date().toISOString(), isPro: isPro };
+      const resetData = { count: 0, lastReset: new Date().toISOString() };
       saveUsageData(resetData);
       setUsage(resetData);
     } else {
-      setUsage({ ...data, isPro });
+      setUsage(data);
     }
   }, [isPro]);
 
-  const remainingFree = Math.max(0, 10 - usage.count);
+  const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count);
   const isLimitReached = !isPro && remainingFree === 0;
-  const requiresAuth = !user && isLimitReached;
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
 
   const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
@@ -358,13 +360,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     const requestId = ++requestIdRef.current;
     setLoading(true);
     setCopied(false);
-
-    // Track usage only for manual generations (not auto-update refreshes)
-    if (!isPro && !interpretationStyle && !isAutoUpdate) {
-      const newData = { ...usage, count: usage.count + 1 };
-      saveUsageData(newData);
-      setUsage(newData);
-    }
+    setGenerationError('');
 
     try {
       const promptPayload = interpretationStyle 
@@ -373,7 +369,8 @@ export default function PromptEnhancer({ onAuthClick }) {
 
       if (!session?.access_token) {
         onAuthClick?.()
-        throw new Error('Sign in required to generate prompts.')
+        setLoading(false);
+        return;
       }
 
       const response = await fetch('/.netlify/functions/enhance-prompt', {
@@ -389,6 +386,13 @@ export default function PromptEnhancer({ onAuthClick }) {
       if (!response.ok) {
         throw new Error(data?.error || `Enhancer failed (${response.status})`)
       }
+
+      if (!isPro && !interpretationStyle && !isAutoUpdate) {
+        const nextUsage = { ...usage, count: usage.count + 1 };
+        saveUsageData(nextUsage);
+        setUsage(nextUsage);
+      }
+
       const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
       const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
       const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
@@ -400,22 +404,13 @@ export default function PromptEnhancer({ onAuthClick }) {
       setSaveError('');
       lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
-      // Fallback with smart prompt generator
-      const fallbackPrompt = generateSmartPrompt(idea, mood, useCase, skillLevel);
-      const withAudio = applyAudioPreference(fallbackPrompt, includeAudioSfx, mood, useCase, skillLevel);
-      const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
       if (requestId !== requestIdRef.current) return;
-      setBaseResult(nextBaseResult);
-      setResult(applySelectedProDetails(nextBaseResult, addedDetails));
-      setHasGeneratedOnce(true);
-      setSaveStatus('idle');
-      setSaveError('');
-      lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
+      setGenerationError(err?.message || 'Unable to generate prompt right now. Please retry.');
     }
     if (requestId === requestIdRef.current) {
       setLoading(false);
     }
-  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick, usage]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -553,26 +548,26 @@ export default function PromptEnhancer({ onAuthClick }) {
             className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--text-primary)' }}
           >
-            Describe your idea. <span style={{ color: 'var(--accent-blue)' }}>We'll write the prompt.</span>
+            Describe the shot in your head. <span style={{ color: 'var(--accent-blue)' }}>We'll translate it for the machine.</span>
           </h2>
           
           {/* Usage Counter for Free Users */}
           {!isPro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
               style={{ 
-                background: remainingFree <= 5 ? 'var(--accent-red)15' : 'var(--bg-card)',
-                border: `1px solid ${remainingFree <= 5 ? 'var(--accent-red)30' : 'var(--border-color)'}`,
-                color: remainingFree <= 5 ? 'var(--accent-red)' : 'var(--text-muted)'
+                background: remainingFree <= 1 ? 'var(--accent-red)15' : 'var(--bg-card)',
+                border: `1px solid ${remainingFree <= 1 ? 'var(--accent-red)30' : 'var(--border-color)'}`,
+                color: remainingFree <= 1 ? 'var(--accent-red)' : 'var(--text-muted)'
               }}
             >
               <Zap className="h-3 w-3" />
               {remainingFree > 0 ? (
-                <span>{remainingFree} free Prompt Enhancer generations remaining this month</span>
+                <span>{remainingFree} free generations left this month across Enhancer + Shot to Prompt</span>
               ) : (
                 <span>
                   {!user ? 'Sign in to continue' : 'Free limit reached — '}
                   <button 
-                    onClick={onAuthClick}
+                    onClick={() => (user ? window.location.assign('/pricing') : onAuthClick?.())}
                     style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}
                   >
                     {!user ? 'Sign in' : 'Upgrade to Pro'}
@@ -595,6 +590,13 @@ export default function PromptEnhancer({ onAuthClick }) {
             </div>
           )}
         </div>
+        {generationError && (
+          <div className="text-center mb-3">
+            <p className="text-sm" style={{ color: 'var(--accent-red)' }}>
+              {generationError}
+            </p>
+          </div>
+        )}
 
         {/* Wide Compact Card */}
         <div 

@@ -4,37 +4,37 @@ const features = [
   {
     icon: Database,
     title: '150+ Tested Prompts',
-    description: 'Every prompt tested and refined for commercial use. No more trial and error.',
+    description: '150+ prompts battle-tested for commercial shoots. Your render credits will thank you.',
     color: '#2563EB'
   },
   {
     icon: Camera,
     title: 'Shot to Prompt',
-    description: 'Upload any reference image or video frame. Get the exact prompt to recreate it.',
+    description: 'See it. Upload it. Recreate it. Reverse-engineer any shot in seconds.',
     color: '#7C3AED'
   },
   {
     icon: Workflow,
     title: 'Workflow Templates',
-    description: 'Turn scripts into shot lists with automatic prompt generation.',
+    description: 'From script to shot list to prompts, your pre-production pipeline automated.',
     color: '#059669'
   },
   {
     icon: Wand2,
     title: 'AI Tool Specific',
-    description: 'Prompts optimized for Runway Gen-2, Pika 1.0, and Stable Video Diffusion.',
+    description: 'Tuned for Runway, Pika, Kling and more. Cinematic means different things to different AIs.',
     color: '#DC2626'
   },
   {
     icon: Share2,
     title: 'One-Click Copy',
-    description: 'Copy prompts instantly. Paste into your AI video tool and generate.',
+    description: 'Copy. Paste. Generate. No prompt-engineering degree required.',
     color: '#EA580C'
   },
   {
     icon: Search,
     title: 'Smart Search',
-    description: 'Find prompts by shot type, mood, lighting, camera movement, or subject.',
+    description: 'Search by vibe, not just keywords. Filter by mood, movement, and lighting.',
     color: '#0891B2'
   }
 ]
@@ -53,13 +53,13 @@ export default function Features() {
             className="text-3xl lg:text-4xl font-bold mb-4"
             style={{ color: 'var(--text-primary)' }}
           >
-            Everything You Need for AI Video
+            Your entire AI video toolkit. Minus the guesswork.
           </h2>
           <p 
             className="text-xl max-w-2xl mx-auto"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Stop spending hours tweaking prompts. Get professional results in minutes.
+            Skip the hours of prompt-tweaking. Get commercial-quality results on the first try.
           </p>
         </div>
 

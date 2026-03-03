@@ -81,7 +81,7 @@ const isProUser = (user) => {
 const getDayKey = () => new Date().toISOString().slice(0, 10);
 const getMonthKey = () => new Date().toISOString().slice(0, 7);
 
-const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
+const enforceAndRecord = async ({ user, prefix, isPro, limits, monthlyCounterPrefix = prefix }) => {
   const meta = { ...(user.user_metadata || {}) };
   const now = Date.now();
 
@@ -114,8 +114,8 @@ const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
   }
 
   if (monthLimit > 0) {
-    const monthKeyName = `${prefix}_month`;
-    const monthCountKey = `${prefix}_month_count`;
+    const monthKeyName = `${monthlyCounterPrefix}_month`;
+    const monthCountKey = `${monthlyCounterPrefix}_month_count`;
     const month = getMonthKey();
     const storedMonth = String(meta[monthKeyName] || '');
     const monthCount = Number(meta[monthCountKey] || 0);
@@ -141,7 +141,7 @@ const enforceAndRecord = async ({ user, prefix, isPro, limits }) => {
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'POST, OPTIONS'
   };
 
@@ -191,7 +191,7 @@ exports.handler = async (event) => {
     const pro = isProUser(authedUser);
 
     const limits = {
-      freeMonthly: getEnvInt('CWF_FREE_MONTHLY_ENHANCE', 10),
+      freeMonthly: getEnvInt('CWF_FREE_MONTHLY_TOTAL', 5),
       freeRpm: getEnvInt('CWF_FREE_RPM_ENHANCE', 10),
       proDaily: getEnvInt('CWF_PRO_DAILY_ENHANCE', 200),
       proRpm: getEnvInt('CWF_PRO_RPM_ENHANCE', 30),
@@ -202,6 +202,7 @@ exports.handler = async (event) => {
       prefix: 'cwf_enh',
       isPro: pro,
       limits,
+      monthlyCounterPrefix: 'cwf_free_total',
     });
     if (!gate.ok) {
       return { statusCode: gate.statusCode, headers, body: JSON.stringify({ error: gate.error }) };

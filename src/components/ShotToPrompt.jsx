@@ -4,6 +4,31 @@ import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X, Copy, Check } 
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 
+const FREE_USAGE_KEY = 'cwfFreeUsageTotal'
+const FREE_USAGE_SCHEMA = 1
+const FREE_TOTAL_LIMIT = 5
+
+const getSharedUsage = () => {
+  const fallback = { count: 0, lastReset: new Date().toISOString(), schemaVersion: FREE_USAGE_SCHEMA }
+  const raw = localStorage.getItem(FREE_USAGE_KEY)
+  if (!raw) return fallback
+  try {
+    const parsed = JSON.parse(raw)
+    if (!parsed || parsed.schemaVersion !== FREE_USAGE_SCHEMA) return fallback
+    return {
+      ...fallback,
+      ...parsed,
+      count: Number.isFinite(parsed.count) ? parsed.count : 0,
+    }
+  } catch {
+    return fallback
+  }
+}
+
+const saveSharedUsage = (value) => {
+  localStorage.setItem(FREE_USAGE_KEY, JSON.stringify({ ...value, schemaVersion: FREE_USAGE_SCHEMA }))
+}
+
 export default function ShotToPrompt({ preview = false }) {
   const [uploadedImage, setUploadedImage] = useState(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -13,22 +38,12 @@ export default function ShotToPrompt({ preview = false }) {
   const { user, isPro } = useAuth()
 
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
-  const FREE_LIMIT = 5
   const MAX_UPLOAD_MB = 25
   const MAX_VIDEO_SECONDS = 15
   const MAX_BYTES = MAX_UPLOAD_MB * 1024 * 1024
 
   useEffect(() => {
-    const raw = localStorage.getItem('shotToPromptUsage')
-    if (!raw) return
-    try {
-      const parsed = JSON.parse(raw)
-      if (parsed && typeof parsed.count === 'number' && parsed.lastReset) {
-        setUsage({ count: parsed.count, lastReset: parsed.lastReset })
-      }
-    } catch {
-      // ignore
-    }
+    setUsage(getSharedUsage())
   }, [])
 
   useEffect(() => {
@@ -38,10 +53,10 @@ export default function ShotToPrompt({ preview = false }) {
     if (!shouldReset) return
     const reset = { count: 0, lastReset: now.toISOString() }
     setUsage(reset)
-    localStorage.setItem('shotToPromptUsage', JSON.stringify(reset))
+    saveSharedUsage(reset)
   }, [usage.lastReset])
 
-  const remainingFree = Math.max(0, FREE_LIMIT - usage.count)
+  const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count)
   const isLimitReached = !isPro && remainingFree === 0
 
   const handleMediaUpload = async (e) => {
@@ -134,8 +149,8 @@ export default function ShotToPrompt({ preview = false }) {
 
     if (isLimitReached) {
       setGeneratedPrompt(!user
-        ? 'Free limit reached (5 Shot to Prompt generations/month). Sign in or upgrade to continue.'
-        : 'Free limit reached (5 Shot to Prompt generations/month). Upgrade to continue.'
+        ? 'Free limit reached (5 total generations/month across Enhancer + Shot to Prompt). Sign in or upgrade to continue.'
+        : 'Free limit reached (5 total generations/month across Enhancer + Shot to Prompt). Upgrade to continue.'
       )
       return
     }
@@ -143,12 +158,6 @@ export default function ShotToPrompt({ preview = false }) {
     setIsAnalyzing(true)
     setGeneratedPrompt('')
 
-    if (!isPro) {
-      const next = { count: usage.count + 1, lastReset: usage.lastReset }
-      setUsage(next)
-      localStorage.setItem('shotToPromptUsage', JSON.stringify(next))
-    }
-    
     try {
       const response = await fetch('/.netlify/functions/shot-to-prompt', {
         method: 'POST',
@@ -166,6 +175,11 @@ export default function ShotToPrompt({ preview = false }) {
 
       if (data.prompt) {
         setGeneratedPrompt(data.prompt)
+        if (!isPro) {
+          const next = { count: usage.count + 1, lastReset: usage.lastReset }
+          setUsage(next)
+          saveSharedUsage(next)
+        }
       } else {
         throw new Error('No prompt returned by Shot to Prompt API')
       }
@@ -285,7 +299,7 @@ export default function ShotToPrompt({ preview = false }) {
                 className="text-3xl lg:text-4xl font-bold mb-4"
                 style={{ color: 'var(--text-primary)' }}
               >
-                Shot to Prompt
+                See a shot you love? Steal the prompt.
               </h2>
               {!isPro && (
                 <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
@@ -296,18 +310,17 @@ export default function ShotToPrompt({ preview = false }) {
                   }}
                 >
                   <Sparkles className="h-3 w-3" />
-                  <span>{remainingFree} free Shot to Prompt generations remaining this month</span>
+                  <span>{remainingFree} free generations left this month across Enhancer + Shot to Prompt</span>
                 </div>
               )}
               <p 
                 className="text-xl mb-6"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                Upload any reference image or video frame. Our AI analyzes the shot 
-                and generates the exact prompt to recreate it.
+                Upload any frame from a film, ad, or your own footage and we&apos;ll reverse-engineer the exact prompt to recreate it. It&apos;s like Shazam, but for camera work.
               </p>
               <ul className="space-y-3" style={{ color: 'var(--text-secondary)' }}>
-                {['Reverse-engineer any cinematic shot', 'Upload frames from movies, ads, or your own footage', 'Get detailed prompts with camera settings'].map((item, i) => (
+                {['Decode any shot you see into a ready-to-use prompt', 'Works on movie stills, ad frames, your own clips and more', 'Get a full prompt with camera movement, lighting and style baked in'].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div 
                       className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
@@ -445,10 +458,10 @@ export default function ShotToPrompt({ preview = false }) {
             className="text-3xl font-bold mb-2"
             style={{ color: 'var(--text-primary)' }}
           >
-            Shot to Prompt
+            See a shot you love? Steal the prompt.
           </h1>
           <p style={{ color: 'var(--text-secondary)' }}>
-            Upload any image and get the AI prompt to recreate it
+            Upload any frame from a film, ad, or your own footage and we&apos;ll reverse-engineer the exact prompt to recreate it.
           </p>
           {!isPro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
@@ -459,7 +472,7 @@ export default function ShotToPrompt({ preview = false }) {
               }}
             >
               <Sparkles className="h-3 w-3" />
-              <span>{remainingFree} free Shot to Prompt generations remaining this month</span>
+              <span>{remainingFree} free generations left this month across Enhancer + Shot to Prompt</span>
             </div>
           )}
         </div>

@@ -51,7 +51,7 @@ export default function Header({ onAuthClick }) {
         >
           <Sparkles className="h-4 w-4" style={{ color: 'var(--accent-blue)' }} />
           <span>
-            <span style={{ color: 'var(--accent-blue)' }}>Beta v2</span> is en route — we’re tuning the Enhancer and expanding the Vault.
+            <span style={{ color: 'var(--accent-blue)' }}>Beta v2</span> is in the can — we&apos;re tuning the Enhancer and expanding the Vault.
           </span>
         </span>
       </div>

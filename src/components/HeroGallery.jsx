@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
+const TOOL_LOGOS = ['Runway', 'Pika', 'Sora', 'Kling', 'Luma', 'Higgsfield', 'Seedance']
+
 export default function HeroGallery() {
   const [cameraCtaPressed, setCameraCtaPressed] = useState(false)
 
@@ -16,12 +18,38 @@ export default function HeroGallery() {
         {/* Header */}
         <div className="text-center mb-4">
           <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
-            Get <span style={{ color: 'var(--accent-blue)' }}>AI</span> videos right in one <span style={{ textDecoration: 'line-through', textDecorationColor: 'var(--accent-blue)', textDecorationThickness: '4px', opacity: 0.5 }}>take</span> <span style={{ color: 'var(--accent-blue)' }}>prompt</span>
+            Your <span style={{ color: 'var(--accent-blue)' }}>AI</span> footage deserves better than
+            {' '}
+            <span style={{ color: 'var(--accent-blue)' }}>&ldquo;a cinematic shot of a thing.&rdquo;</span>
           </h1>
           <p className="text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
-            Professionally crafted prompts for Runway, Pika, Kling, Luma, Sora, Meta, and other AI video tools.
-            Get consistent, commercial-quality results every time.
+            150+ battle-tested prompts for Runway, Pika, Kling, Sora and more. Copy. Paste. Get the shot you actually imagined.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
+            {TOOL_LOGOS.map((tool) => (
+              <span
+                key={tool}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-color)',
+                  color: 'var(--text-secondary)',
+                  boxShadow: 'var(--shadow-soft)',
+                }}
+              >
+                <span
+                  className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold"
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(79,142,247,0.18), rgba(164,126,245,0.20))',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  {tool.slice(0, 1)}
+                </span>
+                {tool}
+              </span>
+            ))}
+          </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 mb-1">
             <Link

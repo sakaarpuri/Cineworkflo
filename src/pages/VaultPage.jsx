@@ -711,7 +711,8 @@ function PromptCard({ prompt, globalView }) {
 }
 
 export default function VaultPage() {
-  const prompts = PROMPTS_RAW
+  const { isPro } = useAuth()
+  const prompts = useMemo(() => (isPro ? PROMPTS_RAW : PROMPTS_RAW.slice(0, 25)), [isPro])
 
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
@@ -828,6 +829,11 @@ export default function VaultPage() {
             <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 6 }}>
               Pro prompts start with image generation — the foundation for strong video generations.
             </div>
+            {!isPro && (
+              <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 6 }}>
+                Free plan: 25 prompts unlocked in vault. Upgrade for full access.
+              </div>
+            )}
             <div style={{ marginTop: 10 }}>
               <a
                 href="/vault"
