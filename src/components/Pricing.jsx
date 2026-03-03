@@ -182,19 +182,17 @@ export default function Pricing({ onAuthClick }) {
               key={plan.name}
               className="rounded-2xl p-8 transition-all flex flex-col"
               style={{
-                background: plan.popular ? 'linear-gradient(145deg, #3B82F6, #2563EB)' : 'var(--bg-card)',
-                boxShadow: plan.popular 
-                  ? 'inset 4px 4px 8px rgba(59,130,246,0.3), inset -4px -4px 8px rgba(255,255,255,0.1), 0 8px 24px rgba(59,130,246,0.3)'
-                  : 'var(--shadow-card)',
-                border: `2px solid ${plan.popular ? 'rgba(255,255,255,0.2)' : 'var(--border-color)'}`,
+                background: plan.popular ? 'var(--pro-card-bg)' : 'var(--bg-card)',
+                boxShadow: plan.popular ? 'var(--pro-card-shadow)' : 'var(--shadow-card)',
+                border: `2px solid ${plan.popular ? 'var(--pro-card-border)' : 'var(--border-color)'}`,
               }}
             >
               {plan.popular && (
                 <span 
                   className="inline-block text-sm font-bold px-3 py-1 rounded-full mb-4"
                   style={{
-                    background: 'rgba(255,255,255,0.2)',
-                    color: '#fff'
+                    background: 'var(--pro-card-badge-bg)',
+                    color: 'var(--pro-card-badge-text)'
                   }}
                 >
                   Most Value
@@ -202,27 +200,27 @@ export default function Pricing({ onAuthClick }) {
               )}
               <h3 
                 className="text-2xl font-bold mb-2"
-                style={{ color: plan.popular ? '#fff' : 'var(--text-primary)' }}
+                style={{ color: plan.popular ? 'var(--pro-card-text)' : 'var(--text-primary)' }}
               >
                 {plan.name}
               </h3>
               <p 
                 className="mb-4 text-sm"
-                style={{ color: plan.popular ? 'rgba(255,255,255,0.8)' : 'var(--text-secondary)' }}
+                style={{ color: plan.popular ? 'var(--pro-card-subtext)' : 'var(--text-secondary)' }}
               >
                 {plan.description}
               </p>
               <div className="mb-6">
                 <span 
                   className="text-4xl font-bold"
-                  style={{ color: plan.popular ? '#fff' : 'var(--text-primary)' }}
+                  style={{ color: plan.popular ? 'var(--pro-card-text)' : 'var(--text-primary)' }}
                 >
                   {plan.price}
                 </span>
                 {plan.priceNote && (
                   <span 
                     className="text-sm ml-2"
-                    style={{ color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)' }}
+                    style={{ color: plan.popular ? 'var(--pro-card-subtext)' : 'var(--text-muted)' }}
                   >
                     {plan.priceNote}
                   </span>
@@ -239,7 +237,7 @@ export default function Pricing({ onAuthClick }) {
                     />
                     <span 
                       style={{ 
-                        color: plan.popular ? 'rgba(255,255,255,0.9)' : 'var(--text-secondary)' 
+                        color: plan.popular ? 'var(--pro-card-text)' : 'var(--text-secondary)' 
                       }}
                     >
                       {feature}
@@ -252,14 +250,10 @@ export default function Pricing({ onAuthClick }) {
                 disabled={loading}
                 className="w-full py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2"
                 style={{
-                  background: plan.popular
-                    ? 'linear-gradient(145deg, #fff, #f3f4f6)'
-                    : 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
-                  color: plan.popular ? '#3B82F6' : '#fff',
-                  border: `2px solid ${plan.popular ? '#E5E7EB' : '#3B82F650'}`,
-                  boxShadow: plan.popular
-                    ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15)'
-                    : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                  background: plan.popular ? 'var(--pro-cta-bg)' : 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
+                  color: plan.popular ? 'var(--pro-cta-text)' : '#fff',
+                  border: `2px solid ${plan.popular ? 'var(--pro-cta-border)' : '#3B82F650'}`,
+                  boxShadow: plan.popular ? 'var(--pro-cta-shadow)' : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
                   transform: 'translateY(0) scale(1)',
                   opacity: loading ? 0.7 : 1
                 }}
@@ -267,7 +261,7 @@ export default function Pricing({ onAuthClick }) {
                   if (!loading) {
                     e.currentTarget.style.transform = 'translateY(2px) scale(0.98)';
                     e.currentTarget.style.boxShadow = plan.popular
-                      ? 'inset 4px 4px 8px rgba(0,0,0,0.15), inset -3px -3px 6px rgba(255,255,255,0.8), 0 2px 6px rgba(0,0,0,0.1)'
+                      ? 'inset 4px 4px 8px rgba(0,0,0,0.18), inset -3px -3px 6px rgba(255,255,255,0.05), 0 2px 6px rgba(0,0,0,0.18)'
                       : 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
                   }
                 }}
@@ -275,7 +269,7 @@ export default function Pricing({ onAuthClick }) {
                   if (!loading) {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
                     e.currentTarget.style.boxShadow = plan.popular
-                      ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15)'
+                      ? 'var(--pro-cta-shadow)'
                       : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
                   }
                 }}
@@ -283,7 +277,7 @@ export default function Pricing({ onAuthClick }) {
                   if (!loading) {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
                     e.currentTarget.style.boxShadow = plan.popular
-                      ? 'inset 3px 3px 6px rgba(0,0,0,0.1), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15)'
+                      ? 'var(--pro-cta-shadow)'
                       : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
                   }
                 }}

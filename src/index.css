@@ -42,6 +42,19 @@
     --accent-green: #059669;
     --accent-red: #DC2626;
     --accent-pink: #BE185D;
+
+    /* Pro pricing card theme (light) */
+    --pro-card-bg: linear-gradient(145deg, #3B82F6, #2563EB);
+    --pro-card-border: rgba(255,255,255,0.20);
+    --pro-card-shadow: inset 4px 4px 8px rgba(59,130,246,0.30), inset -4px -4px 8px rgba(255,255,255,0.10), 0 8px 24px rgba(59,130,246,0.30);
+    --pro-card-text: #ffffff;
+    --pro-card-subtext: rgba(255,255,255,0.80);
+    --pro-card-badge-bg: rgba(255,255,255,0.20);
+    --pro-card-badge-text: #ffffff;
+    --pro-cta-bg: linear-gradient(145deg, #ffffff, #f3f4f6);
+    --pro-cta-text: #3B82F6;
+    --pro-cta-border: #E5E7EB;
+    --pro-cta-shadow: inset 3px 3px 6px rgba(0,0,0,0.10), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15);
   }
 
   [data-theme="dark"] {
@@ -61,6 +74,19 @@
     --accent-green: #10B981;
     --accent-red: #EF4444;
     --accent-pink: #EC4899;
+
+    /* Pro pricing card theme (dark): screening-room premium */
+    --pro-card-bg: linear-gradient(145deg, #0A0B14, #0D1022);
+    --pro-card-border: rgba(245,158,11,0.32);
+    --pro-card-shadow: 0 14px 40px rgba(0,0,0,0.62), inset 0 1px 0 rgba(255,255,255,0.05);
+    --pro-card-text: #F9FAFB;
+    --pro-card-subtext: rgba(249,250,251,0.78);
+    --pro-card-badge-bg: rgba(245,158,11,0.14);
+    --pro-card-badge-text: #F59E0B;
+    --pro-cta-bg: linear-gradient(145deg, rgba(245,158,11,0.95), rgba(217,119,6,0.92));
+    --pro-cta-text: #0A0B14;
+    --pro-cta-border: rgba(245,158,11,0.38);
+    --pro-cta-shadow: 0 10px 26px rgba(245,158,11,0.18), inset 3px 3px 6px rgba(0,0,0,0.20), inset -3px -3px 6px rgba(255,255,255,0.05);
   }
 
   /* Keep night mode background as a simple dark surface (no light gradients). */
