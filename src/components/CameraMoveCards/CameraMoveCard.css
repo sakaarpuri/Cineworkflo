@@ -339,3 +339,49 @@
 .camera-move-card__rec-dot--pulse {
   animation: recPulse 0.36s ease-in-out infinite;
 }
+
+/* Dark theme fixes */
+[data-theme="dark"] .camera-move-card {
+  background: linear-gradient(180deg, #1A1B2E 0%, #141729 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 8px 8px 18px rgba(0,0,0,0.45), -6px -6px 14px rgba(255,255,255,0.02);
+}
+
+[data-theme="dark"] .camera-move-card__name {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .camera-move-card__tag {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .camera-move-card__desc {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .camera-move-card__feel-row {
+  background: #111528;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .camera-move-card__feel-text {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .camera-move-card__feel-text strong {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .camera-move-card__prompt-label {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] .camera-move-card__prompt-chip {
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.28);
+  color: #FDE8C8;
+}
+
+[data-theme="dark"] .camera-move-card__prompt-var {
+  color: #F59E0B;
+}

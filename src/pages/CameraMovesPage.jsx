@@ -204,14 +204,14 @@ function Grid({ moves }) {
 
 export default function CameraMovesPage() {
   return (
-    <div style={{ background: '#F0EEE9', padding: '60px 24px 80px' }}>
+    <div style={{ background: 'var(--bg-primary)', padding: '60px 24px 80px' }}>
       <nav
         aria-label="Breadcrumb"
         style={{
           maxWidth: 1200,
           margin: '0 auto 16px',
           fontSize: 14,
-          color: '#6B7280',
+          color: 'var(--text-muted)',
           display: 'flex',
           gap: 8,
           alignItems: 'center'
@@ -219,7 +219,7 @@ export default function CameraMovesPage() {
       >
         <Link to="/" style={{ textDecoration: 'underline' }}>Home</Link>
         <span>/</span>
-        <span style={{ color: '#374151' }}>Camera Moves</span>
+        <span style={{ color: 'var(--text-secondary)' }}>Camera Moves</span>
       </nav>
 
       <div style={{ textAlign: 'center', marginBottom: 52 }}>
@@ -231,9 +231,9 @@ export default function CameraMovesPage() {
             fontSize: 10,
             fontWeight: 800,
             letterSpacing: '0.14em',
-            color: '#2563EB',
-            background: '#EFF6FF',
-            border: '1px solid #BFDBFE',
+            color: 'var(--accent-blue)',
+            background: 'var(--accent-blue)15',
+            border: '1px solid var(--accent-blue)',
             padding: '4px 14px',
             borderRadius: 99,
             marginBottom: 14
@@ -242,25 +242,25 @@ export default function CameraMovesPage() {
           <Move3d className="h-3.5 w-3.5" />
           CAMERA MOVES
         </div>
-        <h1 style={{ fontSize: 36, fontWeight: 800, color: '#111827', letterSpacing: '-0.03em', marginBottom: 10, lineHeight: 1.15 }}>
+        <h1 style={{ fontSize: 36, fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', marginBottom: 10, lineHeight: 1.15 }}>
           Camera Movements
         </h1>
-        <p style={{ fontSize: 15, color: '#6B7280', lineHeight: 1.6 }}>
+        <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
           Learn the language of the Camera to master the language of prompts
         </p>
       </div>
 
-      <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.08em', color: '#111827', margin: '30px auto 20px', maxWidth: 1200 }}>
+      <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.08em', color: 'var(--text-primary)', margin: '30px auto 20px', maxWidth: 1200 }}>
         CLASSIC MOVES
       </div>
       <Grid moves={CLASSIC_MOVES} />
 
-      <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.08em', color: '#111827', margin: '30px auto 20px', maxWidth: 1200 }}>
+      <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.08em', color: 'var(--text-primary)', margin: '30px auto 20px', maxWidth: 1200 }}>
         DYNAMIC / CINEMATIC MOVES
       </div>
       <Grid moves={DYNAMIC_MOVES} />
 
-      <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.08em', color: '#111827', margin: '30px auto 20px', maxWidth: 1200 }}>
+      <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: '0.08em', color: 'var(--text-primary)', margin: '30px auto 20px', maxWidth: 1200 }}>
         MODERN / AI-NATIVE MOVES
       </div>
       <Grid moves={MODERN_MOVES} />
@@ -269,23 +269,23 @@ export default function CameraMovesPage() {
         style={{
           maxWidth: 1200,
           margin: '28px auto 0',
-          background: '#FFFFFF',
-          border: '1px solid #E5E7EB',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-color)',
           borderRadius: 16,
           padding: 24
         }}
       >
-        <h2 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 8 }}>
+        <h2 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 8 }}>
           Apply these moves in your prompts
         </h2>
-        <p style={{ color: '#6B7280', marginBottom: 16 }}>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: 16 }}>
           Use camera-language terms directly in your generation workflow, then refine from visual references.
         </p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <Link
             to="/prompts"
             style={{
-              background: '#2563EB',
+              background: 'var(--accent-blue)',
               color: '#fff',
               padding: '10px 14px',
               borderRadius: 10,
@@ -297,9 +297,9 @@ export default function CameraMovesPage() {
           <Link
             to="/shot-to-prompt"
             style={{
-              border: '1px solid #D1D5DB',
-              color: '#111827',
-              background: '#fff',
+              border: '1px solid var(--border-color)',
+              color: 'var(--text-primary)',
+              background: 'var(--bg-secondary)',
               padding: '10px 14px',
               borderRadius: 10,
               fontWeight: 700
@@ -310,9 +310,9 @@ export default function CameraMovesPage() {
           <Link
             to="/pricing"
             style={{
-              border: '1px solid #D1D5DB',
-              color: '#111827',
-              background: '#fff',
+              border: '1px solid var(--border-color)',
+              color: 'var(--text-primary)',
+              background: 'var(--bg-secondary)',
               padding: '10px 14px',
               borderRadius: 10,
               fontWeight: 700
@@ -327,37 +327,37 @@ export default function CameraMovesPage() {
         style={{
           maxWidth: 1200,
           margin: '20px auto 0',
-          background: '#FFFFFF',
-          border: '1px solid #E5E7EB',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border-color)',
           borderRadius: 16,
           padding: 24
         }}
       >
-        <h2 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 14 }}>
+        <h2 style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)', marginBottom: 14 }}>
           Camera Moves FAQ
         </h2>
         <div style={{ display: 'grid', gap: 14 }}>
           <div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 4 }}>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
               What is the difference between tracking and steadicam?
             </h3>
-            <p style={{ color: '#6B7280', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Tracking usually means camera and subject move together on a matched path; steadicam means stabilized free movement that still follows naturally.
             </p>
           </div>
           <div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 4 }}>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
               Which camera moves are best for beginners?
             </h3>
-            <p style={{ color: '#6B7280', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Start with dolly, pan, tilt, and zoom. They are easy to describe in prompts and build a solid camera-language foundation.
             </p>
           </div>
           <div>
-            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#111827', marginBottom: 4 }}>
+            <h3 style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 4 }}>
               When should I use AI-native moves like push through or dolly zoom?
             </h3>
-            <p style={{ color: '#6B7280', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
               Use them for stylized transitions, dramatic tension, and shots that are expensive or physically difficult in real production.
             </p>
           </div>

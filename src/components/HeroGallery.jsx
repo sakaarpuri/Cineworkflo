@@ -17,13 +17,21 @@ export default function HeroGallery() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-4">
-          <h1 className="font-display text-4xl lg:text-6xl font-bold leading-tight mb-6" style={{ color: 'var(--text-primary)' }}>
-            Your <span style={{ color: 'var(--accent-blue)' }}>AI</span> footage deserves better than
-            {' '}
-            <span style={{ color: 'var(--accent-blue)' }}>&ldquo;a cinematic shot of a thing.&rdquo;</span>
+          <div
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider mb-4"
+            style={{
+              background: 'var(--accent-purple)15',
+              border: '1px solid var(--accent-purple)40',
+              color: 'var(--accent-purple)',
+            }}
+          >
+            AI FILMMAKER TOOLKIT
+          </div>
+          <h1 className="font-display text-5xl lg:text-7xl font-bold leading-[1.06] mb-6 max-w-5xl mx-auto" style={{ color: 'var(--text-primary)' }}>
+            Your AI video is only as rich as your prompt.
           </h1>
           <p className="text-xl max-w-2xl mx-auto mb-8" style={{ color: 'var(--text-secondary)' }}>
-            150+ battle-tested prompts for Runway, Pika, Kling, Sora and more. Copy. Paste. Get the shot you actually imagined.
+            100s of battle-tested prompts for Runway, Pika, Kling, Sora and more. Copy. Paste. Get the shot you actually imagined.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
             {TOOL_LOGOS.map((tool) => (

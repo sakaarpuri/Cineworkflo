@@ -10,7 +10,12 @@ export default function Header({ onAuthClick }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [isLogoutPressed, setIsLogoutPressed] = useState(false)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light'
+    const saved = localStorage.getItem('theme')
+    if (saved === 'light' || saved === 'dark') return saved
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: light)').matches) {
+      return 'light'
+    }
+    return 'dark'
   })
   const location = useLocation()
   const isVaultPage = location?.pathname === '/prompts'
