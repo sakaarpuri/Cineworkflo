@@ -824,7 +824,7 @@ export default function VaultPage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, marginBottom: 18 }}>
           <div>
             <div style={{ fontSize: 24, fontWeight: 900, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
-              Prompt Vault (v2)
+              a vault of prompts.....
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 6 }}>
               Pro prompts start with image generation — the foundation for strong video generations.
