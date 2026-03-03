@@ -581,6 +581,16 @@ export default function ShotToPrompt({ preview = false }) {
             >
               Learn Camera Moves
             </Link>
+            <Link
+              to="/pricing"
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all"
+              style={{
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-primary)'
+              }}
+            >
+              View Pricing
+            </Link>
           </div>
         </section>
 

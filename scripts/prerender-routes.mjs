@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
+import { PROMPT_CATEGORY_SEO_PAGES } from '../src/data/promptCategorySeo.js'
 
 const DIST_DIR = 'dist'
 const BASE_FILE = join(DIST_DIR, 'index.html')
@@ -141,58 +142,6 @@ const ROUTES = [
     `
   },
   {
-    path: '/prompts/product-ads',
-    file: join(DIST_DIR, 'prompts', 'product-ads', 'index.html'),
-    title: 'Product Ads AI Video Prompts | CineWorkflo',
-    description: 'Copy-ready AI video prompts for product ads, launch visuals, and commercial-style product storytelling.',
-    keywords: 'product ad prompts, AI commercial prompts, product showcase video prompts',
-    fallbackHtml: `
-      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-        <h1>Product Ads Prompts</h1>
-        <p>Commercial-focused prompt templates for product storytelling and launch assets.</p>
-      </main>
-    `
-  },
-  {
-    path: '/prompts/short-form-social',
-    file: join(DIST_DIR, 'prompts', 'short-form-social', 'index.html'),
-    title: 'Short-Form Social AI Video Prompts | CineWorkflo',
-    description: 'High-impact AI video prompts built for short-form and vertical social content.',
-    keywords: 'short-form prompts, social video prompts, vertical video prompt templates',
-    fallbackHtml: `
-      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-        <h1>Short-Form Social Prompts</h1>
-        <p>Prompt templates for hooks, vertical framing, and social-first pacing.</p>
-      </main>
-    `
-  },
-  {
-    path: '/prompts/cinematic-storytelling',
-    file: join(DIST_DIR, 'prompts', 'cinematic-storytelling', 'index.html'),
-    title: 'Cinematic Storytelling AI Video Prompts | CineWorkflo',
-    description: 'Narrative-first AI video prompts for cinematic scenes, mood-driven visuals, and story progression.',
-    keywords: 'cinematic storytelling prompts, narrative video prompts, dramatic AI video prompts',
-    fallbackHtml: `
-      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-        <h1>Cinematic Storytelling Prompts</h1>
-        <p>Narrative prompt templates for cinematic scene progression and mood direction.</p>
-      </main>
-    `
-  },
-  {
-    path: '/prompts/world-building',
-    file: join(DIST_DIR, 'prompts', 'world-building', 'index.html'),
-    title: 'World Building AI Video Prompts | CineWorkflo',
-    description: 'Environment and atmosphere-driven AI video prompts for world-building and cinematic reveals.',
-    keywords: 'world-building prompts, environment prompts, cinematic establishing shot prompts',
-    fallbackHtml: `
-      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
-        <h1>World Building Prompts</h1>
-        <p>Atmosphere and environment-first prompts for scale, immersion, and world reveals.</p>
-      </main>
-    `
-  },
-  {
     path: '/contact',
     file: join(DIST_DIR, 'contact', 'index.html'),
     title: 'Contact CineWorkflo Support',
@@ -232,6 +181,22 @@ const ROUTES = [
     `
   }
 ]
+
+const categoryRoutes = PROMPT_CATEGORY_SEO_PAGES.map((category) => ({
+  path: `/prompts/${category.slug}`,
+  file: join(DIST_DIR, 'prompts', category.slug, 'index.html'),
+  title: `${category.name} AI Video Prompts | CineWorkflo`,
+  description: `${category.description} Explore copy-ready prompts for ${category.name.toLowerCase()} workflows in the US, Canada, and UK.`,
+  keywords: `${category.name.toLowerCase()} prompts, AI video prompts, cinematic prompt templates, US Canada UK`,
+  fallbackHtml: `
+    <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+      <h1>${category.name} Prompts</h1>
+      <p>${category.description}</p>
+    </main>
+  `
+}))
+
+const ALL_ROUTES = [...ROUTES, ...categoryRoutes]
 
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -275,7 +240,7 @@ const buildRouteHtml = (baseHtml, route) => {
 const run = () => {
   const baseHtml = readFileSync(BASE_FILE, 'utf8')
 
-  ROUTES.forEach((route) => {
+  ALL_ROUTES.forEach((route) => {
     const html = buildRouteHtml(baseHtml, route)
     mkdirSync(dirname(route.file), { recursive: true })
     writeFileSync(route.file, html, 'utf8')

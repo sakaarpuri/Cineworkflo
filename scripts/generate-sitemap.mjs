@@ -1,4 +1,5 @@
 import { writeFileSync } from 'node:fs'
+import { PROMPT_CATEGORY_SEO_PAGES } from '../src/data/promptCategorySeo.js'
 
 const SITE_URL = 'https://cineworkflo.com'
 const OUTPUT_PATH = 'public/sitemap.xml'
@@ -12,10 +13,11 @@ const routes = [
   { path: '/pricing', changefreq: 'weekly', priority: '0.8' },
   { path: '/about', changefreq: 'monthly', priority: '0.6' },
   { path: '/contact', changefreq: 'monthly', priority: '0.6' },
-  { path: '/prompts/product-ads', changefreq: 'weekly', priority: '0.7' },
-  { path: '/prompts/short-form-social', changefreq: 'weekly', priority: '0.7' },
-  { path: '/prompts/cinematic-storytelling', changefreq: 'weekly', priority: '0.7' },
-  { path: '/prompts/world-building', changefreq: 'weekly', priority: '0.7' },
+  ...PROMPT_CATEGORY_SEO_PAGES.map((category) => ({
+    path: `/prompts/${category.slug}`,
+    changefreq: 'weekly',
+    priority: '0.7'
+  })),
   { path: '/privacy', changefreq: 'yearly', priority: '0.4' },
   { path: '/terms', changefreq: 'yearly', priority: '0.4' },
   { path: '/modern-moves', changefreq: 'monthly', priority: '0.5' }

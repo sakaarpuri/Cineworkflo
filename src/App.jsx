@@ -6,7 +6,7 @@ import HeroGallery from './components/HeroGallery'
 import Footer from './components/Footer'
 import Success from './components/Success'
 import AuthModal from './components/AuthModal'
-import { PROMPT_CATEGORY_PAGES } from './data/promptCategories'
+import { PROMPT_CATEGORY_SEO_BY_SLUG } from './data/promptCategorySeo'
 import { captureAttributionTouch } from './lib/marketingAttribution'
 
 const PromptEnhancer = lazy(() => import('./components/PromptEnhancer'))
@@ -198,9 +198,7 @@ function RouteSeo() {
     const categorySlug = normalizedPath.startsWith('/prompts/')
       ? normalizedPath.replace('/prompts/', '')
       : null
-    const promptCategory = categorySlug
-      ? PROMPT_CATEGORY_PAGES.find((category) => category.slug === categorySlug)
-      : null
+    const promptCategory = categorySlug ? PROMPT_CATEGORY_SEO_BY_SLUG[categorySlug] : null
 
     const promptCategorySeo = promptCategory
       ? {
@@ -303,24 +301,50 @@ function RouteSeo() {
       url: canonicalUrl
     }
 
-    const breadcrumbSchema = normalizedPath === '/' ? null : {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Home',
-          item: origin
-        },
-        {
-          '@type': 'ListItem',
-          position: 2,
-          name: pageName,
-          item: canonicalUrl
+    const breadcrumbItems = normalizedPath === '/'
+      ? []
+      : (() => {
+          const items = [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: origin
+            }
+          ]
+
+          if (categorySlug && promptCategory) {
+            items.push({
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Prompt Vault',
+              item: `${origin}/prompts`
+            })
+            items.push({
+              '@type': 'ListItem',
+              position: 3,
+              name: promptCategory.name,
+              item: canonicalUrl
+            })
+            return items
+          }
+
+          items.push({
+            '@type': 'ListItem',
+            position: 2,
+            name: pageName,
+            item: canonicalUrl
+          })
+          return items
+        })()
+
+    const breadcrumbSchema = breadcrumbItems.length
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: breadcrumbItems
         }
-      ]
-    }
+      : null
 
     const faqEntries = FAQ_BY_PATH[normalizedPath]
     const faqSchema = faqEntries?.length

@@ -57,6 +57,24 @@ export default function HeroGallery() {
               Shot to Prompt
             </Link>
           </div>
+
+          <div className="mt-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+            Explore workflow:
+            {' '}
+            <Link to="/prompts" className="underline" style={{ color: 'var(--accent-blue)' }}>Prompt Vault</Link>
+            {' '}
+            ·
+            {' '}
+            <Link to="/shot-to-prompt" className="underline" style={{ color: 'var(--accent-blue)' }}>Shot to Prompt</Link>
+            {' '}
+            ·
+            {' '}
+            <Link to="/camera-moves" className="underline" style={{ color: 'var(--accent-blue)' }}>Camera Moves</Link>
+            {' '}
+            ·
+            {' '}
+            <Link to="/pricing" className="underline" style={{ color: 'var(--accent-blue)' }}>Pricing</Link>
+          </div>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@ import { Search, Copy, Check, Lightbulb, ChevronDown, ChevronUp, BookmarkPlus } 
 import PROMPTS_RAW from '../data/ai_video_prompt_library.json'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
+import { Link } from 'react-router-dom'
 
 // Use the site's theme variables (light by default, dark when user toggles).
 const BG = 'transparent'
@@ -960,6 +961,34 @@ export default function VaultPage() {
             <PromptCard key={p.id} prompt={p} globalView={globalView} />
           ))}
         </div>
+
+        <section
+          style={{
+            marginTop: 20,
+            background: PANEL,
+            border: `1px solid ${BORDER}`,
+            borderRadius: 16,
+            padding: 14,
+          }}
+        >
+          <div style={{ color: 'var(--text-secondary)', fontSize: 14 }}>
+            Related pages:
+            {' '}
+            <Link to="/shot-to-prompt" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>Shot to Prompt</Link>
+            {' '}
+            ·
+            {' '}
+            <Link to="/camera-moves" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>Camera Moves</Link>
+            {' '}
+            ·
+            {' '}
+            <Link to="/pricing" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>Pricing</Link>
+            {' '}
+            ·
+            {' '}
+            <Link to="/about" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>About</Link>
+          </div>
+        </section>
       </div>
     </div>
   )

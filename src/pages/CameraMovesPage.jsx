@@ -307,6 +307,19 @@ export default function CameraMovesPage() {
           >
             Try Shot to Prompt
           </Link>
+          <Link
+            to="/pricing"
+            style={{
+              border: '1px solid #D1D5DB',
+              color: '#111827',
+              background: '#fff',
+              padding: '10px 14px',
+              borderRadius: 10,
+              fontWeight: 700
+            }}
+          >
+            View Pricing
+          </Link>
         </div>
       </section>
 
