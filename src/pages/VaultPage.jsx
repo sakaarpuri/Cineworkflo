@@ -714,7 +714,7 @@ function PromptCard({ prompt, globalView }) {
 
 export default function VaultPage() {
   const { isPro } = useAuth()
-  const prompts = useMemo(() => (isPro ? PROMPTS_RAW : PROMPTS_RAW.slice(0, 25)), [isPro])
+  const prompts = useMemo(() => (isPro ? PROMPTS_RAW : PROMPTS_RAW.slice(-25)), [isPro])
 
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
@@ -740,6 +740,8 @@ export default function VaultPage() {
       const matchesStyle = style === 'All' || p.style === style
       const matchesQuery =
         !q ||
+        String(p.id) === q ||
+        String(p.source_id ?? '').toLowerCase() === q ||
         normalize(p.title).includes(q) ||
         normalize(p.image_prompt).includes(q) ||
         normalize(p.video_prompt).includes(q) ||

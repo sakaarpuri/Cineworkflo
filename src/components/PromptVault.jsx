@@ -16,7 +16,7 @@ export default function PromptVault({ preview = false }) {
   const navigate = useNavigate()
 
   const visiblePromptLibrary = useMemo(
-    () => (isPro ? PROMPT_LIBRARY : PROMPT_LIBRARY.slice(0, 25)),
+    () => (isPro ? PROMPT_LIBRARY : PROMPT_LIBRARY.slice(-25)),
     [isPro]
   )
 
@@ -52,6 +52,8 @@ export default function PromptVault({ preview = false }) {
   const filteredPrompts = visiblePromptLibrary.filter(prompt => {
     const query = searchQuery.trim().toLowerCase()
     const matchesSearch = !query ||
+      String(prompt.id) === query ||
+      String(prompt.source_id ?? '').toLowerCase() === query ||
       prompt.title.toLowerCase().includes(query) ||
       prompt.tags.some(tag => tag.toLowerCase().includes(query)) ||
       prompt.prompt.toLowerCase().includes(query) ||
