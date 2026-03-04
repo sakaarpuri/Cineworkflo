@@ -713,8 +713,7 @@ function PromptCard({ prompt, globalView }) {
 }
 
 export default function VaultPage() {
-  const { isPro } = useAuth()
-  const prompts = useMemo(() => (isPro ? PROMPTS_RAW : PROMPTS_RAW.slice(-25)), [isPro])
+  const prompts = useMemo(() => PROMPTS_RAW, [])
 
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
@@ -834,11 +833,9 @@ export default function VaultPage() {
             <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 6 }}>
               Designed for image-to-video. Lock the look with an image, then drive the shot with the video prompt.
             </div>
-            {!isPro && (
-              <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 6 }}>
-                Free plan: 25 prompts unlocked in vault. Upgrade for full access.
-              </div>
-            )}
+            <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 6 }}>
+              Vault is currently open to all users.
+            </div>
             <div style={{ marginTop: 10 }}>
               <a
                 href="/vault"

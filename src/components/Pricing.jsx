@@ -12,7 +12,7 @@ const plans = [
     description: 'Dip your toes in. No credit card, no catch.',
     features: [
       '5 total generations / month (Enhancer + Shot to Prompt)',
-      'Prompt Vault (25 prompts)',
+      'Prompt Vault (all prompts)',
       'Basic search',
       'Copy to clipboard'
     ],
@@ -27,7 +27,7 @@ const plans = [
     description: 'For creators who ship. Unlimited everything.',
     features: [
       'Unlimited Prompt Enhancer generations',
-      'Full Prompt Vault (150+)',
+      'Prompt Vault (all prompts)',
       'Shot to Prompt AI tool',
       'Advanced search & filters',
       'New prompts weekly',

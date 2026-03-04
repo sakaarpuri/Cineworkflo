@@ -3,10 +3,8 @@ import { Check, Copy } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 import { trackCtaEvent } from '../lib/marketingAttribution'
-import { useAuth } from '../contexts/AuthContext'
 
 export default function PromptCategoryPage() {
-  const { isPro } = useAuth()
   const { categorySlug } = useParams()
   const [copiedId, setCopiedId] = useState(null)
 
@@ -17,12 +15,10 @@ export default function PromptCategoryPage() {
 
   const prompts = useMemo(() => {
     if (!category) return []
-    const freePromptIds = new Set(PROMPT_LIBRARY.slice(0, 25).map((prompt) => prompt.id))
     return category.promptIds
       .map((promptId) => PROMPT_LIBRARY.find((prompt) => prompt.id === promptId))
-      .filter((prompt) => (isPro ? true : freePromptIds.has(prompt?.id)))
       .filter(Boolean)
-  }, [category, isPro])
+  }, [category])
 
   const copyPrompt = (prompt, id) => {
     navigator.clipboard.writeText(prompt)

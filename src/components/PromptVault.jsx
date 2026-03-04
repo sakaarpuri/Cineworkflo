@@ -3,10 +3,8 @@ import { Search, Copy, Check, ArrowRight, Eye, X } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 import { trackCtaEvent } from '../lib/marketingAttribution'
-import { useAuth } from '../contexts/AuthContext'
 
 export default function PromptVault({ preview = false }) {
-  const { isPro } = useAuth()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [copiedId, setCopiedId] = useState(null)
@@ -15,10 +13,7 @@ export default function PromptVault({ preview = false }) {
   const [vaultToggle, setVaultToggle] = useState(false)
   const navigate = useNavigate()
 
-  const visiblePromptLibrary = useMemo(
-    () => (isPro ? PROMPT_LIBRARY : PROMPT_LIBRARY.slice(-25)),
-    [isPro]
-  )
+  const visiblePromptLibrary = useMemo(() => PROMPT_LIBRARY, [])
 
   const categories = useMemo(() => {
     const orderedFromPages = PROMPT_CATEGORY_PAGES.map((categoryPage) => categoryPage.name)
@@ -154,11 +149,9 @@ export default function PromptVault({ preview = false }) {
             className="text-xl max-w-2xl mx-auto"
             style={{ color: 'var(--text-secondary)' }}
           >
-            {preview 
-              ? 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.' 
-              : (isPro
-                  ? 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.'
-                  : 'Browse 25 free prompts by mood, genre, or use case. Upgrade for the full vault.')}
+            {preview
+              ? 'Explore a sample from the Prompt Vault and open the full library on the dedicated page.'
+              : 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.'}
           </p>
           <p className="mt-3 text-sm max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Designed for image-to-video. Lock the look with an image, then drive the shot with the video prompt.
