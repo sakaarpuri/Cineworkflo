@@ -740,6 +740,7 @@ export default function VaultPage() {
       const matchesStyle = style === 'All' || p.style === style
       const matchesQuery =
         !q ||
+        normalize(p.title).includes(q) ||
         normalize(p.image_prompt).includes(q) ||
         normalize(p.video_prompt).includes(q) ||
         normalize(p.sfx_prompt).includes(q)
@@ -873,7 +874,7 @@ export default function VaultPage() {
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search image/video/sfx…"
+                placeholder="Search title/image/video/sfx…"
                 style={{
                   width: '100%',
                   padding: '12px 12px 12px 38px',

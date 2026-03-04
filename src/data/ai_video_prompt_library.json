@@ -15143,5 +15143,1191 @@
     },
     "tool_notes": "Sora handles impossible physical traces accumulating around action. Runway maintains stunt performer consistency through the surreal accumulation. Add 'surrealist stunt impossible trace motion record abstract' for correct approach.",
     "source_id": 170
+  },
+  {
+    "id": 227,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A [structure type] growing slowly upward from a perfectly calm ocean surface, [lens] wide — the structure already impossibly tall, its upper reaches dissolving into low cloud, its base surrounded by still water with no waves, no wake, no evidence of origin, [time of day] light falling on it from the wrong direction, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera locked on a very slow push-in from maximum distance — the [structure type] continues its upward growth throughout, the water around its base remaining perfectly still as if the event is consensual rather than catastrophic, [time of day] light shifting fractionally across its surface as it rises, the cloud layer at its peak thickening around it, the camera never arriving, the structure never completing, the ocean indifferent throughout.",
+    "sfx_prompt": "No sound of construction — only the deep tonal resonance of something very large moving through water and air, a sub-bass frequency that is felt before it is heard, the ocean's surface tension audible as a glassy near-silence, the cloud above thickening with a slow inhalation sound, no score, no mechanical noise",
+    "variables": {
+      "structure type": {
+        "default": "crystalline monolith",
+        "examples": [
+          "organic tower",
+          "inverted pyramid",
+          "latticed spire"
+        ]
+      },
+      "time of day": {
+        "default": "dead noon — flat white sky",
+        "examples": [
+          "pre-dawn blue",
+          "amber late afternoon",
+          "overcast grey"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the slow emergence best. Prompt Runway with 'no camera shake, locked off, slow zoom'. Kling maintains water surface stillness.",
+    "source_id": 171
+  },
+  {
+    "id": 228,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Artist",
+      "Director"
+    ],
+    "image_prompt": "A [astronaut type] standing on a [surface type] landscape, [lens] mid-distance — the astronaut's helmet visor reflecting a scene completely different from the environment they are standing in, the reflected world warm and domestic, the actual world cold and impossible, [light condition] falling on both simultaneously without contradiction, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera executes a slow orbit around the [astronaut type] — the visor reflection staying fixed on its domestic world as if it is a window rather than a mirror, the actual [surface type] landscape rotating in the background behind the astronaut as the camera moves, the two realities never acknowledging each other, the orbit completing once and beginning again, the astronaut completely still throughout.",
+    "sfx_prompt": "The inside of a spacesuit — compressed air recycling, a faint heartbeat, the sound of breathing in an enclosed space, outside the suit a silence that is not absence but presence, the reflected domestic world in the visor emitting barely audible warmth — distant conversation, a radio, something cooking, none of it explicable",
+    "variables": {
+      "astronaut type": {
+        "default": "vintage NASA suit",
+        "examples": [
+          "sleek future suit",
+          "damaged exploration suit",
+          "child-sized suit"
+        ]
+      },
+      "surface type": {
+        "default": "lunar regolith",
+        "examples": [
+          "red Martian dust",
+          "black volcanic rock",
+          "white salt flat"
+        ]
+      },
+      "light condition": {
+        "default": "harsh unfiltered starlight",
+        "examples": [
+          "earthshine glow",
+          "twin suns",
+          "bioluminescent ground"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the visor reflection paradox best. Add 'reflective visor showing different world' explicitly. Runway: prompt the two separate realities as distinct layers.",
+    "source_id": 172
+  },
+  {
+    "id": 229,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Artist",
+      "Director",
+      "Creator"
+    ],
+    "image_prompt": "A [vehicle type] travelling at full speed along a road that curves upward into the sky and continues horizontally above the clouds, [lens] locked at a low 45-degree angle showing both the normal ground road disappearing behind and the impossible aerial road ahead, [atmospheric condition] between the two levels, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera mounted at the vehicle's bumper height tracking at speed — the road beneath normal and familiar, the transition point where the road curves skyward approaching at a constant rate, the vehicle crossing the transition without slowing, the ground falling away below as the aerial road continues forward as if gravity is a regional policy rather than a law, clouds at eye level now, the road continuing to the horizon above the world.",
+    "sfx_prompt": "Engine note holding absolutely constant through the transition — not a single change in RPM or road noise as the vehicle leaves the ground, tyre on tarmac continuing with the same grain, wind at speed now carrying the slightly different acoustic quality of open altitude, no dramatic musical sting at the transition, just the road continuing",
+    "variables": {
+      "vehicle type": {
+        "default": "ordinary family car",
+        "examples": [
+          "vintage truck",
+          "school bus",
+          "delivery van"
+        ]
+      },
+      "atmospheric condition": {
+        "default": "a thin mist layer",
+        "examples": [
+          "a hard cloud ceiling",
+          "open blue sky",
+          "golden haze"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "The mundane vehicle is essential — avoid sports cars, use ordinary transport for maximum surreal contrast. Sora handles physics-breaking transitions best.",
+    "source_id": 173
+  },
+  {
+    "id": 230,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Director",
+      "Artist",
+      "Creator"
+    ],
+    "image_prompt": "A vast [interior space type] with its ceiling replaced by open sky — [lens] wide, camera at floor level looking upward, the architectural walls ending cleanly where the ceiling should be and open [sky condition] continuing above, [furniture or objects] casting shadows as if a ceiling still exists but the light source is the sky itself, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera begins at floor level and executes a very slow upward tilt — revealing the [interior space type] from floor to the open sky above, [furniture or objects] occupying the space with complete domestic normalcy, clouds or [sky condition] drifting through what should be the ceiling, no characters reacting, no wind disturbing the interior despite the open sky, the architecture accepting the impossible without structural anxiety.",
+    "sfx_prompt": "Interior room acoustics — the specific reverb of [interior space type] walls and floor — but with the faint ambient sound of open sky filtering from above, birdsong or [sky condition] weather sounds at low volume as if the room is simply very high-ceilinged rather than open to the world, no dramatic reveal sound, just the two acoustic worlds coexisting",
+    "variables": {
+      "interior space type": {
+        "default": "grand library",
+        "examples": [
+          "hospital corridor",
+          "school gymnasium",
+          "suburban kitchen"
+        ]
+      },
+      "sky condition": {
+        "default": "overcast white",
+        "examples": [
+          "deep night stars",
+          "golden sunset",
+          "stormy grey"
+        ]
+      },
+      "furniture or objects": {
+        "default": "bookshelves and reading tables",
+        "examples": [
+          "hospital beds and equipment",
+          "school desks",
+          "kitchen appliances"
+        ]
+      },
+      "lens": {
+        "default": "18mm",
+        "examples": [
+          "24mm",
+          "14mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "The contrast between domestic interior and open sky is the entire effect — keep the interior mundane. Sora handles architectural surrealism best. Add 'photorealistic, architectural photography' for grounding.",
+    "source_id": 174
+  },
+  {
+    "id": 231,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A [character type] walking through a corridor where the walls, floor and ceiling are made entirely of [impossible material] — the [impossible material] responding slightly to their passage, [lens] locked ahead in a tracking shot that pulls back as they advance, the corridor extending infinitely in both directions, [light source] having no visible origin, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera pulls back at exactly the walking pace of the [character type] — they never advance, never retreat, the corridor simply continuing, the [impossible material] walls responding to their passage in real time — rippling, compressing, shifting — but always returning to corridor form behind them, [light source] maintaining its sourceless consistency, the character's expression unreadable from this distance, no destination implied.",
+    "sfx_prompt": "Footsteps on [impossible material] — the sound wrong in a specific way, too resonant or too absent for the material's apparent density, the corridor's [impossible material] responding with a barely audible harmonic each time the character passes, no echo because the surfaces absorb rather than reflect, a very low ambient tone that is the corridor itself, no score",
+    "variables": {
+      "character type": {
+        "default": "figure in a plain grey suit",
+        "examples": [
+          "child in school uniform",
+          "elderly person in a coat",
+          "someone in medical scrubs"
+        ]
+      },
+      "impossible material": {
+        "default": "still water",
+        "examples": [
+          "compressed cloud",
+          "slow amber",
+          "dark mirror"
+        ]
+      },
+      "light source": {
+        "default": "a diffuse sourceless white",
+        "examples": [
+          "a warm glow from below",
+          "cold blue from above",
+          "the material itself"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "The mundane character is critical — suit, uniform, ordinary clothing. Avoid heroic or costumed figures. Sora and Kling both handle material surrealism. Keep camera movement to the single pull-back.",
+    "source_id": 175
+  },
+  {
+    "id": 232,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Artist",
+      "Director"
+    ],
+    "image_prompt": "A [natural landscape] in which all shadows point toward the light source rather than away from it — [lens] wide, golden hour light raking low across the scene, every tree, rock and figure casting shadows that reach toward the sun rather than away, the landscape otherwise photorealistic and completely normal, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera executing a very slow pan across the [natural landscape] — the reversed shadows tracking with the movement, maintaining their impossible relationship to the [light source] with perfect consistency, a [figure or animal] moving through the scene mid-pan casting its own reversed shadow with total physical commitment, the pan completing and the landscape continuing as if this has always been how light works here.",
+    "sfx_prompt": "The ambient sound of [natural landscape] completely normal — wind, distant birds, the particular acoustic texture of the environment — nothing in the sound design acknowledging the visual impossibility, the complete normalcy of the audio deepening the uncanniness of what is seen, no score, no supernatural tones",
+    "variables": {
+      "natural landscape": {
+        "default": "open wheat field",
+        "examples": [
+          "pine forest",
+          "coastal clifftop",
+          "desert plain"
+        ]
+      },
+      "light source": {
+        "default": "low evening sun at frame edge",
+        "examples": [
+          "high noon sun from above",
+          "sunrise on the horizon",
+          "overcast diffuse light"
+        ]
+      },
+      "figure or animal": {
+        "default": "a person walking a dog",
+        "examples": [
+          "a grazing horse",
+          "a child running",
+          "a cyclist"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "The reversed shadows must be photorealistic, not stylised. The more grounded the landscape, the more unsettling the effect. Sora handles physics inversions best. Add 'photorealistic, hyperreal, shadows pointing toward sun' to the prompt.",
+    "source_id": 176
+  },
+  {
+    "id": 233,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Artist",
+      "Director"
+    ],
+    "image_prompt": "A [domestic room] viewed through a window from outside — [lens] locked at window-frame distance, the room visible and ordinary, except the room is oriented 90 degrees from the viewer, its floor where a wall should be, its occupants going about their activity with full gravitational commitment to their rotated world, [time of day] light entering their room from what appears to be a wall, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera locked at window distance — the [domestic room] and its occupants [activity] with total normalcy in their 90-degree world, a [object or figure] passing in front of the window on the correct gravitational axis briefly obscuring and then revealing the rotated interior, the interior world continuing its activity undisturbed, no acknowledgment between the two gravitational orientations, [time of day] light shifting fractionally.",
+    "sfx_prompt": "Outside the window — whatever ambient sound belongs to [time of day] and the exterior environment, muffled slightly by the glass, inside the room — barely audible through the window — the sounds of [activity] as if everything is completely normal, the acoustic separation of the glass between the two worlds doing quiet work, no score",
+    "variables": {
+      "domestic room": {
+        "default": "a living room with a television on",
+        "examples": [
+          "a kitchen at breakfast",
+          "a child's bedroom at night",
+          "a home office"
+        ]
+      },
+      "activity": {
+        "default": "a family watching television",
+        "examples": [
+          "someone cooking",
+          "a person reading",
+          "children playing"
+        ]
+      },
+      "object or figure": {
+        "default": "a person walking past",
+        "examples": [
+          "a cat",
+          "a cyclist",
+          "a delivery person"
+        ]
+      },
+      "time of day": {
+        "default": "evening, interior lights on",
+        "examples": [
+          "bright afternoon",
+          "early morning",
+          "night"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "The mundane domestic activity is essential to the effect. Avoid dramatic or unusual room contents. Sora handles spatial orientation best. Add 'room rotated 90 degrees, occupants unaware, photorealistic'.",
+    "source_id": 177
+  },
+  {
+    "id": 234,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Director",
+      "Creator",
+      "Artist"
+    ],
+    "image_prompt": "A [urban or natural environment] in which [weather phenomenon] is falling upward — [lens] wide, the environment completely normal in every other respect, the upward [weather phenomenon] catching whatever light is available and appearing photorealistic, [figures or elements] present in the scene treating the reversed weather as unremarkable, cinematic surrealist still frame, 16:9",
+    "video_prompt": "Camera locked on a wide static shot — the [weather phenomenon] falling consistently upward throughout, individual [weather elements] visible in the foreground catching the light, [figures or elements] moving through the scene with complete normalcy, one [figure] briefly holding out a hand as if to check the [weather phenomenon] then continuing on — the gesture casual, not theatrical, [light condition] holding throughout, no explanation, no resolution.",
+    "sfx_prompt": "The sound of [weather phenomenon] — rain hiss, snow silence, hail impact — but with the specific acoustic quality of sound moving upward rather than down, a subtle reversal in the directional quality of the audio, [figures or elements] present in their normal ambient register, the overall soundscape treating the inversion as meteorologically routine",
+    "variables": {
+      "urban or natural environment": {
+        "default": "a city street at midday",
+        "examples": [
+          "a park",
+          "a suburban cul-de-sac",
+          "a countryside road"
+        ]
+      },
+      "weather phenomenon": {
+        "default": "rain",
+        "examples": [
+          "snow",
+          "autumn leaves",
+          "blossom"
+        ]
+      },
+      "weather elements": {
+        "default": "raindrops",
+        "examples": [
+          "snowflakes",
+          "leaves",
+          "petals"
+        ]
+      },
+      "figures or elements": {
+        "default": "pedestrians with umbrellas held downward",
+        "examples": [
+          "children playing",
+          "a market stall",
+          "parked cars"
+        ]
+      },
+      "light condition": {
+        "default": "flat overcast",
+        "examples": [
+          "bright sun",
+          "golden hour",
+          "blue overcast"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Umbrellas held downward is the key detail for rain — include it. The environment must be completely ordinary. Sora handles physics inversions best. Add 'photorealistic, [weather] falling upward, people treating it as normal'.",
+    "source_id": 178
+  },
+  {
+    "id": 235,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Higgsfield",
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Developer"
+    ],
+    "image_prompt": "A [character type] with [augmentation detail] seated at a [workspace type] in a rain-soaked high-rise interior — [lens] from across the room, the city visible through floor-to-ceiling windows behind them, neon [color palette] from the city below washing the interior in reflected light, multiple [screen type] screens casting additional light from the character-side, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera locked across the room, no movement — the [character type] [working action] at the [workspace type], their [augmentation detail] interfacing with the [screen type] displays, rain tracking down the windows behind them, the city neon shifting fractionally in the reflections, the screens casting light that pulses with data activity, the character absorbed and unreachable, the gap between camera and subject maintained throughout.",
+    "sfx_prompt": "Rain against high-rise glass — distant from this interior, a texture rather than an event, the [screen type] screens emitting a low electrical hum, the [augmentation detail] interfacing with a series of precise haptic clicks, city noise at altitude filtered through glass and reduced to a tonal layer, no music — the screens are the score",
+    "variables": {
+      "character type": {
+        "default": "data analyst",
+        "examples": [
+          "hacker",
+          "corporate operative",
+          "AI researcher"
+        ]
+      },
+      "augmentation detail": {
+        "default": "neural port at the temple",
+        "examples": [
+          "subdermal hand display",
+          "optical implant visible in iris",
+          "forearm data sleeve"
+        ]
+      },
+      "workspace type": {
+        "default": "curved multi-monitor desk",
+        "examples": [
+          "standing holographic terminal",
+          "minimalist single-screen station",
+          "cluttered mechanical keyboard rig"
+        ]
+      },
+      "screen type": {
+        "default": "holographic floating displays",
+        "examples": [
+          "multiple physical monitors",
+          "a single curved ultrawide",
+          "projected wall display"
+        ]
+      },
+      "working action": {
+        "default": "cross-referencing data streams",
+        "examples": [
+          "writing code",
+          "analysing surveillance feeds",
+          "communicating via neural link"
+        ]
+      },
+      "color palette": {
+        "default": "cyan and magenta",
+        "examples": [
+          "amber and red",
+          "blue and white",
+          "green and violet"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Higgsfield Cinema Studio for the locked room shot with city background animation. Add 'blade runner interior lighting, rain-soaked city night' for tone. Keep camera completely static.",
+    "source_id": 179
+  },
+  {
+    "id": 236,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Higgsfield",
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "image_prompt": "An extreme low-angle shot of a [city element] in a cyberpunk city at night — [lens] almost flat to the wet ground, the [city element] enormous overhead, neon signage in [language/style] reflected in every puddle in the foreground, steam from a grate in the mid-ground backlit into a colour column, the sky completely invisible above the density of the built environment, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera completely locked at ground level — the [city element] overhead static and enormous, steam column from the mid-ground grate drifting in a consistent direction, neon reflections in the puddles shifting fractionally as their source signs cycle through states, a [figure type] crossing the frame in the mid-distance at walking pace, passing through the steam column and out the other side, the camera never moving, the city indifferent.",
+    "sfx_prompt": "Street-level city ambience — the specific acoustic density of a space enclosed by tall buildings, sound bouncing between surfaces, neon signs humming at different electrical frequencies, steam grate exhaling with a rhythmic breath, the [figure type]'s footsteps on wet ground brief and receding, distant traffic and voices compressed into a single textural layer by the architecture above",
+    "variables": {
+      "city element": {
+        "default": "elevated rail track with passing train",
+        "examples": [
+          "corporate megastructure base",
+          "bridge underpass",
+          "stacked market levels"
+        ]
+      },
+      "language/style": {
+        "default": "Japanese kanji",
+        "examples": [
+          "Korean hangul",
+          "Arabic script",
+          "mixed multilingual"
+        ]
+      },
+      "figure type": {
+        "default": "hooded pedestrian",
+        "examples": [
+          "street vendor",
+          "augmented courier",
+          "corporate security"
+        ]
+      },
+      "lens": {
+        "default": "18mm",
+        "examples": [
+          "14mm",
+          "24mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "The extreme low angle is the shot — keep the camera at ground level, the architecture overhead is the subject. Higgsfield handles the locked ground-level frame with moving elements best.",
+    "source_id": 180
+  },
+  {
+    "id": 237,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Developer"
+    ],
+    "image_prompt": "A crowded [market or bazaar type] in a cyberpunk city interior — [lens] from a mezzanine level looking down, the market floor dense with [vendor type] stalls and moving bodies, neon [color palette] from competing signage creating overlapping pools of colour, smoke or [atmospheric element] at mid-height, the ceiling invisible above the light and atmosphere, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera locked on the mezzanine level — the market below continuing its activity, the density of movement creating a living texture at this distance, [atmospheric element] drifting at mid-height between camera and floor, individual [vendor type] calls and transactions invisible from this altitude but the aggregate movement readable as commerce, neon signage cycling through states and shifting the colour of the smoke, the scene continuing indefinitely without climax.",
+    "sfx_prompt": "The acoustic mass of a dense [market or bazaar type] from above — individual voices indistinguishable, the aggregate a continuous human texture, [vendor type] sounds compressed by distance into rhythm rather than content, neon electrical hum from multiple sources at slightly different frequencies creating an unintentional chord, [atmospheric element] moving with a barely audible breath, no music — the market is the music",
+    "variables": {
+      "market or bazaar type": {
+        "default": "underground night market",
+        "examples": [
+          "rooftop bazaar",
+          "flooded ground-floor souk",
+          "multi-level tech exchange"
+        ]
+      },
+      "vendor type": {
+        "default": "tech parts and implant dealers",
+        "examples": [
+          "street food stalls",
+          "data brokers",
+          "black market pharmacists"
+        ]
+      },
+      "atmospheric element": {
+        "default": "cooking smoke",
+        "examples": [
+          "vape clouds",
+          "incense smoke",
+          "dry ice from cooling units"
+        ]
+      },
+      "color palette": {
+        "default": "amber and red",
+        "examples": [
+          "cyan and white",
+          "green and yellow",
+          "pink and blue"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "The mezzanine overhead angle is essential — avoid street level for this shot. Sora handles crowd density well. Add 'overhead mezzanine view, looking down at market, cyberpunk night market'.",
+    "source_id": 181
+  },
+  {
+    "id": 238,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Higgsfield",
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "image_prompt": "A [vehicle type] moving through a narrow rain-soaked cyberpunk tunnel or underpass, [lens] from just ahead of the vehicle looking back — the vehicle's [light type] headlights illuminating the wet tunnel walls and ceiling, neon graffiti in [color palette] covering every surface, the tunnel perspective receding behind the vehicle, [atmospheric element] in the air, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera floating just ahead of the [vehicle type], maintaining constant distance — the vehicle moving through the narrow tunnel at low speed, [light type] headlights painting the neon graffiti walls as the tunnel curves, [atmospheric element] parting around the vehicle and closing behind it, the tunnel's own drainage water audible on the floor, the perspective of the receding tunnel entrance shrinking in the frame behind the vehicle, no other traffic.",
+    "sfx_prompt": "Engine note in a confined tunnel — the specific resonance of enclosed space multiplying the [vehicle type] exhaust into something larger, [light type] electrical hum if applicable, tunnel drainage water, the wet tyre sound on the tunnel floor, [atmospheric element] parting with a soft breath, neon graffiti silent but the electrical infrastructure of the tunnel humming beneath everything",
+    "variables": {
+      "vehicle type": {
+        "default": "low-slung electric street car",
+        "examples": [
+          "modified delivery bike",
+          "autonomous pod",
+          "retrofitted vintage car"
+        ]
+      },
+      "light type": {
+        "default": "neon strip underlighting",
+        "examples": [
+          "harsh xenon beams",
+          "soft blue LED",
+          "flickering halogen"
+        ]
+      },
+      "color palette": {
+        "default": "cyan and yellow",
+        "examples": [
+          "red and white",
+          "purple and orange",
+          "green and pink"
+        ]
+      },
+      "atmospheric element": {
+        "default": "steam from tunnel drainage",
+        "examples": [
+          "tyre smoke",
+          "vape cloud",
+          "diesel exhaust"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "14mm"
+        ]
+      }
+    },
+    "tool_notes": "The camera preceding the vehicle is the key framing — avoid following from behind. Higgsfield Cinema Studio handles tunnel tracking shots. Add 'tracking shot from ahead, vehicle moving toward camera'.",
+    "source_id": 182
+  },
+  {
+    "id": 239,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Higgsfield"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Developer"
+    ],
+    "image_prompt": "A [character type] standing in a holographic advertising corridor — [lens] mid-distance, the character surrounded on all sides by full-height holographic [ad content] projections, their face and clothing receiving the coloured light of each passing ad, the actual architecture of the corridor invisible behind the projection layer, [time] implied by the emptiness of the space around them, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera locked at mid-distance as the [character type] stands still — holographic [ad content] cycling through states around them, each transition casting new [color palette] light across their face and body, the ads playing out their sequences indifferent to the human presence, the [character type]'s expression unchanging, the corridor cycling through its playlist without acknowledgment, the accumulation of commercial light becoming something close to beautiful.",
+    "sfx_prompt": "Holographic ads in an empty corridor — each ad transition accompanied by a brief clean audio sting from its own source, the overlap of multiple ad audio playing simultaneously creating an accidental collage, the underlying electrical hum of the projection infrastructure, the [character type]'s breathing in a space that is acoustically complex despite being architecturally simple, no score",
+    "variables": {
+      "character type": {
+        "default": "lone commuter",
+        "examples": [
+          "off-duty security",
+          "street kid",
+          "corporate worker"
+        ]
+      },
+      "ad content": {
+        "default": "consumer augmentation products",
+        "examples": [
+          "pharmaceutical brands",
+          "luxury goods",
+          "political messaging"
+        ]
+      },
+      "color palette": {
+        "default": "shifting — each ad its own palette",
+        "examples": [
+          "cold blue and white corporate",
+          "warm amber consumer",
+          "aggressive red political"
+        ]
+      },
+      "time": {
+        "default": "late night — empty corridor",
+        "examples": [
+          "early morning commute hours",
+          "midday — sparse",
+          "rush hour — crowded periphery"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "24mm"
+        ]
+      }
+    },
+    "tool_notes": "The character's stillness against the cycling ads is the core tension. Sora handles holographic overlays well. Add 'holographic advertisements cycling, character standing still, commercial light on face'.",
+    "source_id": 183
+  },
+  {
+    "id": 240,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Higgsfield",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "image_prompt": "Rooftop level of a cyberpunk megacity at night — [lens] wide, looking across a roofscape of exhaust vents, satellite dishes and [rooftop detail], the city extending to every horizon at multiple levels of altitude, [weather condition] visible at this height, neon glow rising from the street canyons below and lighting the underside of the cloud layer above in [color palette], a [figure type] in the foreground with their back to camera, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera locked wide on the rooftop — [weather condition] moving through the frame from a consistent direction, the city below breathing with its aggregated light and movement visible as a shifting glow in the street canyons, [rooftop detail] moving in the [weather condition], the [figure type] in the foreground still, looking out — the camera never closing the distance, the city continuing its scale beyond the frame in every direction, the figure small against it.",
+    "sfx_prompt": "Rooftop at altitude — wind at a consistent pressure, [weather condition] sound, the city below audible as a low aggregate hum rising from the canyons, individual sounds absorbed by distance and leaving only the fundamental tone of millions of simultaneous events, [rooftop detail] moving in the wind, the [figure type] present but silent, the acoustic scale of the city below felt as much as heard",
+    "variables": {
+      "rooftop detail": {
+        "default": "water towers and antenna arrays",
+        "examples": [
+          "solar collector panels",
+          "urban farming rigs",
+          "cooling towers"
+        ]
+      },
+      "weather condition": {
+        "default": "light rain",
+        "examples": [
+          "heavy fog",
+          "wind-driven mist",
+          "dry cold wind"
+        ]
+      },
+      "figure type": {
+        "default": "hooded figure",
+        "examples": [
+          "maintenance worker",
+          "corporate executive",
+          "refugee"
+        ]
+      },
+      "color palette": {
+        "default": "amber and deep red",
+        "examples": [
+          "cyan and white",
+          "blue and violet",
+          "green and yellow"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "The figure with back to camera looking at the city is the essential framing — never show the face. Higgsfield handles the wide locked rooftop shot with moving weather. Add 'rooftop megacity night, figure looking out, back to camera'.",
+    "source_id": 184
+  },
+  {
+    "id": 241,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Sora",
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Developer"
+    ],
+    "image_prompt": "A [body part] with visible [augmentation type] in extreme close-up — [lens] macro, the augmentation's surface detail filling the frame, [color palette] light catching the mechanical or electronic components, the biological and synthetic materials meeting at a clearly visible seam, [ambient light] providing the fill, cinematic cyberpunk macro still frame, 16:9",
+    "video_prompt": "Camera locked at macro distance — the [augmentation type] on the [body part] activating over the duration of the shot, the [color palette] indicator lights or displays cycling through a sequence, the mechanical components making micro-adjustments visible at this scale, the biological tissue responding fractionally to the augmentation's activity, the seam between organic and synthetic the centre of the frame throughout, no wider context shown.",
+    "sfx_prompt": "The sound of [augmentation type] at the scale of skin — micro-servo movements as physical clicks felt in the body before heard in the room, [color palette] indicator changes accompanied by brief pure electronic tones, biological response as a barely audible pulse, the seam between organic and synthetic having its own acoustic quality — a slight tension in the silence between mechanical events, no score",
+    "variables": {
+      "body part": {
+        "default": "forearm and hand",
+        "examples": [
+          "neck and collar",
+          "eye socket and cheek",
+          "shoulder and upper arm"
+        ]
+      },
+      "augmentation type": {
+        "default": "subdermal data interface with exposed port",
+        "examples": [
+          "mechanical finger joints",
+          "optical implant with visible iris modification",
+          "neural spine connector"
+        ]
+      },
+      "color palette": {
+        "default": "cold blue",
+        "examples": [
+          "amber",
+          "green",
+          "red"
+        ]
+      },
+      "ambient light": {
+        "default": "single overhead clinical light",
+        "examples": [
+          "neon sign light from the side",
+          "screen light from below",
+          "natural window light"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "135mm",
+          "50mm macro"
+        ]
+      }
+    },
+    "tool_notes": "The extreme close-up on the augmentation seam is the shot — avoid showing the full body. Sora and Kling handle macro biological-synthetic detail well. Add 'extreme macro, cyberpunk augmentation, biological and synthetic materials'.",
+    "source_id": 185
+  },
+  {
+    "id": 242,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Higgsfield",
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "image_prompt": "A [transport type] station in a cyberpunk city — [lens] wide from platform level, the station architecture enormous overhead, [transport type] visible arriving or departing in the mid-distance, commuters in [crowd density] on the platform, neon advertising and directional signage in [language/style] on every surface, [atmospheric element] at platform height, cinematic cyberpunk still frame, 16:9",
+    "video_prompt": "Camera locked at platform level — the [transport type] arriving or departing in the mid-distance, its movement displacing [atmospheric element] on the platform, commuters adjusting to the [transport type]'s arrival — stepping back, moving forward — with the choreographed normalcy of daily transit, neon signage cycling through states overhead, the station's enormous scale making the human figures small, the whole scene running on its own timetable with no acknowledgment of the camera.",
+    "sfx_prompt": "Transit station ambience — the specific acoustic signature of [transport type] arriving, platform announcement system in [language/style] at mid-volume, commuter movement as a collective shuffle rather than individual footsteps, [atmospheric element] parting with the [transport type]'s displacement, the station's ventilation system as a continuous background breath, the neon signage contributing to the electrical texture of the sound environment",
+    "variables": {
+      "transport type": {
+        "default": "magnetic levitation train",
+        "examples": [
+          "aerial cable pod",
+          "underground pneumatic shuttle",
+          "elevated monorail"
+        ]
+      },
+      "crowd density": {
+        "default": "moderate — space between bodies",
+        "examples": [
+          "rush hour — packed",
+          "late night — sparse",
+          "mid-morning — light"
+        ]
+      },
+      "language/style": {
+        "default": "Japanese and English bilingual",
+        "examples": [
+          "Mandarin dominant",
+          "Arabic and French",
+          "Korean and Spanish"
+        ]
+      },
+      "atmospheric element": {
+        "default": "platform steam vents",
+        "examples": [
+          "dust from the tunnel",
+          "cigarette smoke",
+          "dry ice from cooling systems"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "The scale of the station architecture overhead is essential — keep the camera low at platform level so the ceiling is vast. Higgsfield Cinema Studio handles the locked platform shot. Add 'wide platform level, enormous station architecture, cyberpunk transit hub'.",
+    "source_id": 186
+  },
+  {
+    "id": 243,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Developer"
+    ],
+    "image_prompt": "A [vessel or habitat type] interior at [operational moment] — [lens] from a corner of the space looking across the full width, [crew type] at their stations, [light quality] from instrument panels and [external view] providing the only illumination, the architecture of the interior communicating its function without labels, cinematic sci-fi still frame, 16:9",
+    "video_prompt": "Camera locked in the corner of the [vessel or habitat type] interior — [crew type] performing their [operational moment] activity with the quiet efficiency of people who have done this before, [external view] visible through viewports and shifting with the vessel's movement, instrument panel light pulsing with data activity, no dramatic event — only the sustained competence of a crew doing their work, the scale of what surrounds them outside implied by their focus within.",
+    "sfx_prompt": "The interior acoustic signature of [vessel or habitat type] — pressurised air circulation as a continuous low breath, instrument panel tones at low volume, [crew type] communications clipped and procedural, structural sounds as the vessel responds to [operational moment], the [external view] outside completely silent as space always is, the contrast between the sound-rich interior and the silent exterior present in every frame",
+    "variables": {
+      "vessel or habitat type": {
+        "default": "deep space research vessel bridge",
+        "examples": [
+          "orbital station operations centre",
+          "submarine command deck",
+          "planetary lander cockpit"
+        ]
+      },
+      "crew type": {
+        "default": "four-person science crew",
+        "examples": [
+          "two-person pilot team",
+          "single operator",
+          "mixed civilian and military crew"
+        ]
+      },
+      "operational moment": {
+        "default": "approach to an unknown object",
+        "examples": [
+          "system failure response",
+          "long-duration transit — routine watch",
+          "first contact protocol"
+        ]
+      },
+      "light quality": {
+        "default": "red alert low-light",
+        "examples": [
+          "standard white operational",
+          "emergency amber",
+          "dim night-watch blue"
+        ]
+      },
+      "external view": {
+        "default": "a vast unknown structure filling the viewport",
+        "examples": [
+          "open deep space",
+          "a planet surface approaching",
+          "another vessel alongside"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "The restraint of the locked camera and quiet crew activity is the point — avoid action sequences. Sora handles complex interior environments. Add 'quiet sci-fi interior, crew at work, no dramatic action, cinematic'.",
+    "source_id": 187
+  },
+  {
+    "id": 244,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "image_prompt": "A [single figure type] alone in a [vast sci-fi environment] — [lens] wide, the figure in the lower third of frame at a scale that makes them a detail rather than a subject, the [vast sci-fi environment] filling the rest of the frame in complete indifference to their presence, [light quality] establishing the environment's scale by the length of the shadows it casts, cinematic sci-fi still frame, 16:9",
+    "video_prompt": "Camera executing an extremely slow zoom-out — the [single figure type] already small at the opening of the shot, becoming smaller as the full scale of the [vast sci-fi environment] is revealed, [light quality] raking across the surfaces and casting shadows that communicate distance better than any measurement, the figure continuing whatever [activity] brought them here, the environment completely indifferent, the zoom completing and the frame holding.",
+    "sfx_prompt": "The acoustic scale of [vast sci-fi environment] — if interior, the resonance of an enormous enclosed space with a very long reverb tail, if exterior, the specific silence of a world with different atmospheric pressure or no atmosphere at all, the [single figure type]'s [activity] audible only as a small sound in a very large space, the contrast between the intimacy of the human sound and the scale of its acoustic container doing the emotional work",
+    "variables": {
+      "single figure type": {
+        "default": "maintenance worker in work suit",
+        "examples": [
+          "scientist in field gear",
+          "child in everyday clothes",
+          "elderly person"
+        ]
+      },
+      "vast sci-fi environment": {
+        "default": "the interior of a decommissioned generation ship",
+        "examples": [
+          "the floor of a Dyson sphere under construction",
+          "a terraformed canyon plain",
+          "an orbital ring interior"
+        ]
+      },
+      "light quality": {
+        "default": "a single distant artificial sun",
+        "examples": [
+          "diffuse overhead panels",
+          "natural light through a vast aperture",
+          "bioluminescent floor"
+        ]
+      },
+      "activity": {
+        "default": "walking toward something far away",
+        "examples": [
+          "sitting and looking upward",
+          "working on a small task",
+          "standing still"
+        ]
+      },
+      "lens": {
+        "default": "18mm",
+        "examples": [
+          "14mm",
+          "24mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "The human figure must remain small — resist the urge to go tighter. The scale contrast is the entire film. Sora handles vast environments with human figures best. Add 'single small human figure, vast sci-fi scale, wide establishing shot, cinematic'.",
+    "source_id": 188
+  },
+  {
+    "id": 245,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Developer"
+    ],
+    "image_prompt": "First light on a [newly discovered or terraformed environment] — [lens] wide from a low position, [geological or atmospheric feature] extending to the horizon, a [human or robotic presence] in the foreground with their back to camera looking out, the light quality of a sun at a [star type] colour temperature raking low across the surface, no Earth vegetation, no familiar ecology, cinematic sci-fi still frame, 16:9",
+    "video_prompt": "Camera locked at low position — the [human or robotic presence] standing still, the [geological or atmospheric feature] extending to the horizon unchanging, the [star type] sun moving fractionally across the sky over the duration casting slowly shifting shadows across the [geological or atmospheric feature] surface, the [human or robotic presence] making one small movement — a turn of the head, a hand raised — then returning to stillness, the planet continuing regardless.",
+    "sfx_prompt": "A world with [atmospheric condition] — if with atmosphere, wind with a different acoustic character than Earth, moving through [geological or atmospheric feature] with unfamiliar textures, the [human or robotic presence] breathing inside [suit or enclosure], structural sounds of whatever brought them here distant and fading, the [star type] sun silent as all stars are, a world that has never been heard by a human ear before this moment",
+    "variables": {
+      "newly discovered or terraformed environment": {
+        "default": "partially terraformed Mars highland",
+        "examples": [
+          "moon of a gas giant",
+          "tidally locked exoplanet",
+          "asteroid colony surface"
+        ]
+      },
+      "geological or atmospheric feature": {
+        "default": "rust-coloured rock plain with distant mesa formations",
+        "examples": [
+          "ammonia ice field under methane clouds",
+          "black obsidian plain",
+          "crystalline mineral forest"
+        ]
+      },
+      "human or robotic presence": {
+        "default": "single suited explorer",
+        "examples": [
+          "two figures — one human one robotic",
+          "a rover at rest",
+          "a small research drone hovering"
+        ]
+      },
+      "star type": {
+        "default": "orange dwarf — warm amber light",
+        "examples": [
+          "red dwarf — deep red light",
+          "binary system — two shadows",
+          "blue-white — cold harsh light"
+        ]
+      },
+      "atmospheric condition": {
+        "default": "thin atmosphere — some wind",
+        "examples": [
+          "no atmosphere — complete silence outside the suit",
+          "dense atmosphere — muffled",
+          "breathable but alien — no suit needed"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "18mm",
+          "35mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "The alien light quality is essential — specify the star type colour temperature explicitly. Sora handles alien environments best. Add the specific [star type] colour temperature to both image and video prompts. Avoid Earth-like greens.",
+    "source_id": 189
+  },
+  {
+    "id": 246,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "image_prompt": "A [structure type] in deep space seen from a distance — [lens] long, the structure small in the centre of an enormous black field, [star field or nebula] providing the only context, [light source] illuminating one face of the structure and leaving the rest in absolute shadow, the scale of the structure illegible from this distance — it could be the size of a building or a continent, cinematic sci-fi still frame, 16:9",
+    "video_prompt": "Camera executing an extremely slow push-in from maximum distance — the [structure type] growing over the full duration from a point of light to a discernible shape, the [star field or nebula] remaining static as the camera advances giving no sense of speed, [light source] revealing more surface detail as the camera closes, the scale becoming clearer but not resolved — the structure still enormous and incomprehensible at the end of the shot as at the beginning, the approach continuing beyond the frame.",
+    "sfx_prompt": "Deep space — absolute silence except for the interior of whatever vessel the camera represents, a low structural hum of propulsion or station-keeping thrusters at their minimum output, the [structure type] emitting no sound at this distance or at any distance — space is silent, the emotional weight carried entirely by the sub-bass resonance of the score's absence, a single pure tone held at the threshold of hearing for the duration",
+    "variables": {
+      "structure type": {
+        "default": "derelict alien megastructure",
+        "examples": [
+          "human-built deep space station",
+          "unidentified geometric object",
+          "ancient orbital ring fragment"
+        ]
+      },
+      "star field or nebula": {
+        "default": "dense star field — Milky Way core",
+        "examples": [
+          "emission nebula in red and gold",
+          "dark nebula — near-black background",
+          "globular cluster"
+        ]
+      },
+      "light source": {
+        "default": "a nearby star off-frame left",
+        "examples": [
+          "internal illumination from within the structure",
+          "a pulsar in the background",
+          "the vessel's own searchlight"
+        ]
+      },
+      "lens": {
+        "default": "200mm",
+        "examples": [
+          "135mm",
+          "300mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "The illegibility of scale is the point — never resolve how big it is. Sora handles deep space environments best. Add 'deep space, slow approach, scale unknown, cinematic sci-fi'. The long lens compressing the star field is essential.",
+    "source_id": 190
   }
 ]
