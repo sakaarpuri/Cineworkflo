@@ -320,7 +320,7 @@ function Stickman() {
   );
 }
 
-function Camera({ glow = "rgba(109,40,217,0.6)" }) {
+function Camera() {
   return (
     <svg
       width="46"
@@ -328,7 +328,7 @@ function Camera({ glow = "rgba(109,40,217,0.6)" }) {
       viewBox="0 0 46 32"
       fill="none"
       aria-hidden="true"
-      style={{ filter: `drop-shadow(0 0 10px ${glow})` }}
+      style={{ filter: `var(--cwf-icon-glow-filter)` }}
     >
       <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#A78BFA" strokeWidth="0.85" />
       <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#A78BFA" strokeWidth="0.6" />
@@ -347,6 +347,7 @@ const css = `
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   background:#F0EEE9;
   padding:60px 24px 80px;
+  --cwf-cm-hint-shadow: 0 0 0 5px #6D28D925, 0 4px 18px #6D28D955;
 }
 .cm-header{ text-align:center; margin-bottom:52px; }
 .cm-eyebrow{
@@ -424,7 +425,7 @@ const css = `
   font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   letter-spacing:0.09em;
   padding:9px 20px; border-radius:999px;
-  box-shadow:0 0 0 5px #6D28D925, 0 4px 18px #6D28D955;
+  box-shadow: var(--cwf-cm-hint-shadow);
 }
 .cm-playTri{ width:0;height:0;border-style:solid;border-width:5px 0 5px 9px;border-color:transparent transparent transparent #fff; }
 
@@ -489,7 +490,7 @@ const css = `
 /* 2) Drone */
 .cm-droneSubject{ right:40px; bottom:48px; transform-origin: bottom center; }
 .cm-droneShadow{ right:30px; bottom:45px; width:76px; height:9px; transform-origin:center center; }
-.cm-droneRig{ position:absolute; left:68px; bottom:92px; z-index:4; transform-origin:center center; filter: drop-shadow(0 0 9px rgba(109,40,217,0.55)); }
+.cm-droneRig{ position:absolute; left:68px; bottom:92px; z-index:4; transform-origin:center center; filter: var(--cwf-icon-glow-filter); }
 .cm-stage:hover .cm-droneRig{ animation: cm-droneRig 3.4s ease-in-out 0s 2 both; }
 .cm-stage:hover .cm-droneSubject{ animation: cm-droneSub 3.4s ease-in-out 0s 2 both; }
 .cm-stage:hover .cm-droneShadow{ animation: cm-droneSub 3.4s ease-in-out 0s 2 both; }
@@ -583,7 +584,16 @@ const css = `
   background: linear-gradient(180deg, rgba(167,139,250,0.35), rgba(109,40,217,0.16));
   border:1px solid rgba(167,139,250,0.35);
   z-index:4;
-  box-shadow:0 0 0 6px rgba(109,40,217,0.10);
+  box-shadow:0 10px 24px rgba(109,40,217,0.10);
+}
+
+/* Dark mode: remove neon glow treatments */
+[data-theme="dark"] .cm-root{
+  --cwf-cm-hint-shadow: 6px 6px 12px rgba(0,0,0,0.55), -6px -6px 12px rgba(255,255,255,0.03);
+}
+
+[data-theme="dark"] .cm-stick{
+  filter:none;
 }
 .cm-pushCut{
   position:absolute; left:160px; bottom:70px; width:38px; height:106px;

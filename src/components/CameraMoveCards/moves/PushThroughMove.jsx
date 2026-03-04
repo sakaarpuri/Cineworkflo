@@ -162,7 +162,7 @@ export function PushThroughMove({ isHovered }) {
           border: '1px solid rgba(167,139,250,0.35)',
           background: 'linear-gradient(180deg, rgba(167,139,250,0.35), rgba(109,40,217,0.16))',
           zIndex: 4,
-          boxShadow: '0 0 0 6px rgba(109,40,217,0.10)',
+          boxShadow: '0 10px 24px rgba(109,40,217,0.10)',
           backdropFilter: 'blur(1px)',
           opacity: 0.5,
           transition: 'opacity 0.08s linear'
@@ -205,8 +205,8 @@ export function PushThroughMove({ isHovered }) {
       </div>
 
       {/* Camera */}
-      <div ref={camRef} className="camera-move-card__camera" style={{ position: 'absolute', bottom: '52px', left: `${SX}px`, zIndex: 4 }}>
-        <svg width="46" height="32" viewBox="0 0 46 32" fill="none" aria-hidden="true" style={{ filter: 'drop-shadow(0 0 9px rgba(109,40,217,0.6))' }}>
+      <div ref={camRef} className="camera-move-card__camera camera-move-card__camera-glow" style={{ position: 'absolute', bottom: '52px', left: `${SX}px`, zIndex: 4 }}>
+        <svg width="46" height="32" viewBox="0 0 46 32" fill="none" aria-hidden="true">
           <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#A78BFA" strokeWidth="0.85" />
           <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#A78BFA" strokeWidth="0.6" />
           <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#A78BFA" strokeWidth="1.2" />

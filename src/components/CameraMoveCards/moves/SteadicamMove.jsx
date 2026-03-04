@@ -173,11 +173,7 @@ export function SteadicamMove({ isHovered }) {
         <line ref={edge2Ref} x1="0" y1="0" x2="0" y2="0" stroke="#FB7185" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="5 4" />
 
         {/* Camera (behind) */}
-        <g
-          ref={camGRef}
-          transform="translate(178,208)"
-          style={{ filter: 'drop-shadow(0 0 10px rgba(251,113,133,0.55)) drop-shadow(0 0 3px rgba(190,24,93,0.55))' }}
-        >
+        <g ref={camGRef} transform="translate(178,208)" className="camera-move-card__camera-glow">
           <rect x="-18" y="-13" width="36" height="26" rx="9" fill="#FDF2F8" stroke="#FB7185" strokeWidth="1" />
           <rect x="-14" y="-9" width="28" height="18" rx="3" fill="#2563EB" stroke="#1D4ED8" strokeWidth="0.9" />
           <rect x="14" y="-5" width="9" height="10" rx="2" fill="#1D4ED8" />
@@ -204,4 +200,3 @@ export function SteadicamMove({ isHovered }) {
     </div>
   );
 }
-

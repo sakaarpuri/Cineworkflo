@@ -192,7 +192,7 @@ export default function CameraMovesPreview() {
                   {move.name === 'Dolly' && (
                     <div className="dolly-icon" style={{ width: 50, height: 36, position: 'relative' }}>
                       <div style={{ width: 30, height: 20, background: 'rgba(255,255,255,0.9)', borderRadius: 3, position: 'absolute', top: 8, left: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 700, color: '#0f172a' }}>SUB</div>
-                      <div style={{ width: 10, height: 10, background: move.color, borderRadius: '50%', position: 'absolute', top: 13, left: 2, boxShadow: `0 0 8px ${move.color}` }} />
+                      <div style={{ width: 10, height: 10, background: move.color, borderRadius: '50%', position: 'absolute', top: 13, left: 2, boxShadow: '0 6px 16px rgba(0,0,0,0.22)' }} />
                     </div>
                   )}
                   {move.name === 'Pan' && (
@@ -236,13 +236,13 @@ export default function CameraMovesPreview() {
                   {move.name === 'Orbit' && (
                     <div style={{ width: 50, height: 50, position: 'relative' }}>
                       <div style={{ width: 18, height: 18, background: 'rgba(255,255,255,0.9)', borderRadius: '50%', position: 'absolute', top: 16, left: 16 }} />
-                      <div className="orbit-icon" style={{ width: 10, height: 10, background: move.color, borderRadius: '50%', position: 'absolute', top: 8, left: 20, boxShadow: `0 0 10px ${move.color}` }} />
+                      <div className="orbit-icon" style={{ width: 10, height: 10, background: move.color, borderRadius: '50%', position: 'absolute', top: 8, left: 20, boxShadow: '0 6px 16px rgba(0,0,0,0.22)' }} />
                     </div>
                   )}
                   {move.name === 'Drone' && (
                     <div style={{ width: 50, height: 50, position: 'relative', overflow: 'hidden' }}>
                       <div className="drone-icon" style={{ width: 28, height: 18, background: 'rgba(255,255,255,0.9)', borderRadius: 3, position: 'absolute', top: 28, left: 11 }} />
-                      <div style={{ position: 'absolute', top: 6, left: '50%', transform: 'translateX(-50%)', width: 10, height: 10, background: move.color, borderRadius: '50%', boxShadow: `0 0 10px ${move.color}` }} />
+                      <div style={{ position: 'absolute', top: 6, left: '50%', transform: 'translateX(-50%)', width: 10, height: 10, background: move.color, borderRadius: '50%', boxShadow: '0 6px 16px rgba(0,0,0,0.22)' }} />
                     </div>
                   )}
                 </div>

@@ -43,6 +43,9 @@
     --accent-red: #DC2626;
     --accent-pink: #BE185D;
 
+    /* Soft glows (used sparingly). In dark mode we disable these for a premium, non-neon look. */
+    --cwf-icon-glow-filter: drop-shadow(0 0 9px rgba(37,99,235,0.55));
+
     /* Pro pricing card theme (light) */
     --pro-card-bg: linear-gradient(145deg, #3B82F6, #2563EB);
     --pro-card-border: rgba(255,255,255,0.20);
@@ -74,6 +77,9 @@
     --accent-green: #10B981;
     --accent-red: #EF4444;
     --accent-pink: #EC4899;
+
+    /* Disable neon-like glows in dark mode. */
+    --cwf-icon-glow-filter: none;
 
     /* Pro pricing card theme (dark): screening-room premium */
     --pro-card-bg: linear-gradient(145deg, #0A0B14, #0D1022);

@@ -40,9 +40,9 @@ function TopDownPerson({ width = 80, height = 52 }) {
   );
 }
 
-function CameraIcon({ recRef, glow = "rgba(37,99,235,0.55)" }) {
+function CameraIcon({ recRef }) {
   return (
-    <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style={{ filter: `drop-shadow(0 0 9px ${glow})` }}>
+    <svg width="46" height="32" viewBox="0 0 46 32" fill="none" style={{ filter: `var(--cwf-icon-glow-filter)` }}>
       <rect x="0" y="6" width="32" height="22" rx="4" fill="#1E40AF" stroke="#93C5FD" strokeWidth="0.75" />
       <rect x="32" y="11" width="12" height="12" rx="2.5" fill="#1D4ED8" stroke="#93C5FD" strokeWidth="0.5" />
       <circle cx="16" cy="17" r="7.5" fill="#0C1445" stroke="#93C5FD" strokeWidth="1.2" />
@@ -71,7 +71,7 @@ function CameraCard({ badge, badgeTint, name, tag, view, stageRef, hintRef, labe
       <div ref={stageRef} style={{ margin: "12px 22px", background: "#080F18", borderRadius: 16, height: 220, position: "relative", overflow: "hidden", border: "1.5px solid #1a2535", cursor: "pointer", userSelect: "none", transition: "border-color 0.3s ease, box-shadow 0.3s ease" }}>
         <span style={{ position: "absolute", top: 11, right: 14, fontSize: 9, fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace", color: "#4B6A8A", letterSpacing: "0.1em", zIndex: 2 }}>{view}</span>
         <div ref={hintRef} style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 6, pointerEvents: "none", transition: "opacity 0.35s ease", background: "rgba(8,15,24,0.38)", borderRadius: 15, opacity: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 9, background: badgeTint?.fg ?? "#2563EB", color: "#fff", fontSize: 11, fontWeight: 800, fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace", letterSpacing: "0.09em", padding: "9px 20px", borderRadius: 999, boxShadow: `0 0 0 5px ${badgeTint?.shadow ?? "#2563EB25"}, 0 4px 18px ${badgeTint?.glow ?? "#2563EB60"}` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 9, background: badgeTint?.fg ?? "#2563EB", color: "#fff", fontSize: 11, fontWeight: 800, fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace", letterSpacing: "0.09em", padding: "9px 20px", borderRadius: 999, boxShadow: "6px 6px 12px rgba(0,0,0,0.25), -6px -6px 12px rgba(255,255,255,0.10)" }}>
             <div style={{ width: 0, height: 0, borderStyle: "solid", borderWidth: "5px 0 5px 9px", borderColor: "transparent transparent transparent #fff" }} />HOVER TO PLAY
           </div>
         </div>

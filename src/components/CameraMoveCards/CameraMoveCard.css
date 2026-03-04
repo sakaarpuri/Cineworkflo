@@ -242,7 +242,7 @@
 }
 
 .camera-move-card__camera-glow {
-  filter: drop-shadow(0 0 7px #2563EB88);
+  filter: var(--cwf-icon-glow-filter);
 }
 
 .camera-move-card__rec-dot {
@@ -384,4 +384,24 @@
 
 [data-theme="dark"] .camera-move-card__prompt-var {
   color: #F59E0B;
+}
+
+/* Dark mode: reduce neon/glow accents while keeping depth. */
+[data-theme="dark"] .camera-move-card__stage--idle,
+[data-theme="dark"] .camera-move-card__stage--classic,
+[data-theme="dark"] .camera-move-card__stage--dynamic,
+[data-theme="dark"] .camera-move-card__stage--ainative {
+  box-shadow: none;
+}
+
+[data-theme="dark"] .camera-move-card__hint-pill {
+  box-shadow: 6px 6px 12px rgba(0,0,0,0.55), -6px -6px 12px rgba(255,255,255,0.03);
+}
+
+[data-theme="dark"] .camera-move-card__stickman-wrap {
+  filter: none;
+}
+
+[data-theme="dark"] .camera-move-card__camera-glow {
+  filter: none;
 }

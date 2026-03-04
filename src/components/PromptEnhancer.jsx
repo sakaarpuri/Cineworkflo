@@ -339,6 +339,26 @@ export default function PromptEnhancer({ onAuthClick }) {
   
   const { user, session, isPro } = useAuth();
 
+  const [themeMode, setThemeMode] = useState(() => {
+    try {
+      return document.documentElement.getAttribute('data-theme') || 'light'
+    } catch {
+      return 'light'
+    }
+  })
+
+  useEffect(() => {
+    const el = document.documentElement
+    if (!el) return
+    const observer = new MutationObserver(() => {
+      setThemeMode(el.getAttribute('data-theme') || 'light')
+    })
+    observer.observe(el, { attributes: true, attributeFilter: ['data-theme'] })
+    return () => observer.disconnect()
+  }, [])
+
+  const isDarkTheme = themeMode === 'dark'
+
   // Load usage on mount
   useEffect(() => {
     const data = getUsageData();
@@ -687,7 +707,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   className="text-xs font-semibold transition-all"
                   style={{
                     color: skillLevel === 'beginner' ? '#3B82F6' : 'var(--text-muted)',
-                    textShadow: levelPulse === 'beginner' ? '0 0 10px rgba(59,130,246,0.65)' : 'none'
+                    textShadow: !isDarkTheme && levelPulse === 'beginner' ? '0 0 10px rgba(59,130,246,0.65)' : 'none'
                   }}
                 >
                   Beginner
@@ -705,8 +725,8 @@ export default function PromptEnhancer({ onAuthClick }) {
                       : 'linear-gradient(145deg, #60A5FA, #2563EB)',
                     border: `2px solid ${skillLevel === 'pro' ? '#A855F750' : '#60A5FA50'}`,
                     boxShadow: skillLevel === 'pro'
-                      ? `inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(124,58,237,0.35)${levelPulse === 'pro' ? ', 0 0 16px rgba(168,85,247,0.55)' : ''}`
-                      : `inset 3px 3px 6px rgba(37,99,235,0.5), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(37,99,235,0.35)${levelPulse === 'beginner' ? ', 0 0 16px rgba(96,165,250,0.55)' : ''}`
+                      ? `inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(124,58,237,0.35)${!isDarkTheme && levelPulse === 'pro' ? ', 0 0 16px rgba(168,85,247,0.55)' : ''}`
+                      : `inset 3px 3px 6px rgba(37,99,235,0.5), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(37,99,235,0.35)${!isDarkTheme && levelPulse === 'beginner' ? ', 0 0 16px rgba(96,165,250,0.55)' : ''}`
                   }}
                   onMouseDown={(e) => {
                     e.currentTarget.style.transform = 'translateY(2px) scale(0.97)'
@@ -731,7 +751,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   className="text-xs font-semibold transition-all"
                   style={{
                     color: skillLevel === 'pro' ? '#7C3AED' : 'var(--text-muted)',
-                    textShadow: levelPulse === 'pro' ? '0 0 10px rgba(124,58,237,0.65)' : 'none'
+                    textShadow: !isDarkTheme && levelPulse === 'pro' ? '0 0 10px rgba(124,58,237,0.65)' : 'none'
                   }}
                 >
                   Pro
