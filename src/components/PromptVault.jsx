@@ -158,6 +158,9 @@ export default function PromptVault({ preview = false }) {
                   ? 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.'
                   : 'Browse 25 free prompts by mood, genre, or use case. Upgrade for the full vault.')}
           </p>
+          <p className="mt-3 text-sm max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+            Designed for image-to-video. Lock the look with an image, then drive the shot with the video prompt.
+          </p>
           {!preview && (
             <div className="mt-4">
               <Link

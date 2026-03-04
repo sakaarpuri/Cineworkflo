@@ -829,7 +829,7 @@ export default function VaultPage() {
               a vault of prompts.....
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: 13, marginTop: 6 }}>
-              Pro prompts start with image generation — the foundation for strong video generations.
+              Designed for image-to-video. Lock the look with an image, then drive the shot with the video prompt.
             </div>
             {!isPro && (
               <div style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 6 }}>
