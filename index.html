@@ -10,8 +10,18 @@
     <script>
       (() => {
         try {
+          const MIGRATION_KEY = 'cwf_theme_migrated_v1'
           const saved = localStorage.getItem('theme')
-          const theme = saved === 'light' || saved === 'dark' ? saved : 'dark'
+
+          // CineWorkflo v2 default is dark. If someone previously saved "light",
+          // migrate them once to dark (they can switch back any time).
+          if (!localStorage.getItem(MIGRATION_KEY)) {
+            if (saved === 'light') localStorage.setItem('theme', 'dark')
+            localStorage.setItem(MIGRATION_KEY, '1')
+          }
+
+          const savedAfter = localStorage.getItem('theme')
+          const theme = savedAfter === 'light' || savedAfter === 'dark' ? savedAfter : 'dark'
           document.documentElement.setAttribute('data-theme', theme)
         } catch (_) {}
       })()
