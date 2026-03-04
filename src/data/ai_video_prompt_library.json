@@ -13295,5 +13295,1853 @@
     },
     "tool_notes": "Luma handles agricultural landscape photorealism. Kling maintains harvest motion and produce colour through the camera move. Add 'photorealistic seasonal harvest agricultural landscape golden hour' for correct approach.",
     "source_id": 150
+  },
+  {
+    "id": 201,
+    "category": "Food & Cooking",
+    "style": "Cinematic",
+    "best_on": [
+      "Kling",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [liquid or sauce] being poured in extreme slow motion, [lens] locked at the point of impact — [liquid color] [liquid or sauce] folding into [vessel or surface], [ice or element] visible, [light source] from behind making the liquid translucent, [background] in soft focus, cinematic macro food still, 16:9",
+    "video_prompt": "The pour continues frame by frame — the [liquid or sauce] folding and crashing in slow motion waves, air bubbles rising and bursting at the surface, the impact point sending ripples outward across [vessel or surface], the [light source] finding every droplet as it moves, the motion so slow the liquid appears almost geological — the whole shot the time it takes to pour a single second of liquid.",
+    "sfx_prompt": "The pour sound pitch-shifted and slowed to match the slow motion — a deep resonant cascade, individual droplets audible as distinct impacts, ice or [element] sounds slowed to low metallic tones, then the sound returns to real speed at the shot's end with the abruptness of normal time resuming",
+    "variables": {
+      "liquid or sauce": {
+        "default": "dark chocolate ganache",
+        "examples": [
+          "aged whiskey",
+          "red wine",
+          "golden honey",
+          "cream"
+        ]
+      },
+      "liquid color": {
+        "default": "deep brown",
+        "examples": [
+          "amber",
+          "deep ruby",
+          "pale gold",
+          "pure white"
+        ]
+      },
+      "vessel or surface": {
+        "default": "a white ceramic bowl",
+        "examples": [
+          "a dark stone surface",
+          "a glass tumbler with ice",
+          "a cut cake cross-section"
+        ]
+      },
+      "ice or element": {
+        "default": "no ice",
+        "examples": [
+          "large format ice cube",
+          "crushed ice",
+          "a single sphere of ice"
+        ]
+      },
+      "light source": {
+        "default": "backlit single source making liquid glow",
+        "examples": [
+          "side light revealing texture",
+          "overhead soft box",
+          "warm candle adjacent"
+        ]
+      },
+      "background": {
+        "default": "dark matte surface",
+        "examples": [
+          "marble",
+          "natural wood",
+          "linen"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles liquid dynamics exceptionally well. Add 'extreme slow motion liquid pour cinematic' on Runway. Luma maintains light-through-liquid translucency.",
+    "source_id": 70
+  },
+  {
+    "id": 202,
+    "category": "Real Estate & Architecture",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [property type] in an impossible location — [specific impossibility] visible clearly, the building itself entirely normal in its design, [lens] wide to show the full relationship between the building and its [impossible context], [one normal detail] — a light on, a garden chair, a welcome mat — grounding the impossible in the domestic, cinematic still frame, 16:9",
+    "video_prompt": "The camera executes a slow orbit around the [property type] — the [impossible context] moving through frame as the camera circles, always present, always ignored by the building which sits in its [impossible location] with complete domestic indifference, [one normal detail] visible from multiple angles during the orbit, the camera completing the orbit and finding the building unchanged and unchanging in its impossible situation.",
+    "sfx_prompt": "The normal sounds of a [property type] — a door, wind chimes, birdsong — transposed into the [impossible context], the domestic sounds sitting over whatever the [impossible context] should sound like, the combination both absurd and, after a moment, completely natural",
+    "variables": {
+      "property type": {
+        "default": "semi-detached suburban house",
+        "examples": [
+          "terraced townhouse",
+          "country cottage",
+          "modern apartment"
+        ]
+      },
+      "specific impossibility": {
+        "default": "floating in the middle of the ocean with no land visible in any direction",
+        "examples": [
+          "perched on a single impossibly thin rock spire above the clouds",
+          "sitting on the surface of the moon with Earth overhead",
+          "embedded halfway into the face of a glacier"
+        ]
+      },
+      "impossible context": {
+        "default": "the open ocean in all directions",
+        "examples": [
+          "the lunar surface with Earth in the sky",
+          "the sheer face of a cliff above the clouds",
+          "inside a glacier with ice visible through the windows from outside"
+        ]
+      },
+      "one normal detail": {
+        "default": "a welcome mat at the front door",
+        "examples": [
+          "a window box with flowers",
+          "a recycling bin at the side",
+          "a 'For Sale' sign in the garden"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible building placement in surreal environments. Luma maintains building detail through the orbit. Add 'surrealist domestic architecture impossible location' for best results.",
+    "source_id": 100
+  },
+  {
+    "id": 203,
+    "category": "Social & Short-Form Content",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Kling"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [object type] that [impossible response to stimulus] — [lens] locked on the [object type] at close-mid distance, the [stimulus] applied by [hand or agent] visible entering frame, [background] simple and undistracting, the [impossible response] beginning at the frame edge, vertical composition, 9:16",
+    "video_prompt": "The [stimulus] is applied — the [object type] responds with [impossible response to stimulus] in slow, deliberate, physically specific detail, the camera holding still as the response unfolds completely, the [hand or agent] withdrawing from frame as the [impossible response] completes and the [object type] returns to stillness changed.",
+    "sfx_prompt": "The sound of [stimulus] — then the sound of [impossible response to stimulus] rendered as if it were a real physical event, specific material sounds for what should be impossible, silence after the response completes and the [object type] settles",
+    "variables": {
+      "object type": {
+        "default": "houseplant",
+        "examples": [
+          "ceramic bowl",
+          "book",
+          "clock"
+        ]
+      },
+      "impossible response to stimulus": {
+        "default": "blooms a dozen flowers instantly when spoken to gently",
+        "examples": [
+          "cracks and reassembles into a different shape when touched",
+          "opens like a door revealing a tiny complete room inside",
+          "melts and reforms into whatever the viewer needs"
+        ]
+      },
+      "stimulus": {
+        "default": "a whispered word",
+        "examples": [
+          "a gentle touch",
+          "being opened",
+          "being looked at"
+        ]
+      },
+      "hand or agent": {
+        "default": "a hand",
+        "examples": [
+          "a finger",
+          "a breath",
+          "eye contact implied"
+        ]
+      },
+      "background": {
+        "default": "a plain domestic interior wall",
+        "examples": [
+          "white",
+          "wooden shelf",
+          "dark background"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "100mm macro",
+          "135mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible object behaviours. Kling maintains object consistency through the transformation. Add 'surrealist object transformation social video vertical' for correct approach.",
+    "source_id": 112
+  },
+  {
+    "id": 204,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [familiar object] that [slowly becomes something else entirely] — [lens] locked at medium close, the [familiar object] beginning in its entirely normal state, the transformation not yet begun, [light source] treating the incoming [something else] as entirely ordinary, 16:9",
+    "video_prompt": "The transformation from [familiar object] to [something else entirely] unfolds with geological patience — the [familiar object] not resisting, the [something else entirely] not dramatic in its arrival, the change happening through the middle of the frame with no cut, no effect — just one thing becoming another over the full duration of the shot, the camera not moving, not commenting, simply present for the change.",
+    "sfx_prompt": "The sound of [familiar object] transitioning to [something else entirely] — what does this specific transformation sound like if given physical properties? The sound design committed to making the impossible sound inevitable and specific rather than generic or fantastical",
+    "variables": {
+      "familiar object": {
+        "default": "a clock",
+        "examples": [
+          "a telephone",
+          "a chair",
+          "a book"
+        ]
+      },
+      "slowly becomes something else entirely": {
+        "default": "a small ecosystem — soil, moss, insects, eventually a tiny tree",
+        "examples": [
+          "water — not melting but simply becoming liquid while holding its form briefly before falling",
+          "a map of somewhere — its surfaces becoming paper and lines and place names",
+          "a musical instrument — reshaping itself into something that could make sound"
+        ]
+      },
+      "something else entirely": {
+        "default": "a small ecosystem",
+        "examples": [
+          "water",
+          "a map",
+          "a musical instrument"
+        ]
+      },
+      "light source": {
+        "default": "steady side light unchanged throughout the transformation",
+        "examples": [
+          "overhead light",
+          "backlit",
+          "ambient only"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "100mm macro",
+          "135mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles slow object transformation surrealism. Runway maintains transformation continuity without cuts. Add 'surrealist object transformation slow continuous no cut' for correct approach.",
+    "source_id": 131
+  },
+  {
+    "id": 205,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [natural landscape element] behaving as if it were [different substance] — [lens] wide enough to show the full extent of the [natural landscape element], [quality of wrong substance] visible in the motion and surface, [scale] preserved making the impossible legible, [time of day] light treating the impossible substance as unremarkable, 16:9",
+    "video_prompt": "The [natural landscape element] continues behaving as [different substance] — [quality of wrong substance] motion playing out at the scale of the landscape, a [scale reference element] present in the frame for scale — something normal-sized moving normally in front of the impossible landscape, the camera executing a slow pull-back that reveals more of the extent of the [natural landscape element]'s wrongness, the wrongness more complete than initially visible.",
+    "sfx_prompt": "The sound of [different substance] at landscape scale — what does [natural landscape element] sound like if it is made of [different substance]? The sound design committed to the physics of the wrong material at the right scale, the [scale reference element] producing entirely normal sounds in contrast",
+    "variables": {
+      "natural landscape element": {
+        "default": "a mountain range",
+        "examples": [
+          "the ocean",
+          "a forest",
+          "a desert plain"
+        ]
+      },
+      "different substance": {
+        "default": "fabric — vast curtains of stone-coloured cloth",
+        "examples": [
+          "glass — transparent and refracting the sky",
+          "liquid — flowing slowly in the shape of hills",
+          "smoke — the mountains present but permeable"
+        ]
+      },
+      "quality of wrong substance": {
+        "default": "the billowing and draping of heavy cloth at mountain scale",
+        "examples": [
+          "the refraction and reflection of glass terrain",
+          "the slow viscous flow of hills rearranging",
+          "the slow drift and dissolution of smoke mountains"
+        ]
+      },
+      "scale reference element": {
+        "default": "a person walking at the base",
+        "examples": [
+          "a vehicle on a road below",
+          "a bird flying past the peaks",
+          "a building at the foot of the range"
+        ]
+      },
+      "time of day": {
+        "default": "golden hour",
+        "examples": [
+          "overcast midday",
+          "dawn mist",
+          "blue hour"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles landscape-scale surrealist material transformation. Luma manages the scale reference element against the impossible landscape. Add 'surrealist landscape wrong material scale cinematic' for correct approach.",
+    "source_id": 132
+  },
+  {
+    "id": 206,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Documentary",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [proposed future location] being [surveyed or studied] by [expedition type] — [lens] observing the [expedition type] at work, the [proposed future location] visible and real around them, [current real technology] they are using to study it, [light condition] the actual conditions of the [proposed future location], documentary near-future still frame, 16:9",
+    "video_prompt": "The [expedition type] moves through the [proposed future location] conducting [survey activity] — the camera following at documentary distance, [current real technology] in active use, the [proposed future location] indifferent to their presence, one moment where [expedition member] stops and simply looks — the act of a human being present somewhere important and knowing it, the survey continuing after the pause.",
+    "sfx_prompt": "The environmental audio of [proposed future location] layered with [expedition type] working sounds — [current real technology] sounds, [expedition member] communication if radio or direct, the [proposed future location]'s own acoustic environment which may be wind, silence, or water, the sounds of people doing serious work in a serious place",
+    "variables": {
+      "proposed future location": {
+        "default": "an Arctic test site for Mars habitat prototypes",
+        "examples": [
+          "an underwater habitat at depth",
+          "a volcanic lava field used for spacesuit testing",
+          "a high-altitude plateau for telescope array construction"
+        ]
+      },
+      "expedition type": {
+        "default": "analog astronaut crew",
+        "examples": [
+          "deep sea habitat team",
+          "ESA engineering field team",
+          "observatory construction crew"
+        ]
+      },
+      "current real technology": {
+        "default": "geological survey instruments and habitat components",
+        "examples": [
+          "saturation diving equipment",
+          "precision alignment tools",
+          "large-scale construction in extreme conditions"
+        ]
+      },
+      "survey activity": {
+        "default": "site assessment and habitat deployment testing",
+        "examples": [
+          "habitat systems checks and EVA simulation",
+          "instrument calibration and site preparation",
+          "structure assembly in high-altitude conditions"
+        ]
+      },
+      "light condition": {
+        "default": "Arctic overcast flat light",
+        "examples": [
+          "deep water artificial light",
+          "volcanic region haze light",
+          "high altitude clear thin light"
+        ]
+      },
+      "expedition member": {
+        "default": "crew commander",
+        "examples": [
+          "youngest team member",
+          "scientist on their first field deployment",
+          "engineer who designed the equipment being tested"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles real analog environment documentary. Runway maintains expedition team consistency through movement. Add 'documentary near-future space analog expedition real location' for correct approach.",
+    "source_id": 138
+  },
+  {
+    "id": 207,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [fighter type] mid-[strike type] — [lens] at a low lateral angle, the [strike type] caught at peak extension, [opponent or target] reacting in the background, [light source] raking across the scene to catch [sweat or dust detail] suspended in the air, the frame frozen at the single most violent and beautiful instant of the action, cinematic still frame, 16:9",
+    "video_prompt": "The [strike type] connects in high-speed slow motion — [sweat or dust detail] erupting from the point of impact in every direction, the [fighter type]'s body following through with the full force of committed technique, the [opponent or target] responding to the impact frame by frame, the camera at a fixed low lateral angle throughout, the slow motion so extreme each individual droplet of [sweat or dust detail] traces its own arc before the shot cuts.",
+    "sfx_prompt": "The impact sound slowed and deepened — the specific physical thud of [strike type] on [opponent or target] rendered at half speed, a sharp exhalation from the [fighter type] at the moment of release, [sweat or dust detail] sounds as they disperse, then the audio returns to real speed with the ambient sound of the [environment] rushing back in",
+    "variables": {
+      "fighter type": {
+        "default": "boxer",
+        "examples": [
+          "martial artist",
+          "street fighter",
+          "soldier in hand-to-hand combat"
+        ]
+      },
+      "strike type": {
+        "default": "cross punch",
+        "examples": [
+          "spinning heel kick",
+          "elbow strike",
+          "takedown"
+        ]
+      },
+      "opponent or target": {
+        "default": "opponent mid-reel",
+        "examples": [
+          "heavy bag exploding from impact",
+          "second fighter blocking",
+          "training dummy disintegrating"
+        ]
+      },
+      "light source": {
+        "default": "single hard side light",
+        "examples": [
+          "overhead industrial gym light",
+          "outdoor sun at low angle",
+          "multiple strobes freezing the motion"
+        ]
+      },
+      "sweat or dust detail": {
+        "default": "sweat spray",
+        "examples": [
+          "chalk dust",
+          "blood mist",
+          "rain droplets"
+        ]
+      },
+      "environment": {
+        "default": "underground boxing gym",
+        "examples": [
+          "open rooftop",
+          "forest clearing",
+          "abandoned warehouse"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles extreme slow motion impact physics. Runway maintains fighter form through the slow motion sequence. Add 'combat slow motion impact spray cinematic' for correct approach.",
+    "source_id": 151
+  },
+  {
+    "id": 208,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [chase type] through [environment] — [lens] low and close behind the [lead figure], the [environment] rushing past on both sides in motion blur, [obstacle] ahead in the mid-ground requiring an immediate decision, [light condition] the harsh available light of the [environment], the speed and direction of the chase legible in every element of the frame, cinematic still frame, 16:9",
+    "video_prompt": "The chase continues without a cut — the [lead figure] navigating the [environment] at full speed, [obstacle] cleared or avoided in a single committed move, the camera maintaining its low close position behind, [pursuer] visible intermittently in the background closing distance, the [environment] changing character as the chase moves through it — tight, then open, then tight again — the camera breathing with the effort of the [lead figure].",
+    "sfx_prompt": "The full acoustic of a chase at speed — [lead figure] footsteps and breathing at close range, the [environment] sounds rushing past, [obstacle] sounds as it is cleared, [pursuer] sounds at variable distance behind, no score — only the percussive rhythm of pursuit and the [environment]'s own audio texture",
+    "variables": {
+      "chase type": {
+        "default": "foot chase",
+        "examples": [
+          "motorcycle chase",
+          "parkour pursuit",
+          "underwater chase"
+        ]
+      },
+      "lead figure": {
+        "default": "runner in civilian clothes",
+        "examples": [
+          "motorcyclist",
+          "free runner",
+          "diver"
+        ]
+      },
+      "environment": {
+        "default": "dense urban market",
+        "examples": [
+          "rooftop landscape",
+          "narrow canal",
+          "underground tunnel system"
+        ]
+      },
+      "obstacle": {
+        "default": "market stall blocking the path",
+        "examples": [
+          "gap between buildings",
+          "locked gate",
+          "oncoming vehicle"
+        ]
+      },
+      "light condition": {
+        "default": "harsh midday sun creating black shadows",
+        "examples": [
+          "night with streetlight pools",
+          "overcast even light",
+          "interior fluorescent strips"
+        ]
+      },
+      "pursuer": {
+        "default": "two figures in dark clothing",
+        "examples": [
+          "police officers",
+          "a single relentless figure",
+          "a vehicle"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles long uncut chase sequences at speed. Luma maintains environment detail through fast camera movement. Add 'cinematic chase sequence low camera continuous' for correct approach.",
+    "source_id": 152
+  },
+  {
+    "id": 209,
+    "category": "Cinematic & Storytelling",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [soldier or operative type] breaching a [location type] — [lens] tight behind the shoulder, the [location type] opening ahead, [entry detail] visible — the moment between the breach and the first contact, [light condition] the tactical light of a [location type] under assault, [team member] visible at the edge of the frame, photorealistic still frame, 16:9",
+    "video_prompt": "The breach unfolds in real time — no slow motion, no stylisation, the [soldier or operative type] moving with the compressed efficiency of trained close-quarters movement, the [location type] clearing in the camera's field as they advance, [entry detail] passing as the threshold is crossed, [light condition] shifting as the camera moves from exterior to interior, [team member] maintaining position in peripheral vision throughout, the action over in seconds.",
+    "sfx_prompt": "The specific audio of a tactical breach — [entry detail] sound, the [soldier or operative type]'s controlled breathing close in the mix, boots on the floor of [location type], [team member] communication signals if any, the [location type]'s own acoustic shifting as the space is entered — the entire sequence in undesigned real-time audio",
+    "variables": {
+      "soldier or operative type": {
+        "default": "special forces operative",
+        "examples": [
+          "SWAT officer",
+          "private military contractor",
+          "undercover agent"
+        ]
+      },
+      "location type": {
+        "default": "urban building interior",
+        "examples": [
+          "shipping container",
+          "underground facility",
+          "vehicle"
+        ]
+      },
+      "entry detail": {
+        "default": "door being kicked open",
+        "examples": [
+          "window entry",
+          "floor hatch opening",
+          "wall breach"
+        ]
+      },
+      "light condition": {
+        "default": "flashlight beams in dark interior",
+        "examples": [
+          "daylight flooding from the breach point",
+          "red emergency lighting",
+          "night vision green tint"
+        ]
+      },
+      "team member": {
+        "default": "second operative in tactical gear",
+        "examples": [
+          "team lead providing cover",
+          "medic holding position",
+          "spotter on comms"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "28mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles photorealistic tactical movement in confined spaces. Runway maintains consistent lighting through the breach transition. Add 'tactical breach photorealistic close quarters real time' for correct approach.",
+    "source_id": 153
+  },
+  {
+    "id": 210,
+    "category": "Cinematic & Storytelling",
+    "style": "Photorealistic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [crowd type] erupting in [action event] — [lens] wide at ground level within the crowd, [figures] on all sides in motion, [action event] visible at the centre of the composition, [light condition] the flare and chaos of [action event] light mixing with [environment] light, photorealistic still frame, 16:9",
+    "video_prompt": "The camera moves through the [crowd type] as [action event] peaks — pushed and jostled by the bodies around it, the frame unstable in the way of a camera operator in a real crowd, [figures] filling and clearing the frame unpredictably, the [action event] at the centre pulling focus as the crowd noise builds to a peak and then — a single beat of held silence — before erupting again.",
+    "sfx_prompt": "The full acoustic of a [crowd type] during [action event] — voices from every direction building to an overwhelming wall of sound, [action event] sounds at the centre, the physical sounds of bodies in close proximity, a single moment of near-silence at the peak that makes the subsequent eruption more total — binaural and immersive throughout",
+    "variables": {
+      "crowd type": {
+        "default": "fight night crowd",
+        "examples": [
+          "protest crowd",
+          "sports crowd at a decisive moment",
+          "concert crowd in a mosh"
+        ]
+      },
+      "action event": {
+        "default": "knockout blow landed in the ring",
+        "examples": [
+          "confrontation breaking into violence",
+          "last-second goal",
+          "stage dive"
+        ]
+      },
+      "figures": {
+        "default": "spectators on their feet",
+        "examples": [
+          "protesters surging forward",
+          "fans in full roar",
+          "crowd surfers overhead"
+        ]
+      },
+      "light condition": {
+        "default": "ring lights and camera flashes in dark arena",
+        "examples": [
+          "streetlight and phone screens at night",
+          "stadium floodlights",
+          "stage light and strobes"
+        ]
+      },
+      "environment": {
+        "default": "arena",
+        "examples": [
+          "street at night",
+          "stadium",
+          "concert venue"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "28mm",
+          "14mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles large crowd action sequences at scale. Luma maintains photorealistic crowd density and light. Add 'crowd action photorealistic ground level immersive' for correct approach.",
+    "source_id": 154
+  },
+  {
+    "id": 211,
+    "category": "Cinematic & Storytelling",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [fighter or athlete type] in combat or competition where [physical law] works differently — [specific surreal condition] visible in the physics of their movement, the [fighter or athlete type] having adapted completely to these conditions and fighting within their logic, [opponent] equally adapted, [lens] wide enough to show the full extent of the [specific surreal condition], cinematic still frame, 16:9",
+    "video_prompt": "The [fighter or athlete type] executes [signature move] within the [specific surreal condition] — the move following the logic of the impossible physics perfectly, the [opponent] responding within the same impossible rules, the camera tracking the action with the steady confidence of a sports broadcast that has decided these physics are normal, the [specific surreal condition] creating a choreography that could not exist in any other world.",
+    "sfx_prompt": "The sounds of [signature move] given the acoustic properties of [specific surreal condition] — impact sounds with wrong decay, movement sounds with wrong Doppler, the impossible physics rendered in audio with the same specificity as the visual, the [opponent]'s response sounds equally impossible and equally real",
+    "variables": {
+      "fighter or athlete type": {
+        "default": "martial artist",
+        "examples": [
+          "boxer",
+          "wrestler",
+          "gymnast competing"
+        ]
+      },
+      "physical law": {
+        "default": "gravity",
+        "examples": [
+          "momentum",
+          "time",
+          "space between objects"
+        ]
+      },
+      "specific surreal condition": {
+        "default": "gravity reverses at the peak of every jump — fighters float at the apex of each move before falling upward then returning",
+        "examples": [
+          "every strike lands twice — once in real time and once three seconds later as an echo",
+          "the space between the fighters compresses and expands with their emotional state",
+          "time moves at different speeds for each fighter — one in slow motion, one at normal speed"
+        ]
+      },
+      "opponent": {
+        "default": "equally skilled opponent",
+        "examples": [
+          "a mirror version of the fighter",
+          "an opponent who has mastered the impossible physics longer",
+          "multiple opponents"
+        ]
+      },
+      "signature move": {
+        "default": "a spinning kick at the apex of reversed gravity",
+        "examples": [
+          "a punch whose echo lands first",
+          "a takedown across compressed space",
+          "a move at full speed against a slow-motion opponent"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible physics in action sequences. Runway maintains fighter consistency through the surreal movement. Add 'surrealist action impossible physics combat sports broadcast' for correct approach.",
+    "source_id": 155
+  },
+  {
+    "id": 212,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [vehicle type] taking a [corner type] at speed — [lens] mounted at road level ahead of the apex, the [vehicle type] arriving into frame from the entry of the corner, [tyre behaviour] visible at all four corners, [light condition] raking across the [vehicle type]'s body panels as it rotates through the corner, [environment] as context, cinematic automotive still frame, 16:9",
+    "video_prompt": "The [vehicle type] comes through the [corner type] — the camera locked at road level as the [vehicle type] rotates past, [tyre behaviour] generating [atmospheric detail] that catches the [light condition], the body panels sweeping through the light from entry angle to exit angle, the camera holding as the [vehicle type] clears the apex and accelerates away — the exhaust note rising and then receding as the [vehicle type] disappears into [environment].",
+    "sfx_prompt": "The [vehicle type]'s engine note building on corner entry — the load of the [corner type] audible in the engine's response, [tyre behaviour] sound at all four corners, [atmospheric detail] hissing under the arches, the engine note rising to full power on corner exit and then pulling away with the Doppler shift of something fast receding",
+    "variables": {
+      "vehicle type": {
+        "default": "sports car",
+        "examples": [
+          "rally car",
+          "supercar",
+          "muscle car"
+        ]
+      },
+      "corner type": {
+        "default": "fast sweeping bend",
+        "examples": [
+          "tight hairpin",
+          "technical chicane",
+          "banked oval corner"
+        ]
+      },
+      "tyre behaviour": {
+        "default": "controlled oversteer with all four tyres loaded",
+        "examples": [
+          "full sideways drift",
+          "tyre squeal at the limit of grip",
+          "rally-spec four-wheel drift"
+        ]
+      },
+      "light condition": {
+        "default": "late afternoon golden side light",
+        "examples": [
+          "overcast flat racing light",
+          "sunrise on an empty road",
+          "dramatic storm light"
+        ]
+      },
+      "environment": {
+        "default": "mountain road",
+        "examples": [
+          "racing circuit",
+          "desert highway",
+          "forest stage"
+        ]
+      },
+      "atmospheric detail": {
+        "default": "tyre smoke",
+        "examples": [
+          "dust",
+          "gravel spray",
+          "water spray"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles automotive corner sequences at speed. Luma maintains vehicle detail through the rotation. Add 'automotive cinematic corner apex road level locked camera' for correct approach.",
+    "source_id": 156
+  },
+  {
+    "id": 213,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [vehicle type] stationary — [lens] at a slow walk-around distance, [time of day] light sculpting the [body panel detail], the [vehicle type] on [surface] that reflects its underside, [environment] providing a backdrop that does not compete with the vehicle, the [vehicle type] the only subject, cinematic automotive hero shot still frame, 16:9",
+    "video_prompt": "The camera executes a continuous slow walk-around of the [vehicle type] — moving from front three-quarter to full side to rear three-quarter over 20 seconds, [time of day] light finding [body panel detail] differently at each angle, the [surface] reflection tracking the camera's movement below the vehicle, the [environment] rotating slowly in the background, the [vehicle type] never moving — only the light and the camera's relationship to it changing.",
+    "sfx_prompt": "Near silence — the ambient sound of [environment] at [time of day] at a very low level, no engine, no mechanical sound, only the [vehicle type] existing in its environment, the silence itself communicating the reverence of the camera's attention",
+    "variables": {
+      "vehicle type": {
+        "default": "luxury saloon",
+        "examples": [
+          "electric supercar",
+          "classic sports car",
+          "concept vehicle"
+        ]
+      },
+      "time of day": {
+        "default": "golden hour",
+        "examples": [
+          "blue hour",
+          "overcast diffused",
+          "dawn"
+        ]
+      },
+      "body panel detail": {
+        "default": "the shoulder line and door creases",
+        "examples": [
+          "the bonnet contours and air intakes",
+          "the rear haunches and diffuser",
+          "the roofline and glasshouse"
+        ]
+      },
+      "surface": {
+        "default": "wet dark tarmac",
+        "examples": [
+          "polished concrete",
+          "desert salt flat",
+          "dark mirror floor"
+        ]
+      },
+      "environment": {
+        "default": "open salt flat at golden hour",
+        "examples": [
+          "empty multi-storey car park",
+          "cliff road with ocean beyond",
+          "industrial backdrop at dusk"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles automotive walk-around hero shots. Runway maintains paint finish and reflection quality through the move. Add 'automotive hero walk-around golden hour cinematic' for correct approach.",
+    "source_id": 157
+  },
+  {
+    "id": 214,
+    "category": "Brand & Product Ads",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Sora"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "Interior of a [vehicle type] at speed — [lens] from the passenger footwell looking up and forward, the [driver type] visible in the upper frame, [dashboard or instrument detail] in sharp focus in the mid-ground, [road or environment] visible through the windscreen in deep motion blur, [light condition] the interior light of a moving vehicle, photorealistic automotive interior still frame, 16:9",
+    "video_prompt": "The [vehicle type] continues at speed — [road or environment] streaming through the windscreen in continuous motion blur, [dashboard or instrument detail] holding in sharp focus as the [driver type] makes a [driver action], [light condition] shifting as the [vehicle type] passes through different exposure conditions outside, the camera locked in its low passenger position throughout, the interior a capsule of stillness around the blurred world outside.",
+    "sfx_prompt": "Interior automotive audio at speed — tyre roar through the floor, wind noise at the seal edges, the [vehicle type]'s engine note filtered through the firewall, [dashboard or instrument detail] sounds if any, the [driver type]'s breathing or [driver action] sounds close in the mix — the specific acoustic of being inside a fast-moving vehicle",
+    "variables": {
+      "vehicle type": {
+        "default": "performance saloon",
+        "examples": [
+          "rally car",
+          "supercar",
+          "vintage sports car"
+        ]
+      },
+      "driver type": {
+        "default": "driver in racing harness and helmet",
+        "examples": [
+          "driver in civilian clothes",
+          "gloved hands only — no face",
+          "professional racing driver"
+        ]
+      },
+      "dashboard or instrument detail": {
+        "default": "rev counter in the red zone",
+        "examples": [
+          "analogue gauges at maximum",
+          "digital display showing speed and g-force",
+          "minimal instrument cluster"
+        ]
+      },
+      "road or environment": {
+        "default": "mountain road corner sequence",
+        "examples": [
+          "racing circuit straight",
+          "desert highway",
+          "night motorway"
+        ]
+      },
+      "light condition": {
+        "default": "afternoon sun strobing through trees",
+        "examples": [
+          "tunnel darkness then sudden daylight",
+          "overcast flat light",
+          "sunset directly ahead"
+        ]
+      },
+      "driver action": {
+        "default": "heel-and-toe downshift",
+        "examples": [
+          "steering correction",
+          "hand on gearshift",
+          "glance at the mirror"
+        ]
+      },
+      "lens": {
+        "default": "24mm",
+        "examples": [
+          "35mm",
+          "28mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles interior automotive photorealistic detail. Sora manages the motion blur exterior through the windscreen. Add 'automotive interior at speed photorealistic passenger POV' for correct approach.",
+    "source_id": 158
+  },
+  {
+    "id": 215,
+    "category": "Brand & Product Ads",
+    "style": "Photorealistic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [vehicle type] from directly above — [lens] locked overhead drone position, the [vehicle type] moving through [surface pattern] that creates a graphic relationship between the vehicle and its environment from above, [vehicle colour] contrasting with [surface pattern], [speed] implied in the motion blur of the [surface pattern] passing beneath, photorealistic aerial automotive still frame, 16:9",
+    "video_prompt": "The drone maintains its locked overhead position as the [vehicle type] moves beneath it — the [surface pattern] streaming past, the [vehicle type] perfectly centred in the overhead frame, [vehicle colour] tracking across the changing [surface pattern], the [vehicle type]'s shadow tracking below it, [speed] changing over the duration — the [vehicle type] decelerating into a [road feature] then accelerating away, the overhead perspective making the deceleration and acceleration readable as pure geometry.",
+    "sfx_prompt": "The [vehicle type] audio from overhead distance — the engine note compressed by altitude, tyre sounds on [surface pattern], the [road feature] sounds as the [vehicle type] navigates it, wind at drone altitude above it all — the acoustic portrait of a fast vehicle from the one angle where its sound is most abstracted from its size",
+    "variables": {
+      "vehicle type": {
+        "default": "sports car",
+        "examples": [
+          "rally car",
+          "electric vehicle",
+          "classic car"
+        ]
+      },
+      "surface pattern": {
+        "default": "winding mountain road with white centreline",
+        "examples": [
+          "racing circuit with painted markings",
+          "desert highway with heat shimmer",
+          "wet urban street with lane markings"
+        ]
+      },
+      "vehicle colour": {
+        "default": "red",
+        "examples": [
+          "white",
+          "black",
+          "yellow"
+        ]
+      },
+      "speed": {
+        "default": "high speed",
+        "examples": [
+          "building from slow to fast",
+          "constant fast",
+          "slowing to a stop then launching"
+        ]
+      },
+      "road feature": {
+        "default": "tight hairpin",
+        "examples": [
+          "circuit chicane",
+          "intersection",
+          "start line"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent drone",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles overhead drone automotive tracking. Luma maintains vehicle colour accuracy against the surface pattern. Add 'overhead drone automotive tracking road geometry photorealistic' for correct approach.",
+    "source_id": 159
+  },
+  {
+    "id": 216,
+    "category": "Brand & Product Ads",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Sora"
+    ],
+    "audience": [
+      "Marketer",
+      "Developer"
+    ],
+    "image_prompt": "A [vehicle type] at speed through a [neon city environment] at night — [lens] low and lateral, the [vehicle type] streaking through frame, [neon color palette] light raking across the body panels as it passes each light source, wet [surface] reflecting the neon below the vehicle, [city detail] in motion blur behind, cinematic still frame, 16:9",
+    "video_prompt": "The [vehicle type] comes through the [neon city environment] — [neon color palette] light hitting the paint in sequence as each sign passes, the wet [surface] reflection tracking the vehicle's path below it, the camera locked in its low lateral position as the [vehicle type] fills and clears the frame in under three seconds, the after-image of its [neon color palette]-lit form burning briefly in the frame before the [neon city environment] returns to its pre-vehicle state.",
+    "sfx_prompt": "The [vehicle type]'s engine approaching — a Doppler sweep from low anticipation pitch through the full roar of passing to the receding note, [neon color palette] light sources humming at their individual frequencies beneath the engine note, wet [surface] tyre noise, the [neon city environment] ambient returning to its bass-heavy normal as the [vehicle type] is gone",
+    "variables": {
+      "vehicle type": {
+        "default": "low wide sports car",
+        "examples": [
+          "modified street car",
+          "electric hypercar",
+          "classic muscle car with modern modifications"
+        ]
+      },
+      "neon city environment": {
+        "default": "rain-soaked urban canyon with competing signs",
+        "examples": [
+          "elevated highway with city below",
+          "tunnel with neon-lit walls",
+          "underpass with graffiti and strip lights"
+        ]
+      },
+      "neon color palette": {
+        "default": "magenta and cyan",
+        "examples": [
+          "amber and red",
+          "green and white",
+          "blue and gold"
+        ]
+      },
+      "surface": {
+        "default": "tarmac",
+        "examples": [
+          "concrete",
+          "cobblestone",
+          "metal grating"
+        ]
+      },
+      "city detail": {
+        "default": "neon signs and building facades",
+        "examples": [
+          "other vehicles and pedestrians",
+          "overpass structures",
+          "market stalls and crowds"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon light on automotive surfaces consistently. Sora manages the full city environment at speed. Add 'cyberpunk automotive neon rain night low camera speed pass' for correct approach.",
+    "source_id": 160
+  },
+  {
+    "id": 217,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Sora"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [combat type] between [combatant a] and [combatant b] in a [neon environment] — [lens] wide enough to show both combatants and the full [neon environment], [neon weapon or power] the primary light source in the frame, [neon color a] vs [neon color b] creating a visual opposition between the two sides, rain or [atmospheric element] in the air catching both colours, cinematic still frame, 16:9",
+    "video_prompt": "The [combat type] reaches its decisive exchange — [combatant a]'s [neon weapon or power] meeting [combatant b]'s in a clash that sends [neon color a] and [neon color b] light in opposite directions across the [neon environment], the camera executing a slow orbit of the clash point over the duration, [atmospheric element] in the air making every beam and edge visible, the [neon environment] itself reacting to the energy of the clash — signs flickering, surfaces reflecting the doubled light.",
+    "sfx_prompt": "The clash of [neon weapon or power] — the specific electronic and physical sound of the two forces meeting, [neon color a] and [neon color b] producing slightly different tones that create a chord at the point of contact, [atmospheric element] sounds hissing in the energy, the [neon environment] electrical systems responding with flickers and hums, the physical effort sounds of both combatants at the moment of maximum exertion",
+    "variables": {
+      "combat type": {
+        "default": "sword fight with energy blades",
+        "examples": [
+          "hand-to-hand with powered augmentations",
+          "ranged energy weapon duel",
+          "mech vs mech close combat"
+        ]
+      },
+      "combatant a": {
+        "default": "armoured soldier",
+        "examples": [
+          "assassin in dark bodysuit",
+          "rebel fighter",
+          "android warrior"
+        ]
+      },
+      "combatant b": {
+        "default": "corporate enforcer",
+        "examples": [
+          "military-grade android",
+          "augmented mercenary",
+          "rival soldier"
+        ]
+      },
+      "neon environment": {
+        "default": "rain-soaked rooftop with city below",
+        "examples": [
+          "neon-lit underground arena",
+          "corporate plaza at night",
+          "elevated train platform"
+        ]
+      },
+      "neon weapon or power": {
+        "default": "energy blade",
+        "examples": [
+          "plasma augmentation",
+          "energy shield and weapon",
+          "mech weapon systems"
+        ]
+      },
+      "neon color a": {
+        "default": "blue",
+        "examples": [
+          "white",
+          "green",
+          "gold"
+        ]
+      },
+      "neon color b": {
+        "default": "red",
+        "examples": [
+          "purple",
+          "orange",
+          "silver"
+        ]
+      },
+      "atmospheric element": {
+        "default": "rain",
+        "examples": [
+          "steam",
+          "smoke",
+          "sparks already in the air"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon weapon combat consistently. Sora manages the full rooftop environment at scale. Add 'cyberpunk energy weapon combat neon rain rooftop' for correct approach.",
+    "source_id": 161
+  },
+  {
+    "id": 218,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Neon/Cyberpunk",
+    "best_on": [
+      "Kling",
+      "Runway"
+    ],
+    "audience": [
+      "Developer",
+      "Creator"
+    ],
+    "image_prompt": "A [vehicle type] pursuit through a [neon city level] — [lens] mounted on the [lead vehicle], looking back at the [pursuing vehicle], [neon color palette] light from the [neon city level] strobing across both vehicles as they pass light sources, [atmospheric element] catching the light between them, the gap between vehicles closing, cinematic still frame, 16:9",
+    "video_prompt": "The pursuit continues at full speed through the [neon city level] — the [pursuing vehicle] gaining through the duration, [neon color palette] light hitting both vehicles in sequence as they pass each source, [atmospheric element] spraying from the [lead vehicle]'s path, a [obstacle or hazard] ahead that both vehicles must navigate differently — the gap between them at its narrowest as the shot ends, the outcome unresolved.",
+    "sfx_prompt": "Two engine notes — the [lead vehicle] close and dominant, the [pursuing vehicle] slightly lower in pitch and building in volume as it closes, [atmospheric element] sounds between them, [neon city level] ambient bass and electrical hum beneath, [obstacle or hazard] sounds as they are navigated, the combined audio of two machines at their limits in a space that amplifies every sound",
+    "variables": {
+      "vehicle type": {
+        "default": "modified street car",
+        "examples": [
+          "police interceptor",
+          "cargo vehicle",
+          "motorcycle"
+        ]
+      },
+      "lead vehicle": {
+        "default": "modified street car",
+        "examples": [
+          "stolen vehicle",
+          "courier bike",
+          "escape vehicle"
+        ]
+      },
+      "pursuing vehicle": {
+        "default": "corporate security vehicle",
+        "examples": [
+          "police cruiser",
+          "bounty hunter vehicle",
+          "military pursuit unit"
+        ]
+      },
+      "neon city level": {
+        "default": "mid-level elevated highway",
+        "examples": [
+          "lower street level with market crowds",
+          "upper corporate tier",
+          "underground transit tunnel"
+        ]
+      },
+      "neon color palette": {
+        "default": "blue and white corporate lighting",
+        "examples": [
+          "red and amber market signs",
+          "green industrial lighting",
+          "mixed chaotic lower city colour"
+        ]
+      },
+      "atmospheric element": {
+        "default": "rain spray",
+        "examples": [
+          "steam from vents",
+          "sparks from damaged infrastructure",
+          "smoke from previous incident"
+        ]
+      },
+      "obstacle or hazard": {
+        "default": "closing blast door",
+        "examples": [
+          "slower vehicle in the path",
+          "damaged section of road",
+          "security checkpoint"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Kling handles neon city vehicle pursuit sequences. Runway maintains consistent neon light on vehicle surfaces. Add 'cyberpunk vehicle pursuit neon city levels chase mounted camera' for correct approach.",
+    "source_id": 162
+  },
+  {
+    "id": 219,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Photorealistic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [powered suit or exoskeleton type] in [combat or action situation] — [lens] at medium distance, the [powered suit or exoskeleton type] mid-[action type], [light source] catching the [suit detail] and the [action type]'s physical consequence in the environment, [human scale reference] providing scale, photorealistic near-future still frame, 16:9",
+    "video_prompt": "The [action type] plays out — the [powered suit or exoskeleton type] moving with the augmented speed and force of something between human and machine, the [action type]'s physical consequences visible in the environment: [environmental consequence], the [light source] shifting as the [powered suit or exoskeleton type] moves through it, the camera tracking at medium distance with the controlled steadiness of something that can keep up, [human scale reference] providing constant scale context.",
+    "sfx_prompt": "The [powered suit or exoskeleton type] in motion — hydraulic and servo sounds beneath the [action type] sounds, the [action type]'s physical impact on the environment rendered at the scale of the suit's mass, [suit detail] sounds specific to the near-future technology, the [powered suit or exoskeleton type]'s operator sounds filtered through the suit's communication system — present but processed",
+    "variables": {
+      "powered suit or exoskeleton type": {
+        "default": "military exoskeleton",
+        "examples": [
+          "industrial powered frame",
+          "prototype combat suit",
+          "civilian rescue exoskeleton"
+        ]
+      },
+      "combat or action situation": {
+        "default": "urban combat",
+        "examples": [
+          "heavy rescue operation",
+          "facility breach",
+          "field repair under fire"
+        ]
+      },
+      "action type": {
+        "default": "punching through a reinforced wall",
+        "examples": [
+          "lifting a collapsed structure",
+          "sprinting at augmented speed through debris",
+          "holding a position under fire"
+        ]
+      },
+      "light source": {
+        "default": "harsh daylight through dust and debris",
+        "examples": [
+          "emergency lighting in a dark facility",
+          "fire light in a combat zone",
+          "clean outdoor test site lighting"
+        ]
+      },
+      "suit detail": {
+        "default": "the joint actuators and load-bearing frame",
+        "examples": [
+          "the cooling vents under load",
+          "the damage visible on the armour panels",
+          "the sensor array on the helmet"
+        ]
+      },
+      "human scale reference": {
+        "default": "standard soldiers alongside the suit",
+        "examples": [
+          "civilians being protected",
+          "engineers on the test floor",
+          "wreckage at human scale"
+        ]
+      },
+      "environmental consequence": {
+        "default": "concrete fragmenting and rebar bending",
+        "examples": [
+          "debris clearing a path as it is lifted",
+          "ground cracking under augmented sprint",
+          "incoming rounds deflecting off the armour"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "24mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles powered suit action sequences at scale. Luma maintains mechanical suit detail through dynamic movement. Add 'powered exoskeleton combat photorealistic near future' for correct approach.",
+    "source_id": 163
+  },
+  {
+    "id": 220,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Photorealistic",
+    "best_on": [
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [space combat type] in [space environment] — [lens] at the distance of a combat camera, [vessel a] and [vessel b] in relative motion, [weapon or effect] visible between them, the [space environment] providing the context of scale and silence, [light source] — a star, a planet, an explosion — the only illumination in absolute black, photorealistic space combat still frame, 16:9",
+    "video_prompt": "The [space combat type] unfolds in the silence of space — [vessel a] maneuvering with the precise thruster bursts of actual orbital mechanics, [vessel b] responding, [weapon or effect] travelling the distance between them at the correct speed for its type, the [space environment] unchanging in the background — indifferent, enormous, the combat a tiny and violent interruption in an infinite stillness, the camera tracking [vessel a] throughout without stabilisation — the slight drift of a real observation platform.",
+    "sfx_prompt": "Interior audio only — if we are inside [vessel a]: the hull sounds of combat, system alerts, thruster burns felt as vibration, [weapon or effect] impacts on the hull as physical shocks rather than sounds, the crew's voices on internal comms — exterior space is silent, the entire audio mix is what can be heard from inside the vessel",
+    "variables": {
+      "space combat type": {
+        "default": "fighter vs fighter dogfight",
+        "examples": [
+          "capital ship vs capital ship",
+          "fighter vs capital ship",
+          "boarding action at close range"
+        ]
+      },
+      "space environment": {
+        "default": "open deep space with a gas giant in the far background",
+        "examples": [
+          "asteroid field",
+          "planetary orbit with atmosphere below",
+          "the shadow of a large vessel"
+        ]
+      },
+      "vessel a": {
+        "default": "agile single-seat fighter",
+        "examples": [
+          "heavy cruiser",
+          "interceptor squadron",
+          "boarding craft"
+        ]
+      },
+      "vessel b": {
+        "default": "opposing fighter",
+        "examples": [
+          "dreadnought",
+          "carrier",
+          "defending station"
+        ]
+      },
+      "weapon or effect": {
+        "default": "directed energy weapon",
+        "examples": [
+          "kinetic projectiles",
+          "missile spread",
+          "point defence system"
+        ]
+      },
+      "light source": {
+        "default": "a distant star providing hard raking light",
+        "examples": [
+          "a nearby planet reflecting light",
+          "an ongoing explosion from an earlier hit",
+          "both vessels' own drive exhaust"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles space combat at scale with correct physics. Luma maintains vessel detail through the combat sequence. Add 'photorealistic space combat orbital mechanics silent vacuum' for correct approach.",
+    "source_id": 164
+  },
+  {
+    "id": 221,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [sci-fi action scene] where [impossible narrative condition] — [lens] treating the [impossible narrative condition] as documentary fact, [character or vessel] performing the [sci-fi action scene] within the [impossible narrative condition]'s logic, the [sci-fi action scene]'s physical consequences behaving according to the rules of the [impossible narrative condition] rather than physics, cinematic still frame, 16:9",
+    "video_prompt": "The [sci-fi action scene] continues within the [impossible narrative condition] — [character or vessel] adapting their tactics to the [impossible narrative condition]'s rules rather than fighting them, [specific impossible consequence] of the [sci-fi action scene] playing out according to the [impossible narrative condition]'s logic, the camera observing with the steady neutrality of a war correspondent who has decided the [impossible narrative condition] is simply the terrain, the [sci-fi action scene] ending with a resolution that only makes sense within the [impossible narrative condition].",
+    "sfx_prompt": "The [sci-fi action scene] sounds rendered through the acoustic properties of [impossible narrative condition] — the [impossible narrative condition] changing how sound behaves in ways that are specific and physical rather than generic, the [character or vessel] sounds correct for what they are doing, the [specific impossible consequence] sounds entirely plausible within the impossible rules, the whole mix committed to the [impossible narrative condition]'s physics",
+    "variables": {
+      "sci-fi action scene": {
+        "default": "starfighter combat",
+        "examples": [
+          "ground assault",
+          "space station evacuation",
+          "mech battle"
+        ]
+      },
+      "impossible narrative condition": {
+        "default": "the battle is happening simultaneously in three different time periods — the same space contains past, present and future versions of the conflict overlaid",
+        "examples": [
+          "the combatants are fighting inside a black hole where direction has no meaning — up, forward and future are the same axis",
+          "the battle exists in a probability space — every possible outcome is happening simultaneously and the characters must navigate to the version they want to survive",
+          "the weapons fire ideas rather than energy — hits change what the target believes rather than damaging them physically"
+        ]
+      },
+      "character or vessel": {
+        "default": "fighter pilot",
+        "examples": [
+          "ground soldier",
+          "starship crew",
+          "mech pilot"
+        ]
+      },
+      "specific impossible consequence": {
+        "default": "a ship destroyed in the past reappears in the future version of the same space already repaired",
+        "examples": [
+          "a pilot who is hit falls in a direction that doesn't exist",
+          "a destroyed vessel exists in multiple probability states simultaneously",
+          "a soldier hit with an idea weapon stops fighting because they now believe the wrong side is theirs"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles surrealist impossible narrative conditions in action sequences. Runway maintains visual consistency through the impossible logic. Add 'surrealist sci-fi action impossible narrative condition' for correct approach.",
+    "source_id": 165
+  },
+  {
+    "id": 222,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [stunt performer type] mid-[stunt type] — [lens] at the angle that most clearly shows the full commitment and danger of the [stunt type], the [stunt type] at its point of maximum exposure, [light condition] treating the [stunt performer type] as a cinematic subject at the moment of physical extremity, [environment] providing the scale and context of what is being risked, cinematic still frame, 16:9",
+    "video_prompt": "The [stunt type] plays out in real time — no slow motion, no stylisation, the [stunt performer type] committed fully from the point of no return through to the [landing or resolution], the camera at its fixed angle throughout, [light condition] catching every physical detail of the [stunt type] as it happens, the [environment] the same at the end as at the beginning — only the [stunt performer type]'s position having changed.",
+    "sfx_prompt": "The sounds of [stunt type] in [environment] — the physical sounds of the [stunt performer type]'s body and equipment at each phase of the [stunt type], [environment] acoustic, the [landing or resolution] sound at full physical reality — no softening, no score, the complete undesigned audio of a body doing something extreme",
+    "variables": {
+      "stunt performer type": {
+        "default": "stunt performer in civilian wardrobe",
+        "examples": [
+          "stunt double in character costume",
+          "action actor performing their own stunt",
+          "free runner"
+        ]
+      },
+      "stunt type": {
+        "default": "rooftop leap across a gap",
+        "examples": [
+          "controlled fall from height onto an airbag",
+          "vehicle transfer at speed",
+          "fire stunt in protective gear"
+        ]
+      },
+      "light condition": {
+        "default": "overcast city light — flat and revealing",
+        "examples": [
+          "dramatic low sun creating long shadow",
+          "interior practical light",
+          "night with artificial lighting"
+        ]
+      },
+      "environment": {
+        "default": "urban rooftop landscape",
+        "examples": [
+          "interior of a building",
+          "moving vehicle",
+          "controlled outdoor location"
+        ]
+      },
+      "landing or resolution": {
+        "default": "landing and immediate roll on the far roof",
+        "examples": [
+          "controlled impact on the mat",
+          "landing on the vehicle and holding",
+          "extinguishing of the fire suit"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "50mm",
+          "135mm",
+          "35mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles stunt sequence physics in real environments. Runway maintains stunt performer consistency through the action. Add 'cinematic stunt sequence real time no slow motion physical' for correct approach.",
+    "source_id": 166
+  },
+  {
+    "id": 223,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "Behind-the-scenes of a [film stunt type] being prepared — [lens] at mid-distance, [stunt coordinator type] with [stunt performer type] in the foreground, the [set or location] visible with [stunt rigging or equipment] in frame, [light condition] the working light of a film set, the preparation for something dangerous captured with the calm of professional routine, cinematic documentary-adjacent still frame, 16:9",
+    "video_prompt": "The preparation continues — [stunt coordinator type] and [stunt performer type] working through the [film stunt type] in slow walk-through, [stunt rigging or equipment] being checked and rechecked, the camera observing at a respectful distance, the [set or location] alive with the controlled activity of a stunt being made safe, one moment where [stunt performer type] stands alone at the [stunt start position] looking at the [stunt end point] — the pause before commitment.",
+    "sfx_prompt": "The working sounds of a film set preparing a stunt — [stunt rigging or equipment] sounds, the voices of the [stunt coordinator type] and crew at a working distance, [set or location] ambient, the particular focused quiet that falls when the [stunt performer type] takes their position — the whole crew holding still as the [stunt start position] is reached",
+    "variables": {
+      "film stunt type": {
+        "default": "high fall onto crash mat",
+        "examples": [
+          "wire-assisted fight sequence",
+          "vehicle roll",
+          "fire gag"
+        ]
+      },
+      "stunt coordinator type": {
+        "default": "stunt coordinator with headset",
+        "examples": [
+          "second unit director and stunt supervisor together",
+          "stunt rigger and coordinator",
+          "pyrotechnic supervisor"
+        ]
+      },
+      "stunt performer type": {
+        "default": "stunt performer in full costume",
+        "examples": [
+          "stunt double next to the actor they are doubling",
+          "stunt performer in protective gear under costume",
+          "fire stunt performer"
+        ]
+      },
+      "set or location": {
+        "default": "practical building interior dressed as a fictional location",
+        "examples": [
+          "exterior location with camera vehicles visible",
+          "controlled outdoor set",
+          "studio set with practical elements"
+        ]
+      },
+      "stunt rigging or equipment": {
+        "default": "high fall wire rig and mats visible",
+        "examples": [
+          "fight choreography marks on the floor",
+          "vehicle prep and safety equipment",
+          "fire gel application and protective suit"
+        ]
+      },
+      "light condition": {
+        "default": "set lighting mixed with practical working lights",
+        "examples": [
+          "exterior daylight with reflectors",
+          "interior set lighting at full output",
+          "mixed practical and film lighting"
+        ]
+      },
+      "stunt start position": {
+        "default": "fall point",
+        "examples": [
+          "fight start mark",
+          "vehicle entry point",
+          "ignition point"
+        ]
+      },
+      "stunt end point": {
+        "default": "the crash mat far below",
+        "examples": [
+          "the fight end position",
+          "the roll out point",
+          "the extinguishing zone"
+        ]
+      },
+      "lens": {
+        "default": "50mm",
+        "examples": [
+          "35mm",
+          "85mm",
+          "28mm"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles behind-the-scenes film set observation. Luma maintains the practical set detail and mixed lighting. Add 'film stunt preparation behind scenes documentary cinematic' for correct approach.",
+    "source_id": 167
+  },
+  {
+    "id": 224,
+    "category": "Abstract & Motion Art",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [stunt or extreme action type] shot in extreme macro — [lens] so close that the [stunt or extreme action type] is unrecognisable as what it is, only the [physical detail] visible at this scale, [light source] raking to reveal [texture or material in motion], the human body as landscape, photorealistic macro still frame, 16:9",
+    "video_prompt": "The [stunt or extreme action type] continues at extreme macro — the [physical detail] moving through frame in ways that read as abstract landscape before the eye resolves them into what they are, the [light source] catching [texture or material in motion] as it moves and deforms, the camera locked without movement as the action brings new [physical detail] through the macro field, the [stunt or extreme action type] over before the viewer has fully understood what they were watching.",
+    "sfx_prompt": "The close-mic sound of [physical detail] in motion during [stunt or extreme action type] — the specific acoustic of [texture or material in motion] at macro scale, sounds always present in extreme action but never isolated and heard this clearly, in complete audio isolation — no ambient, no music, just the body doing something extreme heard at a distance of millimetres",
+    "variables": {
+      "stunt or extreme action type": {
+        "default": "high fall impact",
+        "examples": [
+          "martial arts strike",
+          "sprint at full speed",
+          "vehicle jump landing"
+        ]
+      },
+      "physical detail": {
+        "default": "hands gripping a ledge at the moment of catch",
+        "examples": [
+          "knuckles of a fist at the moment of impact",
+          "feet on a surface at the moment of landing",
+          "a face in the moment of receiving an impact"
+        ]
+      },
+      "light source": {
+        "default": "single hard raking light",
+        "examples": [
+          "backlit to show translucency of skin",
+          "ring light revealing every surface detail",
+          "overhead raking at 45 degrees"
+        ]
+      },
+      "texture or material in motion": {
+        "default": "skin and tendons under extreme load",
+        "examples": [
+          "fabric deforming around the impact point",
+          "muscle under maximum contraction",
+          "skin and sweat at the moment of impact"
+        ]
+      },
+      "lens": {
+        "default": "100mm macro",
+        "examples": [
+          "85mm",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles extreme macro human detail in motion. Runway maintains texture focus through the macro action. Add 'extreme macro human body stunt action photorealistic abstract' for correct approach.",
+    "source_id": 168
+  },
+  {
+    "id": 225,
+    "category": "Abstract & Motion Art",
+    "style": "Photorealistic",
+    "best_on": [
+      "Luma",
+      "Sora"
+    ],
+    "audience": [
+      "Creator",
+      "Developer"
+    ],
+    "image_prompt": "A [stunt or extreme movement type] captured at [extreme frame rate] so slow that the motion becomes fully abstract — [lens] locked, the [stunt or extreme movement type] frozen into a form that has never existed at normal speed, [atmospheric element] suspended in absolute stillness around the moving body, [light source] finding [detail] that is invisible at any other speed, photorealistic ultra-slow-motion still frame, 16:9",
+    "video_prompt": "The [stunt or extreme movement type] plays out at [extreme frame rate] — the motion so slowed that each phase is a distinct composition, [atmospheric element] moving with the geological patience of something removed from human time, [detail] visible that exists for only a fraction of a millisecond at normal speed, the camera locked throughout, the [stunt or extreme movement type] taking the full duration to complete what takes a fraction of a second in reality — the entire film the exploration of one instant.",
+    "sfx_prompt": "The audio of [stunt or extreme movement type] pitch-shifted to match the [extreme frame rate] — the sounds of the action slowed to frequencies that sit below normal hearing and are felt rather than heard, [atmospheric element] sounds becoming deep resonant tones, [detail] sounds becoming long sustained notes, the entire sonic world of one instant of extreme action stretched across the full duration",
+    "variables": {
+      "stunt or extreme movement type": {
+        "default": "punching through a glass panel",
+        "examples": [
+          "landing from a fall",
+          "a vehicle impact",
+          "a controlled explosion effect"
+        ]
+      },
+      "extreme frame rate": {
+        "default": "10,000 frames per second",
+        "examples": [
+          "1,000 frames per second",
+          "5,000 frames per second",
+          "25,000 frames per second"
+        ]
+      },
+      "atmospheric element": {
+        "default": "glass fragments",
+        "examples": [
+          "water spray from impact",
+          "dust and debris",
+          "fabric and padding from the crash mat"
+        ]
+      },
+      "light source": {
+        "default": "high-speed strobe lighting for the frame rate",
+        "examples": [
+          "single hard side light",
+          "backlit to show translucency of material",
+          "overhead raking light"
+        ]
+      },
+      "detail": {
+        "default": "the stress fracture pattern in the glass propagating ahead of the fist",
+        "examples": [
+          "the exact moment the water surface breaks",
+          "the compression wave moving through the material",
+          "the fabric weave separating thread by thread"
+        ]
+      },
+      "lens": {
+        "default": "135mm",
+        "examples": [
+          "85mm",
+          "200mm",
+          "100mm macro"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles ultra-slow-motion photorealistic stunt capture. Sora manages the abstract quality of extreme slow motion. Add 'ultra slow motion extreme action abstract photorealistic high speed camera' for correct approach.",
+    "source_id": 169
+  },
+  {
+    "id": 226,
+    "category": "Abstract & Motion Art",
+    "style": "Surrealist",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator"
+    ],
+    "image_prompt": "A [stunt type] that [leaves impossible trace] — [lens] locked at the angle that best shows the [impossible trace] accumulating, the [stunt performer] executing the [stunt type] with complete physical commitment, the [impossible trace] visible as the primary visual event of the frame rather than the [stunt type] itself, [light source] treating the [impossible trace] as physically unremarkable, cinematic still frame, 16:9",
+    "video_prompt": "The [stunt type] continues and the [impossible trace] accumulates — each repetition or phase of the [stunt type] adding to the [impossible trace] until the frame is filled with the evidence of every movement made, the [stunt performer] moving through their own [impossible trace] as if it were simply the environment, the camera locked as the [impossible trace] builds to a point where the [stunt type] itself is obscured by its own record, the shot ending before the [impossible trace] fully resolves.",
+    "sfx_prompt": "The sounds of [stunt type] layered with the impossible sound of [impossible trace] forming — the [stunt type] sounds real and physical, the [impossible trace] sounds specific and committed to its impossible material properties, the two sound worlds building together as the [impossible trace] accumulates, neither acknowledging the other's impossibility",
+    "variables": {
+      "stunt type": {
+        "default": "repeated high falls",
+        "examples": [
+          "a fight sequence",
+          "a parkour run",
+          "a driving sequence"
+        ]
+      },
+      "impossible trace": {
+        "default": "each fall leaves a perfect frozen silhouette of the falling body suspended in the air at the exact moment of peak commitment — the air filling with multiple simultaneous versions of the stunt at different points",
+        "examples": [
+          "each movement leaves a line of light tracing the exact path taken — the space filling with the calligraphy of the stunt",
+          "each impact leaves the shape of the impact in the surface permanently — the floor becoming a record of every landing",
+          "each movement is duplicated three seconds later by a ghost version — the stunt and its echo performing together"
+        ]
+      },
+      "stunt performer": {
+        "default": "stunt performer in dark clothing",
+        "examples": [
+          "stunt performer in white",
+          "multiple stunt performers",
+          "a single performer whose [impossible trace] multiplies them"
+        ]
+      },
+      "light source": {
+        "default": "single overhead light",
+        "examples": [
+          "side light",
+          "backlit",
+          "ambient only"
+        ]
+      },
+      "lens": {
+        "default": "35mm",
+        "examples": [
+          "24mm",
+          "50mm",
+          "85mm"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles impossible physical traces accumulating around action. Runway maintains stunt performer consistency through the surreal accumulation. Add 'surrealist stunt impossible trace motion record abstract' for correct approach.",
+    "source_id": 170
   }
 ]
