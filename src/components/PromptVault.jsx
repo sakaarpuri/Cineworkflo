@@ -83,7 +83,10 @@ export default function PromptVault({ preview = false }) {
       style={{ background: 'transparent' }}
     >
       {/* Decorative gradient */}
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-32 bg-gradient-to-b from-purple-100 to-transparent opacity-30" />
+      <div
+        className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+        style={{ background: 'var(--section-top-fade)' }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {!preview && (
           <nav
@@ -115,7 +118,7 @@ export default function PromptVault({ preview = false }) {
                     : 'linear-gradient(145deg, #6366F1, #4F46E5)',
                   boxShadow: vaultToggle
                     ? 'inset 3px 3px 6px rgba(16,185,129,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(16,185,129,0.4)'
-                    : 'inset 3px 3px 6px rgba(99,102,241,0.5), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(99,102,241,0.4)',
+                    : 'var(--control-soft-shadow)',
                   border: `2px solid ${vaultToggle ? '#10B98150' : '#6366F150'}`
                 }}
                 aria-label="Explore Prompt Vault"
@@ -123,9 +126,9 @@ export default function PromptVault({ preview = false }) {
                 <span
                   className="absolute top-1 left-1 w-7 h-7 rounded-full transition-all duration-300 flex items-center justify-center"
                   style={{
-                    background: '#fff',
+                    background: 'var(--toggle-knob-bg)',
                     transform: vaultToggle ? 'translateX(38px)' : 'translateX(0)',
-                    boxShadow: '2px 2px 6px rgba(0,0,0,0.2), inset 1px 1px 2px rgba(255,255,255,0.8)'
+                    boxShadow: 'var(--toggle-knob-shadow)'
                   }}
                 >
                   <ArrowRight
@@ -211,7 +214,7 @@ export default function PromptVault({ preview = false }) {
                     border: `2px solid ${isActive ? catColor + '50' : 'var(--border-color)'}`,
                     boxShadow: isActive 
                       ? `inset 3px 3px 6px ${catColor}60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px ${catColor}40`
-                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                      : 'var(--control-soft-shadow)',
                     transform: isActive ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                 >

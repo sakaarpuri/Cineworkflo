@@ -64,6 +64,15 @@
     --hero-secondary-bg: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(255,255,255,0.64));
     --hero-secondary-shadow: inset 2px 2px 5px rgba(255,255,255,0.65), inset -2px -2px 5px rgba(255,255,255,0.38), 0 3px 10px rgba(15,23,42,0.08);
     --hero-secondary-text: var(--text-secondary);
+    --section-top-fade: linear-gradient(180deg, rgba(139,92,246,0.10), rgba(139,92,246,0));
+    --section-shell-shadow: inset 8px 8px 18px rgba(0,0,0,0.08), inset -8px -8px 18px rgba(255,255,255,0.85), 0 10px 28px rgba(15,23,42,0.08);
+    --control-soft-shadow: 8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5);
+    --control-soft-shadow-pressed: inset 4px 4px 8px rgba(15,23,42,0.16), inset -3px -3px 6px rgba(255,255,255,0.72);
+    --toggle-off-bg: linear-gradient(145deg, #D1D5DB, #9CA3AF);
+    --toggle-off-border: #9CA3AF55;
+    --toggle-off-shadow: inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2);
+    --toggle-knob-bg: linear-gradient(145deg, #FFFFFF, #F1F5F9);
+    --toggle-knob-shadow: 3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95);
   }
 
   [data-theme="dark"] {
@@ -107,6 +116,15 @@
     --hero-secondary-bg: linear-gradient(145deg, rgba(31,37,45,0.98), rgba(24,29,36,0.96));
     --hero-secondary-shadow: 0 16px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04);
     --hero-secondary-text: var(--text-primary);
+    --section-top-fade: linear-gradient(180deg, rgba(98,167,255,0.06), rgba(98,167,255,0));
+    --section-shell-shadow: 0 28px 54px rgba(0,0,0,0.34), 0 12px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 0 rgba(0,0,0,0.22);
+    --control-soft-shadow: 0 16px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04);
+    --control-soft-shadow-pressed: inset 0 1px 0 rgba(255,255,255,0.02), inset 8px 8px 16px rgba(0,0,0,0.24);
+    --toggle-off-bg: linear-gradient(145deg, rgba(47,53,61,0.98), rgba(33,38,45,0.96));
+    --toggle-off-border: rgba(255,255,255,0.08);
+    --toggle-off-shadow: 0 12px 24px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04);
+    --toggle-knob-bg: linear-gradient(145deg, #F3F6F8, #D9DEE4);
+    --toggle-knob-shadow: 0 2px 6px rgba(0,0,0,0.26);
   }
 
   /* Night mode gets subtle atmosphere instead of purple wash. */

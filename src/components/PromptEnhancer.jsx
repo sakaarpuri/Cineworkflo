@@ -536,7 +536,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         color: selected ? '#fff' : 'var(--text-secondary)',
         boxShadow: selected 
           ? `inset 3px 3px 6px ${color}60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px ${color}40`
-          : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+          : 'var(--control-soft-shadow)',
         transform: selected ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
       }}
     >
@@ -742,8 +742,8 @@ export default function PromptEnhancer({ onAuthClick }) {
                     className="absolute top-[3px] h-[24px] w-[24px] rounded-full transition-all duration-250"
                     style={{
                       left: skillLevel === 'pro' ? '38px' : '4px',
-                      background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
-                      boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                      background: 'var(--toggle-knob-bg)',
+                      boxShadow: 'var(--toggle-knob-shadow)'
                     }}
                   />
                 </button>
@@ -774,19 +774,19 @@ export default function PromptEnhancer({ onAuthClick }) {
                     style={{
                       background: includeImageDetails
                         ? 'linear-gradient(145deg, #22C55E, #16A34A)'
-                        : 'linear-gradient(145deg, #D1D5DB, #9CA3AF)',
-                      border: `2px solid ${includeImageDetails ? '#22C55E50' : '#9CA3AF55'}`,
+                        : 'var(--toggle-off-bg)',
+                      border: `2px solid ${includeImageDetails ? '#22C55E50' : 'var(--toggle-off-border)'}`,
                       boxShadow: includeImageDetails
                         ? 'inset 3px 3px 6px rgba(22,163,74,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(34,197,94,0.35)'
-                        : 'inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2)'
+                        : 'var(--toggle-off-shadow)'
                     }}
                   >
                     <span
                       className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-all duration-250"
                       style={{
                         left: includeImageDetails ? '35px' : '4px',
-                        background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
-                        boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                        background: 'var(--toggle-knob-bg)',
+                        boxShadow: 'var(--toggle-knob-shadow)'
                       }}
                     />
                   </button>
@@ -824,19 +824,19 @@ export default function PromptEnhancer({ onAuthClick }) {
                   style={{
                     background: includeAudioSfx
                       ? 'linear-gradient(145deg, #F97316, #EA580C)'
-                      : 'linear-gradient(145deg, #D1D5DB, #9CA3AF)',
-                    border: `2px solid ${includeAudioSfx ? '#F9731650' : '#9CA3AF55'}`,
+                      : 'var(--toggle-off-bg)',
+                    border: `2px solid ${includeAudioSfx ? '#F9731650' : 'var(--toggle-off-border)'}`,
                     boxShadow: includeAudioSfx
                       ? 'inset 3px 3px 6px rgba(194,65,12,0.55), inset -3px -3px 6px rgba(255,255,255,0.25), 0 6px 16px rgba(249,115,22,0.35)'
-                      : 'inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2)'
+                      : 'var(--toggle-off-shadow)'
                   }}
                 >
                   <span
                     className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-all duration-250"
                     style={{
                       left: includeAudioSfx ? '35px' : '4px',
-                      background: 'linear-gradient(145deg, #FFFFFF, #F1F5F9)',
-                      boxShadow: '3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95)'
+                      background: 'var(--toggle-knob-bg)',
+                      boxShadow: 'var(--toggle-knob-shadow)'
                     }}
                   />
                 </button>
@@ -920,7 +920,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                       border: `2px solid ${saveStatus === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                       boxShadow: saveStatus === 'saved'
                         ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                        : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)'
+                        : 'var(--control-soft-shadow)'
                     }}
                   >
                     {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved' : saveStatus === 'exists' ? 'Already Saved' : 'Save Prompt'}
@@ -937,7 +937,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                     boxShadow: copied 
                       ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                      : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                      : 'var(--control-soft-shadow)',
                     transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                 >
@@ -1000,7 +1000,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                         color: addedDetails.includes(detail.key) ? '#fff' : '#92400E',
                         boxShadow: addedDetails.includes(detail.key)
                           ? 'inset 4px 4px 8px rgba(217,119,6,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(245,158,11,0.4)'
-                          : '6px 6px 12px rgba(217,119,6,0.2), -6px -6px 12px rgba(255,255,255,0.8), inset 0 2px 0 rgba(255,255,255,0.9)',
+                          : 'var(--control-soft-shadow)',
                         transform: addedDetails.includes(detail.key) ? 'translateY(2px) scale(0.96)' : 'translateY(0) scale(1)',
                         textShadow: addedDetails.includes(detail.key) ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
                       }}
@@ -1046,7 +1046,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                         background: 'var(--bg-card)',
                         border: `2px solid ${interp.color}30`,
                         color: interp.color,
-                        boxShadow: '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+                        boxShadow: 'var(--control-soft-shadow)',
                         transform: 'translateY(0) scale(1)'
                       }}
                     >

@@ -235,7 +235,7 @@ export default function ShotToPrompt({ preview = false }) {
             border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
             boxShadow: copied 
               ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-              : '8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.8), inset 0 1px 0 rgba(255,255,255,0.5)',
+              : 'var(--control-soft-shadow)',
             transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
           }}
         >
@@ -280,7 +280,7 @@ export default function ShotToPrompt({ preview = false }) {
             style={{
               background: 'var(--bg-secondary)',
               border: '1px solid var(--border-color)',
-              boxShadow: 'inset 8px 8px 18px rgba(0,0,0,0.08), inset -8px -8px 18px rgba(255,255,255,0.85), 0 10px 28px rgba(15,23,42,0.08)'
+              boxShadow: 'var(--section-shell-shadow)'
             }}
           >
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -440,7 +440,7 @@ export default function ShotToPrompt({ preview = false }) {
           style={{
             background: 'var(--bg-secondary)',
             border: '1px solid var(--border-color)',
-            boxShadow: 'inset 8px 8px 18px rgba(0,0,0,0.08), inset -8px -8px 18px rgba(255,255,255,0.85), 0 10px 28px rgba(15,23,42,0.08)'
+            boxShadow: 'var(--section-shell-shadow)'
           }}
         >
         <nav
