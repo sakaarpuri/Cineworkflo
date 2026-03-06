@@ -4,6 +4,7 @@ import { Upload, Sparkles, Image as ImageIcon, Loader2, Wand2, X, Copy, Check } 
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 
+const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com'])
 const FREE_USAGE_KEY = 'cwfFreeUsageTotal'
 const FREE_USAGE_SCHEMA = 1
 const FREE_TOTAL_LIMIT = 5
@@ -36,6 +37,8 @@ export default function ShotToPrompt({ preview = false }) {
   const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
   const { user, isPro } = useAuth()
+  const hasForcedProAccess = FORCE_PRO_EMAILS.has(String(user?.email || '').trim().toLowerCase())
+  const canUsePro = isPro || hasForcedProAccess
 
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
   const MAX_UPLOAD_MB = 25
@@ -57,7 +60,7 @@ export default function ShotToPrompt({ preview = false }) {
   }, [usage.lastReset])
 
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count)
-  const isLimitReached = !isPro && remainingFree === 0
+  const isLimitReached = !canUsePro && remainingFree === 0
 
   const handleMediaUpload = async (e) => {
     const file = e.target.files?.[0]
@@ -175,7 +178,7 @@ export default function ShotToPrompt({ preview = false }) {
 
       if (data.prompt) {
         setGeneratedPrompt(data.prompt)
-        if (!isPro) {
+        if (!canUsePro) {
           const next = { count: usage.count + 1, lastReset: usage.lastReset }
           setUsage(next)
           saveSharedUsage(next)
@@ -301,7 +304,7 @@ export default function ShotToPrompt({ preview = false }) {
               >
                 See a shot you love? Steal the prompt.
               </h2>
-              {!isPro && (
+              {!canUsePro && (
                 <div className="mb-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
                   style={{
                     background: remainingFree <= 1 ? 'var(--accent-red)15' : 'var(--bg-card)',
@@ -463,7 +466,7 @@ export default function ShotToPrompt({ preview = false }) {
           <p style={{ color: 'var(--text-secondary)' }}>
             Upload any frame from a film, ad, or your own footage and we&apos;ll reverse-engineer the exact prompt to recreate it.
           </p>
-          {!isPro && (
+          {!canUsePro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
               style={{
                 background: remainingFree <= 1 ? 'var(--accent-red)15' : 'var(--bg-card)',

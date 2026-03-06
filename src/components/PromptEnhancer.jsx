@@ -3,6 +3,7 @@ import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus } from 'lu
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 
+const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com']);
 const MOODS = ["Epic", "Dramatic", "Thought-Provoking", "Whimsical", "Serene", "Mysterious", "Energetic", "Eerie", "Calm", "Surreal", "Hopeful", "Melancholic", "Tense", "Playful", "Dreamlike"];
 const MOOD_COLORS = {
   "Epic": "#8B5CF6",
@@ -338,6 +339,8 @@ export default function PromptEnhancer({ onAuthClick }) {
   const requestIdRef = useRef(0);
   
   const { user, session, isPro } = useAuth();
+  const hasForcedProAccess = FORCE_PRO_EMAILS.has(String(user?.email || '').trim().toLowerCase());
+  const canUsePro = isPro || hasForcedProAccess;
 
   const [themeMode, setThemeMode] = useState(() => {
     try {
@@ -369,10 +372,10 @@ export default function PromptEnhancer({ onAuthClick }) {
     } else {
       setUsage(data);
     }
-  }, [isPro]);
+  }, [canUsePro]);
 
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count);
-  const isLimitReached = !isPro && remainingFree === 0;
+  const isLimitReached = !canUsePro && remainingFree === 0;
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
 
   const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
@@ -407,7 +410,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         throw new Error(data?.error || `Enhancer failed (${response.status})`)
       }
 
-      if (!isPro && !interpretationStyle && !isAutoUpdate) {
+      if (!canUsePro && !interpretationStyle && !isAutoUpdate) {
         const nextUsage = { ...usage, count: usage.count + 1 };
         saveUsageData(nextUsage);
         setUsage(nextUsage);
@@ -430,7 +433,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     if (requestId === requestIdRef.current) {
       setLoading(false);
     }
-  }, [canSubmit, idea, mood, useCase, skillLevel, isPro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick, usage]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick, usage]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -572,7 +575,7 @@ export default function PromptEnhancer({ onAuthClick }) {
           </h2>
           
           {/* Usage Counter for Free Users */}
-          {!isPro && (
+          {!canUsePro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
               style={{ 
                 background: remainingFree <= 1 ? 'var(--accent-red)15' : 'var(--bg-card)',
@@ -598,7 +601,7 @@ export default function PromptEnhancer({ onAuthClick }) {
           )}
           
           {/* Pro Badge */}
-          {isPro && (
+          {canUsePro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
               style={{ 
                 background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)',

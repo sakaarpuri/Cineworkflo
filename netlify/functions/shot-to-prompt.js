@@ -6,6 +6,7 @@ const MODEL_FALLBACK = [
 ];
 
 const { createClient } = require('@supabase/supabase-js');
+const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com']);
 
 const getEnvInt = (key, fallback) => {
   const raw = process.env[key];
@@ -36,6 +37,8 @@ const getBearerToken = (event) => {
 };
 
 const isProUser = (user) => {
+  const email = String(user?.email || '').trim().toLowerCase();
+  if (FORCE_PRO_EMAILS.has(email)) return true;
   const meta = user?.user_metadata || {};
   if (meta.is_pro !== true) return false;
   if (!meta.pro_expires_at) return true;
