@@ -107,7 +107,7 @@ export default function PromptVault({ preview = false }) {
                 className="text-3xl lg:text-4xl font-bold"
                 style={{ color: 'var(--text-primary)' }}
               >
-                a vault of prompts.....
+                Prompt Vault
               </h2>
               <button
                 onClick={handleVaultToggle}
@@ -145,7 +145,7 @@ export default function PromptVault({ preview = false }) {
               className="text-3xl lg:text-4xl font-bold mb-4"
               style={{ color: 'var(--text-primary)' }}
             >
-              a vault of prompts.....
+              Prompt Vault
             </h2>
           )}
           <p 

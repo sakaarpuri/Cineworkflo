@@ -547,7 +547,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   return (
     <section 
       id="prompt-enhancer"
-      className="pt-6 pb-12 transition-colors relative overflow-hidden"
+      className="pt-10 pb-12 transition-colors relative overflow-hidden"
       style={{ background: 'transparent' }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, Film, Sun, Moon, LogOut, Settings, Sparkles } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import UserSettingsModal from './UserSettingsModal'
 
@@ -14,8 +14,6 @@ export default function Header({ onAuthClick }) {
     if (saved === 'light' || saved === 'dark') return saved
     return 'dark'
   })
-  const location = useLocation()
-  const isVaultPage = location?.pathname === '/prompts'
   const isDark = theme === 'dark'
 
   useEffect(() => {
@@ -376,48 +374,6 @@ export default function Header({ onAuthClick }) {
           </div>
         )}
       </div>
-      {user && (
-        <div className="hidden md:block fixed left-4 bottom-4 z-40">
-          <div
-            className="rounded-xl px-3 py-2 flex items-center gap-3"
-            style={{
-              background: isVaultPage ? 'rgba(22,22,24,0.92)' : 'var(--bg-card)',
-              border: isVaultPage ? '1px solid rgba(255,255,255,0.12)' : '1px solid var(--border-color)',
-              boxShadow: isVaultPage
-                ? '0 18px 40px rgba(0,0,0,0.55)'
-                : '0 6px 14px rgba(15,23,42,0.04), 3px 3px 7px rgba(15,23,42,0.07), -3px -3px 6px rgba(255,255,255,0.82)'
-            }}
-          >
-            <div
-              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold"
-              style={{
-                background: isVaultPage ? 'rgba(79,142,247,0.18)' : 'var(--accent-blue)20',
-                color: isVaultPage ? '#4F8EF7' : 'var(--accent-blue)'
-              }}
-            >
-              {(displayName || 'U').slice(0, 1).toUpperCase()}
-            </div>
-            <div className="min-w-0">
-              <div
-                className="text-sm font-semibold truncate"
-                style={{
-                  color: isVaultPage ? 'rgba(255,255,255,0.92)' : 'var(--text-primary)',
-                  maxWidth: '120px'
-                }}
-              >
-                {displayName}
-              </div>
-              <button
-                onClick={() => setIsSettingsOpen(true)}
-                className="text-xs font-medium hover:underline"
-                style={{ color: isVaultPage ? 'rgba(231,231,234,0.70)' : 'var(--text-secondary)' }}
-              >
-                User Settings
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
       <UserSettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </header>
   )

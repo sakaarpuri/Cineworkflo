@@ -73,6 +73,7 @@
     --toggle-off-shadow: inset 3px 3px 6px rgba(75,85,99,0.35), inset -3px -3px 6px rgba(255,255,255,0.35), 0 6px 16px rgba(75,85,99,0.2);
     --toggle-knob-bg: linear-gradient(145deg, #FFFFFF, #F1F5F9);
     --toggle-knob-shadow: 3px 3px 6px rgba(15,23,42,0.25), inset 1px 1px 2px rgba(255,255,255,0.95);
+    --surface-highlight: inset 0 1px 0 rgba(255,255,255,0.92), inset 0 -1px 0 rgba(255,255,255,0.38);
   }
 
   [data-theme="dark"] {
@@ -125,6 +126,7 @@
     --toggle-off-shadow: 0 12px 24px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04);
     --toggle-knob-bg: linear-gradient(145deg, #F3F6F8, #D9DEE4);
     --toggle-knob-shadow: 0 2px 6px rgba(0,0,0,0.26);
+    --surface-highlight: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.28);
   }
 
   /* Night mode gets subtle atmosphere instead of purple wash. */
@@ -171,7 +173,7 @@
     pointer-events: none;
     /* Keep card depth soft and rubbery (no hard frame-like edges). */
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.92);
+      var(--surface-highlight);
     opacity: 0.9;
   }
 
@@ -183,32 +185,30 @@
 
   .neu-button {
     background: var(--bg-card);
-    box-shadow: 0 14px 30px rgba(15,23,42,0.05), 6px 6px 14px rgba(15,23,42,0.10), -6px -6px 12px rgba(255,255,255,0.78);
+    box-shadow: 0 18px 34px rgba(15,23,42,0.06), 8px 8px 18px rgba(15,23,42,0.10), -8px -8px 16px rgba(255,255,255,0.84), var(--surface-highlight);
     border: 1px solid var(--border-color);
     border-radius: 10px;
     transition: all 0.2s ease;
   }
 
   .neu-button:hover {
-    box-shadow: 0 18px 44px rgba(15,23,42,0.06), 8px 8px 18px rgba(15,23,42,0.12), -8px -8px 14px rgba(255,255,255,0.82);
+    box-shadow: 0 24px 48px rgba(15,23,42,0.07), 10px 10px 20px rgba(15,23,42,0.12), -10px -10px 18px rgba(255,255,255,0.86), var(--surface-highlight);
   }
 
   .neu-button:active {
-    box-shadow: var(--shadow-inset);
+    box-shadow: var(--control-soft-shadow-pressed);
   }
 
   [data-theme="dark"] .neu-button {
-    box-shadow: 0 18px 34px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.04);
+    box-shadow: var(--control-soft-shadow), var(--surface-highlight);
   }
 
   [data-theme="dark"] .neu-button:hover {
-    box-shadow: 0 22px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 20px 36px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.24);
   }
 
   [data-theme="dark"] .neu-card::before {
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.06),
-      inset 0 -1px 0 rgba(0,0,0,0.25);
+    box-shadow: var(--surface-highlight);
     opacity: 0.7;
   }
 
