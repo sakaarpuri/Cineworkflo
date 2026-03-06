@@ -339,6 +339,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [useCase, setUseCase] = useState("");
   const [skillLevel, setSkillLevel] = useState('beginner'); // 'beginner' | 'pro'
   const [loading, setLoading] = useState(false);
+  const [loadingMode, setLoadingMode] = useState('');
   const [baseResult, setBaseResult] = useState(null);
   const [result, setResult] = useState(null);
   const [copied, setCopied] = useState(false);
@@ -356,6 +357,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [outputMode, setOutputMode] = useState('standard');
   const [startFramePrompt, setStartFramePrompt] = useState('');
   const [endFrameDirection, setEndFrameDirection] = useState('');
+  const [motionDirection, setMotionDirection] = useState('');
   const [endFramePrompt, setEndFramePrompt] = useState('');
   const [motionPrompt, setMotionPrompt] = useState('');
   const [currentGroupId, setCurrentGroupId] = useState('');
@@ -401,6 +403,15 @@ export default function PromptEnhancer({ onAuthClick }) {
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count);
   const isLimitReached = !canUsePro && remainingFree === 0;
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
+  const enhanceButtonLabel = loading
+    ? (loadingMode === 'motion'
+        ? 'Building Motion...'
+        : loadingMode === 'interpretation'
+          ? 'Enhancing...'
+          : includeImageDetails
+            ? 'Building Start Frame...'
+            : 'Building Prompt...')
+    : 'Enhance';
 
   const getValidAccessToken = useCallback(async () => {
     if (session?.access_token) return session.access_token;
@@ -436,6 +447,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     if (!canSubmit && !interpretationStyle) return;
     const requestId = ++requestIdRef.current;
     setLoading(true);
+    setLoadingMode(interpretationStyle ? 'interpretation' : 'enhance');
     setCopied(false);
     setGenerationError('');
 
@@ -448,6 +460,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       if (!accessToken) {
         onAuthClick?.()
         setLoading(false);
+        setLoadingMode('');
         return;
       }
 
@@ -483,6 +496,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         setStartFramePrompt(buildFramePrompt(nextResult));
         setEndFramePrompt('');
         setMotionPrompt('');
+        setMotionDirection('');
         setOutputMode('frame');
         setCurrentGroupId('');
       } else {
@@ -492,6 +506,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         setOutputMode('standard');
         setCurrentGroupId('');
         setEndFrameDirection('');
+        setMotionDirection('');
       }
       setHasGeneratedOnce(true);
       setSaveStatus(EMPTY_SAVE_STATUS);
@@ -504,6 +519,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     }
     if (requestId === requestIdRef.current) {
       setLoading(false);
+      setLoadingMode('');
     }
   }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, getValidAccessToken, onAuthClick, requestEnhancedPrompt, usage]);
 
@@ -564,6 +580,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setStartFramePrompt(buildFramePrompt(nextResult));
       setEndFramePrompt('');
       setMotionPrompt('');
+      setMotionDirection('');
       setOutputMode('frame');
       setCurrentGroupId('');
       setSaveStatus((previous) => ({ ...previous, end_frame: 'idle', motion_prompt: 'idle' }));
@@ -577,6 +594,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setMotionPrompt('');
       setOutputMode('standard');
       setEndFrameDirection('');
+      setMotionDirection('');
       setCurrentGroupId('');
     }
   }, [includeImageDetails]);
@@ -594,6 +612,16 @@ export default function PromptEnhancer({ onAuthClick }) {
     navigator.clipboard.writeText(text);
     setCopiedSection(key);
     setTimeout(() => setCopiedSection(''), 2000);
+  };
+
+  const getMotionGuidanceText = () => {
+    if (motionDirection.trim()) {
+      return 'We’ll use your motion direction and clean it into a stronger motion prompt.';
+    }
+    if (endFrameDirection.trim()) {
+      return 'We’ll bridge your start frame to the derived end frame.';
+    }
+    return 'We’ll infer a natural motion path from your start frame.';
   };
 
   const savePromptVariant = async ({ saveMode, promptText, ideaLabel, variantType, linkedFromVariant = null, framePromptText = null, targetFramePrompt = null }) => {
@@ -643,6 +671,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     if (!startFramePrompt) return;
     const requestId = ++requestIdRef.current;
     setLoading(true);
+    setLoadingMode('motion');
     setGenerationError('');
     try {
       const accessToken = await getValidAccessToken();
@@ -659,6 +688,7 @@ export default function PromptEnhancer({ onAuthClick }) {
           idea,
           framePrompt: startFramePrompt,
           endFrameDirection,
+          motionDirection,
           mood,
           useCase,
           skillLevel
@@ -676,6 +706,7 @@ export default function PromptEnhancer({ onAuthClick }) {
           idea,
           framePrompt: startFramePrompt,
           endFrameDirection,
+          motionDirection,
           mood,
           useCase,
           skillLevel
@@ -699,6 +730,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     }
     if (requestId === requestIdRef.current) {
       setLoading(false);
+      setLoadingMode('');
     }
   };
 
@@ -825,21 +857,23 @@ export default function PromptEnhancer({ onAuthClick }) {
             {/* Enhance Button - Orange Neumorphic Main Button */}
             <button
               onClick={() => handleEnhance(false)}
+              disabled={loading || !canSubmit}
               className="px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
               style={{
-                background: canSubmit 
+                background: loading || canSubmit
                   ? 'linear-gradient(145deg, #FF6B35, #FF6B35DD)' 
                   : 'linear-gradient(145deg, #E5E7EB, #D1D5DB)',
-                color: canSubmit ? '#fff' : '#4B5563',
-                cursor: 'pointer',
-                border: `2px solid ${canSubmit ? '#FF6B3550' : 'var(--border-color)'}`,
-                boxShadow: canSubmit 
+                color: loading || canSubmit ? '#fff' : '#4B5563',
+                cursor: loading ? 'progress' : (canSubmit ? 'pointer' : 'not-allowed'),
+                border: `2px solid ${loading || canSubmit ? '#FF6B3550' : 'var(--border-color)'}`,
+                boxShadow: loading || canSubmit
                   ? 'inset 3px 3px 6px rgba(255,107,53,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(255,107,53,0.4)'
                   : 'inset 3px 3px 6px rgba(107,114,128,0.18), inset -3px -3px 6px rgba(255,255,255,0.72), 0 4px 12px rgba(107,114,128,0.18)',
-                transform: 'translateY(0) scale(1)'
+                transform: loading ? 'translateY(1px) scale(0.985)' : 'translateY(0) scale(1)',
+                opacity: 1
               }}
               onMouseDown={(e) => {
-                if (canSubmit) {
+                if (loading || canSubmit) {
                   e.currentTarget.style.transform = 'translateY(2px) scale(0.96)';
                   e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(255,107,53,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(255,107,53,0.3)';
                 } else {
@@ -867,9 +901,12 @@ export default function PromptEnhancer({ onAuthClick }) {
               }}
             >
               {loading ? (
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  {enhanceButtonLabel}
+                </>
               ) : (
-                <><Wand2 className="h-4 w-4" /> Enhance</>
+                <><Wand2 className="h-4 w-4" /> {enhanceButtonLabel}</>
               )}
             </button>
           </div>
@@ -877,10 +914,11 @@ export default function PromptEnhancer({ onAuthClick }) {
           {/* Options - Stacked for better chip wrapping */}
           <div className="space-y-3 text-sm">
             {/* Skill Level Toggle */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="pb-3 border-b" style={{ borderColor: 'var(--border-color)' }}>
               <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 min-w-[40px]">Level</span>
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="flex items-center gap-2">
+              <div className="mt-2 flex flex-col gap-3">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-2">
                 <span
                   className="text-xs font-semibold transition-all"
                   style={{
@@ -944,8 +982,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                 >
                   camera + lens
                 </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
+
+                <div className="flex items-center gap-2 flex-nowrap min-w-0">
                   <span
                     className="text-xs font-semibold transition-all"
                     style={{ color: includeImageDetails ? 'var(--text-muted)' : '#6B7280' }}
@@ -992,15 +1032,23 @@ export default function PromptEnhancer({ onAuthClick }) {
                       border: '1px solid var(--border-color)'
                     }}
                   >
-                    start frame flow
+                    create a START FRAME
                   </span>
                 </div>
+
+                {includeImageDetails && (
+                  <div className="pl-0 sm:pl-[43px]">
+                    <span className="text-xs block" style={{ color: 'var(--text-muted)' }}>
+                      Create your shot’s start frame. Optionally define how it ends, then generate motion between them.
+                    </span>
+                  </div>
+                )}
               </div>
-              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                {includeImageDetails
-                  ? 'Create your shot’s start frame. Optionally define how it ends, then generate motion between them.'
-                  : (skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications')}
-              </span>
+              {!includeImageDetails && (
+                <span className="text-xs block mt-2" style={{ color: 'var(--text-muted)' }}>
+                  {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
+                </span>
+              )}
             </div>
 
             {/* SFX Toggle */}
@@ -1241,6 +1289,30 @@ export default function PromptEnhancer({ onAuthClick }) {
                   </p>
                 </div>
 
+                <div className="rounded-xl p-4" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)' }}>
+                  <label className="block text-xs font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                    Optional motion direction
+                  </label>
+                  <input
+                    value={motionDirection}
+                    onChange={(event) => {
+                      setMotionDirection(event.target.value);
+                      setMotionPrompt('');
+                      setSaveStatus((previous) => ({ ...previous, motion_prompt: 'idle' }));
+                    }}
+                    placeholder="slow push in as she turns toward camera"
+                    className="w-full px-4 py-3 rounded-xl outline-none transition-all"
+                    style={{
+                      background: 'var(--bg-secondary)',
+                      border: '2px solid var(--border-color)',
+                      color: 'var(--text-primary)'
+                    }}
+                  />
+                  <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                    Describe the movement in your own words. We’ll convert it into a cleaner motion prompt.
+                  </p>
+                </div>
+
                 <div className="flex items-center gap-2 flex-wrap">
                   <button
                     onClick={handleGenerateMotionPrompt}
@@ -1256,7 +1328,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     {loading ? 'Generating...' : motionPrompt ? 'Regenerate Motion Prompt' : 'Generate Motion Prompt'}
                   </button>
                   <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    {endFrameDirection.trim() ? 'Motion will bridge your start frame to the derived end frame.' : 'Motion will evolve from the saved start frame.'}
+                    {getMotionGuidanceText()}
                   </span>
                 </div>
 

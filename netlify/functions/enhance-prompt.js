@@ -274,6 +274,7 @@ exports.handler = async (event) => {
       idea = '',
       framePrompt = '',
       endFrameDirection = '',
+      motionDirection = '',
       mood = '',
       useCase = '',
       tool = 'General',
@@ -286,6 +287,7 @@ exports.handler = async (event) => {
     const trimmedIdea = normalizeText(idea);
     const trimmedFramePrompt = normalizeText(framePrompt);
     const trimmedEndFrameDirection = normalizeText(endFrameDirection);
+    const trimmedMotionDirection = normalizeText(motionDirection);
     const isBeginner = skillLevel === 'beginner';
 
     if (mode === 'frame_to_motion') {
@@ -308,6 +310,9 @@ Rules:
 - The start frame is the primary visual anchor.
 - Preserve the same subject, world, style, palette, and core scene identity.
 - Only change what the end-frame direction explicitly asks for.
+- If a user motion direction is provided, treat it as priority intent for how movement should feel and unfold.
+- Rewrite the user motion direction into stronger cinematic prompt language instead of copying it verbatim.
+- If the user motion direction and end-frame direction pull in different directions, reconcile them while preserving continuity from the start frame.
 - The motion prompt must describe temporal change, camera behavior, subject behavior, and how the shot resolves.
 - Do not rewrite the whole scene from scratch.
 - Keep language ${isBeginner ? 'simple and direct' : 'professional and cinematic'}.
@@ -316,6 +321,7 @@ Rules:
 Idea: ${trimmedIdea || 'Not specified'}
 Start frame prompt: ${trimmedFramePrompt}
 Ending direction: ${trimmedEndFrameDirection || 'None supplied'}
+Motion direction: ${trimmedMotionDirection || 'None supplied'}
 Mood: ${mood || 'Not specified'}
 Use case: ${useCase || 'Not specified'}
 Skill level: ${skillLevel}
