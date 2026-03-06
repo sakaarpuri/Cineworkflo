@@ -391,6 +391,36 @@ export default function PromptEnhancer({ onAuthClick }) {
   const isLimitReached = !canUsePro && remainingFree === 0;
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
 
+  const getValidAccessToken = useCallback(async () => {
+    if (session?.access_token) return session.access_token;
+
+    const { data: latestAuth } = await supabase.auth.getSession();
+    if (latestAuth?.session?.access_token) return latestAuth.session.access_token;
+
+    const { data: refreshed, error } = await supabase.auth.refreshSession();
+    if (error) return '';
+    return refreshed?.session?.access_token || '';
+  }, [session]);
+
+  const requestEnhancedPrompt = useCallback(async (payload, accessToken) => {
+    const response = await fetch('/.netlify/functions/enhance-prompt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(data?.error || `Enhancer failed (${response.status})`);
+      error.status = response.status;
+      throw error;
+    }
+    return data;
+  }, []);
+
   const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
     if (!canSubmit && !interpretationStyle) return;
     const requestId = ++requestIdRef.current;
@@ -403,24 +433,26 @@ export default function PromptEnhancer({ onAuthClick }) {
         ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx, includeImages: includeImageDetails }
         : { idea, mood, useCase, skillLevel, includeAudioSfx, includeImages: includeImageDetails };
 
-      if (!session?.access_token) {
+      const accessToken = await getValidAccessToken();
+      if (!accessToken) {
         onAuthClick?.()
         setLoading(false);
         return;
       }
 
-      const response = await fetch('/.netlify/functions/enhance-prompt', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`
-        },
-        body: JSON.stringify(promptPayload)
-      });
+      let data;
+      try {
+        data = await requestEnhancedPrompt(promptPayload, accessToken);
+      } catch (err) {
+        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
+        if (!shouldRetryAuth) throw err;
 
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data?.error || `Enhancer failed (${response.status})`)
+        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
+        const refreshedToken = refreshed?.session?.access_token;
+        if (refreshError || !refreshedToken) {
+          throw new Error('Session expired. Please sign in again.');
+        }
+        data = await requestEnhancedPrompt(promptPayload, refreshedToken);
       }
 
       if (!canUsePro && !interpretationStyle && !isAutoUpdate) {
@@ -446,7 +478,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     if (requestId === requestIdRef.current) {
       setLoading(false);
     }
-  }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, session, onAuthClick, usage]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, getValidAccessToken, onAuthClick, requestEnhancedPrompt, usage]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
