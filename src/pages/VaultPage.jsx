@@ -68,6 +68,7 @@ const renderTemplateNodes = (template, valueByNormKey) => {
 
 const TOOL_NAMES = new Set(['Runway', 'Kling', 'Luma', 'Pika', 'Sora', 'Higgsfield', 'Google Veo', 'HeyGen'])
 const TOOL_BOLD_RE = /\b(Runway|Kling|Luma|Pika|Sora|Higgsfield|Google Veo|HeyGen)\b/g
+const EMPTY_SAVE_STATUS = { video: 'idle', start_frame: 'idle', end_frame: 'idle' }
 
 function ToolNotes({ text }) {
   const raw = String(text || '')
@@ -114,7 +115,7 @@ function CopyButton({ onCopy, copied }) {
   )
 }
 
-function SaveButton({ onSave, status }) {
+function SaveButton({ onSave, status, label = 'Save' }) {
   const saving = status === 'saving'
   const saved = status === 'saved' || status === 'exists'
 
@@ -141,7 +142,7 @@ function SaveButton({ onSave, status }) {
       }}
     >
       {saved ? <Check size={16} /> : <BookmarkPlus size={16} />}
-      {saving ? 'Saving…' : saved ? 'Saved' : 'Save'}
+      {saving ? 'Saving…' : saved ? 'Saved' : label}
     </button>
   )
 }
@@ -282,7 +283,7 @@ function PromptCard({ prompt, globalView }) {
   const { user } = useAuth()
   const [expanded, setExpanded] = useState(false)
   const [copiedKey, setCopiedKey] = useState(null) // 'image' | 'video' | 'sfx' | null
-  const [saveStatus, setSaveStatus] = useState('idle') // idle | saving | saved | exists | error
+  const [saveStatus, setSaveStatus] = useState(EMPTY_SAVE_STATUS)
   const [lastSavedText, setLastSavedText] = useState('')
   const [varValues, setVarValues] = useState(() => {
     const next = {}
@@ -304,11 +305,14 @@ function PromptCard({ prompt, globalView }) {
 
   useEffect(() => {
     if (!lastSavedText) return
-    if (String(filledVideo || '').trim() !== String(lastSavedText || '').trim()) {
-      setSaveStatus('idle')
+    const savedText = String(lastSavedText || '').trim()
+    const currentVideo = String(filledVideo || '').trim()
+    const currentImage = String(filledImage || '').trim()
+    if (savedText !== currentVideo && savedText !== currentImage) {
+      setSaveStatus(EMPTY_SAVE_STATUS)
       setLastSavedText('')
     }
-  }, [filledVideo, lastSavedText])
+  }, [filledVideo, filledImage, lastSavedText])
 
   const imageNodes = useMemo(() => renderTemplateNodes(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
   const videoNodes = useMemo(() => renderTemplateNodes(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
@@ -412,45 +416,57 @@ function PromptCard({ prompt, globalView }) {
 
   const keyVars = useMemo(() => pickKeyVariables(prompt.variables), [prompt.variables])
 
-  const handleSave = async () => {
+  const handleSave = async (saveMode = 'video') => {
     if (!user) return
-    if (saveStatus === 'saving' || saveStatus === 'saved' || saveStatus === 'exists') return
-    setSaveStatus('saving')
+    if (saveStatus[saveMode] === 'saving' || saveStatus[saveMode] === 'saved' || saveStatus[saveMode] === 'exists') return
+    setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saving' }))
+    const isFrameSave = saveMode === 'start_frame' || saveMode === 'end_frame'
+    const framePrompt = String(filledImage || '').trim()
+    const promptToSave = isFrameSave ? framePrompt : String(filledVideo || '').trim()
+    const frameLabel = saveMode === 'start_frame' ? 'Start Frame' : saveMode === 'end_frame' ? 'End Frame' : null
+    if (!promptToSave) {
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }))
+      window.setTimeout(() => setSaveStatus((previous) => ({ ...previous, [saveMode]: 'idle' })), 2500)
+      return
+    }
 
     const payload = {
       user_id: user.id,
-      idea: heading || `Prompt #${prompt.id}`,
-      prompt: String(filledVideo || '').trim(),
+      idea: frameLabel ? `${heading || `Prompt #${prompt.id}`} — ${frameLabel}` : heading || `Prompt #${prompt.id}`,
+      prompt: promptToSave,
       mood: null,
       use_case: null,
       skill_level: 'vault',
       include_audio_sfx: Boolean(String(filledSfx || '').trim()),
-      include_image_details: Boolean(String(filledImage || '').trim()),
+      include_image_details: Boolean(framePrompt),
       metadata: {
         source: 'prompt_vault',
         library_id: prompt.id,
         category: prompt.category,
         style: prompt.style,
         best_on: bestOn,
-        image_prompt: String(filledImage || '').trim(),
+        image_prompt: framePrompt,
         sfx_prompt: String(filledSfx || '').trim(),
         variables: varValues,
+        save_mode: saveMode,
+        frame_role: isFrameSave ? saveMode : null,
+        video_prompt: String(filledVideo || '').trim(),
       },
     }
 
     const { error } = await supabase.from('saved_prompts').insert(payload)
     if (!error) {
-      setSaveStatus('saved')
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saved' }))
       setLastSavedText(payload.prompt)
       return
     }
     if (error.code === '23505') {
-      setSaveStatus('exists')
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'exists' }))
       setLastSavedText(payload.prompt)
       return
     }
-    setSaveStatus('error')
-    window.setTimeout(() => setSaveStatus('idle'), 2500)
+    setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }))
+    window.setTimeout(() => setSaveStatus((previous) => ({ ...previous, [saveMode]: 'idle' })), 2500)
   }
 
   return (
@@ -509,7 +525,7 @@ function PromptCard({ prompt, globalView }) {
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end', alignItems: 'center' }}>
-          {user && <SaveButton onSave={handleSave} status={saveStatus} />}
+          {user && <SaveButton onSave={() => handleSave('video')} status={saveStatus.video} />}
           {bestOn.map((tool, idx) => (
             <span
               key={`${prompt.id}-${tool}-${idx}`}
@@ -631,6 +647,12 @@ function PromptCard({ prompt, globalView }) {
               onCopy={() => copyText('image', filledImage)}
               highlight={true}
             />
+            {user && String(filledImage || '').trim() && (
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                <SaveButton onSave={() => handleSave('start_frame')} status={saveStatus.start_frame} label="Save Start Frame" />
+                <SaveButton onSave={() => handleSave('end_frame')} status={saveStatus.end_frame} label="Save End Frame" />
+              </div>
+            )}
             <PromptBlock
               label="🎥 VIDEO PROMPT"
               color={COLOR.purple}

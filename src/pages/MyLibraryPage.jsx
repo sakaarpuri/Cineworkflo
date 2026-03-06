@@ -23,7 +23,7 @@ export default function MyLibraryPage() {
       setError('')
       const { data, error: fetchError } = await supabase
         .from('saved_prompts')
-        .select('id, idea, prompt, mood, use_case, skill_level, include_audio_sfx, include_image_details, created_at')
+        .select('id, idea, prompt, mood, use_case, skill_level, include_audio_sfx, include_image_details, metadata, created_at')
         .order('created_at', { ascending: false })
 
       if (fetchError) {
@@ -159,6 +159,11 @@ export default function MyLibraryPage() {
                   {item.prompt}
                 </div>
                 <div className="flex gap-2 flex-wrap mt-3">
+                  {(item.metadata?.frame_role === 'start_frame' || item.metadata?.frame_role === 'end_frame') && (
+                    <span className="text-xs px-2 py-1 rounded" style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}>
+                      {item.metadata.frame_role === 'start_frame' ? 'Start frame' : 'End frame'}
+                    </span>
+                  )}
                   {item.skill_level && (
                     <span className="text-xs px-2 py-1 rounded" style={{ background: 'var(--bg-primary)', color: 'var(--text-muted)' }}>
                       {item.skill_level}

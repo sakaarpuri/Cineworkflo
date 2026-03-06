@@ -316,6 +316,19 @@ const applySelectedProDetails = (prompt, detailKeys) => {
   return detailKeys.reduce((current, key) => `${current}${PRO_DETAIL_TEXT[key] || ''}`, base).trim();
 };
 
+const buildFramePrompt = (prompt) => {
+  const raw = String(prompt || '').trim();
+  if (!raw) return '';
+  return raw
+    .split(/(?<=[.!?])\s+/)
+    .filter((line) => !/^Audio\/SFX:/i.test(line.trim()))
+    .join(' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+};
+
+const EMPTY_SAVE_STATUS = { video: 'idle', start_frame: 'idle', end_frame: 'idle' };
+
 export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
   const [mood, setMood] = useState("");
@@ -333,7 +346,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner", includeAudioSfx: false, includeImageDetails: false });
   const levelPulseTimeoutRef = useRef(null);
   const [levelPulse, setLevelPulse] = useState('');
-  const [saveStatus, setSaveStatus] = useState('idle');
+  const [saveStatus, setSaveStatus] = useState(EMPTY_SAVE_STATUS);
   const [saveError, setSaveError] = useState('');
   const [generationError, setGenerationError] = useState('');
   const requestIdRef = useRef(0);
@@ -423,7 +436,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setBaseResult(nextBaseResult);
       setResult(applySelectedProDetails(nextBaseResult, addedDetails));
       setHasGeneratedOnce(true);
-      setSaveStatus('idle');
+      setSaveStatus(EMPTY_SAVE_STATUS);
       setSaveError('');
       lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
@@ -497,33 +510,44 @@ export default function PromptEnhancer({ onAuthClick }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSavePrompt = async () => {
+  const handleSavePrompt = async (saveMode = 'video') => {
     if (!user || !result) return;
-    setSaveStatus('saving');
+    setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saving' }));
     setSaveError('');
+    const framePrompt = buildFramePrompt(result);
+    const promptToSave = saveMode === 'video' ? result.trim() : framePrompt;
+    const frameLabel = saveMode === 'start_frame' ? 'Start Frame' : saveMode === 'end_frame' ? 'End Frame' : null;
+    if (!promptToSave) {
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }));
+      setSaveError('No frame prompt available to save right now.');
+      return;
+    }
     const payload = {
       user_id: user.id,
-      idea: idea.trim(),
-      prompt: result.trim(),
+      idea: frameLabel ? `${idea.trim()} — ${frameLabel}` : idea.trim(),
+      prompt: promptToSave,
       mood: mood || null,
       use_case: useCase || null,
       skill_level: skillLevel,
       include_audio_sfx: includeAudioSfx,
-      include_image_details: includeImageDetails,
+      include_image_details: includeImageDetails || saveMode !== 'video',
       metadata: {
-        added_details: addedDetails
+        added_details: addedDetails,
+        save_mode: saveMode,
+        frame_role: saveMode === 'video' ? null : saveMode,
+        source_prompt: result.trim()
       }
     };
     const { error } = await supabase.from('saved_prompts').insert(payload);
     if (!error) {
-      setSaveStatus('saved');
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saved' }));
       return;
     }
     if (error.code === '23505') {
-      setSaveStatus('exists');
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'exists' }));
       return;
     }
-    setSaveStatus('error');
+    setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }));
     setSaveError(error.message || 'Unable to save prompt right now.');
   };
 
@@ -759,6 +783,16 @@ export default function PromptEnhancer({ onAuthClick }) {
                 >
                   Pro
                 </span>
+                <span
+                  className="text-[11px] px-2 py-1 rounded-full font-semibold"
+                  style={{
+                    background: 'var(--bg-primary)',
+                    color: 'var(--text-muted)',
+                    border: '1px solid var(--border-color)'
+                  }}
+                >
+                  camera + lens
+                </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span
@@ -798,6 +832,16 @@ export default function PromptEnhancer({ onAuthClick }) {
                     style={{ color: includeImageDetails ? '#16A34A' : 'var(--text-muted)' }}
                   >
                     On
+                  </span>
+                  <span
+                    className="text-[11px] px-2 py-1 rounded-full font-semibold"
+                    style={{
+                      background: 'var(--bg-primary)',
+                      color: 'var(--text-muted)',
+                      border: '1px solid var(--border-color)'
+                    }}
+                  >
+                    shot start/end
                   </span>
                 </div>
               </div>
@@ -911,23 +955,55 @@ export default function PromptEnhancer({ onAuthClick }) {
               </div>
               <div className="flex items-center gap-2 flex-wrap justify-end">
                 {user && (
-                  <button
-                    onClick={handleSavePrompt}
-                    disabled={saveStatus === 'saving'}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                    style={{
-                      background: saveStatus === 'saved'
-                        ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)'
-                        : 'var(--bg-card)',
-                      color: saveStatus === 'saved' ? '#fff' : 'var(--text-secondary)',
-                      border: `2px solid ${saveStatus === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                      boxShadow: saveStatus === 'saved'
-                        ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                        : 'var(--control-soft-shadow)'
-                    }}
-                  >
-                    {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved' : saveStatus === 'exists' ? 'Already Saved' : 'Save Prompt'}
-                  </button>
+                  <>
+                    <button
+                      onClick={() => handleSavePrompt('video')}
+                      disabled={saveStatus.video === 'saving'}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                      style={{
+                        background: saveStatus.video === 'saved'
+                          ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)'
+                          : 'var(--bg-card)',
+                        color: saveStatus.video === 'saved' ? '#fff' : 'var(--text-secondary)',
+                        border: `2px solid ${saveStatus.video === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                        boxShadow: saveStatus.video === 'saved'
+                          ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+                          : 'var(--control-soft-shadow)'
+                      }}
+                    >
+                      {saveStatus.video === 'saving' ? 'Saving...' : saveStatus.video === 'saved' ? 'Saved' : saveStatus.video === 'exists' ? 'Already Saved' : 'Save Prompt'}
+                    </button>
+                    {includeImageDetails && (
+                      <>
+                        <button
+                          onClick={() => handleSavePrompt('start_frame')}
+                          disabled={saveStatus.start_frame === 'saving'}
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                          style={{
+                            background: saveStatus.start_frame === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                            color: saveStatus.start_frame === 'saved' ? '#fff' : 'var(--text-secondary)',
+                            border: `2px solid ${saveStatus.start_frame === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                            boxShadow: saveStatus.start_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                          }}
+                        >
+                          {saveStatus.start_frame === 'saving' ? 'Saving...' : saveStatus.start_frame === 'saved' ? 'Saved Start' : saveStatus.start_frame === 'exists' ? 'Start Saved' : 'Save Start'}
+                        </button>
+                        <button
+                          onClick={() => handleSavePrompt('end_frame')}
+                          disabled={saveStatus.end_frame === 'saving'}
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                          style={{
+                            background: saveStatus.end_frame === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                            color: saveStatus.end_frame === 'saved' ? '#fff' : 'var(--text-secondary)',
+                            border: `2px solid ${saveStatus.end_frame === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                            boxShadow: saveStatus.end_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                          }}
+                        >
+                          {saveStatus.end_frame === 'saving' ? 'Saving...' : saveStatus.end_frame === 'saved' ? 'Saved End' : saveStatus.end_frame === 'exists' ? 'End Saved' : 'Save End'}
+                        </button>
+                      </>
+                    )}
+                  </>
                 )}
                 <button
                   onClick={handleCopy}
@@ -971,7 +1047,7 @@ export default function PromptEnhancer({ onAuthClick }) {
             <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
               Click text to select all, or use the Copy button
             </p>
-            {saveStatus === 'error' && (
+            {(saveStatus.video === 'error' || saveStatus.start_frame === 'error' || saveStatus.end_frame === 'error') && (
               <p className="mt-1 text-xs" style={{ color: 'var(--accent-red)' }}>
                 {saveError}
               </p>
