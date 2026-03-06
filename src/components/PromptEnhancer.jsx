@@ -327,7 +327,11 @@ const buildFramePrompt = (prompt) => {
     .trim();
 };
 
-const EMPTY_SAVE_STATUS = { video: 'idle', start_frame: 'idle', end_frame: 'idle' };
+const createGroupId = () => (
+  globalThis.crypto?.randomUUID?.() || `cwf_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+);
+
+const EMPTY_SAVE_STATUS = { video: 'idle', start_frame: 'idle', end_frame: 'idle', motion_prompt: 'idle' };
 
 export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
@@ -349,6 +353,13 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [saveStatus, setSaveStatus] = useState(EMPTY_SAVE_STATUS);
   const [saveError, setSaveError] = useState('');
   const [generationError, setGenerationError] = useState('');
+  const [outputMode, setOutputMode] = useState('standard');
+  const [startFramePrompt, setStartFramePrompt] = useState('');
+  const [endFrameDirection, setEndFrameDirection] = useState('');
+  const [endFramePrompt, setEndFramePrompt] = useState('');
+  const [motionPrompt, setMotionPrompt] = useState('');
+  const [currentGroupId, setCurrentGroupId] = useState('');
+  const [copiedSection, setCopiedSection] = useState('');
   const requestIdRef = useRef(0);
   
   const { user, session, isPro } = useAuth();
@@ -465,11 +476,27 @@ export default function PromptEnhancer({ onAuthClick }) {
       const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
       const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
       if (requestId !== requestIdRef.current) return;
+      const nextResult = applySelectedProDetails(nextBaseResult, addedDetails);
       setBaseResult(nextBaseResult);
-      setResult(applySelectedProDetails(nextBaseResult, addedDetails));
+      setResult(nextResult);
+      if (includeImageDetails) {
+        setStartFramePrompt(buildFramePrompt(nextResult));
+        setEndFramePrompt('');
+        setMotionPrompt('');
+        setOutputMode('frame');
+        setCurrentGroupId('');
+      } else {
+        setStartFramePrompt('');
+        setEndFramePrompt('');
+        setMotionPrompt('');
+        setOutputMode('standard');
+        setCurrentGroupId('');
+        setEndFrameDirection('');
+      }
       setHasGeneratedOnce(true);
       setSaveStatus(EMPTY_SAVE_STATUS);
       setSaveError('');
+      setCopiedSection('');
       lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
       if (requestId !== requestIdRef.current) return;
@@ -531,8 +558,28 @@ export default function PromptEnhancer({ onAuthClick }) {
 
   useEffect(() => {
     if (!baseResult) return;
-    setResult(applySelectedProDetails(baseResult, addedDetails));
-  }, [baseResult, addedDetails]);
+    const nextResult = applySelectedProDetails(baseResult, addedDetails);
+    setResult(nextResult);
+    if (includeImageDetails) {
+      setStartFramePrompt(buildFramePrompt(nextResult));
+      setEndFramePrompt('');
+      setMotionPrompt('');
+      setOutputMode('frame');
+      setCurrentGroupId('');
+      setSaveStatus((previous) => ({ ...previous, end_frame: 'idle', motion_prompt: 'idle' }));
+    }
+  }, [baseResult, addedDetails, includeImageDetails]);
+
+  useEffect(() => {
+    if (!includeImageDetails) {
+      setStartFramePrompt('');
+      setEndFramePrompt('');
+      setMotionPrompt('');
+      setOutputMode('standard');
+      setEndFrameDirection('');
+      setCurrentGroupId('');
+    }
+  }, [includeImageDetails]);
 
 
   const handleCopy = () => {
@@ -542,36 +589,45 @@ export default function PromptEnhancer({ onAuthClick }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSavePrompt = async (saveMode = 'video') => {
-    if (!user || !result) return;
+  const handleCopySection = (key, text) => {
+    if (!text) return;
+    navigator.clipboard.writeText(text);
+    setCopiedSection(key);
+    setTimeout(() => setCopiedSection(''), 2000);
+  };
+
+  const savePromptVariant = async ({ saveMode, promptText, ideaLabel, variantType, linkedFromVariant = null, framePromptText = null, targetFramePrompt = null }) => {
+    if (!user || !promptText) return;
     setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saving' }));
     setSaveError('');
-    const framePrompt = buildFramePrompt(result);
-    const promptToSave = saveMode === 'video' ? result.trim() : framePrompt;
-    const frameLabel = saveMode === 'start_frame' ? 'Start Frame' : saveMode === 'end_frame' ? 'End Frame' : null;
-    if (!promptToSave) {
-      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }));
-      setSaveError('No frame prompt available to save right now.');
-      return;
-    }
+    const groupId = currentGroupId || createGroupId();
     const payload = {
       user_id: user.id,
-      idea: frameLabel ? `${idea.trim()} — ${frameLabel}` : idea.trim(),
-      prompt: promptToSave,
+      idea: ideaLabel,
+      prompt: String(promptText || '').trim(),
       mood: mood || null,
       use_case: useCase || null,
       skill_level: skillLevel,
       include_audio_sfx: includeAudioSfx,
-      include_image_details: includeImageDetails || saveMode !== 'video',
+      include_image_details: includeImageDetails || variantType !== 'video_prompt',
       metadata: {
+        group_id: groupId,
+        variant_type: variantType,
+        source: 'prompt_enhancer',
+        original_idea: idea.trim(),
+        frame_prompt: framePromptText ? String(framePromptText).trim() : null,
+        end_frame_direction: endFrameDirection.trim() || null,
+        target_frame_prompt: targetFramePrompt ? String(targetFramePrompt).trim() : null,
+        linked_from_variant: linkedFromVariant,
         added_details: addedDetails,
         save_mode: saveMode,
-        frame_role: saveMode === 'video' ? null : saveMode,
+        frame_role: variantType === 'start_frame' || variantType === 'end_frame' ? variantType : null,
         source_prompt: result.trim()
       }
     };
     const { error } = await supabase.from('saved_prompts').insert(payload);
     if (!error) {
+      setCurrentGroupId(groupId);
       setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saved' }));
       return;
     }
@@ -581,6 +637,69 @@ export default function PromptEnhancer({ onAuthClick }) {
     }
     setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }));
     setSaveError(error.message || 'Unable to save prompt right now.');
+  };
+
+  const handleGenerateMotionPrompt = async () => {
+    if (!startFramePrompt) return;
+    const requestId = ++requestIdRef.current;
+    setLoading(true);
+    setGenerationError('');
+    try {
+      const accessToken = await getValidAccessToken();
+      if (!accessToken) {
+        onAuthClick?.();
+        setLoading(false);
+        return;
+      }
+
+      let data;
+      try {
+        data = await requestEnhancedPrompt({
+          mode: 'frame_to_motion',
+          idea,
+          framePrompt: startFramePrompt,
+          endFrameDirection,
+          mood,
+          useCase,
+          skillLevel
+        }, accessToken);
+      } catch (err) {
+        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
+        if (!shouldRetryAuth) throw err;
+        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
+        const refreshedToken = refreshed?.session?.access_token;
+        if (refreshError || !refreshedToken) {
+          throw new Error('Session expired. Please sign in again.');
+        }
+        data = await requestEnhancedPrompt({
+          mode: 'frame_to_motion',
+          idea,
+          framePrompt: startFramePrompt,
+          endFrameDirection,
+          mood,
+          useCase,
+          skillLevel
+        }, refreshedToken);
+      }
+
+      if (requestId !== requestIdRef.current) return;
+      if (!canUsePro) {
+        const nextUsage = { ...usage, count: usage.count + 1 };
+        saveUsageData(nextUsage);
+        setUsage(nextUsage);
+      }
+      setStartFramePrompt(data.startFramePrompt || startFramePrompt);
+      setEndFramePrompt(data.endFramePrompt || '');
+      setMotionPrompt(data.motionPrompt || '');
+      setOutputMode('frame_plus_motion');
+      setSaveStatus((previous) => ({ ...previous, end_frame: 'idle', motion_prompt: 'idle' }));
+    } catch (err) {
+      if (requestId !== requestIdRef.current) return;
+      setGenerationError(err?.message || 'Unable to generate motion prompt right now.');
+    }
+    if (requestId === requestIdRef.current) {
+      setLoading(false);
+    }
   };
 
   const Chip = ({ label, selected, onClick, color }) => (
@@ -873,13 +992,14 @@ export default function PromptEnhancer({ onAuthClick }) {
                       border: '1px solid var(--border-color)'
                     }}
                   >
-                    shot start/end
+                    start frame flow
                   </span>
                 </div>
               </div>
               <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                {skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications'}
-                {includeImageDetails ? ' + still-image cues' : ''}
+                {includeImageDetails
+                  ? 'Create your shot’s start frame. Optionally define how it ends, then generate motion between them.'
+                  : (skillLevel === 'beginner' ? 'Simple language, optional add-ons' : 'Full technical specifications')}
               </span>
             </div>
 
@@ -969,7 +1089,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         </div>
 
         {/* Result - Copyable Text Field */}
-        {result && (
+        {(result || startFramePrompt) && (
           <div 
             className="neu-card mt-6 p-5 rounded-2xl"
             style={{
@@ -977,109 +1097,263 @@ export default function PromptEnhancer({ onAuthClick }) {
               border: '1px solid var(--accent-green)40'
             }}
           >
-            <div className="flex items-center justify-between mb-3 gap-3">
-              <div 
-                className="text-xs font-bold flex items-center gap-1.5"
-                style={{ color: 'var(--accent-green)' }}
-              >
-                <Check className="h-4 w-4" />
-                YOUR PROMPT
-              </div>
-              <div className="flex items-center gap-2 flex-wrap justify-end">
-                {user && (
-                  <>
+            {outputMode === 'standard' && (
+              <>
+                <div className="flex items-center justify-between mb-3 gap-3">
+                  <div className="text-xs font-bold flex items-center gap-1.5" style={{ color: 'var(--accent-green)' }}>
+                    <Check className="h-4 w-4" />
+                    YOUR PROMPT
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap justify-end">
+                    {user && (
+                      <button
+                        onClick={() => savePromptVariant({
+                          saveMode: 'video',
+                          promptText: result.trim(),
+                          ideaLabel: idea.trim() || 'Prompt',
+                          variantType: 'video_prompt'
+                        })}
+                        disabled={saveStatus.video === 'saving'}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                        style={{
+                          background: saveStatus.video === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                          color: saveStatus.video === 'saved' ? '#fff' : 'var(--text-secondary)',
+                          border: `2px solid ${saveStatus.video === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                          boxShadow: saveStatus.video === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                        }}
+                      >
+                        {saveStatus.video === 'saving' ? 'Saving...' : saveStatus.video === 'saved' ? 'Saved' : saveStatus.video === 'exists' ? 'Already Saved' : 'Save Prompt'}
+                      </button>
+                    )}
                     <button
-                      onClick={() => handleSavePrompt('video')}
-                      disabled={saveStatus.video === 'saving'}
+                      onClick={handleCopy}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
                       style={{
-                        background: saveStatus.video === 'saved'
-                          ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)'
-                          : 'var(--bg-card)',
-                        color: saveStatus.video === 'saved' ? '#fff' : 'var(--text-secondary)',
-                        border: `2px solid ${saveStatus.video === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                        boxShadow: saveStatus.video === 'saved'
-                          ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                          : 'var(--control-soft-shadow)'
+                        background: copied ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                        color: copied ? '#fff' : 'var(--text-secondary)',
+                        border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                        boxShadow: copied ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)',
+                        transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
                       }}
                     >
-                      {saveStatus.video === 'saving' ? 'Saving...' : saveStatus.video === 'saved' ? 'Saved' : saveStatus.video === 'exists' ? 'Already Saved' : 'Save Prompt'}
+                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                      {copied ? 'Copied!' : 'Copy Prompt'}
                     </button>
-                    {includeImageDetails && (
-                      <>
-                        <button
-                          onClick={() => handleSavePrompt('start_frame')}
-                          disabled={saveStatus.start_frame === 'saving'}
-                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                          style={{
-                            background: saveStatus.start_frame === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
-                            color: saveStatus.start_frame === 'saved' ? '#fff' : 'var(--text-secondary)',
-                            border: `2px solid ${saveStatus.start_frame === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                            boxShadow: saveStatus.start_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
-                          }}
-                        >
-                          {saveStatus.start_frame === 'saving' ? 'Saving...' : saveStatus.start_frame === 'saved' ? 'Saved as Start Frame' : saveStatus.start_frame === 'exists' ? 'Start Frame Saved' : 'Save as Start Frame'}
-                        </button>
-                        <button
-                          onClick={() => handleSavePrompt('end_frame')}
-                          disabled={saveStatus.end_frame === 'saving'}
-                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                          style={{
-                            background: saveStatus.end_frame === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
-                            color: saveStatus.end_frame === 'saved' ? '#fff' : 'var(--text-secondary)',
-                            border: `2px solid ${saveStatus.end_frame === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                            boxShadow: saveStatus.end_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
-                          }}
-                        >
-                          {saveStatus.end_frame === 'saving' ? 'Saving...' : saveStatus.end_frame === 'saved' ? 'Saved as End Frame' : saveStatus.end_frame === 'exists' ? 'End Frame Saved' : 'Save as End Frame'}
-                        </button>
-                      </>
-                    )}
-                  </>
-                )}
-                <button
-                  onClick={handleCopy}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                  </div>
+                </div>
+                <div
+                  className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
                   style={{
-                    background: copied 
-                      ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
-                      : 'var(--bg-card)',
-                    color: copied ? '#fff' : 'var(--text-secondary)',
-                    border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                    boxShadow: copied 
-                      ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-                      : 'var(--control-soft-shadow)',
-                    transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+                    background: 'var(--bg-primary)',
+                    border: '2px solid var(--border-color)',
+                    color: 'var(--text-primary)',
+                    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                    minHeight: '100px'
+                  }}
+                  onClick={(e) => {
+                    const range = document.createRange();
+                    range.selectNodeContents(e.currentTarget);
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
                   }}
                 >
-                  {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                  {copied ? 'Copied!' : 'Copy Prompt'}
-                </button>
+                  {result}
+                </div>
+                <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                  Click text to select all, or use the Copy button
+                </p>
+              </>
+            )}
+
+            {outputMode !== 'standard' && startFramePrompt && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-3 flex-wrap">
+                  <div className="text-xs font-bold flex items-center gap-1.5" style={{ color: 'var(--accent-green)' }}>
+                    <Check className="h-4 w-4" />
+                    FRAME-FIRST WORKFLOW
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap justify-end">
+                    {user && (
+                      <button
+                        onClick={() => savePromptVariant({
+                          saveMode: 'start_frame',
+                          promptText: startFramePrompt,
+                          ideaLabel: `${idea.trim() || 'Prompt'} — Start Frame`,
+                          variantType: 'start_frame',
+                          framePromptText: startFramePrompt
+                        })}
+                        disabled={saveStatus.start_frame === 'saving'}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                        style={{
+                          background: saveStatus.start_frame === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                          color: saveStatus.start_frame === 'saved' ? '#fff' : 'var(--text-secondary)',
+                          border: `2px solid ${saveStatus.start_frame === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                          boxShadow: saveStatus.start_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                        }}
+                      >
+                        {saveStatus.start_frame === 'saving' ? 'Saving...' : saveStatus.start_frame === 'saved' ? 'Saved as Start Frame' : saveStatus.start_frame === 'exists' ? 'Start Frame Saved' : 'Save as Start Frame'}
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleCopySection('start_frame', startFramePrompt)}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                      style={{
+                        background: copiedSection === 'start_frame' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                        color: copiedSection === 'start_frame' ? '#fff' : 'var(--text-secondary)',
+                        border: `2px solid ${copiedSection === 'start_frame' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                        boxShadow: copiedSection === 'start_frame' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                      }}
+                    >
+                      {copiedSection === 'start_frame' ? 'Copied!' : 'Copy Start Frame'}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+                  <div className="text-xs font-bold mb-2" style={{ color: 'var(--accent-blue)' }}>START FRAME PROMPT</div>
+                  {startFramePrompt}
+                </div>
+
+                <div className="rounded-xl p-4" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)' }}>
+                  <label className="block text-xs font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+                    Optional end frame
+                  </label>
+                  <input
+                    value={endFrameDirection}
+                    onChange={(event) => {
+                      setEndFrameDirection(event.target.value);
+                      setEndFramePrompt('');
+                      setMotionPrompt('');
+                      setOutputMode('frame');
+                      setSaveStatus((previous) => ({ ...previous, end_frame: 'idle', motion_prompt: 'idle' }));
+                    }}
+                    placeholder="camera ends tighter on her face"
+                    className="w-full px-4 py-3 rounded-xl outline-none transition-all"
+                    style={{
+                      background: 'var(--bg-secondary)',
+                      border: '2px solid var(--border-color)',
+                      color: 'var(--text-primary)'
+                    }}
+                  />
+                  <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
+                    Describe how the shot should end. Keep the same scene, subject, and style — only describe what changes.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button
+                    onClick={handleGenerateMotionPrompt}
+                    disabled={loading}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                    style={{
+                      background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)',
+                      color: '#fff',
+                      border: '2px solid #8B5CF650',
+                      boxShadow: 'inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.2), 0 4px 12px rgba(124,58,237,0.3)'
+                    }}
+                  >
+                    {loading ? 'Generating...' : motionPrompt ? 'Regenerate Motion Prompt' : 'Generate Motion Prompt'}
+                  </button>
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                    {endFrameDirection.trim() ? 'Motion will bridge your start frame to the derived end frame.' : 'Motion will evolve from the saved start frame.'}
+                  </span>
+                </div>
+
+                {endFramePrompt && (
+                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+                    <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                      <div className="text-xs font-bold" style={{ color: '#F59E0B' }}>END FRAME PROMPT</div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {user && (
+                          <button
+                            onClick={() => savePromptVariant({
+                              saveMode: 'end_frame',
+                              promptText: endFramePrompt,
+                              ideaLabel: `${idea.trim() || 'Prompt'} — End Frame`,
+                              variantType: 'end_frame',
+                              linkedFromVariant: 'start_frame',
+                              framePromptText: startFramePrompt,
+                              targetFramePrompt: endFramePrompt
+                            })}
+                            disabled={saveStatus.end_frame === 'saving'}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                            style={{
+                              background: saveStatus.end_frame === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                              color: saveStatus.end_frame === 'saved' ? '#fff' : 'var(--text-secondary)',
+                              border: `2px solid ${saveStatus.end_frame === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                              boxShadow: saveStatus.end_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                            }}
+                          >
+                            {saveStatus.end_frame === 'saving' ? 'Saving...' : saveStatus.end_frame === 'saved' ? 'Saved as End Frame' : saveStatus.end_frame === 'exists' ? 'End Frame Saved' : 'Save as End Frame'}
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleCopySection('end_frame', endFramePrompt)}
+                          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                          style={{
+                            background: copiedSection === 'end_frame' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                            color: copiedSection === 'end_frame' ? '#fff' : 'var(--text-secondary)',
+                            border: `2px solid ${copiedSection === 'end_frame' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                            boxShadow: copiedSection === 'end_frame' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                          }}
+                        >
+                          {copiedSection === 'end_frame' ? 'Copied!' : 'Copy End Frame'}
+                        </button>
+                      </div>
+                    </div>
+                    {endFramePrompt}
+                  </div>
+                )}
+
+                {motionPrompt && (
+                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+                    <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                      <div className="text-xs font-bold" style={{ color: '#A855F7' }}>MOTION PROMPT</div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {user && (
+                          <button
+                            onClick={() => savePromptVariant({
+                              saveMode: 'motion_prompt',
+                              promptText: motionPrompt,
+                              ideaLabel: `${idea.trim() || 'Prompt'} — Motion Prompt`,
+                              variantType: 'motion_prompt',
+                              framePromptText: startFramePrompt,
+                              targetFramePrompt: endFramePrompt || null
+                            })}
+                            disabled={saveStatus.motion_prompt === 'saving'}
+                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                            style={{
+                              background: saveStatus.motion_prompt === 'saved' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                              color: saveStatus.motion_prompt === 'saved' ? '#fff' : 'var(--text-secondary)',
+                              border: `2px solid ${saveStatus.motion_prompt === 'saved' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                              boxShadow: saveStatus.motion_prompt === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                            }}
+                          >
+                            {saveStatus.motion_prompt === 'saving' ? 'Saving...' : saveStatus.motion_prompt === 'saved' ? 'Saved Motion Prompt' : saveStatus.motion_prompt === 'exists' ? 'Motion Prompt Saved' : 'Save Motion Prompt'}
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleCopySection('motion_prompt', motionPrompt)}
+                          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                          style={{
+                            background: copiedSection === 'motion_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                            color: copiedSection === 'motion_prompt' ? '#fff' : 'var(--text-secondary)',
+                            border: `2px solid ${copiedSection === 'motion_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                            boxShadow: copiedSection === 'motion_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                          }}
+                        >
+                          {copiedSection === 'motion_prompt' ? 'Copied!' : 'Copy Motion Prompt'}
+                        </button>
+                      </div>
+                    </div>
+                    {motionPrompt}
+                  </div>
+                )}
               </div>
-            </div>
-            <div
-              className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
-              style={{
-                background: 'var(--bg-primary)',
-                border: '2px solid var(--border-color)',
-                color: 'var(--text-primary)',
-                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                minHeight: '100px'
-              }}
-              onClick={(e) => {
-                const range = document.createRange();
-                range.selectNodeContents(e.currentTarget);
-                const sel = window.getSelection();
-                sel.removeAllRanges();
-                sel.addRange(range);
-              }}
-            >
-              {result}
-            </div>
-            <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-              Click text to select all, or use the Copy button
-            </p>
-            {(saveStatus.video === 'error' || saveStatus.start_frame === 'error' || saveStatus.end_frame === 'error') && (
+            )}
+
+            {(saveStatus.video === 'error' || saveStatus.start_frame === 'error' || saveStatus.end_frame === 'error' || saveStatus.motion_prompt === 'error') && (
               <p className="mt-1 text-xs" style={{ color: 'var(--accent-red)' }}>
                 {saveError}
               </p>

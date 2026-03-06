@@ -49,6 +49,45 @@ const enforcePromptShape = (raw, { maxWords = 90 } = {}) => {
   return text;
 };
 
+const runAnthropicPrompt = async ({ anthropicApiKey, promptInput }) => {
+  let response = null;
+  let lastError = null;
+
+  for (const model of MODEL_FALLBACK) {
+    try {
+      const apiResponse = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': anthropicApiKey,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 700,
+          messages: [{ role: 'user', content: promptInput }]
+        })
+      });
+
+      const apiData = await apiResponse.json();
+      if (!apiResponse.ok) {
+        throw new Error(apiData?.error?.message || apiData?.error || `Anthropic request failed (${apiResponse.status})`);
+      }
+
+      response = apiData;
+      break;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  if (!response) {
+    throw lastError || new Error('Model request failed');
+  }
+
+  return response?.content?.[0]?.text || '';
+};
+
 const getEnvInt = (key, fallback) => {
   const raw = process.env[key];
   const value = Number.parseInt(String(raw ?? ''), 10);
@@ -231,7 +270,10 @@ exports.handler = async (event) => {
     }
 
     const {
+      mode = 'default',
       idea = '',
+      framePrompt = '',
+      endFrameDirection = '',
       mood = '',
       useCase = '',
       tool = 'General',
@@ -242,6 +284,78 @@ exports.handler = async (event) => {
     } = JSON.parse(event.body || '{}');
 
     const trimmedIdea = normalizeText(idea);
+    const trimmedFramePrompt = normalizeText(framePrompt);
+    const trimmedEndFrameDirection = normalizeText(endFrameDirection);
+    const isBeginner = skillLevel === 'beginner';
+
+    if (mode === 'frame_to_motion') {
+      if (!trimmedFramePrompt) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: 'A start frame prompt is required to generate motion.' })
+        };
+      }
+
+      const motionPromptInput = `You are helping convert a still image prompt into a cinematic image-to-video setup.
+
+Generate:
+1. A start frame prompt (preserve the given start frame, only lightly normalize wording if needed)
+${trimmedEndFrameDirection ? '2. An end frame prompt derived from the start frame plus the ending direction' : ''}
+${trimmedEndFrameDirection ? '3. A motion prompt that begins from the start frame and lands on the end frame' : '2. A motion prompt that begins from the start frame and evolves naturally from it'}
+
+Rules:
+- The start frame is the primary visual anchor.
+- Preserve the same subject, world, style, palette, and core scene identity.
+- Only change what the end-frame direction explicitly asks for.
+- The motion prompt must describe temporal change, camera behavior, subject behavior, and how the shot resolves.
+- Do not rewrite the whole scene from scratch.
+- Keep language ${isBeginner ? 'simple and direct' : 'professional and cinematic'}.
+- Keep each output compact.
+
+Idea: ${trimmedIdea || 'Not specified'}
+Start frame prompt: ${trimmedFramePrompt}
+Ending direction: ${trimmedEndFrameDirection || 'None supplied'}
+Mood: ${mood || 'Not specified'}
+Use case: ${useCase || 'Not specified'}
+Skill level: ${skillLevel}
+
+Return valid JSON only using this shape:
+{
+  "startFramePrompt": "string",
+  ${trimmedEndFrameDirection ? '"endFramePrompt": "string",' : ''}
+  "motionPrompt": "string"
+}`;
+
+      const raw = await runAnthropicPrompt({ anthropicApiKey, promptInput: motionPromptInput });
+      let parsed;
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        const match = raw.match(/\{[\s\S]*\}/);
+        parsed = match ? JSON.parse(match[0]) : null;
+      }
+
+      if (!parsed?.startFramePrompt || !parsed?.motionPrompt) {
+        return {
+          statusCode: 502,
+          headers,
+          body: JSON.stringify({ error: 'Model returned an incomplete frame-to-motion response.' })
+        };
+      }
+
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          startFramePrompt: enforcePromptShape(parsed.startFramePrompt, { maxWords: isBeginner ? 90 : 120 }),
+          endFramePrompt: parsed.endFramePrompt ? enforcePromptShape(parsed.endFramePrompt, { maxWords: isBeginner ? 90 : 120 }) : '',
+          motionPrompt: enforcePromptShape(parsed.motionPrompt, { maxWords: isBeginner ? 90 : 120 }),
+          kind: 'frame_to_motion'
+        })
+      };
+    }
+
     if (trimmedIdea.length < 3) {
       return {
         statusCode: 400,
@@ -267,8 +381,6 @@ exports.handler = async (event) => {
         })
       };
     }
-
-    const isBeginner = skillLevel === 'beginner';
 
     let interpretationInstruction = '';
     if (interpretation) {
@@ -311,42 +423,7 @@ ${interpretationInstruction ? `Style direction: ${interpretationInstruction}` : 
 
 Format: ${isBeginner ? 'Simple descriptive prompt ending with aspect ratio and resolution' : 'Technical cinematography prompt with full specifications'}. Keep it under ${isBeginner ? '60' : '80'} words. Just return the prompt text.`;
 
-    let response = null;
-    let lastError = null;
-
-    for (const model of MODEL_FALLBACK) {
-      try {
-        const apiResponse = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': anthropicApiKey,
-            'anthropic-version': '2023-06-01'
-          },
-          body: JSON.stringify({
-            model,
-            max_tokens: 500,
-            messages: [{ role: 'user', content: promptInput }]
-          })
-        });
-
-        const apiData = await apiResponse.json();
-        if (!apiResponse.ok) {
-          throw new Error(apiData?.error?.message || apiData?.error || `Anthropic request failed (${apiResponse.status})`);
-        }
-
-        response = apiData;
-        break;
-      } catch (error) {
-        lastError = error;
-      }
-    }
-
-    if (!response) {
-      throw lastError || new Error('Model request failed');
-    }
-
-    const rawPrompt = response?.content?.[0]?.text;
+    const rawPrompt = await runAnthropicPrompt({ anthropicApiKey, promptInput });
     const prompt = enforcePromptShape(rawPrompt, { maxWords: isBeginner ? 90 : 120 });
     if (!prompt) {
       return {

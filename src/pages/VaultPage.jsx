@@ -36,6 +36,9 @@ const MONO_STACK =
 
 const UI_STACK =
   '"DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"'
+const createGroupId = () => (
+  globalThis.crypto?.randomUUID?.() || `cwf_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+)
 
 const normalize = (value) => String(value || '').trim().toLowerCase()
 
@@ -285,6 +288,7 @@ function PromptCard({ prompt, globalView }) {
   const [copiedKey, setCopiedKey] = useState(null) // 'image' | 'video' | 'sfx' | null
   const [saveStatus, setSaveStatus] = useState(EMPTY_SAVE_STATUS)
   const [lastSavedText, setLastSavedText] = useState('')
+  const [currentGroupId, setCurrentGroupId] = useState('')
   const [varValues, setVarValues] = useState(() => {
     const next = {}
     for (const [k, spec] of Object.entries(prompt.variables || {})) next[k] = spec?.default ?? ''
@@ -311,6 +315,7 @@ function PromptCard({ prompt, globalView }) {
     if (savedText !== currentVideo && savedText !== currentImage) {
       setSaveStatus(EMPTY_SAVE_STATUS)
       setLastSavedText('')
+      setCurrentGroupId('')
     }
   }, [filledVideo, filledImage, lastSavedText])
 
@@ -421,9 +426,11 @@ function PromptCard({ prompt, globalView }) {
     if (saveStatus[saveMode] === 'saving' || saveStatus[saveMode] === 'saved' || saveStatus[saveMode] === 'exists') return
     setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saving' }))
     const isFrameSave = saveMode === 'start_frame' || saveMode === 'end_frame'
+    const variantType = saveMode === 'video' ? 'video_prompt' : saveMode
     const framePrompt = String(filledImage || '').trim()
     const promptToSave = isFrameSave ? framePrompt : String(filledVideo || '').trim()
     const frameLabel = saveMode === 'start_frame' ? 'Start Frame' : saveMode === 'end_frame' ? 'End Frame' : null
+    const groupId = currentGroupId || createGroupId()
     if (!promptToSave) {
       setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }))
       window.setTimeout(() => setSaveStatus((previous) => ({ ...previous, [saveMode]: 'idle' })), 2500)
@@ -440,7 +447,10 @@ function PromptCard({ prompt, globalView }) {
       include_audio_sfx: Boolean(String(filledSfx || '').trim()),
       include_image_details: Boolean(framePrompt),
       metadata: {
+        group_id: groupId,
+        variant_type: variantType,
         source: 'prompt_vault',
+        original_idea: heading || `Prompt #${prompt.id}`,
         library_id: prompt.id,
         category: prompt.category,
         style: prompt.style,
@@ -450,12 +460,14 @@ function PromptCard({ prompt, globalView }) {
         variables: varValues,
         save_mode: saveMode,
         frame_role: isFrameSave ? saveMode : null,
+        linked_from_variant: saveMode === 'end_frame' ? 'start_frame' : null,
         video_prompt: String(filledVideo || '').trim(),
       },
     }
 
     const { error } = await supabase.from('saved_prompts').insert(payload)
     if (!error) {
+      setCurrentGroupId(groupId)
       setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saved' }))
       setLastSavedText(payload.prompt)
       return
