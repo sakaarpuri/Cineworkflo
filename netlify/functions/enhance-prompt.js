@@ -7,6 +7,8 @@ const MODEL_FALLBACK = [
 
 const { createClient } = require('@supabase/supabase-js');
 const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com']);
+const DEFAULT_SUPABASE_URL = 'https://vxpppjhsnnfoggigxupo.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4cHBwamhzbm5mb2dnaWd4dXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Njg0MjgsImV4cCI6MjA4NzU0NDQyOH0.1yFxUkXP9Tvvyxn81BtC1gEQy8sYO1a5vrZh8CSPBtM';
 
 const normalizeText = (value) => String(value || '').trim();
 
@@ -55,13 +57,19 @@ const getEnvInt = (key, fallback) => {
   return Number.isFinite(value) ? value : fallback;
 };
 
-const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   || process.env.SUPABASE_SERVICE_KEY
   || process.env.SUPABASE_SERVICE_ROLE
   || '';
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY
+  || process.env.VITE_SUPABASE_ANON_KEY
+  || DEFAULT_SUPABASE_ANON_KEY;
 const supabaseAdmin = supabaseUrl && supabaseServiceRoleKey
   ? createClient(supabaseUrl, supabaseServiceRoleKey)
+  : null;
+const supabasePublic = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
 const getBearerToken = (event) => {
@@ -85,6 +93,7 @@ const getDayKey = () => new Date().toISOString().slice(0, 10);
 const getMonthKey = () => new Date().toISOString().slice(0, 7);
 
 const enforceAndRecord = async ({ user, prefix, isPro, limits, monthlyCounterPrefix = prefix }) => {
+  if (!supabaseAdmin) return { ok: true };
   const meta = { ...(user.user_metadata || {}) };
   const now = Date.now();
 
@@ -141,6 +150,26 @@ const enforceAndRecord = async ({ user, prefix, isPro, limits, monthlyCounterPre
   return { ok: true };
 };
 
+const resolveAuthedUser = async (token) => {
+  if (!token) return { user: null, message: 'Missing bearer token.' };
+
+  if (supabaseAdmin) {
+    const { data, error } = await supabaseAdmin.auth.getUser(token);
+    if (!error && data?.user) return { user: data.user, message: null };
+  }
+
+  if (supabasePublic) {
+    const { data, error } = await supabasePublic.auth.getUser(token);
+    if (!error && data?.user) return { user: data.user, message: null };
+    return { user: null, message: error?.message || 'Token validation failed.' };
+  }
+
+  return {
+    user: null,
+    message: 'Supabase auth verify is not configured (missing SUPABASE_ANON_KEY or SUPABASE_SERVICE_ROLE_KEY).',
+  };
+};
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -169,28 +198,20 @@ exports.handler = async (event) => {
     };
   }
 
-  if (!supabaseAdmin) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({
-        error: 'Supabase admin is not configured (missing SUPABASE_URL and/or SUPABASE_SERVICE_ROLE_KEY).'
-      })
-    };
-  }
-
   try {
     const token = getBearerToken(event);
     if (!token) {
       return { statusCode: 401, headers, body: JSON.stringify({ error: 'Sign in required' }) };
     }
 
-    const { data: authData, error: authError } = await supabaseAdmin.auth.getUser(token);
-    if (authError || !authData?.user) {
-      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Invalid session. Please sign in again.' }) };
+    const { user: authedUser, message: authMessage } = await resolveAuthedUser(token);
+    if (!authedUser) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({ error: `Invalid session. Please sign in again. (${authMessage})` })
+      };
     }
-
-    const authedUser = authData.user;
     const pro = isProUser(authedUser);
 
     const limits = {

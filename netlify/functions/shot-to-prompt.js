@@ -7,6 +7,8 @@ const MODEL_FALLBACK = [
 
 const { createClient } = require('@supabase/supabase-js');
 const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com']);
+const DEFAULT_SUPABASE_URL = 'https://vxpppjhsnnfoggigxupo.supabase.co';
+const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4cHBwamhzbm5mb2dnaWd4dXBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5Njg0MjgsImV4cCI6MjA4NzU0NDQyOH0.1yFxUkXP9Tvvyxn81BtC1gEQy8sYO1a5vrZh8CSPBtM';
 
 const getEnvInt = (key, fallback) => {
   const raw = process.env[key];
@@ -14,14 +16,14 @@ const getEnvInt = (key, fallback) => {
   return Number.isFinite(value) ? value : fallback;
 };
 
-const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || DEFAULT_SUPABASE_URL;
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   || process.env.SUPABASE_SERVICE_KEY
   || process.env.SUPABASE_SERVICE_ROLE
   || '';
 const supabaseAnonKey = process.env.SUPABASE_ANON_KEY
   || process.env.VITE_SUPABASE_ANON_KEY
-  || '';
+  || DEFAULT_SUPABASE_ANON_KEY;
 const supabaseAdmin = supabaseUrl && supabaseServiceRoleKey
   ? createClient(supabaseUrl, supabaseServiceRoleKey)
   : null;
