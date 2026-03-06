@@ -1141,8 +1141,11 @@ export default function PromptEnhancer({ onAuthClick }) {
           <div 
             className="neu-card mt-6 p-5 rounded-2xl"
             style={{
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--accent-green)40'
+              background: isDarkTheme ? 'var(--bg-secondary)' : 'linear-gradient(145deg, rgba(255,255,255,0.98), rgba(255,249,253,0.96))',
+              border: isDarkTheme ? '1px solid var(--accent-green)40' : '1px solid rgba(5,150,105,0.18)',
+              boxShadow: isDarkTheme
+                ? undefined
+                : '0 22px 44px rgba(15,23,42,0.06), 8px 8px 18px rgba(15,23,42,0.08), -8px -8px 16px rgba(255,255,255,0.9)'
             }}
           >
             {outputMode === 'standard' && (
@@ -1192,11 +1195,12 @@ export default function PromptEnhancer({ onAuthClick }) {
                 <div
                   className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
                   style={{
-                    background: 'var(--bg-primary)',
+                    background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,250,253,0.98), rgba(255,255,255,0.94))',
                     border: '2px solid var(--border-color)',
                     color: 'var(--text-primary)',
                     fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                    minHeight: '100px'
+                    minHeight: '100px',
+                    boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.05), inset -4px -4px 10px rgba(255,255,255,0.95)'
                   }}
                   onClick={(e) => {
                     const range = document.createRange();
@@ -1258,12 +1262,12 @@ export default function PromptEnhancer({ onAuthClick }) {
                   </div>
                 </div>
 
-                <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+                <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(239,246,255,0.92), rgba(255,255,255,0.96))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(37,99,235,0.06), inset -3px -3px 8px rgba(255,255,255,0.92)' }}>
                   <div className="text-xs font-bold mb-2" style={{ color: 'var(--accent-blue)' }}>START FRAME PROMPT</div>
                   {startFramePrompt}
                 </div>
 
-                <div className="rounded-xl p-4" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)' }}>
+                <div className="rounded-xl p-4" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,252,254,0.98), rgba(248,250,252,0.94))', border: '2px solid var(--border-color)', boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.04), inset -4px -4px 10px rgba(255,255,255,0.92)' }}>
                   <label className="block text-xs font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
                     Optional end frame
                   </label>
@@ -1279,9 +1283,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                     placeholder="camera ends tighter on her face"
                     className="w-full px-4 py-3 rounded-xl outline-none transition-all"
                     style={{
-                      background: 'var(--bg-secondary)',
+                      background: isDarkTheme ? 'var(--bg-secondary)' : 'rgba(255,255,255,0.92)',
                       border: '2px solid var(--border-color)',
-                      color: 'var(--text-primary)'
+                      color: 'var(--text-primary)',
+                      boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(15,23,42,0.05), inset -3px -3px 8px rgba(255,255,255,0.96)'
                     }}
                   />
                   <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
@@ -1289,7 +1294,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   </p>
                 </div>
 
-                <div className="rounded-xl p-4" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)' }}>
+                <div className="rounded-xl p-4" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,252,254,0.98), rgba(248,250,252,0.94))', border: '2px solid var(--border-color)', boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.04), inset -4px -4px 10px rgba(255,255,255,0.92)' }}>
                   <label className="block text-xs font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
                     Optional motion direction
                   </label>
@@ -1303,9 +1308,10 @@ export default function PromptEnhancer({ onAuthClick }) {
                     placeholder="slow push in as she turns toward camera"
                     className="w-full px-4 py-3 rounded-xl outline-none transition-all"
                     style={{
-                      background: 'var(--bg-secondary)',
+                      background: isDarkTheme ? 'var(--bg-secondary)' : 'rgba(255,255,255,0.92)',
                       border: '2px solid var(--border-color)',
-                      color: 'var(--text-primary)'
+                      color: 'var(--text-primary)',
+                      boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(15,23,42,0.05), inset -3px -3px 8px rgba(255,255,255,0.96)'
                     }}
                   />
                   <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
@@ -1322,7 +1328,9 @@ export default function PromptEnhancer({ onAuthClick }) {
                       background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)',
                       color: '#fff',
                       border: '2px solid #8B5CF650',
-                      boxShadow: 'inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.2), 0 4px 12px rgba(124,58,237,0.3)'
+                      boxShadow: isDarkTheme
+                        ? 'inset 3px 3px 6px rgba(124,58,237,0.55), inset -3px -3px 6px rgba(255,255,255,0.2), 0 4px 12px rgba(124,58,237,0.3)'
+                        : 'inset 3px 3px 6px rgba(124,58,237,0.45), inset -3px -3px 6px rgba(255,255,255,0.28), 0 10px 22px rgba(124,58,237,0.22)'
                     }}
                   >
                     {loading ? 'Generating...' : motionPrompt ? 'Regenerate Motion Prompt' : 'Generate Motion Prompt'}
@@ -1333,7 +1341,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                 </div>
 
                 {endFramePrompt && (
-                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,247,237,0.96), rgba(255,255,255,0.96))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(245,158,11,0.07), inset -3px -3px 8px rgba(255,255,255,0.94)' }}>
                     <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="text-xs font-bold" style={{ color: '#F59E0B' }}>END FRAME PROMPT</div>
                       <div className="flex items-center gap-2 flex-wrap">
@@ -1379,7 +1387,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                 )}
 
                 {motionPrompt && (
-                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: 'var(--bg-primary)', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace' }}>
+                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(250,245,255,0.96), rgba(255,255,255,0.96))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(124,58,237,0.07), inset -3px -3px 8px rgba(255,255,255,0.94)' }}>
                     <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="text-xs font-bold" style={{ color: '#A855F7' }}>MOTION PROMPT</div>
                       <div className="flex items-center gap-2 flex-wrap">
