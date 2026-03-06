@@ -127,10 +127,10 @@ export default function HeroGallery() {
                 onClick={() => trackCtaEvent('hero_shot_to_prompt_secondary', '/')}
                 className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
                 style={{
-                  background: 'linear-gradient(145deg, rgba(255,255,255,0.88), rgba(255,255,255,0.64))',
-                  color: 'var(--text-secondary)',
+                  background: 'var(--hero-secondary-bg)',
+                  color: 'var(--hero-secondary-text)',
                   border: '1.5px solid var(--border-color)',
-                  boxShadow: 'inset 2px 2px 5px rgba(255,255,255,0.65), inset -2px -2px 5px rgba(255,255,255,0.38), 0 3px 10px rgba(15,23,42,0.08)'
+                  boxShadow: 'var(--hero-secondary-shadow)'
                 }}
               >
                 Shot to Prompt

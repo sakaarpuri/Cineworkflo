@@ -16,6 +16,7 @@ export default function Header({ onAuthClick }) {
   })
   const location = useLocation()
   const isVaultPage = location?.pathname === '/prompts'
+  const isDark = theme === 'dark'
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -37,7 +38,7 @@ export default function Header({ onAuthClick }) {
       <div
         className="text-center text-sm sm:text-base py-2.5"
         style={{
-          background: 'linear-gradient(90deg, rgba(59,130,246,0.12), rgba(139,92,246,0.12))',
+          background: 'var(--header-band-bg)',
           borderBottom: '1px solid var(--border-color)',
           color: 'var(--text-secondary)'
         }}
@@ -47,7 +48,7 @@ export default function Header({ onAuthClick }) {
           style={{
             background: 'var(--bg-secondary)',
             border: '1px solid var(--border-color)',
-            boxShadow: '0 10px 24px rgba(15,23,42,0.06), 6px 6px 12px rgba(15,23,42,0.08), -6px -6px 12px rgba(255,255,255,0.75)',
+            boxShadow: 'var(--header-pill-shadow)',
             color: 'var(--text-primary)'
           }}
         >
@@ -134,8 +135,11 @@ export default function Header({ onAuthClick }) {
                   <span
                     className="px-3 py-1 rounded-full text-xs font-bold"
                     style={{
-                      background: 'linear-gradient(145deg, #8B5CF6, #7C3AED)',
-                      color: '#fff'
+                      background: isDark
+                        ? 'linear-gradient(145deg, rgba(245,158,11,0.20), rgba(217,119,6,0.12))'
+                        : 'linear-gradient(145deg, #8B5CF6, #7C3AED)',
+                      color: isDark ? '#F59E0B' : '#fff',
+                      border: isDark ? '1px solid rgba(245,158,11,0.24)' : 'none'
                     }}
                   >
                     PRO
@@ -167,8 +171,12 @@ export default function Header({ onAuthClick }) {
                     border: '1px solid var(--border-color)',
                     color: 'var(--text-secondary)',
                     boxShadow: isLogoutPressed
-                      ? 'inset 4px 4px 8px rgba(15,23,42,0.16), inset -3px -3px 6px rgba(255,255,255,0.72)'
-                      : '0 10px 20px rgba(15,23,42,0.05), 5px 5px 10px rgba(15,23,42,0.10), -5px -5px 10px rgba(255,255,255,0.78)',
+                      ? (isDark
+                        ? 'inset 0 1px 0 rgba(255,255,255,0.02), inset 8px 8px 16px rgba(0,0,0,0.24)'
+                        : 'inset 4px 4px 8px rgba(15,23,42,0.16), inset -3px -3px 6px rgba(255,255,255,0.72)')
+                      : (isDark
+                        ? '0 18px 32px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04)'
+                        : '0 10px 20px rgba(15,23,42,0.05), 5px 5px 10px rgba(15,23,42,0.10), -5px -5px 10px rgba(255,255,255,0.78)'),
                     transform: isLogoutPressed ? 'translateY(2px) scale(0.98)' : 'translateY(0) scale(1)'
                   }}
                   aria-label="Sign out"
@@ -176,18 +184,28 @@ export default function Header({ onAuthClick }) {
                   <span
                     className="relative inline-flex items-center w-8 h-5 rounded-full"
                     style={{
-                      background: 'linear-gradient(145deg, #E5E7EB, #D1D5DB)',
+                      background: isDark
+                        ? 'linear-gradient(145deg, rgba(49,56,66,0.98), rgba(34,39,47,0.96))'
+                        : 'linear-gradient(145deg, #E5E7EB, #D1D5DB)',
                       border: '1px solid var(--border-color)',
                       boxShadow: isLogoutPressed
-                        ? 'inset 2px 2px 4px rgba(15,23,42,0.16), inset -2px -2px 4px rgba(255,255,255,0.74)'
-                        : 'inset 1px 1px 2px rgba(255,255,255,0.9), inset -1px -1px 2px rgba(15,23,42,0.08)'
+                        ? (isDark
+                          ? 'inset 0 1px 0 rgba(255,255,255,0.02), inset 3px 3px 7px rgba(0,0,0,0.22)'
+                          : 'inset 2px 2px 4px rgba(15,23,42,0.16), inset -2px -2px 4px rgba(255,255,255,0.74)')
+                        : (isDark
+                          ? 'inset 0 1px 0 rgba(255,255,255,0.04), 0 1px 0 rgba(0,0,0,0.18)'
+                          : 'inset 1px 1px 2px rgba(255,255,255,0.9), inset -1px -1px 2px rgba(15,23,42,0.08)')
                     }}
                   >
                     <span
                       className="absolute left-[2px] w-3.5 h-3.5 rounded-full transition-transform duration-150"
                       style={{
-                        background: 'linear-gradient(145deg, #F9FAFB, #E5E7EB)',
-                        boxShadow: '1px 1px 2px rgba(15,23,42,0.20)',
+                        background: isDark
+                          ? 'linear-gradient(145deg, #f4f6f8, #d6dbe0)'
+                          : 'linear-gradient(145deg, #F9FAFB, #E5E7EB)',
+                        boxShadow: isDark
+                          ? '0 2px 6px rgba(0,0,0,0.26)'
+                          : '1px 1px 2px rgba(15,23,42,0.20)',
                         transform: isLogoutPressed ? 'translateY(1px)' : 'translateY(-1px)'
                       }}
                     />
@@ -209,23 +227,33 @@ export default function Header({ onAuthClick }) {
                   to="/pricing"
                   className="px-5 py-2 rounded-lg font-semibold transition-all duration-200"
                   style={{
-                    background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
+                    background: isDark
+                      ? 'linear-gradient(145deg, #2E6FD6, #255BB0)'
+                      : 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
                     color: '#fff',
-                    border: '2px solid #3B82F650',
-                    boxShadow: 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
+                    border: isDark ? '1px solid rgba(98,167,255,0.28)' : '2px solid #3B82F650',
+                    boxShadow: isDark
+                      ? '0 16px 28px rgba(7,12,19,0.30), inset 0 1px 0 rgba(255,255,255,0.14)'
+                      : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
                     transform: 'translateY(0) scale(1)'
                   }}
                   onMouseDown={(e) => {
                     e.currentTarget.style.transform = 'translateY(2px) scale(0.96)';
-                    e.currentTarget.style.boxShadow = 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
+                    e.currentTarget.style.boxShadow = isDark
+                      ? 'inset 0 1px 0 rgba(255,255,255,0.04), inset 8px 8px 16px rgba(7,12,19,0.28)'
+                      : 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)';
                   }}
                   onMouseUp={(e) => {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
+                    e.currentTarget.style.boxShadow = isDark
+                      ? '0 16px 28px rgba(7,12,19,0.30), inset 0 1px 0 rgba(255,255,255,0.14)'
+                      : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
+                    e.currentTarget.style.boxShadow = isDark
+                      ? '0 16px 28px rgba(7,12,19,0.30), inset 0 1px 0 rgba(255,255,255,0.14)'
+                      : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)';
                   }}
                 >
                   Get Pro

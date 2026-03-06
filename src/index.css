@@ -30,6 +30,7 @@
     --bg-primary: rgba(255, 249, 253, 0.94);
     --bg-secondary: rgba(255, 253, 254, 0.98);
     --bg-card: rgba(255, 255, 255, 0.98);
+    --bg-elevated: rgba(255, 255, 255, 0.92);
     --text-primary: #111827;
     --text-secondary: #6B7280;
     --text-muted: #9CA3AF;
@@ -58,25 +59,31 @@
     --pro-cta-text: #3B82F6;
     --pro-cta-border: #E5E7EB;
     --pro-cta-shadow: inset 3px 3px 6px rgba(0,0,0,0.10), inset -3px -3px 6px rgba(255,255,255,1), 0 4px 12px rgba(0,0,0,0.15);
+    --header-band-bg: linear-gradient(90deg, rgba(59,130,246,0.12), rgba(139,92,246,0.12));
+    --header-pill-shadow: 0 10px 24px rgba(15,23,42,0.06), 6px 6px 12px rgba(15,23,42,0.08), -6px -6px 12px rgba(255,255,255,0.75);
+    --hero-secondary-bg: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(255,255,255,0.64));
+    --hero-secondary-shadow: inset 2px 2px 5px rgba(255,255,255,0.65), inset -2px -2px 5px rgba(255,255,255,0.38), 0 3px 10px rgba(15,23,42,0.08);
+    --hero-secondary-text: var(--text-secondary);
   }
 
   [data-theme="dark"] {
-    /* Night Mode - Dark blue/purple tones */
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e1b4b;
-    --bg-card: #1e293b;
-    --text-primary: #F9FAFB;
-    --text-secondary: #A1A5AD;
-    --text-muted: #6B7280;
-    --border-color: #312e81;
-    --shadow-soft: 0 4px 20px rgba(0,0,0,0.4);
-    --shadow-card: 8px 8px 16px rgba(0,0,0,0.5), -8px -8px 16px rgba(255,255,255,0.03);
-    --shadow-inset: inset 4px 4px 8px rgba(0,0,0,0.5), inset -4px -4px 8px rgba(255,255,255,0.03);
-    --accent-blue: #3B82F6;
-    --accent-purple: #8B5CF6;
-    --accent-green: #10B981;
-    --accent-red: #EF4444;
-    --accent-pink: #EC4899;
+    /* Night Mode - neutral slate with restrained blue / warm accents */
+    --bg-primary: #0d1014;
+    --bg-secondary: rgba(21, 25, 31, 0.94);
+    --bg-card: rgba(26, 31, 38, 0.96);
+    --bg-elevated: rgba(30, 36, 44, 0.98);
+    --text-primary: #F3F6F8;
+    --text-secondary: #AEB6BF;
+    --text-muted: #77818C;
+    --border-color: rgba(255,255,255,0.08);
+    --shadow-soft: 0 18px 40px rgba(0,0,0,0.30);
+    --shadow-card: 0 30px 60px rgba(0,0,0,0.38), 0 12px 24px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.04);
+    --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.03), inset 0 -1px 0 rgba(0,0,0,0.30), inset 8px 8px 16px rgba(0,0,0,0.18);
+    --accent-blue: #62A7FF;
+    --accent-purple: #8B9BFF;
+    --accent-green: #34D399;
+    --accent-red: #FF6B6B;
+    --accent-pink: #FF8FA3;
 
     /* Disable neon-like glows in dark mode. */
     --cwf-icon-glow-filter: none;
@@ -93,12 +100,25 @@
     --pro-cta-text: #0A0B14;
     --pro-cta-border: rgba(245,158,11,0.38);
     --pro-cta-shadow: 0 10px 26px rgba(245,158,11,0.18), inset 3px 3px 6px rgba(0,0,0,0.20), inset -3px -3px 6px rgba(255,255,255,0.05);
+    --header-band-bg:
+      linear-gradient(90deg, rgba(98,167,255,0.10), rgba(245,158,11,0.07)),
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+    --header-pill-shadow: 0 18px 34px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.04);
+    --hero-secondary-bg: linear-gradient(145deg, rgba(31,37,45,0.98), rgba(24,29,36,0.96));
+    --hero-secondary-shadow: 0 16px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04);
+    --hero-secondary-text: var(--text-primary);
   }
 
-  /* Keep night mode background as a simple dark surface (no light gradients). */
+  /* Night mode gets subtle atmosphere instead of purple wash. */
   [data-theme="dark"] body {
     background-color: var(--bg-primary);
-    background-image: none;
+    background-image:
+      radial-gradient(70% 46% at 12% 0%, rgba(98,167,255,0.08) 0%, rgba(98,167,255,0) 56%),
+      radial-gradient(58% 40% at 88% 12%, rgba(245,158,11,0.05) 0%, rgba(245,158,11,0) 54%),
+      radial-gradient(66% 44% at 50% 100%, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 60%),
+      linear-gradient(180deg, #0d1014 0%, #0f1318 42%, #10151b 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 180%;
   }
 
 }
@@ -160,11 +180,11 @@
   }
 
   [data-theme="dark"] .neu-button {
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.5), -4px -4px 8px rgba(255,255,255,0.03);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
   [data-theme="dark"] .neu-button:hover {
-    box-shadow: 6px 6px 12px rgba(0,0,0,0.6), -6px -6px 12px rgba(255,255,255,0.05);
+    box-shadow: 0 22px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
   [data-theme="dark"] .neu-card::before {
@@ -175,23 +195,23 @@
   }
 
   [data-theme="dark"] .neu-card {
-    box-shadow: 4px 4px 8px rgba(0,0,0,0.5), -4px -4px 8px rgba(255,255,255,0.03);
+    box-shadow: var(--shadow-card);
   }
 
   [data-theme="dark"] .neu-card:hover {
-    box-shadow: 6px 6px 12px rgba(0,0,0,0.6), -6px -6px 12px rgba(255,255,255,0.05);
+    box-shadow: 0 34px 66px rgba(0,0,0,0.42), 0 16px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
-  /* Homepage dark mode: reduce bright glow on inline-styled button shadows. */
+  /* Homepage dark mode: replace light neumorphic shadows with cleaner elevation. */
   [data-theme="dark"] .home-route button,
   [data-theme="dark"] .home-route a[class*="rounded"] {
-    box-shadow: 5px 5px 10px rgba(0,0,0,0.42), -4px -4px 8px rgba(255,255,255,0.02), inset 0 1px 0 rgba(255,255,255,0.03) !important;
+    box-shadow: 0 16px 28px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04) !important;
     filter: none !important;
   }
 
   [data-theme="dark"] .home-route button:active,
   [data-theme="dark"] .home-route a[class*="rounded"]:active {
-    box-shadow: inset 4px 4px 8px rgba(0,0,0,0.50), inset -3px -3px 6px rgba(255,255,255,0.02) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), inset 8px 8px 16px rgba(0,0,0,0.24) !important;
   }
 
   /* Clapperboard banner treatment */
