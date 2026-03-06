@@ -36,7 +36,7 @@ export default function ShotToPrompt({ preview = false }) {
   const [generatedPrompt, setGeneratedPrompt] = useState('')
   const [copied, setCopied] = useState(false)
   const fileInputRef = useRef(null)
-  const { user, isPro } = useAuth()
+  const { user, session, loading: authLoading, isPro } = useAuth()
   const hasForcedProAccess = FORCE_PRO_EMAILS.has(String(user?.email || '').trim().toLowerCase())
   const canUsePro = isPro || hasForcedProAccess
 
@@ -140,10 +140,43 @@ export default function ShotToPrompt({ preview = false }) {
     }
   }
 
-  const analyzeImage = async (imageData) => {
-    // Always pull a fresh session at request time to avoid expired-token errors.
+  const getValidAccessToken = async () => {
+    if (session?.access_token) return session.access_token
+
     const { data: latestAuth } = await supabase.auth.getSession()
-    const accessToken = latestAuth?.session?.access_token
+    if (latestAuth?.session?.access_token) return latestAuth.session.access_token
+
+    const { data: refreshed, error } = await supabase.auth.refreshSession()
+    if (error) return ''
+    return refreshed?.session?.access_token || ''
+  }
+
+  const requestShotPrompt = async (imageData, accessToken) => {
+    const response = await fetch('/.netlify/functions/shot-to-prompt', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify({ image: imageData })
+    })
+
+    const data = await response.json().catch(() => ({}))
+    if (!response.ok) {
+      const error = new Error(data.error || `Shot to Prompt failed (${response.status})`)
+      error.status = response.status
+      throw error
+    }
+    return data
+  }
+
+  const analyzeImage = async (imageData) => {
+    if (authLoading) {
+      setGeneratedPrompt('Checking your session…')
+      return
+    }
+
+    const accessToken = await getValidAccessToken()
 
     if (!accessToken) {
       setGeneratedPrompt('Sign in required to use Shot to Prompt.')
@@ -162,18 +195,19 @@ export default function ShotToPrompt({ preview = false }) {
     setGeneratedPrompt('')
 
     try {
-      const response = await fetch('/.netlify/functions/shot-to-prompt', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        },
-        body: JSON.stringify({ image: imageData })
-      })
+      let data
+      try {
+        data = await requestShotPrompt(imageData, accessToken)
+      } catch (err) {
+        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''))
+        if (!shouldRetryAuth) throw err
 
-      const data = await response.json().catch(() => ({}))
-      if (!response.ok) {
-        throw new Error(data.error || `Shot to Prompt failed (${response.status})`)
+        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession()
+        const refreshedToken = refreshed?.session?.access_token
+        if (refreshError || !refreshedToken) {
+          throw new Error('Session expired. Please sign in again.')
+        }
+        data = await requestShotPrompt(imageData, refreshedToken)
       }
 
       if (data.prompt) {
