@@ -983,9 +983,6 @@ export default function PromptEnhancer({ onAuthClick }) {
                   camera + lens
                 </span>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-2 flex-nowrap min-w-0">
                   <span
                     className="text-xs font-semibold transition-all"
                     style={{ color: includeImageDetails ? 'var(--text-muted)' : '#6B7280' }}
