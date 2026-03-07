@@ -327,6 +327,36 @@ const buildFramePrompt = (prompt) => {
     .trim();
 };
 
+const parsePromptSections = (prompt) => {
+  const raw = String(prompt || '').trim();
+  if (!raw) {
+    return { videoPrompt: '', imagePrompt: '', sfxPrompt: '' };
+  }
+
+  let working = raw;
+  let imagePrompt = '';
+  let sfxPrompt = '';
+
+  const imageMatch = working.match(/Image details:\s*([\s\S]*?)(?=(?:Audio\/SFX:)|$)/i);
+  if (imageMatch) {
+    imagePrompt = String(imageMatch[1] || '').trim().replace(/[.\s]+$/g, '').trim();
+    working = working.replace(imageMatch[0], ' ').trim();
+  }
+
+  const sfxMatch = working.match(/Audio\/SFX:\s*([\s\S]*?)(?=(?:Image details:)|$)/i);
+  if (sfxMatch) {
+    sfxPrompt = String(sfxMatch[1] || '').trim().replace(/[.\s]+$/g, '').trim();
+    working = working.replace(sfxMatch[0], ' ').trim();
+  }
+
+  const videoPrompt = working
+    .replace(/\s{2,}/g, ' ')
+    .replace(/[.\s]+$/g, '')
+    .trim();
+
+  return { videoPrompt, imagePrompt, sfxPrompt };
+};
+
 const createGroupId = () => (
   globalThis.crypto?.randomUUID?.() || `cwf_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
 );
@@ -342,7 +372,6 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [loadingMode, setLoadingMode] = useState('');
   const [baseResult, setBaseResult] = useState(null);
   const [result, setResult] = useState(null);
-  const [copied, setCopied] = useState(false);
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false);
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() });
   const [addedDetails, setAddedDetails] = useState([]);
@@ -362,6 +391,10 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [motionPrompt, setMotionPrompt] = useState('');
   const [currentGroupId, setCurrentGroupId] = useState('');
   const [copiedSection, setCopiedSection] = useState('');
+  const [videoPromptMode, setVideoPromptMode] = useState('standard');
+  const [klingVideoPrompt, setKlingVideoPrompt] = useState('');
+  const [klingLoading, setKlingLoading] = useState(false);
+  const [klingError, setKlingError] = useState('');
   const requestIdRef = useRef(0);
   
   const { user, session, isPro } = useAuth();
@@ -412,6 +445,10 @@ export default function PromptEnhancer({ onAuthClick }) {
             ? 'Building Start Frame...'
             : 'Building Prompt...')
     : 'Enhance';
+  const standardSections = parsePromptSections(result);
+  const displayedVideoPrompt = videoPromptMode === 'kling' && klingVideoPrompt
+    ? klingVideoPrompt
+    : standardSections.videoPrompt;
 
   const getValidAccessToken = useCallback(async () => {
     if (session?.access_token) return session.access_token;
@@ -448,7 +485,6 @@ export default function PromptEnhancer({ onAuthClick }) {
     const requestId = ++requestIdRef.current;
     setLoading(true);
     setLoadingMode(interpretationStyle ? 'interpretation' : 'enhance');
-    setCopied(false);
     setGenerationError('');
 
     try {
@@ -512,6 +548,9 @@ export default function PromptEnhancer({ onAuthClick }) {
       setSaveStatus(EMPTY_SAVE_STATUS);
       setSaveError('');
       setCopiedSection('');
+      setVideoPromptMode('standard');
+      setKlingVideoPrompt('');
+      setKlingError('');
       lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
       if (requestId !== requestIdRef.current) return;
@@ -584,6 +623,9 @@ export default function PromptEnhancer({ onAuthClick }) {
       setOutputMode('frame');
       setCurrentGroupId('');
       setSaveStatus((previous) => ({ ...previous, end_frame: 'idle', motion_prompt: 'idle' }));
+      setVideoPromptMode('standard');
+      setKlingVideoPrompt('');
+      setKlingError('');
     }
   }, [baseResult, addedDetails, includeImageDetails]);
 
@@ -596,17 +638,11 @@ export default function PromptEnhancer({ onAuthClick }) {
       setEndFrameDirection('');
       setMotionDirection('');
       setCurrentGroupId('');
+      setVideoPromptMode('standard');
+      setKlingVideoPrompt('');
+      setKlingError('');
     }
   }, [includeImageDetails]);
-
-
-  const handleCopy = () => {
-    if (!result) return;
-    navigator.clipboard.writeText(result);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   const handleCopySection = (key, text) => {
     if (!text) return;
     navigator.clipboard.writeText(text);
@@ -731,6 +767,60 @@ export default function PromptEnhancer({ onAuthClick }) {
     if (requestId === requestIdRef.current) {
       setLoading(false);
       setLoadingMode('');
+    }
+  };
+
+  const handleVideoPromptModeChange = async (nextMode) => {
+    if (nextMode === 'standard') {
+      setVideoPromptMode('standard');
+      setKlingError('');
+      return;
+    }
+
+    if (!standardSections.videoPrompt || klingLoading) return;
+    if (klingVideoPrompt) {
+      setVideoPromptMode('kling');
+      setKlingError('');
+      return;
+    }
+
+    setKlingLoading(true);
+    setKlingError('');
+    try {
+      const accessToken = await getValidAccessToken();
+      if (!accessToken) {
+        onAuthClick?.();
+        setKlingLoading(false);
+        return;
+      }
+
+      let data;
+      try {
+        data = await requestEnhancedPrompt({
+          mode: 'kling_optimize',
+          videoPrompt: standardSections.videoPrompt
+        }, accessToken);
+      } catch (err) {
+        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
+        if (!shouldRetryAuth) throw err;
+        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
+        const refreshedToken = refreshed?.session?.access_token;
+        if (refreshError || !refreshedToken) {
+          throw new Error('Session expired. Please sign in again.');
+        }
+        data = await requestEnhancedPrompt({
+          mode: 'kling_optimize',
+          videoPrompt: standardSections.videoPrompt
+        }, refreshedToken);
+      }
+
+      setKlingVideoPrompt(String(data?.prompt || '').trim());
+      setVideoPromptMode('kling');
+    } catch (err) {
+      setVideoPromptMode('standard');
+      setKlingError(err?.message || 'Unable to optimise for Kling right now.');
+    } finally {
+      setKlingLoading(false);
     }
   };
 
@@ -1173,45 +1263,107 @@ export default function PromptEnhancer({ onAuthClick }) {
                         {saveStatus.video === 'saving' ? 'Saving...' : saveStatus.video === 'saved' ? 'Saved' : saveStatus.video === 'exists' ? 'Already Saved' : 'Save Prompt'}
                       </button>
                     )}
-                    <button
-                      onClick={handleCopy}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-                      style={{
-                        background: copied ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
-                        color: copied ? '#fff' : 'var(--text-secondary)',
-                        border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                        boxShadow: copied ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)',
-                        transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
-                      }}
-                    >
-                      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      {copied ? 'Copied!' : 'Copy Prompt'}
-                    </button>
                   </div>
                 </div>
-                <div
-                  className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
-                  style={{
-                    background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,250,253,0.98), rgba(255,255,255,0.94))',
-                    border: '2px solid var(--border-color)',
-                    color: 'var(--text-primary)',
-                    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                    minHeight: '100px',
-                    boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.05), inset -4px -4px 10px rgba(255,255,255,0.95)'
-                  }}
-                  onClick={(e) => {
-                    const range = document.createRange();
-                    range.selectNodeContents(e.currentTarget);
-                    const sel = window.getSelection();
-                    sel.removeAllRanges();
-                    sel.addRange(range);
-                  }}
-                >
-                  {result}
-                </div>
-                <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-                  Click text to select all, or use the Copy button
-                </p>
+                {standardSections.imagePrompt && (
+                  <div className="rounded-xl p-4 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(239,246,255,0.92), rgba(255,255,255,0.96))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(37,99,235,0.06), inset -3px -3px 8px rgba(255,255,255,0.92)' }}>
+                    <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                      <div className="text-xs font-bold" style={{ color: 'var(--accent-blue)' }}>IMAGE PROMPT</div>
+                      <button
+                        onClick={() => handleCopySection('image_prompt', standardSections.imagePrompt)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                        style={{
+                          background: copiedSection === 'image_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                          color: copiedSection === 'image_prompt' ? '#fff' : 'var(--text-secondary)',
+                          border: `2px solid ${copiedSection === 'image_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                          boxShadow: copiedSection === 'image_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                        }}
+                      >
+                        {copiedSection === 'image_prompt' ? 'Copied!' : 'Copy Image'}
+                      </button>
+                    </div>
+                    {standardSections.imagePrompt}
+                  </div>
+                )}
+
+                {standardSections.videoPrompt && (
+                  <>
+                    <div className="flex items-center justify-end mt-4">
+                      <div className="inline-flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)', boxShadow: isDarkTheme ? 'none' : 'inset 2px 2px 5px rgba(15,23,42,0.04), inset -2px -2px 5px rgba(255,255,255,0.92)' }}>
+                        <button
+                          onClick={() => handleVideoPromptModeChange('standard')}
+                          disabled={klingLoading}
+                          className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200"
+                          style={{
+                            background: videoPromptMode === 'standard' ? 'linear-gradient(145deg, #FFFFFF, #F3F4F6)' : 'transparent',
+                            color: videoPromptMode === 'standard' ? 'var(--text-primary)' : 'var(--text-muted)',
+                            boxShadow: videoPromptMode === 'standard' ? 'var(--control-soft-shadow)' : 'none'
+                          }}
+                        >
+                          Standard
+                        </button>
+                        <button
+                          onClick={() => handleVideoPromptModeChange('kling')}
+                          disabled={klingLoading}
+                          className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-2"
+                          style={{
+                            background: videoPromptMode === 'kling' ? 'linear-gradient(145deg, #8B5CF6, #7C3AED)' : 'transparent',
+                            color: videoPromptMode === 'kling' ? '#fff' : 'var(--text-muted)',
+                            boxShadow: videoPromptMode === 'kling' ? '0 6px 16px rgba(124,58,237,0.22)' : 'none',
+                            opacity: klingLoading && videoPromptMode !== 'kling' ? 0.8 : 1
+                          }}
+                        >
+                          {klingLoading && videoPromptMode !== 'kling' ? <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : null}
+                          Kling 3.0
+                        </button>
+                      </div>
+                    </div>
+                    <div className="rounded-xl p-4 mt-2 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,250,253,0.98), rgba(255,255,255,0.94))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.05), inset -4px -4px 10px rgba(255,255,255,0.95)' }}>
+                      <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                        <div className="text-xs font-bold" style={{ color: 'var(--accent-green)' }}>VIDEO PROMPT</div>
+                        <button
+                          onClick={() => handleCopySection('video_prompt', displayedVideoPrompt)}
+                          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                          style={{
+                            background: copiedSection === 'video_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                            color: copiedSection === 'video_prompt' ? '#fff' : 'var(--text-secondary)',
+                            border: `2px solid ${copiedSection === 'video_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                            boxShadow: copiedSection === 'video_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                          }}
+                        >
+                          {copiedSection === 'video_prompt' ? 'Copied!' : 'Copy Video'}
+                        </button>
+                      </div>
+                      {displayedVideoPrompt}
+                    </div>
+                    {klingError && (
+                      <p className="mt-2 text-xs text-right" style={{ color: 'var(--accent-red)' }}>
+                        {klingError}
+                      </p>
+                    )}
+                  </>
+                )}
+
+                {standardSections.sfxPrompt && (
+                  <div className="rounded-xl p-4 mt-4 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,247,237,0.96), rgba(255,255,255,0.96))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 3px 3px 8px rgba(245,158,11,0.07), inset -3px -3px 8px rgba(255,255,255,0.94)' }}>
+                    <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                      <div className="text-xs font-bold" style={{ color: '#F59E0B' }}>SFX PROMPT</div>
+                      <button
+                        onClick={() => handleCopySection('sfx_prompt', standardSections.sfxPrompt)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                        style={{
+                          background: copiedSection === 'sfx_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                          color: copiedSection === 'sfx_prompt' ? '#fff' : 'var(--text-secondary)',
+                          border: `2px solid ${copiedSection === 'sfx_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                          boxShadow: copiedSection === 'sfx_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                        }}
+                      >
+                        {copiedSection === 'sfx_prompt' ? 'Copied!' : 'Copy SFX'}
+                      </button>
+                    </div>
+                    {standardSections.sfxPrompt}
+                  </div>
+                )}
               </>
             )}
 
