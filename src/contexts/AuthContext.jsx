@@ -2,6 +2,32 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 const AuthContext = createContext(null)
+const directSignUp = async ({ email, password, fullName, redirectTo }) => (
+  supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: redirectTo,
+      data: {
+        full_name: fullName?.trim() || '',
+      },
+    },
+  })
+)
+
+const getSignupEndpoint = () => (
+  import.meta.env.VITE_AUTH_SIGNUP_ENDPOINT || '/.netlify/functions/auth-signup'
+)
+
+const readSignupError = async (response) => {
+  try {
+    const payload = await response.json()
+    if (payload?.error) return payload.error
+  } catch {
+    // Ignore malformed JSON and fall back to generic messaging.
+  }
+  return 'Unable to create your account right now.'
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
@@ -27,17 +53,47 @@ export function AuthProvider({ children }) {
 
   const signUp = async (email, password, fullName = '') => {
     const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/` : undefined
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectTo,
-        data: {
-          full_name: fullName?.trim() || '',
+
+    if (typeof window === 'undefined') {
+      return directSignUp({ email, password, fullName, redirectTo })
+    }
+
+    try {
+      const response = await fetch(getSignupEndpoint(), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      },
-    })
-    return { data, error }
+        body: JSON.stringify({
+          email,
+          password,
+          fullName,
+          redirectTo,
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json().catch(() => ({}))
+        return { data, error: null }
+      }
+
+      if (import.meta.env.DEV && (response.status === 404 || response.status === 405)) {
+        return directSignUp({ email, password, fullName, redirectTo })
+      }
+
+      return {
+        data: null,
+        error: new Error(await readSignupError(response)),
+      }
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        return directSignUp({ email, password, fullName, redirectTo })
+      }
+      return {
+        data: null,
+        error: error instanceof Error ? error : new Error('Unable to create your account right now.'),
+      }
+    }
   }
 
   const signIn = async (email, password) => {
