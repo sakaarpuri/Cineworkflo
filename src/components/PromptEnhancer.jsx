@@ -1241,7 +1241,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                           boxShadow: saveStatus.start_frame === 'saved' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
                         }}
                       >
-                        {saveStatus.start_frame === 'saving' ? 'Saving...' : saveStatus.start_frame === 'saved' ? 'Saved as Start Frame' : saveStatus.start_frame === 'exists' ? 'Start Frame Saved' : 'Save as Start Frame'}
+                        {saveStatus.start_frame === 'saving' ? 'Saving...' : saveStatus.start_frame === 'saved' ? 'Saved as Start Frame' : saveStatus.start_frame === 'exists' ? 'Start Frame Saved' : 'Save Prompt'}
                       </button>
                     )}
                     <button
