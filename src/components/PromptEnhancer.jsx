@@ -1295,9 +1295,15 @@ export default function PromptEnhancer({ onAuthClick }) {
                           disabled={klingLoading}
                           className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200"
                           style={{
-                            background: videoPromptMode === 'standard' ? 'linear-gradient(145deg, #FFFFFF, #F3F4F6)' : 'transparent',
-                            color: videoPromptMode === 'standard' ? 'var(--text-primary)' : 'var(--text-muted)',
-                            boxShadow: videoPromptMode === 'standard' ? 'var(--control-soft-shadow)' : 'none'
+                            background: videoPromptMode === 'standard'
+                              ? (isDarkTheme ? 'linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))' : 'linear-gradient(145deg, #FFFFFF, #F3F4F6)')
+                              : 'transparent',
+                            color: videoPromptMode === 'standard'
+                              ? 'var(--text-primary)'
+                              : (isDarkTheme ? '#CBD5E1' : 'var(--text-muted)'),
+                            boxShadow: videoPromptMode === 'standard'
+                              ? (isDarkTheme ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 6px 16px rgba(0,0,0,0.18)' : 'var(--control-soft-shadow)')
+                              : 'none'
                           }}
                         >
                           Standard
