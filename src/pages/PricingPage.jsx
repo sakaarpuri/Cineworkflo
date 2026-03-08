@@ -67,7 +67,7 @@ export default function PricingPage({ onAuthClick }) {
                 Is this a recurring subscription?
               </h3>
               <p style={{ color: 'var(--text-secondary)' }}>
-                Yes. Pro is billed monthly and can be cancelled anytime.
+                Yes. You can choose monthly or yearly billing, and both renew automatically until cancelled.
               </p>
             </div>
             <div>

@@ -24,7 +24,7 @@ const plans = [
     planType: 'monthly',
     price: '$7.99',
     priceNote: '/month',
-    description: 'For creators who ship. Unlimited everything.',
+    description: 'For creators who ship every month. Unlimited everything.',
     features: [
       'Unlimited Prompt Enhancer generations',
       'Prompt Vault (all prompts)',
@@ -34,6 +34,24 @@ const plans = [
       'Cancel anytime'
     ],
     cta: 'Go Pro — $7.99/mo',
+    popular: false
+  },
+  {
+    name: 'Pro Yearly',
+    planType: 'yearly',
+    price: '$49',
+    priceNote: '/year',
+    description: 'Huge discount versus monthly. Best value if you plan to stay.',
+    features: [
+      'Everything in Pro',
+      'Save 49% vs monthly billing',
+      'Unlimited Prompt Enhancer generations',
+      'Prompt Vault (all prompts)',
+      'Shot to Prompt AI tool',
+      'Advanced search & filters',
+      'New prompts weekly'
+    ],
+    cta: 'Go Yearly — $49/yr',
     popular: true
   }
 ]
@@ -52,7 +70,7 @@ export default function Pricing({ onAuthClick }) {
     if (checkout === 'canceled') {
       setCheckoutCanceled(true)
       const plan = params.get('plan')
-      if (plan === 'monthly') setCheckoutCanceledPlan(plan)
+      if (plan === 'monthly' || plan === 'yearly') setCheckoutCanceledPlan(plan)
       params.delete('checkout')
       params.delete('plan')
       const query = params.toString()
@@ -176,7 +194,7 @@ export default function Pricing({ onAuthClick }) {
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
           {plans.map((plan) => (
             <div 
               key={plan.name}
@@ -195,7 +213,7 @@ export default function Pricing({ onAuthClick }) {
                     color: 'var(--pro-card-badge-text)'
                   }}
                 >
-                  Most Value
+                  {plan.planType === 'yearly' ? 'Huge Discount' : 'Most Value'}
                 </span>
               )}
               <h3 
@@ -210,6 +228,18 @@ export default function Pricing({ onAuthClick }) {
               >
                 {plan.description}
               </p>
+              {plan.planType === 'yearly' && (
+                <div
+                  className="mb-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-bold"
+                  style={{
+                    background: plan.popular ? 'rgba(255,255,255,0.14)' : 'rgba(59,130,246,0.10)',
+                    color: plan.popular ? 'var(--pro-card-text)' : 'var(--accent-blue)',
+                    border: `1px solid ${plan.popular ? 'rgba(255,255,255,0.18)' : 'rgba(59,130,246,0.18)'}`
+                  }}
+                >
+                  Save 49% compared with paying monthly
+                </div>
+              )}
               <div className="mb-6">
                 <span 
                   className="text-4xl font-bold"

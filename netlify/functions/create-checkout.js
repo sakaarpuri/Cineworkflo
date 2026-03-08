@@ -71,7 +71,7 @@ exports.handler = async (event) => {
               currency: 'usd',
               product_data: {
                 name: 'CineWorkflo Pro Monthly',
-                description: 'Unlimited AI generations + all Pro features'
+                description: 'Unlimited CineWorkflo access billed monthly'
               },
               unit_amount: 799, // $7.99 in cents
               recurring: { interval: 'month' }
@@ -105,7 +105,7 @@ exports.handler = async (event) => {
               currency: 'usd',
               product_data: {
                 name: 'CineWorkflo Pro Yearly',
-                description: '1 year unlimited access to 150+ AI video prompts and all Pro features'
+                description: 'Unlimited CineWorkflo access billed yearly at a discounted rate'
               },
               unit_amount: 4900, // $49.00 in cents
               recurring: { interval: 'year' }
