@@ -362,6 +362,41 @@ const createGroupId = () => (
 );
 
 const EMPTY_SAVE_STATUS = { video: 'idle', start_frame: 'idle', end_frame: 'idle', motion_prompt: 'idle' };
+const ENHANCER_CACHE_STORAGE_KEY = 'cwf_prompt_enhancer_cache_v1';
+const ENHANCER_CACHE_TTL_MS = 30 * 60 * 1000;
+
+const buildCacheKey = (mode, payload, userId = 'anon') => JSON.stringify({
+  userId,
+  mode,
+  idea: String(payload.idea || '').trim(),
+  mood: String(payload.mood || '').trim(),
+  useCase: String(payload.useCase || '').trim(),
+  skillLevel: String(payload.skillLevel || '').trim(),
+  interpretation: String(payload.interpretation || '').trim(),
+  includeAudioSfx: Boolean(payload.includeAudioSfx),
+  includeImages: Boolean(payload.includeImages),
+  framePrompt: String(payload.framePrompt || '').trim(),
+  endFrameDirection: String(payload.endFrameDirection || '').trim(),
+  motionDirection: String(payload.motionDirection || '').trim()
+});
+
+const readSessionEnhancerCache = () => {
+  try {
+    const raw = sessionStorage.getItem(ENHANCER_CACHE_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch {
+    return {};
+  }
+};
+
+const writeSessionEnhancerCache = (cache) => {
+  try {
+    sessionStorage.setItem(ENHANCER_CACHE_STORAGE_KEY, JSON.stringify(cache));
+  } catch {
+    // Ignore storage failures.
+  }
+};
 
 export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
@@ -391,11 +426,8 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [motionPrompt, setMotionPrompt] = useState('');
   const [currentGroupId, setCurrentGroupId] = useState('');
   const [copiedSection, setCopiedSection] = useState('');
-  const [videoPromptMode, setVideoPromptMode] = useState('standard');
-  const [klingVideoPrompt, setKlingVideoPrompt] = useState('');
-  const [klingLoading, setKlingLoading] = useState(false);
-  const [klingError, setKlingError] = useState('');
   const requestIdRef = useRef(0);
+  const enhancerCacheRef = useRef({});
   
   const { user, session, isPro } = useAuth();
   const hasForcedProAccess = FORCE_PRO_EMAILS.has(String(user?.email || '').trim().toLowerCase());
@@ -420,6 +452,10 @@ export default function PromptEnhancer({ onAuthClick }) {
   }, [])
 
   const isDarkTheme = themeMode === 'dark'
+
+  useEffect(() => {
+    enhancerCacheRef.current = readSessionEnhancerCache();
+  }, []);
 
   // Load usage on mount
   useEffect(() => {
@@ -446,9 +482,6 @@ export default function PromptEnhancer({ onAuthClick }) {
             : 'Building Prompt...')
     : 'Enhance';
   const standardSections = parsePromptSections(result);
-  const displayedVideoPrompt = videoPromptMode === 'kling' && klingVideoPrompt
-    ? klingVideoPrompt
-    : standardSections.videoPrompt;
 
   const getValidAccessToken = useCallback(async () => {
     if (session?.access_token) return session.access_token;
@@ -480,6 +513,30 @@ export default function PromptEnhancer({ onAuthClick }) {
     return data;
   }, []);
 
+  const getCachedEnhancerResponse = useCallback((mode, payload) => {
+    const key = buildCacheKey(mode, payload, user?.id);
+    const existing = enhancerCacheRef.current[key];
+    if (!existing) return null;
+    if (Date.now() - Number(existing.storedAt || 0) > ENHANCER_CACHE_TTL_MS) {
+      delete enhancerCacheRef.current[key];
+      writeSessionEnhancerCache(enhancerCacheRef.current);
+      return null;
+    }
+    return existing.value ?? null;
+  }, [user?.id]);
+
+  const setCachedEnhancerResponse = useCallback((mode, payload, value) => {
+    const key = buildCacheKey(mode, payload, user?.id);
+    enhancerCacheRef.current = {
+      ...enhancerCacheRef.current,
+      [key]: {
+        storedAt: Date.now(),
+        value
+      }
+    };
+    writeSessionEnhancerCache(enhancerCacheRef.current);
+  }, [user?.id]);
+
   const handleEnhance = useCallback(async (isAutoUpdate = false, interpretationStyle = null) => {
     if (!canSubmit && !interpretationStyle) return;
     const requestId = ++requestIdRef.current;
@@ -492,30 +549,36 @@ export default function PromptEnhancer({ onAuthClick }) {
         ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx, includeImages: includeImageDetails }
         : { idea, mood, useCase, skillLevel, includeAudioSfx, includeImages: includeImageDetails };
 
-      const accessToken = await getValidAccessToken();
-      if (!accessToken) {
-        onAuthClick?.()
-        setLoading(false);
-        setLoadingMode('');
-        return;
-      }
+      const cached = getCachedEnhancerResponse('enhance', promptPayload);
+      let data = cached;
 
-      let data;
-      try {
-        data = await requestEnhancedPrompt(promptPayload, accessToken);
-      } catch (err) {
-        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
-        if (!shouldRetryAuth) throw err;
-
-        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
-        const refreshedToken = refreshed?.session?.access_token;
-        if (refreshError || !refreshedToken) {
-          throw new Error('Session expired. Please sign in again.');
+      if (!data) {
+        const accessToken = await getValidAccessToken();
+        if (!accessToken) {
+          onAuthClick?.()
+          setLoading(false);
+          setLoadingMode('');
+          return;
         }
-        data = await requestEnhancedPrompt(promptPayload, refreshedToken);
+
+        try {
+          data = await requestEnhancedPrompt(promptPayload, accessToken);
+        } catch (err) {
+          const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
+          if (!shouldRetryAuth) throw err;
+
+          const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
+          const refreshedToken = refreshed?.session?.access_token;
+          if (refreshError || !refreshedToken) {
+            throw new Error('Session expired. Please sign in again.');
+          }
+          data = await requestEnhancedPrompt(promptPayload, refreshedToken);
+        }
+
+        setCachedEnhancerResponse('enhance', promptPayload, data);
       }
 
-      if (!canUsePro && !interpretationStyle && !isAutoUpdate) {
+      if (!cached && !canUsePro && !interpretationStyle && !isAutoUpdate) {
         const nextUsage = { ...usage, count: usage.count + 1 };
         saveUsageData(nextUsage);
         setUsage(nextUsage);
@@ -548,9 +611,6 @@ export default function PromptEnhancer({ onAuthClick }) {
       setSaveStatus(EMPTY_SAVE_STATUS);
       setSaveError('');
       setCopiedSection('');
-      setVideoPromptMode('standard');
-      setKlingVideoPrompt('');
-      setKlingError('');
       lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
       if (requestId !== requestIdRef.current) return;
@@ -560,7 +620,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setLoading(false);
       setLoadingMode('');
     }
-  }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, getValidAccessToken, onAuthClick, requestEnhancedPrompt, usage]);
+  }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, getCachedEnhancerResponse, getValidAccessToken, onAuthClick, requestEnhancedPrompt, setCachedEnhancerResponse, usage]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -623,9 +683,6 @@ export default function PromptEnhancer({ onAuthClick }) {
       setOutputMode('frame');
       setCurrentGroupId('');
       setSaveStatus((previous) => ({ ...previous, end_frame: 'idle', motion_prompt: 'idle' }));
-      setVideoPromptMode('standard');
-      setKlingVideoPrompt('');
-      setKlingError('');
     }
   }, [baseResult, addedDetails, includeImageDetails]);
 
@@ -638,9 +695,6 @@ export default function PromptEnhancer({ onAuthClick }) {
       setEndFrameDirection('');
       setMotionDirection('');
       setCurrentGroupId('');
-      setVideoPromptMode('standard');
-      setKlingVideoPrompt('');
-      setKlingError('');
     }
   }, [includeImageDetails]);
   const handleCopySection = (key, text) => {
@@ -710,47 +764,46 @@ export default function PromptEnhancer({ onAuthClick }) {
     setLoadingMode('motion');
     setGenerationError('');
     try {
-      const accessToken = await getValidAccessToken();
-      if (!accessToken) {
-        onAuthClick?.();
-        setLoading(false);
-        return;
-      }
+      const motionPayload = {
+        mode: 'frame_to_motion',
+        idea,
+        framePrompt: startFramePrompt,
+        endFrameDirection,
+        motionDirection,
+        mood,
+        useCase,
+        skillLevel
+      };
 
-      let data;
-      try {
-        data = await requestEnhancedPrompt({
-          mode: 'frame_to_motion',
-          idea,
-          framePrompt: startFramePrompt,
-          endFrameDirection,
-          motionDirection,
-          mood,
-          useCase,
-          skillLevel
-        }, accessToken);
-      } catch (err) {
-        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
-        if (!shouldRetryAuth) throw err;
-        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
-        const refreshedToken = refreshed?.session?.access_token;
-        if (refreshError || !refreshedToken) {
-          throw new Error('Session expired. Please sign in again.');
+      const cached = getCachedEnhancerResponse('frame_to_motion', motionPayload);
+      let data = cached;
+
+      if (!data) {
+        const accessToken = await getValidAccessToken();
+        if (!accessToken) {
+          onAuthClick?.();
+          setLoading(false);
+          return;
         }
-        data = await requestEnhancedPrompt({
-          mode: 'frame_to_motion',
-          idea,
-          framePrompt: startFramePrompt,
-          endFrameDirection,
-          motionDirection,
-          mood,
-          useCase,
-          skillLevel
-        }, refreshedToken);
+
+        try {
+          data = await requestEnhancedPrompt(motionPayload, accessToken);
+        } catch (err) {
+          const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
+          if (!shouldRetryAuth) throw err;
+          const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
+          const refreshedToken = refreshed?.session?.access_token;
+          if (refreshError || !refreshedToken) {
+            throw new Error('Session expired. Please sign in again.');
+          }
+          data = await requestEnhancedPrompt(motionPayload, refreshedToken);
+        }
+
+        setCachedEnhancerResponse('frame_to_motion', motionPayload, data);
       }
 
       if (requestId !== requestIdRef.current) return;
-      if (!canUsePro) {
+      if (!cached && !canUsePro) {
         const nextUsage = { ...usage, count: usage.count + 1 };
         saveUsageData(nextUsage);
         setUsage(nextUsage);
@@ -767,60 +820,6 @@ export default function PromptEnhancer({ onAuthClick }) {
     if (requestId === requestIdRef.current) {
       setLoading(false);
       setLoadingMode('');
-    }
-  };
-
-  const handleVideoPromptModeChange = async (nextMode) => {
-    if (nextMode === 'standard') {
-      setVideoPromptMode('standard');
-      setKlingError('');
-      return;
-    }
-
-    if (!standardSections.videoPrompt || klingLoading) return;
-    if (klingVideoPrompt) {
-      setVideoPromptMode('kling');
-      setKlingError('');
-      return;
-    }
-
-    setKlingLoading(true);
-    setKlingError('');
-    try {
-      const accessToken = await getValidAccessToken();
-      if (!accessToken) {
-        onAuthClick?.();
-        setKlingLoading(false);
-        return;
-      }
-
-      let data;
-      try {
-        data = await requestEnhancedPrompt({
-          mode: 'kling_optimize',
-          videoPrompt: standardSections.videoPrompt
-        }, accessToken);
-      } catch (err) {
-        const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''));
-        if (!shouldRetryAuth) throw err;
-        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession();
-        const refreshedToken = refreshed?.session?.access_token;
-        if (refreshError || !refreshedToken) {
-          throw new Error('Session expired. Please sign in again.');
-        }
-        data = await requestEnhancedPrompt({
-          mode: 'kling_optimize',
-          videoPrompt: standardSections.videoPrompt
-        }, refreshedToken);
-      }
-
-      setKlingVideoPrompt(String(data?.prompt || '').trim());
-      setVideoPromptMode('kling');
-    } catch (err) {
-      setVideoPromptMode('standard');
-      setKlingError(err?.message || 'Unable to optimise for Kling right now.');
-    } finally {
-      setKlingLoading(false);
     }
   };
 
@@ -1287,67 +1286,24 @@ export default function PromptEnhancer({ onAuthClick }) {
                 )}
 
                 {standardSections.videoPrompt && (
-                  <>
-                    <div className="flex items-center justify-end mt-4">
-                      <div className="inline-flex items-center gap-1 p-1 rounded-xl" style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)', boxShadow: isDarkTheme ? 'none' : 'inset 2px 2px 5px rgba(15,23,42,0.04), inset -2px -2px 5px rgba(255,255,255,0.92)' }}>
-                        <button
-                          onClick={() => handleVideoPromptModeChange('standard')}
-                          disabled={klingLoading}
-                          className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200"
-                          style={{
-                            background: videoPromptMode === 'standard'
-                              ? (isDarkTheme ? 'linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08))' : 'linear-gradient(145deg, #FFFFFF, #F3F4F6)')
-                              : 'transparent',
-                            color: videoPromptMode === 'standard'
-                              ? 'var(--text-primary)'
-                              : (isDarkTheme ? '#CBD5E1' : 'var(--text-muted)'),
-                            boxShadow: videoPromptMode === 'standard'
-                              ? (isDarkTheme ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 6px 16px rgba(0,0,0,0.18)' : 'var(--control-soft-shadow)')
-                              : 'none'
-                          }}
-                        >
-                          Standard
-                        </button>
-                        <button
-                          onClick={() => handleVideoPromptModeChange('kling')}
-                          disabled={klingLoading}
-                          className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-2"
-                          style={{
-                            background: videoPromptMode === 'kling' ? 'linear-gradient(145deg, #8B5CF6, #7C3AED)' : 'transparent',
-                            color: videoPromptMode === 'kling' ? '#fff' : 'var(--text-muted)',
-                            boxShadow: videoPromptMode === 'kling' ? '0 6px 16px rgba(124,58,237,0.22)' : 'none',
-                            opacity: klingLoading && videoPromptMode !== 'kling' ? 0.8 : 1
-                          }}
-                        >
-                          {klingLoading && videoPromptMode !== 'kling' ? <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : null}
-                          Kling 3.0
-                        </button>
-                      </div>
+                  <div className="rounded-xl p-4 mt-4 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,250,253,0.98), rgba(255,255,255,0.94))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.05), inset -4px -4px 10px rgba(255,255,255,0.95)' }}>
+                    <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                      <div className="text-xs font-bold" style={{ color: 'var(--accent-green)' }}>VIDEO PROMPT</div>
+                      <button
+                        onClick={() => handleCopySection('video_prompt', standardSections.videoPrompt)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                        style={{
+                          background: copiedSection === 'video_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
+                          color: copiedSection === 'video_prompt' ? '#fff' : 'var(--text-secondary)',
+                          border: `2px solid ${copiedSection === 'video_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+                          boxShadow: copiedSection === 'video_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
+                        }}
+                      >
+                        {copiedSection === 'video_prompt' ? 'Copied!' : 'Copy Video'}
+                      </button>
                     </div>
-                    <div className="rounded-xl p-4 mt-2 text-base leading-relaxed" style={{ background: isDarkTheme ? 'var(--bg-primary)' : 'linear-gradient(145deg, rgba(255,250,253,0.98), rgba(255,255,255,0.94))', border: '2px solid var(--border-color)', color: 'var(--text-primary)', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', boxShadow: isDarkTheme ? 'none' : 'inset 4px 4px 10px rgba(15,23,42,0.05), inset -4px -4px 10px rgba(255,255,255,0.95)' }}>
-                      <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
-                        <div className="text-xs font-bold" style={{ color: 'var(--accent-green)' }}>VIDEO PROMPT</div>
-                        <button
-                          onClick={() => handleCopySection('video_prompt', displayedVideoPrompt)}
-                          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
-                          style={{
-                            background: copiedSection === 'video_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
-                            color: copiedSection === 'video_prompt' ? '#fff' : 'var(--text-secondary)',
-                            border: `2px solid ${copiedSection === 'video_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-                            boxShadow: copiedSection === 'video_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
-                          }}
-                        >
-                          {copiedSection === 'video_prompt' ? 'Copied!' : 'Copy Video'}
-                        </button>
-                      </div>
-                      {displayedVideoPrompt}
-                    </div>
-                    {klingError && (
-                      <p className="mt-2 text-xs text-right" style={{ color: 'var(--accent-red)' }}>
-                        {klingError}
-                      </p>
-                    )}
-                  </>
+                    {standardSections.videoPrompt}
+                  </div>
                 )}
 
                 {standardSections.sfxPrompt && (

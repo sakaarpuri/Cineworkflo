@@ -27,25 +27,25 @@ const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
 
 const SEO_DEFAULT = {
-  title: 'CineWorkflo - AI Video Prompt Workflows for US, Canada, and UK Creators',
-  description: 'AI video prompt workflows for filmmakers and creator teams in the US, Canada, and UK. Access Prompt Vault, Shot to Prompt, and Camera Moves.',
-  keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, US creators, Canada creators, UK creators',
+  title: 'CineWorkflo - AI Video Prompt Workflows for Creators Worldwide',
+  description: 'AI video prompt workflows for filmmakers and creator teams worldwide. Access Prompt Vault, Shot to Prompt, Camera Moves, and image-to-video prompting tools.',
+  keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, creators worldwide, prompt workflows',
   path: '/',
   noindex: false
 }
 
 const SEO_BY_PATH = {
   '/': {
-    title: 'CineWorkflo - AI Video Prompts for US, Canada, and UK Creators | Prompt Vault + Tools',
-    description: 'Create AI video faster with Prompt Vault, Shot to Prompt, and Camera Moves. Built for filmmakers and creator teams across the US, Canada, and UK.',
-    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, US, Canada, UK',
+    title: 'CineWorkflo - AI Video Prompts for Creators Worldwide | Prompt Vault + Tools',
+    description: 'Create AI video faster with Prompt Vault, Shot to Prompt, Camera Moves, and image-to-video prompt workflows for creators worldwide.',
+    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, creators worldwide',
     path: '/',
     noindex: false
   },
   '/prompts': {
-    title: 'Prompt Vault - AI Video Prompts for US, Canada, and UK Teams | CineWorkflo',
-    description: 'Browse AI video prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls for creator workflows in the US, Canada, and UK.',
-    keywords: 'prompt vault, AI video prompts, image prompt, video prompt, sfx prompt, variable prompts, Runway prompts, Kling prompts, Luma prompts, Sora prompts, US Canada UK',
+    title: 'Prompt Vault - AI Video Prompts for Creator Teams Worldwide | CineWorkflo',
+    description: 'Browse AI video prompts with Image Prompt, Video Prompt, and SFX blocks plus variable controls for creator workflows worldwide.',
+    keywords: 'prompt vault, AI video prompts, image prompt, video prompt, sfx prompt, variable prompts, Runway prompts, Kling prompts, Luma prompts, Sora prompts',
     path: '/prompts',
     noindex: false
   },
@@ -58,15 +58,15 @@ const SEO_BY_PATH = {
   },
   '/shot-to-prompt': {
     title: 'Shot to Prompt - Convert Frames into AI Video Prompts | CineWorkflo',
-    description: 'Upload an image or short video reference and generate an AI video prompt. Built for previsualization workflows in the US, Canada, and UK.',
-    keywords: 'shot to prompt, image to prompt, AI video prompt generator, filmmaking prompt tool, US Canada UK',
+    description: 'Upload an image or short video reference and generate an AI video prompt for previsualization workflows worldwide.',
+    keywords: 'shot to prompt, image to prompt, AI video prompt generator, filmmaking prompt tool, previsualization',
     path: '/shot-to-prompt',
     noindex: false
   },
   '/camera-moves': {
     title: 'Camera Movements Guide - Classic, Dynamic, and AI-Native Moves | CineWorkflo',
-    description: 'Learn camera movement language with interactive cards for dolly, pan, tracking, handheld, steadicam, orbit, drone, and more for US, Canada, and UK creators.',
-    keywords: 'camera movements, dolly shot, pan shot, steadicam, handheld, whip pan, dutch angle, dolly zoom, AI camera moves, US Canada UK',
+    description: 'Learn camera movement language with interactive cards for dolly, pan, tracking, handheld, steadicam, orbit, drone, and more.',
+    keywords: 'camera movements, dolly shot, pan shot, steadicam, handheld, whip pan, dutch angle, dolly zoom, AI camera moves',
     path: '/camera-moves',
     noindex: false
   },
@@ -78,23 +78,23 @@ const SEO_BY_PATH = {
     noindex: false
   },
   '/pricing': {
-    title: 'Pricing - CineWorkflo Plans for AI Video Creators in US, Canada, and UK',
-    description: 'Compare Free and Pro plans for CineWorkflo. Unlock the ever-growing Prompt Vault and unlimited Prompt Enhancer generations for creator workflows in the US, Canada, and UK.',
-    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans, Sora prompt plans, Meta prompt plans, US Canada UK',
+    title: 'Pricing - CineWorkflo Plans for AI Video Creators Worldwide',
+    description: 'Compare Free and Pro plans for CineWorkflo. Unlock the ever-growing Prompt Vault and unlimited Prompt Enhancer generations for creator workflows worldwide.',
+    keywords: 'CineWorkflo pricing, AI video prompt pricing, Runway prompt subscription, Pika prompt plans, Sora prompt plans, Meta prompt plans',
     path: '/pricing',
     noindex: false
   },
   '/about': {
     title: 'About CineWorkflo - AI Video Prompt Workflows',
-    description: 'Learn how CineWorkflo helps filmmakers and creator teams in the US, Canada, and UK build reliable AI video workflows.',
-    keywords: 'about CineWorkflo, AI video workflow platform, filmmaker prompt tools, US Canada UK',
+    description: 'Learn how CineWorkflo helps filmmakers and creator teams worldwide build reliable AI video workflows.',
+    keywords: 'about CineWorkflo, AI video workflow platform, filmmaker prompt tools',
     path: '/about',
     noindex: false
   },
   '/contact': {
     title: 'Contact CineWorkflo Support',
-    description: 'Contact CineWorkflo for support, billing, and partnership inquiries from the US, Canada, and UK.',
-    keywords: 'contact CineWorkflo, CineWorkflo support, prompt tool support, US Canada UK',
+    description: 'Contact CineWorkflo for support, billing, and partnership inquiries worldwide.',
+    keywords: 'contact CineWorkflo, CineWorkflo support, prompt tool support',
     path: '/contact',
     noindex: false
   },
