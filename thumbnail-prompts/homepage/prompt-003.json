@@ -1,0 +1,17 @@
+{
+  "prompt": "A sports car stationary on a winding coastal road at golden hour, 35mm low-angle composition at tire height, dust settled around the tires, warm side-raking dramatic light sculpting the body panels, heat shimmer visible in the far distance, cinematic 2.39:1 color grade, 16:9. Create this as a simple low-resolution thumbnail-style cinematic still for a prompt library card. Keep the composition clean, readable at small size, realistic, uncluttered, with strong silhouette and clear focal subject. No text, no interface chrome, no split panels, no collage.",
+  "negative_prompt": "text overlay, UI chrome, collage, split screen, diptych, triptych, watermark, logo, illegible details, extra objects, cluttered composition, cartoon, illustration, low-detail mush, deformed product, distorted vehicle, duplicate objects",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage card",
+    "camera_angle": "match the prompt framing with a single clear subject",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean edges, realistic materials, readable at small size"
+  }
+}

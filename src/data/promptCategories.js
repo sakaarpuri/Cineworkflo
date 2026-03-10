@@ -64,6 +64,7 @@ const CATEGORY_METADATA = {
 }
 
 const FALLBACK_TOOL = 'Runway'
+const GENERATED_THUMBNAIL_COUNT = 30
 
 const toSlug = (value) =>
   String(value || '')
@@ -198,7 +199,11 @@ export const PROMPT_LIBRARY = rawPromptLibrary.map((rawPrompt, index) => {
     }),
     tool: bestOn[0] || FALLBACK_TOOL,
     prompt: videoPrompt,
-    tags: dedupeKeepFirst([style, ...bestOn, ...audience])
+    tags: dedupeKeepFirst([style, ...bestOn, ...audience]),
+    thumbnail_url:
+      Number(rawPrompt.id ?? index + 1) <= GENERATED_THUMBNAIL_COUNT
+        ? `/prompt-thumbnails/${String(rawPrompt.id ?? index + 1).padStart(3, '0')}.jpg`
+        : null
   }
 })
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Search, Copy, Check, ArrowRight, Eye, X } from 'lucide-react'
+import { Search, Copy, Check, ArrowRight, X } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 import { trackCtaEvent } from '../lib/marketingAttribution'
@@ -231,80 +231,112 @@ export default function PromptVault({ preview = false }) {
             <div 
               key={prompt.id}
               onClick={() => openModal(prompt)}
-              className="neu-card p-5 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer group cwf-scanline-hover"
+              className="neu-card rounded-[28px] overflow-hidden transition-all hover:-translate-y-1 cursor-pointer group"
             >
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div>
-                  <span 
-                    className="text-xs font-bold uppercase tracking-wide"
-                    style={{ color: CATEGORY_COLORS[prompt.category] || 'var(--accent-blue)' }}
+              <div
+                className="aspect-[16/9] p-5"
+                style={{
+                  background: prompt.thumbnail_url
+                    ? '#d9d9d9'
+                    : `linear-gradient(135deg, ${CATEGORY_COLORS[prompt.category] || 'var(--accent-blue)'}BB, rgba(15,23,42,0.12))`
+                }}
+              >
+                {prompt.thumbnail_url ? (
+                  <img
+                    src={prompt.thumbnail_url}
+                    alt={prompt.title}
+                    className="w-full h-full object-cover rounded-[20px]"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full rounded-[20px] flex items-end p-4"
+                    style={{
+                      background: 'rgba(255,255,255,0.78)',
+                      border: '1px solid rgba(255,255,255,0.45)'
+                    }}
                   >
-                    {prompt.category}
-                  </span>
-                  <h3 
-                    className="font-bold mt-1"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
-                    {prompt.title}
-                  </h3>
-                </div>
-                <span 
-                  className="text-xs px-2 py-1 rounded"
-                  style={{ 
-                    background: 'var(--bg-primary)',
-                    color: 'var(--text-muted)'
-                  }}
-                >
-                  {prompt.tool}
-                </span>
+                    <span
+                      className="text-xs font-bold uppercase tracking-[0.14em]"
+                      style={{ color: CATEGORY_COLORS[prompt.category] || 'var(--accent-blue)' }}
+                    >
+                      Thumbnail pending
+                    </span>
+                  </div>
+                )}
               </div>
 
-              <p 
-                className="text-sm mb-4 font-mono line-clamp-3"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                {prompt.prompt}
-              </p>
-
-              <div className="flex items-center justify-between">
-                <div className="flex gap-1.5">
-                  {prompt.tags.slice(0, 2).map(tag => (
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div>
                     <span 
-                      key={tag}
-                      className="text-xs px-2 py-1 rounded"
-                      style={{ 
-                        background: 'var(--bg-primary)',
-                        color: 'var(--text-muted)'
-                      }}
+                      className="text-[11px] font-bold uppercase tracking-[0.14em]"
+                      style={{ color: CATEGORY_COLORS[prompt.category] || 'var(--accent-blue)' }}
                     >
-                      #{tag}
+                      {prompt.category}
                     </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-2">
+                    <h3 
+                      className="font-mono text-[1.05rem] leading-8 mt-2"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {prompt.title}
+                    </h3>
+                  </div>
                   <span 
-                    className="flex items-center gap-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ color: 'var(--text-muted)' }}
+                    className="text-xs px-2.5 py-1 rounded-full shrink-0"
+                    style={{ 
+                      background: 'var(--bg-primary)',
+                      color: 'var(--text-muted)',
+                      border: '1px solid var(--border-color)'
+                    }}
                   >
-                    <Eye className="h-3.5 w-3.5" /> View
+                    {prompt.tool}
                   </span>
+                </div>
+
+                <p 
+                  className="text-sm mb-6 font-mono line-clamp-4 min-h-[6rem]"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  {prompt.prompt}
+                </p>
+
+                <div className="flex items-center justify-between gap-3">
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
                       copyPrompt(prompt.prompt, prompt.id)
                     }}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${copiedId === prompt.id ? 'cwf-rec-flash' : ''}`}
+                    className={`flex items-center gap-2 px-5 py-3 rounded-full text-sm font-semibold transition-all ${copiedId === prompt.id ? 'cwf-rec-flash' : ''}`}
                     style={{
                       background: copiedId === prompt.id ? 'var(--accent-green)' : 'var(--bg-primary)',
                       color: copiedId === prompt.id ? '#fff' : 'var(--text-secondary)',
-                      border: '1px solid var(--border-color)'
+                      border: '1px solid var(--border-color)',
+                      boxShadow: 'var(--control-soft-shadow)'
                     }}
                   >
                     {copiedId === prompt.id ? (
-                      <><Check className="h-3.5 w-3.5" /> Copied</>
+                      <><Check className="h-4 w-4" /> Copied</>
                     ) : (
-                      <><Copy className="h-3.5 w-3.5" /> Copy</>
+                      <><Copy className="h-4 w-4" /> Copy prompt</>
                     )}
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      openModal(prompt)
+                    }}
+                    className="h-12 w-12 rounded-full flex items-center justify-center transition-all"
+                    style={{
+                      background: 'var(--bg-primary)',
+                      color: 'var(--text-secondary)',
+                      border: '1px solid var(--border-color)',
+                      boxShadow: 'var(--control-soft-shadow)'
+                    }}
+                    aria-label={`View ${prompt.title}`}
+                  >
+                    <ArrowRight className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -441,6 +473,16 @@ export default function PromptVault({ preview = false }) {
 	                </Link>
 	              </div>
 	            </div>
+
+            {selectedPrompt.thumbnail_url && (
+              <div className="mb-4 p-2 rounded-2xl" style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)' }}>
+                <img
+                  src={selectedPrompt.thumbnail_url}
+                  alt={selectedPrompt.title}
+                  className="w-full aspect-[16/9] object-cover rounded-xl"
+                />
+              </div>
+            )}
 
             <div 
               className="p-4 rounded-xl mb-4 font-mono text-sm leading-relaxed"
