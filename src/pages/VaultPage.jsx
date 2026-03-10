@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Search, Copy, Check, Lightbulb, ChevronDown, ChevronUp, BookmarkPlus } from 'lucide-react'
-import PROMPTS_RAW from '../data/ai_video_prompt_library.json'
+import { PROMPT_LIBRARY } from '../data/promptCategories'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import { Link } from 'react-router-dom'
@@ -181,8 +181,8 @@ function PromptBlock({ label, color, nodes, text, onCopy, copied, highlight = tr
       <div
         style={{
           fontFamily: MONO_STACK,
-          fontSize: 12.5,
-          lineHeight: 1.75,
+          fontSize: 14,
+          lineHeight: 1.8,
           color: 'var(--text-primary)',
           whiteSpace: 'pre-wrap',
         }}
@@ -224,7 +224,7 @@ function VariableCard({ name, spec, value, onPick }) {
       <div style={{ fontFamily: MONO_STACK, fontSize: 12, color: COLOR.amber, fontWeight: 700, marginBottom: 6 }}>
         {name}
       </div>
-      <div style={{ color: 'var(--text-primary)', fontSize: 12.5, lineHeight: 1.5, marginBottom: 8 }}>
+      <div style={{ color: 'var(--text-primary)', fontSize: 14.5, lineHeight: 1.55, marginBottom: 10 }}>
         {value}
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -234,8 +234,8 @@ function VariableCard({ name, spec, value, onPick }) {
             type="button"
             onClick={() => onPick(ex)}
             style={{
-              fontSize: 11,
-              padding: '5px 8px',
+              fontSize: 12.5,
+              padding: '7px 10px',
               borderRadius: 999,
               background: 'var(--bg-primary)',
               border: `1px solid ${BORDER}`,
@@ -491,6 +491,32 @@ function PromptCard({ prompt, globalView }) {
         padding: 16,
       }}
     >
+      {prompt.thumbnail_url && (
+        <div
+          style={{
+            marginBottom: 14,
+            padding: 10,
+            background: 'var(--bg-primary)',
+            border: `1px solid ${BORDER}`,
+            borderRadius: 18,
+          }}
+        >
+          <img
+            src={prompt.thumbnail_url}
+            alt={prompt.title}
+            style={{
+              width: '100%',
+              aspectRatio: '16 / 9',
+              objectFit: 'cover',
+              borderRadius: 14,
+              maxHeight: 180,
+              display: 'block',
+            }}
+            loading="lazy"
+          />
+        </div>
+      )}
+
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'flex-start', marginBottom: 12 }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, minWidth: 0 }}>
           <span
@@ -579,11 +605,11 @@ function PromptCard({ prompt, globalView }) {
                 key={`${prompt.id}-kv-${k}`}
                 style={{
                   fontFamily: MONO_STACK,
-                  fontSize: 11.5,
+                  fontSize: 13,
                   color: COLOR.amber,
                   background: 'rgba(232,164,90,0.08)',
                   border: '1px solid rgba(232,164,90,0.18)',
-                  padding: '6px 10px',
+                  padding: '8px 12px',
                   borderRadius: 999,
                 }}
               >
@@ -747,7 +773,7 @@ function PromptCard({ prompt, globalView }) {
 }
 
 export default function VaultPage() {
-  const prompts = useMemo(() => PROMPTS_RAW, [])
+  const prompts = useMemo(() => PROMPT_LIBRARY, [])
 
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
