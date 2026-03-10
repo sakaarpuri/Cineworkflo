@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
@@ -13,15 +13,29 @@ export default function HeroGallery() {
   const [cameraCtaPressed, setCameraCtaPressed] = useState(false)
   const [heroVideoOk, setHeroVideoOk] = useState(true)
   const [overlayIndex, setOverlayIndex] = useState(0)
-  const [overlayVisible, setOverlayVisible] = useState(true)
   const [overlayFinished, setOverlayFinished] = useState(false)
+  const currentOverlayLabel = HERO_OVERLAY_PROMPTS[overlayIndex] || ''
+  const [typedOverlay, setTypedOverlay] = useState('')
 
   useEffect(() => {
-    if (overlayFinished) return
-    setOverlayVisible(false)
-    const id = window.setTimeout(() => setOverlayVisible(true), 70)
-    return () => window.clearTimeout(id)
-  }, [overlayIndex, overlayFinished])
+    if (overlayFinished) {
+      setTypedOverlay('')
+      return
+    }
+
+    let idx = 0
+    setTypedOverlay('')
+
+    const id = window.setInterval(() => {
+      idx += 1
+      setTypedOverlay(currentOverlayLabel.slice(0, idx))
+      if (idx >= currentOverlayLabel.length) {
+        window.clearInterval(id)
+      }
+    }, 26)
+
+    return () => window.clearInterval(id)
+  }, [currentOverlayLabel, overlayFinished])
 
   const handleHeroTimeUpdate = (event) => {
     if (overlayFinished) return
@@ -29,7 +43,6 @@ export default function HeroGallery() {
     const currentTime = event.currentTarget.currentTime
     if (currentTime >= 9) {
       setOverlayIndex(2)
-      setOverlayVisible(false)
       setOverlayFinished(true)
       return
     }
@@ -205,12 +218,12 @@ export default function HeroGallery() {
                     fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
                     fontSize: 12,
                     lineHeight: 1.45,
-                    transform: overlayVisible ? 'translateY(0)' : 'translateY(6px)',
-                    opacity: overlayVisible ? 1 : 0,
-                    transition: 'opacity 220ms ease, transform 220ms ease',
+                    opacity: overlayFinished ? 0 : 1,
+                    transition: 'opacity 220ms ease',
                   }}
                 >
-                  {HERO_OVERLAY_PROMPTS[overlayIndex]}
+                  {typedOverlay}
+                  {!overlayFinished && typedOverlay.length < currentOverlayLabel.length ? <span style={{ opacity: 0.8 }}>▋</span> : null}
                 </div>
               </div>
             </div>
