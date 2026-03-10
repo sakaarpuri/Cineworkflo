@@ -87,7 +87,7 @@ export default function HeroGallery() {
               className="font-display text-5xl lg:text-7xl font-bold leading-[1.06] mb-6"
               style={{ color: 'var(--text-primary)' }}
             >
-              Your AI video is only as rich as your prompt.
+              Your AI video is only as rich as your prompt
             </h1>
             <p className="text-xl max-w-2xl mx-auto lg:mx-0 mb-8" style={{ color: 'var(--text-secondary)' }}>
               100s of battle-tested prompts for Runway, Pika, Kling, Sora and more. Copy. Paste. Get the shot you actually imagined.
