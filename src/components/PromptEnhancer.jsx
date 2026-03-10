@@ -484,6 +484,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const standardSections = parsePromptSections(result);
 
   const getValidAccessToken = useCallback(async () => {
+    if (!user) return '';
     if (session?.access_token) return session.access_token;
 
     const { data: latestAuth } = await supabase.auth.getSession();
@@ -492,15 +493,18 @@ export default function PromptEnhancer({ onAuthClick }) {
     const { data: refreshed, error } = await supabase.auth.refreshSession();
     if (error) return '';
     return refreshed?.session?.access_token || '';
-  }, [session]);
+  }, [session, user]);
 
   const requestEnhancedPrompt = useCallback(async (payload, accessToken) => {
+    const requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+    if (accessToken) {
+      requestHeaders.Authorization = `Bearer ${accessToken}`;
+    }
     const response = await fetch('/.netlify/functions/enhance-prompt', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      },
+      headers: requestHeaders,
       body: JSON.stringify(payload)
     });
 
@@ -554,7 +558,7 @@ export default function PromptEnhancer({ onAuthClick }) {
 
       if (!data) {
         const accessToken = await getValidAccessToken();
-        if (!accessToken) {
+        if (user && !accessToken) {
           onAuthClick?.()
           setLoading(false);
           setLoadingMode('');
@@ -780,7 +784,7 @@ export default function PromptEnhancer({ onAuthClick }) {
 
       if (!data) {
         const accessToken = await getValidAccessToken();
-        if (!accessToken) {
+        if (user && !accessToken) {
           onAuthClick?.();
           setLoading(false);
           return;

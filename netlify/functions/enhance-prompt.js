@@ -88,30 +88,6 @@ const runAnthropicPrompt = async ({ anthropicApiKey, promptInput }) => {
   return response?.content?.[0]?.text || '';
 };
 
-const runAnthropicSinglePrompt = async ({ anthropicApiKey, systemPrompt = '', promptInput, model, maxTokens = 500 }) => {
-  const apiResponse = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': anthropicApiKey,
-      'anthropic-version': '2023-06-01'
-    },
-    body: JSON.stringify({
-      model,
-      system: systemPrompt,
-      max_tokens: maxTokens,
-      messages: [{ role: 'user', content: promptInput }]
-    })
-  });
-
-  const apiData = await apiResponse.json();
-  if (!apiResponse.ok) {
-    throw new Error(apiData?.error?.message || apiData?.error || `Anthropic request failed (${apiResponse.status})`);
-  }
-
-  return normalizeText(apiData?.content?.[0]?.text || '');
-};
-
 const getEnvInt = (key, fallback) => {
   const raw = process.env[key];
   const value = Number.parseInt(String(raw ?? ''), 10);
@@ -261,24 +237,23 @@ exports.handler = async (event) => {
 
   try {
     const token = getBearerToken(event);
-    if (!token) {
-      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Sign in required' }) };
-    }
-
-    const { user: authedUser, message: authMessage } = await resolveAuthedUser(token);
-    if (!authedUser) {
-      return {
-        statusCode: 401,
-        headers,
-        body: JSON.stringify({ error: `Invalid session. Please sign in again. (${authMessage})` })
-      };
+    let authedUser = null;
+    if (token) {
+      const { user, message: authMessage } = await resolveAuthedUser(token);
+      if (!user) {
+        return {
+          statusCode: 401,
+          headers,
+          body: JSON.stringify({ error: `Invalid session. Please sign in again. (${authMessage})` })
+        };
+      }
+      authedUser = user;
     }
     const {
       mode = 'default',
       idea = '',
       framePrompt = '',
       endFrameDirection = '',
-      videoPrompt = '',
       motionDirection = '',
       mood = '',
       useCase = '',
@@ -289,9 +264,8 @@ exports.handler = async (event) => {
       includeImages = false
     } = JSON.parse(event.body || '{}');
 
-    const pro = isProUser(authedUser);
-    const usageTrackedMode = mode !== 'kling_optimize';
-    if (usageTrackedMode) {
+    const pro = authedUser ? isProUser(authedUser) : false;
+    if (authedUser) {
       const limits = {
         freeMonthly: getEnvInt('CWF_FREE_MONTHLY_TOTAL', 5),
         freeRpm: getEnvInt('CWF_FREE_RPM_ENHANCE', 10),
@@ -314,42 +288,8 @@ exports.handler = async (event) => {
     const trimmedIdea = normalizeText(idea);
     const trimmedFramePrompt = normalizeText(framePrompt);
     const trimmedEndFrameDirection = normalizeText(endFrameDirection);
-    const trimmedVideoPrompt = normalizeText(videoPrompt);
     const trimmedMotionDirection = normalizeText(motionDirection);
     const isBeginner = skillLevel === 'beginner';
-
-    if (mode === 'kling_optimize') {
-      if (!trimmedVideoPrompt) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: 'A video prompt is required for Kling optimisation.' })
-        };
-      }
-
-      const klingPrompt = await runAnthropicSinglePrompt({
-        anthropicApiKey,
-        model: 'claude-sonnet-4-20250514',
-        maxTokens: 500,
-        systemPrompt: `You are a Kling 3.0 prompt specialist. Reformat the following video prompt into Kling 3.0 structure without changing any creative content.
-Return only the reformatted prompt, no explanation, no labels.
-
-Structure to follow:
-1. Environment — one sentence grounding the scene and lighting
-2. Subject — who or what is in the frame and their state before action
-3. Action — what happens, described sequentially not simultaneously
-4. Camera — stated as its own explicit beat
-5. Motion intensity: [0.1 to 1.0 — infer from how much movement is described. Slow locked shots = 0.2–0.3. Active tracking = 0.5–0.6. Fast action = 0.7–0.9]
-6. Style: [2–3 word closing tag extracted from the prompt's aesthetic]`,
-        promptInput: trimmedVideoPrompt
-      });
-
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({ prompt: klingPrompt, kind: 'kling_optimize' })
-      };
-    }
 
     if (mode === 'frame_to_motion') {
       if (!trimmedFramePrompt) {

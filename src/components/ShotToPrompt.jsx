@@ -141,6 +141,7 @@ export default function ShotToPrompt({ preview = false }) {
   }
 
   const getValidAccessToken = async () => {
+    if (!user) return ''
     if (session?.access_token) return session.access_token
 
     const { data: latestAuth } = await supabase.auth.getSession()
@@ -152,12 +153,15 @@ export default function ShotToPrompt({ preview = false }) {
   }
 
   const requestShotPrompt = async (imageData, accessToken) => {
+    const requestHeaders = {
+      'Content-Type': 'application/json',
+    }
+    if (accessToken) {
+      requestHeaders.Authorization = `Bearer ${accessToken}`
+    }
     const response = await fetch('/.netlify/functions/shot-to-prompt', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      },
+      headers: requestHeaders,
       body: JSON.stringify({ image: imageData })
     })
 
@@ -178,8 +182,8 @@ export default function ShotToPrompt({ preview = false }) {
 
     const accessToken = await getValidAccessToken()
 
-    if (!accessToken) {
-      setGeneratedPrompt('Sign in required to use Shot to Prompt.')
+    if (user && !accessToken) {
+      setGeneratedPrompt('Session expired. Please sign in again.')
       return
     }
 
