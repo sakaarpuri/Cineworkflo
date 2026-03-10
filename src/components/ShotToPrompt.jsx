@@ -33,8 +33,9 @@ const saveSharedUsage = (value) => {
 export default function ShotToPrompt({ preview = false }) {
   const [uploadedImage, setUploadedImage] = useState(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [generatedPrompt, setGeneratedPrompt] = useState('')
-  const [copied, setCopied] = useState(false)
+  const [generatedPrompt, setGeneratedPrompt] = useState(null)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [copiedSection, setCopiedSection] = useState('')
   const fileInputRef = useRef(null)
   const { user, session, loading: authLoading, isPro } = useAuth()
   const hasForcedProAccess = FORCE_PRO_EMAILS.has(String(user?.email || '').trim().toLowerCase())
@@ -70,7 +71,8 @@ export default function ShotToPrompt({ preview = false }) {
 
     if (file.size > MAX_BYTES) {
       setUploadedImage(null)
-      setGeneratedPrompt(`File too large. Max ${MAX_UPLOAD_MB}MB.`)
+      setGeneratedPrompt(null)
+      setErrorMessage(`File too large. Max ${MAX_UPLOAD_MB}MB.`)
       return
     }
 
@@ -89,12 +91,14 @@ export default function ShotToPrompt({ preview = false }) {
 
     if (!allowedVideos.has(file.type)) {
       setUploadedImage(null)
-      setGeneratedPrompt('Unsupported file format. Upload JPG/PNG/WEBP/GIF, or MP4/WEBM/MOV (≤15s).')
+      setGeneratedPrompt(null)
+      setErrorMessage('Unsupported file format. Upload JPG/PNG/WEBP/GIF, or MP4/WEBM/MOV (≤15s).')
       return
     }
 
     // Video: extract a representative frame client-side and analyze as an image.
-    setGeneratedPrompt('')
+    setGeneratedPrompt(null)
+    setErrorMessage('')
 
     const objectUrl = URL.createObjectURL(file)
     try {
@@ -134,7 +138,8 @@ export default function ShotToPrompt({ preview = false }) {
       await analyzeImage(frameDataUrl)
     } catch (err) {
       setUploadedImage(null)
-      setGeneratedPrompt(err.message || 'Unable to read video. Please try a shorter MP4/WEBM/MOV.')
+      setGeneratedPrompt(null)
+      setErrorMessage(err.message || 'Unable to read video. Please try a shorter MP4/WEBM/MOV.')
     } finally {
       URL.revokeObjectURL(objectUrl)
     }
@@ -176,19 +181,22 @@ export default function ShotToPrompt({ preview = false }) {
 
   const analyzeImage = async (imageData) => {
     if (authLoading) {
-      setGeneratedPrompt('Checking your session…')
+      setGeneratedPrompt(null)
+      setErrorMessage('Checking your session…')
       return
     }
 
     const accessToken = await getValidAccessToken()
 
     if (user && !accessToken) {
-      setGeneratedPrompt('Session expired. Please sign in again.')
+      setGeneratedPrompt(null)
+      setErrorMessage('Session expired. Please sign in again.')
       return
     }
 
     if (isLimitReached) {
-      setGeneratedPrompt(!user
+      setGeneratedPrompt(null)
+      setErrorMessage(!user
         ? 'Free limit reached (5 total generations/month across Enhancer + Shot to Prompt). Sign in or upgrade to continue.'
         : 'Free limit reached (5 total generations/month across Enhancer + Shot to Prompt). Upgrade to continue.'
       )
@@ -196,7 +204,9 @@ export default function ShotToPrompt({ preview = false }) {
     }
 
     setIsAnalyzing(true)
-    setGeneratedPrompt('')
+    setGeneratedPrompt(null)
+    setErrorMessage('')
+    setCopiedSection('')
 
     try {
       let data
@@ -214,19 +224,25 @@ export default function ShotToPrompt({ preview = false }) {
         data = await requestShotPrompt(imageData, refreshedToken)
       }
 
-      if (data.prompt) {
-        setGeneratedPrompt(data.prompt)
+      if (data.image_prompt && data.video_prompt) {
+        setGeneratedPrompt({
+          title: String(data.title || '').trim(),
+          image_prompt: String(data.image_prompt || '').trim(),
+          video_prompt: String(data.video_prompt || '').trim(),
+          tool_notes: String(data.tool_notes || '').trim(),
+        })
         if (!canUsePro) {
           const next = { count: usage.count + 1, lastReset: usage.lastReset }
           setUsage(next)
           saveSharedUsage(next)
         }
       } else {
-        throw new Error('No prompt returned by Shot to Prompt API')
+        throw new Error('No structured prompt returned by Shot to Prompt API')
       }
     } catch (err) {
       console.error('Shot to prompt error:', err)
-      setGeneratedPrompt(err.message || 'Unable to generate prompt right now. Please retry in a moment.')
+      setGeneratedPrompt(null)
+      setErrorMessage(err.message || 'Unable to generate prompt right now. Please retry in a moment.')
     } finally {
       setIsAnalyzing(false)
     }
@@ -234,18 +250,75 @@ export default function ShotToPrompt({ preview = false }) {
 
   const clearImage = () => {
     setUploadedImage(null)
-    setGeneratedPrompt('')
-    setCopied(false)
+    setGeneratedPrompt(null)
+    setErrorMessage('')
+    setCopiedSection('')
   }
 
-  const handleCopy = () => {
-    if (!generatedPrompt) return
-    navigator.clipboard.writeText(generatedPrompt)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const handleCopy = (section, value) => {
+    if (!value) return
+    navigator.clipboard.writeText(value)
+    setCopiedSection(section)
+    setTimeout(() => {
+      setCopiedSection((current) => (current === section ? '' : current))
+    }, 2000)
   }
 
-  // Copyable Output Component (like PromptEnhancer)
+  const PromptSection = ({ label, value, tone, sectionKey }) => (
+    <div
+      className="rounded-xl p-4"
+      style={{
+        background: 'var(--bg-primary)',
+        border: '2px solid var(--border-color)',
+      }}
+    >
+      <div className="flex items-center justify-between mb-3 gap-3">
+        <div
+          className="text-xs font-bold flex items-center gap-1.5"
+          style={{ color: tone }}
+        >
+          <Check className="h-4 w-4" />
+          {label}
+        </div>
+        <button
+          onClick={() => handleCopy(sectionKey, value)}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+          style={{
+            background: copiedSection === sectionKey
+              ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)'
+              : 'var(--bg-card)',
+            color: copiedSection === sectionKey ? '#fff' : 'var(--text-secondary)',
+            border: `2px solid ${copiedSection === sectionKey ? 'var(--accent-green)50' : 'var(--border-color)'}`,
+            boxShadow: copiedSection === sectionKey
+              ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
+              : 'var(--control-soft-shadow)',
+            transform: copiedSection === sectionKey ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
+          }}
+        >
+          {copiedSection === sectionKey ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+          {copiedSection === sectionKey ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+      <div
+        className="w-full rounded-xl text-base leading-relaxed cursor-text select-all"
+        style={{
+          color: 'var(--text-primary)',
+          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+          minHeight: '88px'
+        }}
+        onClick={(e) => {
+          const range = document.createRange()
+          range.selectNodeContents(e.currentTarget)
+          const sel = window.getSelection()
+          sel.removeAllRanges()
+          sel.addRange(range)
+        }}
+      >
+        {value}
+      </div>
+    </div>
+  )
+
   const CopyableOutput = () => (
     <div 
       className="mt-4"
@@ -263,49 +336,52 @@ export default function ShotToPrompt({ preview = false }) {
           style={{ color: 'var(--accent-green)' }}
         >
           <Check className="h-4 w-4" />
-          GENERATED PROMPT
+          STRUCTURED OUTPUT
         </div>
-        <button
-          onClick={handleCopy}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-          style={{
-            background: copied 
-              ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' 
-              : 'var(--bg-card)',
-            color: copied ? '#fff' : 'var(--text-secondary)',
-            border: `2px solid ${copied ? 'var(--accent-green)50' : 'var(--border-color)'}`,
-            boxShadow: copied 
-              ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40'
-              : 'var(--control-soft-shadow)',
-            transform: copied ? 'translateY(1px) scale(0.98)' : 'translateY(0) scale(1)'
-          }}
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? 'Copied!' : 'Copy Prompt'}
-        </button>
       </div>
-      <div
-        className="w-full p-4 rounded-xl text-base leading-relaxed cursor-text select-all"
-        style={{
-          background: 'var(--bg-primary)',
-          border: '2px solid var(--border-color)',
-          color: 'var(--text-primary)',
-          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-          minHeight: '100px'
-        }}
-        onClick={(e) => {
-          const range = document.createRange()
-          range.selectNodeContents(e.currentTarget)
-          const sel = window.getSelection()
-          sel.removeAllRanges()
-          sel.addRange(range)
-        }}
-      >
-        {generatedPrompt}
+      {generatedPrompt?.title ? (
+        <div className="mb-4">
+          <div className="text-[10px] font-bold tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>
+            TITLE
+          </div>
+          <div style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: 16, lineHeight: 1.35 }}>
+            {generatedPrompt.title}
+          </div>
+        </div>
+      ) : null}
+      <div className="grid gap-4">
+        <PromptSection
+          label="IMAGE PROMPT"
+          value={generatedPrompt?.image_prompt || ''}
+          tone="var(--accent-blue)"
+          sectionKey="image"
+        />
+        <PromptSection
+          label="VIDEO PROMPT"
+          value={generatedPrompt?.video_prompt || ''}
+          tone="var(--accent-purple)"
+          sectionKey="video"
+        />
       </div>
-      <p className="mt-2 text-xs" style={{ color: 'var(--text-muted)' }}>
-        Click text to select all, or use the Copy button
+      <p className="mt-3 text-xs" style={{ color: 'var(--text-muted)', lineHeight: 1.6 }}>
+        {generatedPrompt?.tool_notes || 'Click inside a prompt block to select all, or use the Copy button.'}
       </p>
+    </div>
+  )
+
+  const ErrorNotice = () => (
+    <div
+      className="rounded-xl p-4"
+      style={{
+        background: 'var(--accent-red)10',
+        border: '1px solid var(--accent-red)30',
+        color: 'var(--accent-red)'
+      }}
+    >
+      <div className="text-sm font-semibold mb-1">Unable to generate prompt</div>
+      <div className="text-sm" style={{ lineHeight: 1.6 }}>
+        {errorMessage}
+      </div>
     </div>
   )
 
@@ -432,33 +508,38 @@ export default function ShotToPrompt({ preview = false }) {
                       <Loader2 className="h-5 w-5 animate-spin" style={{ color: 'var(--accent-purple)' }} />
                       <span style={{ color: 'var(--text-secondary)' }}>Analyzing shot composition...</span>
                     </div>
+                  ) : errorMessage ? (
+                    <ErrorNotice />
                   ) : generatedPrompt ? (
                     <CopyableOutput />
                   ) : null}
                 </div>
               ) : (
-                <div className="text-center py-12">
-                  <div 
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                    style={{
-                      background: 'var(--bg-primary)',
-                      border: '2px dashed var(--border-color)'
-                    }}
-                  >
-                    <ImageIcon className="h-8 w-8" style={{ color: 'var(--text-muted)' }} />
+                <div className="text-center py-12 space-y-4">
+                  <div>
+                    <div 
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                      style={{
+                        background: 'var(--bg-primary)',
+                        border: '2px dashed var(--border-color)'
+                      }}
+                    >
+                      <ImageIcon className="h-8 w-8" style={{ color: 'var(--text-muted)' }} />
+                    </div>
+                    <p 
+                      className="font-medium mb-2"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      Drop an image here
+                    </p>
+                    <p style={{ color: 'var(--text-muted)' }} className="text-sm">
+                      {isLimitReached ? 'Free limit reached — upgrade to continue' : 'or click to browse'}
+                    </p>
+                    <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">
+                      Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s
+                    </p>
                   </div>
-                  <p 
-                    className="font-medium mb-2"
-                    style={{ color: 'var(--text-primary)' }}
-                  >
-                    Drop an image here
-                  </p>
-                  <p style={{ color: 'var(--text-muted)' }} className="text-sm">
-                    {isLimitReached ? 'Free limit reached — upgrade to continue' : 'or click to browse'}
-                  </p>
-                  <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">
-                    Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s
-                  </p>
+                  {errorMessage ? <ErrorNotice /> : null}
                 </div>
               )}
             </div>
@@ -597,6 +678,8 @@ export default function ShotToPrompt({ preview = false }) {
                   <span style={{ color: 'var(--text-secondary)' }}>Analyzing shot composition...</span>
                 </div>
               )}
+
+              {!isAnalyzing && errorMessage && <ErrorNotice />}
 
               {generatedPrompt && <CopyableOutput />}
             </div>

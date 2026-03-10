@@ -129,6 +129,44 @@ const resolveAuthedUser = async (token) => {
   };
 };
 
+const extractJsonObject = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return null;
+
+  const fenced = raw.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  const candidate = fenced ? fenced[1].trim() : raw;
+
+  const start = candidate.indexOf('{');
+  const end = candidate.lastIndexOf('}');
+  if (start === -1 || end === -1 || end <= start) return null;
+
+  try {
+    return JSON.parse(candidate.slice(start, end + 1));
+  } catch {
+    return null;
+  }
+};
+
+const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+
+const normalizeStructuredPrompt = (payload) => {
+  if (!payload || typeof payload !== 'object') return null;
+
+  const title = normalizeText(payload.title);
+  const imagePrompt = normalizeText(payload.image_prompt);
+  const videoPrompt = normalizeText(payload.video_prompt);
+  const toolNotes = normalizeText(payload.tool_notes);
+
+  if (!imagePrompt || !videoPrompt) return null;
+
+  return {
+    title: title || '',
+    image_prompt: imagePrompt,
+    video_prompt: videoPrompt,
+    ...(toolNotes ? { tool_notes: toolNotes } : {})
+  };
+};
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -229,6 +267,24 @@ exports.handler = async (event) => {
           body: JSON.stringify({
             model,
             max_tokens: 500,
+            system: `You analyze a single uploaded frame and turn it into a structured image-to-video prompt package.
+
+Return valid JSON only. No markdown. No explanation.
+
+Required JSON shape:
+{
+  "title": "short readable title",
+  "image_prompt": "a still-image prompt that accurately recreates this uploaded frame with rich filmmaking detail",
+  "video_prompt": "a video prompt that starts from this exact frame and turns it into a plausible cinematic shot while preserving subject, environment, lighting family, and visual style",
+  "tool_notes": "optional brief note about why this motion/camera continuation fits the uploaded frame"
+}
+
+Rules:
+- The image_prompt must describe the uploaded frame as a reproducible still.
+- The video_prompt must feel like a continuation of the uploaded image, not a new concept.
+- Use strong filmmaking detail: subject, setting, composition, lens/framing, lighting, mood, texture, continuity, motion, and camera behavior where relevant.
+- Do not include variables, placeholders, bullet points, labels outside JSON, or SFX.
+- Keep tool_notes short and practical if present.`,
             messages: [
               {
                 role: 'user',
@@ -243,10 +299,7 @@ exports.handler = async (event) => {
                   },
                   {
                     type: 'text',
-                    text: `Analyze this shot and create a detailed AI video generation prompt to recreate it.
-
-Include camera movement, lighting style, composition, subject, mood, and technical details.
-Format as a single paragraph optimized for Runway/Pika-style video generation.`
+                    text: `Analyze this uploaded frame and return the structured JSON response. The image prompt should recreate the still accurately. The video prompt should animate that exact still into a plausible shot with continuity preserved.`
                   }
                 ]
               }
@@ -270,19 +323,20 @@ Format as a single paragraph optimized for Runway/Pika-style video generation.`
       throw lastError || new Error('Model request failed');
     }
 
-    const prompt = response?.content?.[0]?.text?.trim();
-    if (!prompt) {
+    const contentText = response?.content?.[0]?.text?.trim();
+    const parsed = normalizeStructuredPrompt(extractJsonObject(contentText));
+    if (!parsed) {
       return {
         statusCode: 502,
         headers,
-        body: JSON.stringify({ error: 'No prompt returned from model' })
+        body: JSON.stringify({ error: 'No structured prompt returned from model' })
       };
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify(parsed)
     };
   } catch (error) {
     return {
