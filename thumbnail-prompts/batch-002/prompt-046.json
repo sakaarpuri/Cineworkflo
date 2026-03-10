@@ -1,0 +1,17 @@
+{
+  "prompt": "A young woman in simple white t-shirt against a pure pure white background, 85mm — single soft overhead diffused light as the sole illumination, slowly raising one hand palm up implied in the still frame, abstract character study composition, 16:9. Create this as a simple low-resolution thumbnail-style cinematic still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "minimalist thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

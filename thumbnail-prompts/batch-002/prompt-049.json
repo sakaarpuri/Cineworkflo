@@ -1,0 +1,17 @@
+{
+  "prompt": "A street hacker with glowing neural interface ports at the temple in a dim underground bar, 85mm portrait framing — neon cyan and amber light catching their features and glowing neural interface ports at the temple, scrolling data on a holographic screen implied in still posture, quietly dangerous energy, 16:9. Create this as a simple low-resolution thumbnail-style cinematic still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "neon/cyberpunk thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

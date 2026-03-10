@@ -1,0 +1,17 @@
+{
+  "prompt": "A barista pouring latte art at a slight low angle, 50mm — steam rising in columns catching a single backlight source, dark moody café as pure abstract bokeh with string lights reduced to soft halos of color, subject sharp against the dissolving world behind, rich brown and amber tones with lifted blacks and rolled highlights, 9:16. Create this as a simple low-resolution thumbnail-style cinematic still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

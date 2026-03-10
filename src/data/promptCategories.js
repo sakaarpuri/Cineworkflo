@@ -64,7 +64,7 @@ const CATEGORY_METADATA = {
 }
 
 const FALLBACK_TOOL = 'Runway'
-const GENERATED_THUMBNAIL_COUNT = 30
+const GENERATED_THUMBNAIL_COUNT = 60
 
 const toSlug = (value) =>
   String(value || '')
