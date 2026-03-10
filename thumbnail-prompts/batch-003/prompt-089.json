@@ -1,0 +1,17 @@
+{
+  "prompt": "A lone hacker with glowing cybernetic eye implants in rain-soaked cyberpunk narrow market alley at night, 35mm framing — cyan and magenta neon fracturing in wet ground, augmentation catching specific colors that bare skin cannot, hunted and wary expressed through posture and stance, city indifferent and enormous behind the figure, 16:9. Create this as a simple low-resolution thumbnail-style cinematic still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "neon/cyberpunk thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}
