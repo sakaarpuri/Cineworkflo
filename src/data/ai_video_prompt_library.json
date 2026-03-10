@@ -16329,5 +16329,68 @@
     },
     "tool_notes": "The illegibility of scale is the point — never resolve how big it is. Sora handles deep space environments best. Add 'deep space, slow approach, scale unknown, cinematic sci-fi'. The long lens compressing the star field is essential.",
     "source_id": 190
+  },
+  {
+    "id": 247,
+    "source_id": 247,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Sora",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "title": "Stepwell descent",
+    "image_prompt": "Stepwell descent, Rajasthan, India. Girl joyfully navigating ancient sandstone tiers. 85mm f/2.8, golden-hour side lighting, warm amber-ochre palette. Geometric step patterns sharp in foreground, soft bokeh depth behind. Shallow depth of field isolating subject against layered architectural recession. Textured stone detail, dust particle visibility. Medium-wide composition, centered vertical axis. 4K UHD, 16:9, cinematic LUT. Still frame with rule-of-thirds placement, warm highlight retention, rich shadow detail.",
+    "video_prompt": "Camera holds a graceful medium-wide view as the girl moves joyfully down the ancient sandstone tiers, her pace light and confident. A subtle stabilized follow with shallow depth keeps her separated from the receding geometry while dust motes catch the golden side light. The stepped architecture unfolds rhythmically behind her, warm amber and ochre tones staying rich and textured throughout.",
+    "sfx_prompt": "Soft sandstone footsteps, faint fabric movement, dry ambient air, distant birds, and a gentle desert breeze moving through the open architecture. No music. Natural location sound only.",
+    "variables": {},
+    "tool_notes": "Works best as an image-to-video shot built from the architectural still first. Keep the warm Rajasthan light and shallow depth consistent in motion."
+  },
+  {
+    "id": 248,
+    "source_id": 248,
+    "category": "Sci-Fi & Concept Film",
+    "style": "Cinematic",
+    "best_on": [
+      "Sora",
+      "Runway",
+      "Luma"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "title": "Alien survivor portrait",
+    "image_prompt": "Lean human survivor in their early 30s, weathered face, sharp alert eyes, sun-browned skin, short messy dark hair, athletic but exhausted build, wearing a torn futuristic survival suit with improvised armor plates, dust-stained fabric, utility straps, alien trophies and scavenged tech attached to the belt, rugged boots, hyper-real cinematic sci-fi realism, highly detailed.",
+    "video_prompt": "A tense portrait shot of the survivor scanning an alien horizon, breathing hard but controlled. The camera drifts in slowly while the subject subtly shifts weight, eyes locked on something dangerous beyond frame. Dust on the suit, improvised armor, and scavenged tech stay tactile and sharply rendered, with the exhausted but resilient expression carrying the scene.",
+    "sfx_prompt": "Dry wind over open terrain, faint gear rattle on utility straps, controlled breathing, distant unidentifiable alien ambience, and a low environmental hum. No dialogue.",
+    "variables": {},
+    "tool_notes": "Use this as a character-anchor frame first, then drive motion with subtle eye-line and breathing changes. Keep realism high and avoid glossy sci-fi styling."
+  },
+  {
+    "id": 249,
+    "source_id": 249,
+    "category": "Cinematic & Storytelling",
+    "style": "Cinematic",
+    "best_on": [
+      "Runway",
+      "Luma",
+      "Sora"
+    ],
+    "audience": [
+      "Creator",
+      "Director"
+    ],
+    "title": "Mustang desert drive",
+    "image_prompt": "A two-lane desert highway cutting through the Mojave at golden hour, a weathered turquoise 1967 Ford Mustang mid-drive, slight motion blur on the rear wheels, dust trail lifting off the road behind it, cracked red earth on both sides with sparse dry shrubs and occasional desert wildflowers, a weathered Route 66 sign leaning slightly roadside, power lines running parallel dissolving into the horizon, distant mesa formations layered in heat haze, a hawk circling in the upper third of the frame, tumbleweed mid-roll in the foreground, warm raking sidelight casting a long shadow off the car body, shot on ARRI Alexa 35mm anamorphic, 2.39:1 cinematic feel.",
+    "video_prompt": "The Mustang tears down the Mojave highway at golden hour while the camera tracks beside and slightly behind it, keeping the weathered turquoise body heroic in frame. Dust lifts off the road, the rear wheels blur with speed, power lines and Route 66 signage streak backward, and the warm side light carves the car against heat-hazed mesas in the distance.",
+    "sfx_prompt": "Vintage V8 engine note, tire texture on sun-baked asphalt, dust and grit trailing behind, passing wind rush, and a loose roadside sign creaking softly as the car tears past.",
+    "variables": {},
+    "tool_notes": "Best built as an image-first driving shot. Preserve the anamorphic desert composition, long shadow, and turquoise paint as the motion anchor."
   }
 ]

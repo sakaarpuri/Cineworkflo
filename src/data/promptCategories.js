@@ -104,7 +104,10 @@ const getVarDefault = (variables, ...keys) => {
   return ''
 }
 
-const buildPromptTitle = ({ variables = {}, image_prompt = '', video_prompt = '', category = '' }) => {
+const buildPromptTitle = ({ title = '', variables = {}, image_prompt = '', video_prompt = '', category = '' }) => {
+  const explicitTitle = normalizeWhitespace(title)
+  if (explicitTitle) return clampTitle(explicitTitle)
+
   const product = getVarDefault(variables, 'product type')
   if (product) return clampTitle(`${stripLensAndTech(product)} ad`)
 
@@ -192,6 +195,7 @@ export const PROMPT_LIBRARY = rawPromptLibrary.map((rawPrompt, index) => {
     variables: rawPrompt.variables || {},
     tool_notes: normalizeWhitespace(rawPrompt.tool_notes),
     title: buildPromptTitle({
+      title: normalizeWhitespace(rawPrompt.title),
       variables: rawPrompt.variables || {},
       image_prompt: imagePrompt,
       video_prompt: videoPrompt,

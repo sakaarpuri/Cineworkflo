@@ -1,47 +1,37 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
 const TOOL_LOGOS = ['Runway', 'Pika', 'Sora', 'Kling', 'Luma', 'Higgsfield', 'Seedance']
+const HERO_OVERLAY_PROMPTS = [
+  'prompt id #247 · Stepwell descent',
+  'prompt id #248 · Alien planet survivor portrait',
+  'prompt id #249 · Mustang desert drive',
+]
 
 export default function HeroGallery() {
   const [cameraCtaPressed, setCameraCtaPressed] = useState(false)
   const [heroVideoOk, setHeroVideoOk] = useState(true)
-  const heroOverlayText = useMemo(
-    () => 'slow tracking shot, neon reflections on wet street, shallow depth of field, 16:9, 4K',
-    []
-  )
-  const [typed, setTyped] = useState('')
+  const [overlayIndex, setOverlayIndex] = useState(0)
+  const [overlayLocked, setOverlayLocked] = useState(false)
 
-  useEffect(() => {
-    let idx = 0
-    let direction = 1 // 1 typing, -1 deleting
-    let pauseMs = 0
-    const full = heroOverlayText
+  const handleHeroTimeUpdate = (event) => {
+    if (overlayLocked) return
 
-    const tick = () => {
-      if (pauseMs > 0) {
-        pauseMs -= 30
-        return
-      }
-
-      idx += direction
-      if (idx >= full.length) {
-        idx = full.length
-        direction = -1
-        pauseMs = 900
-      } else if (idx <= 0) {
-        idx = 0
-        direction = 1
-        pauseMs = 350
-      }
-      setTyped(full.slice(0, idx))
+    const currentTime = event.currentTarget.currentTime
+    if (currentTime >= 6) {
+      setOverlayIndex(2)
+      setOverlayLocked(true)
+      return
     }
 
-    setTyped('')
-    const id = window.setInterval(tick, 30)
-    return () => window.clearInterval(id)
-  }, [heroOverlayText])
+    if (currentTime >= 3) {
+      setOverlayIndex(1)
+      return
+    }
+
+    setOverlayIndex(0)
+  }
 
   return (
     <section 
@@ -149,10 +139,10 @@ export default function HeroGallery() {
             </div>
           </div>
 
-          {/* Right: output proof */}
+          {/* Right: output preview */}
           <div className="neu-card rounded-3xl p-6 lg:p-7" style={{ background: 'var(--bg-secondary)' }}>
             <div className="flex items-center justify-between gap-4 mb-4">
-              <div className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Output proof</div>
+              <div className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Output Preview</div>
               <div className="inline-flex items-center gap-2 text-xs font-semibold" style={{ color: 'var(--text-muted)' }}>
                 <span style={{ width: 8, height: 8, borderRadius: 99, background: '#EF4444', boxShadow: '0 0 0 3px rgba(239,68,68,0.18)' }} />
                 REC
@@ -163,12 +153,14 @@ export default function HeroGallery() {
               <div className="h-[180px] lg:h-[210px] relative" style={{ background: 'rgba(2,6,23,0.92)' }}>
                 {heroVideoOk ? (
                   <video
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    preload="metadata"
                     src="/hero-demo.mp4"
                     muted
                     autoPlay
                     loop
                     playsInline
+                    onTimeUpdate={handleHeroTimeUpdate}
                     onError={() => setHeroVideoOk(false)}
                   />
                 ) : (
@@ -201,30 +193,40 @@ export default function HeroGallery() {
                     lineHeight: 1.45,
                   }}
                 >
-                  {typed}
-                  <span style={{ opacity: 0.8 }}>▋</span>
+                  {HERO_OVERLAY_PROMPTS[overlayIndex]}
                 </div>
               </div>
             </div>
 
             <div className="grid gap-3">
               <div className="rounded-2xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
-                <div className="text-[10px] font-bold tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>PROMPT</div>
-                <div
-                  style={{
-                    color: 'var(--text-primary)',
-                    fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
-                    fontSize: 12.5,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  “A lone driver in a neon city, rain on lens, soft bokeh, slow push-in, cinematic grade, 16:9, 4K.”
-                </div>
-              </div>
-              <div className="rounded-2xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                 <div className="text-[10px] font-bold tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>WHAT YOU GET</div>
                 <div style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.6 }}>
-                  A copy-ready prompt with camera movement, lighting, mood, and tool-friendly phrasing.
+                  A copy-ready prompt with frame design, motion language, and tool-friendly phrasing pulled from the Vault.
+                </div>
+              </div>
+              <div
+                className="rounded-2xl p-4"
+                style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
+              >
+                <div className="text-[10px] font-bold tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>IN THIS LOOP</div>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  {HERO_OVERLAY_PROMPTS.map((label, idx) => (
+                    <span
+                      key={label}
+                      style={{
+                        padding: '7px 10px',
+                        borderRadius: 999,
+                        fontSize: 11.5,
+                        fontWeight: 800,
+                        background: idx === overlayIndex ? 'rgba(79,142,247,0.14)' : 'var(--bg-primary)',
+                        border: idx === overlayIndex ? '1px solid rgba(79,142,247,0.28)' : '1px solid var(--border-color)',
+                        color: idx === overlayIndex ? 'var(--text-primary)' : 'var(--text-secondary)'
+                      }}
+                    >
+                      {label}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
