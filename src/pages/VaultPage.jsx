@@ -3,7 +3,7 @@ import { Search, Copy, Check, Lightbulb, ChevronDown, ChevronUp, BookmarkPlus } 
 import { PROMPT_LIBRARY } from '../data/promptCategories'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 // Use the site's theme variables (light by default, dark when user toggles).
 const BG = 'transparent'
@@ -774,6 +774,7 @@ function PromptCard({ prompt, globalView }) {
 
 export default function VaultPage() {
   const prompts = useMemo(() => PROMPT_LIBRARY, [])
+  const location = useLocation()
 
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
@@ -781,6 +782,12 @@ export default function VaultPage() {
   const globalView = 'beginner'
   const prevCategoryRef = useRef(null)
   const prevStyleRef = useRef(null)
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const search = params.get('search')
+    if (search) setQuery(search)
+  }, [location.search])
 
   const categories = useMemo(() => {
     const list = [...new Set(prompts.map((p) => p.category))].sort()

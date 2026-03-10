@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
@@ -13,15 +13,29 @@ export default function HeroGallery() {
   const [cameraCtaPressed, setCameraCtaPressed] = useState(false)
   const [heroVideoOk, setHeroVideoOk] = useState(true)
   const [overlayIndex, setOverlayIndex] = useState(0)
-  const [overlayLocked, setOverlayLocked] = useState(false)
+  const [overlayVisible, setOverlayVisible] = useState(true)
+  const [overlayFinished, setOverlayFinished] = useState(false)
+
+  useEffect(() => {
+    if (overlayFinished) return
+    setOverlayVisible(false)
+    const id = window.setTimeout(() => setOverlayVisible(true), 70)
+    return () => window.clearTimeout(id)
+  }, [overlayIndex, overlayFinished])
 
   const handleHeroTimeUpdate = (event) => {
-    if (overlayLocked) return
+    if (overlayFinished) return
 
     const currentTime = event.currentTarget.currentTime
+    if (currentTime >= 9) {
+      setOverlayIndex(2)
+      setOverlayVisible(false)
+      setOverlayFinished(true)
+      return
+    }
+
     if (currentTime >= 6) {
       setOverlayIndex(2)
-      setOverlayLocked(true)
       return
     }
 
@@ -184,13 +198,16 @@ export default function HeroGallery() {
                 <div
                   className="absolute bottom-3 left-3 right-3 rounded-xl px-3 py-2"
                   style={{
-                    background: 'rgba(15,23,42,0.55)',
+                    background: 'rgba(148,163,184,0.22)',
                     border: '1px solid rgba(255,255,255,0.10)',
                     backdropFilter: 'blur(6px)',
                     color: 'rgba(255,255,255,0.92)',
                     fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
                     fontSize: 12,
                     lineHeight: 1.45,
+                    transform: overlayVisible ? 'translateY(0)' : 'translateY(6px)',
+                    opacity: overlayVisible ? 1 : 0,
+                    transition: 'opacity 220ms ease, transform 220ms ease',
                   }}
                 >
                   {HERO_OVERLAY_PROMPTS[overlayIndex]}
@@ -212,20 +229,25 @@ export default function HeroGallery() {
                 <div className="text-[10px] font-bold tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>IN THIS LOOP</div>
                 <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                   {HERO_OVERLAY_PROMPTS.map((label, idx) => (
-                    <span
+                    <Link
                       key={label}
+                      to={`/prompts?search=${247 + idx}`}
                       style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
                         padding: '7px 10px',
                         borderRadius: 999,
                         fontSize: 11.5,
                         fontWeight: 800,
                         background: idx === overlayIndex ? 'rgba(79,142,247,0.14)' : 'var(--bg-primary)',
                         border: idx === overlayIndex ? '1px solid rgba(79,142,247,0.28)' : '1px solid var(--border-color)',
-                        color: idx === overlayIndex ? 'var(--text-primary)' : 'var(--text-secondary)'
+                        color: idx === overlayIndex ? 'var(--text-primary)' : 'var(--text-secondary)',
+                        textDecoration: 'none',
+                        cursor: 'pointer',
                       }}
                     >
                       {label}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               </div>
