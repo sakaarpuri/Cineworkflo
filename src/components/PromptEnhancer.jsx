@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus, ChevronDown } from 'lucide-react';
+import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
 import STYLE_PRESETS from '../data/stylePresets.json';
@@ -414,7 +414,6 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [mood, setMood] = useState("");
   const [useCase, setUseCase] = useState("");
   const [preset, setPreset] = useState('');
-  const [presetsExpanded, setPresetsExpanded] = useState(true);
   const [showAllPresets, setShowAllPresets] = useState(false);
   const [skillLevel, setSkillLevel] = useState('beginner'); // 'beginner' | 'pro'
   const [loading, setLoading] = useState(false);
@@ -883,24 +882,27 @@ export default function PromptEnhancer({ onAuthClick }) {
           color: active ? '#fff' : 'var(--text-primary)'
         }}
       >
-        <div className="p-4 h-full flex flex-col gap-3">
-          <div
-            className="relative overflow-hidden rounded-2xl"
-            style={{
-              aspectRatio: '16 / 9',
-              background: active ? `${item.accentColor}22` : 'var(--bg-primary)',
-              border: `1px solid ${active ? `${item.accentColor}55` : 'var(--border-color)'}`,
-              boxShadow: active ? `0 10px 24px ${item.accentColor}20` : 'inset 0 1px 0 rgba(255,255,255,0.08)'
-            }}
-          >
-            <img
-              src={imageUrl}
-              alt={item.label}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div className="flex items-center justify-between gap-3">
+        <div className="p-3 h-full flex flex-col gap-2.5">
+          <div className="flex items-start gap-3">
+            <div
+              className="relative overflow-hidden rounded-xl flex-shrink-0"
+              style={{
+                width: compact ? '60px' : '72px',
+                height: compact ? '34px' : '40px',
+                background: active ? `${item.accentColor}22` : 'var(--bg-primary)',
+                border: `1px solid ${active ? `${item.accentColor}55` : 'var(--border-color)'}`,
+                boxShadow: active ? `0 8px 18px ${item.accentColor}18` : 'inset 0 1px 0 rgba(255,255,255,0.08)'
+              }}
+            >
+              <img
+                src={imageUrl}
+                alt={item.label}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center justify-between gap-3">
             <span
               className="text-[10px] uppercase tracking-[0.18em] font-bold"
               style={{ color: active ? 'rgba(255,255,255,0.82)' : item.accentColor }}
@@ -910,13 +912,15 @@ export default function PromptEnhancer({ onAuthClick }) {
             {active ? <Check className="h-4 w-4" /> : <Film className="h-4 w-4" style={{ color: item.accentColor }} />}
           </div>
 
-          <div>
-            <div className="font-semibold leading-tight">{item.label}</div>
-            <div
-              className="text-[11px] mt-1 leading-snug"
-              style={{ color: active ? 'rgba(255,255,255,0.8)' : 'var(--text-muted)' }}
-            >
-              {item.subtitle}
+              <div className="mt-1">
+                <div className="font-semibold leading-tight">{item.label}</div>
+                <div
+                  className="text-[11px] mt-1 leading-snug"
+                  style={{ color: active ? 'rgba(255,255,255,0.8)' : 'var(--text-muted)' }}
+                >
+                  {item.subtitle}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1292,10 +1296,8 @@ export default function PromptEnhancer({ onAuthClick }) {
             <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
               <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Style</span>
               <div className="flex-1">
-                <button
-                  type="button"
-                  onClick={() => setPresetsExpanded((prev) => !prev)}
-                  className="w-full rounded-2xl p-3 text-left transition-all"
+                <div
+                  className="rounded-2xl p-4"
                   style={{
                     background: 'var(--bg-primary)',
                     border: '1px solid var(--border-color)',
@@ -1304,61 +1306,45 @@ export default function PromptEnhancer({ onAuthClick }) {
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div>
-              <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Style Presets</div>
+                      <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Style Presets</div>
                       <div className="text-xs mt-1" style={{ color: selectedPreset ? selectedPreset.accentColor : 'var(--text-muted)' }}>
                         {selectedPreset ? selectedPreset.label : 'None selected'}
                       </div>
                     </div>
-                    <ChevronDown
-                      className="h-4 w-4 transition-transform"
-                      style={{ color: 'var(--text-muted)', transform: presetsExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                    />
                   </div>
-                </button>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {FEATURED_STYLE_PRESETS.map((item) => (
+                      <PresetCard key={item.key} item={item} compact />
+                    ))}
+                  </div>
 
-                {presetsExpanded && (
-                  <div
-                    className="mt-3 rounded-2xl p-4"
-                    style={{
-                      background: 'var(--bg-primary)',
-                      border: '1px solid var(--border-color)',
-                      boxShadow: 'var(--control-soft-shadow)'
-                    }}
-                  >
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {FEATURED_STYLE_PRESETS.map((item) => (
-                        <PresetCard key={item.key} item={item} compact />
+                  <div className="mt-4 flex items-center justify-between gap-3 flex-wrap">
+                    <div className="text-xs max-w-2xl" style={{ color: selectedPreset ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
+                      {selectedPreset ? selectedPreset.whenToUse : 'Choose a cinematic visual grammar. Mood sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.'}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowAllPresets((prev) => !prev)}
+                      className="px-3 py-2 rounded-xl text-xs font-semibold transition-all"
+                      style={{
+                        background: 'var(--bg-secondary)',
+                        color: 'var(--text-primary)',
+                        border: '1px solid var(--border-color)',
+                        boxShadow: 'var(--control-soft-shadow)'
+                      }}
+                    >
+                      {showAllPresets ? 'Hide extra styles' : 'More styles'}
+                    </button>
+                  </div>
+
+                  {showAllPresets && (
+                    <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
+                      {EXTRA_STYLE_PRESETS.map((item) => (
+                        <PresetCard key={item.key} item={item} />
                       ))}
                     </div>
-
-                    <div className="mt-4 flex items-center justify-between gap-3 flex-wrap">
-                      <div className="text-xs max-w-2xl" style={{ color: selectedPreset ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
-                        {selectedPreset ? selectedPreset.whenToUse : 'Choose a cinematic visual grammar. Mood sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.'}
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setShowAllPresets((prev) => !prev)}
-                        className="px-3 py-2 rounded-xl text-xs font-semibold transition-all"
-                        style={{
-                          background: 'var(--bg-secondary)',
-                          color: 'var(--text-primary)',
-                          border: '1px solid var(--border-color)',
-                          boxShadow: 'var(--control-soft-shadow)'
-                        }}
-                      >
-                        {showAllPresets ? 'Hide extra styles' : 'More styles'}
-                      </button>
-                    </div>
-
-                    {showAllPresets && (
-                      <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
-                        {EXTRA_STYLE_PRESETS.map((item) => (
-                          <PresetCard key={item.key} item={item} />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
