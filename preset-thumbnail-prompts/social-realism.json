@@ -1,0 +1,17 @@
+{
+  "prompt": "An overcast daylight shot of a kitchen window from inside — net curtains diffusing flat grey light onto a simple formica countertop. A single mug and a folded newspaper on the counter. Muted grey, beige, and faded blue-green tones. No stylization — completely naturalistic. The beauty is in the quiet ordinariness. Eye-level, static, 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

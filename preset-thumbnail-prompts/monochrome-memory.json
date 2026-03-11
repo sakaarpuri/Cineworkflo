@@ -1,0 +1,17 @@
+{
+  "prompt": "High contrast black and white image of a tall window in a bare room, bright white light pouring in from outside. Deep pure black shadows on walls and floor. A single empty chair silhouetted against the window light. Extreme headroom — the ceiling takes up the top third of the frame, the chair sits low. Architectural lines prominent. Stark, elegant, 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

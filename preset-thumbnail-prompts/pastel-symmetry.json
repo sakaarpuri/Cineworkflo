@@ -1,0 +1,17 @@
+{
+  "prompt": "Perfectly symmetrical front-on view of a painted doorway — blush pink door centered in a powder blue wall. Flat, even lighting with no shadows. Clean, pristine painted surfaces. A small mint green planter on each side of the door, mirrored exactly. Storybook dollhouse quality. Controlled pastel palette — pink, blue, mint, cream. 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

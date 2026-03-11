@@ -1,0 +1,17 @@
+{
+  "prompt": "A narrow path disappearing into dense jungle foliage with low-hanging mist. Ambient sourceless green light filtering through leaves. Wet surfaces — water droplets on leaves, damp earth path. Deep green and dark blue palette with a single warm amber glow deep in the background, origin unknown. The atmosphere feels thick and humid. Dreamlike, liminal, 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "prompt": "A grand palatial interior shot from a low angle looking upward — soaring ornate arches with intricate mirror work and gold leaf covering every surface, reflecting hundreds of warm oil lamp flames. Massive scale — the architecture dwarfs everything, pillars receding into the distance. Deep ruby red silk drapes hanging between the arches. Warm golden light radiating from below (the unseen diyas) casting dramatic upward shadows on the ornate ceiling. Wisps of incense smoke drifting through the shafts of golden light between pillars. The color palette is jewel-maximalist — ruby, molten gold, deep emerald accents in the tilework. Every surface is decorated, no empty space, Bhansali-level opulence. The grandness is in the architecture and scale, not in people or detail. 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

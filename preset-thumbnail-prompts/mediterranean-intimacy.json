@@ -1,0 +1,17 @@
+{
+  "prompt": "Close-up of sun-warmed linen fabric draped over a stone surface, with dappled Mediterranean sunlight filtering through unseen leaves creating soft shadow patterns. Warm ochre and terracotta tones. A single ripe peach or fig resting on the linen, slightly soft focus. Honey-gold light wrapping around textures. Sensual, tactile, 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

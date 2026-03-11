@@ -1,0 +1,17 @@
+{
+  "prompt": "A lone tree silhouette on a hilltop with the entire frame engulfed in deep golden-orange magic hour light. The sun sits just at the horizon behind the tree, creating an intense radial burst of warm light rays fanning outward across the sky. Long dramatic shadows stretch toward the camera across wild meadow grass. The sky gradients from deep amber near the horizon through burnt orange to soft purple at the top edges. Visible sun rays cutting through atmospheric haze. Ultra-wide 14mm perspective making the tree feel small against an enormous sky. The light is overwhelming — not gentle golden hour but the last explosive minutes before sunset where everything turns molten. 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

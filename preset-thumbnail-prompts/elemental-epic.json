@@ -1,0 +1,17 @@
+{
+  "prompt": "Torrential rain falling in heavy sheets against a dark stormy sky, with a single banner or flag on a pole silhouetted against the clouds, whipping violently in wind. High contrast — near-black sky with white rain streaks. The rain is dense and dramatic, almost like a wall of water. Wind energy visible in the flag's movement. Epic, elemental, 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}

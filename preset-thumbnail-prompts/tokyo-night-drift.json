@@ -1,0 +1,17 @@
+{
+  "prompt": "Out-of-focus Tokyo cityscape at night seen through rain-spotted glass — neon signs reduced to soft pink, violet, and blue bokeh orbs floating across the frame. No readable text — just abstract neon color blobs. A few sharper raindrops on the glass in the foreground. The overall feeling is dreamy urban isolation. Soft, melancholic, 16:9, photorealistic.",
+  "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1024x576",
+    "style": "photorealistic cinematic mood thumbnail",
+    "lighting": "strong readable signature lighting",
+    "camera_angle": "simple bold composition",
+    "depth_of_field": "controlled depth of field for thumbnail readability",
+    "quality": "high detail, bold shapes, small-size readability"
+  }
+}
