@@ -899,9 +899,15 @@ export default function PromptEnhancer({ onAuthClick }) {
                 alt={item.label}
                 className="w-full h-full object-cover"
                 loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.style.display = 'none';
+                  if (event.currentTarget.parentElement) {
+                    event.currentTarget.parentElement.style.background = `linear-gradient(145deg, ${item.accentColor}55, ${item.accentColor}20)`;
+                  }
+                }}
               />
             </div>
-            <div className="min-w-0 flex-1">
+            <div className="min-w-0 flex-1 overflow-hidden">
               <div className="flex items-center justify-between gap-3">
             <span
               className="text-[10px] uppercase tracking-[0.18em] font-bold"
@@ -913,7 +919,12 @@ export default function PromptEnhancer({ onAuthClick }) {
           </div>
 
               <div className="mt-1">
-                <div className="font-semibold leading-tight">{item.label}</div>
+                <div
+                  className="font-semibold leading-tight break-words"
+                  style={{ overflowWrap: 'anywhere' }}
+                >
+                  {item.label}
+                </div>
                 <div
                   className="text-[11px] mt-1 leading-snug"
                   style={{ color: active ? 'rgba(255,255,255,0.8)' : 'var(--text-muted)' }}
