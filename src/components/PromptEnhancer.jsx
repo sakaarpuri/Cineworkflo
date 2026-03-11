@@ -1338,7 +1338,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     <button
                       type="button"
                       onClick={() => setShowAllPresets((prev) => !prev)}
-                      className="px-3 py-2 rounded-xl text-xs font-semibold transition-all"
+                      className="px-3 py-2 rounded-xl text-xs font-semibold transition-all inline-flex items-center gap-2"
                       style={{
                         background: 'var(--bg-secondary)',
                         color: 'var(--text-primary)',
@@ -1346,7 +1346,12 @@ export default function PromptEnhancer({ onAuthClick }) {
                         boxShadow: 'var(--control-soft-shadow)'
                       }}
                     >
-                      {showAllPresets ? 'Hide extra styles' : 'More styles'}
+                      <span>{showAllPresets ? 'Hide extra styles' : 'More styles'}</span>
+                      {!showAllPresets && (
+                        <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>
+                          Nordic Noir · Dreamscape · Tokyo Night Drift
+                        </span>
+                      )}
                     </button>
                   </div>
 
