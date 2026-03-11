@@ -414,7 +414,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [mood, setMood] = useState("");
   const [useCase, setUseCase] = useState("");
   const [preset, setPreset] = useState('');
-  const [presetsExpanded, setPresetsExpanded] = useState(false);
+  const [presetsExpanded, setPresetsExpanded] = useState(true);
   const [showAllPresets, setShowAllPresets] = useState(false);
   const [skillLevel, setSkillLevel] = useState('beginner'); // 'beginner' | 'pro'
   const [loading, setLoading] = useState(false);
@@ -866,6 +866,7 @@ export default function PromptEnhancer({ onAuthClick }) {
 
   const PresetCard = ({ item, compact = false }) => {
     const active = preset === item.key;
+    const imageUrl = `/preset-thumbnails/${item.key}.webp`;
 
     return (
       <button
@@ -883,6 +884,22 @@ export default function PromptEnhancer({ onAuthClick }) {
         }}
       >
         <div className="p-4 h-full flex flex-col gap-3">
+          <div
+            className="relative overflow-hidden rounded-2xl"
+            style={{
+              aspectRatio: '16 / 9',
+              background: active ? `${item.accentColor}22` : 'var(--bg-primary)',
+              border: `1px solid ${active ? `${item.accentColor}55` : 'var(--border-color)'}`,
+              boxShadow: active ? `0 10px 24px ${item.accentColor}20` : 'inset 0 1px 0 rgba(255,255,255,0.08)'
+            }}
+          >
+            <img
+              src={imageUrl}
+              alt={item.label}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
           <div className="flex items-center justify-between gap-3">
             <span
               className="text-[10px] uppercase tracking-[0.18em] font-bold"
@@ -1287,7 +1304,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Style Presets</div>
+              <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Style Presets</div>
                       <div className="text-xs mt-1" style={{ color: selectedPreset ? selectedPreset.accentColor : 'var(--text-muted)' }}>
                         {selectedPreset ? selectedPreset.label : 'None selected'}
                       </div>
