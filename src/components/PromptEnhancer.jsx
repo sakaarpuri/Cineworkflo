@@ -870,7 +870,7 @@ export default function PromptEnhancer({ onAuthClick }) {
     return (
       <button
         onClick={() => setPreset(active ? '' : item.key)}
-        className={`rounded-2xl text-left transition-all duration-200 ${compact ? 'w-full' : 'min-w-[240px] w-[240px] flex-shrink-0'}`}
+        className={`rounded-2xl text-left transition-all duration-200 ${compact ? 'w-full' : 'w-full sm:w-[260px] sm:flex-shrink-0'}`}
         style={{
           background: active
             ? `linear-gradient(155deg, ${item.accentColor}, ${item.accentColor}DD)`
@@ -887,8 +887,8 @@ export default function PromptEnhancer({ onAuthClick }) {
             <div
               className="relative overflow-hidden rounded-xl flex-shrink-0"
               style={{
-                width: compact ? '60px' : '72px',
-                height: compact ? '34px' : '40px',
+                width: compact ? '120px' : '144px',
+                height: compact ? '68px' : '82px',
                 background: active ? `${item.accentColor}22` : 'var(--bg-primary)',
                 border: `1px solid ${active ? `${item.accentColor}55` : 'var(--border-color)'}`,
                 boxShadow: active ? `0 8px 18px ${item.accentColor}18` : 'inset 0 1px 0 rgba(255,255,255,0.08)'
@@ -1297,7 +1297,7 @@ export default function PromptEnhancer({ onAuthClick }) {
               <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Style</span>
               <div className="flex-1">
                 <div
-                  className="rounded-2xl p-4"
+                  className="rounded-2xl p-4 overflow-hidden"
                   style={{
                     background: 'var(--bg-primary)',
                     border: '1px solid var(--border-color)',
@@ -1338,7 +1338,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   </div>
 
                   {showAllPresets && (
-                    <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
+                    <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       {EXTRA_STYLE_PRESETS.map((item) => (
                         <PresetCard key={item.key} item={item} />
                       ))}
