@@ -865,7 +865,7 @@ export default function PromptEnhancer({ onAuthClick }) {
 
   const PresetCard = ({ item, compact = false }) => {
     const active = preset === item.key;
-    const imageUrl = `/preset-thumbnails/${item.key}.webp`;
+    const imageUrl = `/preset-thumbnails/${item.key}.webp?v=2`;
 
     return (
       <button
@@ -908,15 +908,9 @@ export default function PromptEnhancer({ onAuthClick }) {
               />
             </div>
             <div className="min-w-0 flex-1 overflow-hidden">
-              <div className="flex items-center justify-between gap-3">
-            <span
-              className="text-[10px] uppercase tracking-[0.18em] font-bold"
-              style={{ color: active ? 'rgba(255,255,255,0.82)' : item.accentColor }}
-            >
-              Style Preset
-            </span>
-            {active ? <Check className="h-4 w-4" /> : <Film className="h-4 w-4" style={{ color: item.accentColor }} />}
-          </div>
+              <div className="flex items-center justify-end gap-3">
+                {active ? <Check className="h-4 w-4" /> : <Film className="h-4 w-4" style={{ color: item.accentColor }} />}
+              </div>
 
               <div className="mt-1">
                 <div
