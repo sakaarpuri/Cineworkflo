@@ -1318,8 +1318,16 @@ export default function PromptEnhancer({ onAuthClick }) {
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Style Presets</div>
-                      <div className="text-xs mt-1" style={{ color: selectedPreset ? selectedPreset.accentColor : 'var(--text-muted)' }}>
-                        {selectedPreset ? selectedPreset.label : 'None selected'}
+                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <div className="text-xs font-medium" style={{ color: selectedPreset ? selectedPreset.accentColor : 'var(--text-muted)' }}>
+                          {selectedPreset ? selectedPreset.label : 'None selected'}
+                        </div>
+                        <div
+                          className="text-xs font-medium"
+                          style={{ color: 'var(--text-secondary)' }}
+                        >
+                          Choose a cinematic visual grammar inspired by iconic filmmakers. Mood selection sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1330,8 +1338,8 @@ export default function PromptEnhancer({ onAuthClick }) {
                   </div>
 
                   <div className="mt-4 flex items-center justify-between gap-3 flex-wrap">
-                    <div className="text-xs max-w-2xl" style={{ color: selectedPreset ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
-                      {selectedPreset ? selectedPreset.whenToUse : 'Choose a cinematic visual grammar. Mood sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.'}
+                    <div className="text-xs max-w-2xl font-medium" style={{ color: selectedPreset ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
+                      {selectedPreset ? selectedPreset.whenToUse : 'Choose one featured preset or open more styles below.'}
                     </div>
                     <button
                       type="button"
