@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus } from 'lucide-react';
+import { Sparkles, Copy, Check, Wand2, Zap, Palette, Film, Lock, Plus, ChevronDown } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { supabase } from '../lib/supabase';
+import STYLE_PRESETS from '../data/stylePresets.json';
 
 const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com']);
 const MOODS = ["Epic", "Dramatic", "Thought-Provoking", "Whimsical", "Serene", "Mysterious", "Energetic", "Eerie", "Calm", "Surreal", "Hopeful", "Melancholic", "Tense", "Playful", "Dreamlike"];
@@ -208,10 +209,14 @@ const PRO_DETAIL_TEXT = {
   lighting: ' Three-point lighting with soft key light.'
 };
 
+const STYLE_PRESET_MAP = new Map(STYLE_PRESETS.map((preset) => [preset.key, preset]));
+const FEATURED_STYLE_PRESETS = STYLE_PRESETS.filter((preset) => preset.featured);
+const EXTRA_STYLE_PRESETS = STYLE_PRESETS.filter((preset) => !preset.featured);
+
 const AUDIO_KEYWORDS_REGEX = /\b(audio|sound|sfx|music|foley|ambien|voiceover|soundscape|dialogue)\b/i;
 const IMAGE_KEYWORDS_REGEX = /\b(image|still|frame|composition|framing|palette|texture|detail pass|render)\b/i;
 
-const buildAudioSfxDetails = (mood, useCase, skillLevel = 'beginner') => {
+const buildAudioSfxDetails = (mood, useCase, skillLevel = 'beginner', presetKey = '') => {
   const moodSfx = {
     Epic: 'deep cinematic hits and rising orchestral swells',
     Dramatic: 'low tense pulses with restrained room tone',
@@ -234,20 +239,23 @@ const buildAudioSfxDetails = (mood, useCase, skillLevel = 'beginner') => {
   const moodLayer = moodSfx[mood] || 'subtle cinematic ambience';
   const useLayer = useSfx[useCase] || 'realistic environmental foley';
 
+  const preset = STYLE_PRESET_MAP.get(String(presetKey || '').trim());
+  const presetLayer = preset?.sfxTraits ? `, ${preset.sfxTraits}` : '';
+
   if (skillLevel === 'pro') {
-    return `Audio design: ${moodLayer}, ${useLayer}, balanced mix with controlled dynamics.`;
+    return `Audio design: ${moodLayer}, ${useLayer}${presetLayer}, balanced mix with controlled dynamics.`;
   }
 
-  return `Audio/SFX: ${moodLayer} with ${useLayer}.`;
+  return `Audio/SFX: ${moodLayer} with ${useLayer}${presetLayer}.`;
 };
 
-const applyAudioPreference = (prompt, includeAudioSfx, mood, useCase, skillLevel) => {
+const applyAudioPreference = (prompt, includeAudioSfx, mood, useCase, skillLevel, presetKey = '') => {
   const normalizedPrompt = (prompt || '').trim();
   if (!normalizedPrompt) return normalizedPrompt;
 
   if (includeAudioSfx) {
     if (AUDIO_KEYWORDS_REGEX.test(normalizedPrompt)) return normalizedPrompt;
-    return `${normalizedPrompt} ${buildAudioSfxDetails(mood, useCase, skillLevel)}`.trim();
+    return `${normalizedPrompt} ${buildAudioSfxDetails(mood, useCase, skillLevel, presetKey)}`.trim();
   }
 
   const cleaned = normalizedPrompt
@@ -260,7 +268,7 @@ const applyAudioPreference = (prompt, includeAudioSfx, mood, useCase, skillLevel
   return cleaned || normalizedPrompt;
 };
 
-const buildImageDetails = (mood, useCase, skillLevel = 'beginner') => {
+const buildImageDetails = (mood, useCase, skillLevel = 'beginner', presetKey = '') => {
   const moodVisual = {
     Epic: 'hero composition with dramatic scale and layered depth',
     Dramatic: 'high-contrast framing with intentional negative space',
@@ -282,21 +290,23 @@ const buildImageDetails = (mood, useCase, skillLevel = 'beginner') => {
 
   const moodLayer = moodVisual[mood] || 'intentional composition and clean visual hierarchy';
   const useLayer = useVisual[useCase] || 'balanced composition for versatile generation';
+  const preset = STYLE_PRESET_MAP.get(String(presetKey || '').trim());
+  const presetLayer = preset?.imageTraits ? `, ${preset.imageTraits}` : '';
 
   if (skillLevel === 'pro') {
-    return `Image details: ${moodLayer}, ${useLayer}, controlled color palette and texture fidelity.`;
+    return `Image details: ${moodLayer}, ${useLayer}${presetLayer}, controlled color palette and texture fidelity.`;
   }
 
-  return `Image details: ${moodLayer} with ${useLayer}.`;
+  return `Image details: ${moodLayer} with ${useLayer}${presetLayer}.`;
 };
 
-const applyImagePreference = (prompt, includeImageDetails, mood, useCase, skillLevel) => {
+const applyImagePreference = (prompt, includeImageDetails, mood, useCase, skillLevel, presetKey = '') => {
   const normalizedPrompt = (prompt || '').trim();
   if (!normalizedPrompt) return normalizedPrompt;
 
   if (includeImageDetails) {
     if (IMAGE_KEYWORDS_REGEX.test(normalizedPrompt)) return normalizedPrompt;
-    return `${normalizedPrompt} ${buildImageDetails(mood, useCase, skillLevel)}`.trim();
+    return `${normalizedPrompt} ${buildImageDetails(mood, useCase, skillLevel, presetKey)}`.trim();
   }
 
   const cleaned = normalizedPrompt
@@ -371,6 +381,7 @@ const buildCacheKey = (mode, payload, userId = 'anon') => JSON.stringify({
   idea: String(payload.idea || '').trim(),
   mood: String(payload.mood || '').trim(),
   useCase: String(payload.useCase || '').trim(),
+  preset: String(payload.preset || '').trim(),
   skillLevel: String(payload.skillLevel || '').trim(),
   interpretation: String(payload.interpretation || '').trim(),
   includeAudioSfx: Boolean(payload.includeAudioSfx),
@@ -402,6 +413,9 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [idea, setIdea] = useState("");
   const [mood, setMood] = useState("");
   const [useCase, setUseCase] = useState("");
+  const [preset, setPreset] = useState('');
+  const [presetsExpanded, setPresetsExpanded] = useState(false);
+  const [showAllPresets, setShowAllPresets] = useState(false);
   const [skillLevel, setSkillLevel] = useState('beginner'); // 'beginner' | 'pro'
   const [loading, setLoading] = useState(false);
   const [loadingMode, setLoadingMode] = useState('');
@@ -412,7 +426,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const [addedDetails, setAddedDetails] = useState([]);
   const [includeAudioSfx, setIncludeAudioSfx] = useState(false);
   const [includeImageDetails, setIncludeImageDetails] = useState(false);
-  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", skillLevel: "beginner", includeAudioSfx: false, includeImageDetails: false });
+  const lastParamsRef = useRef({ idea: "", mood: "", useCase: "", preset: "", skillLevel: "beginner", includeAudioSfx: false, includeImageDetails: false });
   const levelPulseTimeoutRef = useRef(null);
   const [levelPulse, setLevelPulse] = useState('');
   const [saveStatus, setSaveStatus] = useState(EMPTY_SAVE_STATUS);
@@ -472,6 +486,7 @@ export default function PromptEnhancer({ onAuthClick }) {
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count);
   const isLimitReached = !canUsePro && remainingFree === 0;
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached;
+  const selectedPreset = STYLE_PRESET_MAP.get(preset) || null;
   const enhanceButtonLabel = loading
     ? (loadingMode === 'motion'
         ? 'Building Motion...'
@@ -550,8 +565,8 @@ export default function PromptEnhancer({ onAuthClick }) {
 
     try {
       const promptPayload = interpretationStyle 
-        ? { idea, mood, useCase, interpretation: interpretationStyle, skillLevel, includeAudioSfx, includeImages: includeImageDetails }
-        : { idea, mood, useCase, skillLevel, includeAudioSfx, includeImages: includeImageDetails };
+        ? { idea, mood, useCase, preset, interpretation: interpretationStyle, skillLevel, includeAudioSfx, includeImages: includeImageDetails }
+        : { idea, mood, useCase, preset, skillLevel, includeAudioSfx, includeImages: includeImageDetails };
 
       const cached = getCachedEnhancerResponse('enhance', promptPayload);
       let data = cached;
@@ -589,8 +604,8 @@ export default function PromptEnhancer({ onAuthClick }) {
       }
 
       const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
-      const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel);
-      const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel);
+      const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel, preset);
+      const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel, preset);
       if (requestId !== requestIdRef.current) return;
       const nextResult = applySelectedProDetails(nextBaseResult, addedDetails);
       setBaseResult(nextBaseResult);
@@ -615,7 +630,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setSaveStatus(EMPTY_SAVE_STATUS);
       setSaveError('');
       setCopiedSection('');
-      lastParamsRef.current = { idea, mood, useCase, skillLevel, includeAudioSfx, includeImageDetails };
+      lastParamsRef.current = { idea, mood, useCase, preset, skillLevel, includeAudioSfx, includeImageDetails };
     } catch (err) {
       if (requestId !== requestIdRef.current) return;
       setGenerationError(err?.message || 'Unable to generate prompt right now. Please retry.');
@@ -624,7 +639,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       setLoading(false);
       setLoadingMode('');
     }
-  }, [canSubmit, idea, mood, useCase, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, getCachedEnhancerResponse, getValidAccessToken, onAuthClick, requestEnhancedPrompt, setCachedEnhancerResponse, usage]);
+  }, [canSubmit, idea, mood, useCase, preset, skillLevel, canUsePro, includeAudioSfx, includeImageDetails, addedDetails, getCachedEnhancerResponse, getValidAccessToken, onAuthClick, requestEnhancedPrompt, setCachedEnhancerResponse, usage]);
 
   const generateInterpretation = (style) => {
     handleEnhance(false, style);
@@ -656,6 +671,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         idea !== lastParamsRef.current.idea ||
         mood !== lastParamsRef.current.mood ||
         useCase !== lastParamsRef.current.useCase ||
+        preset !== lastParamsRef.current.preset ||
         skillLevel !== lastParamsRef.current.skillLevel ||
         includeAudioSfx !== lastParamsRef.current.includeAudioSfx ||
         includeImageDetails !== lastParamsRef.current.includeImageDetails;
@@ -667,7 +683,7 @@ export default function PromptEnhancer({ onAuthClick }) {
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [mood, useCase, idea, skillLevel, includeAudioSfx, includeImageDetails, hasGeneratedOnce, canSubmit, handleEnhance]);
+  }, [mood, useCase, preset, idea, skillLevel, includeAudioSfx, includeImageDetails, hasGeneratedOnce, canSubmit, handleEnhance]);
 
   useEffect(() => () => {
     if (levelPulseTimeoutRef.current) {
@@ -776,6 +792,7 @@ export default function PromptEnhancer({ onAuthClick }) {
         motionDirection,
         mood,
         useCase,
+        preset,
         skillLevel
       };
 
@@ -846,6 +863,56 @@ export default function PromptEnhancer({ onAuthClick }) {
       {label}
     </button>
   );
+
+  const PresetCard = ({ item, compact = false }) => {
+    const active = preset === item.key;
+
+    return (
+      <button
+        onClick={() => setPreset(active ? '' : item.key)}
+        className={`rounded-2xl text-left transition-all duration-200 ${compact ? 'w-full' : 'min-w-[240px] w-[240px] flex-shrink-0'}`}
+        style={{
+          background: active
+            ? `linear-gradient(155deg, ${item.accentColor}, ${item.accentColor}DD)`
+            : 'var(--bg-secondary)',
+          border: `1px solid ${active ? `${item.accentColor}90` : 'var(--border-color)'}`,
+          boxShadow: active
+            ? `inset 4px 4px 10px ${item.accentColor}55, inset -4px -4px 10px rgba(255,255,255,0.2), 0 10px 26px ${item.accentColor}30`
+            : 'var(--control-soft-shadow)',
+          color: active ? '#fff' : 'var(--text-primary)'
+        }}
+      >
+        <div className="p-4 h-full flex flex-col gap-3">
+          <div className="flex items-center justify-between gap-3">
+            <span
+              className="text-[10px] uppercase tracking-[0.18em] font-bold"
+              style={{ color: active ? 'rgba(255,255,255,0.82)' : item.accentColor }}
+            >
+              Style Preset
+            </span>
+            {active ? <Check className="h-4 w-4" /> : <Film className="h-4 w-4" style={{ color: item.accentColor }} />}
+          </div>
+
+          <div>
+            <div className="font-semibold leading-tight">{item.label}</div>
+            <div
+              className="text-[11px] mt-1 leading-snug"
+              style={{ color: active ? 'rgba(255,255,255,0.8)' : 'var(--text-muted)' }}
+            >
+              {item.subtitle}
+            </div>
+          </div>
+
+          <div
+            className="text-[11px] leading-snug"
+            style={{ color: active ? 'rgba(255,255,255,0.9)' : 'var(--text-secondary)' }}
+          >
+            {item.whenToUse}
+          </div>
+        </div>
+      </button>
+    );
+  };
 
   return (
     <section 
@@ -1202,6 +1269,79 @@ export default function PromptEnhancer({ onAuthClick }) {
                     color={MOOD_COLORS[m]}
                   />
                 ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-3">
+              <span style={{ color: 'var(--text-muted)' }} className="text-xs font-medium flex-shrink-0 pt-1.5 min-w-[40px]">Style</span>
+              <div className="flex-1">
+                <button
+                  type="button"
+                  onClick={() => setPresetsExpanded((prev) => !prev)}
+                  className="w-full rounded-2xl p-3 text-left transition-all"
+                  style={{
+                    background: 'var(--bg-primary)',
+                    border: '1px solid var(--border-color)',
+                    boxShadow: 'var(--control-soft-shadow)'
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <div className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Style Presets</div>
+                      <div className="text-xs mt-1" style={{ color: selectedPreset ? selectedPreset.accentColor : 'var(--text-muted)' }}>
+                        {selectedPreset ? selectedPreset.label : 'None selected'}
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className="h-4 w-4 transition-transform"
+                      style={{ color: 'var(--text-muted)', transform: presetsExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    />
+                  </div>
+                </button>
+
+                {presetsExpanded && (
+                  <div
+                    className="mt-3 rounded-2xl p-4"
+                    style={{
+                      background: 'var(--bg-primary)',
+                      border: '1px solid var(--border-color)',
+                      boxShadow: 'var(--control-soft-shadow)'
+                    }}
+                  >
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {FEATURED_STYLE_PRESETS.map((item) => (
+                        <PresetCard key={item.key} item={item} compact />
+                      ))}
+                    </div>
+
+                    <div className="mt-4 flex items-center justify-between gap-3 flex-wrap">
+                      <div className="text-xs max-w-2xl" style={{ color: selectedPreset ? 'var(--text-secondary)' : 'var(--text-muted)' }}>
+                        {selectedPreset ? selectedPreset.whenToUse : 'Choose a cinematic visual grammar. Mood sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.'}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowAllPresets((prev) => !prev)}
+                        className="px-3 py-2 rounded-xl text-xs font-semibold transition-all"
+                        style={{
+                          background: 'var(--bg-secondary)',
+                          color: 'var(--text-primary)',
+                          border: '1px solid var(--border-color)',
+                          boxShadow: 'var(--control-soft-shadow)'
+                        }}
+                      >
+                        {showAllPresets ? 'Hide extra styles' : 'More styles'}
+                      </button>
+                    </div>
+
+                    {showAllPresets && (
+                      <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
+                        {EXTRA_STYLE_PRESETS.map((item) => (
+                          <PresetCard key={item.key} item={item} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 

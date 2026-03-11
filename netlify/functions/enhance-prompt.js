@@ -6,7 +6,9 @@ const MODEL_FALLBACK = [
 ];
 
 const { createClient } = require('@supabase/supabase-js');
+const STYLE_PRESETS = require('../../src/data/stylePresets.json');
 const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com']);
+const STYLE_PRESET_MAP = new Map(STYLE_PRESETS.map((preset) => [preset.key, preset]));
 
 const normalizeText = (value) => String(value || '').trim();
 
@@ -47,6 +49,36 @@ const enforcePromptShape = (raw, { maxWords = 90 } = {}) => {
   }
 
   return text;
+};
+
+const buildPresetInstruction = ({ presetKey, includeImages = false, includeAudioSfx = false, mode = 'default' }) => {
+  const preset = STYLE_PRESET_MAP.get(String(presetKey || '').trim());
+  if (!preset) return '';
+
+  const base = `Selected cinematic style preset: ${preset.label}.
+Use case: ${preset.whenToUse}.
+Visual traits: ${preset.imageTraits}.
+Motion traits: ${preset.motionTraits}.
+Prompt injection keywords: ${preset.promptInjectionKeywords}.`;
+
+  if (mode === 'frame_to_motion') {
+    return `${base}
+Preserve this preset’s visual grammar while keeping continuity from the start frame.
+If an end frame is generated, it must stay in the same preset style family.
+Motion should reflect the preset’s pacing and camera behavior, not generic movement.`;
+  }
+
+  if (includeImages) {
+    return `${base}
+Images are ON. Prioritize the visual traits in the start-frame/image layer.
+Treat movement traits as companion motion guidance rather than the dominant focus of the still.
+If you include an image line, prefix it exactly with "Image details:".`;
+  }
+
+  return `${base}
+Images are OFF. Apply both the visual traits and the motion traits directly to the main video prompt.
+If audio is included, keep any sound cues atmosphere-matched to the preset.
+If you include an audio line, prefix it exactly with "Audio/SFX:".`;
 };
 
 const runAnthropicPrompt = async ({ anthropicApiKey, promptInput }) => {
@@ -255,6 +287,7 @@ exports.handler = async (event) => {
       framePrompt = '',
       endFrameDirection = '',
       motionDirection = '',
+      preset = '',
       mood = '',
       useCase = '',
       tool = 'General',
@@ -289,6 +322,7 @@ exports.handler = async (event) => {
     const trimmedFramePrompt = normalizeText(framePrompt);
     const trimmedEndFrameDirection = normalizeText(endFrameDirection);
     const trimmedMotionDirection = normalizeText(motionDirection);
+    const trimmedPreset = normalizeText(preset);
     const isBeginner = skillLevel === 'beginner';
 
     if (mode === 'frame_to_motion') {
@@ -301,6 +335,8 @@ exports.handler = async (event) => {
       }
 
       const motionPromptInput = `You are helping convert a still image prompt into a cinematic image-to-video setup.
+
+${buildPresetInstruction({ presetKey: trimmedPreset, includeImages: true, mode: 'frame_to_motion' })}
 
 Generate:
 1. A start frame prompt (preserve the given start frame, only lightly normalize wording if needed)
@@ -325,6 +361,7 @@ Ending direction: ${trimmedEndFrameDirection || 'None supplied'}
 Motion direction: ${trimmedMotionDirection || 'None supplied'}
 Mood: ${mood || 'Not specified'}
 Use case: ${useCase || 'Not specified'}
+Preset: ${trimmedPreset || 'None'}
 Skill level: ${skillLevel}
 
 Return valid JSON only using this shape:
@@ -421,14 +458,16 @@ Return valid JSON only using this shape:
 ${skillInstruction}
 ${audioInstruction}
 ${imageInstruction}
+${buildPresetInstruction({ presetKey: trimmedPreset, includeImages, includeAudioSfx, mode: 'default' })}
 
 Idea: "${trimmedIdea}"
 Mood: ${mood || 'Not specified'}
 Use case: ${useCase || 'Not specified'}
 Tool: ${tool || 'General'}
+Preset: ${trimmedPreset || 'None'}
 ${interpretationInstruction ? `Style direction: ${interpretationInstruction}` : ''}
 
-Format: ${isBeginner ? 'Simple descriptive prompt ending with aspect ratio and resolution' : 'Technical cinematography prompt with full specifications'}. Keep it under ${isBeginner ? '60' : '80'} words. Just return the prompt text.`;
+Format: ${isBeginner ? 'Simple descriptive prompt ending with aspect ratio and resolution' : 'Technical cinematography prompt with full specifications'}. Keep it under ${isBeginner ? '60' : '80'} words. ${includeImages ? 'When image details are included, use the exact prefix "Image details:". ' : ''}${includeAudioSfx ? 'When audio is included, use the exact prefix "Audio/SFX:". ' : ''}Just return the prompt text.`;
 
     const rawPrompt = await runAnthropicPrompt({ anthropicApiKey, promptInput });
     const prompt = enforcePromptShape(rawPrompt, { maxWords: isBeginner ? 90 : 120 });
