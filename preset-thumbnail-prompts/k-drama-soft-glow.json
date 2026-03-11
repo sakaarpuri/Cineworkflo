@@ -1,5 +1,5 @@
 {
-  "prompt": "Soft golden bokeh circles filling the background — out-of-focus warm string lights or city lights at dusk. In the foreground, a few sharp autumn maple leaves in orange and gold on a wooden surface, slightly wet. Warm amber tones with a hint of cool lavender in the sky area. Gentle, romantic, nostalgic warmth. Shallow depth of field, everything soft except the leaves. 16:9, photorealistic.",
+  "prompt": "Soft golden bokeh circles filling the background from warm string lights at dusk, with a shallow-depth-of-field romantic composition. In the foreground, a few sharp autumn maple leaves in orange and gold rest on a slightly wet wooden surface. Warm amber tones dominate, with a faint cool lavender dusk haze in the distance. Gentle nostalgic glow, polished K-drama romance mood, soft lens bloom, everything creamy and luminous except the leaves. 16:9, photorealistic.",
   "negative_prompt": "text, letters, typography, logo, watermark, collage, split screen, multi-panel, low detail, cluttered composition, extra objects, cartoon, illustration, CGI look, unreadable signage, oversharpening",
   "api_parameters": {
     "resolution": "1K",

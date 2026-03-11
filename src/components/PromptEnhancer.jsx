@@ -865,7 +865,7 @@ export default function PromptEnhancer({ onAuthClick }) {
 
   const PresetCard = ({ item, compact = false }) => {
     const active = preset === item.key;
-    const imageUrl = `/preset-thumbnails/${item.key}.webp?v=2`;
+    const imageUrl = `/preset-thumbnails/${item.key}.webp?v=3`;
 
     return (
       <button
