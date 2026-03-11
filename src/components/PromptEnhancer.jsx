@@ -1086,7 +1086,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     textShadow: !isDarkTheme && levelPulse === 'beginner' ? '0 0 10px rgba(59,130,246,0.65)' : 'none'
                   }}
                 >
-                  Beginner
+                  Essential
                 </span>
                 <button
                   type="button"
