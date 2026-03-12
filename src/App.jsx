@@ -22,6 +22,7 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
 const MyLibraryPage = lazy(() => import('./pages/MyLibraryPage'))
 const VaultPage = lazy(() => import('./pages/VaultPage'))
+const StoryFlowPage = lazy(() => import('./pages/StoryFlowPage'))
 const Features = lazy(() => import('./components/Features'))
 const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
@@ -124,6 +125,13 @@ const SEO_BY_PATH = {
     description: 'Saved prompts for your CineWorkflo account.',
     keywords: 'saved prompts, my library, cineworkflo',
     path: '/my-library',
+    noindex: true
+  },
+  '/story-flow': {
+    title: 'Story Flow Planner (Test) | CineWorkflo',
+    description: 'A hidden CineWorkFlo test page that turns one idea into a one-minute image-to-video production plan up to image and shot prompt review.',
+    keywords: 'story flow planner, one minute story planner, image to video planning, cinematic scene breakdown',
+    path: '/story-flow',
     noindex: true
   }
 }
@@ -498,6 +506,7 @@ function App() {
               <Route path="/privacy" element={<Suspense fallback={sectionFallback(220)}><PrivacyPage /></Suspense>} />
               <Route path="/terms" element={<Suspense fallback={sectionFallback(220)}><TermsPage /></Suspense>} />
               <Route path="/my-library" element={<Suspense fallback={sectionFallback(220)}><MyLibraryPage /></Suspense>} />
+              <Route path="/story-flow" element={<Suspense fallback={sectionFallback(320)}><StoryFlowPage onAuthClick={() => setAuthModalOpen(true)} /></Suspense>} />
               <Route path="/success" element={<Success />} />
             </Routes>
           </main>
