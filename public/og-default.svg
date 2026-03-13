@@ -27,7 +27,7 @@
     </text>
 
     <text x="56" y="182" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="24" font-weight="600" fill="rgba(255,255,255,0.78)">
-      Professional AI video prompts + shot-to-prompt tools
+      Prompt Vault • Prompt Enhancer • Shot to Prompt
     </text>
 
     <text x="56" y="236" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" font-weight="700" fill="rgba(96,165,250,0.95)">
@@ -43,7 +43,7 @@
     <g transform="translate(56 284)">
       <rect x="0" y="0" width="220" height="54" rx="16" fill="rgba(59,130,246,0.20)" stroke="rgba(59,130,246,0.35)"/>
       <text x="18" y="34" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="16" font-weight="800" fill="#bfdbfe">
-        150+ TESTED PROMPTS
+        IMAGE-TO-VIDEO WORKFLOWS
       </text>
     </g>
   </g>

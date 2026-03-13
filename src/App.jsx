@@ -28,8 +28,8 @@ const PromptVault = lazy(() => import('./components/PromptVault'))
 const Pricing = lazy(() => import('./components/Pricing'))
 
 const SEO_DEFAULT = {
-  title: 'CineWorkflo - AI Video Prompt Workflows for Creators Worldwide',
-  description: 'AI video prompt workflows for filmmakers and creator teams worldwide. Access Prompt Vault, Shot to Prompt, Camera Moves, and image-to-video prompting tools.',
+  title: 'CineWorkflo - Prompt Vault, Prompt Enhancer & Shot to Prompt for AI Video',
+  description: 'Build better AI videos with Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves — one workflow for stronger image-to-video prompting.',
   keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, creators worldwide, prompt workflows',
   path: '/',
   noindex: false
@@ -37,8 +37,8 @@ const SEO_DEFAULT = {
 
 const SEO_BY_PATH = {
   '/': {
-    title: 'CineWorkflo - AI Video Prompts for Creators Worldwide | Prompt Vault + Tools',
-    description: 'Create AI video faster with Prompt Vault, Shot to Prompt, Camera Moves, and image-to-video prompt workflows for creators worldwide.',
+    title: 'CineWorkflo - Prompt Vault, Prompt Enhancer & Shot to Prompt for AI Video',
+    description: 'Build better AI videos with Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves — one workflow for stronger image-to-video prompting.',
     keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, creators worldwide',
     path: '/',
     noindex: false
@@ -58,8 +58,8 @@ const SEO_BY_PATH = {
     noindex: true
   },
   '/shot-to-prompt': {
-    title: 'Shot to Prompt - Convert Frames into AI Video Prompts | CineWorkflo',
-    description: 'Upload an image or short video reference and generate an AI video prompt for previsualization workflows worldwide.',
+    title: 'Shot to Prompt - Turn a Frame into Image + Video Prompts | CineWorkflo',
+    description: 'Upload a frame and get matching image and video prompts for previsualization, prompt iteration, and image-to-video planning.',
     keywords: 'shot to prompt, image to prompt, AI video prompt generator, filmmaking prompt tool, previsualization',
     path: '/shot-to-prompt',
     noindex: false
