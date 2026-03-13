@@ -301,6 +301,21 @@ export default function PromptVault({ preview = false }) {
                   {prompt.prompt}
                 </p>
 
+                {preview && (
+                  <div
+                    className="mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold"
+                    style={{
+                      background: 'var(--bg-primary)',
+                      color: 'var(--text-secondary)',
+                      border: '1px solid var(--border-color)',
+                      boxShadow: 'var(--control-soft-shadow)'
+                    }}
+                  >
+                    <span>See pro prompt controls in the Vault</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between gap-3">
                   <button
                     onClick={(e) => {
