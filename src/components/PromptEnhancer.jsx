@@ -602,7 +602,10 @@ export default function PromptEnhancer({ onAuthClick }) {
         setUsage(nextUsage);
       }
 
-      const enhancedPrompt = data.prompt || generateSmartPrompt(idea, mood, useCase, skillLevel);
+      const enhancedPrompt = String(data?.prompt || '').trim();
+      if (!enhancedPrompt) {
+        throw new Error('Prompt generation returned an empty response. Please retry.');
+      }
       const withAudio = applyAudioPreference(enhancedPrompt, includeAudioSfx, mood, useCase, skillLevel, preset);
       const nextBaseResult = applyImagePreference(withAudio, includeImageDetails, mood, useCase, skillLevel, preset);
       if (requestId !== requestIdRef.current) return;
@@ -1464,7 +1467,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                           boxShadow: copiedSection === 'video_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
                         }}
                       >
-                        {copiedSection === 'video_prompt' ? 'Copied!' : 'Copy Video'}
+                        {copiedSection === 'video_prompt' ? 'Copied!' : 'Copy Video Prompt'}
                       </button>
                     </div>
                     {standardSections.videoPrompt}
