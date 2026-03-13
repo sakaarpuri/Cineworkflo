@@ -197,9 +197,7 @@ const INTERPRETATIONS = [
 
 const PRO_DETAILS = [
   { key: 'camera', label: '+ Camera Movement', desc: 'gimbal tracking, handheld, dolly zoom' },
-  { key: 'lens', label: '+ Lens Type', desc: '24mm wide, 50mm portrait, 85mm telephoto' },
-  { key: 'depth', label: '+ Depth of Field', desc: 'shallow bokeh, deep focus, f/1.4-f/22' },
-  { key: 'lighting', label: '+ Lighting Setup', desc: 'key light, rim light, softbox, golden hour' }
+  { key: 'lens', label: '+ Lens Type', desc: '24mm wide, 50mm portrait, 85mm telephoto' }
 ];
 
 const PRO_DETAIL_TEXT = {
