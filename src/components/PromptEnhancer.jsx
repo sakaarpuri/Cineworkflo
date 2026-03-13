@@ -1410,6 +1410,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   <div className="flex items-center gap-2 flex-wrap justify-end">
                     {user && (
                       <button
+                        type="button"
                         onClick={() => savePromptVariant({
                           saveMode: 'video',
                           promptText: result.trim(),
@@ -1435,6 +1436,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="text-xs font-bold" style={{ color: 'var(--accent-blue)' }}>IMAGE PROMPT</div>
                       <button
+                        type="button"
                         onClick={() => handleCopySection('image_prompt', standardSections.imagePrompt)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
@@ -1456,6 +1458,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="text-xs font-bold" style={{ color: 'var(--accent-green)' }}>VIDEO PROMPT</div>
                       <button
+                        type="button"
                         onClick={() => handleCopySection('video_prompt', standardSections.videoPrompt)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
@@ -1477,6 +1480,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                     <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
                       <div className="text-xs font-bold" style={{ color: '#F59E0B' }}>SFX PROMPT</div>
                       <button
+                        type="button"
                         onClick={() => handleCopySection('sfx_prompt', standardSections.sfxPrompt)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
@@ -1505,6 +1509,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                   <div className="flex items-center gap-2 flex-wrap justify-end">
                     {user && (
                       <button
+                        type="button"
                         onClick={() => savePromptVariant({
                           saveMode: 'start_frame',
                           promptText: startFramePrompt,
@@ -1525,6 +1530,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                       </button>
                     )}
                     <button
+                      type="button"
                       onClick={() => handleCopySection('start_frame', startFramePrompt)}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
                       style={{
