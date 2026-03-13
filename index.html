@@ -7,6 +7,12 @@
     <meta name="theme-color" content="#111827" />
     <meta name="color-scheme" content="dark light" />
 
+    <script>document.documentElement.classList.add('js')</script>
+    <style>
+      .js #seo-shell { display: none !important; }
+      #seo-shell { padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto; }
+    </style>
+
     <script>
       (() => {
         try {
@@ -106,108 +112,46 @@
     </noscript>
   </head>
   <body>
-    <div id="root">
-      <!-- Static content for crawlers (replaced by React for real users) -->
-      <main style="padding: 40px; font-family: system-ui, sans-serif; max-width: 800px; margin: 0 auto;">
+    <div id="seo-shell">
+      <main>
         <h1>CineWorkflo — AI Video Prompt Workflows for Creators Worldwide</h1>
-        <p><strong>Prompt Vault, Shot to Prompt, and Camera Moves for AI video generation.</strong> Build faster, clearer prompts and image-to-video workflows.</p>
-        <p>CineWorkflo is a web app for filmmakers and creators using AI video tools worldwide. It includes a searchable prompt library, a shot-to-prompt assistant, a prompt enhancer, and a visual camera movement guide.</p>
+        <p><strong>Prompt Vault, Shot to Prompt, Camera Moves, and Prompt Enhancer for stronger image-to-video workflows.</strong></p>
+        <p>CineWorkflo helps filmmakers and creator teams turn ideas, frames, and shot references into production-ready AI video prompts. It combines a prompt library, prompt enhancement, shot analysis, and camera-language education in one workflow.</p>
 
         <h2>Core Pages</h2>
         <ul>
-          <li><a href="/">Home</a> — Product overview, value proposition, pricing entry point</li>
-          <li><a href="/prompts">Prompt Vault</a> — Curated AI video prompts by style and use case</li>
-          <li><a href="/shot-to-prompt">Shot to Prompt</a> — Converts an image/shot reference into a prompt</li>
-          <li><a href="/camera-moves">Camera Moves</a> — Animated guide to classic, dynamic, and AI-native camera motion</li>
-          <li><a href="/pricing">Pricing</a> — Plan comparison and checkout entry point</li>
-          <li><a href="/modern-moves">Modern AI-Native Moves</a> — Orbit, drone, dolly zoom, and push-through concepts</li>
+          <li><a href="/">Home</a> — product overview, hero workflow, and pricing entry points</li>
+          <li><a href="/prompts">Prompt Vault</a> — curated prompt library with image and video prompt structure</li>
+          <li><a href="/shot-to-prompt">Shot to Prompt</a> — upload a frame and generate matching image + video prompts</li>
+          <li><a href="/camera-moves">Camera Moves</a> — learn prompt-friendly movement language for shots</li>
+          <li><a href="/pricing">Pricing</a> — free and pro plan comparison</li>
         </ul>
 
-        <h2>Trust Pages</h2>
+        <h2>What CineWorkflo Offers</h2>
         <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/terms">Terms of Service</a></li>
+          <li>An ever-growing Prompt Vault for AI video workflows</li>
+          <li>Prompt Enhancer with mood, use-case, image-first, and style-preset controls</li>
+          <li>Shot-to-Prompt reverse engineering from uploaded images</li>
+          <li>Camera movement training for better visual prompting</li>
+          <li>Image-to-video planning workflows for creators worldwide</li>
         </ul>
 
-        <h2>Route Summaries for Crawlers</h2>
-        <h3>/prompts</h3>
-        <p>A searchable prompt vault for AI video creation with ready-to-copy examples for commercials, social clips, storytelling, and product films.</p>
-        <ul>
-          <li>Intent: curated prompt library for creators using Runway, Pika, Kling, Luma, Sora, Meta, and similar tools worldwide</li>
-          <li>Primary action: browse prompts and copy to workflow</li>
-          <li>Category pages:
-            <a href="/prompts/product-ads"> product ads</a>,
-            <a href="/prompts/short-form-social"> short-form social</a>,
-            <a href="/prompts/cinematic-storytelling"> cinematic storytelling</a>,
-            <a href="/prompts/world-building"> world building</a>
-          </li>
-        </ul>
-        <h3>/shot-to-prompt</h3>
-        <p>An upload tool that analyzes a frame or image reference and produces an AI-video prompt draft for recreation and iteration.</p>
-        <ul>
-          <li>Intent: convert shot references into reusable prompts</li>
-          <li>Primary action: upload frame, generate prompt, then refine</li>
-        </ul>
-        <h3>/camera-moves</h3>
-        <p>An educational camera movement guide with classic, dynamic, and AI-native move cards to improve prompt language and shot direction.</p>
-        <ul>
-          <li>Intent: learn movement terminology (dolly, pan, tilt, tracking, handheld, steadicam, whip pan, dutch angle, orbit, drone, dolly zoom, push through)</li>
-          <li>Primary action: understand move behavior and apply terms in prompts</li>
-        </ul>
+        <h2>Supported Workflow Types</h2>
+        <p>Designed for creators using Runway, Pika, Kling, Luma, Sora, Meta, Seedance, Higgsfield, and similar AI video tools.</p>
 
-        <h2>Product Features</h2>
-        <ul>
-          <li>150+ professional prompts for Runway Gen-2, Pika Labs, Sora, Meta, and other AI video tools</li>
-          <li>Shot-to-Prompt AI: Upload any image, get an optimized prompt</li>
-          <li>Smart search and filtering by tool, style, mood, shot type</li>
-          <li>One-click copy to clipboard</li>
-          <li>Workflow templates for complete scenes and image-to-video prompting</li>
-        </ul>
-
-        <h2>Supported AI Video Tools</h2>
-        <ul>
-          <li>Runway Gen-2</li>
-          <li>Pika Labs</li>
-          <li>Sora</li>
-          <li>Meta</li>
-          <li>Stable Video Diffusion</li>
-          <li>Other AI video generators</li>
-        </ul>
-
-        <h2>Use Cases</h2>
-        <ul>
-          <li>Concept trailers and mood videos</li>
-          <li>Commercial style tests and social ad prototypes</li>
-          <li>Narrative shot planning and previsualization</li>
-          <li>Rapid prompt iteration for creators and agencies</li>
-        </ul>
-
-        <h2>Pricing</h2>
-        <p><strong>Free and Pro plans</strong> — unlock the full prompt workflow with monthly or yearly billing.</p>
-
-        <h2>Who It's For</h2>
-        <p>Filmmakers, content creators, production companies, and agencies using AI video tools.</p>
+        <h2>Who It’s For</h2>
+        <p>Filmmakers, content creators, studios, production teams, agencies, and solo creators developing AI-assisted video workflows.</p>
 
         <h2>Machine-Readable Resources</h2>
         <ul>
-          <li><a href="/sitemap.xml">Sitemap</a> — URL discovery for crawlers</li>
-          <li><a href="/robots.txt">Robots Policy</a> — Crawl policy and bot directives</li>
-          <li><a href="/llms.txt">LLMs Information</a> — High-level product context for AI systems</li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+          <li><a href="/robots.txt">Robots policy</a></li>
+          <li><a href="/llms.txt">LLMs guide</a></li>
+          <li><a href="/ai.txt">AI access summary</a></li>
         </ul>
-
-        <h2>FAQ Summary</h2>
-        <h3>Are prompts tool-specific?</h3>
-        <p>Prompts are optimized for major AI video tools and can be adapted across most text-to-video systems.</p>
-        <h3>What makes a good shot reference upload?</h3>
-        <p>Use clear frames with visible subject, lighting, and composition for stronger prompt extraction.</p>
-        <h3>How should camera move terms be used?</h3>
-        <p>Add movement phrases directly to prompts to control scene motion and improve output consistency.</p>
-
-        <p><em>Created by filmmakers who've worked with Netflix, BBC, and major studios.</em></p>
       </main>
     </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

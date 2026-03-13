@@ -10,4 +10,4 @@ Public tools:
 - https://cineworkflo.com/camera-moves
 
 Website purpose:
-CineWorkflo helps creators generate higher-quality AI video prompts using a vault, enhancer, and camera movement training.
+CineWorkflo helps creators generate higher-quality AI video prompts using a prompt vault, prompt enhancer, shot-to-prompt analysis, camera movement training, and image-to-video workflow planning.

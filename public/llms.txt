@@ -15,7 +15,7 @@ It combines:
 - Prompt Vault (curated prompt library)
 - Camera Moves guide (visual language for prompting motion)
 
-Supported workflows include Runway, Pika, Kling, Luma, Sora, and Meta video toolchains.
+Supported workflows include Runway, Pika, Kling, Luma, Sora, Meta, Seedance, Higgsfield, and similar AI video toolchains.
 
 ## Core Public URLs
 - Home: https://cineworkflo.com/
@@ -29,10 +29,15 @@ Supported workflows include Runway, Pika, Kling, Luma, Sora, and Meta video tool
 - Terms: https://cineworkflo.com/terms
 
 ## Prompt Vault Categories
-- Product Ads: https://cineworkflo.com/prompts/product-ads
-- Short-Form Social: https://cineworkflo.com/prompts/short-form-social
-- Cinematic Storytelling: https://cineworkflo.com/prompts/cinematic-storytelling
-- World Building: https://cineworkflo.com/prompts/world-building
+- Brand and Product Ads: https://cineworkflo.com/prompts/brand-and-product-ads
+- Social and Short-Form Content: https://cineworkflo.com/prompts/social-and-short-form-content
+- Cinematic and Storytelling: https://cineworkflo.com/prompts/cinematic-and-storytelling
+- World and Environment Building: https://cineworkflo.com/prompts/world-and-environment-building
+- Abstract and Motion Art: https://cineworkflo.com/prompts/abstract-and-motion-art
+- AI Avatar and Character: https://cineworkflo.com/prompts/ai-avatar-and-character
+- Sci-Fi and Concept Film: https://cineworkflo.com/prompts/sci-fi-and-concept-film
+- Food and Cooking: https://cineworkflo.com/prompts/food-and-cooking
+- Real Estate and Architecture: https://cineworkflo.com/prompts/real-estate-and-architecture
 
 ## Access + Plans (public marketing level)
 - Prompt Vault: open access
