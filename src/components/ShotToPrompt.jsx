@@ -36,6 +36,7 @@ export default function ShotToPrompt({ preview = false }) {
   const [generatedPrompt, setGeneratedPrompt] = useState(null)
   const [errorMessage, setErrorMessage] = useState('')
   const [copiedSection, setCopiedSection] = useState('')
+  const [uploadKind, setUploadKind] = useState('image')
   const fileInputRef = useRef(null)
   const { user, session, loading: authLoading, isPro } = useAuth()
   const hasForcedProAccess = FORCE_PRO_EMAILS.has(String(user?.email || '').trim().toLowerCase())
@@ -63,6 +64,20 @@ export default function ShotToPrompt({ preview = false }) {
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count)
   const isLimitReached = !canUsePro && remainingFree === 0
 
+  const captureVideoFrame = async (video, captureTime) => {
+    await new Promise((resolve) => {
+      video.currentTime = captureTime
+      video.onseeked = () => resolve()
+    })
+
+    const canvas = document.createElement('canvas')
+    canvas.width = video.videoWidth || 1280
+    canvas.height = video.videoHeight || 720
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+    return canvas.toDataURL('image/jpeg', 0.9)
+  }
+
   const handleMediaUpload = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -82,8 +97,9 @@ export default function ShotToPrompt({ preview = false }) {
     if (allowedImages.has(file.type)) {
       const reader = new FileReader()
       reader.onloadend = () => {
+        setUploadKind('image')
         setUploadedImage(reader.result)
-        analyzeImage(reader.result)
+        analyzeMedia({ image: reader.result, sourceType: 'image' })
       }
       reader.readAsDataURL(file)
       return
@@ -96,9 +112,10 @@ export default function ShotToPrompt({ preview = false }) {
       return
     }
 
-    // Video: extract a representative frame client-side and analyze as an image.
+    // Video: extract three key moments from one continuous shot.
     setGeneratedPrompt(null)
     setErrorMessage('')
+    setUploadKind('video')
 
     const objectUrl = URL.createObjectURL(file)
     try {
@@ -121,23 +138,25 @@ export default function ShotToPrompt({ preview = false }) {
         throw new Error(`Video too long. Max ${MAX_VIDEO_SECONDS} seconds.`)
       }
 
-      const captureTime = Math.max(0.05, Math.min(duration * 0.5, duration - 0.05))
-      await new Promise((resolve) => {
-        video.currentTime = captureTime
-        video.onseeked = () => resolve()
+      const captureTimes = [
+        Math.max(0.05, Math.min(duration * 0.15, duration - 0.1)),
+        Math.max(0.05, Math.min(duration * 0.5, duration - 0.05)),
+        Math.max(0.05, Math.min(duration * 0.85, duration - 0.05)),
+      ]
+      const frames = []
+      for (const captureTime of captureTimes) {
+        frames.push(await captureVideoFrame(video, captureTime))
+      }
+
+      setUploadedImage(frames[1])
+      await analyzeMedia({
+        image: frames[1],
+        frames,
+        sourceType: 'video',
       })
-
-      const canvas = document.createElement('canvas')
-      canvas.width = video.videoWidth || 1280
-      canvas.height = video.videoHeight || 720
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-      const frameDataUrl = canvas.toDataURL('image/jpeg', 0.92)
-
-      setUploadedImage(frameDataUrl)
-      await analyzeImage(frameDataUrl)
     } catch (err) {
       setUploadedImage(null)
+      setUploadKind('image')
       setGeneratedPrompt(null)
       setErrorMessage(err.message || 'Unable to read video. Please try a shorter MP4/WEBM/MOV.')
     } finally {
@@ -157,7 +176,7 @@ export default function ShotToPrompt({ preview = false }) {
     return refreshed?.session?.access_token || ''
   }
 
-  const requestShotPrompt = async (imageData, accessToken) => {
+  const requestShotPrompt = async (payload, accessToken) => {
     const requestHeaders = {
       'Content-Type': 'application/json',
     }
@@ -167,7 +186,7 @@ export default function ShotToPrompt({ preview = false }) {
     const response = await fetch('/.netlify/functions/shot-to-prompt', {
       method: 'POST',
       headers: requestHeaders,
-      body: JSON.stringify({ image: imageData })
+      body: JSON.stringify(payload)
     })
 
     const data = await response.json().catch(() => ({}))
@@ -179,7 +198,7 @@ export default function ShotToPrompt({ preview = false }) {
     return data
   }
 
-  const analyzeImage = async (imageData) => {
+  const analyzeMedia = async (payload) => {
     if (authLoading) {
       setGeneratedPrompt(null)
       setErrorMessage('Checking your session…')
@@ -211,7 +230,7 @@ export default function ShotToPrompt({ preview = false }) {
     try {
       let data
       try {
-        data = await requestShotPrompt(imageData, accessToken)
+        data = await requestShotPrompt(payload, accessToken)
       } catch (err) {
         const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''))
         if (!shouldRetryAuth) throw err
@@ -221,7 +240,7 @@ export default function ShotToPrompt({ preview = false }) {
         if (refreshError || !refreshedToken) {
           throw new Error('Session expired. Please sign in again.')
         }
-        data = await requestShotPrompt(imageData, refreshedToken)
+        data = await requestShotPrompt(payload, refreshedToken)
       }
 
       if (data.image_prompt && data.video_prompt) {
@@ -250,6 +269,7 @@ export default function ShotToPrompt({ preview = false }) {
 
   const clearImage = () => {
     setUploadedImage(null)
+    setUploadKind('image')
     setGeneratedPrompt(null)
     setErrorMessage('')
     setCopiedSection('')
@@ -434,10 +454,10 @@ export default function ShotToPrompt({ preview = false }) {
                 className="text-xl mb-6"
                 style={{ color: 'var(--text-secondary)' }}
               >
-                Upload any frame from a film, ad, or your own footage and we&apos;ll reverse-engineer the exact prompt to recreate it. It&apos;s like Shazam, but for camera work.
+                Upload any frame or short single-shot clip from a film, ad, or your own footage and we&apos;ll reverse-engineer the prompt language behind it. For video, we read motion from three key moments in one shot.
               </p>
               <ul className="space-y-3" style={{ color: 'var(--text-secondary)' }}>
-                {['Decode any shot you see into a ready-to-use prompt', 'Works on movie stills, ad frames, your own clips and more', 'Get a full prompt with camera movement, lighting and style baked in'].map((item, i) => (
+                {['Decode one strong shot into a ready-to-use prompt pair', 'Works on movie stills, ad frames, and short single-shot clips', 'Get visual identity plus motion language, not just static description'].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <div 
                       className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
@@ -506,7 +526,9 @@ export default function ShotToPrompt({ preview = false }) {
                       }}
                     >
                       <Loader2 className="h-5 w-5 animate-spin" style={{ color: 'var(--accent-purple)' }} />
-                      <span style={{ color: 'var(--text-secondary)' }}>Analyzing shot composition...</span>
+                      <span style={{ color: 'var(--text-secondary)' }}>
+                        {uploadKind === 'video' ? 'Analyzing shot motion across the clip...' : 'Analyzing shot composition...'}
+                      </span>
                     </div>
                   ) : errorMessage ? (
                     <ErrorNotice />
@@ -530,13 +552,13 @@ export default function ShotToPrompt({ preview = false }) {
                       className="font-medium mb-2"
                       style={{ color: 'var(--text-primary)' }}
                     >
-                      Drop an image here
+                      Drop an image or short clip here
                     </p>
                     <p style={{ color: 'var(--text-muted)' }} className="text-sm">
                       {isLimitReached ? 'Free limit reached — upgrade to continue' : 'or click to browse'}
                     </p>
                     <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">
-                      Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s
+                      Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s • Best for one continuous shot
                     </p>
                   </div>
                   {errorMessage ? <ErrorNotice /> : null}
@@ -583,7 +605,7 @@ export default function ShotToPrompt({ preview = false }) {
             See a shot you love? Steal the prompt.
           </h1>
           <p style={{ color: 'var(--text-secondary)' }}>
-            Upload any frame from a film, ad, or your own footage and we&apos;ll reverse-engineer the exact prompt to recreate it.
+            Upload any frame or short single-shot clip and we&apos;ll reverse-engineer the visual identity plus motion language behind it.
           </p>
           {!canUsePro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
@@ -631,13 +653,13 @@ export default function ShotToPrompt({ preview = false }) {
                 className="text-xl font-medium mb-2"
                 style={{ color: 'var(--text-primary)' }}
               >
-                Drop your image here
+                Drop your image or short clip here
               </p>
               <p style={{ color: 'var(--text-muted)' }}>
                 or click to browse from your device
               </p>
               <p style={{ color: 'var(--text-muted)' }} className="text-xs mt-2">
-                Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s
+                Max {MAX_UPLOAD_MB}MB • Video up to {MAX_VIDEO_SECONDS}s • Best for one continuous shot
               </p>
             </div>
           ) : (
@@ -675,7 +697,9 @@ export default function ShotToPrompt({ preview = false }) {
                   }}
                 >
                   <Loader2 className="h-6 w-6 animate-spin" style={{ color: 'var(--accent-purple)' }} />
-                  <span style={{ color: 'var(--text-secondary)' }}>Analyzing shot composition...</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>
+                    {uploadKind === 'video' ? 'Analyzing shot motion across the clip...' : 'Analyzing shot composition...'}
+                  </span>
                 </div>
               )}
 
@@ -752,6 +776,14 @@ export default function ShotToPrompt({ preview = false }) {
               </h3>
               <p style={{ color: 'var(--text-secondary)' }}>
                 Yes. You can upload references from films, ads, or your own shots to reverse-engineer camera language.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+                How does video upload work?
+              </h3>
+              <p style={{ color: 'var(--text-secondary)' }}>
+                We treat video as one continuous shot, not a full edit. Shot to Prompt samples three key moments in the clip to infer subject motion, camera behavior, and pacing, then returns one image prompt and one motion-aware video prompt.
               </p>
             </div>
             <div>

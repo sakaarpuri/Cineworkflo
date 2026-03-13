@@ -167,6 +167,21 @@ const normalizeStructuredPrompt = (payload) => {
   };
 };
 
+const parseBase64Image = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return null;
+
+  const mediaMatch = raw.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,/);
+  const mediaType = mediaMatch?.[1] || 'image/jpeg';
+  const allowedMediaTypes = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+  if (!allowedMediaTypes.has(mediaType)) return null;
+
+  return {
+    mediaType,
+    data: mediaMatch ? raw.slice(mediaMatch[0].length) : raw,
+  };
+};
+
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -231,7 +246,7 @@ exports.handler = async (event) => {
       }
     }
 
-    const { image } = JSON.parse(event.body || '{}');
+    const { image, frames = [], sourceType = 'image' } = JSON.parse(event.body || '{}');
     if (!image) {
       return {
         statusCode: 400,
@@ -240,18 +255,16 @@ exports.handler = async (event) => {
       };
     }
 
-    const mediaMatch = image.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,/);
-    const mediaType = mediaMatch?.[1] || 'image/jpeg';
-    const allowedMediaTypes = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
-    if (!allowedMediaTypes.has(mediaType)) {
+    const primaryImage = parseBase64Image(image);
+    if (!primaryImage) {
       return {
         statusCode: 400,
         headers,
         body: JSON.stringify({ error: 'Unsupported image format. Use JPG, PNG, WEBP, or GIF.' })
       };
     }
-
-    const base64Image = mediaMatch ? image.slice(mediaMatch[0].length) : image;
+    const parsedFrames = Array.isArray(frames) ? frames.map(parseBase64Image).filter(Boolean).slice(0, 3) : [];
+    const isVideoInput = sourceType === 'video' && parsedFrames.length >= 3;
 
     let response = null;
     let lastError = null;
@@ -267,7 +280,7 @@ exports.handler = async (event) => {
           body: JSON.stringify({
             model,
             max_tokens: 500,
-            system: `You analyze a single uploaded frame and turn it into a structured image-to-video prompt package.
+            system: `You analyze either a single uploaded frame or three key frames from one continuous video shot and turn it into a structured image-to-video prompt package.
 
 Return valid JSON only. No markdown. No explanation.
 
@@ -280,27 +293,60 @@ Required JSON shape:
 }
 
 Rules:
-- The image_prompt must describe the uploaded frame as a reproducible still.
-- The video_prompt must feel like a continuation of the uploaded image, not a new concept.
+- If three frames are provided, treat them as start, middle, and end moments from one continuous shot.
+- The image_prompt must describe the representative still accurately. When three frames are provided, use the middle frame as the visual anchor while preserving continuity from the other two.
+- The video_prompt must feel like a continuation of the uploaded image, not a new concept. If three frames are provided, infer actual motion, pacing, and camera behavior from their progression.
 - Use strong filmmaking detail: subject, setting, composition, lens/framing, lighting, mood, texture, continuity, motion, and camera behavior where relevant.
 - Do not include variables, placeholders, bullet points, labels outside JSON, or SFX.
-- Keep tool_notes short and practical if present.`,
+- Keep tool_notes short and practical if present.
+- This tool is for one shot only. Do not break the clip into scenes or describe edits/montages.`,
             messages: [
               {
                 role: 'user',
                 content: [
-                  {
-                    type: 'image',
-                    source: {
-                      type: 'base64',
-                      media_type: mediaType,
-                      data: base64Image
+                  ...(isVideoInput ? [
+                    {
+                      type: 'image',
+                      source: {
+                        type: 'base64',
+                        media_type: parsedFrames[0].mediaType,
+                        data: parsedFrames[0].data
+                      }
+                    },
+                    {
+                      type: 'image',
+                      source: {
+                        type: 'base64',
+                        media_type: parsedFrames[1].mediaType,
+                        data: parsedFrames[1].data
+                      }
+                    },
+                    {
+                      type: 'image',
+                      source: {
+                        type: 'base64',
+                        media_type: parsedFrames[2].mediaType,
+                        data: parsedFrames[2].data
+                      }
+                    },
+                    {
+                      type: 'text',
+                      text: `These three images are start, middle, and end moments from one continuous shot. Return structured JSON. The image_prompt should recreate the representative middle-frame still accurately. The video_prompt should capture the actual motion, camera behavior, and pacing implied across the three frames while preserving subject, environment, lighting family, and visual identity.`
                     }
-                  },
-                  {
-                    type: 'text',
-                    text: `Analyze this uploaded frame and return the structured JSON response. The image prompt should recreate the still accurately. The video prompt should animate that exact still into a plausible shot with continuity preserved.`
-                  }
+                  ] : [
+                    {
+                      type: 'image',
+                      source: {
+                        type: 'base64',
+                        media_type: primaryImage.mediaType,
+                        data: primaryImage.data
+                      }
+                    },
+                    {
+                      type: 'text',
+                      text: `Analyze this uploaded frame and return the structured JSON response. The image prompt should recreate the still accurately. The video prompt should animate that exact still into a plausible shot with continuity preserved.`
+                    }
+                  ])
                 ]
               }
             ]
