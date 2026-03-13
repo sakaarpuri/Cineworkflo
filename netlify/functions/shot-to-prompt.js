@@ -147,6 +147,16 @@ const extractJsonObject = (value) => {
   }
 };
 
+const extractResponseText = (response) => {
+  const blocks = Array.isArray(response?.content) ? response.content : [];
+  return blocks
+    .filter((block) => block?.type === 'text' && typeof block?.text === 'string')
+    .map((block) => block.text.trim())
+    .filter(Boolean)
+    .join('\n')
+    .trim();
+};
+
 const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
 const normalizeStructuredPrompt = (payload) => {
@@ -180,6 +190,75 @@ const parseBase64Image = (value) => {
     mediaType,
     data: mediaMatch ? raw.slice(mediaMatch[0].length) : raw,
   };
+};
+
+const requestAnthropicJson = async ({ anthropicApiKey, model, system, messages, maxTokens = 500 }) => {
+  const apiResponse = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': anthropicApiKey,
+      'anthropic-version': '2023-06-01'
+    },
+    body: JSON.stringify({
+      model,
+      max_tokens: maxTokens,
+      temperature: 0,
+      system,
+      messages
+    })
+  });
+
+  const apiData = await apiResponse.json();
+  if (!apiResponse.ok) {
+    throw new Error(apiData?.error?.message || apiData?.error || `Anthropic request failed (${apiResponse.status})`);
+  }
+
+  return apiData;
+};
+
+const repairStructuredPrompt = async ({ anthropicApiKey, rawText }) => {
+  if (!rawText) return null;
+
+  for (const model of MODEL_FALLBACK) {
+    try {
+      const repaired = await requestAnthropicJson({
+        anthropicApiKey,
+        model,
+        maxTokens: 400,
+        system: `You repair malformed model output into valid JSON only.
+
+Return valid JSON only. No markdown. No explanation.
+
+Required JSON shape:
+{
+  "title": "short readable title",
+  "image_prompt": "string",
+  "video_prompt": "string",
+  "tool_notes": "optional string"
+}`,
+        messages: [
+          {
+            role: 'user',
+            content: [
+              {
+                type: 'text',
+                text: `Repair this output into valid JSON with the exact required keys. Keep the creative content intact.\n\n${rawText}`
+              }
+            ]
+          }
+        ]
+      });
+
+      const repairedText = extractResponseText(repaired);
+      const parsed = normalizeStructuredPrompt(extractJsonObject(repairedText));
+      if (parsed) return parsed;
+    } catch {
+      // Try next fallback model.
+    }
+  }
+
+  return null;
 };
 
 exports.handler = async (event) => {
@@ -270,17 +349,11 @@ exports.handler = async (event) => {
     let lastError = null;
     for (const model of MODEL_FALLBACK) {
       try {
-        const apiResponse = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': anthropicApiKey,
-            'anthropic-version': '2023-06-01'
-          },
-          body: JSON.stringify({
-            model,
-            max_tokens: 500,
-            system: `You analyze either a single uploaded frame or three key frames from one continuous video shot and turn it into a structured image-to-video prompt package.
+        response = await requestAnthropicJson({
+          anthropicApiKey,
+          model,
+          maxTokens: 500,
+          system: `You analyze either a single uploaded frame or three key frames from one continuous video shot and turn it into a structured image-to-video prompt package.
 
 Return valid JSON only. No markdown. No explanation.
 
@@ -300,65 +373,57 @@ Rules:
 - Do not include variables, placeholders, bullet points, labels outside JSON, or SFX.
 - Keep tool_notes short and practical if present.
 - This tool is for one shot only. Do not break the clip into scenes or describe edits/montages.`,
-            messages: [
-              {
-                role: 'user',
-                content: [
-                  ...(isVideoInput ? [
-                    {
-                      type: 'image',
-                      source: {
-                        type: 'base64',
-                        media_type: parsedFrames[0].mediaType,
-                        data: parsedFrames[0].data
-                      }
-                    },
-                    {
-                      type: 'image',
-                      source: {
-                        type: 'base64',
-                        media_type: parsedFrames[1].mediaType,
-                        data: parsedFrames[1].data
-                      }
-                    },
-                    {
-                      type: 'image',
-                      source: {
-                        type: 'base64',
-                        media_type: parsedFrames[2].mediaType,
-                        data: parsedFrames[2].data
-                      }
-                    },
-                    {
-                      type: 'text',
-                      text: `These three images are start, middle, and end moments from one continuous shot. Return structured JSON. The image_prompt should recreate the representative middle-frame still accurately. The video_prompt should capture the actual motion, camera behavior, and pacing implied across the three frames while preserving subject, environment, lighting family, and visual identity.`
+          messages: [
+            {
+              role: 'user',
+              content: [
+                ...(isVideoInput ? [
+                  {
+                    type: 'image',
+                    source: {
+                      type: 'base64',
+                      media_type: parsedFrames[0].mediaType,
+                      data: parsedFrames[0].data
                     }
-                  ] : [
-                    {
-                      type: 'image',
-                      source: {
-                        type: 'base64',
-                        media_type: primaryImage.mediaType,
-                        data: primaryImage.data
-                      }
-                    },
-                    {
-                      type: 'text',
-                      text: `Analyze this uploaded frame and return the structured JSON response. The image prompt should recreate the still accurately. The video prompt should animate that exact still into a plausible shot with continuity preserved.`
+                  },
+                  {
+                    type: 'image',
+                    source: {
+                      type: 'base64',
+                      media_type: parsedFrames[1].mediaType,
+                      data: parsedFrames[1].data
                     }
-                  ])
-                ]
-              }
-            ]
-          })
+                  },
+                  {
+                    type: 'image',
+                    source: {
+                      type: 'base64',
+                      media_type: parsedFrames[2].mediaType,
+                      data: parsedFrames[2].data
+                    }
+                  },
+                  {
+                    type: 'text',
+                    text: `These three images are start, middle, and end moments from one continuous shot. Return structured JSON. The image_prompt should recreate the representative middle-frame still accurately. The video_prompt should capture the actual motion, camera behavior, and pacing implied across the three frames while preserving subject, environment, lighting family, and visual identity.`
+                  }
+                ] : [
+                  {
+                    type: 'image',
+                    source: {
+                      type: 'base64',
+                      media_type: primaryImage.mediaType,
+                      data: primaryImage.data
+                    }
+                  },
+                  {
+                    type: 'text',
+                    text: `Analyze this uploaded frame and return the structured JSON response. The image prompt should recreate the still accurately. The video prompt should animate that exact still into a plausible shot with continuity preserved.`
+                  }
+                ])
+              ]
+            }
+          ]
         });
-
-        const apiData = await apiResponse.json();
-        if (!apiResponse.ok) {
-          throw new Error(apiData?.error?.message || apiData?.error || `Anthropic request failed (${apiResponse.status})`);
-        }
-
-        response = apiData;
         break;
       } catch (error) {
         lastError = error;
@@ -369,8 +434,11 @@ Rules:
       throw lastError || new Error('Model request failed');
     }
 
-    const contentText = response?.content?.[0]?.text?.trim();
-    const parsed = normalizeStructuredPrompt(extractJsonObject(contentText));
+    const contentText = extractResponseText(response);
+    let parsed = normalizeStructuredPrompt(extractJsonObject(contentText));
+    if (!parsed) {
+      parsed = await repairStructuredPrompt({ anthropicApiKey, rawText: contentText });
+    }
     if (!parsed) {
       return {
         statusCode: 502,
