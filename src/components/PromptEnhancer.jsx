@@ -1440,13 +1440,15 @@ export default function PromptEnhancer({ onAuthClick }) {
                         onClick={() => handleCopySection('image_prompt', standardSections.imagePrompt)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
+                          minWidth: '132px',
+                          justifyContent: 'center',
                           background: copiedSection === 'image_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
                           color: copiedSection === 'image_prompt' ? '#fff' : 'var(--text-secondary)',
                           border: `2px solid ${copiedSection === 'image_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                           boxShadow: copiedSection === 'image_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
                         }}
                       >
-                        {copiedSection === 'image_prompt' ? 'Copied!' : 'Copy Image'}
+                        {copiedSection === 'image_prompt' ? 'Copied ✓' : 'Copy Image'}
                       </button>
                     </div>
                     {standardSections.imagePrompt}
@@ -1462,13 +1464,15 @@ export default function PromptEnhancer({ onAuthClick }) {
                         onClick={() => handleCopySection('video_prompt', standardSections.videoPrompt)}
                         className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
                         style={{
+                          minWidth: '172px',
+                          justifyContent: 'center',
                           background: copiedSection === 'video_prompt' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
                           color: copiedSection === 'video_prompt' ? '#fff' : 'var(--text-secondary)',
                           border: `2px solid ${copiedSection === 'video_prompt' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                           boxShadow: copiedSection === 'video_prompt' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
                         }}
                       >
-                        {copiedSection === 'video_prompt' ? 'Copied!' : 'Copy Video Prompt'}
+                        {copiedSection === 'video_prompt' ? 'Copied ✓' : 'Copy Video Prompt'}
                       </button>
                     </div>
                     {standardSections.videoPrompt}
@@ -1534,13 +1538,15 @@ export default function PromptEnhancer({ onAuthClick }) {
                       onClick={() => handleCopySection('start_frame', startFramePrompt)}
                       className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
                       style={{
+                        minWidth: '170px',
+                        justifyContent: 'center',
                         background: copiedSection === 'start_frame' ? 'linear-gradient(145deg, var(--accent-green), var(--accent-green)DD)' : 'var(--bg-card)',
                         color: copiedSection === 'start_frame' ? '#fff' : 'var(--text-secondary)',
                         border: `2px solid ${copiedSection === 'start_frame' ? 'var(--accent-green)50' : 'var(--border-color)'}`,
                         boxShadow: copiedSection === 'start_frame' ? 'inset 3px 3px 6px var(--accent-green)60, inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px var(--accent-green)40' : 'var(--control-soft-shadow)'
                       }}
                     >
-                      {copiedSection === 'start_frame' ? 'Copied!' : 'Copy Start Frame'}
+                      {copiedSection === 'start_frame' ? 'Copied ✓' : 'Copy Start Frame'}
                     </button>
                   </div>
                 </div>
