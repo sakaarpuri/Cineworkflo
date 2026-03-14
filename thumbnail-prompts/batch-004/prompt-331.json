@@ -1,0 +1,17 @@
+{
+  "prompt": "A [process moment] reduced to its essential visual elements — [lens] tight, the frame containing only [element A] and [element B] with nothing else present, [color A] and [color B] the complete palette, [light quality] treating both elements with equal weight, the [process moment] at its most graphic: two things in a precise relationship that could not exist outside this specific [cooking or food context], minimalist food process still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

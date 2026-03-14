@@ -1,0 +1,17 @@
+{
+  "prompt": "A [infrastructure type] at [unusual viewing position] — [lens] wide from a position that reveals the infrastructure's [hidden visual quality]: the geometry, scale, or material quality that is invisible from normal use, [structural detail] visible at this position but never seen by the infrastructure's users, [light quality] the operational light of this infrastructure — often artificial, always functional, [scale reference] establishing the true scale, photorealistic infrastructure photography still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

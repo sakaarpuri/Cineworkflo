@@ -1,0 +1,17 @@
+{
+  "prompt": "The facade of a [brutalist or concrete building] — [lens] locked directly facing the facade, the building's [defining brutalist feature] filling two-thirds of the frame, [light quality] raking across the raw concrete surface to reveal its [surface texture]: board marks, aggregate, staining, [weathering detail] accumulated over the building's life, [human scale element] in the lower third establishing the building's true scale, the sky at the top edge, cinematic brutalist architecture still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

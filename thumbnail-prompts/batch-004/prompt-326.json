@@ -1,0 +1,17 @@
+{
+  "prompt": "A [cook type]'s hands performing [hand technique] — [lens] locked at close-medium distance, the hands filling two-thirds of the frame, [ingredient] being worked, the hands showing [evidence of craft]: calluses, staining, scars, flour dust, oil sheen — the specific hands of someone who does this every day, [work surface] and [tools] visible as extensions of the hands' practice, [light quality] treating the hands as the subject they are, documentary craft portrait still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

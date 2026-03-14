@@ -1,0 +1,17 @@
+{
+  "prompt": "A [hero ingredient] in its [natural or harvested state] — [lens] close, the ingredient filling the frame with its [defining surface quality], [light source] treating it as a portrait subject rather than a product, [color detail] the full palette of this ingredient's exterior and any visible interior, [context detail] establishing provenance without becoming a landscape shot, the ingredient photographed with the same consideration given to a human portrait, cinematic ingredient portrait still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

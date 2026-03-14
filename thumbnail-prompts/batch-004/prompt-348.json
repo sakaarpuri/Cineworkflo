@@ -1,0 +1,17 @@
+{
+  "prompt": "A [building type] in which [one architectural impossibility] has been quietly applied — [lens] wide, the building photorealistic and architecturally coherent in every other respect, [one architectural impossibility] visible throughout as a consistent fact rather than an anomaly, [people in the building] using the space with complete normalcy as if the [one architectural impossibility] is simply how this building works, [light quality] photorealistic and treating the impossible as structurally unremarkable, surrealist architectural world still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

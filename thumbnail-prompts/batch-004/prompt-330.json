@@ -1,0 +1,17 @@
+{
+  "prompt": "A single [food subject] on a [surface] — [lens] overhead locked directly above, the [food subject] centred with [negative space] on all four sides, [one shadow] the only other element in the frame, [color relationship] between the [food subject] and [surface] deliberate and precise, [light source] from [light direction] casting [one shadow] at a specific angle, no props, no context, no garnish — the [food subject] and its shadow as the complete composition, minimalist overhead food still, 16:9 Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "cinematic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}
