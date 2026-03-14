@@ -40,6 +40,69 @@ const createGroupId = () => (
   globalThis.crypto?.randomUUID?.() || `cwf_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
 )
 
+const DEFAULT_ALL_CATEGORY_WEIGHTS = {
+  'Sci-Fi & Concept Film': 10,
+  'World & Environment Building': 8,
+  'Cinematic & Storytelling': 7,
+  'Brand & Product Ads': 6,
+  'Food & Cooking': 5,
+  'AI Avatar & Character': 4,
+  'Abstract & Motion Art': 3,
+  'Nature & Wildlife Documentary': 3,
+  'Real Estate & Architecture': 2,
+  'Social & Short-Form Content': 1,
+}
+
+const getDefaultAllPriority = (prompt, index) => {
+  const categoryWeight = DEFAULT_ALL_CATEGORY_WEIGHTS[prompt.category] || 0
+  const hasThumbnail = prompt.thumbnail_url ? 20 : 0
+  const styleBoost =
+    /(cinematic|photorealistic|hyper ?real|concept|documentary|editorial|luxury|surreal)/i.test(String(prompt.style || ''))
+      ? 3
+      : 0
+
+  return hasThumbnail + categoryWeight + styleBoost - index * 0.001
+}
+
+const curateDefaultAllView = (items) => {
+  const buckets = new Map()
+
+  items.forEach((prompt, index) => {
+    const key = prompt.category || 'Uncategorized'
+    const list = buckets.get(key) || []
+    list.push({ prompt, priority: getDefaultAllPriority(prompt, index) })
+    buckets.set(key, list)
+  })
+
+  for (const list of buckets.values()) {
+    list.sort((a, b) => b.priority - a.priority)
+  }
+
+  const categoryOrder = [...buckets.entries()]
+    .sort((a, b) => {
+      const aTop = a[1][0]?.priority || 0
+      const bTop = b[1][0]?.priority || 0
+      return bTop - aTop
+    })
+    .map(([key]) => key)
+
+  const mixed = []
+  let added = true
+
+  while (added) {
+    added = false
+    for (const key of categoryOrder) {
+      const list = buckets.get(key)
+      if (list?.length) {
+        mixed.push(list.shift().prompt)
+        added = true
+      }
+    }
+  }
+
+  return mixed
+}
+
 const normalize = (value) => String(value || '').trim().toLowerCase()
 
 const fillTemplateText = (template, valueByNormKey) => {
@@ -801,7 +864,7 @@ export default function VaultPage() {
 
   const filtered = useMemo(() => {
     const q = normalize(query)
-    return prompts.filter((p) => {
+    const base = prompts.filter((p) => {
       const matchesCategory = category === 'All' || p.category === category
       const matchesStyle = style === 'All' || p.style === style
       const matchesQuery =
@@ -814,6 +877,11 @@ export default function VaultPage() {
         normalize(p.sfx_prompt).includes(q)
       return matchesCategory && matchesStyle && matchesQuery
     })
+
+    const isDefaultAllView = !q && category === 'All' && style === 'All'
+    if (!isDefaultAllView) return base
+
+    return curateDefaultAllView(base)
   }, [prompts, query, category, style])
 
   return (
