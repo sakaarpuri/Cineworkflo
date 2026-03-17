@@ -29,8 +29,8 @@ const Pricing = lazy(() => import('./components/Pricing'))
 
 const SEO_DEFAULT = {
   title: 'CineWorkflo - Prompt Vault, Prompt Enhancer & Shot to Prompt for AI Video',
-  description: 'Build better AI videos with Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves — one workflow for stronger image-to-video prompting.',
-  keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, creators worldwide, prompt workflows',
+  description: 'The prompt toolkit for AI filmmakers — Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves for stronger image-to-video workflows.',
+  keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, prompt workflows',
   path: '/',
   noindex: false
 }
@@ -38,8 +38,8 @@ const SEO_DEFAULT = {
 const SEO_BY_PATH = {
   '/': {
     title: 'CineWorkflo - Prompt Vault, Prompt Enhancer & Shot to Prompt for AI Video',
-    description: 'Build better AI videos with Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves — one workflow for stronger image-to-video prompting.',
-    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, creators worldwide',
+    description: 'The prompt toolkit for AI filmmakers — Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves for stronger image-to-video workflows.',
+    keywords: 'AI video prompts, Runway prompts, Pika prompts, Sora prompts, Meta prompts, AI filmmaking, video generation prompts, prompt workflows',
     path: '/',
     noindex: false
   },
