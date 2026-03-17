@@ -370,18 +370,6 @@ function PromptCard({ prompt, globalView }) {
   const filledVideo = useMemo(() => fillTemplateText(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
   const filledSfx = useMemo(() => fillTemplateText(prompt.sfx_prompt, valueByNormKey), [prompt.sfx_prompt, valueByNormKey])
 
-  useEffect(() => {
-    if (!lastSavedText) return
-    const savedText = String(lastSavedText || '').trim()
-    const currentVideo = String(filledVideo || '').trim()
-    const currentImage = String(filledImage || '').trim()
-    if (savedText !== currentVideo && savedText !== currentImage) {
-      setSaveStatus(EMPTY_SAVE_STATUS)
-      setLastSavedText('')
-      setCurrentGroupId('')
-    }
-  }, [filledVideo, filledImage, lastSavedText])
-
   const imageNodes = useMemo(() => renderTemplateNodes(prompt.image_prompt, valueByNormKey), [prompt.image_prompt, valueByNormKey])
   const videoNodes = useMemo(() => renderTemplateNodes(prompt.video_prompt, valueByNormKey), [prompt.video_prompt, valueByNormKey])
 
@@ -483,6 +471,19 @@ function PromptCard({ prompt, globalView }) {
   const bestOn = Array.isArray(prompt.best_on) ? prompt.best_on : []
 
   const keyVars = useMemo(() => pickKeyVariables(prompt.variables), [prompt.variables])
+
+  const handleVariablePick = (name, nextValue) => {
+    setVarValues((prev) => {
+      if (prev?.[name] === nextValue) return prev
+      return { ...prev, [name]: nextValue }
+    })
+
+    if (lastSavedText || currentGroupId || Object.values(saveStatus).some((status) => status !== 'idle')) {
+      setSaveStatus(EMPTY_SAVE_STATUS)
+      setLastSavedText('')
+      setCurrentGroupId('')
+    }
+  }
 
   const handleSave = async (saveMode = 'video') => {
     if (!user) return
@@ -802,7 +803,7 @@ function PromptCard({ prompt, globalView }) {
                     name={name}
                     spec={spec}
                     value={varValues[name] ?? spec?.default ?? ''}
-                    onPick={(next) => setVarValues((prev) => ({ ...prev, [name]: next }))}
+                    onPick={(next) => handleVariablePick(name, next)}
                   />
                 ))}
               </div>
