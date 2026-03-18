@@ -1,0 +1,17 @@
+{
+  "prompt": "A the Little Tramp — bowler hat, cane, oversized shoes, too-small jacket on a cobblestone city street with a soup kitchen queue — orthochromatic silent film stock aesthetic: high contrast, blown highlights, crushed blacks, the sky rendered white, faces with exaggerated makeup visible, oversized suit jacket, too-short trousers, white shirt with frayed collar precisely of the era — worn at aspirational — dressed above his means but the wear shows, hat tilted at a dignified angle despite visible hunger communicating the character's entire situation without dialogue, full body from 10 feet — silent cinema's performance frame the wide full-body framing of silent cinema where physical performance is the language, iris vignette at the frame edges, cinematic silent film still, 4:3 ratio",
+  "negative_prompt": "text, watermark, logo, UI, frame, collage, split screen, blurry, low detail, duplicated figures, malformed hands, extra limbs",
+  "api_parameters": {
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "jpg"
+  },
+  "settings": {
+    "style": "photorealistic still with silent film era rendering",
+    "lighting": "orthocromatic silent film contrast and period realism",
+    "camera_angle": "cinematic 16:9 thumbnail frame",
+    "quality": "high detail, readable composition, thumbnail-friendly silhouette"
+  },
+  "source_type": "image_prompt",
+  "prompt_id": 350
+}
