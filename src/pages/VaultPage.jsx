@@ -104,6 +104,22 @@ const curateDefaultAllView = (items) => {
 }
 
 const normalize = (value) => String(value || '').trim().toLowerCase()
+const normalizeSearchText = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const matchesSearchField = (value, query) => {
+  const normalizedValue = normalizeSearchText(value)
+  const normalizedQuery = normalizeSearchText(query)
+  if (!normalizedQuery) return true
+  if (!normalizedValue) return false
+  const pattern = new RegExp(`(^|\\s)${escapeRegExp(normalizedQuery).replace(/\s+/g, '\\s+')}(?=\\s|$)`, 'i')
+  return pattern.test(normalizedValue)
+}
 
 const fillTemplateText = (template, valueByNormKey) => {
   const raw = String(template || '')
@@ -872,10 +888,10 @@ export default function VaultPage() {
         !q ||
         String(p.id) === q ||
         String(p.source_id ?? '').toLowerCase() === q ||
-        normalize(p.title).includes(q) ||
-        normalize(p.image_prompt).includes(q) ||
-        normalize(p.video_prompt).includes(q) ||
-        normalize(p.sfx_prompt).includes(q)
+        matchesSearchField(p.title, q) ||
+        matchesSearchField(p.image_prompt, q) ||
+        matchesSearchField(p.video_prompt, q) ||
+        matchesSearchField(p.sfx_prompt, q)
       return matchesCategory && matchesStyle && matchesQuery
     })
 

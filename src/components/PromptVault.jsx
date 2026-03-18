@@ -4,6 +4,23 @@ import { Link, useNavigate } from 'react-router-dom'
 import { CATEGORY_COLORS, PROMPT_CATEGORY_PAGES, PROMPT_LIBRARY } from '../data/promptCategories'
 import { trackCtaEvent } from '../lib/marketingAttribution'
 
+const normalizeSearchText = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const matchesSearchField = (value, query) => {
+  const normalizedValue = normalizeSearchText(value)
+  const normalizedQuery = normalizeSearchText(query)
+  if (!normalizedQuery) return true
+  if (!normalizedValue) return false
+  const pattern = new RegExp(`(^|\\s)${escapeRegExp(normalizedQuery).replace(/\s+/g, '\\s+')}(?=\\s|$)`, 'i')
+  return pattern.test(normalizedValue)
+}
+
 export default function PromptVault({ preview = false }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
@@ -49,11 +66,11 @@ export default function PromptVault({ preview = false }) {
     const matchesSearch = !query ||
       String(prompt.id) === query ||
       String(prompt.source_id ?? '').toLowerCase() === query ||
-      prompt.title.toLowerCase().includes(query) ||
-      prompt.tags.some(tag => tag.toLowerCase().includes(query)) ||
-      prompt.prompt.toLowerCase().includes(query) ||
-      prompt.image_prompt.toLowerCase().includes(query) ||
-      prompt.sfx_prompt.toLowerCase().includes(query)
+      matchesSearchField(prompt.title, query) ||
+      prompt.tags.some(tag => matchesSearchField(tag, query)) ||
+      matchesSearchField(prompt.prompt, query) ||
+      matchesSearchField(prompt.image_prompt, query) ||
+      matchesSearchField(prompt.sfx_prompt, query)
     const matchesCategory = selectedCategory === 'All' || prompt.category === selectedCategory
     return matchesSearch && matchesCategory
   })
@@ -302,18 +319,24 @@ export default function PromptVault({ preview = false }) {
                 </p>
 
                 {preview && (
-                  <div
+                  <Link
+                    to="/prompts"
+                    onClick={(event) => {
+                      event.stopPropagation()
+                      trackCtaEvent('prompt_vault_home_preview_to_vault', '/')
+                    }}
                     className="mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold"
                     style={{
                       background: 'var(--bg-primary)',
                       color: 'var(--text-secondary)',
                       border: '1px solid var(--border-color)',
-                      boxShadow: 'var(--control-soft-shadow)'
+                      boxShadow: 'var(--control-soft-shadow)',
+                      textDecoration: 'none'
                     }}
                   >
                     <span>See pro prompt controls in the Vault</span>
                     <ArrowRight className="h-3.5 w-3.5" />
-                  </div>
+                  </Link>
                 )}
 
                 <div className="flex items-center justify-between gap-3">
