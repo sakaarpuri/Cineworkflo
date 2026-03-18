@@ -93,3 +93,60 @@ export const FEATURED_VAULT_CARDS = [
     description: 'Commercial-grade vehicle language with environmental scale, raking sidelight, and shot-ready detail.',
   },
 ]
+
+export const FEATURED_MOODS = ['Epic', 'Dreamlike', 'Tense', 'Whimsical']
+
+export const FEATURED_USE_CASES = ['Storytelling', 'Brand Ad', 'Short-form', 'Documentary']
+
+export const FEATURED_STYLE_PRESETS = [
+  {
+    key: 'desert-minimalism',
+    label: 'Desert Minimalism',
+    subtitle: 'Villeneuve / Deakins',
+    accent: '#C08A4D',
+  },
+  {
+    key: 'humid-neon-noir',
+    label: 'Humid Neon Noir',
+    subtitle: 'Wong Kar-wai / Doyle',
+    accent: '#D14B7E',
+  },
+  {
+    key: 'golden-hour-immersion',
+    label: 'Golden Hour Immersion',
+    subtitle: 'Malick / Lubezki',
+    accent: '#D4A64A',
+  },
+  {
+    key: 'pastel-symmetry',
+    label: 'Pastel Symmetry',
+    subtitle: 'Wes Anderson',
+    accent: '#D7A9B8',
+  },
+]
+
+export const EXTRA_STYLE_PRESET_NAMES = ['Nordic Noir', 'Dreamscape', 'Tokyo Night Drift']
+
+export const SHOT_TO_PROMPT_BENEFITS = [
+  'Decode one strong shot into a ready-to-use prompt pair.',
+  'Use movie stills, ad frames, or short single-shot clips as references.',
+  'Preserve visual identity while adding motion-aware camera language.',
+]
+
+export const SHOT_TO_PROMPT_FAQS = [
+  {
+    question: 'What happens when I upload video?',
+    answer:
+      'Video stays a single-shot workflow. We sample three key moments from one continuous clip to infer subject motion, camera behavior, and pacing, then return one image prompt and one motion-aware video prompt.',
+  },
+  {
+    question: 'Does this break down a full edit into scenes?',
+    answer:
+      'Not in v1. The goal is clarity: one shot in, one strong prompt pair out. Multi-scene parsing would be a separate workflow later.',
+  },
+  {
+    question: 'What should I do after generation?',
+    answer:
+      'Refine the result in Prompt Enhancer, then pull matching styles or references from Prompt Vault before moving into image-to-video tools.',
+  },
+]
