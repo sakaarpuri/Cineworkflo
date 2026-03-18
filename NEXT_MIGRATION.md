@@ -47,6 +47,10 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - video prompts can now be saved directly from cards
   - expanded cards can save start-frame and end-frame variants into the same saved group
   - signed-out users now get a direct sign-in path instead of a dead-end save state
+- working Next client version of `Story Flow`
+  - hidden Pro-only route at `/story-flow`
+  - same stage-based `/.netlify/functions/story-flow` backend
+  - same one-minute planning flow: idea → treatment → variables → scenes → assets → prompt review
 
 ### Current intent
 - Keep the existing Vite app at repo root as the live source of truth during migration
@@ -62,7 +66,7 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Move from route parity to refinement, starting with:
   1. shared SEO metadata helpers and richer per-route metadata
   2. final homepage redesign implementation inside Next
-  3. remaining private flows like `/story-flow` and account settings
+  3. account/settings flows and any remaining private-page parity
   4. final polish and cutover prep for the public/private route mix
 
 ### Current commands
@@ -79,5 +83,6 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - `/prompts/[categorySlug]`
   - `/sign-in`
   - `/shot-to-prompt`
+  - `/story-flow`
   - `/camera-moves`
   - `/pricing`
