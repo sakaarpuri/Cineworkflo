@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { supabase } from '../lib/supabase'
-
-const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com'])
+import { useAuth } from '../contexts/AuthContext'
 const FREE_USAGE_KEY = 'cwfFreeUsageTotal'
 const FREE_USAGE_SCHEMA = 1
 const FREE_TOTAL_LIMIT = 5
@@ -33,16 +31,6 @@ const saveSharedUsage = (value) => {
   localStorage.setItem(FREE_USAGE_KEY, JSON.stringify({ ...value, schemaVersion: FREE_USAGE_SCHEMA }))
 }
 
-const hasProAccess = (user) => {
-  if (!user) return false
-  if (FORCE_PRO_EMAILS.has(String(user.email || '').trim().toLowerCase())) return true
-  const proExpiresAt = user.user_metadata?.pro_expires_at
-  if (proExpiresAt) {
-    return new Date(proExpiresAt) > new Date()
-  }
-  return user.user_metadata?.is_pro === true
-}
-
 export default function ShotToPromptClient() {
   const [uploadedImage, setUploadedImage] = useState(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -50,13 +38,10 @@ export default function ShotToPromptClient() {
   const [errorMessage, setErrorMessage] = useState('')
   const [copiedSection, setCopiedSection] = useState('')
   const [uploadKind, setUploadKind] = useState('image')
-  const [user, setUser] = useState(null)
-  const [session, setSession] = useState(null)
-  const [authLoading, setAuthLoading] = useState(true)
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
   const fileInputRef = useRef(null)
+  const { user, loading: authLoading, isPro: canUsePro, getValidAccessToken, refreshAuthSession } = useAuth()
 
-  const canUsePro = hasProAccess(user)
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count)
   const isLimitReached = !canUsePro && remainingFree === 0
 
@@ -74,27 +59,6 @@ export default function ShotToPromptClient() {
     saveSharedUsage(reset)
   }, [usage.lastReset])
 
-  useEffect(() => {
-    let mounted = true
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!mounted) return
-      setSession(session)
-      setUser(session?.user ?? null)
-      setAuthLoading(false)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      setSession(nextSession)
-      setUser(nextSession?.user ?? null)
-    })
-
-    return () => {
-      mounted = false
-      subscription.unsubscribe()
-    }
-  }, [])
-
   const captureVideoFrame = async (video, captureTime) => {
     await new Promise((resolve) => {
       video.currentTime = captureTime
@@ -107,18 +71,6 @@ export default function ShotToPromptClient() {
     const ctx = canvas.getContext('2d')
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
     return canvas.toDataURL('image/jpeg', 0.9)
-  }
-
-  const getValidAccessToken = async () => {
-    if (!user) return ''
-    if (session?.access_token) return session.access_token
-
-    const { data: latestAuth } = await supabase.auth.getSession()
-    if (latestAuth?.session?.access_token) return latestAuth.session.access_token
-
-    const { data: refreshed, error } = await supabase.auth.refreshSession()
-    if (error) return ''
-    return refreshed?.session?.access_token || ''
   }
 
   const requestShotPrompt = async (payload, accessToken) => {
@@ -181,7 +133,7 @@ export default function ShotToPromptClient() {
         const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''))
         if (!shouldRetryAuth) throw err
 
-        const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession()
+        const { data: refreshed, error: refreshError } = await refreshAuthSession()
         const refreshedToken = refreshed?.session?.access_token
         if (refreshError || !refreshedToken) {
           throw new Error('Session expired. Please sign in again.')

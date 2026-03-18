@@ -3,10 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Check, Copy, Sparkles, Wand2, Zap, Palette, Film, Plus } from 'lucide-react'
-import { supabase } from '../lib/supabase'
 import STYLE_PRESETS from '../data/stylePresets.json'
-
-const FORCE_PRO_EMAILS = new Set(['puri.sakaar@gmail.com'])
+import { useAuth } from '../contexts/AuthContext'
 const MOODS = ['Epic', 'Dramatic', 'Thought-Provoking', 'Whimsical', 'Serene', 'Mysterious', 'Energetic', 'Eerie', 'Calm', 'Surreal', 'Hopeful', 'Melancholic', 'Tense', 'Playful', 'Dreamlike']
 const MOOD_COLORS = {
   Epic: '#8B5CF6',
@@ -249,14 +247,6 @@ const buildStartFramePrompt = ({ videoPrompt, imagePrompt }) => {
   return parts.join('. ').replace(/\.\s*Image details:/, '. Image details:')
 }
 
-const canUseProAccess = (user) => {
-  if (!user) return false
-  if (FORCE_PRO_EMAILS.has(String(user.email || '').trim().toLowerCase())) return true
-  const proExpiresAt = user.user_metadata?.pro_expires_at
-  if (proExpiresAt) return new Date(proExpiresAt) > new Date()
-  return user.user_metadata?.is_pro === true
-}
-
 export default function PromptEnhancerClient() {
   const [idea, setIdea] = useState('')
   const [mood, setMood] = useState('')
@@ -272,17 +262,14 @@ export default function PromptEnhancerClient() {
   const [result, setResult] = useState('')
   const [baseResult, setBaseResult] = useState('')
   const [usage, setUsage] = useState({ count: 0, lastReset: new Date().toISOString() })
-  const [user, setUser] = useState(null)
-  const [session, setSession] = useState(null)
-  const [authLoading, setAuthLoading] = useState(true)
   const [hasGeneratedOnce, setHasGeneratedOnce] = useState(false)
   const [generationError, setGenerationError] = useState('')
   const [copiedSection, setCopiedSection] = useState('')
+  const { user, loading: authLoading, isPro: canUsePro, getValidAccessToken, refreshAuthSession } = useAuth()
   const requestIdRef = useRef(0)
   const enhancerCacheRef = useRef({})
   const lastParamsRef = useRef({ idea: '', mood: '', useCase: '', preset: '', skillLevel: 'beginner', includeAudioSfx: false, includeImageDetails: false })
 
-  const canUsePro = canUseProAccess(user)
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count)
   const isLimitReached = !canUsePro && remainingFree === 0
   const canSubmit = idea.trim().length > 3 && !loading && !isLimitReached
@@ -301,36 +288,6 @@ export default function PromptEnhancerClient() {
       setUsage(data)
     }
   }, [])
-
-  useEffect(() => {
-    let mounted = true
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!mounted) return
-      setSession(session)
-      setUser(session?.user ?? null)
-      setAuthLoading(false)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      setSession(nextSession)
-      setUser(nextSession?.user ?? null)
-    })
-
-    return () => {
-      mounted = false
-      subscription.unsubscribe()
-    }
-  }, [])
-
-  const getValidAccessToken = useCallback(async () => {
-    if (!user) return ''
-    if (session?.access_token) return session.access_token
-    const { data: latestAuth } = await supabase.auth.getSession()
-    if (latestAuth?.session?.access_token) return latestAuth.session.access_token
-    const { data: refreshed, error } = await supabase.auth.refreshSession()
-    if (error) return ''
-    return refreshed?.session?.access_token || ''
-  }, [session, user])
 
   const requestEnhancedPrompt = useCallback(async (payload, accessToken) => {
     const requestHeaders = { 'Content-Type': 'application/json' }
@@ -395,7 +352,7 @@ export default function PromptEnhancerClient() {
         } catch (err) {
           const shouldRetryAuth = err?.status === 401 || /invalid session/i.test(String(err?.message || ''))
           if (!shouldRetryAuth) throw err
-          const { data: refreshed, error: refreshError } = await supabase.auth.refreshSession()
+          const { data: refreshed, error: refreshError } = await refreshAuthSession()
           const refreshedToken = refreshed?.session?.access_token
           if (refreshError || !refreshedToken) throw new Error('Session expired. Please sign in again.')
           data = await requestEnhancedPrompt(promptPayload, refreshedToken)
@@ -429,7 +386,7 @@ export default function PromptEnhancerClient() {
       setLoading(false)
       setLoadingMode('')
     }
-  }, [addedDetails, canSubmit, canUsePro, getCachedEnhancerResponse, getValidAccessToken, idea, includeAudioSfx, includeImageDetails, mood, preset, requestEnhancedPrompt, setCachedEnhancerResponse, skillLevel, usage, useCase, user])
+  }, [addedDetails, canSubmit, canUsePro, getCachedEnhancerResponse, getValidAccessToken, idea, includeAudioSfx, includeImageDetails, mood, preset, refreshAuthSession, requestEnhancedPrompt, setCachedEnhancerResponse, skillLevel, usage, useCase, user])
 
   useEffect(() => {
     if (!baseResult) return

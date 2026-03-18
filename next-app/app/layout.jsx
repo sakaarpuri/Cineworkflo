@@ -1,5 +1,7 @@
 import './globals.css'
 import Link from 'next/link'
+import AppProviders from '../components/AppProviders'
+import AuthNav from '../components/AuthNav'
 
 export const metadata = {
   title: 'CineWorkflo — Next.js Migration',
@@ -19,27 +21,32 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="page-shell">
-          <header className="site-header">
-            <div className="container header-inner">
-              <Link href="/" className="brand">
-                CineWorkflo
-              </Link>
-              <nav className="nav-links">
-                {navLinks.map((item) => (
-                  <Link key={item.href} href={item.href}>
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-              <div className="migration-pill">Next.js migration foundation</div>
-            </div>
-          </header>
-          {children}
-          <footer className="site-footer">
-            <div className="container footer-copy">CineWorkflo — less guessing, more directing.</div>
-          </footer>
-        </div>
+        <AppProviders>
+          <div className="page-shell">
+            <header className="site-header">
+              <div className="container header-inner">
+                <Link href="/" className="brand">
+                  CineWorkflo
+                </Link>
+                <nav className="nav-links">
+                  {navLinks.map((item) => (
+                    <Link key={item.href} href={item.href}>
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+                <div className="header-right">
+                  <div className="migration-pill">Next.js migration foundation</div>
+                  <AuthNav />
+                </div>
+              </div>
+            </header>
+            {children}
+            <footer className="site-footer">
+              <div className="container footer-copy">CineWorkflo — less guessing, more directing.</div>
+            </footer>
+          </div>
+        </AppProviders>
       </body>
     </html>
   )

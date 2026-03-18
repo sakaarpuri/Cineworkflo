@@ -36,6 +36,13 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - real category routes driven from normalized vault data
   - real search, category/style filters, thumbnails, variable swapping, and copy actions
   - save-to-library internals intentionally deferred for a later pass
+- shared Next auth provider inside `next-app`
+  - Supabase session state now lives behind one provider instead of repeated route-local listeners
+  - dedicated `/sign-in` route mirrors the current email/password signup and confirmation flow
+- working Next client version of `My Library`
+  - real `saved_prompts` fetch from Supabase
+  - grouped prompt variants, copy actions, and delete actions
+  - signed-out users are routed into the new Next sign-in flow
 
 ### Current intent
 - Keep the existing Vite app at repo root as the live source of truth during migration
@@ -51,8 +58,8 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Move from route parity to refinement, starting with:
   1. shared SEO metadata helpers and richer per-route metadata
   2. final homepage redesign implementation inside Next
-  3. auth/provider consolidation inside `next-app`
-  4. any deferred save/library interactions for Vault
+  3. any deferred save/library interactions for Vault
+  4. remaining private flows like `/story-flow` and account settings
 
 ### Current commands
 - `cd next-app && npm install`
@@ -60,11 +67,13 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - `cd next-app && npm run build`
 
 ### Validation
-- `next-app` currently builds successfully with static routes for:
+- `next-app` currently builds successfully with static and client-backed routes for:
   - `/`
+  - `/my-library`
   - `/prompt-enhancer`
   - `/prompts`
   - `/prompts/[categorySlug]`
+  - `/sign-in`
   - `/shot-to-prompt`
   - `/camera-moves`
   - `/pricing`
