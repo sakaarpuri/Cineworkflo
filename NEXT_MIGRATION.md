@@ -51,6 +51,9 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - hidden Pro-only route at `/story-flow`
   - same stage-based `/.netlify/functions/story-flow` backend
   - same one-minute planning flow: idea → treatment → variables → scenes → assets → prompt review
+- working Next account settings page
+  - dedicated `/settings` route for display name, password, and sign-out
+  - mirrors the current Vite settings modal behavior
 
 ### Current intent
 - Keep the existing Vite app at repo root as the live source of truth during migration
@@ -66,7 +69,7 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Move from route parity to refinement, starting with:
   1. shared SEO metadata helpers and richer per-route metadata
   2. final homepage redesign implementation inside Next
-  3. account/settings flows and any remaining private-page parity
+  3. any remaining private-page parity gaps
   4. final polish and cutover prep for the public/private route mix
 
 ### Current commands
@@ -83,6 +86,7 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - `/prompts/[categorySlug]`
   - `/sign-in`
   - `/shot-to-prompt`
+  - `/settings`
   - `/story-flow`
   - `/camera-moves`
   - `/pricing`

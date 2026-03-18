@@ -41,6 +41,9 @@ export default function AuthNav() {
       <Link href="/my-library" className="header-auth-link">
         My Library
       </Link>
+      <Link href="/settings" className="header-auth-link">
+        Settings
+      </Link>
       <div className="header-user-pill">
         <span>{displayName}</span>
         {isPro ? <span className="header-pro-pill">Pro</span> : null}

@@ -438,6 +438,49 @@ a {
   background: rgba(239, 68, 68, 0.08);
 }
 
+.settings-shell {
+  display: grid;
+  gap: 24px;
+}
+
+.settings-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.settings-card {
+  display: grid;
+  gap: 16px;
+}
+
+.settings-card h2 {
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.settings-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.settings-danger {
+  border-color: rgba(239, 68, 68, 0.18);
+}
+
+.settings-signout-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .feature-card h1,
 .feature-card h2,
 .feature-card h3,
@@ -842,6 +885,12 @@ a {
   border: 1px solid rgba(124, 58, 237, 0.18);
   background: rgba(124, 58, 237, 0.08);
   color: var(--accent-purple);
+}
+
+.status-card.success {
+  color: var(--accent-green);
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.08);
 }
 
 .error-card {
