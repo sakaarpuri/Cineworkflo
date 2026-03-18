@@ -21,10 +21,11 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Keep current Netlify functions, Supabase auth, and Stripe backend unchanged in Phase 1
 
 ### Recommended next step
-- Port the real homepage sections into Next client/server components, starting with:
-  1. Hero
-  2. Shot to Prompt section shell
-  3. Prompt Enhancer section shell
+- Port the real interactive public tools into Next client/server components, starting with:
+  1. Shot to Prompt section shell
+  2. Prompt Enhancer section shell
+  3. Prompt Vault card grid
+  4. shared SEO metadata helpers
 
 ### Current commands
 - `cd next-app && npm install`
@@ -35,6 +36,7 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - `next-app` currently builds successfully with static routes for:
   - `/`
   - `/prompts`
+  - `/prompts/[categorySlug]`
   - `/shot-to-prompt`
   - `/camera-moves`
   - `/pricing`
