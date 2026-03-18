@@ -25,7 +25,7 @@ export default function HomePage() {
               <Link href="/shot-to-prompt" className="cta-primary">
                 Try Shot to Prompt
               </Link>
-              <Link href="#prompt-enhancer" className="cta-secondary">
+              <Link href="/prompt-enhancer" className="cta-secondary">
                 Open Prompt Enhancer
               </Link>
             </div>
@@ -160,6 +160,11 @@ export default function HomePage() {
               moving into production. This is the first hands-on workflow for people who arrive with a concept instead
               of a reference.
             </p>
+            <div className="card-actions">
+              <Link href="/prompt-enhancer" className="text-link">
+                Open route
+              </Link>
+            </div>
             <p>
               In the Next migration, the public homepage should preview this system clearly even before the interactive
               client component is fully ported over.

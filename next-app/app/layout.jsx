@@ -8,6 +8,7 @@ export const metadata = {
 }
 
 const navLinks = [
+  { href: '/prompt-enhancer', label: 'Prompt Enhancer' },
   { href: '/prompts', label: 'Prompt Vault' },
   { href: '/shot-to-prompt', label: 'Shot to Prompt' },
   { href: '/camera-moves', label: 'Camera Moves' },
