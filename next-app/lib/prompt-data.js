@@ -95,34 +95,13 @@ export const FEATURED_VAULT_CARDS = [
 ]
 
 export const FEATURED_MOODS = ['Epic', 'Dreamlike', 'Tense', 'Whimsical']
-
 export const FEATURED_USE_CASES = ['Storytelling', 'Brand Ad', 'Short-form', 'Documentary']
 
 export const FEATURED_STYLE_PRESETS = [
-  {
-    key: 'desert-minimalism',
-    label: 'Desert Minimalism',
-    subtitle: 'Villeneuve / Deakins',
-    accent: '#C08A4D',
-  },
-  {
-    key: 'humid-neon-noir',
-    label: 'Humid Neon Noir',
-    subtitle: 'Wong Kar-wai / Doyle',
-    accent: '#D14B7E',
-  },
-  {
-    key: 'golden-hour-immersion',
-    label: 'Golden Hour Immersion',
-    subtitle: 'Malick / Lubezki',
-    accent: '#D4A64A',
-  },
-  {
-    key: 'pastel-symmetry',
-    label: 'Pastel Symmetry',
-    subtitle: 'Wes Anderson',
-    accent: '#D7A9B8',
-  },
+  { key: 'desert-minimalism', label: 'Desert Minimalism', subtitle: 'Villeneuve / Deakins', accent: '#C08A4D' },
+  { key: 'humid-neon-noir', label: 'Humid Neon Noir', subtitle: 'Wong Kar-wai / Doyle', accent: '#D14B7E' },
+  { key: 'golden-hour-immersion', label: 'Golden Hour Immersion', subtitle: 'Malick / Lubezki', accent: '#D4A64A' },
+  { key: 'pastel-symmetry', label: 'Pastel Symmetry', subtitle: 'Wes Anderson', accent: '#D7A9B8' },
 ]
 
 export const EXTRA_STYLE_PRESET_NAMES = ['Nordic Noir', 'Dreamscape', 'Tokyo Night Drift']
@@ -148,5 +127,89 @@ export const SHOT_TO_PROMPT_FAQS = [
     question: 'What should I do after generation?',
     answer:
       'Refine the result in Prompt Enhancer, then pull matching styles or references from Prompt Vault before moving into image-to-video tools.',
+  },
+]
+
+export const PLATFORM_BADGES = [
+  { label: 'Runway', tone: 'neutral' },
+  { label: 'Pika', tone: 'neutral' },
+  { label: 'Sora', tone: 'neutral' },
+  { label: 'Kling', tone: 'neutral' },
+  { label: 'Luma', tone: 'neutral' },
+  { label: 'Veo', tone: 'new' },
+  { label: 'Grok', tone: 'new' },
+  { label: 'Higgsfield', tone: 'neutral' },
+  { label: 'Seedance', tone: 'neutral' },
+]
+
+export const HOME_CAMERA_MOVES = [
+  {
+    title: 'Slow Push-In',
+    description: 'Tension-building camera language for character focus, reveals, and emotional escalation.',
+    prompt: 'Slow push-in over 8 seconds, subtle stabilization, subject remains locked in frame.',
+  },
+  {
+    title: 'Lateral Tracking',
+    description: 'Great for product, fashion, and story beats where movement should feel directed but controlled.',
+    prompt: 'Lateral tracking shot, clean parallax separation, background glides past with measured pace.',
+  },
+  {
+    title: 'Floating Orbit',
+    description: 'Useful when you want cinematic atmosphere without turning the shot into aggressive motion.',
+    prompt: 'Floating circular move around subject, soft continuous drift, no abrupt speed changes.',
+  },
+]
+
+export const TESTIMONIALS = [
+  {
+    quote: 'Shot to Prompt gets me from a film still to usable prompt language faster than anything else I have tried.',
+    name: 'Indie director',
+    role: 'Short-form filmmaker',
+  },
+  {
+    quote: 'Prompt Enhancer feels like having a cinematography-minded writing partner instead of a generic AI helper.',
+    name: 'Creative strategist',
+    role: 'Brand film workflow',
+  },
+  {
+    quote: 'The Vault is actually curated. It feels more like a working reference library than prompt spam.',
+    name: 'AI video creator',
+    role: 'Commercial and concept work',
+  },
+]
+
+export const PRICING_TIERS = [
+  {
+    name: 'Free',
+    price: '£0',
+    period: '/ month',
+    description: 'Try the core workflows before you commit.',
+    hook: 'Good for testing the workflow.',
+    featured: false,
+    ctaLabel: 'Start free',
+    ctaHref: '/prompt-enhancer',
+    features: ['5 generations per month across Enhancer + Shot to Prompt', 'Prompt Vault browsing', 'Camera Moves access'],
+  },
+  {
+    name: 'Pro',
+    price: '£10',
+    period: '/ month',
+    description: 'For working creators who need the full toolkit.',
+    hook: 'Most popular for active image-to-video work.',
+    featured: true,
+    ctaLabel: 'Get Pro',
+    ctaHref: '/pricing',
+    features: ['Unlimited generation flow', 'Full Prompt Vault controls', 'Style presets and interpretation passes', 'Best route for real production use'],
+  },
+  {
+    name: 'Yearly',
+    price: '£49',
+    period: '/ year',
+    description: 'Best value if CineWorkFlo is part of your regular workflow.',
+    hook: 'Lower cost, same core Pro value.',
+    featured: false,
+    ctaLabel: 'Choose yearly',
+    ctaHref: '/pricing',
+    features: ['Everything in Pro', 'Lower annual cost', 'Simple plan for long-term use'],
   },
 ]

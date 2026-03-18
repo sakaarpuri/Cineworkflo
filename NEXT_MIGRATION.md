@@ -8,12 +8,14 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - dedicated `next-app/` workspace for the migration
 - its own App Router layout and initial route shells
 - independent Next package/scripts so the current Vite app stays untouched
-- homepage shell using the current CineWorkflo hierarchy:
+- redesigned Next homepage following the current CineWorkFlo hierarchy and homepage spec:
   - Hero
   - Shot to Prompt
   - Prompt Enhancer
   - Prompt Vault
   - Camera Moves
+  - Social Proof
+  - Pricing
 - richer public SEO shells for:
   - `/shot-to-prompt`
   - `/prompt-enhancer`
@@ -41,8 +43,9 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Keep current Netlify functions, Supabase auth, and Stripe backend unchanged in Phase 1
 
 ### Current focus
-- Replace placeholder public pages with migration-ready public shells that already reflect the real CineWorkFlo product story
+- Replace placeholder public pages with migration-ready public surfaces that already reflect the real CineWorkFlo product story
 - Move the most important public workflows one by one, starting with reference-first and idea-first tools, then the public discovery surface
+- Implement the homepage redesign directly inside Next instead of redesigning the old Vite homepage first
 
 ### Recommended next step
 - Move from route parity to refinement, starting with:
