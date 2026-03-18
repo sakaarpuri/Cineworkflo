@@ -18,6 +18,11 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - `/shot-to-prompt`
   - `/prompts`
   - `/prompts/[categorySlug]`
+- working Next client version of `Shot to Prompt`
+  - same Netlify `/.netlify/functions/shot-to-prompt` endpoint
+  - same image/video upload rules
+  - same structured output shape (`title`, `image_prompt`, `video_prompt`, `tool_notes`)
+  - direct Supabase session lookup inside the client component for anonymous/pro access handling
 
 ### Current intent
 - Keep the existing Vite app at repo root as the live source of truth during migration
@@ -26,14 +31,14 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 
 ### Current focus
 - Replace placeholder public pages with migration-ready public shells that already reflect the real CineWorkflo product story
-- Keep interactive logic for later passes, but make the public routes useful for metadata, crawlability, and eventual section-by-section porting
+- Move the most important public workflows one by one, starting with reference-first tools
 
 ### Recommended next step
-- Port the real interactive public tools into Next client/server components, starting with:
-  1. Shot to Prompt client workflow
-  2. Prompt Enhancer client workflow
-  3. Prompt Vault grid/search/filter behavior
-  4. shared SEO metadata helpers
+- Port the next interactive public tools into Next, starting with:
+  1. Prompt Enhancer client workflow
+  2. Prompt Vault grid/search/filter behavior
+  3. shared SEO metadata helpers
+  4. eventual auth/provider consolidation inside `next-app`
 
 ### Current commands
 - `cd next-app && npm install`

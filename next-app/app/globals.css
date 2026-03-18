@@ -618,3 +618,126 @@ a {
     font-size: 2.6rem;
   }
 }
+
+
+.hidden-input {
+  display: none;
+}
+
+.shot-live-shell {
+  display: grid;
+  gap: 24px;
+}
+
+.live-upload-shell {
+  cursor: pointer;
+  min-height: 160px;
+}
+
+.uploaded-preview-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.uploaded-preview {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(15,23,42,0.02), rgba(124,58,237,0.06));
+}
+
+.clear-upload,
+.copy-action {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.clear-upload {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.copy-action {
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.status-card,
+.error-card,
+.usage-pill {
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.status-card {
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  background: rgba(124, 58, 237, 0.08);
+  color: var(--accent-purple);
+}
+
+.error-card {
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+}
+
+.usage-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+.usage-pill.warnable {
+  border: 1px solid var(--border-color);
+  background: rgba(79, 142, 247, 0.08);
+  color: var(--text-secondary);
+}
+
+.usage-pill.success {
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--accent-green);
+}
+
+.live-output-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.live-output-card {
+  padding: 20px;
+}
+
+.mono-output {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.output-title-card h2 {
+  margin-bottom: 0;
+}
+
+.notes-card p {
+  margin-top: 6px;
+}
+
+.helper-card ul {
+  margin-top: 0;
+}
+
+.helper-actions {
+  margin-top: 20px;
+}
