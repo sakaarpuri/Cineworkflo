@@ -43,6 +43,10 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - real `saved_prompts` fetch from Supabase
   - grouped prompt variants, copy actions, and delete actions
   - signed-out users are routed into the new Next sign-in flow
+- auth-aware save flow inside the Next `Prompt Vault`
+  - video prompts can now be saved directly from cards
+  - expanded cards can save start-frame and end-frame variants into the same saved group
+  - signed-out users now get a direct sign-in path instead of a dead-end save state
 
 ### Current intent
 - Keep the existing Vite app at repo root as the live source of truth during migration
@@ -58,8 +62,8 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Move from route parity to refinement, starting with:
   1. shared SEO metadata helpers and richer per-route metadata
   2. final homepage redesign implementation inside Next
-  3. any deferred save/library interactions for Vault
-  4. remaining private flows like `/story-flow` and account settings
+  3. remaining private flows like `/story-flow` and account settings
+  4. final polish and cutover prep for the public/private route mix
 
 ### Current commands
 - `cd next-app && npm install`

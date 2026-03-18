@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { Check, ChevronDown, ChevronUp, Copy, Search } from 'lucide-react'
+import { BookmarkPlus, Check, ChevronDown, ChevronUp, Copy, Search } from 'lucide-react'
 import { CATEGORY_COLORS, PROMPT_LIBRARY } from '../lib/vault-data'
+import { useAuth } from '../contexts/AuthContext'
+import { supabase } from '../lib/supabase'
 
 const DEFAULT_ALL_CATEGORY_WEIGHTS = {
   'Sci-Fi & Concept Film': 10,
@@ -19,6 +21,10 @@ const DEFAULT_ALL_CATEGORY_WEIGHTS = {
 }
 
 const MONO_STACK = 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace'
+const EMPTY_SAVE_STATUS = { video: 'idle', start_frame: 'idle', end_frame: 'idle' }
+
+const createGroupId = () =>
+  globalThis.crypto?.randomUUID?.() || `cwf_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
 
 const normalize = (value) => String(value || '').trim().toLowerCase()
 const normalizeSearchText = (value) => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
@@ -133,9 +139,29 @@ function PromptBlock({ label, colorClass, nodes, text, copied, onCopy, highlight
   )
 }
 
-function PromptCard({ prompt }) {
+function SaveButton({ onSave, status, label = 'Save' }) {
+  const saving = status === 'saving'
+  const saved = status === 'saved' || status === 'exists'
+
+  return (
+    <button
+      type="button"
+      className={`vault-save-button ${saved ? 'saved' : ''}`}
+      onClick={onSave}
+      disabled={saving || saved}
+      title={status === 'exists' ? 'Already in My Library' : 'Save to My Library'}
+    >
+      {saved ? <Check className="icon-xs" /> : <BookmarkPlus className="icon-xs" />}
+      {saving ? 'Saving…' : saved ? 'Saved' : label}
+    </button>
+  )
+}
+
+function PromptCard({ prompt, user }) {
   const [expanded, setExpanded] = useState(false)
   const [copiedKey, setCopiedKey] = useState('')
+  const [saveStatus, setSaveStatus] = useState(EMPTY_SAVE_STATUS)
+  const [currentGroupId, setCurrentGroupId] = useState('')
   const [varValues, setVarValues] = useState(() => {
     const next = {}
     for (const [key, spec] of Object.entries(prompt.variables || {})) next[key] = spec?.default ?? ''
@@ -164,6 +190,87 @@ function PromptCard({ prompt }) {
     } catch {}
   }
 
+  const resetSaveState = () => {
+    setSaveStatus(EMPTY_SAVE_STATUS)
+    setCurrentGroupId('')
+  }
+
+  const handleVariablePick = (name, nextValue) => {
+    setVarValues((prev) => {
+      if (prev?.[name] === nextValue) return prev
+      return { ...prev, [name]: nextValue }
+    })
+
+    if (currentGroupId || Object.values(saveStatus).some((status) => status !== 'idle')) {
+      resetSaveState()
+    }
+  }
+
+  const handleSave = async (saveMode = 'video') => {
+    if (!user) return
+    if (saveStatus[saveMode] === 'saving' || saveStatus[saveMode] === 'saved' || saveStatus[saveMode] === 'exists') return
+
+    setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saving' }))
+
+    const isFrameSave = saveMode === 'start_frame' || saveMode === 'end_frame'
+    const variantType = saveMode === 'video' ? 'video_prompt' : saveMode
+    const framePrompt = String(filledImage || '').trim()
+    const promptToSave = isFrameSave ? framePrompt : String(filledVideo || '').trim()
+    const frameLabel = saveMode === 'start_frame' ? 'Start Frame' : saveMode === 'end_frame' ? 'End Frame' : null
+    const groupId = currentGroupId || createGroupId()
+
+    if (!promptToSave) {
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }))
+      window.setTimeout(() => setSaveStatus((previous) => ({ ...previous, [saveMode]: 'idle' })), 2500)
+      return
+    }
+
+    const payload = {
+      user_id: user.id,
+      idea: frameLabel ? `${prompt.title} — ${frameLabel}` : prompt.title,
+      prompt: promptToSave,
+      mood: null,
+      use_case: null,
+      skill_level: 'vault',
+      include_audio_sfx: Boolean(String(filledSfx || '').trim()),
+      include_image_details: Boolean(framePrompt),
+      metadata: {
+        group_id: groupId,
+        variant_type: variantType,
+        source: 'prompt_vault',
+        original_idea: prompt.title,
+        library_id: prompt.id,
+        category: prompt.category,
+        style: prompt.style,
+        best_on: prompt.best_on || [],
+        image_prompt: framePrompt,
+        sfx_prompt: String(filledSfx || '').trim(),
+        variables: varValues,
+        save_mode: saveMode,
+        frame_role: isFrameSave ? saveMode : null,
+        linked_from_variant: saveMode === 'end_frame' ? 'start_frame' : null,
+        video_prompt: String(filledVideo || '').trim(),
+      },
+    }
+
+    const { error } = await supabase.from('saved_prompts').insert(payload)
+
+    if (!error) {
+      setCurrentGroupId(groupId)
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'saved' }))
+      return
+    }
+
+    if (error.code === '23505') {
+      setCurrentGroupId(groupId)
+      setSaveStatus((previous) => ({ ...previous, [saveMode]: 'exists' }))
+      return
+    }
+
+    setSaveStatus((previous) => ({ ...previous, [saveMode]: 'error' }))
+    window.setTimeout(() => setSaveStatus((previous) => ({ ...previous, [saveMode]: 'idle' })), 2500)
+  }
+
   return (
     <article className="vault-card-live">
       {prompt.thumbnail_url ? <img src={prompt.thumbnail_url} alt={prompt.title} className="vault-card-thumb" loading="lazy" /> : null}
@@ -174,6 +281,7 @@ function PromptCard({ prompt }) {
           <span className="vault-style-text">{prompt.style}</span>
         </div>
         <div className="vault-tool-row">
+          {user ? <SaveButton onSave={() => handleSave('video')} status={saveStatus.video} label="Save Prompt" /> : null}
           {(prompt.best_on || []).map((tool, index) => (
             <span key={`${prompt.id}-${tool}-${index}`} className="vault-tool-pill">{tool}</span>
           ))}
@@ -244,7 +352,7 @@ function PromptCard({ prompt }) {
                       <div className="vault-var-value">{varValues[name] ?? spec?.default ?? ''}</div>
                       <div className="chip-row wrap-row compact-gap">
                         {(spec?.examples || []).map((example) => (
-                          <button key={example} type="button" className="vault-example-pill" onClick={() => setVarValues((prev) => ({ ...prev, [name]: example }))}>
+                          <button key={example} type="button" className="vault-example-pill" onClick={() => handleVariablePick(name, example)}>
                             {example}
                           </button>
                         ))}
@@ -259,6 +367,22 @@ function PromptCard({ prompt }) {
                   <p>{prompt.tool_notes}</p>
                 </section>
               ) : null}
+              <section className="vault-notes-shell">
+                <div className="card-eyebrow">{user ? 'Save variants' : 'Save to My Library'}</div>
+                {user ? (
+                  <div className="vault-save-row">
+                    <SaveButton onSave={() => handleSave('start_frame')} status={saveStatus.start_frame} label="Save Start Frame" />
+                    <SaveButton onSave={() => handleSave('end_frame')} status={saveStatus.end_frame} label="Save End Frame" />
+                  </div>
+                ) : (
+                  <p>
+                    <Link href={`/sign-in?next=%2Fprompts`} className="inline-text-link">
+                      Sign in
+                    </Link>{' '}
+                    to save prompt variants and keep them grouped in My Library.
+                  </p>
+                )}
+              </section>
             </div>
           </div>
           <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>
@@ -274,6 +398,7 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
   const [query, setQuery] = useState(initialQuery)
   const [category, setCategory] = useState(initialCategory)
   const [style, setStyle] = useState(initialStyle)
+  const { user } = useAuth()
 
   const categories = useMemo(() => ['All', ...new Set(PROMPT_LIBRARY.map((prompt) => prompt.category))], [])
   const styles = useMemo(() => ['All', ...new Set(PROMPT_LIBRARY.map((prompt) => prompt.style))], [])
@@ -365,7 +490,7 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
 
       <section className="vault-grid-live">
         {filtered.map((prompt) => (
-          <PromptCard key={prompt.id} prompt={prompt} />
+          <PromptCard key={prompt.id} prompt={prompt} user={user} />
         ))}
       </section>
 

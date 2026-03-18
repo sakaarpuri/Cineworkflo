@@ -1211,6 +1211,31 @@ a {
   align-items: center;
 }
 
+.vault-save-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: rgba(255,255,255,0.9);
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.vault-save-button.saved {
+  border-color: rgba(16,185,129,0.35);
+  background: rgba(16,185,129,0.1);
+  color: var(--accent-green);
+}
+
+.vault-save-button:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
 .vault-id-pill,
 .vault-category-pill,
 .vault-tool-pill,
@@ -1346,9 +1371,20 @@ a {
   cursor: pointer;
 }
 
+.vault-save-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .vault-notes-shell p {
   margin: 0;
   color: var(--text-secondary);
+}
+
+.inline-text-link {
+  color: var(--accent-blue);
+  font-weight: 700;
 }
 
 @media (max-width: 960px) {
