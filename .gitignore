@@ -1,5 +1,8 @@
 /dist
 /node_modules
+/.next
+/next-app/node_modules
+/next-app/.next
 .env
 deploy*.zip
 package-lock.json
