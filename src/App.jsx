@@ -462,6 +462,11 @@ function App() {
               <Route path="/" element={
                 <div className="home-route">
                   <HeroGallery />
+                  <DeferredSection minHeight={220}>
+                    <Suspense fallback={sectionFallback(220)}>
+                      <ShotToPrompt preview={true} />
+                    </Suspense>
+                  </DeferredSection>
                   <DeferredSection minHeight={260}>
                     <Suspense fallback={sectionFallback(260)}>
                       <PromptEnhancer />
@@ -470,11 +475,6 @@ function App() {
                   <DeferredSection minHeight={240}>
                     <Suspense fallback={sectionFallback(240)}>
                       <PromptVault preview={true} />
-                    </Suspense>
-                  </DeferredSection>
-                  <DeferredSection minHeight={220}>
-                    <Suspense fallback={sectionFallback(220)}>
-                      <ShotToPrompt preview={true} />
                     </Suspense>
                   </DeferredSection>
                   <DeferredSection minHeight={220}>
