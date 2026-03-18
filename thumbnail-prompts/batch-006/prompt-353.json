@@ -1,0 +1,18 @@
+{
+  "prompt": "A lone small man in bowler and oversized jacket attempting single-handedly moving a grand piano up a narrow exterior staircase — orthochromatic silent film, the full-body frame showing the figure and the complete scale of the single-handedly moving a grand piano up a narrow exterior staircase, the gap between the figure's capacity and the task's demands immediately legible in the composition: the figure — small, determined, in the wrong clothes against the grand piano — enormous, uncooperative, occupying the entire staircase width, period costume precisely wrong for the task at hand — the clothes of a different life worn for a different one, the task in the piano halfway up, wedged at the turn — already the point of no return communicating how far in the figure already is, 4:3",
+  "negative_prompt": "text, watermark, logo, UI, frame, collage, split screen, blurry, low detail, duplicated figures, malformed hands, extra limbs, modern clothing, modern cars outside intended period elements",
+  "api_parameters": {
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "jpg"
+  },
+  "settings": {
+    "style": "photorealistic still with silent film era rendering",
+    "lighting": "orthocromatic silent film contrast and period realism",
+    "camera_angle": "cinematic 16:9 thumbnail frame",
+    "quality": "high detail, readable composition, thumbnail-friendly silhouette"
+  },
+  "source_type": "image_prompt",
+  "prompt_id": 353,
+  "source_file": "chaplin_era_10_revised.json"
+}

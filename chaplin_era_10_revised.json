@@ -1,0 +1,1122 @@
+[
+  {
+    "id": 280,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A lone [Chaplin-era everyman type] balanced precariously on [precarious structure] \u2014 orthochromatic silent film stock: high contrast, blown highlights, crushed blacks, white sky, the full-body silent cinema frame showing the complete figure, [period costume] precise to the 1920s working class, the [precarious structure] height establishing the physical stakes, the figure's posture communicating [physical predicament] with the overstatement of silent performance, [1920s environment] below and around, iris vignette at frame edges, 4:3",
+    "video_prompt": "Camera locked wide \u2014 the [Chaplin-era everyman type] performs [balance action] on the [precarious structure], each movement slightly overstating the danger in the grammar of silent physical comedy, one foot tested, then the other, [balance action] nearly failing twice before [improvised solution] \u2014 found on the figure's person \u2014 changes the situation, the whole sequence readable without a single word, the figure arriving at a new precarious equilibrium by the end, [period costume] elements catching the movement throughout.",
+    "sfx_prompt": "Silent film accompaniment \u2014 [tense comedy piano style] building with each near-failure of [balance action], brief stings at the two moments of near-disaster, [improvised solution] given a triumphant brief major chord, the piano resolving into a lighter theme as the new equilibrium is found, the physical comedy scored note-for-note in the silent film tradition",
+    "variables": {
+      "Chaplin-era everyman type": {
+        "default": "small man in oversized jacket and bowler hat",
+        "examples": [
+          "factory worker in flat cap and overalls",
+          "street vendor in apron and collarless shirt",
+          "office clerk in too-small suit and wire spectacles"
+        ]
+      },
+      "precarious structure": {
+        "default": "a scaffolding plank suspended between two windows four floors up",
+        "examples": [
+          "the roof of a moving delivery wagon",
+          "a ladder leaning against a warehouse wall \u2014 the base sliding",
+          "a narrow ledge above a busy street"
+        ]
+      },
+      "period costume": {
+        "default": "oversized jacket, flat-heeled shoes too large, bowler hat tilted",
+        "examples": [
+          "overalls with one strap undone, flat cap, work boots",
+          "apron, collarless shirt, cap at a practical angle",
+          "suit jacket one size too small, collar slightly wrong, hat straight"
+        ]
+      },
+      "physical predicament": {
+        "default": "the plank bending slightly with each step \u2014 testing the physics before committing",
+        "examples": [
+          "the wagon accelerating below \u2014 balance requiring constant correction",
+          "the ladder base inching away from the wall \u2014 each rung a negotiation",
+          "wind against the ledge \u2014 the body learning the building's specific air"
+        ]
+      },
+      "1920s environment": {
+        "default": "city street far below \u2014 a cobblestone canyon of brick buildings",
+        "examples": [
+          "factory yard below \u2014 workers too far away to notice",
+          "warehouse district \u2014 empty except for the figure above",
+          "commercial street below \u2014 oblivious to the drama above"
+        ]
+      },
+      "balance action": {
+        "default": "crossing the plank with a delivery parcel under one arm \u2014 the parcel the wrong shape for balance",
+        "examples": [
+          "riding the wagon roof while retrieving a hat blown there \u2014 the hat moving with each gust",
+          "climbing the sliding ladder while carrying a bucket \u2014 the bucket the wrong counterweight",
+          "inching along the ledge to reach an open window \u2014 the destination moving no closer"
+        ]
+      },
+      "improvised solution": {
+        "default": "the walking cane deployed as a balance pole \u2014 suddenly perfectly suited to the problem",
+        "examples": [
+          "the flat cap deployed as a wind gauge \u2014 the direction read, the crossing timed",
+          "the bucket inverted and sat upon \u2014 the ladder stable with weight at the base",
+          "the jacket removed and held as a sail \u2014 the wind now an advantage"
+        ]
+      },
+      "tense comedy piano style": {
+        "default": "staccato tension \u2014 each step a note, each near-fall a chord",
+        "examples": [
+          "accelerating tempo matching the wagon's speed",
+          "chromatic descent matching each ladder slide",
+          "held single note \u2014 the ledge, the wind, the decision"
+        ]
+      },
+      "lens": {
+        "default": "50mm equivalent \u2014 full figure always visible",
+        "examples": [
+          "35mm equivalent",
+          "28mm equivalent wide",
+          "75mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Single figure only \u2014 no crowd, no second character. The physical comedy must be entirely in the one body. Runway handles orthochromatic single-figure silent film best. Add 'silent film physical comedy, 1920s, orthochromatic, single figure on [precarious structure], full body frame, 4:3, no crowd'. The improvised solution using something already on the character is classic Chaplin structure."
+  },
+  {
+    "id": 281,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A lone [Chaplin-era everyman type] navigating a [1920s obstacle environment] \u2014 orthochromatic silent film stock, the full-body frame showing the complete figure and the environment simultaneously, the [obstacle environment's hazard] established clearly in the frame, the figure approaching it with [approach posture]: the body communicating its strategy before the action begins, [period costume] working class 1920s, iris vignette, high contrast, 4:3",
+    "video_prompt": "Camera locked wide \u2014 the [Chaplin-era everyman type] encounters [obstacle environment's hazard] and develops [physical navigation strategy] across three attempts: first attempt fails in [first failure mode], second attempt nearly succeeds before [second failure mode], third attempt succeeds through [unexpected solution] \u2014 the body discovering the answer the mind couldn't plan, the [period costume] contributing to each attempt's specific comedy, the full sequence one continuous physical argument between the figure and the environment.",
+    "sfx_prompt": "Three-act silent film accompaniment \u2014 [attempt one piano] for the first attempt, a comic sting at [first failure mode], [attempt two piano] building higher for the near-success, a longer sting at [second failure mode], [attempt three piano] finding a new key for [unexpected solution], a brief triumphant resolution as the figure passes through \u2014 the piano narrating the body's three-attempt logic",
+    "variables": {
+      "Chaplin-era everyman type": {
+        "default": "small man in bowler and oversized jacket",
+        "examples": [
+          "factory worker in flat cap and overalls",
+          "delivery man in uniform cap",
+          "street vendor in apron"
+        ]
+      },
+      "1920s obstacle environment": {
+        "default": "a muddy construction site the figure must cross to reach the other side",
+        "examples": [
+          "a narrow alley being used as a furniture delivery route",
+          "a section of street where the pavement is being dug up",
+          "a loading dock where crates are being moved continuously"
+        ]
+      },
+      "obstacle environment's hazard": {
+        "default": "planks over mud \u2014 stable only in specific spots, the rest sinking",
+        "examples": [
+          "furniture being carried through at unpredictable intervals",
+          "a trench across the path with a single plank bridge being moved by workers",
+          "crates swinging in and out on a crane \u2014 the gap between them the only passage"
+        ]
+      },
+      "approach posture": {
+        "default": "full survey \u2014 the cane testing each plank before the foot commits",
+        "examples": [
+          "timing study \u2014 the figure counting the intervals before attempting",
+          "route planning \u2014 the figure tracing the path in the air with one finger",
+          "confidence assessment \u2014 the figure straightening the jacket, settling the hat, then beginning"
+        ]
+      },
+      "physical navigation strategy": {
+        "default": "a route across the stable planks \u2014 identified from the edge, executed from memory",
+        "examples": [
+          "timing-based \u2014 moving in the gaps between furniture",
+          "opportunistic \u2014 following the plank as it moves",
+          "momentum-based \u2014 committing fully and not stopping"
+        ]
+      },
+      "first failure mode": {
+        "default": "the third plank sinking under weight \u2014 one foot deep in mud, the other still dry",
+        "examples": [
+          "the first piece of furniture arriving exactly at the wrong moment \u2014 retreat required",
+          "the plank moving as weight is applied \u2014 the figure moving with it, off-route",
+          "the first crate arriving sooner than calculated \u2014 the retreat faster than the advance"
+        ]
+      },
+      "second failure mode": {
+        "default": "the alternate route \u2014 better, but the last plank tipping at the final step",
+        "examples": [
+          "a longer gap between furniture \u2014 but the final piece faster than the others",
+          "the plank carried further than expected \u2014 stranded mid-crossing",
+          "two crates simultaneously from opposite sides \u2014 the gap closed"
+        ]
+      },
+      "unexpected solution": {
+        "default": "using the walking cane as a pole vault over the last section \u2014 one elegant arc over the remaining mud",
+        "examples": [
+          "sitting on the furniture being carried through \u2014 arriving at the destination as cargo",
+          "standing on the moving plank and riding it to the far side",
+          "timing the two crates \u2014 stepping onto one, then the other, then through"
+        ]
+      },
+      "attempt one piano": {
+        "default": "tentative \u2014 single-note testing, cautious tempo",
+        "examples": [
+          "counting rhythm \u2014 the figure timing the gaps",
+          "confident march \u2014 immediately undermined",
+          "optimistic stride \u2014 cut short"
+        ]
+      },
+      "attempt two piano": {
+        "default": "faster and more committed \u2014 building to near-success",
+        "examples": [
+          "longer gap, higher hope, further into the sequence",
+          "the plank's movement given a sliding chromatic figure",
+          "two-handed tension \u2014 both crates in the music"
+        ]
+      },
+      "attempt three piano": {
+        "default": "a new key \u2014 the solution's own musical logic",
+        "examples": [
+          "cargo music \u2014 a rocking, carried feeling",
+          "surfing tempo \u2014 the plank's movement become the beat",
+          "two-step \u2014 one crate, then the other, then through"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent \u2014 figure and full obstacle visible",
+        "examples": [
+          "28mm equivalent wide",
+          "50mm equivalent",
+          "24mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Single figure, no crowd. The three-attempt structure is silent film comedy grammar \u2014 fail, nearly succeed, solve unexpectedly. Runway handles orthochromatic single-figure environments. Add 'silent film obstacle comedy, 1920s, orthochromatic, single figure, three attempts, full body frame, 4:3'. The unexpected solution must use something already in the environment."
+  },
+  {
+    "id": 282,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A lone [Chaplin-era everyman type] in a [1920s pursuit situation] \u2014 orthochromatic silent film, the figure mid-flight across [pursuit terrain], [what they are fleeing implied] by their backward glance and the urgency in every limb, [period costume] in full comedic disarray from the exertion, the [pursuit terrain] providing the geography of escape: [terrain feature A] ahead, [terrain feature B] to one side \u2014 the figure reading the environment at speed, full-body silent cinema frame, 4:3",
+    "video_prompt": "Camera locked wide \u2014 the [Chaplin-era everyman type] in motion across [pursuit terrain], the backward glance establishing the unseen threat, [terrain feature A] encountered and used: [terrain feature A use] \u2014 a beat of comic improvisation \u2014 then moving again, [terrain feature B] encountered and used: [terrain feature B use] \u2014 a second beat, the figure arriving at [escape conclusion] having turned the environment against [what they are fleeing implied] entirely through physical wit, the [period costume] increasingly wrong for the situation and increasingly irrelevant to the outcome.",
+    "sfx_prompt": "Flight silent film accompaniment \u2014 chase tempo piano from the opening, [terrain feature A use] given a brief comedic musical aside without breaking the chase rhythm, [terrain feature B use] given a second aside \u2014 slightly longer, more elaborate \u2014 the chase resuming each time, [escape conclusion] given a triumphant resolution, the piano narrating the flight as simultaneously desperate and elegantly improvised",
+    "variables": {
+      "Chaplin-era everyman type": {
+        "default": "small man in bowler and oversized jacket \u2014 running with surprising dignity",
+        "examples": [
+          "factory worker in flat cap \u2014 running with the specific gait of work boots",
+          "street vendor abandoning his cart \u2014 running free of it for the first time",
+          "office clerk in too-small suit \u2014 running with the horror of someone who never runs"
+        ]
+      },
+      "1920s pursuit situation": {
+        "default": "fleeing an unseen but very large pursuer \u2014 implied by the glance back",
+        "examples": [
+          "escaping a situation of his own accidental creation \u2014 the evidence of the error briefly visible",
+          "departing a location ahead of official consequences \u2014 the door he's just come through swinging behind",
+          "outrunning something mechanical \u2014 the shape of it implied, the speed definite"
+        ]
+      },
+      "pursuit terrain": {
+        "default": "a construction site \u2014 planks, ladders, scaffolding, open pits",
+        "examples": [
+          "a market street \u2014 stalls, carts, goods in transit",
+          "a factory floor \u2014 machinery, workbenches, moving parts",
+          "a warehouse district \u2014 loading bays, stacked goods, narrow passages"
+        ]
+      },
+      "what they are fleeing implied": {
+        "default": "a large angry figure \u2014 size implied by the figure's expression when glancing back",
+        "examples": [
+          "the consequences of a mistake \u2014 implied by what's visible through the door swinging shut",
+          "official authority \u2014 uniform visible at the edge of the frame once",
+          "something mechanical gone wrong \u2014 smoke or movement visible behind"
+        ]
+      },
+      "terrain feature A": {
+        "default": "a plank bridge over a construction pit",
+        "examples": [
+          "a market vendor's cart of produce",
+          "a workbench with tools laid out",
+          "a stack of crates at a loading bay"
+        ]
+      },
+      "terrain feature A use": {
+        "default": "crossing it then pulling one end up so the pursuer cannot follow \u2014 a beat of pure environmental wit",
+        "examples": [
+          "running past and sending it spinning as distraction",
+          "using the surface as a launching point for a leap to higher ground",
+          "tipping it across the passage behind \u2014 mobile barricade"
+        ]
+      },
+      "terrain feature B": {
+        "default": "a ladder against a wall",
+        "examples": [
+          "a hanging rope from a warehouse crane",
+          "a chute for loading goods \u2014 going down",
+          "a window at street level \u2014 going through"
+        ]
+      },
+      "terrain feature B use": {
+        "default": "climbing halfway then using it as a pendulum to cross to the adjacent scaffolding",
+        "examples": [
+          "swinging to the floor above and pulling the rope after \u2014 the ascent denied",
+          "using the chute as a slide to the level below \u2014 faster than any staircase",
+          "going through sideways \u2014 the fit exact \u2014 then using the hat to block it from the other side"
+        ]
+      },
+      "escape conclusion": {
+        "default": "arriving on a rooftop the pursuer cannot reach \u2014 dusting off the jacket, straightening the hat, surveying the city",
+        "examples": [
+          "landing in a delivery cart already moving away \u2014 cargo, safe, mobile",
+          "emerging from a warehouse door on the opposite street \u2014 turning the wrong direction into safety",
+          "appearing at a window two floors up \u2014 the pursuer below, looking the wrong way"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent wide \u2014 figure and full terrain always visible",
+        "examples": [
+          "28mm equivalent",
+          "24mm equivalent",
+          "50mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Single figure only \u2014 the pursuer is NEVER shown, only implied by the glance back. No crowd. Runway handles the orthochromatic single-figure flight. Add 'silent film flight and evasion, 1920s, orthochromatic, single figure, terrain used as escape tool, pursuer never shown, full body frame, 4:3'. The terrain use is the comedy \u2014 environment as improvised solution."
+  },
+  {
+    "id": 283,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A lone [Chaplin-era everyman type] attempting [ambitious 1920s task] \u2014 orthochromatic silent film, the full-body frame showing the figure and the complete scale of the [ambitious 1920s task], the gap between the figure's capacity and the task's demands immediately legible in the composition: [figure scale] against [task scale], [period costume] precisely wrong for the task at hand \u2014 the clothes of a different life worn for a different one, the task in [task state] communicating how far in the figure already is, 4:3",
+    "video_prompt": "Camera locked wide \u2014 the [Chaplin-era everyman type] attempts [ambitious 1920s task] with complete commitment, [task complication A] developing first \u2014 addressed through [solution A]: improvised, physically inventive, briefly working \u2014 [task complication B] developing from the solution itself \u2014 addressed through [solution B]: a second improvisation that uses what's available \u2014 the task reaching [task resolution state]: not complete, not failed, but transformed into something the figure can accept as a kind of victory, the [period costume]'s progressive wrongness for the task the visual record of the attempt.",
+    "sfx_prompt": "Ambitious undertaking silent film accompaniment \u2014 [ambitious piano theme] establishing the scale of the task at the start, [task complication A] given a musical detour \u2014 minor key, brief \u2014 [solution A] given its own musical logic, [task complication B] given a longer musical problem \u2014 the piano working harder, [solution B] given a new key signature \u2014 the improvisation audible as invention \u2014 [task resolution state] given the specific minor-major resolution of Chaplin's endings: not triumphant, not defeated, exactly between",
+    "variables": {
+      "Chaplin-era everyman type": {
+        "default": "small man in bowler and oversized jacket",
+        "examples": [
+          "street vendor in apron and cap",
+          "factory worker in overalls and flat cap",
+          "delivery man in uniform slightly too large"
+        ]
+      },
+      "ambitious 1920s task": {
+        "default": "single-handedly moving a grand piano up a narrow exterior staircase",
+        "examples": [
+          "erecting a flagpole on the roof of a building alone",
+          "painting the exterior of a three-storey building from a single ladder",
+          "delivering an enormous package to a top-floor apartment via the exterior"
+        ]
+      },
+      "figure scale": {
+        "default": "the figure \u2014 small, determined, in the wrong clothes",
+        "examples": [
+          "the figure with one hand on the base of the flagpole \u2014 looking up its full length",
+          "the figure at the base of the building with one bucket \u2014 looking at three storeys",
+          "the figure at the ground floor with the package \u2014 looking at the exterior climb"
+        ]
+      },
+      "task scale": {
+        "default": "the grand piano \u2014 enormous, uncooperative, occupying the entire staircase width",
+        "examples": [
+          "the flagpole \u2014 the length of the building, needing to end vertical",
+          "the building's three exterior storeys \u2014 the windows requiring a ladder that isn't long enough",
+          "the package \u2014 as large as the figure, the wrong shape for any surface"
+        ]
+      },
+      "task state": {
+        "default": "the piano halfway up, wedged at the turn \u2014 already the point of no return",
+        "examples": [
+          "the flagpole horizontal and roped to the roof edge \u2014 the vertical the problem",
+          "the ladder at full extension reaching floor two \u2014 floor three requiring invention",
+          "the package at floor two \u2014 rested on a window ledge \u2014 the last floor the problem"
+        ]
+      },
+      "task complication A": {
+        "default": "the piano beginning to slide back down \u2014 gravity reasserting itself",
+        "examples": [
+          "the flagpole rope coming loose \u2014 the pole returning to horizontal",
+          "the ladder sliding away from the wall \u2014 the angle becoming unsustainable",
+          "the package beginning to tip off the window ledge \u2014 the resting place unstable"
+        ]
+      },
+      "solution A": {
+        "default": "the walking cane wedged under the piano leg \u2014 temporary, exact, buying one more attempt",
+        "examples": [
+          "the jacket tied to the rope \u2014 the additional length holding the pole",
+          "the hat placed under the ladder base \u2014 the friction improved by felt on stone",
+          "the belt looped through the package and around the window latch \u2014 held in place"
+        ]
+      },
+      "task complication B": {
+        "default": "the cane wedge working but the piano now impossible to push from below \u2014 the angle wrong",
+        "examples": [
+          "the jacket holding but the angle of the rope wrong \u2014 the pole going up at the wrong angle",
+          "the hat working but the ladder now stuck \u2014 the foot fixed, the top moving",
+          "the belt holding but now the figure is attached to the building by his own trousers"
+        ]
+      },
+      "solution B": {
+        "default": "going above the piano and pulling from the top step \u2014 discovering the correct physics",
+        "examples": [
+          "going above the pole and pushing down at the correct angle \u2014 the counterintuitive solution",
+          "using the stuck ladder as a scaffold base and building up from it \u2014 the problem becoming the solution",
+          "using the window itself as the entry point \u2014 delivering the package inward rather than upward"
+        ]
+      },
+      "task resolution state": {
+        "default": "the piano at the top \u2014 in the wrong room, facing the wrong direction, but up \u2014 hat straightened, jacket brushed, task technically complete",
+        "examples": [
+          "the flagpole vertical \u2014 leaning four degrees \u2014 the flag flying regardless",
+          "the top floor painted \u2014 slightly more paint on the figure than the wall \u2014 the commission complete",
+          "the package delivered \u2014 through the window, via the roof, but at the address \u2014 delivered"
+        ]
+      },
+      "ambitious piano theme": {
+        "default": "heroic march in minor key \u2014 the ambition exceeding the capacity, but only slightly",
+        "examples": [
+          "aspirational fanfare \u2014 cut short by the reality of the flagpole's length",
+          "industrious working theme \u2014 interrupted by physics",
+          "delivery march \u2014 confident, then confronted by the staircase"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent \u2014 figure and full task scale visible",
+        "examples": [
+          "28mm equivalent wide",
+          "24mm equivalent \u2014 task overwhelming the frame",
+          "50mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Single figure only \u2014 the task is the only other character. Runway handles orthochromatic single-figure task sequences. Add 'silent film ambitious undertaking, 1920s, orthochromatic, single figure vs large task, two improvisations, resolution neither victory nor defeat, full body frame, 4:3'. The task in the wrong room / leaning / via the window resolution is Chaplin's specific flavour of achievement."
+  },
+  {
+    "id": 284,
+    "category": "Cinematic & Storytelling",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "Artist"
+    ],
+    "image_prompt": "A lone [Chaplin-era everyman type] in [1920s survival situation] \u2014 orthochromatic silent film, the figure in [survival environment] facing [survival challenge], [period costume] both wrong for the environment and the figure's only resource, the full-body frame showing the complete situation: [figure position] within [survival environment], the figure's expression communicating [survival emotional state] with the exaggerated legibility of silent cinema performance, [environment detail] establishing the stakes, 4:3",
+    "video_prompt": "Camera locked \u2014 the [Chaplin-era everyman type] addresses [survival challenge] through sequential improvisation: [survival attempt A] using [costume or carried object A] in an unintended way, producing [survival attempt A result] \u2014 partial, enough to continue \u2014 [survival attempt B] using [environment feature] as [unintended use], producing [survival attempt B result] \u2014 further, the situation now changed \u2014 reaching [survival outcome]: not comfort, not rescue, but a workable arrangement of available materials that is distinctly and specifically the figure's own solution, the [period costume] by the end serving purposes it was never designed for.",
+    "sfx_prompt": "Survival silent film accompaniment \u2014 [survival environment piano texture] establishing the situation's stakes, [survival attempt A] given a musical problem-solving motif \u2014 thinking music, brief and inventive \u2014 [survival attempt A result] given a partial resolution, [survival attempt B] given a longer inventive passage \u2014 the solution more elaborate \u2014 [survival outcome] given the specific Chaplin resolution chord: major key but minor-inflected, the victory containing its own awareness of its limitations",
+    "variables": {
+      "Chaplin-era everyman type": {
+        "default": "small man in bowler and oversized jacket \u2014 both the wrong clothes and the only clothes",
+        "examples": [
+          "street vendor in apron \u2014 the apron becoming the solution",
+          "factory worker in overalls \u2014 the overalls becoming the resource",
+          "office clerk in suit \u2014 the suit becoming the survival tool"
+        ]
+      },
+      "1920s survival situation": {
+        "default": "stranded on a rooftop overnight \u2014 city visible below, access gone",
+        "examples": [
+          "adrift on a raft of lashed-together construction materials \u2014 river visible around",
+          "trapped in a basement \u2014 the exit above, the ladder gone",
+          "marooned on a loading platform between two buildings \u2014 both doors locked, the drop significant"
+        ]
+      },
+      "survival environment": {
+        "default": "a rooftop \u2014 chimney stacks, skylights, the city spread below and unreachable",
+        "examples": [
+          "a construction materials raft on a slow-moving river",
+          "a factory basement \u2014 crates, pipes, a high window",
+          "a loading platform \u2014 two locked doors, the city two floors below"
+        ]
+      },
+      "survival challenge": {
+        "default": "cold, darkness approaching, no shelter and no way down",
+        "examples": [
+          "the raft drifting toward a weir \u2014 direction needed, steering mechanism absent",
+          "the high window the only exit \u2014 the climb requiring something that isn't there yet",
+          "the platform with no ladder and a drop too large \u2014 a controlled descent needed"
+        ]
+      },
+      "figure position": {
+        "default": "standing at the rooftop edge \u2014 surveying the drop below with the look of someone revising their options",
+        "examples": [
+          "standing at the raft's centre \u2014 watching the weir approaching with scientific interest",
+          "standing at the base of the basement wall \u2014 measuring the window with his eyes",
+          "standing at the platform's centre \u2014 measuring the drop with his hat, then his jacket, then arithmetic"
+        ]
+      },
+      "survival emotional state": {
+        "default": "philosophical \u2014 the situation assessed, the options counted, the best one not yet obvious",
+        "examples": [
+          "methodical \u2014 the problem is engineering, and engineering has solutions",
+          "optimistic \u2014 the resources visible if not yet arranged correctly",
+          "calm \u2014 the panic already completed, the practical phase begun"
+        ]
+      },
+      "environment detail": {
+        "default": "the city lights beginning below \u2014 the night arriving, the rooftop becoming colder",
+        "examples": [
+          "the weir's sound increasing \u2014 distance measurable in remaining time",
+          "the single window \u2014 high, small, the light outside dimming",
+          "the platform's height \u2014 the street below small, the door behind locked"
+        ]
+      },
+      "costume or carried object A": {
+        "default": "the oversized jacket \u2014 repurposed as a tent over the chimney stack, the warmth redirected",
+        "examples": [
+          "the apron \u2014 rigged as a sail using the raft's longest plank as a mast",
+          "the belt \u2014 looped around a pipe as the first stage of the climb",
+          "the hat \u2014 lowered on the tie as a measuring instrument, then the tie as the first rope section"
+        ]
+      },
+      "survival attempt A result": {
+        "default": "shelter from the wind \u2014 not warm, but survivable \u2014 the night's first problem solved",
+        "examples": [
+          "direction \u2014 the raft moving away from the weir, slowly, enough",
+          "the first half of the climb \u2014 the pipe reached, the window closer",
+          "the drop measured \u2014 twelve hat-lengths \u2014 the materials on the platform inventoried against that number"
+        ]
+      },
+      "environment feature": {
+        "default": "a chimney stack's warmth \u2014 still radiating from the day's fires",
+        "examples": [
+          "a current in the river \u2014 running parallel to the bank",
+          "a pipe running up the wall \u2014 thicker higher up, the grip better",
+          "the loading platform's rope \u2014 still attached to a pulley above, the other end free"
+        ]
+      },
+      "unintended use": {
+        "default": "a heat source \u2014 the jacket-tent over it completing the shelter",
+        "examples": [
+          "a second directional force \u2014 the sail and the current working together",
+          "a ladder \u2014 sections of pipe become rungs, the belt the connection",
+          "a controlled descent system \u2014 the rope through the pulley, the weight of the crates as counterbalance"
+        ]
+      },
+      "survival attempt B result": {
+        "default": "a workable overnight arrangement \u2014 the chimney's warmth, the jacket's shelter, the bowler hat's dignity maintained",
+        "examples": [
+          "landfall \u2014 the raft against the bank, the apron-sail furled, the destination reached",
+          "the window reached \u2014 the climb complete \u2014 the exit available",
+          "a controlled landing \u2014 the rope-and-pulley descent, the street reached, the hat still on"
+        ]
+      },
+      "survival outcome": {
+        "default": "the figure arranged against the warm chimney under the jacket-tent, bowler hat on, surveying the city from the rooftop with the specific contentment of someone who has solved the night's problem \u2014 dawn and the question of descent can wait",
+        "examples": [
+          "the figure on the bank, the raft behind him, wringing out the apron \u2014 then putting it back on and continuing in the original direction",
+          "the figure climbing out of the window onto the street \u2014 dusting off the suit, adjusting the collar \u2014 continuing as if the basement were simply a route he'd chosen",
+          "the figure on the street, the rope still attached to the pulley above \u2014 looking up at it once, then straightening the hat and walking away from the platform as if that were always the plan"
+        ]
+      },
+      "survival environment piano texture": {
+        "default": "rooftop wind \u2014 high register, sparse, the city below implied in the bass",
+        "examples": [
+          "river current \u2014 flowing, slightly urgent, the weir a growing low note",
+          "basement \u2014 low register, enclosed, the high window a single high note above it",
+          "platform \u2014 suspended \u2014 held chords, the drop implied by what's not resolved"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent \u2014 figure and full survival environment visible",
+        "examples": [
+          "28mm equivalent wide",
+          "24mm equivalent",
+          "50mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Single figure only \u2014 the environment is the only other character. Runway handles orthochromatic single-figure survival scenarios. Add 'silent film survival improvisation, 1920s, orthochromatic, single figure, costume as survival tool, environment feature repurposed, Chaplin-era resolution, full body frame, 4:3'. The survival outcome must feel like a Chaplin ending \u2014 practical, dignified, slightly absurd, continuing."
+  },
+  {
+    "id": 285,
+    "category": "World & Environment Building",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "World Builder"
+    ],
+    "image_prompt": "A [1920s industrial city district] in its full orthochromatic rendering \u2014 silent film stock aesthetic, the [district's defining characteristic] establishing its identity across the full frame, [street level detail] of the era: [period transportation], [period signage], [period population] going about their day, factory or industrial [smoke or steam] filling the upper frame against a white orthochromatic sky, [architectural character] of the period rising on both sides, the world of Chaplin's films as a complete environment, wide establishing, 4:3",
+    "video_prompt": "Camera locked at street level \u2014 the [1920s industrial city district] operating at full capacity, [period population] moving through the frame at the pace of the era \u2014 not the rush of modernity, [period transportation] passing through with its specific sounds and scale, [smoke or steam] from [district's defining characteristic] drifting across the upper frame, [period signage] in the background as a world of language, the world fully inhabited and functioning, [incidental period moment] \u2014 a detail from the life of this specific place and time \u2014 occurring in the mid-ground before the continuous activity resumes.",
+    "sfx_prompt": "The world sound of [1920s industrial city district] as reconstructed for silent film accompaniment \u2014 not recorded sound but the imagined acoustic of the era as a silent film orchestra would have interpreted it: [district ambient piano theme] as the continuous musical ground, [period transportation] sounds as the orchestra would have represented them, [smoke or steam] source sounds \u2014 factory whistle, industrial rhythm \u2014 as musical elements, the world built in sound as completely as in image, the silent film acoustic world of the 1920s",
+    "variables": {
+      "1920s industrial city district": {
+        "default": "factory district \u2014 steel and smoke",
+        "examples": [
+          "immigrant tenement neighbourhood",
+          "downtown commercial district",
+          "docklands \u2014 ships, cargo, workers"
+        ]
+      },
+      "district's defining characteristic": {
+        "default": "steel mill with multiple smokestacks dominating the skyline",
+        "examples": [
+          "tenement buildings six stories high, washing lines between them",
+          "department stores and office buildings \u2014 the new commercial city",
+          "cargo cranes and warehouses along the waterfront"
+        ]
+      },
+      "street level detail": {
+        "default": "workers in flat caps and overalls, delivery carts, a policeman on the corner",
+        "examples": [
+          "pushcart vendors, children on stoops, laundry overhead, women in aprons",
+          "office workers in suits, delivery boys, a newsstand, automobiles and horse-drawn together",
+          "stevedores with cargo, sailors, warehouse workers, a customs officer"
+        ]
+      },
+      "period transportation": {
+        "default": "horse-drawn delivery wagons alongside early automobiles \u2014 the era in transition",
+        "examples": [
+          "pushcarts, bicycles, early trams \u2014 the neighbourhood moving at its own pace",
+          "automobiles, delivery trucks, taxis \u2014 the commercial city at speed",
+          "cargo trucks, tugboats visible at the dock end of the street \u2014 industrial scale movement"
+        ]
+      },
+      "period signage": {
+        "default": "painted factory gate signs, union notices, employment boards",
+        "examples": [
+          "hand-painted shop signs in multiple languages, boarding house notices, prayer house signs",
+          "department store awnings, office building directories, advertisement hoardings",
+          "shipping company names, cargo manifests posted, union hall signs"
+        ]
+      },
+      "period population": {
+        "default": "factory workers \u2014 the working poor of the industrial city",
+        "examples": [
+          "immigrant families \u2014 multiple nationalities, all in their best clothes for the street",
+          "office workers and shop workers \u2014 the new white-collar city",
+          "dockworkers and sailors \u2014 the transient population of the waterfront"
+        ]
+      },
+      "smoke or steam": {
+        "default": "industrial smoke \u2014 multiple stacks contributing to a shared sky",
+        "examples": [
+          "laundry steam from tenement windows \u2014 domesticity made visible",
+          "automobile exhaust and coal dust \u2014 the new pollution",
+          "ship steam and coal smoke \u2014 the industrial waterfront atmosphere"
+        ]
+      },
+      "architectural character": {
+        "default": "brick factory buildings \u2014 functional, unornamented, monumental in their mass",
+        "examples": [
+          "tenement buildings \u2014 decorative brick with fire escapes and window cornices",
+          "commercial blocks \u2014 stone facades, large windows, striped awnings",
+          "warehouse buildings \u2014 iron and brick, loading bays, industrial scale"
+        ]
+      },
+      "incidental period moment": {
+        "default": "a shift change \u2014 workers pouring through the factory gate, the new shift waiting",
+        "examples": [
+          "a street vendor argument \u2014 two pushcart owners, a policeman arriving",
+          "a newsboy calling headlines \u2014 office workers stopping, coins exchanging hands",
+          "a cargo load swinging over the dock \u2014 workers stepping back, resuming"
+        ]
+      },
+      "district ambient piano theme": {
+        "default": "industrial march \u2014 steady, purposeful, working class in its rhythm",
+        "examples": [
+          "lyrical folk melody \u2014 the neighbourhood's cultural memory",
+          "bright commercial theme \u2014 the optimism of the commercial city",
+          "sea shanty-influenced \u2014 the waterfront's musical heritage"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent wide \u2014 the district as world",
+        "examples": [
+          "24mm equivalent",
+          "28mm equivalent",
+          "50mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the complex period urban world. The orthochromatic rendering \u2014 white sky, high contrast, blown factory windows \u2014 is the essential aesthetic. Add '1920s industrial city, silent film world, orthochromatic, [1920s industrial city district], period accurate, Charlie Chaplin era urban world, 4:3'. Every background detail must be era-accurate."
+  },
+  {
+    "id": 286,
+    "category": "World & Environment Building",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "World Builder"
+    ],
+    "image_prompt": "A [1920s interior world type] in orthochromatic silent film rendering \u2014 the interior's [defining spatial characteristic] establishing its social register: [class indicator detail] throughout the space, [period furniture and objects] precisely of the era and the [social class] they serve, [light quality] \u2014 window light in the orthochromatic tradition: harsh and directional, blown highlights, deep shadow \u2014 [inhabitants type] in the space, the world as a complete social environment requiring no explanation, silent film interior world still, 4:3",
+    "video_prompt": "Camera locked in the [1920s interior world type] \u2014 [inhabitants type] going about their [interior activity] with the specific physical grammar of the era: [class physical behaviour] \u2014 movement, posture, relationship to objects \u2014 [period furniture and objects] used as they were intended, [light quality] maintaining its orthochromatic character as the interior's activity continues, one [interior world event] occurring that reveals the [1920s interior world type]'s social logic \u2014 then the interior resuming its activity as if nothing happened, because in this world, nothing did.",
+    "sfx_prompt": "Silent film interior accompaniment \u2014 the [interior ambient theme] appropriate to the [social class] and [1920s interior world type], [interior activity] given its musical texture, the [interior world event] given a brief musical response \u2014 comedy, pathos, or tension according to the event's nature \u2014 the interior's specific sound world built through the piano's capacity to suggest rather than represent: [piano register] indicating the [1920s interior world type]'s social register acoustically",
+    "variables": {
+      "1920s interior world type": {
+        "default": "tenement apartment \u2014 three rooms for six people",
+        "examples": [
+          "factory owner's office \u2014 mahogany and self-satisfaction",
+          "boarding house dining room \u2014 the temporary home of the displaced",
+          "department store floor \u2014 commerce as spectacle"
+        ]
+      },
+      "defining spatial characteristic": {
+        "default": "a kitchen that is also a bedroom \u2014 poverty making the room do multiple things",
+        "examples": [
+          "an office that communicates power through every surface",
+          "a dining room that is a dormitory between meals",
+          "a retail floor designed to create desire through arrangement"
+        ]
+      },
+      "class indicator detail": {
+        "default": "mended everything \u2014 curtains, clothes, furniture \u2014 repair as a way of life",
+        "examples": [
+          "expensive everything \u2014 and the expense visible in every object's specificity",
+          "rented everything \u2014 nothing entirely belonging, nothing entirely cared for",
+          "displayed everything \u2014 goods as the environment, the salesfloor as its own world"
+        ]
+      },
+      "period furniture and objects": {
+        "default": "iron bed behind a curtain, a shared table, a stove, one good coat on a hook",
+        "examples": [
+          "a large desk, leather chair, a decanter, a portrait of the owner on the wall",
+          "boarding house chairs that don't match, a shared table, a noticeboard of rules",
+          "glass display cases, wooden counters, point-of-sale displays, a pneumatic cash tube system"
+        ]
+      },
+      "social class": {
+        "default": "working poor \u2014 the dignity of people who have always had very little",
+        "examples": [
+          "wealthy \u2014 the ease of people for whom money is not a subject",
+          "working class transient \u2014 between situations, making do",
+          "commercial middle class \u2014 aspiring, busy, performing prosperity"
+        ]
+      },
+      "light quality": {
+        "default": "one window \u2014 harsh morning light, the rest of the room in deep orthochromatic shadow",
+        "examples": [
+          "large office windows \u2014 light as authority, the owner illuminated",
+          "a single boarding house window \u2014 shared light, contested",
+          "salesfloor artificial light \u2014 designed for display, not comfort"
+        ]
+      },
+      "inhabitants type": {
+        "default": "a family \u2014 mother, father, children \u2014 each occupying their specific social position in the small space",
+        "examples": [
+          "the owner alone \u2014 master of the space, performing his mastery",
+          "four or five boarders \u2014 strangers sharing a temporary world",
+          "sales staff and customers \u2014 the choreography of commerce"
+        ]
+      },
+      "interior activity": {
+        "default": "morning preparation \u2014 everyone moving around each other in the small space with the efficiency of long practice",
+        "examples": [
+          "working \u2014 signing papers, receiving visitors, exercising authority",
+          "eating \u2014 the boarding house meal as social performance",
+          "shopping \u2014 the customer and the sales ritual, the product as the story"
+        ]
+      },
+      "class physical behaviour": {
+        "default": "working poor movement \u2014 efficient, practised, the body at home in limitation",
+        "examples": [
+          "wealthy movement \u2014 expansive, unhurried, the space entirely his",
+          "transient movement \u2014 slightly provisional, not quite at home anywhere",
+          "commercial movement \u2014 purposeful, performed, professional"
+        ]
+      },
+      "interior world event": {
+        "default": "a neighbour appearing at the door \u2014 the boundary between one family's world and the next, briefly opened",
+        "examples": [
+          "a visitor arriving \u2014 the power dynamic rearranging itself",
+          "a late arrival at the boarding house table \u2014 the rules enforced or waived",
+          "a return request \u2014 the customer's desire versus the store's policy"
+        ]
+      },
+      "interior ambient theme": {
+        "default": "simple domestic theme \u2014 modest, warm, the music of a small life lived fully",
+        "examples": [
+          "authority theme \u2014 formal, self-important, the room sounding like its owner",
+          "transient theme \u2014 slightly unsettled, not quite resolved",
+          "commercial theme \u2014 bright, purposeful, the sound of optimistic enterprise"
+        ]
+      },
+      "piano register": {
+        "default": "mid-range \u2014 the register of ordinary life",
+        "examples": [
+          "bass \u2014 authority and weight",
+          "slightly uncertain \u2014 the music of impermanence",
+          "bright upper register \u2014 the display of commercial cheerfulness"
+        ]
+      },
+      "lens": {
+        "default": "28mm equivalent \u2014 the room as world",
+        "examples": [
+          "24mm equivalent",
+          "35mm equivalent",
+          "50mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the complex period interior world. The orthochromatic interior \u2014 harsh window light, deep shadow, high contrast faces \u2014 is the visual signature. Add '1920s interior world, silent film, orthochromatic, [social class] space, [1920s interior world type], period accurate, Charlie Chaplin era, 4:3'. The social class must be readable in every object."
+  },
+  {
+    "id": 287,
+    "category": "World & Environment Building",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "World Builder"
+    ],
+    "image_prompt": "A [Chaplin-era public institution] in its 1920s operation \u2014 orthochromatic rendering, the institution's [institutional architecture] communicating its social function through its physical form: [power architecture detail] above, [supplicant space] below, [institutional population] \u2014 those who run it and those who require it \u2014 visible simultaneously in the frame, [period signage] establishing the institution's identity and its rules, the world of the institutions that shaped Chaplin's social world, wide establishing, 4:3",
+    "video_prompt": "Camera locked in the [Chaplin-era public institution] \u2014 [institutional population] performing their respective roles: those with authority [authority behaviour], those without it [supplicant behaviour], the institution's [institutional procedure] in visible operation, [power architecture detail] framing the transaction from above, one [institutional moment] that condenses the institution's social logic into a single visual event \u2014 then the [institutional procedure] resuming its continuous operation, indifferent to the moment that just occurred.",
+    "sfx_prompt": "Silent film institutional accompaniment \u2014 the [institution ambient theme] carrying the social weight of the [Chaplin-era public institution], [institutional procedure] given its musical rhythm \u2014 repetitive, mechanical, like the institution itself, [institutional moment] given a brief musical comment \u2014 a trombone slide, a piano aside \u2014 then [institution ambient theme] resuming, the institution's acoustic world establishing its social power through the piano's capacity for irony: the music making the institution simultaneously necessary and absurd",
+    "variables": {
+      "Chaplin-era public institution": {
+        "default": "the unemployment office",
+        "examples": [
+          "the pawn shop",
+          "the police station",
+          "the factory employment gate"
+        ]
+      },
+      "institutional architecture": {
+        "default": "high counter \u2014 the officer elevated above the supplicant",
+        "examples": [
+          "glass cases and tills \u2014 the objects between the desperate and the valuable",
+          "desk and cell \u2014 authority and its consequence in the same room",
+          "gate and window \u2014 employment as a permission to be granted"
+        ]
+      },
+      "power architecture detail": {
+        "default": "the high counter \u2014 designed to make the person below it smaller",
+        "examples": [
+          "the glass between pawnbroker and client \u2014 transaction across a barrier",
+          "the desk behind which the sergeant sits \u2014 authority in furniture",
+          "the employment window \u2014 a slot in a wall between the employed and the hopeful"
+        ]
+      },
+      "supplicant space": {
+        "default": "the queue on the applicants' side \u2014 standing, waiting, hat in hand literally",
+        "examples": [
+          "the floor in front of the counter \u2014 the transaction space",
+          "the bench \u2014 waiting for the sergeant's decision",
+          "the yard outside the gate \u2014 the space before the permission"
+        ]
+      },
+      "institutional population": {
+        "default": "a clerk with a stamp and the queue of the unemployed",
+        "examples": [
+          "the pawnbroker and the people who need him",
+          "the desk sergeant and the range of people who require the police",
+          "the employment clerk and the workers seeking work"
+        ]
+      },
+      "period signage": {
+        "default": "UNEMPLOYMENT RELIEF \u2014 rules and requirements in small print",
+        "examples": [
+          "MONEY LENT \u2014 the rates and terms in declining type",
+          "NOTICE \u2014 the rules of the station, what is permitted and what is not",
+          "POSITIONS AVAILABLE \u2014 the list, the requirements, the application process"
+        ]
+      },
+      "authority behaviour": {
+        "default": "stamping forms \u2014 the stamp as power, its sound the institution's heartbeat",
+        "examples": [
+          "assessing objects across the counter \u2014 the power to determine value",
+          "taking statements \u2014 writing the official version of events",
+          "reading applications \u2014 the power of selection"
+        ]
+      },
+      "supplicant behaviour": {
+        "default": "waiting \u2014 the specific physical posture of those who need something from an institution",
+        "examples": [
+          "presenting objects \u2014 the exposure of the desperate",
+          "explaining \u2014 the narrative the institution requires before it will act",
+          "waiting for the decision \u2014 the body in the posture of hope"
+        ]
+      },
+      "institutional procedure": {
+        "default": "the queue advancing one person at a time \u2014 the stamp, the form, the next",
+        "examples": [
+          "the assessment and the offer \u2014 the ritual of the pawnshop",
+          "the charge, the caution, the cell or the release \u2014 the police station's binary",
+          "the interview, the decision, the hire or the rejection \u2014 the employment process"
+        ]
+      },
+      "institutional moment": {
+        "default": "a form rejected \u2014 the clerk's stamp on DENIED, the person's face, the queue continuing regardless",
+        "examples": [
+          "an object refused \u2014 not enough value, the person's last resource insufficient",
+          "a charge dismissed \u2014 the machinery of justice briefly producing justice",
+          "a hire \u2014 the moment of relief in the face, the gate opening"
+        ]
+      },
+      "institution ambient theme": {
+        "default": "bureaucratic march \u2014 repetitive, slightly grinding, the music of systems",
+        "examples": [
+          "transaction theme \u2014 minor key commerce, the music of need meeting reluctant supply",
+          "authority theme \u2014 pompous and slow, the music of power at rest",
+          "hope theme \u2014 major key aspiration in a minor key institution"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent \u2014 institution and supplicant in the same frame",
+        "examples": [
+          "28mm equivalent wide",
+          "50mm equivalent",
+          "24mm equivalent"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the complex period institutional environment. The architecture of power \u2014 high counters, glass barriers, elevated desks \u2014 is the social argument made in space. Add '1920s public institution, silent film world, orthochromatic, [Chaplin-era public institution], social power in architecture, Charlie Chaplin era, 4:3'."
+  },
+  {
+    "id": 288,
+    "category": "World & Environment Building",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "World Builder"
+    ],
+    "image_prompt": "A [Chaplin-era leisure environment] in its 1920s orthochromatic rendering \u2014 [leisure setting] at its most active, [class-specific leisure activity] visible throughout the frame, [period leisure population] in their [leisure costume] of the era, [leisure architecture or setting detail] establishing the environment's social register, the contrast between [working world implied] and [leisure world present] established by the frame's complete absorption in pleasure, silent film leisure world establishing still, 4:3",
+    "video_prompt": "Camera locked in the [Chaplin-era leisure environment] \u2014 [period leisure population] engaged in [class-specific leisure activity] with the full commitment of people for whom this time is hard-won or assumed, [leisure architecture or setting detail] providing the environment's geography, [leisure world event] occurring in the mid-ground \u2014 a small comedy or grace note of the [Chaplin-era leisure environment] \u2014 before the [class-specific leisure activity] resumes, [Chaplin character potential] visible in the scene: the figure who doesn't quite belong, navigating the [Chaplin-era leisure environment] with improvised dignity.",
+    "sfx_prompt": "Silent film leisure accompaniment \u2014 [leisure music style] as the scene's ambient score, the [class-specific leisure activity]'s sounds musically represented, [leisure world event] given a musical grace note, [Chaplin character potential]'s navigation of the environment accompanied by a slightly different musical register \u2014 the observer's theme rather than the participant's \u2014 the leisure world in full acoustic bloom, the music making the environment's pleasure palpable and its social exclusions audible",
+    "variables": {
+      "Chaplin-era leisure environment": {
+        "default": "seaside resort \u2014 the working class day trip",
+        "examples": [
+          "the park on a Sunday \u2014 democratic leisure",
+          "the dance hall \u2014 aspiration and its complications",
+          "the boxing arena \u2014 the working class spectacle"
+        ]
+      },
+      "leisure setting": {
+        "default": "beach promenade and the sea behind \u2014 sun hats and swimming costumes",
+        "examples": [
+          "public park \u2014 bandstand, paths, grass, benches",
+          "dance hall \u2014 wooden floor, small orchestra, paper decorations",
+          "boxing arena \u2014 ring, crowd, corner men, gamblers at the edges"
+        ]
+      },
+      "class-specific leisure activity": {
+        "default": "working class families in the sea \u2014 paddling, building, running \u2014 joy at full volume",
+        "examples": [
+          "Sunday park promenading \u2014 the public performance of respectability",
+          "dancing \u2014 the working class ambition of grace",
+          "watching the fight \u2014 the crowd as character"
+        ]
+      },
+      "period leisure population": {
+        "default": "working class families \u2014 flat caps and bathing suits, children at the edge of the sea",
+        "examples": [
+          "mixed classes in the park \u2014 the democratic Sunday",
+          "young working people \u2014 this is their ballroom, their stage",
+          "fight crowd \u2014 men in suits, women less present, the boxing crowd's specific demographic"
+        ]
+      },
+      "leisure costume": {
+        "default": "period bathing costumes \u2014 modest by today's standards, brave for theirs",
+        "examples": [
+          "Sunday best \u2014 the park demands the good coat",
+          "dance hall clothes \u2014 saved for and worn with intention",
+          "fight crowd clothes \u2014 working clothes elevated by the occasion"
+        ]
+      },
+      "leisure architecture or setting detail": {
+        "default": "the promenade \u2014 the pier in the background, the beach below, the sea beyond",
+        "examples": [
+          "the bandstand \u2014 a small orchestra visible, paths radiating from it",
+          "the dance floor \u2014 the orchestra at one end, couples across the space",
+          "the arena \u2014 the ring elevated, the crowd banked around it"
+        ]
+      },
+      "leisure world event": {
+        "default": "a wave arriving larger than expected \u2014 the crowd's response",
+        "examples": [
+          "the band striking up \u2014 the park's response",
+          "a couple who cannot agree on who leads \u2014 dancing anyway",
+          "a dramatic moment in the fight \u2014 the crowd as one body"
+        ]
+      },
+      "Chaplin character potential": {
+        "default": "the Tramp at the beach's edge \u2014 watching more than participating, enjoying the sea from a respectful distance",
+        "examples": [
+          "the outsider in the park \u2014 no Sunday best, full Sunday dignity",
+          "the worst dancer in the hall \u2014 making up in enthusiasm what he lacks in skill",
+          "the man with no bet \u2014 the only one watching the fight itself"
+        ]
+      },
+      "leisure music style": {
+        "default": "seaside band \u2014 brass and percussion, the sound of the English resort",
+        "examples": [
+          "park band \u2014 light orchestral, respectable and pleasant",
+          "dance band \u2014 syncopated, the period popular music",
+          "fight night \u2014 crowd noise musically represented, tension and release"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent wide \u2014 the leisure world in its full social breadth",
+        "examples": [
+          "28mm equivalent",
+          "50mm equivalent",
+          "24mm equivalent \u2014 the full environment"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the complex period leisure environment. The Chaplin character potential \u2014 the figure who doesn't quite belong \u2014 is always available as a narrative seed. Add '1920s leisure world, silent film, orthochromatic, [Chaplin-era leisure environment], working class joy, Charlie Chaplin era, 4:3'. Joy and aspiration are the registers \u2014 not misery."
+  },
+  {
+    "id": 289,
+    "category": "World & Environment Building",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Sora",
+      "Runway"
+    ],
+    "audience": [
+      "Creator",
+      "Director",
+      "World Builder"
+    ],
+    "image_prompt": "A [1920s transitional world moment] \u2014 orthochromatic silent film rendering, the frame containing [old world element] and [new world element] simultaneously: the world in the act of becoming something it has not yet finished becoming, [period population navigating change] visible in the frame going about their day in a world that is changing around them without their full awareness, [transition architecture or object] the frame's central visual argument \u2014 the old and new sharing the same street, the same moment, cinematic silent film transition world still, 4:3",
+    "video_prompt": "Camera locked \u2014 the [1920s transitional world moment] playing out in continuous time, [old world element] and [new world element] operating in the same frame simultaneously: [old world activity] and [new world activity] as parallel realities, [period population navigating change] moving between them with the specific unawareness of people inside a historical transition, [transition event] occurring that briefly makes the [1920s transitional world moment] visible to someone in the frame \u2014 one person registering it \u2014 then the continuous movement of the world resuming, the transition continuing unannounced.",
+    "sfx_prompt": "Silent film world transition accompaniment \u2014 two musical registers: [old world musical theme] representing the [old world element] \u2014 established, slower, known \u2014 and [new world musical theme] representing the [new world element] \u2014 faster, brasher, arriving, the two themes present simultaneously in a contrapuntal texture, [transition event] given a brief musical resolution \u2014 the two themes finding a moment of harmony \u2014 before both continue on their separate trajectories, the world of 1920s transition in full acoustic argument with itself",
+    "variables": {
+      "1920s transitional world moment": {
+        "default": "horses and automobiles sharing the same street \u2014 the old world and the new",
+        "examples": [
+          "the last horse-drawn tram and the first electric one on the same route",
+          "silent film cinema and the first talking picture theatre side by side",
+          "hand-set type printing press and the first mechanical typesetter in the same print shop"
+        ]
+      },
+      "old world element": {
+        "default": "horse-drawn delivery wagons \u2014 the economy of centuries",
+        "examples": [
+          "horse-drawn tram \u2014 the familiar route, the familiar technology",
+          "silent film cinema \u2014 the established art form",
+          "the compositor hand-setting type \u2014 the craftsman's art"
+        ]
+      },
+      "new world element": {
+        "default": "early automobiles \u2014 the internal combustion engine as the future",
+        "examples": [
+          "electric tram \u2014 faster, cleaner, louder, displacing",
+          "the talkie theatre \u2014 the new art form, the old one's replacement",
+          "the mechanical typesetter \u2014 faster, cheaper, requiring fewer hands"
+        ]
+      },
+      "period population navigating change": {
+        "default": "delivery workers, pedestrians, policemen \u2014 managing the new traffic with rules built for the old",
+        "examples": [
+          "commuters \u2014 choosing one or the other without quite knowing they are making a historical choice",
+          "cinema-goers \u2014 some going to the silent, some to the talkie, the two queues adjacent",
+          "print workers \u2014 some at the old press, some learning the new, the same room, different futures"
+        ]
+      },
+      "transition architecture or object": {
+        "default": "a crossing point \u2014 where horse and automobile must negotiate passage",
+        "examples": [
+          "the junction where both tram types pass \u2014 the transition visible as a track change",
+          "the block where both cinemas stand \u2014 their competing bills visible simultaneously",
+          "the print room floor \u2014 old press and new machine, the gap between them"
+        ]
+      },
+      "old world activity": {
+        "default": "the horse-drawn deliveries continuing \u2014 reliable, slow, the city's circulatory system for a century",
+        "examples": [
+          "the horse tram completing its route \u2014 the familiar stops, the familiar passengers",
+          "the silent film showing \u2014 the audience absorbed in the world without sound",
+          "the compositor setting type by hand \u2014 accuracy and craft in every letter"
+        ]
+      },
+      "new world activity": {
+        "default": "automobiles navigating around the horse-drawn \u2014 faster, louder, impatient",
+        "examples": [
+          "the electric tram overtaking \u2014 faster, and carrying twice as many",
+          "the talkie showing \u2014 laughter from inside, the new audience larger",
+          "the mechanical typesetter running \u2014 the speed making the craft beside it look slow"
+        ]
+      },
+      "transition event": {
+        "default": "a horse startling at an automobile horn \u2014 the old world's biological response to the new world's technology",
+        "examples": [
+          "a passenger choosing the electric tram over the horse tram \u2014 one small historical vote",
+          "a cinema-goer emerging from the talkie and pausing at the silent film's bill \u2014 the comparison made",
+          "a compositor watching the machine run \u2014 the calculation happening in real time"
+        ]
+      },
+      "old world musical theme": {
+        "default": "steady walking bass \u2014 the horse's rhythm, the century's pace",
+        "examples": [
+          "tram bell motif \u2014 regular, mechanical, familiar",
+          "silent film piano accompaniment style \u2014 the established vocabulary",
+          "compositor's rhythm \u2014 steady, hand-paced, craftsman's time"
+        ]
+      },
+      "new world musical theme": {
+        "default": "syncopated upper register \u2014 jazz arriving, the automobile's rhythm",
+        "examples": [
+          "electric hum in the bass \u2014 new frequency, new world",
+          "talkie brass and rhythm section \u2014 the sound arriving into the image",
+          "mechanical tempo \u2014 faster, regular, machine-paced"
+        ]
+      },
+      "lens": {
+        "default": "35mm equivalent wide \u2014 both worlds in the same frame",
+        "examples": [
+          "28mm equivalent",
+          "24mm equivalent \u2014 the full transition visible",
+          "50mm equivalent \u2014 the contrast more compressed"
+        ]
+      }
+    },
+    "tool_notes": "Sora handles the complex period transition world. The old and new sharing the same frame without drama \u2014 the transition happening in plain sight, unannounced \u2014 is the concept. Add '1920s world transition, silent film, orthochromatic, [old world element] and [new world element] simultaneously, historical change in progress, Charlie Chaplin era, 4:3'. The person who briefly sees the transition and then continues is the human register of the historical moment."
+  }
+]

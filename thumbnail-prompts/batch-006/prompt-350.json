@@ -1,0 +1,18 @@
+{
+  "prompt": "A lone small man in oversized jacket and bowler hat balanced precariously on a scaffolding plank suspended between two windows four floors up — orthochromatic silent film stock: high contrast, blown highlights, crushed blacks, white sky, the full-body silent cinema frame showing the complete figure, oversized jacket, flat-heeled shoes too large, bowler hat tilted precise to the 1920s working class, the a scaffolding plank suspended between two windows four floors up height establishing the physical stakes, the figure's posture communicating the plank bending slightly with each step — testing the physics before committing with the overstatement of silent performance, city street far below — a cobblestone canyon of brick buildings below and around, iris vignette at frame edges, 4:3",
+  "negative_prompt": "text, watermark, logo, UI, frame, collage, split screen, blurry, low detail, duplicated figures, malformed hands, extra limbs, modern clothing, modern cars outside intended period elements",
+  "api_parameters": {
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "jpg"
+  },
+  "settings": {
+    "style": "photorealistic still with silent film era rendering",
+    "lighting": "orthocromatic silent film contrast and period realism",
+    "camera_angle": "cinematic 16:9 thumbnail frame",
+    "quality": "high detail, readable composition, thumbnail-friendly silhouette"
+  },
+  "source_type": "image_prompt",
+  "prompt_id": 350,
+  "source_file": "chaplin_era_10_revised.json"
+}

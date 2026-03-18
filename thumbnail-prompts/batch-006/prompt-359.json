@@ -1,0 +1,18 @@
+{
+  "prompt": "A horses and automobiles sharing the same street — the old world and the new — orthochromatic silent film rendering, the frame containing horse-drawn delivery wagons — the economy of centuries and early automobiles — the internal combustion engine as the future simultaneously: the world in the act of becoming something it has not yet finished becoming, delivery workers, pedestrians, policemen — managing the new traffic with rules built for the old visible in the frame going about their day in a world that is changing around them without their full awareness, a crossing point — where horse and automobile must negotiate passage the frame's central visual argument — the old and new sharing the same street, the same moment, cinematic silent film transition world still, 4:3",
+  "negative_prompt": "text, watermark, logo, UI, frame, collage, split screen, blurry, low detail, duplicated figures, malformed hands, extra limbs, modern clothing, modern cars outside intended period elements",
+  "api_parameters": {
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "jpg"
+  },
+  "settings": {
+    "style": "photorealistic still with silent film era rendering",
+    "lighting": "orthocromatic silent film contrast and period realism",
+    "camera_angle": "cinematic 16:9 thumbnail frame",
+    "quality": "high detail, readable composition, thumbnail-friendly silhouette"
+  },
+  "source_type": "image_prompt",
+  "prompt_id": 359,
+  "source_file": "chaplin_era_10_revised.json"
+}

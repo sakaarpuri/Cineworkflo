@@ -1,6 +1,6 @@
 {
   "prompt": "A factory district — steel and smoke in its full orthochromatic rendering — silent film stock aesthetic, the steel mill with multiple smokestacks dominating the skyline establishing its identity across the full frame, workers in flat caps and overalls, delivery carts, a policeman on the corner of the era: horse-drawn delivery wagons alongside early automobiles — the era in transition, painted factory gate signs, union notices, employment boards, factory workers — the working poor of the industrial city going about their day, factory or industrial industrial smoke — multiple stacks contributing to a shared sky filling the upper frame against a white orthochromatic sky, brick factory buildings — functional, unornamented, monumental in their mass of the period rising on both sides, the world of Chaplin's films as a complete environment, wide establishing, 4:3",
-  "negative_prompt": "text, watermark, logo, UI, frame, collage, split screen, blurry, low detail, duplicated figures, malformed hands, extra limbs",
+  "negative_prompt": "text, watermark, logo, UI, frame, collage, split screen, blurry, low detail, duplicated figures, malformed hands, extra limbs, modern clothing, modern cars outside intended period elements",
   "api_parameters": {
     "aspect_ratio": "16:9",
     "resolution": "1K",
@@ -13,5 +13,6 @@
     "quality": "high detail, readable composition, thumbnail-friendly silhouette"
   },
   "source_type": "image_prompt",
-  "prompt_id": 355
+  "prompt_id": 355,
+  "source_file": "chaplin_era_10_revised.json"
 }
