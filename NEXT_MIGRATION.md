@@ -29,6 +29,11 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
   - same mood, use-case, and style preset logic
   - same essential/pro level split, image toggle, SFX toggle, and interpretation passes
   - shared free/pro monthly usage behavior with Shot to Prompt
+- working read-only Next client version of `Prompt Vault`
+  - real library data copied into `next-app/data/ai_video_prompt_library.json`
+  - real category routes driven from normalized vault data
+  - real search, category/style filters, thumbnails, variable swapping, and copy actions
+  - save-to-library internals intentionally deferred for a later pass
 
 ### Current intent
 - Keep the existing Vite app at repo root as the live source of truth during migration
@@ -36,15 +41,15 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Keep current Netlify functions, Supabase auth, and Stripe backend unchanged in Phase 1
 
 ### Current focus
-- Replace placeholder public pages with migration-ready public shells that already reflect the real CineWorkflo product story
-- Move the most important public workflows one by one, starting with reference-first and idea-first tools
+- Replace placeholder public pages with migration-ready public shells that already reflect the real CineWorkFlo product story
+- Move the most important public workflows one by one, starting with reference-first and idea-first tools, then the public discovery surface
 
 ### Recommended next step
-- Port the next public workflow surface into Next, starting with:
-  1. Prompt Vault grid/search/filter behavior
-  2. shared SEO metadata helpers
-  3. eventual auth/provider consolidation inside `next-app`
-  4. final homepage redesign implementation inside Next
+- Move from route parity to refinement, starting with:
+  1. shared SEO metadata helpers and richer per-route metadata
+  2. final homepage redesign implementation inside Next
+  3. auth/provider consolidation inside `next-app`
+  4. any deferred save/library interactions for Vault
 
 ### Current commands
 - `cd next-app && npm install`

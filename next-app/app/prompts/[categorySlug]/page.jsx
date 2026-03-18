@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import { CATEGORY_BY_SLUG, CATEGORY_PAGES } from '../../../lib/prompt-data'
+import PromptVaultClient from '../../../components/PromptVaultClient'
+import { CATEGORY_BY_SLUG, PROMPT_CATEGORY_PAGES } from '../../../lib/vault-data'
 
 export function generateStaticParams() {
-  return CATEGORY_PAGES.map((category) => ({ categorySlug: category.slug }))
+  return PROMPT_CATEGORY_PAGES.map((category) => ({ categorySlug: category.slug }))
 }
 
 export async function generateMetadata({ params }) {
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${category.name} AI Video Prompts | CineWorkflo Next Migration`,
-    description: `${category.description} This is the category-route scaffold for the Next.js migration.`,
+    description: category.description,
   }
 }
 
@@ -38,9 +38,9 @@ export default async function PromptCategoryPage({ params }) {
     <main className="route-shell">
       <div className="container category-shell">
         <div className="breadcrumb">
-          <Link href="/">Home</Link>
+          <a href="/">Home</a>
           <span>/</span>
-          <Link href="/prompts">Prompt Vault</Link>
+          <a href="/prompts">Prompt Vault</a>
           <span>/</span>
           <span>{category.name}</span>
         </div>
@@ -51,26 +51,11 @@ export default async function PromptCategoryPage({ params }) {
           <p>{category.description}</p>
           <div className="category-meta">
             <span>{category.count}+ prompts in current library</span>
-            <span>SEO route scaffolded in Next.js</span>
+            <span>Now rendered from the real Next Vault grid</span>
           </div>
         </div>
 
-        <div className="section-grid">
-          <div className="feature-card static-card">
-            <div className="card-eyebrow">Why this route matters</div>
-            <h2>Indexable category landing pages</h2>
-            <p>
-              These category pages are some of the highest-value public SEO surfaces after the homepage and main Prompt Vault.
-            </p>
-          </div>
-          <div className="feature-card static-card">
-            <div className="card-eyebrow">Next migration goal</div>
-            <h2>Port real grid + metadata next</h2>
-            <p>
-              The next pass will bring over the actual category card grid, thumbnails, and prompt summaries while preserving the current URLs.
-            </p>
-          </div>
-        </div>
+        <PromptVaultClient initialCategory={category.name} />
       </div>
     </main>
   )
