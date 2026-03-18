@@ -149,13 +149,13 @@ export default function Pricing({ onAuthClick }) {
             className="text-3xl lg:text-4xl font-bold mb-4"
             style={{ color: 'var(--text-primary)' }}
           >
-            Simple pricing. No enterprise tier nonsense.
+            Simple pricing for working AI video workflows.
           </h2>
           <p 
             className="text-xl"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Cancel anytime. No guilt trip, no pop-up begging you to stay.
+            Start free, upgrade when you need more generations and the full Vault.
           </p>
           <div className="mt-4 flex justify-center">
             <div
@@ -167,7 +167,7 @@ export default function Pricing({ onAuthClick }) {
                 boxShadow: '0 10px 24px rgba(15,23,42,0.05), 6px 6px 12px rgba(15,23,42,0.07), -6px -6px 12px rgba(255,255,255,0.75)'
               }}
             >
-              Support is coming soon. We’re currently hiring our best apologetic tone.
+              Free gives you 5 shared generations per month. Pro unlocks unlimited generations and the full Prompt Vault.
             </div>
           </div>
         </div>

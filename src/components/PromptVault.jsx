@@ -170,8 +170,8 @@ export default function PromptVault({ preview = false }) {
             style={{ color: 'var(--text-secondary)' }}
           >
             {preview
-              ? 'Explore a sample from the Prompt Vault and open the full library on the dedicated page.'
-              : 'Browse by mood, genre, or use case. Every prompt is road-tested across Runway, Pika and more.'}
+              ? 'Browse a curated slice of the Vault, then open the full library for pro prompt controls, variables, and category filters.'
+              : 'Browse prompts by category, style, and use case. Every entry is built for image-to-video workflows, not generic prompt dumping.'}
           </p>
           <p className="mt-3 text-sm max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Designed for image-to-video. Lock the look with an image, then drive the shot with the video prompt.

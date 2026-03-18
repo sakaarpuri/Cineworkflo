@@ -10,7 +10,7 @@ const HERO_OVERLAY_PROMPTS = [
 ]
 
 export default function HeroGallery() {
-  const [cameraCtaPressed, setCameraCtaPressed] = useState(false)
+  const [primaryCtaPressed, setPrimaryCtaPressed] = useState(false)
   const [heroVideoOk, setHeroVideoOk] = useState(true)
   const [overlayIndex, setOverlayIndex] = useState(0)
   const [overlayFinished, setOverlayFinished] = useState(false)
@@ -87,10 +87,10 @@ export default function HeroGallery() {
               className="font-display text-5xl lg:text-7xl font-bold leading-[1.06] mb-6"
               style={{ color: 'var(--text-primary)' }}
             >
-              Your AI video is only as rich as your prompt
+              The prompt toolkit for AI filmmakers
             </h1>
             <p className="text-xl max-w-2xl mx-auto lg:mx-0 mb-8" style={{ color: 'var(--text-secondary)' }}>
-              100s of battle-tested prompts for Runway, Pika, Kling, Sora and more. Copy. Paste. Get the shot you actually imagined.
+              Start from an idea, a reference frame, or a proven prompt. CineWorkflo helps you build stronger image-to-video workflows with Shot to Prompt, Prompt Enhancer, Prompt Vault, and Camera Moves.
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-6">
@@ -121,27 +121,27 @@ export default function HeroGallery() {
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-2">
               <Link
-                to="/camera-moves"
-                onClick={() => trackCtaEvent('hero_camera_moves_primary', '/')}
+                to="/shot-to-prompt"
+                onClick={() => trackCtaEvent('hero_shot_to_prompt_primary', '/')}
                 className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
                 style={{
                   background: 'linear-gradient(145deg, #3B82F6, #3B82F6DD)',
                   color: '#fff',
                   border: '2px solid #3B82F650',
-                  boxShadow: cameraCtaPressed
+                  boxShadow: primaryCtaPressed
                     ? 'inset 4px 4px 8px rgba(59,130,246,0.6), inset -3px -3px 6px rgba(255,255,255,0.3), 0 2px 6px rgba(59,130,246,0.3)'
                     : 'inset 3px 3px 6px rgba(59,130,246,0.4), inset -3px -3px 6px rgba(255,255,255,0.3), 0 4px 12px rgba(59,130,246,0.4)',
-                  transform: cameraCtaPressed ? 'translateY(2px) scale(0.96)' : 'translateY(0) scale(1)'
+                  transform: primaryCtaPressed ? 'translateY(2px) scale(0.96)' : 'translateY(0) scale(1)'
                 }}
-                onMouseDown={() => setCameraCtaPressed(true)}
-                onMouseUp={() => setCameraCtaPressed(false)}
-                onMouseLeave={() => setCameraCtaPressed(false)}
+                onMouseDown={() => setPrimaryCtaPressed(true)}
+                onMouseUp={() => setPrimaryCtaPressed(false)}
+                onMouseLeave={() => setPrimaryCtaPressed(false)}
               >
-                Learn Camera Moves
+                Try Shot to Prompt
               </Link>
-              <Link
-                to="/shot-to-prompt"
-                onClick={() => trackCtaEvent('hero_shot_to_prompt_secondary', '/')}
+              <a
+                href="/#prompt-enhancer"
+                onClick={() => trackCtaEvent('hero_prompt_enhancer_secondary', '/')}
                 className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
                 style={{
                   background: 'var(--hero-secondary-bg)',
@@ -150,15 +150,15 @@ export default function HeroGallery() {
                   boxShadow: 'var(--hero-secondary-shadow)'
                 }}
               >
-                Shot to Prompt
-              </Link>
+                Open Prompt Enhancer
+              </a>
             </div>
 
             <div className="mt-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
               Explore workflow:{' '}
-              <Link to="/prompts" className="underline" style={{ color: 'var(--accent-blue)' }}>Prompt Vault</Link>
-              {' '}·{' '}
               <Link to="/shot-to-prompt" className="underline" style={{ color: 'var(--accent-blue)' }}>Shot to Prompt</Link>
+              {' '}·{' '}
+              <Link to="/prompts" className="underline" style={{ color: 'var(--accent-blue)' }}>Prompt Vault</Link>
               {' '}·{' '}
               <Link to="/camera-moves" className="underline" style={{ color: 'var(--accent-blue)' }}>Camera Moves</Link>
               {' '}·{' '}
@@ -232,7 +232,7 @@ export default function HeroGallery() {
               <div className="rounded-2xl p-4" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)' }}>
                 <div className="text-[10px] font-bold tracking-wider mb-2" style={{ color: 'var(--text-muted)' }}>WHAT YOU GET</div>
                 <div style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.6 }}>
-                  A copy-ready prompt with frame design, motion language, and tool-friendly phrasing pulled from the Vault.
+                  Copy-ready prompt building blocks for still frames, motion, and shot language — the same workflow thinking used across the Vault and Enhancer.
                 </div>
               </div>
               <div

@@ -967,6 +967,9 @@ export default function PromptEnhancer({ onAuthClick }) {
           >
             Describe the shot in your head. <span style={{ color: 'var(--accent-blue)' }}>We'll translate it for the machine.</span>
           </h2>
+          <p className="mt-3 text-sm md:text-base max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+            Start from your own idea, then shape it with mood, style presets, and pro-level prompt detail before you move into production.
+          </p>
           
           {/* Usage Counter for Free Users */}
           {!canUsePro && (
@@ -1031,7 +1034,7 @@ export default function PromptEnhancer({ onAuthClick }) {
                 value={idea}
                 onChange={(e) => setIdea(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="e.g. a car driving through a neon-lit city at night..."
+                placeholder="e.g. a lone boxer wrapping hands in a fluorescent locker room before the fight..."
                 className="w-full px-4 py-3 rounded-xl outline-none transition-all"
                 style={{
                   background: 'var(--bg-primary)',

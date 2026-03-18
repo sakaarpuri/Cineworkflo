@@ -602,10 +602,10 @@ export default function ShotToPrompt({ preview = false }) {
             className="text-3xl font-bold mb-2"
             style={{ color: 'var(--text-primary)' }}
           >
-            See a shot you love? Steal the prompt.
+            Start from a shot you love.
           </h1>
           <p style={{ color: 'var(--text-secondary)' }}>
-            Upload any frame or short single-shot clip and we&apos;ll reverse-engineer the visual identity plus motion language behind it.
+            Upload a frame or a short single-shot clip and CineWorkflo reverse-engineers the still-image look plus the motion language behind it.
           </p>
           {!canUsePro && (
             <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs"
@@ -719,7 +719,7 @@ export default function ShotToPrompt({ preview = false }) {
           <ul className="space-y-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
             <li>Use clear, well-lit frames where the subject fills enough of the image.</li>
             <li>Upload the exact moment with the composition you want to replicate.</li>
-            <li>After generation, refine the result with style prompts from Prompt Vault.</li>
+            <li>After generation, refine the result in Prompt Enhancer or pull matching styles from Prompt Vault.</li>
           </ul>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
