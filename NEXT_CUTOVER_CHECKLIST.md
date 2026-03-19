@@ -81,9 +81,14 @@ Make sure the Next deployment target has:
 Also confirm:
 
 - Netlify is pointed at `next-app/` as the base directory for the cutover candidate
+- `next-app/scripts/sync-public-assets.mjs` runs during `prebuild` so public assets and Netlify functions are copied into the Next workspace before deploy
 - Next is deployed with a Netlify-compatible Next runtime
 - `/.netlify/functions/*` requests still resolve correctly from the deployed Next frontend
 - direct refresh works on all migrated routes
+- legacy paths still behave correctly:
+  - `/vault` → `/prompts`
+  - `/modern-moves` → `/camera-moves`
+  - `/camera-moves.html` → `/camera-moves`
 
 ## Cutover recommendation
 

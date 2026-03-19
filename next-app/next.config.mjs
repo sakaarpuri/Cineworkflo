@@ -10,6 +10,25 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async redirects() {
+    return [
+      {
+        source: '/vault',
+        destination: '/prompts',
+        permanent: true,
+      },
+      {
+        source: '/modern-moves',
+        destination: '/camera-moves',
+        permanent: true,
+      },
+      {
+        source: '/camera-moves.html',
+        destination: '/camera-moves',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig

@@ -60,6 +60,7 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Port public routes into Next incrementally
 - Keep current Netlify functions, Supabase auth, and Stripe backend unchanged in Phase 1
 - Prepare the branch for Netlify cutover by pointing the deployment config at `next-app/`
+- Sync root `public/` assets and Netlify functions into the Next workspace during `predev` / `prebuild` so the monorepo deploy has the same thumbnails, crawler files, and serverless endpoints
 
 ### Current focus
 - Replace placeholder public pages with migration-ready public surfaces that already reflect the real CineWorkFlo product story

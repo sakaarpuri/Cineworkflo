@@ -3,6 +3,8 @@
 /.next
 /next-app/node_modules
 /next-app/.next
+/next-app/public
+/next-app/netlify/functions
 .env
 deploy*.zip
 package-lock.json

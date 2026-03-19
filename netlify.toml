@@ -2,13 +2,25 @@
   base = "next-app"
   command = "npm run build"
   publish = ".next"
-  functions = "../netlify/functions"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
 
 [[redirects]]
   from = "/camera-moves.html"
+  to = "/camera-moves"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/vault"
+  to = "/prompts"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/modern-moves"
   to = "/camera-moves"
   status = 301
   force = true
