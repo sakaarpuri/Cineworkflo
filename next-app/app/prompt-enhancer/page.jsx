@@ -1,10 +1,7 @@
 import PromptEnhancerClient from '../../components/PromptEnhancerClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'Prompt Enhancer | CineWorkflo Next Migration',
-  description:
-    'Describe the shot in your head, then shape it with mood, style presets, and pro-level prompt detail in the Next.js migration.',
-}
+export const metadata = PAGE_SEO.promptEnhancer
 
 export default function PromptEnhancerPage() {
   return (

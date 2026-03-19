@@ -1,9 +1,7 @@
 import StoryFlowClient from '../../components/StoryFlowClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'Story Flow Planner — CineWorkflo',
-  description: 'Hidden Pro test route for turning one idea into a one-minute image-to-video production plan.',
-}
+export const metadata = PAGE_SEO.storyFlow
 
 export default function StoryFlowPage() {
   return <StoryFlowClient />

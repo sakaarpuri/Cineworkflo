@@ -8,6 +8,9 @@ import {
   PRICING_TIERS,
   TESTIMONIALS,
 } from '../lib/prompt-data'
+import { PAGE_SEO } from '../lib/seo'
+
+export const metadata = PAGE_SEO.home
 
 export default function HomePage() {
   return (

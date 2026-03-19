@@ -1,10 +1,7 @@
 import ShotToPromptClient from '../../components/ShotToPromptClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'Shot to Prompt | CineWorkflo Next Migration',
-  description:
-    'Upload a frame or short single-shot clip, then turn it into an image prompt plus a motion-aware video prompt.',
-}
+export const metadata = PAGE_SEO.shotToPrompt
 
 export default function ShotToPromptPage() {
   return (

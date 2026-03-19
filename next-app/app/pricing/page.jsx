@@ -1,6 +1,6 @@
-export const metadata = {
-  title: 'Pricing | CineWorkflo Next Migration',
-}
+import { PAGE_SEO } from '../../lib/seo'
+
+export const metadata = PAGE_SEO.pricing
 
 export default function PricingPage() {
   return (

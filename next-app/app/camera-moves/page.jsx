@@ -1,6 +1,6 @@
-export const metadata = {
-  title: 'Camera Moves | CineWorkflo Next Migration',
-}
+import { PAGE_SEO } from '../../lib/seo'
+
+export const metadata = PAGE_SEO.cameraMoves
 
 export default function CameraMovesPage() {
   return (

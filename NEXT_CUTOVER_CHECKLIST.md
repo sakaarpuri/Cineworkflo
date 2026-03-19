@@ -1,0 +1,100 @@
+# Next.js Cutover Checklist
+
+## Current status
+
+The `codex/nextjs-phase1` branch now covers the main public and private routes that matter most for SEO and user flow:
+
+- `/`
+- `/prompt-enhancer`
+- `/prompts`
+- `/prompts/[categorySlug]`
+- `/shot-to-prompt`
+- `/camera-moves`
+- `/pricing`
+- `/sign-in`
+- `/my-library`
+- `/settings`
+- `/story-flow`
+
+## Remaining route parity gaps
+
+These routes still exist in the current Vite app and are not yet present in `next-app/`:
+
+- `/about`
+- `/contact`
+- `/privacy`
+- `/terms`
+- `/success`
+
+These are not blockers for internal testing, but they are blockers for a clean full cutover if we want strict route parity.
+
+## Metadata and crawlability
+
+Before cutover:
+
+- Verify each public Next route has correct metadata in page source, not just after hydration
+- Confirm `robots` behavior:
+  - public routes indexable
+  - private routes noindex
+- Check category-page canonicals under `/prompts/[categorySlug]`
+- Confirm the default OG image is still valid and current
+
+## Functional checks
+
+Run through these on the Next deployment candidate:
+
+- Homepage loads and matches the new hierarchy
+- Prompt Enhancer works end-to-end against `/.netlify/functions/enhance-prompt`
+- Shot to Prompt works for image and short single-shot video uploads
+- Prompt Vault:
+  - search works
+  - category and style filters work
+  - variable swapping works
+  - save-to-library works for signed-in users
+- My Library:
+  - fetches saved prompts
+  - copy works
+  - delete works
+- Settings:
+  - display name update works
+  - password update works
+  - sign out works
+- Story Flow:
+  - signed-out gate works
+  - Pro gate works
+  - each planner step works
+
+## Environment and deployment checks
+
+Make sure the Next deployment target has:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- all existing Netlify function secrets still configured:
+  - `ANTHROPIC_API_KEY`
+  - Stripe keys
+  - any Supabase service-role/server keys already used by functions
+
+Also confirm:
+
+- Next is deployed with a Netlify-compatible Next runtime
+- `/.netlify/functions/*` requests still resolve correctly from the deployed Next frontend
+- direct refresh works on all migrated routes
+
+## Cutover recommendation
+
+Do **not** cut over yet if any of these are still incomplete:
+
+- missing legal/support routes
+- broken save-to-library behavior
+- broken auth redirect behavior
+- metadata mismatch on public routes
+- deployment/runtime mismatch between Next frontend and Netlify functions
+
+## Recommended final sequence
+
+1. Add the remaining parity routes
+2. Smoke-test all public and private flows on a Next preview deployment
+3. Confirm metadata and robots behavior using page source
+4. Switch primary deployment to the Next app
+5. Keep the Vite app available briefly as rollback insurance

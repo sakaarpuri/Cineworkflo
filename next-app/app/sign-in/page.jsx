@@ -1,9 +1,7 @@
 import SignInClient from '../../components/SignInClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'Sign In — CineWorkflo',
-  description: 'Sign in to CineWorkflo to access your Prompt Vault saves, Pro tools, and synced library.',
-}
+export const metadata = PAGE_SEO.signIn
 
 export default async function SignInPage({ searchParams }) {
   const params = await searchParams

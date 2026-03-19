@@ -1,9 +1,7 @@
 import PromptVaultClient from '../../components/PromptVaultClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'Prompt Vault | CineWorkflo Next Migration',
-  description: 'Browse Prompt Vault in the Next.js migration with real search, filters, thumbnails, and variable-driven prompt controls.',
-}
+export const metadata = PAGE_SEO.prompts
 
 export default function PromptsPage() {
   return (

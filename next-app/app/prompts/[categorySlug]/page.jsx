@@ -1,5 +1,6 @@
 import PromptVaultClient from '../../../components/PromptVaultClient'
 import { CATEGORY_BY_SLUG, PROMPT_CATEGORY_PAGES } from '../../../lib/vault-data'
+import { buildPromptCategoryMetadata } from '../../../lib/seo'
 
 export function generateStaticParams() {
   return PROMPT_CATEGORY_PAGES.map((category) => ({ categorySlug: category.slug }))
@@ -8,13 +9,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const category = CATEGORY_BY_SLUG[params.categorySlug]
   if (!category) {
-    return { title: 'Prompt Category | CineWorkflo Next Migration' }
+    return { title: 'Prompt Category | CineWorkflo' }
   }
 
-  return {
-    title: `${category.name} AI Video Prompts | CineWorkflo Next Migration`,
-    description: category.description,
-  }
+  return buildPromptCategoryMetadata(category)
 }
 
 export default async function PromptCategoryPage({ params }) {

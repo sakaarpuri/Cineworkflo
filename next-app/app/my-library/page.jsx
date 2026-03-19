@@ -1,9 +1,7 @@
 import MyLibraryClient from '../../components/MyLibraryClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'My Library — CineWorkflo',
-  description: 'Access saved CineWorkflo prompts, grouped variants, and your prompt history in one place.',
-}
+export const metadata = PAGE_SEO.myLibrary
 
 export default function MyLibraryPage() {
   return <MyLibraryClient />

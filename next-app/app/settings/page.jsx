@@ -1,9 +1,7 @@
 import SettingsClient from '../../components/SettingsClient'
+import { PAGE_SEO } from '../../lib/seo'
 
-export const metadata = {
-  title: 'Settings — CineWorkflo',
-  description: 'Manage your CineWorkflo profile, password, and session settings.',
-}
+export const metadata = PAGE_SEO.settings
 
 export default function SettingsPage() {
   return <SettingsClient />

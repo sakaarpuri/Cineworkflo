@@ -2,11 +2,16 @@ import './globals.css'
 import Link from 'next/link'
 import AppProviders from '../components/AppProviders'
 import AuthNav from '../components/AuthNav'
+import { siteMetadataBase } from '../lib/seo'
 
 export const metadata = {
-  title: 'CineWorkflo — Next.js Migration',
+  metadataBase: siteMetadataBase,
+  title: {
+    default: 'CineWorkflo — Prompt Vault, Prompt Enhancer & Shot to Prompt for AI Video',
+    template: '%s',
+  },
   description:
-    'Parallel Next.js App Router foundation for migrating CineWorkflo from the current Vite app.',
+    'The prompt toolkit for AI filmmakers — Prompt Vault, Prompt Enhancer, Shot to Prompt, and Camera Moves for stronger image-to-video workflows.',
 }
 
 const navLinks = [

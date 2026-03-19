@@ -66,11 +66,11 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Implement the homepage redesign directly inside Next instead of redesigning the old Vite homepage first
 
 ### Recommended next step
-- Move from route parity to refinement, starting with:
-  1. shared SEO metadata helpers and richer per-route metadata
-  2. final homepage redesign implementation inside Next
-  3. any remaining private-page parity gaps
-  4. final polish and cutover prep for the public/private route mix
+- Move from route migration to cutover prep:
+  1. close the remaining parity gaps (`/about`, `/contact`, `/privacy`, `/terms`, `/success`)
+  2. run a full preview-deployment smoke test against the real Netlify functions
+  3. verify per-route metadata and noindex behavior in page source
+  4. use `NEXT_CUTOVER_CHECKLIST.md` as the final handoff checklist
 
 ### Current commands
 - `cd next-app && npm install`
