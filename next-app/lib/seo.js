@@ -113,10 +113,4 @@ export const buildPromptCategoryMetadata = (category) =>
     path: `/prompts/${category.slug}`,
   })
 
-export const CUTOVER_ROUTE_GAPS = [
-  '/about',
-  '/contact',
-  '/privacy',
-  '/terms',
-  '/success',
-]
+export const CUTOVER_ROUTE_GAPS = []

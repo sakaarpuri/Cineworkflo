@@ -18,15 +18,13 @@ The `codex/nextjs-phase1` branch now covers the main public and private routes t
 
 ## Remaining route parity gaps
 
-These routes still exist in the current Vite app and are not yet present in `next-app/`:
+Route parity is now much closer. The major public/private routes from the current Vite app are present in `next-app/`.
 
-- `/about`
-- `/contact`
-- `/privacy`
-- `/terms`
-- `/success`
+Remaining parity work is now more about behavior polish than missing route files, for example:
 
-These are not blockers for internal testing, but they are blockers for a clean full cutover if we want strict route parity.
+- final content review on support/legal pages
+- real success-page flow testing after Stripe checkout
+- any smaller route details we discover during preview-deployment QA
 
 ## Metadata and crawlability
 

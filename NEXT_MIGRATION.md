@@ -67,9 +67,9 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 
 ### Recommended next step
 - Move from route migration to cutover prep:
-  1. close the remaining parity gaps (`/about`, `/contact`, `/privacy`, `/terms`, `/success`)
-  2. run a full preview-deployment smoke test against the real Netlify functions
-  3. verify per-route metadata and noindex behavior in page source
+  1. run a full preview-deployment smoke test against the real Netlify functions
+  2. verify per-route metadata and noindex behavior in page source
+  3. confirm support/legal/success route content feels launch-ready
   4. use `NEXT_CUTOVER_CHECKLIST.md` as the final handoff checklist
 
 ### Current commands
