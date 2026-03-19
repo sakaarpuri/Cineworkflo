@@ -1075,66 +1075,6 @@
     "source_id": 33
   },
   {
-    "id": 34,
-    "category": "Social & Short-Form Content",
-    "style": "Minimalist",
-    "best_on": [
-      "Runway",
-      "Pika"
-    ],
-    "audience": [
-      "Creator",
-      "Marketer"
-    ],
-    "image_prompt": "A single [subject] perfectly centered against a pure [background color] background, [lens] — [one subtle action] implied in the still frame, hyper-clean aesthetic, nothing else in frame, 9:16",
-    "video_prompt": "Slow [camera move] throughout, [one subtle action] unfolds in perfect stillness over 8 seconds, hyper-clean aesthetic maintained, satisfying and meditative in tone",
-    "sfx_prompt": "Near-total silence with the softest possible room presence. [One subtle action]'s specific quiet sound — a single soft audio event at its moment of occurrence. No other sounds — the minimalism extends to the acoustic space.",
-    "variables": {
-      "subject": {
-        "default": "hand holding a single white flower",
-        "examples": [
-          "ceramic cup being slowly filled with coffee",
-          "candle flame",
-          "open book"
-        ]
-      },
-      "background color": {
-        "default": "off-white",
-        "examples": [
-          "deep black",
-          "sage green",
-          "dusty rose"
-        ]
-      },
-      "camera move": {
-        "default": "very slow push in",
-        "examples": [
-          "gentle pull back",
-          "static hold",
-          "barely perceptible orbit"
-        ]
-      },
-      "one subtle action": {
-        "default": "single petal falling in slow motion",
-        "examples": [
-          "steam rising gently",
-          "page turning slowly",
-          "flame flickering once"
-        ]
-      },
-      "lens": {
-        "default": "85mm",
-        "examples": [
-          "50mm",
-          "100mm",
-          "135mm"
-        ]
-      }
-    },
-    "tool_notes": "Runway keeps backgrounds pristine. Pika handles satisfying minimal loops.",
-    "source_id": 34
-  },
-  {
     "id": 35,
     "category": "Social & Short-Form Content",
     "style": "Surrealist",
