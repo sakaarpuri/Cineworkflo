@@ -7,16 +7,18 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const category = CATEGORY_BY_SLUG[params.categorySlug]
+  const resolvedParams = await params
+  const category = CATEGORY_BY_SLUG[resolvedParams.categorySlug]
   if (!category) {
-        return { title: 'Prompt Category | CineWorkflo' }
+    return { title: 'Prompt Category | CineWorkflo' }
   }
 
   return buildPromptCategoryMetadata(category)
 }
 
 export default async function PromptCategoryPage({ params }) {
-  const category = CATEGORY_BY_SLUG[params.categorySlug]
+  const resolvedParams = await params
+  const category = CATEGORY_BY_SLUG[resolvedParams.categorySlug]
 
   if (!category) {
     return (
