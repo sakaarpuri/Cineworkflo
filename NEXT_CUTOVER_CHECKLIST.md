@@ -15,6 +15,11 @@ The `codex/nextjs-phase1` branch now covers the main public and private routes t
 - `/my-library`
 - `/settings`
 - `/story-flow`
+- `/about`
+- `/contact`
+- `/privacy`
+- `/terms`
+- `/success`
 
 ## Remaining route parity gaps
 
@@ -75,6 +80,7 @@ Make sure the Next deployment target has:
 
 Also confirm:
 
+- Netlify is pointed at `next-app/` as the base directory for the cutover candidate
 - Next is deployed with a Netlify-compatible Next runtime
 - `/.netlify/functions/*` requests still resolve correctly from the deployed Next frontend
 - direct refresh works on all migrated routes
@@ -91,8 +97,8 @@ Do **not** cut over yet if any of these are still incomplete:
 
 ## Recommended final sequence
 
-1. Add the remaining parity routes
-2. Smoke-test all public and private flows on a Next preview deployment
-3. Confirm metadata and robots behavior using page source
+1. Smoke-test all public and private flows on a Next preview deployment
+2. Confirm metadata and robots behavior using page source
+3. Verify Netlify branch config and environment variables against `next-app/`
 4. Switch primary deployment to the Next app
 5. Keep the Vite app available briefly as rollback insurance

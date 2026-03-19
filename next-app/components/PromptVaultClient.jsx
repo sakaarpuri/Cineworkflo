@@ -428,10 +428,8 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
     <div className="page-stack vault-live-shell">
       <div className="section-heading left compact-heading">
         <div className="eyebrow">Prompt Vault</div>
-        <h1>Prompt discovery in Next.js</h1>
-        <p>
-          Browse prompts by category, style, and use case. Every entry is built for image-to-video workflows, not generic prompt dumping.
-        </p>
+        <h1>Curated prompts for real image-to-video work.</h1>
+        <p>Browse prompts by category, style, and use case, then refine them with variables and pro prompt controls.</p>
       </div>
 
       <section className="feature-card static-card vault-toolbar-shell">

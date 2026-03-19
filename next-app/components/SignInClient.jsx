@@ -84,7 +84,7 @@ export default function SignInClient({ nextPath = '/my-library' }) {
           {confirmationSent
             ? `A confirmation email has been sent to ${email}. Open it, confirm your account, then come back here to sign in.`
             : mode === 'login'
-              ? 'Sign in to access your saved prompts, Pro tools, and your migration-ready library in Next.'
+              ? 'Sign in to access your saved prompts, Pro tools, and your library.'
               : 'Use email and password to get into CineWorkflo. We’ll keep the setup simple and the handoff clear.'}
         </p>
 

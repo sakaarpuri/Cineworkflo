@@ -131,16 +131,6 @@ a {
   text-transform: uppercase;
 }
 
-.migration-pill {
-  padding: 10px 12px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  background: linear-gradient(145deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.14));
-}
-
 .hero {
   padding: 88px 0 40px;
 }
@@ -904,8 +894,7 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .nav-links,
-  .migration-pill {
+  .nav-links {
     display: none;
   }
 

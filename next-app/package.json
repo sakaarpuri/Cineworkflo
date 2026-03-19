@@ -1,5 +1,5 @@
 {
-  "name": "cineworkflo-next-migration",
+  "name": "cineworkflo-next",
   "private": true,
   "scripts": {
     "dev": "next dev",

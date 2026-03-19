@@ -59,6 +59,7 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Keep the existing Vite app at repo root as the live source of truth during migration
 - Port public routes into Next incrementally
 - Keep current Netlify functions, Supabase auth, and Stripe backend unchanged in Phase 1
+- Prepare the branch for Netlify cutover by pointing the deployment config at `next-app/`
 
 ### Current focus
 - Replace placeholder public pages with migration-ready public surfaces that already reflect the real CineWorkFlo product story
@@ -66,11 +67,12 @@ This branch adds a parallel Next.js App Router foundation in `next-app/` without
 - Implement the homepage redesign directly inside Next instead of redesigning the old Vite homepage first
 
 ### Recommended next step
-- Move from route migration to cutover prep:
-  1. run a full preview-deployment smoke test against the real Netlify functions
-  2. verify per-route metadata and noindex behavior in page source
-  3. confirm support/legal/success route content feels launch-ready
-  4. use `NEXT_CUTOVER_CHECKLIST.md` as the final handoff checklist
+- Move from route migration to preview deployment and cutover QA:
+  1. deploy the branch with `next-app/` as the active Netlify base directory
+  2. run a full preview-deployment smoke test against the real Netlify functions
+  3. verify per-route metadata and noindex behavior in page source
+  4. confirm support/legal/success route content feels launch-ready
+  5. use `NEXT_CUTOVER_CHECKLIST.md` as the final handoff checklist
 
 ### Current commands
 - `cd next-app && npm install`

@@ -9,7 +9,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const category = CATEGORY_BY_SLUG[params.categorySlug]
   if (!category) {
-    return { title: 'Prompt Category | CineWorkflo' }
+        return { title: 'Prompt Category | CineWorkflo' }
   }
 
   return buildPromptCategoryMetadata(category)
@@ -25,7 +25,7 @@ export default async function PromptCategoryPage({ params }) {
           <div className="feature-card static-card">
             <div className="card-eyebrow">Category not found</div>
             <h1>Unknown category</h1>
-            <p>This category slug does not exist in the migration scaffold.</p>
+            <p>This category slug does not exist in the current Prompt Vault.</p>
           </div>
         </div>
       </main>
@@ -49,7 +49,7 @@ export default async function PromptCategoryPage({ params }) {
           <p>{category.description}</p>
           <div className="category-meta">
             <span>{category.count}+ prompts in current library</span>
-            <span>Now rendered from the real Next Vault grid</span>
+            <span>Variable-driven prompts built for image-to-video workflows</span>
           </div>
         </div>
 

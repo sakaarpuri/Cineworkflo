@@ -41,7 +41,6 @@ export default function RootLayout({ children }) {
                   ))}
                 </nav>
                 <div className="header-right">
-                  <div className="migration-pill">Next.js migration foundation</div>
                   <AuthNav />
                 </div>
               </div>
