@@ -660,11 +660,11 @@ export default function PromptEnhancerClient() {
       ) : null}
 
       <section className="feature-card static-card helper-card">
-        <div className="card-eyebrow">What this migrated version keeps</div>
+        <div className="card-eyebrow">What works best next</div>
         <ul className="benefit-list compact">
-          <li>Same `/.netlify/functions/enhance-prompt` backend as the current site.</li>
-          <li>Same free/pro usage rules and shared monthly counter with Shot to Prompt.</li>
-          <li>Same cinematic style preset system, interpretations, and prompt copy structure.</li>
+          <li>Use Shot to Prompt when you have a film still or reference frame instead of a written idea.</li>
+          <li>Use Prompt Vault when you want variable-driven prompt structures and pro controls.</li>
+          <li>Stay in Essential for cleaner outputs, then move to Pro when you need stronger production detail.</li>
         </ul>
         <div className="cta-row route-actions helper-actions">
           <Link href="/shot-to-prompt" className="cta-secondary">Open Shot to Prompt</Link>
