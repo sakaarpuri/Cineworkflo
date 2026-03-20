@@ -1,6 +1,9 @@
 {
   "name": "cineworkflo-next",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "predev": "node scripts/sync-public-assets.mjs",
     "dev": "next dev",
