@@ -7,6 +7,9 @@
 [build.environment]
   NODE_VERSION = "20.11.1"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [[redirects]]
   from = "/camera-moves.html"
   to = "/camera-moves"
