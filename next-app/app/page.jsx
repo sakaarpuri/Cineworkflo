@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import HomeHeroPreview from '../components/HomeHeroPreview'
 import {
   CATEGORY_PAGES,
   FEATURED_STYLE_PRESETS,
@@ -47,26 +48,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="panel hero-preview-redesign">
-            <div className="panel-title">Live workflow preview</div>
-            <div className="hero-preview-media">
-              <div className="hero-preview-chip">prompt id #247 · Stepwell descent</div>
-            </div>
-            <div className="panel-card">
-              <div className="panel-eyebrow">WHAT YOU GET</div>
-              <p className="panel-copy">
-                Still-frame language, motion-aware direction, and prompt structures that stay useful across Shot to
-                Prompt, Prompt Enhancer, and the Vault.
-              </p>
-              <div className="loop-list">
-                {FEATURED_VAULT_CARDS.map((card) => (
-                  <span key={card.id} className="loop-chip active-home-chip">
-                    prompt id #{card.id} · {card.title}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          <HomeHeroPreview />
         </div>
       </section>
 
