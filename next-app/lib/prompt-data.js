@@ -75,22 +75,22 @@ export const CATEGORY_BY_SLUG = Object.fromEntries(CATEGORY_PAGES.map((item) => 
 
 export const FEATURED_VAULT_CARDS = [
   {
-    id: 247,
-    title: 'Stepwell descent',
-    category: 'Cinematic & Storytelling',
-    description: 'Architectural scale, warm light, subject isolation, and camera-ready detail for narrative still-to-motion workflows.',
-  },
-  {
-    id: 248,
-    title: 'Alien planet survivor portrait',
-    category: 'Sci-Fi & Concept Film',
-    description: 'Character-first sci-fi prompt design with costume detail, survival mood, and clear motion continuity.',
-  },
-  {
-    id: 249,
+    id: 53,
     title: 'Mustang desert drive',
     category: 'Brand & Product Ads',
     description: 'Commercial-grade vehicle language with environmental scale, raking sidelight, and shot-ready detail.',
+  },
+  {
+    id: 350,
+    title: 'Chaplin-era precarious balance',
+    category: 'Cinematic & Storytelling',
+    description: 'Silent-era physical storytelling with strong period silhouette, readable danger, and production-ready comedic framing.',
+  },
+  {
+    id: 355,
+    title: 'Chaplin industrial city world',
+    category: 'World & Environment Building',
+    description: 'A complete 1920s industrial environment prompt with period density, readable world logic, and strong atmosphere.',
   },
 ]
 
