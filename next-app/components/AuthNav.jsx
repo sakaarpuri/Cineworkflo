@@ -26,6 +26,9 @@ export default function AuthNav() {
   if (!user) {
     return (
       <div className="auth-nav">
+        <Link href="/pricing" className="header-pro-cta">
+          Get Pro
+        </Link>
         <Link
           href={pathname === '/sign-in' ? '/my-library' : `/sign-in?next=${encodeURIComponent(pathname || '/my-library')}`}
           className="header-auth-link"

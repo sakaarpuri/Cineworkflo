@@ -15,13 +15,6 @@ export const metadata = PAGE_SEO.home
 export default function HomePage() {
   return (
     <main className="home-redesign">
-      <section className="home-announcement">
-        <div className="container announcement-inner">
-          <span>🎬 Beta v2 is live — Veo, Grok &amp; Seedance now supported in the Enhancer.</span>
-          <Link href="/prompt-enhancer">Try the updated flow →</Link>
-        </div>
-      </section>
-
       <section className="hero hero-redesign">
         <div className="container hero-grid redesign-hero-grid">
           <div>
@@ -168,7 +161,10 @@ export default function HomePage() {
                 <div className="preset-grid live-preset-grid home-preset-grid">
                   {FEATURED_STYLE_PRESETS.map((preset) => (
                     <div key={preset.key} className="preset-card live-preset-card selected" style={{ '--preset-accent': preset.accent }}>
-                      <div className="preset-thumb" />
+                      <div
+                        className="preset-thumb"
+                        style={{ backgroundImage: `url(/preset-thumbnails/${preset.key}.webp)` }}
+                      />
                       <div>
                         <strong>{preset.label}</strong>
                         <span>{preset.subtitle}</span>
@@ -224,7 +220,10 @@ export default function HomePage() {
           <div className="card-grid three-up">
             {FEATURED_VAULT_CARDS.map((card) => (
               <div key={card.id} className="feature-card static-card vault-card redesigned-vault-card">
-                <div className="vault-thumb" />
+                <div
+                  className="vault-thumb"
+                  style={{ backgroundImage: `url(/prompt-thumbnails/${String(card.id).padStart(3, '0')}.jpg)` }}
+                />
                 <div className="card-eyebrow">{card.category}</div>
                 <h3>#{card.id} · {card.title}</h3>
                 <p>{card.description}</p>
