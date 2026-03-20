@@ -18,6 +18,21 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/vault/v2',
+        destination: '/prompts',
+        permanent: true,
+      },
+      {
+        source: '/enhancer',
+        destination: '/prompt-enhancer',
+        permanent: true,
+      },
+      {
+        source: '/library',
+        destination: '/my-library',
+        permanent: true,
+      },
+      {
         source: '/modern-moves',
         destination: '/camera-moves',
         permanent: true,

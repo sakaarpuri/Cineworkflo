@@ -23,6 +23,24 @@
   force = true
 
 [[redirects]]
+  from = "/vault/v2"
+  to = "/prompts"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/enhancer"
+  to = "/prompt-enhancer"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/library"
+  to = "/my-library"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/modern-moves"
   to = "/camera-moves"
   status = 301
