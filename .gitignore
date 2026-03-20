@@ -4,6 +4,7 @@
 /next-app/node_modules
 /next-app/.next
 /next-app/public
+/next-app/src/data
 /next-app/netlify/functions
 .env
 deploy*.zip

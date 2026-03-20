@@ -12,6 +12,11 @@ const syncTargets = [
     targetDir: path.resolve(__dirname, '../public'),
   },
   {
+    label: 'shared app data',
+    sourceDir: path.resolve(__dirname, '../../src/data'),
+    targetDir: path.resolve(__dirname, '../src/data'),
+  },
+  {
     label: 'Netlify functions',
     sourceDir: path.resolve(__dirname, '../../netlify/functions'),
     targetDir: path.resolve(__dirname, '../netlify/functions'),
