@@ -462,23 +462,93 @@ export default function PromptEnhancerClient() {
         </div>
 
         <div className="enhancer-control-stack">
-          <div className="toggle-row">
-            <span className="control-label">Level</span>
-            <div className="toggle-cluster">
-              <button type="button" onClick={() => setSkillLevel('beginner')} className={`pill-toggle ${skillLevel === 'beginner' ? 'active blue' : ''}`}>
-                Essential
-              </button>
-              <button type="button" onClick={() => setSkillLevel('pro')} className={`pill-toggle ${skillLevel === 'pro' ? 'active purple' : ''}`}>
-                Pro
-              </button>
-            </div>
-            <div className="toggle-cluster auxiliary-cluster">
-              <button type="button" onClick={() => setIncludeImageDetails((prev) => !prev)} className={`pill-toggle ${includeImageDetails ? 'active green' : ''}`}>
-                Images {includeImageDetails ? 'On' : 'Off'}
-              </button>
-              <button type="button" onClick={() => setIncludeAudioSfx((prev) => !prev)} className={`pill-toggle ${includeAudioSfx ? 'active orange' : ''}`}>
-                SFX {includeAudioSfx ? 'On' : 'Off'}
-              </button>
+          <div className="toggle-row enhancer-settings-row">
+            <div className="home-setting-stack enhancer-setting-stack">
+              <div className="home-setting-row">
+                <span className="setting-label sentence">Level</span>
+                <div className="switch-pair">
+                  <button
+                    type="button"
+                    onClick={() => setSkillLevel('beginner')}
+                    className={`switch-side interactive ${skillLevel === 'beginner' ? 'active blue' : ''}`}
+                  >
+                    Essential
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSkillLevel((current) => (current === 'beginner' ? 'pro' : 'beginner'))}
+                    className={`soft-switch interactive ${skillLevel === 'beginner' ? 'static blue' : 'static purple on'}`}
+                    aria-label={`Toggle level, currently ${skillLevel === 'beginner' ? 'Essential' : 'Pro'}`}
+                  >
+                    <span className="soft-switch-knob" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSkillLevel('pro')}
+                    className={`switch-side interactive ${skillLevel === 'pro' ? 'active purple-text' : ''}`}
+                  >
+                    Pro
+                  </button>
+                  <span className="setting-note-pill">camera + lens</span>
+                </div>
+
+                <div className="switch-pair">
+                  <button
+                    type="button"
+                    onClick={() => setIncludeImageDetails(false)}
+                    className={`switch-side interactive ${!includeImageDetails ? 'active subtle' : ''}`}
+                  >
+                    Images Off
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIncludeImageDetails((prev) => !prev)}
+                    className={`soft-switch interactive ${includeImageDetails ? 'static green on' : ''}`}
+                    aria-label={`Toggle images ${includeImageDetails ? 'on' : 'off'}`}
+                  >
+                    <span className="soft-switch-knob" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIncludeImageDetails(true)}
+                    className={`switch-side interactive ${includeImageDetails ? 'active green-text' : ''}`}
+                  >
+                    On
+                  </button>
+                  <span className="setting-note-pill">create a START FRAME</span>
+                </div>
+              </div>
+
+              <div className="home-setting-caption">Simple language, optional add-ons</div>
+
+              <div className="home-setting-row secondary enhancer-secondary-row">
+                <span className="setting-label sentence">SFX</span>
+                <div className="switch-pair">
+                  <button
+                    type="button"
+                    onClick={() => setIncludeAudioSfx(false)}
+                    className={`switch-side interactive ${!includeAudioSfx ? 'active subtle' : ''}`}
+                  >
+                    Off
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIncludeAudioSfx((prev) => !prev)}
+                    className={`soft-switch interactive ${includeAudioSfx ? 'static amber on' : ''}`}
+                    aria-label={`Toggle SFX ${includeAudioSfx ? 'on' : 'off'}`}
+                  >
+                    <span className="soft-switch-knob" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIncludeAudioSfx(true)}
+                    className={`switch-side interactive ${includeAudioSfx ? 'active amber-text' : ''}`}
+                  >
+                    On
+                  </button>
+                </div>
+                <span className="home-setting-caption">Output stays visual-only</span>
+              </div>
             </div>
           </div>
 
@@ -490,12 +560,8 @@ export default function PromptEnhancerClient() {
                   key={item}
                   type="button"
                   onClick={() => setMood(mood === item ? '' : item)}
-                  className="filter-chip-button"
-                  style={{
-                    '--chip-color': MOOD_COLORS[item],
-                    background: mood === item ? MOOD_COLORS[item] : 'rgba(255,255,255,0.82)',
-                    color: mood === item ? '#fff' : 'var(--text-secondary)',
-                  }}
+                  className={`filter-chip enhancer-chip-button ${mood === item ? 'selected' : ''}`}
+                  style={{ '--chip-color': MOOD_COLORS[item], '--chip-selected': MOOD_COLORS[item] }}
                 >
                   {item}
                 </button>
@@ -519,7 +585,7 @@ export default function PromptEnhancerClient() {
                   className={`preset-card live-preset-card ${preset === item.key ? 'selected' : ''}`}
                   style={{ '--preset-accent': item.accentColor }}
                 >
-                  <div className="preset-thumb" />
+                  <div className="preset-thumb" style={{ backgroundImage: `url(/preset-thumbnails/${item.key}.webp)` }} />
                   <div>
                     <strong>{item.label}</strong>
                     <span>{item.subtitle}</span>
@@ -544,7 +610,7 @@ export default function PromptEnhancerClient() {
                     className={`preset-card live-preset-card ${preset === item.key ? 'selected' : ''}`}
                     style={{ '--preset-accent': item.accentColor }}
                   >
-                    <div className="preset-thumb" />
+                    <div className="preset-thumb" style={{ backgroundImage: `url(/preset-thumbnails/${item.key}.webp)` }} />
                     <div>
                       <strong>{item.label}</strong>
                       <span>{item.subtitle}</span>
@@ -564,12 +630,8 @@ export default function PromptEnhancerClient() {
                   key={item}
                   type="button"
                   onClick={() => setUseCase(useCase === item ? '' : item)}
-                  className="filter-chip-button"
-                  style={{
-                    '--chip-color': USE_COLORS[item],
-                    background: useCase === item ? USE_COLORS[item] : 'rgba(255,255,255,0.82)',
-                    color: useCase === item ? '#fff' : 'var(--text-secondary)',
-                  }}
+                  className={`filter-chip enhancer-chip-button ${useCase === item ? 'selected' : ''}`}
+                  style={{ '--chip-color': USE_COLORS[item], '--chip-selected': USE_COLORS[item] }}
                 >
                   {item}
                 </button>
@@ -659,18 +721,41 @@ export default function PromptEnhancerClient() {
         </section>
       ) : null}
 
-      <section className="feature-card static-card helper-card">
-        <div className="card-eyebrow">What works best next</div>
-        <ul className="benefit-list compact">
-          <li>Use Shot to Prompt when you have a film still or reference frame instead of a written idea.</li>
-          <li>Use Prompt Vault when you want variable-driven prompt structures and pro controls.</li>
-          <li>Stay in Essential for cleaner outputs, then move to Pro when you need stronger production detail.</li>
-        </ul>
-        <div className="cta-row route-actions helper-actions">
-          <Link href="/shot-to-prompt" className="cta-secondary">Open Shot to Prompt</Link>
-          <Link href="/prompts" className="cta-primary">Open Prompt Vault</Link>
-        </div>
-      </section>
+      {!result ? (
+        <section className="enhancer-preview-grid">
+          <div className="output-card live-output-card preview-output-card">
+            <div className="output-header">
+              <span className="output-label image">Start Frame Prompt</span>
+              <span className="output-preview-tag">Essential</span>
+            </div>
+            <p>
+              Visual grammar, palette, lensing, and composition anchored to the chosen mood and preset.
+            </p>
+          </div>
+          <div className="output-card live-output-card preview-output-card">
+            <div className="output-header">
+              <span className="output-label video">Video Prompt</span>
+              <span className="output-preview-tag">Pro-ready</span>
+            </div>
+            <p>
+              Camera movement, pacing, and continuity layered onto the same visual identity.
+            </p>
+          </div>
+        </section>
+      ) : (
+        <section className="feature-card static-card helper-card">
+          <div className="card-eyebrow">What works best next</div>
+          <ul className="benefit-list compact">
+            <li>Use Shot to Prompt when you have a film still or reference frame instead of a written idea.</li>
+            <li>Use Prompt Vault when you want variable-driven prompt structures and pro controls.</li>
+            <li>Stay in Essential for cleaner outputs, then move to Pro when you need stronger production detail.</li>
+          </ul>
+          <div className="cta-row route-actions helper-actions">
+            <Link href="/shot-to-prompt" className="cta-secondary">Open Shot to Prompt</Link>
+            <Link href="/prompts" className="cta-primary">Open Prompt Vault</Link>
+          </div>
+        </section>
+      )}
     </div>
   )
 }

@@ -13,6 +13,10 @@ import { PAGE_SEO } from '../lib/seo'
 
 export const metadata = PAGE_SEO.home
 
+const HOME_ENHANCER_MOODS = ['Epic', 'Dramatic', 'Thought-Provoking', 'Whimsical', 'Serene', 'Mysterious', 'Energetic', 'Eerie', 'Calm', 'Surreal', 'Hopeful', 'Melancholic', 'Tense', 'Playful', 'Dreamlike']
+const HOME_ENHANCER_SELECTED_MOODS = new Set(['Epic', 'Tense', 'Dreamlike'])
+const HOME_USE_CASES = ['Product Showcase', 'Brand Ad', 'Spec Ad', 'Logo Reveal', 'Short-form', 'Social Media', 'Event Promo', 'Recruitment', 'Storytelling', 'Short Film', 'Documentary', 'Visual Essay', 'Education', 'Explainer', 'Podcast Visuals']
+
 export default function HomePage() {
   return (
     <main className="home-redesign">
@@ -114,68 +118,101 @@ export default function HomePage() {
           </div>
 
           <div className="feature-card static-card homepage-enhancer-shell">
-            <div className="enhancer-home-top">
-              <div className="prompt-input-shell home-prompt-input">
-                An astronaut returns to a flooded childhood town where every street still glows with old carnival lights.
-              </div>
-              <button className="enhance-primary" type="button">Enhance</button>
-            </div>
             <div className="enhancer-home-controls">
-              <div className="home-toggle-row">
-                <span className="mini-toggle active blue">Essential</span>
-                <span className="mini-toggle">Pro</span>
-                <span className="mini-toggle active green">Images On</span>
-                <span className="mini-toggle">SFX Off</span>
+              <div className="enhancer-home-top">
+                <div className="prompt-input-shell home-prompt-input">
+                  e.g. a lone boxer wrapping hands in a fluorescent locker room before the fight…
+                </div>
+                <button className="enhance-primary" type="button">Enhance</button>
               </div>
+
+              <div className="home-setting-stack">
+                <div className="home-setting-row">
+                  <span className="setting-label sentence">Level</span>
+                  <div className="switch-pair">
+                    <span className="switch-side active blue">Essential</span>
+                    <span className="soft-switch static blue"><span className="soft-switch-knob" /></span>
+                    <span className="switch-side">Pro</span>
+                    <span className="setting-note-pill">camera + lens</span>
+                  </div>
+                  <div className="switch-pair">
+                    <span className="switch-side">Images Off</span>
+                    <span className="soft-switch static green on"><span className="soft-switch-knob" /></span>
+                    <span className="switch-side active green-text">On</span>
+                    <span className="setting-note-pill">create a START FRAME</span>
+                  </div>
+                </div>
+
+                <div className="home-setting-caption">Simple language, optional add-ons</div>
+
+                <div className="home-setting-row secondary">
+                  <span className="setting-label sentence">SFX</span>
+                  <div className="switch-pair">
+                    <span className="switch-side active subtle">Off</span>
+                    <span className="soft-switch static"><span className="soft-switch-knob" /></span>
+                    <span className="switch-side">On</span>
+                  </div>
+                  <span className="home-setting-caption">Output stays visual-only</span>
+                </div>
+              </div>
+
               <div className="home-chip-group">
                 <span className="control-label">Mood</span>
                 <div className="chip-row wrap-row compact-gap">
-                  <span className="filter-chip selected">Epic</span>
-                  <span className="filter-chip selected">Dreamlike</span>
-                  <span className="filter-chip selected">Tense</span>
-                </div>
-              </div>
-              <div className="home-chip-group">
-                <span className="control-label">Style Presets</span>
-                <p className="preset-inline-copy">
-                  Choose a cinematic visual grammar inspired by iconic filmmakers.
-                </p>
-                <div className="preset-grid live-preset-grid home-preset-grid">
-                  {FEATURED_STYLE_PRESETS.map((preset) => (
-                    <div key={preset.key} className="preset-card live-preset-card selected" style={{ '--preset-accent': preset.accent }}>
-                      <div
-                        className="preset-thumb"
-                        style={{ backgroundImage: `url(/preset-thumbnails/${preset.key}.webp)` }}
-                      />
-                      <div>
-                        <strong>{preset.label}</strong>
-                        <span>{preset.subtitle}</span>
-                      </div>
-                    </div>
+                  {HOME_ENHANCER_MOODS.map((mood) => (
+                    <span key={mood} className={`filter-chip ${HOME_ENHANCER_SELECTED_MOODS.has(mood) ? 'selected' : ''}`}>{mood}</span>
                   ))}
                 </div>
               </div>
-              <div className="home-output-preview-grid">
-                <div className="output-card compact-output-card">
-                  <div className="output-header">
-                    <span className="output-label image">Start Frame Prompt</span>
-                    <span className="output-button">Essential</span>
+              <div className="home-chip-group">
+                <div className="home-style-shell">
+                  <div className="home-style-header">
+                    <span className="control-label sentence">Style</span>
+                    <div>
+                      <div className="home-style-title">Style Presets</div>
+                      <p className="preset-inline-copy">
+                        Choose a cinematic visual grammar inspired by iconic filmmakers. Mood selection sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.
+                      </p>
+                    </div>
                   </div>
-                  <p>Visual grammar, palette, lensing, and composition anchored to the chosen mood and preset.</p>
-                </div>
-                <div className="output-card compact-output-card">
-                  <div className="output-header">
-                    <span className="output-label video">Video Prompt</span>
-                    <span className="output-button">Pro-ready</span>
+                  <div className="preset-grid live-preset-grid home-preset-grid">
+                    {FEATURED_STYLE_PRESETS.map((preset) => (
+                      <div key={preset.key} className="preset-card live-preset-card static-selected" style={{ '--preset-accent': preset.accent }}>
+                        <div
+                          className="preset-thumb"
+                          style={{ backgroundImage: `url(/preset-thumbnails/${preset.key}.webp)` }}
+                        />
+                        <div>
+                          <strong>{preset.label}</strong>
+                          <span>{preset.subtitle}</span>
+                          <em>
+                            {preset.key === 'desert-minimalism'
+                              ? 'Isolation, tension, existential scale, characters dwarfed by environment'
+                              : preset.key === 'humid-neon-noir'
+                                ? 'Romance, loneliness, urban intimacy, memory, longing, nocturnal mood'
+                                : preset.key === 'golden-hour-immersion'
+                                  ? 'Spiritual, transcendent, nature, memory, intimacy with the world, raw humanity'
+                                  : 'Whimsy, nostalgia, storybook comedy, meticulously crafted worlds, deadpan'}
+                          </em>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <p>Camera movement, pacing, and continuity layered onto the same visual identity.</p>
+                  <div className="home-style-footer">
+                    <span className="home-style-note">Choose one featured preset or open more styles below.</span>
+                    <button className="more-styles-pill" type="button">More styles</button>
+                    <span className="muted-inline">Nordic Noir · Dreamscape · Tokyo Night Drift</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="section-card-actions">
-              <Link href="/prompt-enhancer" className="text-link">
-                Open Prompt Enhancer
-              </Link>
+              <div className="home-chip-group">
+                <span className="control-label sentence">Use</span>
+                <div className="chip-row wrap-row compact-gap">
+                  {HOME_USE_CASES.map((item) => (
+                    <span key={item} className="filter-chip">{item}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
