@@ -453,7 +453,11 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
                 className="filter-chip-button"
                 style={{
                   '--chip-color': CATEGORY_COLORS[item] || '#6366f1',
-                  background: category === item ? CATEGORY_COLORS[item] || '#6366f1' : 'rgba(255,255,255,0.82)',
+                  '--chip-selected': CATEGORY_COLORS[item] || '#6366f1',
+                  background:
+                    category === item
+                      ? `linear-gradient(145deg, color-mix(in srgb, ${CATEGORY_COLORS[item] || '#6366f1'} 92%, white 8%), color-mix(in srgb, ${CATEGORY_COLORS[item] || '#6366f1'} 86%, black 14%))`
+                      : 'rgba(255,255,255,0.045)',
                   color: category === item ? '#fff' : 'var(--text-secondary)',
                 }}
               >
@@ -473,7 +477,11 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
                 className="filter-chip-button"
                 style={{
                   '--chip-color': '#8B5CF6',
-                  background: style === item ? '#8B5CF6' : 'rgba(255,255,255,0.82)',
+                  '--chip-selected': '#8B5CF6',
+                  background:
+                    style === item
+                      ? 'linear-gradient(145deg, color-mix(in srgb, #8B5CF6 92%, white 8%), color-mix(in srgb, #8B5CF6 86%, black 14%))'
+                      : 'rgba(255,255,255,0.045)',
                   color: style === item ? '#fff' : 'var(--text-secondary)',
                 }}
               >

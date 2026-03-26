@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import HomeHeroPreview from '../components/HomeHeroPreview'
+import HomeCameraMovesPreview from '../components/HomeCameraMovesPreview'
 import {
   CATEGORY_PAGES,
   FEATURED_STYLE_PRESETS,
@@ -270,9 +271,7 @@ export default function HomePage() {
           <div className="card-grid three-up moves-home-grid">
             {HOME_CAMERA_MOVES.map((move) => (
               <div key={move.title} className="feature-card static-card move-home-card">
-                <div className="move-home-thumb">
-                  <span className="move-home-chip">Preview</span>
-                </div>
+                <HomeCameraMovesPreview title={move.title} />
                 <h3>{move.title}</h3>
                 <p>{move.description}</p>
                 <div className="move-home-prompt">{move.prompt}</div>
