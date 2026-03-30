@@ -144,16 +144,19 @@ export const PLATFORM_BADGES = [
 
 export const HOME_CAMERA_MOVES = [
   {
+    key: 'dolly',
     title: 'Slow Push-In',
     description: 'Tension-building camera language for character focus, reveals, and emotional escalation.',
     prompt: 'Slow push-in over 8 seconds, subtle stabilization, subject remains locked in frame.',
   },
   {
+    key: 'tracking',
     title: 'Lateral Tracking',
     description: 'Great for product, fashion, and story beats where movement should feel directed but controlled.',
     prompt: 'Lateral tracking shot, clean parallax separation, background glides past with measured pace.',
   },
   {
+    key: 'orbit',
     title: 'Floating Orbit',
     description: 'Useful when you want cinematic atmosphere without turning the shot into aggressive motion.',
     prompt: 'Floating circular move around subject, soft continuous drift, no abrupt speed changes.',
