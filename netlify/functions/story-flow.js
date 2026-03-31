@@ -74,6 +74,16 @@ const extractJsonObject = (value) => {
   }
 };
 
+const extractResponseText = (response) => {
+  const blocks = Array.isArray(response?.content) ? response.content : [];
+  return blocks
+    .filter((block) => block?.type === 'text' && typeof block?.text === 'string')
+    .map((block) => block.text.trim())
+    .filter(Boolean)
+    .join('\n')
+    .trim();
+};
+
 const getBearerToken = (event) => {
   const header = event?.headers?.authorization || event?.headers?.Authorization || '';
   const value = String(header || '').trim();
@@ -148,7 +158,7 @@ const runAnthropicPrompt = async ({ anthropicApiKey, systemPrompt, userPrompt, m
     throw lastError || new Error('Model request failed');
   }
 
-  return response?.content?.[0]?.text || '';
+  return extractResponseText(response);
 };
 
 const normalizeMood = (value) => {
@@ -464,6 +474,58 @@ const parseStagePayload = (text, normalizer) => {
   return normalizer(parsed);
 };
 
+const repairStagePayload = async ({ anthropicApiKey, rawText, requiredShape, normalizer }) => {
+  if (!rawText) return null;
+
+  for (const model of MODEL_FALLBACK) {
+    try {
+      const repaired = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': anthropicApiKey,
+          'anthropic-version': '2023-06-01'
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 900,
+          temperature: 0,
+          system: `You repair malformed model output into valid JSON only.
+
+Return valid JSON only. No markdown. No explanation.
+
+Required JSON shape:
+${requiredShape}`,
+          messages: [
+            {
+              role: 'user',
+              content: [
+                {
+                  type: 'text',
+                  text: `Repair this output into valid JSON with the exact required structure. Keep the creative content intact.\n\n${rawText}`
+                }
+              ]
+            }
+          ]
+        })
+      });
+
+      const repairedData = await repaired.json();
+      if (!repaired.ok) {
+        continue;
+      }
+
+      const repairedText = extractResponseText(repairedData);
+      const parsed = parseStagePayload(repairedText, normalizer);
+      if (parsed) return parsed;
+    } catch {
+      // Try next fallback model.
+    }
+  }
+
+  return null;
+};
+
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers };
@@ -538,7 +600,7 @@ exports.handler = async (event) => {
     });
 
     if (action === 'develop_story') {
-      const parsed = parseStagePayload(rawText, (payload) => {
+      const normalizer = (payload) => {
         const treatment = normalizeTreatment(payload, idea);
         const conceptVariables = normalizeConceptVariables(payload, treatment, idea);
         return {
@@ -546,7 +608,34 @@ exports.handler = async (event) => {
           conceptVariables,
           recommendedSceneCount: normalizeSceneCount(payload?.recommendedSceneCount),
         };
-      });
+      };
+      let parsed = parseStagePayload(rawText, normalizer);
+      if (!parsed) {
+        parsed = await repairStagePayload({
+          anthropicApiKey,
+          rawText,
+          requiredShape: `{
+  "treatment": {
+    "title": "short title",
+    "logline": "1-2 sentence logline",
+    "storyArc": "brief 1-minute arc summary",
+    "creativeApproach": "how this should feel visually and narratively"
+  },
+  "conceptVariables": {
+    "title": "same or cleaner title",
+    "protagonist": "main subject or character",
+    "setting": "world / location",
+    "conflict": "core dramatic problem or objective",
+    "tone": "short tonal phrase",
+    "mood": "one approved mood only",
+    "visualPreset": "one approved style preset key only",
+    "genreFormat": "genre + format description"
+  },
+  "recommendedSceneCount": 6
+}`,
+          normalizer,
+        });
+      }
       if (!parsed || !parsed.treatment.logline || !parsed.treatment.storyArc) {
         return { statusCode: 502, headers, body: JSON.stringify({ error: 'No structured story response returned from model.' }) };
       }
@@ -555,9 +644,30 @@ exports.handler = async (event) => {
 
     if (action === 'build_scenes') {
       const conceptVariables = normalizeConceptVariables({ conceptVariables: body.conceptVariables || {} }, body.treatment || {}, idea);
-      const parsed = parseStagePayload(rawText, (payload) => ({
+      const normalizer = (payload) => ({
         scenes: normalizeScenePayload(payload, conceptVariables),
-      }));
+      });
+      let parsed = parseStagePayload(rawText, normalizer);
+      if (!parsed) {
+        parsed = await repairStagePayload({
+          anthropicApiKey,
+          rawText,
+          requiredShape: `{
+  "scenes": [
+    {
+      "id": "scene-1",
+      "title": "scene title",
+      "durationSeconds": 10,
+      "purpose": "dramatic purpose",
+      "visualBeat": "what we should see",
+      "characters": ["character names"],
+      "location": "primary location"
+    }
+  ]
+}`,
+          normalizer,
+        });
+      }
       if (!parsed?.scenes?.length) {
         return { statusCode: 502, headers, body: JSON.stringify({ error: 'No scene breakdown returned from model.' }) };
       }
@@ -565,7 +675,20 @@ exports.handler = async (event) => {
     }
 
     if (action === 'build_assets') {
-      const parsed = parseStagePayload(rawText, normalizeAssetPayload);
+      let parsed = parseStagePayload(rawText, normalizeAssetPayload);
+      if (!parsed) {
+        parsed = await repairStagePayload({
+          anthropicApiKey,
+          rawText,
+          requiredShape: `{
+  "characterPrompts": [{ "name": "asset name", "prompt": "reusable asset prompt", "usage": "where it is used" }],
+  "locationPrompts": [{ "name": "asset name", "prompt": "reusable asset prompt", "usage": "where it is used" }],
+  "propPrompts": [{ "name": "asset name", "prompt": "reusable asset prompt", "usage": "where it is used" }],
+  "continuityNotes": ["note 1", "note 2"]
+}`,
+          normalizer: normalizeAssetPayload,
+        });
+      }
       if (!parsed) {
         return { statusCode: 502, headers, body: JSON.stringify({ error: 'No asset prompts returned from model.' }) };
       }
@@ -576,9 +699,27 @@ exports.handler = async (event) => {
       { scenes: body.sceneBreakdown || [] },
       normalizeConceptVariables({ conceptVariables: body.conceptVariables || {} }, body.treatment || {}, idea)
     );
-    const parsed = parseStagePayload(rawText, (payload) => ({
+    const normalizer = (payload) => ({
       scenes: normalizeScenePromptPayload(payload, scenes),
-    }));
+    });
+    let parsed = parseStagePayload(rawText, normalizer);
+    if (!parsed) {
+      parsed = await repairStagePayload({
+        anthropicApiKey,
+        rawText,
+        requiredShape: `{
+  "scenes": [
+    {
+      "id": "scene-1",
+      "imagePrompt": "cinematic still-image prompt",
+      "shotPrompt": "companion shot / image-to-video motion prompt",
+      "selectionNote": "brief review note"
+    }
+  ]
+}`,
+        normalizer,
+      });
+    }
     if (!parsed?.scenes?.length) {
       return { statusCode: 502, headers, body: JSON.stringify({ error: 'No scene prompts returned from model.' }) };
     }
