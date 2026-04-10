@@ -17,13 +17,8 @@ export default function PricingClient() {
     () =>
       PRICING_TIERS.map((plan) => ({
         ...plan,
-        planType:
-          plan.name === 'Free'
-            ? 'free'
-            : plan.name === 'Pro'
-              ? 'monthly'
-              : 'yearly',
-        popular: plan.name === 'Pro Yearly',
+        planType: plan.planType,
+        popular: plan.planType === 'yearly',
       })),
     [],
   )

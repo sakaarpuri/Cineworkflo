@@ -184,6 +184,7 @@ export const TESTIMONIALS = [
 export const PRICING_TIERS = [
   {
     name: 'Free',
+    planType: 'free',
     price: '$0',
     period: '/ month',
     description: 'Dip your toes in. No credit card, no catch.',
@@ -195,6 +196,7 @@ export const PRICING_TIERS = [
   },
   {
     name: 'Pro',
+    planType: 'monthly',
     price: '$7.99',
     period: '/ month',
     description: 'For creators who ship every month. Unlimited everything.',
@@ -206,6 +208,7 @@ export const PRICING_TIERS = [
   },
   {
     name: 'Pro Yearly',
+    planType: 'yearly',
     price: '$49',
     period: '/ year',
     description: 'Huge discount versus monthly. Best value if you plan to stay.',

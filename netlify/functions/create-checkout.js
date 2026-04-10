@@ -1,6 +1,39 @@
 // Netlify Function: Create Stripe checkout session
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const PLAN_CONFIG = {
+  monthly: {
+    mode: 'subscription',
+    priceIdEnv: 'STRIPE_PRICE_MONTHLY_USD',
+    fallbackPriceId: 'price_1TKhk7IVdn8cddGgVx3Wfuuf',
+    name: 'CineWorkflo Pro Monthly',
+    description: 'Unlimited CineWorkflo access billed monthly',
+    successPlan: 'monthly',
+    metadata: { billing_interval: 'month', access_type: 'subscription' },
+  },
+  yearly: {
+    mode: 'subscription',
+    priceIdEnv: 'STRIPE_PRICE_YEARLY_USD',
+    fallbackPriceId: 'price_1TKhkMIVdn8cddGg0AtekgTl',
+    name: 'CineWorkflo Pro Yearly',
+    description: 'Unlimited CineWorkflo access billed yearly at a discounted rate',
+    successPlan: 'yearly',
+    metadata: { billing_interval: 'year', access_type: 'subscription' },
+  },
+  one_time: {
+    mode: 'payment',
+    priceIdEnv: 'STRIPE_PRICE_ONE_TIME_USD',
+    fallbackPriceId: '',
+    name: 'CineWorkflo Pro One-Time',
+    description: 'One-time CineWorkflo Pro purchase',
+    successPlan: 'one_time',
+    metadata: { billing_interval: 'one_time', access_type: 'lifetime' },
+  },
+};
+
+const getSiteUrl = () => process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://cineworkflo.com';
+const getPlanConfig = (plan) => PLAN_CONFIG[plan] || null;
+
 exports.handler = async (event) => {
   // Enable CORS
   const headers = {
@@ -59,85 +92,56 @@ exports.handler = async (event) => {
       cta_count: normalize(attribution.cta_count)
     };
 
-    let session;
-
-    if (plan === 'monthly') {
-      // Monthly subscription
-      session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: [
-          {
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: 'CineWorkflo Pro Monthly',
-                description: 'Unlimited CineWorkflo access billed monthly'
-              },
-              unit_amount: 799, // $7.99 in cents
-              recurring: { interval: 'month' }
-            },
-            quantity: 1
-          }
-        ],
-        mode: 'subscription',
-        client_reference_id: userId,
-        success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=monthly`,
-        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing?checkout=canceled&plan=monthly`,
-        customer_email: email,
-        subscription_data: {
-          metadata: {
-            plan: 'monthly',
-            ...sharedMetadata
-          }
-        },
-        metadata: {
-          plan: 'monthly',
-          ...sharedMetadata
-        }
-      });
-    } else if (plan === 'yearly') {
-      // Yearly subscription
-      session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: [
-          {
-            price_data: {
-              currency: 'usd',
-              product_data: {
-                name: 'CineWorkflo Pro Yearly',
-                description: 'Unlimited CineWorkflo access billed yearly at a discounted rate'
-              },
-              unit_amount: 4900, // $49.00 in cents
-              recurring: { interval: 'year' }
-            },
-            quantity: 1
-          }
-        ],
-        mode: 'subscription',
-        client_reference_id: userId,
-        success_url: `${process.env.URL || 'https://cineworkflo.com'}/success?session_id={CHECKOUT_SESSION_ID}&plan=yearly`,
-        cancel_url: `${process.env.URL || 'https://cineworkflo.com'}/pricing?checkout=canceled&plan=yearly`,
-        customer_email: email,
-        subscription_data: {
-          metadata: {
-            plan: 'yearly',
-            ...sharedMetadata
-          }
-        },
-        metadata: {
-          plan: 'yearly',
-          ...sharedMetadata
-        }
-      });
-    }
-
-    if (!session) {
+    const planConfig = getPlanConfig(plan);
+    if (!planConfig) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: 'Invalid plan. Expected monthly or yearly.' })
-      };
+        body: JSON.stringify({ error: 'Invalid plan. Expected monthly, yearly, or one_time.' })
+      }
     }
+
+    const priceId = process.env[planConfig.priceIdEnv] || planConfig.fallbackPriceId
+    if (!priceId) {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: `${planConfig.priceIdEnv} is not configured for plan ${plan}.` })
+      }
+    }
+
+    const siteUrl = getSiteUrl()
+    const checkoutPayload = {
+      payment_method_types: ['card'],
+      line_items: [{ price: priceId, quantity: 1 }],
+      mode: planConfig.mode,
+      client_reference_id: userId,
+      success_url: `${siteUrl}/success?session_id={CHECKOUT_SESSION_ID}&plan=${planConfig.successPlan}`,
+      cancel_url: `${siteUrl}/pricing?checkout=canceled&plan=${planConfig.successPlan}`,
+      customer_email: email,
+      allow_promotion_codes: true,
+      metadata: {
+        plan,
+        product_name: planConfig.name,
+        product_description: planConfig.description,
+        ...planConfig.metadata,
+        ...sharedMetadata
+      }
+    }
+
+    if (planConfig.mode === 'subscription') {
+      checkoutPayload.subscription_data = {
+        metadata: {
+          plan,
+          product_name: planConfig.name,
+          product_description: planConfig.description,
+          ...planConfig.metadata,
+          ...sharedMetadata
+        }
+      }
+    }
+
+    const session = await stripe.checkout.sessions.create(checkoutPayload);
 
     return {
       statusCode: 200,

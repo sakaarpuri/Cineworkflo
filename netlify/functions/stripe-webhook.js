@@ -59,6 +59,22 @@ const applySubscriptionState = async (subscription, fallbackUserId = null) => {
     pro_expires_at: isActive ? toIsoOrNull(subscription.current_period_end) : null,
     stripe_customer_id: subscription.customer ? String(subscription.customer) : '',
     stripe_subscription_id: subscription.id ? String(subscription.id) : '',
+    stripe_purchase_type: 'subscription',
+  });
+};
+
+const applyOneTimeState = async (session) => {
+  const userId = getUserIdFromPayload(session);
+  if (!userId) return;
+
+  await updateUserProStatus(userId, {
+    is_pro: true,
+    pro_status: 'lifetime',
+    pro_expires_at: null,
+    stripe_customer_id: session.customer ? String(session.customer) : '',
+    stripe_subscription_id: '',
+    stripe_purchase_type: 'one_time',
+    stripe_checkout_session_id: session.id ? String(session.id) : '',
   });
 };
 
@@ -92,6 +108,8 @@ exports.handler = async (event) => {
         const userId = getUserIdFromPayload(object);
         const subscription = await stripe.subscriptions.retrieve(object.subscription);
         await applySubscriptionState(subscription, userId);
+      } else if (object.mode === 'payment' && object.payment_status === 'paid') {
+        await applyOneTimeState(object);
       }
     }
 
