@@ -280,12 +280,11 @@ function PromptCard({ prompt, user }) {
           <span className="vault-category-pill" style={{ '--cat-color': categoryColor }}>{prompt.category}</span>
           <span className="vault-style-text">{prompt.style}</span>
         </div>
-        <div className="vault-tool-row">
-          {user ? <SaveButton onSave={() => handleSave('video')} status={saveStatus.video} label="Save Prompt" /> : null}
-          {(prompt.best_on || []).map((tool, index) => (
-            <span key={`${prompt.id}-${tool}-${index}`} className="vault-tool-pill">{tool}</span>
-          ))}
-        </div>
+        {user ? (
+          <div className="vault-tool-row">
+            <SaveButton onSave={() => handleSave('video')} status={saveStatus.video} label="Save Prompt" />
+          </div>
+        ) : null}
       </div>
       <h2 className="vault-card-title">{prompt.title}</h2>
 

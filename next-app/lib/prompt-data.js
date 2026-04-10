@@ -73,26 +73,7 @@ export const CATEGORY_PAGES = [
 
 export const CATEGORY_BY_SLUG = Object.fromEntries(CATEGORY_PAGES.map((item) => [item.slug, item]))
 
-export const FEATURED_VAULT_CARDS = [
-  {
-    id: 53,
-    title: 'Mustang desert drive',
-    category: 'Brand & Product Ads',
-    description: 'Commercial-grade vehicle language with environmental scale, raking sidelight, and shot-ready detail.',
-  },
-  {
-    id: 350,
-    title: 'Chaplin-era precarious balance',
-    category: 'Cinematic & Storytelling',
-    description: 'Silent-era physical storytelling with strong period silhouette, readable danger, and production-ready comedic framing.',
-  },
-  {
-    id: 355,
-    title: 'Chaplin industrial city world',
-    category: 'World & Environment Building',
-    description: 'A complete 1920s industrial environment prompt with period density, readable world logic, and strong atmosphere.',
-  },
-]
+export const FEATURED_VAULT_CARD_IDS = [53, 101, 350, 355]
 
 export const FEATURED_MOODS = ['Epic', 'Dreamlike', 'Tense', 'Whimsical']
 export const FEATURED_USE_CASES = ['Storytelling', 'Brand Ad', 'Short-form', 'Documentary']

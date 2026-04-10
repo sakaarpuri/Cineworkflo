@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import HomeCameraMovePreview from '../components/HomeCameraMovePreview'
 import HomeHeroPreview from '../components/HomeHeroPreview'
+import HomeVaultPreviewGrid from '../components/HomeVaultPreviewGrid'
 import {
   CATEGORY_PAGES,
   FEATURED_STYLE_PRESETS,
-  FEATURED_VAULT_CARDS,
   HOME_CAMERA_MOVES,
   PLATFORM_BADGES,
   PRICING_TIERS,
@@ -237,20 +237,7 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-          <div className="card-grid three-up">
-            {FEATURED_VAULT_CARDS.map((card) => (
-              <div key={card.id} className="feature-card static-card vault-card redesigned-vault-card">
-                <div
-                  className="vault-thumb"
-                  style={{ backgroundImage: `url(/prompt-thumbnails/${String(card.id).padStart(3, '0')}.jpg)` }}
-                />
-                <div className="card-eyebrow">{card.category}</div>
-                <h3>#{card.id} · {card.title}</h3>
-                <p>{card.description}</p>
-                <div className="vault-footer-note">See pro prompt controls in the Vault</div>
-              </div>
-            ))}
-          </div>
+          <HomeVaultPreviewGrid />
           <div className="center-row">
             <Link href="/prompts" className="cta-secondary">
               Open Prompt Vault

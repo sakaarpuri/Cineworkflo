@@ -1580,6 +1580,10 @@ a {
   gap: 18px;
 }
 
+.homepage-vault-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .vault-card-live {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -1618,6 +1622,10 @@ a {
 .vault-tool-row {
   flex-wrap: wrap;
   align-items: center;
+}
+
+.vault-tool-row {
+  justify-content: flex-end;
 }
 
 .vault-save-button {
@@ -1701,6 +1709,17 @@ a {
   color: var(--text-primary);
   font-weight: 800;
   cursor: pointer;
+}
+
+.homepage-vault-expand-link {
+  justify-content: center;
+  text-decoration: none;
+}
+
+.copy-action.static {
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.72;
 }
 
 .vault-prompt-block,
@@ -2487,6 +2506,14 @@ a {
   padding: 20px;
 }
 
+.homepage-vault-card {
+  min-height: 100%;
+}
+
+.homepage-vault-prompt-block {
+  margin-top: 8px;
+}
+
 .camera-moves-home {
   border-top: 1px solid var(--border-color);
   background: rgba(255,255,255,0.02);
@@ -2509,6 +2536,12 @@ a {
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.12);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+@media (max-width: 980px) {
+  .homepage-vault-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .move-home-chip {
