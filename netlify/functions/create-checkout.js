@@ -1,11 +1,20 @@
 // Netlify Function: Create Stripe checkout session
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { resolvePricingContext } = require('./_pricing.cjs');
 
 const PLAN_CONFIG = {
   monthly: {
     mode: 'subscription',
-    priceIdEnv: 'STRIPE_PRICE_MONTHLY_USD',
-    fallbackPriceId: 'price_1TKhk7IVdn8cddGgVx3Wfuuf',
+    priceIds: {
+      usd: {
+        env: 'STRIPE_PRICE_MONTHLY_USD',
+        fallback: 'price_1TKhk7IVdn8cddGgVx3Wfuuf',
+      },
+      inr: {
+        env: 'STRIPE_PRICE_MONTHLY_INR',
+        fallback: 'price_1TLUSqIVdn8cddGgL2IFHGeK',
+      },
+    },
     name: 'CineWorkflo Pro Monthly',
     description: 'Unlimited CineWorkflo access billed monthly',
     successPlan: 'monthly',
@@ -13,28 +22,32 @@ const PLAN_CONFIG = {
   },
   yearly: {
     mode: 'subscription',
-    priceIdEnv: 'STRIPE_PRICE_YEARLY_USD',
-    fallbackPriceId: 'price_1TKhkMIVdn8cddGg0AtekgTl',
+    priceIds: {
+      usd: {
+        env: 'STRIPE_PRICE_YEARLY_USD',
+        fallback: 'price_1TKhkMIVdn8cddGg0AtekgTl',
+      },
+      inr: {
+        env: 'STRIPE_PRICE_YEARLY_INR',
+        fallback: 'price_1TLUSwIVdn8cddGguFhB1cYp',
+      },
+    },
     name: 'CineWorkflo Pro Yearly',
     description: 'Unlimited CineWorkflo access billed yearly at a discounted rate',
     successPlan: 'yearly',
     metadata: { billing_interval: 'year', access_type: 'subscription' },
   },
-  one_time: {
-    mode: 'payment',
-    priceIdEnv: 'STRIPE_PRICE_ONE_TIME_USD',
-    fallbackPriceId: '',
-    name: 'CineWorkflo Pro One-Time',
-    description: 'One-time CineWorkflo Pro purchase',
-    successPlan: 'one_time',
-    metadata: { billing_interval: 'one_time', access_type: 'lifetime' },
-  },
 };
 
 const getSiteUrl = () => process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://cineworkflo.com';
 const getPlanConfig = (plan) => PLAN_CONFIG[plan] || null;
+const getPriceId = (planConfig, pricingVariant) => {
+  const selected = planConfig?.priceIds?.[pricingVariant] || planConfig?.priceIds?.usd;
+  if (!selected) return '';
+  return process.env[selected.env] || selected.fallback || '';
+};
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -97,16 +110,17 @@ exports.handler = async (event) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: 'Invalid plan. Expected monthly, yearly, or one_time.' })
+        body: JSON.stringify({ error: 'Invalid plan. Expected monthly or yearly.' })
       }
     }
 
-    const priceId = process.env[planConfig.priceIdEnv] || planConfig.fallbackPriceId
+    const pricingContext = resolvePricingContext(event, context)
+    const priceId = getPriceId(planConfig, pricingContext.pricingVariant)
     if (!priceId) {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: `${planConfig.priceIdEnv} is not configured for plan ${plan}.` })
+        body: JSON.stringify({ error: `Price ID is not configured for ${plan} in ${pricingContext.currencyCode}.` })
       }
     }
 
@@ -124,6 +138,8 @@ exports.handler = async (event) => {
         plan,
         product_name: planConfig.name,
         product_description: planConfig.description,
+        billing_currency: pricingContext.currencyCode,
+        billing_country: pricingContext.countryCode,
         ...planConfig.metadata,
         ...sharedMetadata
       }
@@ -135,6 +151,8 @@ exports.handler = async (event) => {
           plan,
           product_name: planConfig.name,
           product_description: planConfig.description,
+          billing_currency: pricingContext.currencyCode,
+          billing_country: pricingContext.countryCode,
           ...planConfig.metadata,
           ...sharedMetadata
         }

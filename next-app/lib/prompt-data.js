@@ -132,7 +132,7 @@ export const HOME_CAMERA_MOVES = [
     badgeType: 'classic',
     description: 'The camera physically moves forward or backward on a track. Unlike zoom, perspective genuinely shifts.',
     feelText: 'Walking into the scene. Builds intimacy, tension, or a slow reveal.',
-    prompt: 'slow dolly in toward subject, camera pushes forward on a track, cinematic push into close-up',
+    prompts: ['slow dolly in toward subject', 'camera pushes forward on a track', 'cinematic push into close-up'],
   },
   {
     key: 'tracking',
@@ -142,7 +142,7 @@ export const HOME_CAMERA_MOVES = [
     badgeType: 'classic',
     description: 'Camera and subject move together sideways at the same speed, keeping the subject perfectly framed.',
     feelText: 'Running alongside someone. Keeps energy and the subject always centred in frame.',
-    prompt: 'tracking shot following subject, camera moves parallel sideways, side-on tracking as character walks',
+    prompts: ['tracking shot following subject', 'camera moves parallel sideways', 'side-on tracking as character walks'],
   },
   {
     key: 'handheld',
@@ -152,7 +152,7 @@ export const HOME_CAMERA_MOVES = [
     badgeType: 'dynamic',
     description: 'A handheld camera has subtle, organic drift from breathing, footsteps, and micro-corrections.',
     feelText: 'Present and personal. Adds realism, tension, and immediacy.',
-    prompt: 'handheld camera, smooth natural micro-drift, human-operated, subtle breathing sway',
+    prompts: ['handheld camera', 'smooth natural micro-drift', 'human-operated', 'subtle breathing sway'],
   },
 ]
 
@@ -171,44 +171,5 @@ export const TESTIMONIALS = [
     quote: 'The Vault is actually curated. It feels more like a working reference library than prompt spam.',
     name: 'AI video creator',
     role: 'Commercial and concept work',
-  },
-]
-
-export const PRICING_TIERS = [
-  {
-    name: 'Free',
-    planType: 'free',
-    price: '$0',
-    period: '/ month',
-    description: 'Dip your toes in. No credit card, no catch.',
-    hook: 'Good for testing the workflow.',
-    featured: false,
-    ctaLabel: 'Start free',
-    ctaHref: '/prompts',
-    features: ['5 total generations / month (Enhancer + Shot to Prompt)', 'Prompt Vault (all prompts)', 'Basic search', 'Copy to clipboard'],
-  },
-  {
-    name: 'Pro',
-    planType: 'monthly',
-    price: '$7.99',
-    period: '/ month',
-    description: 'For creators who ship every month. Unlimited everything.',
-    hook: 'Most popular for active image-to-video work.',
-    featured: true,
-    ctaLabel: 'Get Pro',
-    ctaHref: '/pricing',
-    features: ['Unlimited Prompt Enhancer generations', 'Prompt Vault (all prompts)', 'Shot to Prompt AI tool', 'Advanced search & filters', 'New prompts weekly', 'Cancel anytime'],
-  },
-  {
-    name: 'Pro Yearly',
-    planType: 'yearly',
-    price: '$49',
-    period: '/ year',
-    description: 'Huge discount versus monthly. Best value if you plan to stay.',
-    hook: 'Save 49% compared with paying monthly',
-    featured: false,
-    ctaLabel: 'Choose yearly',
-    ctaHref: '/pricing',
-    features: ['Everything in Pro', 'Save 49% vs monthly billing', 'Unlimited Prompt Enhancer generations', 'Prompt Vault (all prompts)', 'Shot to Prompt AI tool', 'Advanced search & filters', 'New prompts weekly'],
   },
 ]

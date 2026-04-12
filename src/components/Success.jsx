@@ -4,7 +4,7 @@ import { useSearchParams, Link } from 'react-router-dom'
 export default function Success() {
   const [searchParams] = useSearchParams()
   const rawPlan = searchParams.get('plan')
-  const plan = rawPlan === 'monthly' || rawPlan === 'one_time' ? rawPlan : 'yearly'
+  const plan = rawPlan === 'monthly' ? rawPlan : 'yearly'
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
@@ -15,7 +15,7 @@ export default function Success() {
         
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4 bg-purple-100 text-purple-700">
           <Sparkles className="h-4 w-4" />
-          {plan === 'monthly' ? 'Pro Monthly Activated' : plan === 'one_time' ? 'Pro One-Time Activated' : 'Pro Yearly Activated'}
+          {plan === 'monthly' ? 'Pro Monthly Activated' : 'Pro Yearly Activated'}
         </div>
         <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">
           Welcome to Pro!
@@ -23,9 +23,7 @@ export default function Success() {
         <p className="text-gray-600 mb-8">
           {plan === 'monthly'
             ? 'Payment received. Your Pro subscription is being finalized securely and usually appears within seconds.'
-            : plan === 'one_time'
-              ? 'Payment received. Your one-time Pro access is being finalized securely and usually appears within seconds.'
-              : 'Payment received. Your Pro yearly access is being finalized securely and usually appears within seconds.'}
+            : 'Payment received. Your Pro yearly access is being finalized securely and usually appears within seconds.'}
         </p>
 
         <div className="space-y-4">

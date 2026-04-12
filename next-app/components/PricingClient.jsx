@@ -1,65 +1,9 @@
 'use client'
 
-import { useMemo, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { Check, Loader2 } from 'lucide-react'
-import { useAuth } from '../contexts/AuthContext'
-import { PRICING_TIERS } from '../lib/prompt-data'
+import PricingCards from './PricingCards'
 
 export default function PricingClient() {
-  const router = useRouter()
-  const { user } = useAuth()
-  const [loadingPlan, setLoadingPlan] = useState('')
-  const [checkoutError, setCheckoutError] = useState('')
-
-  const plans = useMemo(
-    () =>
-      PRICING_TIERS.map((plan) => ({
-        ...plan,
-        planType: plan.planType,
-        popular: plan.planType === 'yearly',
-      })),
-    [],
-  )
-
-  const handleCheckout = async (planType) => {
-    setCheckoutError('')
-
-    if (planType === 'free') {
-      router.push('/prompts')
-      return
-    }
-
-    if (!user) {
-      router.push(`/sign-in?next=%2Fpricing`)
-      return
-    }
-
-    setLoadingPlan(planType)
-    try {
-      const response = await fetch('/.netlify/functions/create-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: user.email,
-          userId: user.id,
-          plan: planType,
-        }),
-      })
-
-      const data = await response.json().catch(() => ({}))
-      if (!response.ok || !data?.url) {
-        throw new Error(data?.error || 'Unable to start checkout right now.')
-      }
-
-      window.location.assign(data.url)
-    } catch (error) {
-      setCheckoutError(error?.message || 'Unable to start checkout right now.')
-      setLoadingPlan('')
-    }
-  }
-
   return (
     <div className="page-stack pricing-live-shell">
       <div className="breadcrumb">
@@ -76,52 +20,7 @@ export default function PricingClient() {
         </div>
       </section>
 
-      {checkoutError ? <div className="error-card">{checkoutError}</div> : null}
-
-      <section className="pricing-grid-live">
-        {plans.map((plan) => {
-          const isLoading = loadingPlan === plan.planType
-          return (
-            <article key={plan.name} className={`pricing-tier-card ${plan.popular ? 'featured yearly' : ''}`}>
-              {plan.popular ? <div className="pricing-feature-chip">Huge Discount</div> : null}
-              <div className="pricing-tier-name">{plan.name}</div>
-              <p className="pricing-tier-desc">{plan.description}</p>
-              {plan.popular ? <div className="pricing-tier-hook">Save 49% compared with paying monthly</div> : null}
-              <div className="pricing-tier-price-row">
-                <span className="pricing-tier-price">{plan.price}</span>
-                <span className="pricing-tier-period">{plan.period}</span>
-              </div>
-              <ul className="pricing-tier-features">
-                {plan.features.map((feature) => (
-                  <li key={feature}>
-                    <Check className="icon-xs" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                className={`pricing-tier-cta ${plan.popular ? 'featured' : ''}`}
-                onClick={() => handleCheckout(plan.planType)}
-                disabled={Boolean(loadingPlan)}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="icon-xs spin" />
-                    Redirecting…
-                  </>
-                ) : plan.planType === 'free' ? (
-                  'Start Free — No Card Needed'
-                ) : plan.planType === 'monthly' ? (
-                  'Go Pro — $7.99/mo'
-                ) : (
-                  'Go Yearly — $49/yr'
-                )}
-              </button>
-            </article>
-          )
-        })}
-      </section>
+      <PricingCards surface="page" />
 
       <section className="feature-card static-card pricing-support-card">
         <h2>Pricing FAQ</h2>

@@ -2,12 +2,11 @@ import Link from 'next/link'
 import HomeHeroPreview from '../components/HomeHeroPreview'
 import HomeCameraMovesPreview from '../components/HomeCameraMovesPreview'
 import HomeVaultPreviewGrid from '../components/HomeVaultPreviewGrid'
+import PricingCards from '../components/PricingCards'
 import {
-  CATEGORY_PAGES,
   FEATURED_STYLE_PRESETS,
   HOME_CAMERA_MOVES,
   PLATFORM_BADGES,
-  PRICING_TIERS,
   TESTIMONIALS,
 } from '../lib/prompt-data'
 import { PAGE_SEO } from '../lib/seo'
@@ -221,21 +220,6 @@ export default function HomePage() {
 
       <section className="homepage-tool-section vault-home-section">
         <div className="container">
-          <div className="section-heading redesign-heading center-text">
-            <div className="section-chip">Curated library</div>
-            <h2 className="section-title">Prompt Vault</h2>
-            <p className="section-sub">
-              Same prompt structure, same rich prompt-card language — just a tighter homepage slice before you open the full library.
-            </p>
-          </div>
-          <div className="vault-home-cats">
-            {CATEGORY_PAGES.slice(0, 6).map((category) => (
-              <Link key={category.slug} href={`/prompts/${category.slug}`} className="category-pill">
-                <span className="category-dot" style={{ background: category.accent }} />
-                {category.name}
-              </Link>
-            ))}
-          </div>
           <HomeVaultPreviewGrid />
           <div className="center-row">
             <Link href="/prompts" className="cta-secondary">
@@ -272,7 +256,14 @@ export default function HomePage() {
                 </div>
                 <div className="move-home-prompt-shell">
                   <div className="move-home-prompt-label">ADD TO YOUR PROMPT</div>
-                  <div className="move-home-prompt">{move.prompt}</div>
+                  <div className="move-home-prompt">
+                    {move.prompts.map((prompt, index) => (
+                      <span key={prompt}>
+                        <span className="move-home-prompt-var">{prompt}</span>
+                        {index < move.prompts.length - 1 ? ', ' : ''}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -313,27 +304,7 @@ export default function HomePage() {
             <h2 className="section-title">Simple pricing for working AI video workflows.</h2>
             <p className="section-sub">Start free. Upgrade when CineWorkFlo becomes part of how you actually build.</p>
           </div>
-          <div className="card-grid three-up pricing-home-grid">
-            {PRICING_TIERS.map((tier) => (
-              <div key={tier.name} className={`pricing-tier-card ${tier.featured ? 'featured' : ''}`}>
-                <div className="pricing-tier-name">{tier.name}</div>
-                <p className="pricing-tier-desc">{tier.description}</p>
-                <div className="pricing-tier-price-row">
-                  <span className="pricing-tier-price">{tier.price}</span>
-                  <span className="pricing-tier-period">{tier.period}</span>
-                </div>
-                <div className={`pricing-tier-hook ${tier.featured ? 'featured-hook' : ''}`}>{tier.hook}</div>
-                <ul className="pricing-tier-features">
-                  {tier.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-                <Link href={tier.ctaHref} className={`pricing-tier-cta ${tier.featured ? 'featured' : ''}`}>
-                  {tier.ctaLabel}
-                </Link>
-              </div>
-            ))}
-          </div>
+          <PricingCards surface="home" />
         </div>
       </section>
     </main>

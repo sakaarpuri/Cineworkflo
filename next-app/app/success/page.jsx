@@ -12,7 +12,7 @@ export const metadata = buildSeoMetadata({
 export default async function SuccessPage({ searchParams }) {
   const params = await searchParams
   const rawPlan = params?.plan
-  const plan = rawPlan === 'monthly' || rawPlan === 'one_time' ? rawPlan : 'yearly'
+  const plan = rawPlan === 'monthly' ? 'monthly' : 'yearly'
 
   return (
     <main className="route-shell">
@@ -24,16 +24,14 @@ export default async function SuccessPage({ searchParams }) {
 
           <div className="success-pill">
             <Sparkles className="icon-xs" />
-            {plan === 'monthly' ? 'Pro Monthly Activated' : plan === 'one_time' ? 'Pro One-Time Activated' : 'Pro Yearly Activated'}
+            {plan === 'monthly' ? 'Pro Monthly Activated' : 'Pro Yearly Activated'}
           </div>
 
           <h1>Welcome to Pro!</h1>
           <p className="success-copy">
             {plan === 'monthly'
               ? 'Payment received. Your Pro subscription is being finalized securely and usually appears within seconds.'
-              : plan === 'one_time'
-                ? 'Payment received. Your one-time Pro access is being finalized securely and usually appears within seconds.'
-                : 'Payment received. Your Pro yearly access is being finalized securely and usually appears within seconds.'}
+              : 'Payment received. Your Pro yearly access is being finalized securely and usually appears within seconds.'}
           </p>
 
           <div className="success-actions">

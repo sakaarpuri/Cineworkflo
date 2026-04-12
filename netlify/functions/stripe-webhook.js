@@ -63,21 +63,6 @@ const applySubscriptionState = async (subscription, fallbackUserId = null) => {
   });
 };
 
-const applyOneTimeState = async (session) => {
-  const userId = getUserIdFromPayload(session);
-  if (!userId) return;
-
-  await updateUserProStatus(userId, {
-    is_pro: true,
-    pro_status: 'lifetime',
-    pro_expires_at: null,
-    stripe_customer_id: session.customer ? String(session.customer) : '',
-    stripe_subscription_id: '',
-    stripe_purchase_type: 'one_time',
-    stripe_checkout_session_id: session.id ? String(session.id) : '',
-  });
-};
-
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return jsonResponse(405, { error: 'Method not allowed' });
@@ -108,8 +93,6 @@ exports.handler = async (event) => {
         const userId = getUserIdFromPayload(object);
         const subscription = await stripe.subscriptions.retrieve(object.subscription);
         await applySubscriptionState(subscription, userId);
-      } else if (object.mode === 'payment' && object.payment_status === 'paid') {
-        await applyOneTimeState(object);
       }
     }
 
