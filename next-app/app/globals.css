@@ -1599,7 +1599,7 @@ a {
   text-align: left;
 }
 
-.vault-preview-toggle-copy h3 {
+.vault-preview-toggle-copy h2 {
   margin: 0 0 6px;
   font-size: 1.85rem;
 }
@@ -1607,6 +1607,13 @@ a {
 .vault-preview-toggle-copy p {
   margin: 0;
   color: var(--text-secondary);
+}
+
+.vault-preview-note {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
 }
 
 .vault-preview-toggle {

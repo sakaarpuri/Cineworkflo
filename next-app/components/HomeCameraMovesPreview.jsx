@@ -1,13 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { DollyMove, TrackingMove, HandheldMove } from './cameraMoves/moves'
+import { HOMEPAGE_CAMERA_MOVES } from './cameraMoves/cameraMoveData'
 
-const MOVE_COMPONENTS = {
-  Dolly: DollyMove,
-  'Tracking Shot': TrackingMove,
-  Handheld: HandheldMove,
-}
+const MOVE_COMPONENTS = Object.fromEntries(HOMEPAGE_CAMERA_MOVES.map((move) => [move.name, move.MoveComponent]))
 
 export default function HomeCameraMovesPreview({ title }) {
   const [isPlaying, setIsPlaying] = useState(true)

@@ -3,9 +3,9 @@ import HomeHeroPreview from '../components/HomeHeroPreview'
 import HomeCameraMovesPreview from '../components/HomeCameraMovesPreview'
 import HomeVaultPreviewGrid from '../components/HomeVaultPreviewGrid'
 import PricingCards from '../components/PricingCards'
+import { HOMEPAGE_CAMERA_MOVES_META } from '../lib/cameraMovesMeta'
 import {
   FEATURED_STYLE_PRESETS,
-  HOME_CAMERA_MOVES,
   PLATFORM_BADGES,
   TESTIMONIALS,
 } from '../lib/prompt-data'
@@ -239,17 +239,17 @@ export default function HomePage() {
             </p>
           </div>
           <div className="card-grid three-up moves-home-grid">
-            {HOME_CAMERA_MOVES.map((move) => (
-              <div key={move.title} className="feature-card static-card move-home-card">
+            {HOMEPAGE_CAMERA_MOVES_META.map((move) => (
+              <div key={move.id} className="feature-card static-card move-home-card">
                 <div className="move-home-badge-row">
                   <span className={`move-home-badge ${move.badgeType}`}>{move.badge}</span>
                 </div>
                 <div className="move-home-title-row">
-                  <h3>{move.title}</h3>
+                  <h3>{move.name}</h3>
                   <span className="move-home-tag">{move.tag}</span>
                 </div>
-                <HomeCameraMovesPreview title={move.title} />
-                <p>{move.description}</p>
+                <HomeCameraMovesPreview title={move.name} />
+                <p>{move.desc}</p>
                 <div className="move-home-feel-row">
                   <span className="move-home-feel-icon">🎬</span>
                   <span><strong>Feels like:</strong> {move.feelText}</span>
