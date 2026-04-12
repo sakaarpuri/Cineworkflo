@@ -3,7 +3,8 @@ import { useSearchParams, Link } from 'react-router-dom'
 
 export default function Success() {
   const [searchParams] = useSearchParams()
-  const plan = searchParams.get('plan') || 'yearly'
+  const rawPlan = searchParams.get('plan')
+  const plan = rawPlan === 'monthly' ? rawPlan : 'yearly'
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">

@@ -59,6 +59,7 @@ const applySubscriptionState = async (subscription, fallbackUserId = null) => {
     pro_expires_at: isActive ? toIsoOrNull(subscription.current_period_end) : null,
     stripe_customer_id: subscription.customer ? String(subscription.customer) : '',
     stripe_subscription_id: subscription.id ? String(subscription.id) : '',
+    stripe_purchase_type: 'subscription',
   });
 };
 

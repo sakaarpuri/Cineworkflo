@@ -1,0 +1,62 @@
+import PromptVaultClient from '../../../components/PromptVaultClient'
+import { CATEGORY_BY_SLUG, PROMPT_CATEGORY_PAGES } from '../../../lib/vault-data'
+import { buildPromptCategoryMetadata } from '../../../lib/seo'
+
+export function generateStaticParams() {
+  return PROMPT_CATEGORY_PAGES.map((category) => ({ categorySlug: category.slug }))
+}
+
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params
+  const category = CATEGORY_BY_SLUG[resolvedParams.categorySlug]
+  if (!category) {
+    return { title: 'Prompt Category | CineWorkflo' }
+  }
+
+  return buildPromptCategoryMetadata(category)
+}
+
+export default async function PromptCategoryPage({ params }) {
+  const resolvedParams = await params
+  const category = CATEGORY_BY_SLUG[resolvedParams.categorySlug]
+
+  if (!category) {
+    return (
+      <main className="route-shell">
+        <div className="container">
+          <div className="feature-card static-card">
+            <div className="card-eyebrow">Category not found</div>
+            <h1>Unknown category</h1>
+            <p>This category slug does not exist in the current Prompt Vault.</p>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  return (
+    <main className="route-shell">
+      <div className="container category-shell">
+        <div className="breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/prompts">Prompt Vault</a>
+          <span>/</span>
+          <span>{category.name}</span>
+        </div>
+
+        <div className="category-hero feature-card static-card">
+          <div className="card-eyebrow" style={{ color: category.accent }}>Prompt Category</div>
+          <h1>{category.name}</h1>
+          <p>{category.description}</p>
+          <div className="category-meta">
+            <span>{category.count}+ prompts in current library</span>
+            <span>Variable-driven prompts built for image-to-video workflows</span>
+          </div>
+        </div>
+
+        <PromptVaultClient initialCategory={category.name} />
+      </div>
+    </main>
+  )
+}
