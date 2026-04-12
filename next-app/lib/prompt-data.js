@@ -73,7 +73,7 @@ export const CATEGORY_PAGES = [
 
 export const CATEGORY_BY_SLUG = Object.fromEntries(CATEGORY_PAGES.map((item) => [item.slug, item]))
 
-export const FEATURED_VAULT_CARD_IDS = [53, 101, 350, 355]
+export const FEATURED_VAULT_CARD_IDS = [53, 101, 280, 320]
 
 export const FEATURED_MOODS = ['Epic', 'Dreamlike', 'Tense', 'Whimsical']
 export const FEATURED_USE_CASES = ['Storytelling', 'Brand Ad', 'Short-form', 'Documentary']
@@ -126,21 +126,33 @@ export const PLATFORM_BADGES = [
 export const HOME_CAMERA_MOVES = [
   {
     key: 'dolly',
-    title: 'Slow Push-In',
-    description: 'Tension-building camera language for character focus, reveals, and emotional escalation.',
-    prompt: 'Slow push-in over 8 seconds, subtle stabilization, subject remains locked in frame.',
+    title: 'Dolly',
+    tag: 'push in / pull back',
+    badge: 'CLASSIC MOVE',
+    badgeType: 'classic',
+    description: 'The camera physically moves forward or backward on a track. Unlike zoom, perspective genuinely shifts.',
+    feelText: 'Walking into the scene. Builds intimacy, tension, or a slow reveal.',
+    prompt: 'slow dolly in toward subject, camera pushes forward on a track, cinematic push into close-up',
   },
   {
     key: 'tracking',
-    title: 'Lateral Tracking',
-    description: 'Great for product, fashion, and story beats where movement should feel directed but controlled.',
-    prompt: 'Lateral tracking shot, clean parallax separation, background glides past with measured pace.',
+    title: 'Tracking Shot',
+    tag: 'follow sideways',
+    badge: 'CLASSIC MOVE',
+    badgeType: 'classic',
+    description: 'Camera and subject move together sideways at the same speed, keeping the subject perfectly framed.',
+    feelText: 'Running alongside someone. Keeps energy and the subject always centred in frame.',
+    prompt: 'tracking shot following subject, camera moves parallel sideways, side-on tracking as character walks',
   },
   {
-    key: 'orbit',
-    title: 'Floating Orbit',
-    description: 'Useful when you want cinematic atmosphere without turning the shot into aggressive motion.',
-    prompt: 'Floating circular move around subject, soft continuous drift, no abrupt speed changes.',
+    key: 'handheld',
+    title: 'Handheld',
+    tag: 'smooth / natural',
+    badge: 'DYNAMIC / CINEMATIC',
+    badgeType: 'dynamic',
+    description: 'A handheld camera has subtle, organic drift from breathing, footsteps, and micro-corrections.',
+    feelText: 'Present and personal. Adds realism, tension, and immediacy.',
+    prompt: 'handheld camera, smooth natural micro-drift, human-operated, subtle breathing sway',
   },
 ]
 

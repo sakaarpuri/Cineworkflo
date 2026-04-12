@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import HomeCameraMovePreview from '../components/HomeCameraMovePreview'
 import HomeHeroPreview from '../components/HomeHeroPreview'
+import HomeCameraMovesPreview from '../components/HomeCameraMovesPreview'
 import HomeVaultPreviewGrid from '../components/HomeVaultPreviewGrid'
 import {
   CATEGORY_PAGES,
@@ -223,10 +223,9 @@ export default function HomePage() {
         <div className="container">
           <div className="section-heading redesign-heading center-text">
             <div className="section-chip">Curated library</div>
-            <h2 className="section-title">Prompt Vault is where you go deeper.</h2>
+            <h2 className="section-title">Prompt Vault</h2>
             <p className="section-sub">
-              Not just 300+ prompts — a curated image-to-video library with variables, categories, and pro controls that
-              make references actually usable in production.
+              Same prompt structure, same rich prompt-card language — just a tighter homepage slice before you open the full library.
             </p>
           </div>
           <div className="vault-home-cats">
@@ -250,18 +249,31 @@ export default function HomePage() {
         <div className="container">
           <div className="section-heading redesign-heading center-text">
             <div className="section-chip">Support tool</div>
-            <h2 className="section-title">Camera Moves keeps prompts from feeling generic.</h2>
+            <h2 className="section-title">Camera Movements</h2>
             <p className="section-sub">
-              Learn the movement language that makes AI prompts feel directed instead of guessed.
+              Learn the language of the Camera to master the language of prompts.
             </p>
           </div>
           <div className="card-grid three-up moves-home-grid">
             {HOME_CAMERA_MOVES.map((move) => (
               <div key={move.title} className="feature-card static-card move-home-card">
-                <HomeCameraMovePreview moveKey={move.key} title={move.title} />
-                <h3>{move.title}</h3>
+                <div className="move-home-badge-row">
+                  <span className={`move-home-badge ${move.badgeType}`}>{move.badge}</span>
+                </div>
+                <div className="move-home-title-row">
+                  <h3>{move.title}</h3>
+                  <span className="move-home-tag">{move.tag}</span>
+                </div>
+                <HomeCameraMovesPreview title={move.title} />
                 <p>{move.description}</p>
-                <div className="move-home-prompt">{move.prompt}</div>
+                <div className="move-home-feel-row">
+                  <span className="move-home-feel-icon">🎬</span>
+                  <span><strong>Feels like:</strong> {move.feelText}</span>
+                </div>
+                <div className="move-home-prompt-shell">
+                  <div className="move-home-prompt-label">ADD TO YOUR PROMPT</div>
+                  <div className="move-home-prompt">{move.prompt}</div>
+                </div>
               </div>
             ))}
           </div>

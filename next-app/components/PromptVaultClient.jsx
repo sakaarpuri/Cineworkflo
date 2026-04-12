@@ -385,7 +385,7 @@ function PromptCard({ prompt, user }) {
             </div>
           </div>
           <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>
-            Back to beginner <ChevronUp className="icon-xs" />
+            Back to Essential <ChevronUp className="icon-xs" />
           </button>
         </>
       )}

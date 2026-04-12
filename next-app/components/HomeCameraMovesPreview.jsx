@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { DollyMove, TrackingMove, OrbitMove } from './cameraMoves/moves'
+import { DollyMove, TrackingMove, HandheldMove } from './cameraMoves/moves'
 
 const MOVE_COMPONENTS = {
-  'Slow Push-In': DollyMove,
-  'Lateral Tracking': TrackingMove,
-  'Floating Orbit': OrbitMove,
+  Dolly: DollyMove,
+  'Tracking Shot': TrackingMove,
+  Handheld: HandheldMove,
 }
 
 export default function HomeCameraMovesPreview({ title }) {
