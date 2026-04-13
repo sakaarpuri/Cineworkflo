@@ -448,8 +448,8 @@ a {
 
 .hero-copy {
   color: var(--text-secondary);
-  font-size: 1.2rem;
-  line-height: 1.65;
+  font-size: 1.32rem;
+  line-height: 1.75;
   margin: 0 0 28px;
   max-width: 48rem;
 }
@@ -2474,7 +2474,8 @@ a {
 }
 
 .section-sub {
-  font-size: 1rem;
+  font-size: 1.12rem;
+  line-height: 1.8;
   max-width: 38rem;
 }
 
@@ -2510,7 +2511,13 @@ a {
 .upload-demo-shell h3,
 .homepage-enhancer-shell h3 {
   margin: 0 0 4px;
-  font-size: 1rem;
+  font-size: 1.12rem;
+}
+
+.upload-demo-shell p,
+.compact-output-card p {
+  font-size: 1.02rem;
+  line-height: 1.75;
 }
 
 .upload-demo-shell p,
@@ -2692,7 +2699,7 @@ a {
 }
 
 .move-home-thumb {
-  min-height: 172px;
+  min-height: 194px;
   border-radius: 22px;
   background: linear-gradient(165deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92));
   position: relative;
@@ -2704,17 +2711,19 @@ a {
 .animated-move-home-thumb .camera-move-card__stage {
   width: 100%;
   height: 100%;
-  min-height: 132px;
+  min-height: 154px;
   border-radius: 18px;
+  transform: scale(0.92);
+  transform-origin: center center;
 }
 
 .animated-move-home-thumb .camera-move-card__hint-pill {
-  transform: scale(0.92);
+  transform: scale(0.98);
 }
 
 .animated-move-home-thumb .camera-move-card__view-label,
 .animated-move-home-thumb .camera-move-card__dir-label {
-  transform: scale(0.92);
+  transform: scale(0.96);
   transform-origin: top left;
 }
 
