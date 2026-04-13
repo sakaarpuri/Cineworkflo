@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { BookmarkPlus, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { CATEGORY_COLORS } from '../lib/vault-data'
@@ -97,16 +97,22 @@ function SaveButton({ onSave, status, label = 'Save' }) {
   )
 }
 
-export default function VaultPromptCard({ prompt, user }) {
-  const [expanded, setExpanded] = useState(false)
+export default function VaultPromptCard({ prompt, user, context = 'vault', initialExpanded = false }) {
+  const [expanded, setExpanded] = useState(initialExpanded)
   const [copiedKey, setCopiedKey] = useState('')
   const [saveStatus, setSaveStatus] = useState(DEFAULT_EMPTY_SAVE_STATUS)
   const [currentGroupId, setCurrentGroupId] = useState('')
+  const isHomepagePreview = context === 'home'
+  const promptHref = `/prompts?prompt=${prompt.id}&expand=1`
   const [varValues, setVarValues] = useState(() => {
     const next = {}
     for (const [key, spec] of Object.entries(prompt.variables || {})) next[key] = spec?.default ?? ''
     return next
   })
+
+  useEffect(() => {
+    setExpanded(initialExpanded)
+  }, [initialExpanded])
 
   const valueByNormKey = useMemo(() => {
     const next = {}
@@ -212,7 +218,7 @@ export default function VaultPromptCard({ prompt, user }) {
   }
 
   return (
-    <article className="vault-card-live">
+    <article id={`prompt-${prompt.id}`} className={`vault-card-live ${isHomepagePreview ? 'vault-card-home-preview' : ''}`}>
       {prompt.thumbnail_url ? <img src={prompt.thumbnail_url} alt={prompt.title} className="vault-card-thumb" loading="lazy" /> : null}
       <div className="vault-card-top">
         <div className="vault-id-row">
@@ -245,9 +251,20 @@ export default function VaultPromptCard({ prompt, user }) {
               onCopy={() => copyText('video', filledVideo)}
             />
           </div>
-          <button type="button" className="vault-expand-button" onClick={() => setExpanded(true)}>
-            Show pro controls <ChevronDown className="icon-xs" />
-          </button>
+          {isHomepagePreview ? (
+            <div className="vault-home-action-row">
+              <button type="button" className="vault-expand-button" onClick={() => setExpanded(true)}>
+                Quick preview <ChevronDown className="icon-xs" />
+              </button>
+              <Link href={promptHref} className="vault-expand-button homepage-vault-expand-link">
+                See pro controls <ChevronDown className="icon-xs" />
+              </Link>
+            </div>
+          ) : (
+            <button type="button" className="vault-expand-button" onClick={() => setExpanded(true)}>
+              Show pro controls <ChevronDown className="icon-xs" />
+            </button>
+          )}
         </>
       ) : (
         <>
@@ -324,9 +341,20 @@ export default function VaultPromptCard({ prompt, user }) {
               </section>
             </div>
           </div>
-          <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>
-            Back to Essential <ChevronUp className="icon-xs" />
-          </button>
+          {isHomepagePreview ? (
+            <div className="vault-home-action-row">
+              <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>
+                Back to Essential <ChevronUp className="icon-xs" />
+              </button>
+              <Link href={promptHref} className="vault-expand-button homepage-vault-expand-link">
+                See prompt in Vault <ChevronDown className="icon-xs" />
+              </Link>
+            </div>
+          ) : (
+            <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>
+              Back to Essential <ChevronUp className="icon-xs" />
+            </button>
+          )}
         </>
       )}
     </article>

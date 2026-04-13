@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Search } from 'lucide-react'
 import { CATEGORY_COLORS, PROMPT_LIBRARY } from '../lib/vault-data'
@@ -65,9 +65,13 @@ const curateDefaultAllView = (items) => {
   return mixed
 }
 
-export default function PromptVaultClient({ initialCategory = 'All', initialStyle = 'All', initialQuery = '' }) {
-  const [query, setQuery] = useState(initialQuery)
-  const [category, setCategory] = useState(initialCategory)
+export default function PromptVaultClient({ initialCategory = 'All', initialStyle = 'All', initialQuery = '', initialPromptId = '', autoExpandPrompt = false }) {
+  const initialPrompt = useMemo(
+    () => PROMPT_LIBRARY.find((prompt) => Number(prompt.id) === Number(initialPromptId)) || null,
+    [initialPromptId],
+  )
+  const [query, setQuery] = useState(initialQuery || (initialPrompt ? String(initialPrompt.id) : ''))
+  const [category, setCategory] = useState(initialCategory === 'All' && initialPrompt ? initialPrompt.category : initialCategory)
   const [style, setStyle] = useState(initialStyle)
   const { user } = useAuth()
 
@@ -94,6 +98,13 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
     const isDefaultAllView = !q && category === 'All' && style === 'All'
     return isDefaultAllView ? curateDefaultAllView(base) : base
   }, [category, query, style])
+
+  useEffect(() => {
+    if (!initialPromptId) return
+    const target = document.getElementById(`prompt-${initialPromptId}`)
+    if (!target) return
+    window.setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
+  }, [filtered, initialPromptId])
 
   return (
     <div className="page-stack vault-live-shell">
@@ -167,7 +178,12 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
 
       <section className="vault-grid-live">
         {filtered.map((prompt) => (
-          <VaultPromptCard key={prompt.id} prompt={prompt} user={user} />
+          <VaultPromptCard
+            key={prompt.id}
+            prompt={prompt}
+            user={user}
+            initialExpanded={autoExpandPrompt && Number(prompt.id) === Number(initialPromptId)}
+          />
         ))}
       </section>
 

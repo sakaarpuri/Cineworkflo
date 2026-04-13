@@ -44,7 +44,7 @@ export default function HomeVaultPreviewGrid() {
 
       <section className="vault-grid-live homepage-vault-grid">
         {FEATURED_PROMPTS.map((prompt) => (
-          <VaultPromptCard key={prompt.id} prompt={prompt} user={user} />
+          <VaultPromptCard key={prompt.id} prompt={prompt} user={user} context="home" />
         ))}
       </section>
     </>
