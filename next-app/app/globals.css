@@ -1322,13 +1322,13 @@ a {
 }
 
 .enhancer-live-shell .section-heading h1 {
-  font-size: clamp(2.3rem, 4vw, 3.3rem);
+  font-size: clamp(2.6rem, 4.8vw, 3.7rem);
   line-height: 1.08;
 }
 
 .enhancer-live-shell .section-heading p {
-  font-size: 1.08rem;
-  line-height: 1.8;
+  font-size: 1.18rem;
+  line-height: 1.85;
   max-width: 68ch;
 }
 
@@ -1338,11 +1338,11 @@ a {
 }
 
 .enhancer-card {
-  padding: 36px;
+  padding: 42px;
 }
 
 .enhancer-output-shell {
-  padding: 34px;
+  padding: 38px;
 }
 
 .enhancer-top-row {
@@ -1354,12 +1354,12 @@ a {
 
 .enhancer-input {
   width: 100%;
-  padding: 20px 22px;
+  padding: 22px 24px;
   border-radius: 16px;
   border: 2px solid var(--border-color);
   background: linear-gradient(145deg, color-mix(in srgb, var(--bg-secondary) 92%, white 8%), color-mix(in srgb, var(--bg-card) 96%, black 4%));
   color: var(--text-primary);
-  font-size: 1.16rem;
+  font-size: 1.24rem;
   box-shadow: var(--control-soft-shadow);
 }
 
@@ -1367,13 +1367,13 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 19px 22px;
+  padding: 21px 24px;
   border-radius: 16px;
   border: 2px solid rgba(255,107,53,0.24);
   background: linear-gradient(145deg, #ff6b35, #ea580c);
   color: #fff;
   font-weight: 800;
-  font-size: 1.04rem;
+  font-size: 1.12rem;
   cursor: pointer;
   box-shadow: 0 10px 22px rgba(255,107,53,0.25);
 }
@@ -1396,15 +1396,15 @@ a {
 
 .enhancer-control-stack {
   display: grid;
-  gap: 26px;
-  margin-top: 28px;
+  gap: 30px;
+  margin-top: 32px;
 }
 
 .control-block,
 .toggle-row {
   display: grid;
-  gap: 14px;
-  padding-top: 18px;
+  gap: 16px;
+  padding-top: 20px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -1414,7 +1414,7 @@ a {
 }
 
 .control-label {
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1483,16 +1483,16 @@ a {
 }
 
 .preset-helper {
-  font-size: 1rem;
+  font-size: 1.08rem;
   color: var(--text-secondary);
-  line-height: 1.65;
+  line-height: 1.75;
 }
 
 .enhancer-live-shell .filter-chip-button,
 .enhancer-live-shell .pill-toggle,
 .enhancer-live-shell .interpretation-button {
-  padding: 13px 17px;
-  font-size: 1rem;
+  padding: 14px 18px;
+  font-size: 1.06rem;
 }
 
 .live-preset-grid {
@@ -1507,11 +1507,11 @@ a {
 }
 
 .enhancer-live-shell .live-preset-card strong {
-  font-size: 1.06rem;
+  font-size: 1.16rem;
 }
 
 .enhancer-live-shell .live-preset-card span {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .live-preset-card.selected {
@@ -1522,7 +1522,7 @@ a {
   display: block;
   margin-top: 8px;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.98rem;
   font-style: normal;
   line-height: 1.65;
 }
@@ -3186,12 +3186,12 @@ a {
 .setting-label.sentence {
   text-transform: none;
   letter-spacing: 0;
-  font-size: 1rem;
+  font-size: 1.08rem;
 }
 
 .home-setting-stack {
   display: grid;
-  gap: 18px;
+  gap: 20px;
   padding-top: 8px;
 }
 
@@ -3199,7 +3199,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 14px 18px;
+  gap: 16px 20px;
 }
 
 .home-setting-row.secondary {
@@ -3215,7 +3215,7 @@ a {
 }
 
 .switch-side {
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   color: var(--text-muted);
 }
@@ -3246,8 +3246,8 @@ a {
 .soft-switch {
   position: relative;
   display: inline-flex;
-  width: 72px;
-  height: 38px;
+  width: 78px;
+  height: 42px;
   border-radius: 999px;
   background: var(--toggle-off-bg);
   border: 2px solid var(--toggle-off-border);
@@ -3283,26 +3283,26 @@ a {
   position: absolute;
   top: 3px;
   left: 4px;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
   background: var(--toggle-knob-bg);
   box-shadow: var(--toggle-knob-shadow);
 }
 
 .soft-switch.on .soft-switch-knob {
-  left: 40px;
+  left: 43px;
 }
 
 .setting-note-pill {
   display: inline-flex;
   align-items: center;
-  padding: 8px 13px;
+  padding: 9px 14px;
   border-radius: 999px;
   border: 1px solid var(--border-color);
   background: linear-gradient(145deg, color-mix(in srgb, var(--bg-elevated) 94%, white 6%), color-mix(in srgb, var(--bg-card) 96%, black 4%));
   color: var(--text-muted);
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   font-weight: 700;
   box-shadow: var(--control-soft-shadow);
 }
@@ -3340,7 +3340,7 @@ a {
 .home-style-note,
 .home-setting-caption {
   color: var(--text-muted);
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 500;
 }
 
@@ -3386,24 +3386,24 @@ a {
 }
 
 .preview-output-card {
-  min-height: 176px;
+  min-height: 188px;
 }
 
 .output-preview-tag {
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   font-weight: 700;
   color: var(--text-muted);
 }
 
 .preview-output-card p {
-  font-size: 1.08rem;
-  line-height: 1.8;
+  font-size: 1.16rem;
+  line-height: 1.85;
   color: var(--text-secondary);
 }
 
 .mono-output {
-  font-size: 1.08rem;
-  line-height: 1.95;
+  font-size: 1.16rem;
+  line-height: 2;
 }
 
 .pricing-live-shell {
