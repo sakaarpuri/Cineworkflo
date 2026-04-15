@@ -108,7 +108,7 @@ export default function PromptVaultClient({ initialCategory = 'All', initialStyl
 
   return (
     <div className="page-stack vault-live-shell">
-      <div className="section-heading left compact-heading">
+      <div className="section-heading">
         <div className="eyebrow">Prompt Vault</div>
         <h1>Curated prompts for real image-to-video work.</h1>
         <p>Browse prompts by category, style, and use case, then refine them with variables and pro prompt controls.</p>
