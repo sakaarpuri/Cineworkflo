@@ -11,6 +11,18 @@ const hasStrongPassword = (value) => {
   return /[\d\W_]/.test(value)
 }
 
+const isTransientNetworkError = (error) => {
+  const message = String(error?.message || '').toLowerCase()
+  return (
+    message.includes('load failed') ||
+    message.includes('failed to fetch') ||
+    message.includes('networkerror') ||
+    message.includes('network request failed')
+  )
+}
+
+const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms))
+
 export default function SignInClient({ nextPath = '/my-library' }) {
   const router = useRouter()
   const { user, loading: authLoading, signIn, signUp, displayName } = useAuth()
@@ -35,7 +47,12 @@ export default function SignInClient({ nextPath = '/my-library' }) {
 
     try {
       if (mode === 'login') {
-        const { error: signInError } = await signIn(email, password)
+        let response = await signIn(email, password)
+        if (response?.error && isTransientNetworkError(response.error)) {
+          await wait(450)
+          response = await signIn(email, password)
+        }
+        const { error: signInError } = response
         if (signInError) throw signInError
         router.replace(nextPath)
         router.refresh()
@@ -43,13 +60,22 @@ export default function SignInClient({ nextPath = '/my-library' }) {
         if (!hasStrongPassword(password)) {
           throw new Error('Password must be at least 6 characters and include a number or symbol.')
         }
-        const { error: signUpError } = await signUp(email, password, fullName)
+        let response = await signUp(email, password, fullName)
+        if (response?.error && isTransientNetworkError(response.error)) {
+          await wait(450)
+          response = await signUp(email, password, fullName)
+        }
+        const { error: signUpError } = response
         if (signUpError) throw signUpError
         setConfirmationSent(true)
         setPassword('')
       }
     } catch (submissionError) {
-      setError(submissionError.message || 'Unable to continue right now.')
+      if (isTransientNetworkError(submissionError)) {
+        setError('Connection to the sign-in service failed. Please try again in a moment.')
+      } else {
+        setError(submissionError.message || 'Unable to continue right now.')
+      }
     } finally {
       setLoading(false)
     }

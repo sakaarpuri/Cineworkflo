@@ -55,6 +55,8 @@ export default function AuthNav() {
 
   const themeIcon = isMounted && theme === 'light' ? <Moon size={18} /> : <Sun size={18} />
 
+  const signInHref = pathname === '/sign-in' ? '/sign-in' : `/sign-in?next=${encodeURIComponent(pathname || '/my-library')}`
+
   const authLinks = user ? (
     <>
       <Link href="/my-library" className="header-auth-link">
@@ -77,7 +79,7 @@ export default function AuthNav() {
         Get Pro
       </Link>
       <Link
-        href={pathname === '/sign-in' ? '/my-library' : `/sign-in?next=${encodeURIComponent(pathname || '/my-library')}`}
+        href={signInHref}
         className="header-auth-link"
       >
         Sign In
@@ -96,7 +98,7 @@ export default function AuthNav() {
             Get Pro
           </Link>
           <Link
-            href={pathname === '/sign-in' ? '/my-library' : `/sign-in?next=${encodeURIComponent(pathname || '/my-library')}`}
+            href={signInHref}
             className="header-auth-link"
           >
             Sign In
@@ -120,7 +122,7 @@ export default function AuthNav() {
                 Get Pro
               </Link>
               <Link
-                href={pathname === '/sign-in' ? '/my-library' : `/sign-in?next=${encodeURIComponent(pathname || '/my-library')}`}
+                href={signInHref}
                 className="header-auth-link"
               >
                 Sign In
