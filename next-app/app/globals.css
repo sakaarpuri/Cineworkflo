@@ -1315,6 +1315,64 @@ a {
   margin-top: 20px;
 }
 
+@media (max-width: 640px) {
+  /* Shot to Prompt — upload zone */
+  .upload-shell {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 12px;
+  }
+
+  .upload-shell h2,
+  .upload-shell h3 {
+    font-size: 1rem;
+  }
+
+  .upload-shell p {
+    font-size: 0.84rem;
+  }
+
+  .live-upload-shell {
+    min-height: 120px;
+  }
+
+  /* Output cards */
+  .output-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .mono-output {
+    font-size: 0.85rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .live-output-card {
+    padding: 16px;
+  }
+
+  /* Helper CTA row — stack on mobile */
+  .helper-actions {
+    flex-direction: column;
+  }
+
+  .helper-actions a {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Section heading — centre on mobile even when left-aligned on desktop */
+  .shot-live-shell .section-heading {
+    text-align: center;
+  }
+
+  .shot-live-shell .section-heading p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 .enhancer-live-shell {
   display: grid;
