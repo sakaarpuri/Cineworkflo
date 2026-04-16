@@ -1461,8 +1461,8 @@ a {
 .control-block,
 .toggle-row {
   display: grid;
-  gap: 16px;
-  padding-top: 20px;
+  gap: 14px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -1560,8 +1560,8 @@ a {
 .live-preset-card {
   width: 100%;
   text-align: left;
-  padding: 16px;
-  gap: 18px;
+  padding: 12px;
+  gap: 12px;
 }
 
 .enhancer-live-shell .live-preset-card strong {
@@ -1577,12 +1577,7 @@ a {
 }
 
 .live-preset-card em {
-  display: block;
-  margin-top: 8px;
-  color: var(--text-secondary);
-  font-size: 0.98rem;
-  font-style: normal;
-  line-height: 1.65;
+  display: none;
 }
 
 .live-preset-card.selected em,

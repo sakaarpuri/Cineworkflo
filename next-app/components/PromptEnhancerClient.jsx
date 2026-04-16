@@ -269,6 +269,8 @@ export default function PromptEnhancerClient() {
   const requestIdRef = useRef(0)
   const enhancerCacheRef = useRef({})
   const lastParamsRef = useRef({ idea: '', mood: '', useCase: '', preset: '', skillLevel: 'beginner', includeAudioSfx: false, includeImageDetails: false })
+  const outputRef = useRef(null)
+  const shouldScrollRef = useRef(false)
 
   const remainingFree = Math.max(0, FREE_TOTAL_LIMIT - usage.count)
   const isLimitReached = !canUsePro && remainingFree === 0
@@ -376,6 +378,7 @@ export default function PromptEnhancerClient() {
       setResult(nextResult)
       setHasGeneratedOnce(true)
       setCopiedSection('')
+      if (!isAutoUpdate) shouldScrollRef.current = true
       lastParamsRef.current = { idea, mood, useCase, preset, skillLevel, includeAudioSfx, includeImageDetails }
     } catch (err) {
       if (requestId !== requestIdRef.current) return
@@ -407,6 +410,13 @@ export default function PromptEnhancerClient() {
     const timeoutId = window.setTimeout(() => handleEnhance(true), 500)
     return () => window.clearTimeout(timeoutId)
   }, [canSubmit, handleEnhance, hasGeneratedOnce, idea, includeAudioSfx, includeImageDetails, mood, preset, skillLevel, useCase])
+
+  useEffect(() => {
+    if (result && shouldScrollRef.current && outputRef.current) {
+      shouldScrollRef.current = false
+      outputRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [result])
 
   const handleCopySection = async (key, text) => {
     if (!text) return
@@ -642,7 +652,7 @@ export default function PromptEnhancerClient() {
       </section>
 
       {result ? (
-        <section className="feature-card static-card enhancer-output-shell">
+        <section ref={outputRef} className="feature-card static-card enhancer-output-shell">
           {includeImageDetails ? (
             <div className="output-card live-output-card">
               <div className="output-header">
