@@ -118,7 +118,7 @@ export default function HomePage() {
           </div>
 
           <div className="feature-card static-card homepage-enhancer-shell">
-            <div className="enhancer-home-controls">
+            <div className="enhancer-home-controls" style={{ pointerEvents: 'none', userSelect: 'none' }}>
               <div className="enhancer-home-top">
                 <div className="prompt-input-shell home-prompt-input">
                   e.g. a lone boxer wrapping hands in a fluorescent locker room before the fight…
@@ -213,6 +213,11 @@ export default function HomePage() {
                   ))}
                 </div>
               </div>
+            </div>
+            <div className="section-card-actions">
+              <Link href="/prompt-enhancer" className="cta-primary">
+                Open Prompt Enhancer
+              </Link>
             </div>
           </div>
         </div>
