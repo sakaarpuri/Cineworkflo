@@ -1801,6 +1801,26 @@ a {
   font-size: 0.82rem;
 }
 
+html[data-theme='light'] .vault-id-pill,
+html[data-theme='light'] .vault-tool-pill,
+html[data-theme='light'] .vault-example-pill {
+  border: 1px solid var(--border-color);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--bg-elevated) 94%, white 6%), color-mix(in srgb, var(--bg-card) 96%, black 4%));
+  color: var(--text-secondary);
+  box-shadow: var(--control-soft-shadow);
+}
+
+html[data-theme='light'] .vault-category-pill {
+  background: color-mix(in srgb, var(--cat-color) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--cat-color) 30%, rgba(0, 0, 0, 0.08));
+  color: color-mix(in srgb, var(--cat-color) 80%, black);
+  box-shadow: none;
+}
+
+html[data-theme='light'] .vault-style-text {
+  color: var(--text-muted);
+}
+
 .vault-card-title {
   margin: 12px 0;
   font-size: 1.3rem;
