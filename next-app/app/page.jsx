@@ -3,9 +3,9 @@ import HomeHeroPreview from '../components/HomeHeroPreview'
 import HomeCameraMovesPreview from '../components/HomeCameraMovesPreview'
 import HomeVaultPreviewGrid from '../components/HomeVaultPreviewGrid'
 import PricingCards from '../components/PricingCards'
+import PromptEnhancerClient from '../components/PromptEnhancerClient'
 import { HOMEPAGE_CAMERA_MOVES_META } from '../lib/cameraMovesMeta'
 import {
-  FEATURED_STYLE_PRESETS,
   PLATFORM_BADGES,
   TESTIMONIALS,
 } from '../lib/prompt-data'
@@ -13,9 +13,7 @@ import { PAGE_SEO } from '../lib/seo'
 
 export const metadata = PAGE_SEO.home
 
-const HOME_ENHANCER_MOODS = ['Epic', 'Dramatic', 'Thought-Provoking', 'Whimsical', 'Serene', 'Mysterious', 'Energetic', 'Eerie', 'Calm', 'Surreal', 'Hopeful', 'Melancholic', 'Tense', 'Playful', 'Dreamlike']
-const HOME_ENHANCER_SELECTED_MOODS = new Set(['Epic', 'Tense', 'Dreamlike'])
-const HOME_USE_CASES = ['Product Showcase', 'Brand Ad', 'Spec Ad', 'Logo Reveal', 'Short-form', 'Social Media', 'Event Promo', 'Recruitment', 'Storytelling', 'Short Film', 'Documentary', 'Visual Essay', 'Education', 'Explainer', 'Podcast Visuals']
+
 
 export default function HomePage() {
   return (
@@ -107,119 +105,8 @@ export default function HomePage() {
       </section>
 
       <section className="homepage-tool-section enhancer-home-section">
-        <div className="container enhancer-home-stack">
-          <div className="section-heading redesign-heading center-text">
-            <div className="section-chip">Idea-first workflow</div>
-            <h2 className="section-title">Describe the shot in your head. We&apos;ll translate it for the machine.</h2>
-            <p className="section-sub">
-              Start from your own idea, then shape it with mood, style presets, and production-ready detail before you
-              move into generation tools.
-            </p>
-          </div>
-
-          <div className="feature-card static-card homepage-enhancer-shell">
-            <div className="enhancer-home-controls" style={{ pointerEvents: 'none', userSelect: 'none' }}>
-              <div className="enhancer-home-top">
-                <div className="prompt-input-shell home-prompt-input">
-                  e.g. a lone boxer wrapping hands in a fluorescent locker room before the fight…
-                </div>
-                <button className="enhance-primary" type="button">Enhance</button>
-              </div>
-
-              <div className="home-setting-stack">
-                <div className="home-setting-row">
-                  <span className="setting-label sentence">Level</span>
-                  <div className="switch-pair">
-                    <span className="switch-side active blue">Essential</span>
-                    <span className="soft-switch static blue"><span className="soft-switch-knob" /></span>
-                    <span className="switch-side">Pro</span>
-                    <span className="setting-note-pill">camera + lens</span>
-                  </div>
-                  <div className="switch-pair">
-                    <span className="switch-side">Images Off</span>
-                    <span className="soft-switch static green on"><span className="soft-switch-knob" /></span>
-                    <span className="switch-side active green-text">On</span>
-                    <span className="setting-note-pill">create a START FRAME</span>
-                  </div>
-                </div>
-
-                <div className="home-setting-caption">Simple language, optional add-ons</div>
-
-                <div className="home-setting-row secondary">
-                  <span className="setting-label sentence">SFX</span>
-                  <div className="switch-pair">
-                    <span className="switch-side active subtle">Off</span>
-                    <span className="soft-switch static"><span className="soft-switch-knob" /></span>
-                    <span className="switch-side">On</span>
-                  </div>
-                  <span className="home-setting-caption">Output stays visual-only</span>
-                </div>
-              </div>
-
-              <div className="home-chip-group">
-                <span className="control-label">Mood</span>
-                <div className="chip-row wrap-row compact-gap">
-                  {HOME_ENHANCER_MOODS.map((mood) => (
-                    <span key={mood} className={`filter-chip ${HOME_ENHANCER_SELECTED_MOODS.has(mood) ? 'selected' : ''}`}>{mood}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="home-chip-group">
-                <div className="home-style-shell">
-                  <div className="home-style-header">
-                    <span className="control-label sentence">Style</span>
-                    <div>
-                      <div className="home-style-title">Style Presets</div>
-                      <p className="preset-inline-copy">
-                        Choose a cinematic visual grammar inspired by iconic filmmakers. Mood selection sets emotional tone, style presets set lensing, framing, lighting, palette, and movement language.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="preset-grid live-preset-grid home-preset-grid">
-                    {FEATURED_STYLE_PRESETS.map((preset) => (
-                      <div key={preset.key} className="preset-card live-preset-card static-selected" style={{ '--preset-accent': preset.accent }}>
-                        <div
-                          className="preset-thumb"
-                          style={{ backgroundImage: `url(/preset-thumbnails/${preset.key}.webp)` }}
-                        />
-                        <div>
-                          <strong>{preset.label}</strong>
-                          <span>{preset.subtitle}</span>
-                          <em>
-                            {preset.key === 'desert-minimalism'
-                              ? 'Isolation, tension, existential scale, characters dwarfed by environment'
-                              : preset.key === 'humid-neon-noir'
-                                ? 'Romance, loneliness, urban intimacy, memory, longing, nocturnal mood'
-                                : preset.key === 'golden-hour-immersion'
-                                  ? 'Spiritual, transcendent, nature, memory, intimacy with the world, raw humanity'
-                                  : 'Whimsy, nostalgia, storybook comedy, meticulously crafted worlds, deadpan'}
-                          </em>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="home-style-footer">
-                    <span className="home-style-note">Choose one featured preset or open more styles below.</span>
-                    <button className="more-styles-pill" type="button">More styles</button>
-                    <span className="muted-inline">Nordic Noir · Dreamscape · Tokyo Night Drift</span>
-                  </div>
-                </div>
-              </div>
-              <div className="home-chip-group">
-                <span className="control-label sentence">Use</span>
-                <div className="chip-row wrap-row compact-gap">
-                  {HOME_USE_CASES.map((item) => (
-                    <span key={item} className="filter-chip">{item}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="section-card-actions">
-              <Link href="/prompt-enhancer" className="cta-primary">
-                Open Prompt Enhancer
-              </Link>
-            </div>
-          </div>
+        <div className="container">
+          <PromptEnhancerClient />
         </div>
       </section>
 
