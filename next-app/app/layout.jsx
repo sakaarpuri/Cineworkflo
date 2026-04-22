@@ -81,11 +81,14 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="footer-links-block">
                   <h4>Connect</h4>
+                  <a href="mailto:studio@cineworkflo.com" className="footer-contact-line">
+                    studio@cineworkflo.com
+                  </a>
                   <div className="footer-socials">
                     <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                       <Twitter size={18} />
                     </a>
-                    <a href="mailto:support@cineworkflo.com" aria-label="Email support">
+                    <a href="mailto:studio@cineworkflo.com" aria-label="Email studio">
                       <Mail size={18} />
                     </a>
                     <a href="https://github.com/sakaarpuri/Cineworkflo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

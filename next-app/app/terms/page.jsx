@@ -16,7 +16,7 @@ export default function TermsPage() {
         'Use of CineWorkflo is subject to lawful use, account integrity, and fair usage of platform features and APIs.',
         'Paid plans grant access according to plan terms. Abuse, reverse engineering, or fraudulent activity may result in account suspension.',
         'Service features may evolve over time as models, providers, and tooling change.',
-        'Questions about terms can be sent to support@cineworkflo.com.',
+        'Questions about terms can be sent to studio@cineworkflo.com.',
       ]}
     />
   )

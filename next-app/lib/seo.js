@@ -99,8 +99,8 @@ export const PAGE_SEO = {
     noindex: true,
   }),
   storyFlow: buildSeoMetadata({
-    title: 'Story Flow Planner (Test) — CineWorkflo',
-    description: 'Hidden Pro test route for turning one idea into a one-minute image-to-video production plan.',
+    title: 'Story Flow Planner — CineWorkflo',
+    description: 'Turn one idea into a one-minute image-to-video production plan, from concept through shot review.',
     path: '/story-flow',
     noindex: true,
   }),

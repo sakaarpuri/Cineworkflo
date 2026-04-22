@@ -1,0 +1,17 @@
+{
+  "prompt": "A photorealistic AI avatar pair — [lens] wide enough to frame both, [avatar A description] and [avatar B description] in a [shared context], their interaction mid-moment, [light quality] treating both equally, the dynamic between them communicated through body language and spatial relationship rather than expression alone, cinematic two-shot, 16:9. Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "photorealistic thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

@@ -13998,6 +13998,73 @@
     "source_id": 173
   },
   {
+    "id": 253,
+    "source_id": 174,
+    "category": "Brand & Product Ads",
+    "style": "Cinematic",
+    "best_on": [
+      "Luma",
+      "Runway"
+    ],
+    "audience": [
+      "Marketer"
+    ],
+    "image_prompt": "A [beverage type] glass or bottle on a [bar or table surface] in a [venue type] — [lens] at glass-height, the venue visible and inhabited in soft focus behind, [venue lighting] providing warm practical light, condensation or [liquid detail] visible on the glass surface, the [beverage type]'s colour luminous against the background light, cinematic drinks editorial still, 16:9",
+    "video_prompt": "Camera locked at glass-height — the [beverage type] completely still, [venue type] life continuing in soft focus behind it, [venue lighting] shifting fractionally as people move through the background, condensation on the glass moving one slow drop over the duration, the glass's [liquid detail] catching the [venue lighting] and holding it, the background life never intruding on the product's stillness.",
+    "sfx_prompt": "The ambient sound of [venue type] — conversation as texture rather than content, [venue lighting] source ambience if applicable (open fire, bar murmur, outdoor evening), the [beverage type] glass settling with a single low contact sound, the condensation drop arriving at the base of the glass with no audible impact, the product sounds subordinate to the atmosphere it belongs to",
+    "variables": {
+      "beverage type": {
+        "default": "amber whisky",
+        "examples": [
+          "pale lager",
+          "deep red wine",
+          "clear gin and tonic"
+        ]
+      },
+      "bar or table surface": {
+        "default": "dark oak bar surface",
+        "examples": [
+          "marble table",
+          "worn leather",
+          "brushed concrete"
+        ]
+      },
+      "venue type": {
+        "default": "intimate whisky bar",
+        "examples": [
+          "rooftop terrace at dusk",
+          "countryside pub",
+          "modern wine bar"
+        ]
+      },
+      "venue lighting": {
+        "default": "warm low Edison bulbs",
+        "examples": [
+          "open firelight",
+          "candlelight",
+          "soft pendant lamps"
+        ]
+      },
+      "liquid detail": {
+        "default": "the meniscus catching the bar light",
+        "examples": [
+          "ice catching the light",
+          "bubbles rising",
+          "the pour still settling"
+        ]
+      },
+      "lens": {
+        "default": "85mm",
+        "examples": [
+          "100mm macro",
+          "135mm",
+          "50mm"
+        ]
+      }
+    },
+    "tool_notes": "Luma handles the glass-height locked shot with background life. Runway maintains liquid and condensation detail. Add 'drinks editorial cinematic, warm practical light, venue atmosphere' for tone."
+  },
+  {
     "id": 254,
     "category": "Brand & Product Ads",
     "style": "Neon/Cyberpunk",
@@ -14405,6 +14472,66 @@
     },
     "tool_notes": "Runway handles the overhead anime flat lay. The hand at frame edge is the animation trigger — specify 'hand entering from frame edge' for Runway. Add 'anime flat lay, overhead locked, [art style], product arrangement' for correct aesthetic.",
     "source_id": 180
+  },
+  {
+    "id": 260,
+    "source_id": 181,
+    "category": "Brand & Product Ads",
+    "style": "Retro/VHS",
+    "best_on": [
+      "Runway",
+      "Kling"
+    ],
+    "audience": [
+      "Marketer",
+      "Creator"
+    ],
+    "image_prompt": "A [decade] era product demo — [presenter type] holding [product type] directly toward the camera in a [studio set] background, [lens] equivalent consumer camera wide, the frame slightly too bright and slightly too saturated in the way of tube-lit studios of the era, the product label facing the camera with the practiced deliberateness of television commerce, VHS grain and scan lines present, still frame from a broadcast, 16:9",
+    "video_prompt": "The [presenter type] demonstrates [product type] with the heightened enthusiasm of era-appropriate broadcast commerce — gesturing at its features, turning it to show different angles, the [studio set] background occasionally visible over their shoulder, the camera not cutting but the [presenter type] moving the product through the frame with the choreography of live television, VHS scan lines rolling slowly, the image occasionally brightening as if the camera is adjusting its exposure.",
+    "sfx_prompt": "The audio quality of [decade] broadcast television — slightly compressed, high-mid frequencies boosted, the [presenter type]'s voice carrying the acoustic signature of a studio microphone rather than a lapel, audience response or applause track if era-appropriate at low volume, the [product type] making its demonstration sounds through the same compression, a broadcast tone or jingle fragment at the opening or close",
+    "variables": {
+      "product type": {
+        "default": "kitchen appliance",
+        "examples": [
+          "cleaning product",
+          "beauty device",
+          "fitness equipment"
+        ]
+      },
+      "presenter type": {
+        "default": "enthusiastic female presenter in era-appropriate outfit",
+        "examples": [
+          "male host in a suit",
+          "celebrity endorser",
+          "two presenters together"
+        ]
+      },
+      "studio set": {
+        "default": "bright kitchen set with era-appropriate props",
+        "examples": [
+          "living room set in period decor",
+          "neutral product demo backdrop",
+          "home shopping channel set"
+        ]
+      },
+      "decade": {
+        "default": "1980s",
+        "examples": [
+          "1970s",
+          "1990s",
+          "early 2000s"
+        ]
+      },
+      "lens": {
+        "default": "18mm broadcast wide",
+        "examples": [
+          "mid zoom",
+          "slight telephoto",
+          "full wide"
+        ]
+      }
+    },
+    "tool_notes": "Runway handles the VHS broadcast aesthetic. Add 'VHS broadcast [decade] television commercial, studio lighting, era-appropriate presenter' for correct aesthetic. The over-enthusiasm is a feature, not a bug."
   },
   {
     "id": 261,

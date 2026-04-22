@@ -1,0 +1,17 @@
+{
+  "prompt": "An anime-style AI avatar in [environment context] — [lens] equivalent wide enough to show the full body and the environment relationship, [character type] in [outfit] with [distinguishing feature], [art style] aesthetic, [light quality] establishing the scene's emotional tone, the avatar in a [pose] that communicates their function, cinematic anime environment character still, 16:9. Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "anime-influenced thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}

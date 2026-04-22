@@ -147,6 +147,30 @@ const extractJsonObject = (value) => {
   }
 };
 
+const extractTaggedValue = (raw, tag) => {
+  const match = String(raw || '').match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, 'i'));
+  return normalizeText(match?.[1] || '');
+};
+
+const extractStructuredPayload = (rawText) => {
+  const jsonCandidate = normalizeStructuredPrompt(extractJsonObject(rawText));
+  if (jsonCandidate) return jsonCandidate;
+
+  const title = extractTaggedValue(rawText, 'TITLE');
+  const imagePrompt = extractTaggedValue(rawText, 'IMAGE_PROMPT');
+  const videoPrompt = extractTaggedValue(rawText, 'VIDEO_PROMPT');
+  const toolNotes = extractTaggedValue(rawText, 'TOOL_NOTES');
+
+  if (!imagePrompt || !videoPrompt) return null;
+
+  return {
+    title,
+    image_prompt: imagePrompt,
+    video_prompt: videoPrompt,
+    ...(toolNotes ? { tool_notes: toolNotes } : {})
+  };
+};
+
 const extractResponseText = (response) => {
   const blocks = Array.isArray(response?.content) ? response.content : [];
   return blocks
@@ -226,24 +250,20 @@ const repairStructuredPrompt = async ({ anthropicApiKey, rawText }) => {
         anthropicApiKey,
         model,
         maxTokens: 400,
-        system: `You repair malformed model output into valid JSON only.
+        system: `You repair malformed model output into a strict tagged format only.
 
-Return valid JSON only. No markdown. No explanation.
-
-Required JSON shape:
-{
-  "title": "short readable title",
-  "image_prompt": "string",
-  "video_prompt": "string",
-  "tool_notes": "optional string"
-}`,
+Return only these XML-like tags, with no markdown and no explanation:
+<TITLE>short readable title</TITLE>
+<IMAGE_PROMPT>string</IMAGE_PROMPT>
+<VIDEO_PROMPT>string</VIDEO_PROMPT>
+<TOOL_NOTES>optional short note</TOOL_NOTES>`,
         messages: [
           {
             role: 'user',
             content: [
               {
                 type: 'text',
-                text: `Repair this output into valid JSON with the exact required keys. Keep the creative content intact.\n\n${rawText}`
+                text: `Repair this output into the exact tagged format. Keep the creative content intact.\n\n${rawText}`
               }
             ]
           }
@@ -251,7 +271,7 @@ Required JSON shape:
       });
 
       const repairedText = extractResponseText(repaired);
-      const parsed = normalizeStructuredPrompt(extractJsonObject(repairedText));
+      const parsed = extractStructuredPayload(repairedText);
       if (parsed) return parsed;
     } catch {
       // Try next fallback model.
@@ -352,18 +372,14 @@ exports.handler = async (event) => {
         response = await requestAnthropicJson({
           anthropicApiKey,
           model,
-          maxTokens: 500,
+          maxTokens: 700,
           system: `You analyze either a single uploaded frame or three key frames from one continuous video shot and turn it into a structured image-to-video prompt package.
 
-Return valid JSON only. No markdown. No explanation.
-
-Required JSON shape:
-{
-  "title": "short readable title",
-  "image_prompt": "a still-image prompt that accurately recreates this uploaded frame with rich filmmaking detail",
-  "video_prompt": "a video prompt that starts from this exact frame and turns it into a plausible cinematic shot while preserving subject, environment, lighting family, and visual style",
-  "tool_notes": "optional brief note about why this motion/camera continuation fits the uploaded frame"
-}
+Return only these XML-like tags, with no markdown and no explanation:
+<TITLE>short readable title</TITLE>
+<IMAGE_PROMPT>a still-image prompt that accurately recreates this uploaded frame with rich filmmaking detail</IMAGE_PROMPT>
+<VIDEO_PROMPT>a video prompt that starts from this exact frame and turns it into a plausible cinematic shot while preserving subject, environment, lighting family, and visual style</VIDEO_PROMPT>
+<TOOL_NOTES>optional brief note about why this motion/camera continuation fits the uploaded frame</TOOL_NOTES>
 
 Rules:
 - If three frames are provided, treat them as start, middle, and end moments from one continuous shot.
@@ -404,7 +420,7 @@ Rules:
                   },
                   {
                     type: 'text',
-                    text: `These three images are start, middle, and end moments from one continuous shot. Return structured JSON. The image_prompt should recreate the representative middle-frame still accurately. The video_prompt should capture the actual motion, camera behavior, and pacing implied across the three frames while preserving subject, environment, lighting family, and visual identity.`
+                    text: `These three images are start, middle, and end moments from one continuous shot. Return the exact tagged format. The IMAGE_PROMPT should recreate the representative middle-frame still accurately. The VIDEO_PROMPT should capture the actual motion, camera behavior, and pacing implied across the three frames while preserving subject, environment, lighting family, and visual identity.`
                   }
                 ] : [
                   {
@@ -417,7 +433,7 @@ Rules:
                   },
                   {
                     type: 'text',
-                    text: `Analyze this uploaded frame and return the structured JSON response. The image prompt should recreate the still accurately. The video prompt should animate that exact still into a plausible shot with continuity preserved.`
+                    text: `Analyze this uploaded frame and return the exact tagged format. The IMAGE_PROMPT should recreate the still accurately. The VIDEO_PROMPT should animate that exact still into a plausible shot with continuity preserved.`
                   }
                 ])
               ]
@@ -435,7 +451,7 @@ Rules:
     }
 
     const contentText = extractResponseText(response);
-    let parsed = normalizeStructuredPrompt(extractJsonObject(contentText));
+    let parsed = extractStructuredPayload(contentText);
     if (!parsed) {
       parsed = await repairStructuredPrompt({ anthropicApiKey, rawText: contentText });
     }

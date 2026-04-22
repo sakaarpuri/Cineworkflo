@@ -46,7 +46,7 @@ export default async function SuccessPage({ searchParams }) {
 
           <div className="success-support">
             <p>Check your email for your receipt and access details.</p>
-            <a href="mailto:support@cineworkflo.com" className="inline-text-link success-support-link">
+            <a href="mailto:studio@cineworkflo.com" className="inline-text-link success-support-link">
               <Mail className="icon-xs" />
               Contact Support
             </a>

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { BookmarkPlus, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { CATEGORY_COLORS } from '../lib/vault-data'
 import { supabase } from '../lib/supabase'
@@ -98,6 +99,7 @@ function SaveButton({ onSave, status, label = 'Save' }) {
 }
 
 export default function VaultPromptCard({ prompt, user, context = 'vault', initialExpanded = false }) {
+  const router = useRouter()
   const [expanded, setExpanded] = useState(initialExpanded)
   const [copiedKey, setCopiedKey] = useState('')
   const [saveStatus, setSaveStatus] = useState(DEFAULT_EMPTY_SAVE_STATUS)
@@ -256,9 +258,13 @@ export default function VaultPromptCard({ prompt, user, context = 'vault', initi
               <button type="button" className="vault-expand-button" onClick={() => setExpanded(true)}>
                 Quick preview <ChevronDown className="icon-xs" />
               </button>
-              <Link href={promptHref} className="vault-expand-button homepage-vault-expand-link">
+              <button
+                type="button"
+                className="vault-expand-button homepage-vault-expand-link"
+                onClick={() => router.push(promptHref)}
+              >
                 See pro controls <ChevronDown className="icon-xs" />
-              </Link>
+              </button>
             </div>
           ) : (
             <button type="button" className="vault-expand-button" onClick={() => setExpanded(true)}>
@@ -346,9 +352,13 @@ export default function VaultPromptCard({ prompt, user, context = 'vault', initi
               <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>
                 Back to Essential <ChevronUp className="icon-xs" />
               </button>
-              <Link href={promptHref} className="vault-expand-button homepage-vault-expand-link">
+              <button
+                type="button"
+                className="vault-expand-button homepage-vault-expand-link"
+                onClick={() => router.push(promptHref)}
+              >
                 See prompt in Vault <ChevronDown className="icon-xs" />
-              </Link>
+              </button>
             </div>
           ) : (
             <button type="button" className="vault-expand-button" onClick={() => setExpanded(false)}>

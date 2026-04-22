@@ -138,7 +138,7 @@ function GateView({ user }) {
           <div className="story-gate-icon">
             <Lock className="icon-md" />
           </div>
-          <div className="eyebrow">Hidden test page</div>
+          <div className="eyebrow">Story Flow</div>
           <h1>Story Flow Planner</h1>
           <p>
             This page turns one idea into a one-minute image-to-video production plan up to start-frame and shot review.
@@ -460,7 +460,7 @@ export default function StoryFlowClient() {
       <section className="feature-card static-card story-hero-card">
         <div className="story-hero-head">
           <div>
-            <div className="eyebrow">Hidden test page</div>
+            <div className="eyebrow">Story Flow</div>
             <h1>Story Flow Planner</h1>
             <p>
               Turn one idea into a one-minute image-to-video production plan up to approved start-frame and shot prompt

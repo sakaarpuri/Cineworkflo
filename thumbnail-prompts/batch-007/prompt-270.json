@@ -1,0 +1,17 @@
+{
+  "prompt": "A full-body cyberpunk AI avatar standing in a [night environment] — [lens] wide enough to show the full figure with environment context, [outfit with tech detail] catching neon [color palette] from the environment, [augmentation visible on body] active, the environment wet and reflective around their feet, the avatar's silhouette clean against the [background light source], cinematic cyberpunk full-body still, 16:9. Create this as a simple cinematic thumbnail still for a prompt library card. Clean single-scene composition. Readable at small size. Strong central subject. No text, no interface chrome, no split panels, no collage, no before-after comparisons.",
+  "negative_prompt": "text overlay, typography, UI chrome, dashboard, website layout, collage, split screen, diptych, triptych, before-and-after, watermark, logo, cluttered composition, too many objects, cartoon, illustration, duplicate objects, warped geometry, unreadable tiny details",
+  "api_parameters": {
+    "resolution": "1K",
+    "output_format": "jpg",
+    "aspect_ratio": "16:9"
+  },
+  "settings": {
+    "resolution": "1280x720",
+    "style": "neon/cyberpunk thumbnail realism",
+    "lighting": "clean, readable, high-contrast lighting suited for a small homepage or library card",
+    "camera_angle": "single clear hero framing that matches the prompt",
+    "depth_of_field": "moderate depth of field for thumbnail readability",
+    "quality": "clean silhouette, realistic materials, readable at small size"
+  }
+}
