@@ -54,6 +54,24 @@ export default function HomePage() {
         </div>
       </section>
 
+
+      <section className="homepage-tool-section enhancer-home-section">
+        <div className="container">
+          <PromptEnhancerClient />
+        </div>
+      </section>
+
+      <section className="homepage-tool-section vault-home-section">
+        <div className="container">
+          <HomeVaultPreviewGrid />
+          <div className="center-row">
+            <Link href="/prompts" className="cta-secondary">
+              Open Prompt Vault
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="homepage-tool-section spotlight-section">
         <div className="container homepage-two-col">
           <div className="section-copy-block">
@@ -72,13 +90,13 @@ export default function HomePage() {
           </div>
 
           <div className="section-demo-card upload-demo-card">
-            <div className="upload-demo-shell">
+            <Link href="/shot-to-prompt?openUpload=1" className="upload-demo-shell upload-demo-link">
               <div className="upload-icon">＋</div>
               <div>
                 <h3>Drop an image or short clip here</h3>
                 <p>Max 25MB · video up to 15s · best for one continuous shot</p>
               </div>
-            </div>
+            </Link>
             <div className="output-stack compact-output-stack">
               <div className="output-card compact-output-card">
                 <div className="output-header">
@@ -96,27 +114,10 @@ export default function HomePage() {
               </div>
             </div>
             <div className="section-card-actions">
-              <Link href="/shot-to-prompt" className="text-link">
-                Open Shot to Prompt
+              <Link href="/shot-to-prompt?openUpload=1" className="text-link">
+                Open Shot to Prompt uploader
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="homepage-tool-section enhancer-home-section">
-        <div className="container">
-          <PromptEnhancerClient />
-        </div>
-      </section>
-
-      <section className="homepage-tool-section vault-home-section">
-        <div className="container">
-          <HomeVaultPreviewGrid />
-          <div className="center-row">
-            <Link href="/prompts" className="cta-secondary">
-              Open Prompt Vault
-            </Link>
           </div>
         </div>
       </section>
@@ -171,9 +172,9 @@ export default function HomePage() {
       <section className="homepage-tool-section proof-home-section">
         <div className="container">
           <div className="section-heading redesign-heading center-text">
-            <div className="section-chip">Social proof</div>
-            <h2 className="section-title">Built for people actually making AI video work.</h2>
-            <p className="section-sub">These are the kinds of reactions the product should earn as the workflow sharpens.</p>
+            <div className="section-chip">Why it helps</div>
+            <h2 className="section-title">Built to be useful when you are actually making something.</h2>
+            <p className="section-sub">Less AI theatre. More practical help for references, prompting, and shot language.</p>
           </div>
           <div className="card-grid three-up proof-grid-home">
             {TESTIMONIALS.map((item) => (

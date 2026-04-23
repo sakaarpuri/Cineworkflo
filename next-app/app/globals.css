@@ -44,6 +44,10 @@
   --toggle-off-shadow: 0 10px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.05);
   --toggle-knob-bg: linear-gradient(145deg, #F3F6F8, #D9DEE4);
   --toggle-knob-shadow: 0 2px 6px rgba(0,0,0,0.26);
+  --page-title-size: clamp(2.15rem, 3.7vw, 3.05rem);
+  --page-lead-size: clamp(1.02rem, 1.18vw, 1.1rem);
+  --section-title-size: clamp(1.95rem, 3vw, 2.65rem);
+  --section-lead-size: clamp(1rem, 1.05vw, 1.08rem);
   --surface-highlight: inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.28);
   --page-background:
     radial-gradient(72% 48% at 12% 0%, rgba(98,167,255,0.11) 0%, rgba(98,167,255,0) 56%),
@@ -765,13 +769,23 @@ a {
 }
 
 .info-page-card h1,
-.success-card h1 {
+.success-card h1,
+.auth-card h1,
+.story-hero-card h1,
+.pricing-hero-shell h1,
+.camera-moves-heading h1,
+.section-heading h1 {
   margin: 0;
   letter-spacing: -0.03em;
+  font-size: var(--page-title-size);
+  line-height: 1.1;
 }
 
 .info-page-lead {
-  font-size: 1.05rem;
+  font-size: var(--page-lead-size);
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 .info-page-copy {
@@ -901,19 +915,23 @@ a {
   text-align: left;
 }
 
-.section-heading h1,
-.section-heading h2 {
-  margin: 0 0 10px;
-  font-size: clamp(2rem, 3vw, 2.6rem);
-}
-
 .section-heading p {
   margin: 0 auto;
   max-width: 56rem;
+  font-size: var(--page-lead-size);
+  line-height: 1.75;
 }
 
 .section-heading.left p {
   margin-left: 0;
+}
+
+.auth-card h1,
+.info-page-card h1,
+.success-card h1,
+.story-hero-card h1 {
+  font-size: var(--page-title-size);
+  line-height: 1.1;
 }
 
 .center-row {
@@ -1389,13 +1407,13 @@ a {
 }
 
 .enhancer-live-shell .section-heading h1 {
-  font-size: clamp(2.6rem, 4.8vw, 3.7rem);
-  line-height: 1.08;
+  font-size: var(--page-title-size);
+  line-height: 1.1;
 }
 
 .enhancer-live-shell .section-heading p {
-  font-size: 1.18rem;
-  line-height: 1.85;
+  font-size: var(--page-lead-size);
+  line-height: 1.75;
   max-width: 68ch;
 }
 
@@ -2083,6 +2101,12 @@ html[data-theme='light'] .vault-style-text {
   line-height: 1.75;
 }
 
+.story-hero-card > p,
+.story-hero-head p,
+.auth-card > p {
+  font-size: var(--page-lead-size);
+}
+
 .story-gate-icon {
   width: 56px;
   height: 56px;
@@ -2553,16 +2577,17 @@ html[data-theme='light'] .vault-style-text {
   background: var(--accent-blue);
 }
 
+.section-heading h2,
 .section-title {
   margin: 0;
-  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-size: var(--section-title-size);
   line-height: 1.1;
   letter-spacing: -0.04em;
 }
 
 .section-sub {
-  font-size: 1.12rem;
-  line-height: 1.8;
+  font-size: var(--section-lead-size);
+  line-height: 1.75;
   max-width: 38rem;
 }
 
@@ -3524,20 +3549,12 @@ html[data-theme='light'] .vault-style-text {
   margin: 0 auto;
 }
 
-.pricing-hero-shell h1,
-.camera-moves-heading h1 {
-  margin: 0;
-  font-size: clamp(2.6rem, 5vw, 4rem);
-  line-height: 1.08;
-  letter-spacing: -0.04em;
-}
-
 .pricing-hero-shell p,
 .camera-moves-heading p {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 1.2rem;
-  line-height: 1.65;
+  font-size: var(--page-lead-size);
+  line-height: 1.75;
 }
 
 .pricing-note-pill {
