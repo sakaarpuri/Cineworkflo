@@ -29,7 +29,7 @@ const PLAN_CONFIG = {
       },
       inr: {
         env: 'STRIPE_PRICE_YEARLY_INR',
-        fallback: 'price_1TLUSwIVdn8cddGguFhB1cYp',
+        fallback: 'price_1TSE0QIVdn8cddGgQxHOfWwC',
       },
     },
     name: 'CineWorkflo Pro Yearly',
@@ -44,6 +44,7 @@ const getPlanConfig = (plan) => PLAN_CONFIG[plan] || null;
 const DEPRECATED_PRICE_IDS = new Set([
   'price_1TKhk7IVdn8cddGgVx3Wfuuf',
   'price_1TKhkMIVdn8cddGg0AtekgTl',
+  'price_1TLUSwIVdn8cddGguFhB1cYp',
 ])
 
 const getPriceId = (planConfig, pricingVariant) => {

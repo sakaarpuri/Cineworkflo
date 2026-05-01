@@ -16,10 +16,10 @@ export const PRICING_VARIANTS = {
     symbol: '₹',
     monthlyDisplay: '₹99',
     monthlyPeriod: '/month',
-    yearlyDisplay: '₹599',
+    yearlyDisplay: '₹1099',
     yearlyPeriod: '/year',
     monthlyCta: 'Go Pro — ₹99/mo',
-    yearlyCta: 'Go Yearly — ₹599/yr',
+    yearlyCta: 'Go Yearly — ₹1099/yr',
   },
 }
 
@@ -56,13 +56,9 @@ export function buildPricingTiers(variant = DEFAULT_PRICING_VARIANT) {
       planType: 'yearly',
       price: variant.yearlyDisplay,
       period: variant.yearlyPeriod,
-      description: variant.key === 'inr'
-        ? 'Huge discount versus monthly. Best value if you plan to stay.'
-        : 'Save with annual billing. Best value if you know this will stay in your workflow.',
-      hook: variant.key === 'inr'
-        ? 'Save 49% compared with paying monthly'
-        : 'Save about 8% compared with paying monthly',
-      badgeLabel: variant.key === 'inr' ? 'Huge Discount' : 'Best Value',
+      description: 'Save with annual billing. Best value if you know this will stay in your workflow.',
+      hook: 'Save about 8% compared with paying monthly',
+      badgeLabel: 'Best Value',
       featured: true,
       ctaLabel: variant.yearlyCta,
       ctaHref: '/pricing',
