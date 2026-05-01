@@ -100,10 +100,10 @@ export default function PricingCards({ surface = 'page' }) {
           const isLoading = loadingPlan === plan.planType
           return (
             <article key={plan.name} className={`pricing-tier-card ${plan.planType === 'yearly' ? 'featured yearly' : ''}`}>
-              {plan.planType === 'yearly' ? <div className="pricing-feature-chip">Huge Discount</div> : null}
+              {plan.planType === 'yearly' ? <div className="pricing-feature-chip">{plan.badgeLabel || 'Best Value'}</div> : null}
               <div className="pricing-tier-name">{plan.name}</div>
               <p className="pricing-tier-desc">{plan.description}</p>
-              {plan.planType === 'yearly' ? <div className="pricing-tier-hook">Save 49% compared with paying monthly</div> : null}
+              {plan.planType === 'yearly' ? <div className="pricing-tier-hook">{plan.hook}</div> : null}
               <div className="pricing-tier-price-row">
                 <span className="pricing-tier-price">{plan.price}</span>
                 <span className="pricing-tier-period">{plan.period}</span>

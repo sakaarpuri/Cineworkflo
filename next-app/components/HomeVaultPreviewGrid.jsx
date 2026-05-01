@@ -24,8 +24,8 @@ export default function HomeVaultPreviewGrid() {
     <>
       <div className="vault-preview-toggle-row">
         <div className="vault-preview-toggle-copy">
-          <h2>Prompt Vault</h2>
-          <p>Browse a curated slice of the Vault, then open the full library for pro prompt controls, variables, and category filters.</p>
+          <h2 className="section-title">Prompt Vault</h2>
+          <p className="section-sub">Browse a curated slice of the Vault, then open the full library for pro prompt controls, variables, and category filters.</p>
           <span className="vault-preview-note">Designed for image-to-video. Lock the look with an image, then drive the shot with the video prompt.</span>
         </div>
         <button

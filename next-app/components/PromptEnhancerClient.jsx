@@ -435,7 +435,7 @@ export default function PromptEnhancerClient() {
 
   return (
     <div className="page-stack enhancer-live-shell">
-      <div className="section-heading left compact-heading">
+      <div className="section-heading center-text">
         <div className="eyebrow">AI Prompt Enhancer</div>
         <h1>Describe the shot in your head. We&apos;ll translate it for the machine.</h1>
         <p>

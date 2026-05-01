@@ -3,12 +3,12 @@ export const PRICING_VARIANTS = {
     key: 'usd',
     currencyCode: 'USD',
     symbol: '$',
-    monthlyDisplay: '$7.99',
+    monthlyDisplay: '$2.99',
     monthlyPeriod: '/month',
-    yearlyDisplay: '$49',
+    yearlyDisplay: '$32.99',
     yearlyPeriod: '/year',
-    monthlyCta: 'Go Pro — $7.99/mo',
-    yearlyCta: 'Go Yearly — $49/yr',
+    monthlyCta: 'Go Pro — $2.99/mo',
+    yearlyCta: 'Go Yearly — $32.99/yr',
   },
   inr: {
     key: 'inr',
@@ -56,12 +56,17 @@ export function buildPricingTiers(variant = DEFAULT_PRICING_VARIANT) {
       planType: 'yearly',
       price: variant.yearlyDisplay,
       period: variant.yearlyPeriod,
-      description: 'Huge discount versus monthly. Best value if you plan to stay.',
-      hook: 'Save 49% compared with paying monthly',
+      description: variant.key === 'inr'
+        ? 'Huge discount versus monthly. Best value if you plan to stay.'
+        : 'Save with annual billing. Best value if you know this will stay in your workflow.',
+      hook: variant.key === 'inr'
+        ? 'Save 49% compared with paying monthly'
+        : 'Save about 8% compared with paying monthly',
+      badgeLabel: variant.key === 'inr' ? 'Huge Discount' : 'Best Value',
       featured: true,
       ctaLabel: variant.yearlyCta,
       ctaHref: '/pricing',
-      features: ['Everything in Pro', 'Save 49% vs monthly billing', 'Unlimited Prompt Enhancer generations', 'Prompt Vault (all prompts)', 'Shot to Prompt AI tool', 'Advanced search & filters', 'New prompts weekly'],
+      features: ['Everything in Pro', 'Save with annual billing', 'Unlimited Prompt Enhancer generations', 'Prompt Vault (all prompts)', 'Shot to Prompt AI tool', 'Advanced search & filters', 'New prompts weekly'],
     },
   ]
 }

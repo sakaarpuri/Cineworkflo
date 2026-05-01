@@ -1704,33 +1704,37 @@ a {
 }
 
 .vault-preview-toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 24px;
   margin: 0 auto 22px;
-  max-width: 880px;
+  max-width: 980px;
 }
 
 .vault-preview-toggle-copy {
+  display: grid;
+  gap: 10px;
   text-align: left;
+  align-content: start;
 }
 
 .vault-preview-toggle-copy h2 {
-  margin: 0 0 6px;
-  font-size: 1.85rem;
+  margin: 0;
 }
 
 .vault-preview-toggle-copy p {
   margin: 0;
   color: var(--text-secondary);
+  max-width: 42rem;
 }
 
 .vault-preview-note {
   display: block;
-  margin-top: 10px;
   color: var(--text-muted);
   font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: 40rem;
 }
 
 .vault-preview-toggle {
@@ -2874,8 +2878,8 @@ html[data-theme='light'] .vault-style-text {
 
 @media (max-width: 980px) {
   .vault-preview-toggle-row {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
+    justify-items: start;
   }
 
   .homepage-vault-grid {

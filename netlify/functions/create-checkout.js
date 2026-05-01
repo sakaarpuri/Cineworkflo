@@ -8,7 +8,7 @@ const PLAN_CONFIG = {
     priceIds: {
       usd: {
         env: 'STRIPE_PRICE_MONTHLY_USD',
-        fallback: 'price_1TKhk7IVdn8cddGgVx3Wfuuf',
+        fallback: 'price_1TSDbHIVdn8cddGgfadY4mjg',
       },
       inr: {
         env: 'STRIPE_PRICE_MONTHLY_INR',
@@ -25,7 +25,7 @@ const PLAN_CONFIG = {
     priceIds: {
       usd: {
         env: 'STRIPE_PRICE_YEARLY_USD',
-        fallback: 'price_1TKhkMIVdn8cddGg0AtekgTl',
+        fallback: 'price_1TSDbSIVdn8cddGgRLkfJ1Kb',
       },
       inr: {
         env: 'STRIPE_PRICE_YEARLY_INR',
@@ -41,10 +41,17 @@ const PLAN_CONFIG = {
 
 const getSiteUrl = () => process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://cineworkflo.com';
 const getPlanConfig = (plan) => PLAN_CONFIG[plan] || null;
+const DEPRECATED_PRICE_IDS = new Set([
+  'price_1TKhk7IVdn8cddGgVx3Wfuuf',
+  'price_1TKhkMIVdn8cddGg0AtekgTl',
+])
+
 const getPriceId = (planConfig, pricingVariant) => {
   const selected = planConfig?.priceIds?.[pricingVariant] || planConfig?.priceIds?.usd;
   if (!selected) return '';
-  return process.env[selected.env] || selected.fallback || '';
+  const envValue = process.env[selected.env] || '';
+  if (envValue && !DEPRECATED_PRICE_IDS.has(envValue)) return envValue;
+  return selected.fallback || '';
 };
 
 exports.handler = async (event, context) => {
